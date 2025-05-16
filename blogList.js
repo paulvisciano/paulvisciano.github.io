@@ -8,7 +8,7 @@ window.BlogList = ({ handleTimelineClick }) => {
   const [selectedTag, setSelectedTag] = React.useState("All");
   const [popoverContent, setPopoverContent] = React.useState(null); // State for popover content
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 }); // State for popover position
-  let globeInstance = null;
+  const globeInstance = React.useRef(null);
 
   // Initialize the Globe.GL after the component renders
   React.useEffect(() => {
@@ -25,7 +25,7 @@ window.BlogList = ({ handleTimelineClick }) => {
 
       console.log("Initializing Globe.GL to match world-cities example with semi-transparent globe and topographic texture");
 
-      globeInstance = Globe()
+      globeInstance.current = Globe()
         .backgroundColor('rgba(0, 0, 0, 1)') // Black background for starfield
         .globeMaterial(new THREE.MeshPhongMaterial({ 
           color: '#1a2526', 
@@ -58,14 +58,14 @@ window.BlogList = ({ handleTimelineClick }) => {
           return new THREE.Mesh(geometry, material);
         })
         .customThreeObjectUpdate((obj, d) => {
-          Object.assign(obj.position, globeInstance.getCoords(d.lat, d.lng, 0.01));
+          Object.assign(obj.position, globeInstance.current.getCoords(d.lat, d.lng, 0.01));
         })
         (document.getElementById('globeViz'));
 
       // Add lighting to enhance topographic texture visibility
       try {
         console.log("Adding lighting to enhance topographic texture");
-        const scene = globeInstance.scene();
+        const scene = globeInstance.current.scene();
         // Ambient light for overall illumination
         const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
         scene.add(ambientLight);
@@ -94,8 +94,8 @@ window.BlogList = ({ handleTimelineClick }) => {
         starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
         const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 1, transparent: true, opacity: 0.7 });
         const stars = new THREE.Points(starGeometry, starMaterial);
-        globeInstance.scene().background = null; // Clear default background
-        globeInstance.scene().add(stars); // Add stars to the scene
+        globeInstance.current.scene().background = null; // Clear default background
+        globeInstance.current.scene().add(stars); // Add stars to the scene
       } catch (error) {
         console.error("Error adding starfield:", error);
       }
@@ -103,21 +103,21 @@ window.BlogList = ({ handleTimelineClick }) => {
       // Enable controls for rotation, zoom, and pan
       try {
         console.log("Enabling Globe.GL controls");
-        globeInstance.controls().autoRotate = true;
-        globeInstance.controls().autoRotateSpeed = 0.5;
-        globeInstance.controls().enableZoom = true;
-        globeInstance.controls().minDistance = 100; // Allow closer zoom
-        globeInstance.controls().maxDistance = 500; // Wider zoom range
+        globeInstance.current.controls().autoRotate = true;
+        globeInstance.current.controls().autoRotateSpeed = 0.5;
+        globeInstance.current.controls().enableZoom = true;
+        globeInstance.current.controls().minDistance = 100; // Allow closer zoom
+        globeInstance.current.controls().maxDistance = 500; // Wider zoom range
       } catch (error) {
         console.error("Error enabling Globe.GL controls:", error);
       }
 
       // Show popover with snippet on marker click
-      globeInstance.onPointClick(point => {
+      globeInstance.current.onPointClick(point => {
         try {
           console.log("Point clicked, zooming and showing popover");
-          globeInstance.controls().autoRotate = false; // Stop auto-rotation
-          globeInstance.pointOfView({
+          globeInstance.current.controls().autoRotate = false; // Stop auto-rotation
+          globeInstance.current.pointOfView({
             lat: point.lat,
             lng: point.lng,
             altitude: 0.1 // Zoom in to city level
@@ -125,7 +125,7 @@ window.BlogList = ({ handleTimelineClick }) => {
 
           // Delay showing the popover until after the zoom completes
           setTimeout(() => {
-            const finalCoords = globeInstance.getScreenCoords(point.lat, point.lng, 0.01);
+            const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.01);
             setPopoverPosition({
               top: finalCoords.y + 20, // Position below the circle
               left: finalCoords.x
@@ -146,7 +146,7 @@ window.BlogList = ({ handleTimelineClick }) => {
       });
 
       // Emphasize city name on hover
-      globeInstance.onPointHover(point => {
+      globeInstance.current.onPointHover(point => {
         try {
           pointsData.forEach(p => {
             if (point && p.label === point.label) {
@@ -156,7 +156,7 @@ window.BlogList = ({ handleTimelineClick }) => {
               p.label = p.label.split('\n')[0]; // Reset to city name only
             }
           });
-          globeInstance.pointsData(pointsData);
+          globeInstance.current.pointsData(pointsData);
         } catch (error) {
           console.error("Error handling point hover:", error);
         }
@@ -173,8 +173,8 @@ window.BlogList = ({ handleTimelineClick }) => {
       // Cleanup globe and event listeners on component unmount
       return () => {
         globeContainer.removeEventListener('wheel', preventScroll);
-        if (globeInstance) {
-          globeInstance.destroy();
+        if (globeInstance.current) {
+          globeInstance.current.destroy();
         }
       };
     } catch (error) {
@@ -184,23 +184,29 @@ window.BlogList = ({ handleTimelineClick }) => {
 
   // Expose handleTimelineClick to parent component
   window.handleTimelineClick = (post) => {
-    if (globeInstance) {
+    if (!globeInstance.current) {
+      console.error("Globe instance not initialized");
+      return;
+    }
+
+    try {
       // Stop auto-rotation
-      globeInstance.controls().autoRotate = false;
+      globeInstance.current.controls().autoRotate = false;
 
       // Debug coordinates
       console.log(`Zooming to ${post.location.name} at lat: ${post.location.lat}, lng: ${post.location.lng}`);
 
       // Zoom to city level
-      globeInstance.pointOfView({
+      globeInstance.current.pointOfView({
         lat: post.location.lat,
         lng: post.location.lng,
         altitude: 0.1 // Zoom in to city level
       }, 1000);
 
-      // Delay showing the popover until after the zoom completes
+      // Clear existing popover and set new position and content
+      setPopoverContent(null);
       setTimeout(() => {
-        const finalCoords = globeInstance.getScreenCoords(post.location.lat, post.location.lng, 0.01);
+        const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.01);
         setPopoverPosition({
           top: finalCoords.y + 20, // Position below the circle
           left: finalCoords.x
@@ -215,6 +221,8 @@ window.BlogList = ({ handleTimelineClick }) => {
           lng: post.location.lng
         });
       }, 1000); // Match zoom animation duration
+    } catch (error) {
+      console.error("Error in handleTimelineClick:", error);
     }
   };
 
@@ -224,7 +232,7 @@ window.BlogList = ({ handleTimelineClick }) => {
       'div',
       {
         className: 'popover',
-        style: {
+        style : {
           position: 'absolute',
           top: `${position.top}px`,
           left: `${position.left}px`,
