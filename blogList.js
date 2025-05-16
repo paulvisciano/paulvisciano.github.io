@@ -48,6 +48,34 @@ window.BlogList = ({ handleTimelineClick }) => {
       globeTexture.minFilter = THREE.LinearMipmapLinearFilter; // Mipmapping for zoom
       globeTexture.magFilter = THREE.LinearFilter;
 
+      const onZoomHandler = () => {
+        if (!globeInstance.current || !pointsData) return;
+
+        // Adjust point radius and altitude based on camera altitude
+        const altitude = globeInstance.current.pointOfView().altitude;
+        const maxRadius = 0.12; // Smaller when zoomed out
+        const minRadius = 0.3; // Larger when zoomed in
+        const maxAltitude = 2.5;
+        const minAltitude = 0.1;
+        const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+        let pointAltitude = 0.8; // Default for zoomed out
+
+        if (altitude < maxAltitude / 2) {
+          pointAltitude = 0.02; // Minimum altitude when max zoomed in
+        } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
+          pointAltitude = 0.08; // mix point
+        } else if (altitude >= maxAltitude - 0.1) {
+          pointAltitude = 0.8; // Maximum altitude when max zoomed out
+        }
+
+        globeInstance.current.pointRadius(radius);
+        console.log('pointAltitude', pointAltitude)
+        globeInstance.current.pointAltitude(pointAltitude);
+
+        // Toggle rotation based on altitude
+        globeInstance.current.controls().autoRotate = altitude > 2.2;
+      };
+
       globeInstance.current = Globe()
         .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
         .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
@@ -61,26 +89,11 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointLng('lng')
         .pointColor(() => '#ffa500') // Orange to match timeline dot
         .pointsMerge(false) // Disable merging for better click detection
-        .onZoom(() => {
-          if (!globeInstance.current || !pointsData) return;
-
-          // Adjust point radius and altitude based on camera altitude
-          const altitude = globeInstance.current.pointOfView().altitude;
-          const maxRadius = 0.12; // Smaller when zoomed out
-          const minRadius = 0.3; // Larger when zoomed in
-          const maxPointAltitude = 0.001; // Higher when zoomed out
-          const minPointAltitude = 0.1; // Lower when zoomed in
-          const maxAltitude = 2.5;
-          const minAltitude = 0.1;
-          const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-          const pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-          globeInstance.current.pointRadius(radius);
-          globeInstance.current.pointAltitude(pointAltitude);
-
-          // Toggle rotation based on altitude
-          globeInstance.current.controls().autoRotate = altitude > 2.2;
-        })
+        .onZoom(onZoomHandler)
         (document.getElementById('globeViz'));
+
+      // Trigger initial onZoom to set radius and altitude
+      onZoomHandler();
 
       // Enable controls with adjusted minDistance
       try {
@@ -122,7 +135,7 @@ window.BlogList = ({ handleTimelineClick }) => {
 
             // Show popover after both animations
             waitForZoom(1500).then(() => {
-              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.01);
+              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.5);
               setPopoverPosition({
                 top: finalCoords.y + 20,
                 left: finalCoords.x
@@ -195,7 +208,7 @@ window.BlogList = ({ handleTimelineClick }) => {
 
         // Show popover after both animations
         waitForZoom(1500).then(() => {
-          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.01);
+          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.5);
           setPopoverPosition({
             top: finalCoords.y + 20,
             left: finalCoords.x
