@@ -124,6 +124,15 @@ footer {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
   background: #007AFF;
 }
+.timeline-entry.selected .timeline-card {
+  background: rgba(255, 255, 255, 0.3); /* Brighter background for highlight */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+.timeline-entry.selected .timeline-dot {
+  background: #007AFF; /* Highlighted dot color */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
 .timeline-dot {
   background: #e0e0e0;
   border-radius: 50%;
@@ -131,7 +140,6 @@ footer {
   transition: all 0.3s ease;
   opacity: 0.8; /* Increased opacity for visibility */
 }
-.timeline  /* Base size will be overridden by inline styles */
 .timeline-card {
   background: rgba(255, 255, 255, 0.15); /* Slightly lighter background for contrast */
   border-radius: 8px;
