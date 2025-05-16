@@ -126,8 +126,8 @@ footer {
   animation-delay: calc(var(--index) * 0.2s);
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 .timeline-date {
   font-size: 0.75rem; /* Smaller font for footer */
@@ -228,11 +228,6 @@ footer {
   padding: 4px 8px !important;
   border-radius: 6px !important;
   transform: translateY(5px); /* Maintain position on hover */
-}
-/* Popover Fade-In Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 /* Responsive Globe Height and Tags for Mobile */
 @media (max-width: 640px) {

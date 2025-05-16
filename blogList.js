@@ -9,7 +9,7 @@ window.BlogList = ({ handleTimelineClick }) => {
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
   const globeInstance = React.useRef(null);
-  const popoverRef = React.useRef(null); // Ref to track popover DOM element
+  const popoverRef = React.useRef(null);
   const isZooming = React.useRef(false);
 
   // Utility to wait for zoom animation
@@ -246,13 +246,13 @@ window.BlogList = ({ handleTimelineClick }) => {
       'div',
       {
         className: 'popover',
-        ref: popoverRef, // Attach ref to popover
+        ref: popoverRef,
         style: {
           position: 'absolute',
           top: `${position.top}px`,
           left: `${position.left}px`,
           transform: 'translateX(-50%)',
-          animation: 'fadeIn 0.3s ease-in-out'
+          animation: 'fadeIn 0.5s ease-in-out'
         }
       },
       React.createElement(
