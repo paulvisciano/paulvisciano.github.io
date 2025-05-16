@@ -12,7 +12,6 @@ window.Footer = () => {
       React.createElement(
         'div',
         { className: 'timeline' },
-        React.createElement('div', { className: 'timeline-highlight-dot' }),
         window.blogPosts.map((post, index) => {
           // Calculate dot size based on stayDuration
           const dotSize = Math.min(8 + post.stayDuration * 0.5, 16); // 8px base + 0.5px per day, max 16px

@@ -85,30 +85,6 @@ footer {
   padding: 0 16px;
   position: relative;
 }
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 40px; /* Adjusted for smaller dots */
-  left: 0;
-  right: 0;
-  height: 1px; /* Thinner line for footer */
-  background: #e0e0e0;
-  opacity: 0.5; /* Increased opacity for visibility */
-}
-.timeline-highlight-dot {
-  position: absolute;
-  top: 38px; /* Adjusted for smaller dots */
-  width: 4px; /* Smaller dot for footer */
-  height: 4px;
-  background: #007AFF;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  animation: moveHighlight 20s linear infinite;
-}
-@keyframes moveHighlight {
-  0% { left: 0%; }
-  100% { left: 100%; }
-}
 .timeline-entry {
   display: inline-block;
   text-align: center;
@@ -294,14 +270,6 @@ footer {
   }
   .timeline-card {
     padding: 6px 8px; /* Further reduced padding for mobile */
-  }
-  .timeline::before {
-    top: 30px; /* Adjusted for smaller dots */
-  }
-  .timeline-highlight-dot {
-    top: 28px; /* Adjusted for smaller dots */
-    width: 3px; /* Smaller dot for mobile */
-    height: 3px;
   }
   .scene-container .globe-tooltip {
     font-size: 12px !important; /* Smaller city name label on mobile */
