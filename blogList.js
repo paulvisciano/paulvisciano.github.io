@@ -109,8 +109,10 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
               snippet: post.snippet || "No Snippet",
               fullLink: post.fullLink || "#",
               lat: post.location.lat,
-              lng: post.location.lng
+              lng: post.location.lng,
+              id: post.id // Store post ID for hover comparison
             });
+            setSelectedId(post.id); // Highlight timeline item
             isZooming.current = false;
           });
         });
@@ -118,7 +120,7 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
         isZooming.current = false;
       }
     });
-  }, [setZoomCallback]);
+  }, [setZoomCallback, setSelectedId]);
 
   // Initialize the Globe.GL after the component renders
   React.useEffect(() => {
@@ -184,6 +186,25 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
         .pointColor(() => '#ffa500') // Orange to match timeline dot
         .pointsMerge(false) // Disable merging for better click detection
         .onZoom(onZoomHandler)
+        .onPointHover((point) => {
+          if (point) {
+            const post = window.blogPosts.find(p => 
+              p.location.lat === point.lat && p.location.lng === point.lng
+            );
+            if (post && post.id) {
+              // Scroll timeline item into view
+              const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
+             
+              if (timelineItem) {
+                document.querySelectorAll('.timeline-entry.selected').forEach(item => 
+                  item.classList.remove('selected')
+                );
+                timelineItem.classList.add('selected');
+                timelineItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }
+          }
+        })
         (document.getElementById('globeViz'));
 
       // Trigger initial onZoom to set radius and altitude
@@ -242,7 +263,8 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
               snippet: point.snippet || "No Snippet",
               fullLink: point.fullLink || "#",
               lat: point.lat,
-              lng: point.lng
+              lng: point.lng,
+              id: post.id // Store post ID for hover comparison
             });
             isZooming.current = false;
           });
