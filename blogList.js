@@ -1,10 +1,9 @@
-window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCallback }) => {
+window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, setSelectedTag, setZoomCallback }) => {
   if (typeof window.blogPosts === 'undefined') {
     return React.createElement('div', null, 'Error: Data not loaded');
   }
 
   const allTags = ["All", ...new Set(window.blogPosts.flatMap(post => post.tags))];
-  const [selectedTag, setSelectedTag] = React.useState("All");
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
   const globeInstance = React.useRef(null);
@@ -122,20 +121,9 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
     });
   }, [setZoomCallback, setSelectedId]);
 
-  // Initialize the Globe.GL after the component renders
+  // Initialize the Globe.GL on mount
   React.useEffect(() => {
     try {
-      const pointsData = window.blogPosts.map(post => ({
-        lat: post.location.lat,
-        lng: post.location.lng,
-        label: post.location.name,
-        fullLink: post.fullLink,
-        snippet: post.snippet,
-        title: post.title,
-        stayDuration: post.stayDuration,
-        id: post.id
-      }));
-
       // Load texture with filtering
       const textureLoader = new THREE.TextureLoader();
       const globeTexture = textureLoader.load('//unpkg.com/three-globe/example/img/earth-night.jpg');
@@ -144,7 +132,7 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
       globeTexture.magFilter = THREE.LinearFilter;
 
       const onZoomHandler = () => {
-        if (!globeInstance.current || !pointsData) return;
+        if (!globeInstance.current) return;
 
         // Adjust point radius and altitude based on camera altitude
         const altitude = globeInstance.current.pointOfView().altitude;
@@ -180,7 +168,7 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
           side: THREE.DoubleSide
         }))
         .pointOfView({ lat: 0, lng: 0, altitude: 2.5 }, 0)
-        .pointsData(pointsData)
+        .pointsData([]) // Initial empty pointsData, updated below
         .pointLat('lat')
         .pointLng('lng')
         .pointColor(() => '#ffa500') // Orange to match timeline dot
@@ -194,7 +182,6 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
             if (post && post.id) {
               // Scroll timeline item into view
               const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
-             
               if (timelineItem) {
                 document.querySelectorAll('.timeline-entry.selected').forEach(item => 
                   item.classList.remove('selected')
@@ -290,7 +277,35 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
       };
     } catch (error) {
     }
-  }, []);
+  }, []); // Empty dependency array to run only on mount
+
+  // Update pointsData when selectedTag changes
+  React.useEffect(() => {
+    if (globeInstance.current) {
+      const filteredPosts = selectedTag === "All" 
+        ? window.blogPosts 
+        : window.blogPosts.filter(post => post.tags.includes(selectedTag));
+      
+      const pointsData = filteredPosts.map(post => ({
+        lat: post.location.lat,
+        lng: post.location.lng,
+        label: post.location.name,
+        fullLink: post.fullLink,
+        snippet: post.snippet,
+        title: post.title,
+        stayDuration: post.stayDuration,
+        id: post.id
+      }));
+
+      globeInstance.current.pointsData(pointsData);
+    }
+  }, [selectedTag]);
+
+  // Clear selectedId and popover when changing tags to avoid highlighting non-filtered posts
+  React.useEffect(() => {
+    setSelectedId(null);
+    setPopoverContent(null); // Clear popover when changing tags
+  }, [selectedTag, setSelectedId]);
 
   // Popover Component
   const Popover = ({ title, snippet, fullLink, onClose, position }) => {

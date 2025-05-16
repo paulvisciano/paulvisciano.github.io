@@ -1,5 +1,6 @@
 window.App = () => {
   const [selectedId, setSelectedId] = React.useState(null);
+  const [selectedTag, setSelectedTag] = React.useState("All");
   const [zoomCallback, setZoomCallback] = React.useState(null);
 
   const handleTimelineClick = (post) => {
@@ -27,12 +28,15 @@ window.App = () => {
       handleTimelineClick, 
       selectedId, 
       setSelectedId,
+      selectedTag,
+      setSelectedTag,
       setZoomCallback
     }),
     React.createElement(window.Footer, { 
       handleTimelineClick, 
       selectedId, 
-      setSelectedId 
+      setSelectedId,
+      selectedTag
     })
   );
 };

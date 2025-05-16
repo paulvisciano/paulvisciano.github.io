@@ -1,4 +1,4 @@
-window.Footer = ({ handleTimelineClick, selectedId, setSelectedId }) => {
+window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }) => {
   return React.createElement(
     'footer',
     null,
@@ -9,32 +9,34 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId }) => {
       React.createElement(
         'div',
         { className: 'timeline' },
-        window.blogPosts.map(post => {
-          // Calculate dot size based on stayDuration
-          const dotSize = Math.min(8 + post.stayDuration * 0.5, 16); // 8px base + 0.5px per day, max 16px
-          return React.createElement(
-            'div',
-            {
-              key: post.id,
-              className: `timeline-entry ${selectedId === post.id ? 'selected' : ''}`,
-              'data-id': post.id,
-              onClick: () => {
-                setSelectedId(post.id);
-                handleTimelineClick(post);
-              }
-            },
-            React.createElement('div', { 
-              className: 'timeline-dot',
-              style: { width: `${dotSize}px`, height: `${dotSize}px` }
-            }),
-            React.createElement(
+        window.blogPosts
+          .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
+          .map(post => {
+            // Calculate dot size based on stayDuration
+            const dotSize = Math.min(8 + post.stayDuration * 0.5, 16); // 8px base + 0.5px per day, max 16px
+            return React.createElement(
               'div',
-              { className: 'timeline-card' },
-              React.createElement('div', { className: 'timeline-date' }, post.timelineDate),
-              React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight)
-            )
-          );
-        })
+              {
+                key: post.id,
+                className: `timeline-entry ${selectedId === post.id ? 'selected' : ''}`,
+                'data-id': post.id,
+                onClick: () => {
+                  setSelectedId(post.id);
+                  handleTimelineClick(post);
+                }
+              },
+              React.createElement('div', { 
+                className: 'timeline-dot',
+                style: { width: `${dotSize}px`, height: `${dotSize}px` }
+              }),
+              React.createElement(
+                'div',
+                { className: 'timeline-card' },
+                React.createElement('div', { className: 'timeline-date' }, post.timelineDate),
+                React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight)
+              )
+            );
+          })
       )
     )
   );
