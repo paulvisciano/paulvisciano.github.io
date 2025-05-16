@@ -10,25 +10,63 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
   const globeInstance = React.useRef(null);
   const popoverRef = React.useRef(null);
   const isZooming = React.useRef(false);
+  const touchStartX = React.useRef(null);
+  const touchStartY = React.useRef(null);
 
   // Utility to wait for zoom animation
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
-  // Handle clicks outside the popover to dismiss it
+  // Handle clicks and taps outside the popover to dismiss it
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
         setPopoverContent(null);
+        setSelectedId(null); // Clear timeline highlight
       }
     };
 
+    const handleTouchStart = (event) => {
+      if (event.touches.length === 1) {
+        touchStartX.current = event.touches[0].clientX;
+        touchStartY.current = event.touches[0].clientY;
+      }
+    };
+
+    const handleTouchMove = (event) => {
+      if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {
+        const touchEndX = event.touches[0].clientX;
+        const touchEndY = event.touches[0].clientY;
+        const deltaX = touchEndX - touchStartX.current;
+        const deltaY = touchEndY - touchStartY.current;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        // Detect swipe (minimum distance threshold, e.g., 50 pixels)
+        if (distance > 50) {
+          setPopoverContent(null);
+          setSelectedId(null); // Clear timeline highlight
+          touchStartX.current = null;
+          touchStartY.current = null;
+        }
+      }
+    };
+
+    const handleTouchEnd = () => {
+      touchStartX.current = null;
+      touchStartY.current = null;
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside); // Support touch events
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, []);
+  }, [popoverContent, setSelectedId]);
 
   // Provide zoom callback to App.js
   React.useEffect(() => {
@@ -256,7 +294,10 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
           React.createElement('h2', { className: 'popover-title' }, title),
           React.createElement(
             'button',
-            { className: 'popover-close', onClick: onClose },
+            { className: 'popover-close', onClick: () => {
+              onClose();
+              setSelectedId(null); // Clear timeline highlight when closing via button
+            }},
             '×'
           )
         ),
