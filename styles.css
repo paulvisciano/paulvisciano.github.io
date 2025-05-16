@@ -28,8 +28,8 @@ footer {
 /* Tag Styling */
 .tag, .filter-tag {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-  color: #d1d5db;
+  background: rgba(255, 255, 255, 0.2); /* Increased opacity for clearer background */
+  color: #ffffff; /* Brighter text for readability */
   padding: 4px 12px;
   border-radius: 9999px;
   font-size: 0.875rem;
@@ -125,14 +125,13 @@ footer {
   background: #007AFF;
 }
 .timeline-dot {
-  width: 8px; /* Smaller dot for footer */
-  height: 8px;
   background: #e0e0e0;
   border-radius: 50%;
   margin: 0 auto 8px;
   transition: all 0.3s ease;
   opacity: 0.8; /* Increased opacity for visibility */
 }
+.timeline  /* Base size will be overridden by inline styles */
 .timeline-card {
   background: rgba(255, 255, 255, 0.15); /* Slightly lighter background for contrast */
   border-radius: 8px;
@@ -263,6 +262,12 @@ footer {
   .filter-tag {
     font-size: 0.75rem;
     padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.2); /* Match desktop clarity */
+    color: #ffffff;
+  }
+  .filter-tag:hover, .filter-tag.active {
+    background: #007AFF;
+    color: #ffffff;
   }
   .container {
     padding: 2px;
@@ -277,8 +282,7 @@ footer {
     font-size: 0.75rem; /* Smaller font for mobile */
   }
   .timeline-dot {
-    width: 6px; /* Smaller dot for mobile */
-    height: 6px;
+    /* Base size will be overridden by inline styles */
   }
   .timeline-card {
     padding: 6px 8px; /* Further reduced padding for mobile */
