@@ -1,0 +1,310 @@
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: transparent; /* Allow starfield to show through */
+  color: #e0e0e0;
+  margin: 0;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a {
+  color: #007AFF;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #40C4FF;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1a1a; /* Darker background for better visibility */
+  border-top: 1px solid #333; /* Slightly lighter border for contrast */
+  z-index: 20; /* Above globe (z-index 1) and main content (z-index 10) */
+  padding: 8px 0; /* Reduced padding */
+}
+/* Tag Styling */
+.tag, .filter-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  color: #d1d5db;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.tag:hover, .filter-tag:hover {
+  background: #007AFF;
+  color: #ffffff;
+}
+.filter-tag.active {
+  background: #007AFF;
+  color: #ffffff;
+}
+/* Globe Styling */
+#globeViz {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh; /* Full viewport height to match starfield */
+  width: 100%;
+  z-index: 1; /* Lower z-index to place in background */
+}
+/* Main Content Styling */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 300px; /* Account for globe height */
+  padding-bottom: 100px; /* Reduced to account for smaller footer height */
+  position: relative;
+  z-index: 10; /* Higher z-index to bring content to foreground */
+}
+/* Container Styling for Full Width */
+.container {
+  padding: 4px;
+}
+/* Apple-Inspired Timeline Styling (Now in Footer) */
+.timeline-container {
+  position: relative;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 8px 0; /* Reduced padding for footer */
+  background: transparent; /* No background in footer */
+  border-radius: 0; /* No border radius in footer */
+}
+.timeline {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 40px; /* Adjusted for smaller dots */
+  left: 0;
+  right: 0;
+  height: 1px; /* Thinner line for footer */
+  background: #e0e0e0;
+  opacity: 0.5; /* Increased opacity for visibility */
+}
+.timeline-highlight-dot {
+  position: absolute;
+  top: 38px; /* Adjusted for smaller dots */
+  width: 4px; /* Smaller dot for footer */
+  height: 4px;
+  background: #007AFF;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  animation: moveHighlight 20s linear infinite;
+}
+@keyframes moveHighlight {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
+.timeline-entry {
+  display: inline-block;
+  text-align: center;
+  margin-right: 32px; /* Reduced margin for footer */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.timeline-entry:hover .timeline-card {
+  transform: translateY(-2px); /* Smaller lift for footer */
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+.timeline-entry:hover .timeline-dot {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  background: #007AFF;
+}
+.timeline-dot {
+  width: 8px; /* Smaller dot for footer */
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  margin: 0 auto 8px;
+  transition: all 0.3s ease;
+  opacity: 0.8; /* Increased opacity for visibility */
+}
+.timeline-card {
+  background: rgba(255, 255, 255, 0.15); /* Slightly lighter background for contrast */
+  border-radius: 8px;
+  padding: 8px 12px; /* Reduced padding for footer */
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  animation-delay: calc(var(--index) * 0.2s);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.timeline-date {
+  font-size: 0.75rem; /* Smaller font for footer */
+  color: #a1a1aa;
+  margin-bottom: 2px;
+  opacity: 0.9; /* Increased opacity for visibility */
+}
+.timeline-highlight {
+  font-size: 0.875rem; /* Smaller font for footer */
+  font-weight: 500;
+  color: #e0e0e0;
+  opacity: 0.9; /* Increased opacity for visibility */
+}
+/* Popover Styling */
+.popover {
+  z-index: 40; /* Above globe and other elements but below potential overlays */
+}
+.popover-content {
+  background: #2c2c2c;
+  border-radius: 8px;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+  /* Caret (pointer) on top, pointing to the pin */
+  border-top: 1px solid rgba(255, 255, 295, 0.1);
+}
+.popover-content::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #2c2c2c;
+}
+.popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.popover-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+.popover-close {
+  background: none;
+  border: none;
+  color: #a1a1aa;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.popover-close:hover {
+  color: #ffffff;
+}
+.popover-body {
+  font-size: 0.875rem;
+  color: #d1d5db;
+  margin-bottom: 10px;
+}
+.popover-footer {
+  text-align: right;
+}
+.popover-link {
+  color: #007AFF;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.popover-link:hover {
+  text-decoration: underline;
+  color: #40C4FF;
+}
+/* City Name Label Styling (Permanent, Right Under Circles, Emphasized on Hover) */
+.scene-container .globe-tooltip {
+  display: block !important; /* Ensure labels are always visible */
+  background: transparent !important;
+  color: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 1) !important; /* Increased shadow for better readability on dark globe */
+  white-space: nowrap !important;
+  z-index: 5 !important; /* Above globe but below popover */
+  transition: all 0.3s ease !important;
+  transform: translateY(5px); /* Slight offset to position label right under the circle */
+  text-align: center; /* Center the label text */
+}
+/* Emphasize on hover */
+.scene-container .globe-tooltip:hover {
+  background: rgba(0, 0, 0, 0.9) !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  transform: translateY(5px); /* Maintain position on hover */
+}
+/* Popover Fade-In Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Responsive Globe Height and Tags for Mobile */
+@media (max-width: 640px) {
+  #globeViz {
+    height: 100vh; /* Full viewport height for mobile */
+  }
+  .main-content {
+    padding-top: 250px; /* Account for smaller globe height */
+    padding-bottom: 80px; /* Reduced to account for smaller footer height */
+  }
+  .filter-tag {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+  }
+  .container {
+    padding: 2px;
+  }
+  .timeline-entry {
+    margin-right: 16px; /* Further reduced margin for mobile */
+  }
+  .timeline-date {
+    font-size: 0.625rem; /* Smaller font for mobile */
+  }
+  .timeline-highlight {
+    font-size: 0.75rem; /* Smaller font for mobile */
+  }
+  .timeline-dot {
+    width: 6px; /* Smaller dot for mobile */
+    height: 6px;
+  }
+  .timeline-card {
+    padding: 6px 8px; /* Further reduced padding for mobile */
+  }
+  .timeline::before {
+    top: 30px; /* Adjusted for smaller dots */
+  }
+  .timeline-highlight-dot {
+    top: 28px; /* Adjusted for smaller dots */
+    width: 3px; /* Smaller dot for mobile */
+    height: 3px;
+  }
+  .scene-container .globe-tooltip {
+    font-size: 12px !important; /* Smaller city name label on mobile */
+  }
+  .popover-content {
+    width: 250px;
+    padding: 10px;
+  }
+  .popover-title {
+    font-size: 1rem;
+  }
+  .popover-body {
+    font-size: 0.75rem;
+  }
+  .popover-link {
+    font-size: 0.75rem;
+  }
+}

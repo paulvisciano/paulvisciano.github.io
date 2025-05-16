@@ -1,0 +1,295 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An Epic Day in Austin</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?cachebust=20250515" crossorigin="anonymous"></script>
+  <!-- React and Babel CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js?cachebust=20250515" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js?cachebust=20250515" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.5/babel.min.js?cachebust=20250515" crossorigin="anonymous"></script>
+  <!-- Globe.GL Dependencies (Pinned Versions) -->
+  <script src="https://unpkg.com/three@0.128.0/build/three.min.js?cachebust=20250515" crossorigin="anonymous" onerror="console.error('Failed to load Three.js')"></script>
+  <script src="https://unpkg.com/d3@7.8.5/dist/d3.min.js?cachebust=20250515" crossorigin="anonymous" onerror="console.error('Failed to load D3')"></script>
+  <script src="https://unpkg.com/globe.gl@2.29.2/dist/globe.gl.min.js?cachebust=20250515" crossorigin="anonymous" onerror="console.error('Failed to load Globe.GL')"></script>
+  <!-- Local Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+  <!-- Globe Div at Root Level -->
+  <div id="globeViz"></div>
+
+  <!-- Global Error Handler -->
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.error('Global Error:', {
+        message,
+        source,
+        lineno,
+        colno,
+        error,
+        stack: error ? error.stack : 'No stack trace available'
+      });
+      return true;
+    };
+  </script>
+
+  <!-- Data (Load First) -->
+  <script type="text/babel" defer>
+    window.blogPosts = [
+      {
+        title: "An Epic Day Vibing in Austin",
+        date: "Posted on May 10, 2025",
+        timelineDate: "March 2024",
+        timelineHighlight: "Volleyball & Coffee in Austin",
+        tags: ["beach volleyball", "coffee", "hookah"],
+        snippet: "Austin, Texas, knows how to deliver a day packed with energy, and today was a testament to that. From a double espresso with a jaw-dropping skyline view to spiking volleyballs and chilling at Mezze, here’s how I soaked up ATX’s best.",
+        image: "attachment://cosmic-skyline.jpg",
+        imageAlt: "Austin Skyline from Cosmic Coffee",
+        caption: "The breathtaking view of downtown Austin from Cosmic Coffee, complete with a red train cruising by and modern buildings under a perfect sky.",
+        mapLink: "https://maps.app.goo.gl/5gKqL9nL8J3mX5zK7",
+        mapText: "📍 Find Cosmic Coffee on Google Maps",
+        fullLink: "austin-post.html",
+        location: { lat: 30.2672, lng: -97.7431, name: "Austin, Texas" }
+      },
+      {
+        title: "Beach Volleyball in Destin",
+        date: "Posted on January 15, 2024",
+        timelineDate: "January 2024",
+        timelineHighlight: "Beach Volleyball in Destin",
+        tags: ["beach volleyball", "beach"],
+        snippet: "Kicked off my journey with sun, sand, and epic volleyball matches in Destin’s emerald waters.",
+        image: "attachment://placeholder-destin.jpg",
+        imageAlt: "Destin Beach Volleyball",
+        caption: "Spiking on the white sands of Destin!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Destin on Google Maps",
+        fullLink: "#",
+        location: { lat: 30.3935, lng: -86.4958, name: "Destin, Florida" }
+      },
+      {
+        title: "Jazz and Beignets in New Orleans",
+        date: "Posted on February 10, 2024",
+        timelineDate: "February 2024",
+        timelineHighlight: "Jazz in New Orleans",
+        tags: ["live music", "food"],
+        snippet: "Soaked in the vibrant jazz scene and savored beignets in the heart of the French Quarter.",
+        image: "attachment://placeholder-new-orleans.jpg",
+        imageAlt: "New Orleans French Quarter",
+        caption: "Jazz on the streets of New Orleans!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find New Orleans on Google Maps",
+        fullLink: "#",
+        location: { lat: 29.9511, lng: -90.0715, name: "New Orleans, Louisiana" }
+      },
+      {
+        title: "Rocky Mountain High in Denver",
+        date: "Posted on April 5, 2024",
+        timelineDate: "April 2024",
+        timelineHighlight: "Exploring Denver",
+        tags: ["hiking", "city"],
+        snippet: "Explored Denver’s urban charm and took in stunning views from nearby trails.",
+        image: "attachment://placeholder-denver.jpg",
+        imageAlt: "Denver Skyline",
+        caption: "Denver’s skyline with the Rockies in the background!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Denver on Google Maps",
+        fullLink: "#",
+        location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" }
+      },
+      {
+        title: "Skiing in Breckenridge",
+        date: "Posted on May 1, 2024",
+        timelineDate: "May 2024",
+        timelineHighlight: "Skiing in Breckenridge",
+        tags: ["skiing", "mountains"],
+        snippet: "Hit the snowy slopes of Breckenridge for an epic skiing adventure.",
+        image: "attachment://placeholder-breckenridge.jpg",
+        imageAlt: "Breckenridge Slopes",
+        caption: "Shredding the slopes in Breckenridge!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Breckenridge on Google Maps",
+        fullLink: "#",
+        location: { lat: 39.4817, lng: -106.0384, name: "Breckenridge, Colorado" }
+      },
+      {
+        title: "Snowy Adventures in Salt Lake City",
+        date: "Posted on June 10, 2024",
+        timelineDate: "June 2024",
+        timelineHighlight: "Snow in Salt Lake City",
+        tags: ["skiing", "nature"],
+        snippet: "Explored the snowy landscapes around Salt Lake City, from ski resorts to serene hikes.",
+        image: "attachment://placeholder-salt-lake.jpg",
+        imageAlt: "Salt Lake City Mountains",
+        caption: "Winter beauty in Salt Lake City!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Salt Lake City on Google Maps",
+        fullLink: "#",
+        location: { lat: 40.7608, lng: -111.8910, name: "Salt Lake City, Utah" }
+      },
+      {
+        title: "Lights and Action in Las Vegas",
+        date: "Posted on July 15, 2024",
+        timelineDate: "July 2024",
+        timelineHighlight: "Lights in Las Vegas",
+        tags: ["nightlife", "city"],
+        snippet: "Experienced the dazzling lights and vibrant nightlife of the Las Vegas Strip.",
+        image: "attachment://placeholder-las-vegas.jpg",
+        imageAlt: "Las Vegas Strip",
+        caption: "Bright lights of the Las Vegas Strip!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Las Vegas on Google Maps",
+        fullLink: "#",
+        location: { lat: 36.1699, lng: -115.1398, name: "Las Vegas, Nevada" }
+      },
+      {
+        title: "Surf and Sun in San Diego",
+        date: "Posted on August 20, 2024",
+        timelineDate: "August 2024",
+        timelineHighlight: "Surfing in San Diego",
+        tags: ["beach", "surfing"],
+        snippet: "Caught some waves and soaked up the sun on San Diego’s beautiful beaches.",
+        image: "attachment://placeholder-san-diego.jpg",
+        imageAlt: "San Diego Beach",
+        caption: "Surfing the waves in San Diego!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find San Diego on Google Maps",
+        fullLink: "#",
+        location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" }
+      },
+      {
+        title: "Island Life in Hawaii",
+        date: "Posted on September 10, 2024",
+        timelineDate: "September 2024",
+        timelineHighlight: "Island Life in Hawaii",
+        tags: ["beach", "nature"],
+        snippet: "Embraced island life in Honolulu with stunning beaches and lush hikes.",
+        image: "attachment://placeholder-hawaii.jpg",
+        imageAlt: "Hawaii Beach",
+        caption: "Paradise found in Honolulu, Hawaii!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Honolulu on Google Maps",
+        fullLink: "#",
+        location: { lat: 21.3069, lng: -157.8583, name: "Honolulu, Hawaii" }
+      },
+      {
+        title: "Tropical Vibes in the Philippines",
+        date: "Posted on October 5, 2024",
+        timelineDate: "October 2024",
+        timelineHighlight: "Tropical Vibes in the Philippines",
+        tags: ["beach", "culture"],
+        snippet: "Explored the vibrant culture and pristine beaches of Manila and beyond.",
+        image: "attachment://placeholder-philippines.jpg",
+        imageAlt: "Philippines Beach",
+        caption: "Tropical paradise in the Philippines!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Manila on Google Maps",
+        fullLink: "#",
+        location: { lat: 14.5995, lng: 120.9842, name: "Manila, Philippines" }
+      },
+      {
+        title: "Temples and Markets in Thailand",
+        date: "Posted on November 1, 2024",
+        timelineDate: "November 2024",
+        timelineHighlight: "Temples in Thailand",
+        tags: ["culture", "markets"],
+        snippet: "Immersed myself in Bangkok’s stunning temples and bustling markets.",
+        image: "attachment://placeholder-thailand.jpg",
+        imageAlt: "Bangkok Temple",
+        caption: "Exploring the temples of Bangkok!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Bangkok on Google Maps",
+        fullLink: "#",
+        location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" }
+      },
+      {
+        title: "Tech and Tradition in Japan",
+        date: "Posted on December 10, 2024",
+        timelineDate: "December 2024",
+        timelineHighlight: "Tech in Japan",
+        tags: ["culture", "city"],
+        snippet: "Experienced the blend of tech and tradition in Tokyo’s vibrant streets.",
+        image: "attachment://placeholder-japan.jpg",
+        imageAlt: "Tokyo Skyline",
+        caption: "Tokyo’s neon lights and traditions!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Tokyo on Google Maps",
+        fullLink: "#",
+        location: { lat: 35.6762, lng: 139.6503, name: "Tokyo, Japan" }
+      },
+      {
+        title: "Beaches and Beats in Miami",
+        date: "Posted on January 15, 2025",
+        timelineDate: "January 2025",
+        timelineHighlight: "Beaches in Miami",
+        tags: ["beach", "nightlife"],
+        snippet: "Danced to the beats and relaxed on the beaches of Miami.",
+        image: "attachment://placeholder-miami.jpg",
+        imageAlt: "Miami Beach",
+        caption: "Sunset vibes on Miami Beach!",
+        mapLink: "https://maps.app.goo.gl/placeholder",
+        mapText: "📍 Find Miami on Google Maps",
+        fullLink: "#",
+        location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" }
+      }
+    ];
+  </script>
+
+  <!-- Local Scripts -->
+  <script type="text/babel" defer src="blogList.js"></script>
+  <script type="text/babel" defer src="footer.js"></script>
+  <script type="text/babel" defer src="app.js"></script>
+
+  <!-- Render the App -->
+  <script type="text/babel" defer>
+    try {
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(React.createElement(window.App));
+    } catch (error) {
+      console.error('Error rendering React app:', error);
+    }
+  </script>
+</body>
+</html>
