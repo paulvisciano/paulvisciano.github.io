@@ -1,6 +1,5 @@
 window.BlogList = ({ handleTimelineClick }) => {
   if (typeof window.blogPosts === 'undefined') {
-    console.error("blogPosts is undefined. Ensure blogData.js is loaded before blogList.js");
     return React.createElement('div', null, 'Error: Data not loaded');
   }
 
@@ -42,8 +41,6 @@ window.BlogList = ({ handleTimelineClick }) => {
         stayDuration: post.stayDuration
       }));
 
-      console.log("Initializing Globe.GL with earth-night.jpg texture and dynamic point sizes");
-
       // Load texture with filtering
       const textureLoader = new THREE.TextureLoader();
       const globeTexture = textureLoader.load('//unpkg.com/three-globe/example/img/earth-night.jpg');
@@ -63,7 +60,7 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointLat('lat')
         .pointLng('lng')
         .pointColor(() => '#ffa500') // Orange to match timeline dot
-        .pointsMerge(true)
+        .pointsMerge(false) // Disable merging for better click detection
         .onZoom(() => {
           if (!globeInstance.current || !pointsData) return;
 
@@ -77,7 +74,6 @@ window.BlogList = ({ handleTimelineClick }) => {
           const minAltitude = 0.1;
           const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
           const pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-          
           globeInstance.current.pointRadius(radius);
           globeInstance.current.pointAltitude(pointAltitude);
 
@@ -88,23 +84,24 @@ window.BlogList = ({ handleTimelineClick }) => {
 
       // Enable controls with adjusted minDistance
       try {
-        console.log("Enabling Globe.GL controls");
         globeInstance.current.controls().autoRotate = true;
         globeInstance.current.controls().autoRotateSpeed = 0.5;
         globeInstance.current.controls().enableZoom = true;
         globeInstance.current.controls().minDistance = 120; // Adjusted to allow closer zoom
         globeInstance.current.controls().maxDistance = 500;
       } catch (error) {
-        console.error("Error enabling Globe.GL controls:", error);
       }
 
       // Show popover on marker click
       globeInstance.current.onPointClick(point => {
         try {
-          if (!point) return;
+          if (!point) {
+            return;
+          }
 
-          console.log("Point clicked, zooming and showing popover");
-          if (isZooming.current) return;
+          if (isZooming.current) {
+            return;
+          }
           isZooming.current = true;
           globeInstance.current.controls().autoRotate = false;
 
@@ -131,9 +128,9 @@ window.BlogList = ({ handleTimelineClick }) => {
                 left: finalCoords.x
               });
               setPopoverContent({
-                title: point.title,
-                snippet: point.snippet,
-                fullLink: point.fullLink,
+                title: point.title || "No Title",
+                snippet: point.snippet || "No Snippet",
+                fullLink: point.fullLink || "#",
                 lat: point.lat,
                 lng: point.lng
               });
@@ -141,7 +138,6 @@ window.BlogList = ({ handleTimelineClick }) => {
             });
           });
         } catch (error) {
-          console.error("Error handling point click:", error);
           isZooming.current = false;
         }
       });
@@ -162,24 +158,25 @@ window.BlogList = ({ handleTimelineClick }) => {
         }
       };
     } catch (error) {
-      console.error('Error initializing Globe.GL:', error);
     }
   }, []);
 
   // Expose handleTimelineClick to parent component
   window.handleTimelineClick = (post) => {
     if (!globeInstance.current) {
-      console.error("Globe instance not initialized");
       return;
     }
 
-    if (!post) return;
+    if (!post) {
+      return;
+    }
 
     try {
-      if (isZooming.current) return;
+      if (isZooming.current) {
+        return;
+      }
       isZooming.current = true;
       globeInstance.current.controls().autoRotate = false;
-      console.log(`Zooming to ${post.location.name} at lat: ${post.location.lat}, lng: ${post.location.lng}`);
 
       // Zoom out first
       globeInstance.current.pointOfView({
@@ -204,9 +201,9 @@ window.BlogList = ({ handleTimelineClick }) => {
             left: finalCoords.x
           });
           setPopoverContent({
-            title: post.title,
-            snippet: post.snippet,
-            fullLink: post.fullLink,
+            title: post.title || "No Title",
+            snippet: post.snippet || "No Snippet",
+            fullLink: post.fullLink || "#",
             lat: post.location.lat,
             lng: post.location.lng
           });
@@ -214,7 +211,6 @@ window.BlogList = ({ handleTimelineClick }) => {
         });
       });
     } catch (error) {
-      console.error("Error in handleTimelineClick:", error);
       isZooming.current = false;
     }
   };
