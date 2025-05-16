@@ -42,14 +42,7 @@ window.BlogList = ({ handleTimelineClick }) => {
         stayDuration: post.stayDuration
       }));
 
-      // Prepare labels data
-      const labelsData = window.blogPosts.map(post => ({
-        name: post.location.name,
-        lat: post.location.lat,
-        lng: post.location.lng
-      }));
-
-      console.log("Initializing Globe.GL with earth-night.jpg texture and enhanced point markers");
+      console.log("Initializing Globe.GL with earth-night.jpg texture and dynamic point sizes");
 
       // Load texture with filtering
       const textureLoader = new THREE.TextureLoader();
@@ -70,10 +63,22 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointLat('lat')
         .pointLng('lng')
         .pointColor(() => '#ffa500') // Orange to match timeline dot
-        .pointRadius(0.2) // Larger circles
+        .pointRadius(0.8) // Initial radius
         .pointAltitude(0.01) // Slight elevation
         .pointsMerge(true)
-       
+        .onZoom(() => {
+          if (!globeInstance.current || !pointsData) return;
+
+          // Adjust point radius based on altitude
+          const altitude = globeInstance.current.pointOfView().altitude;
+          const maxRadius = 0.05; // Larger when zoomed out
+          const minRadius = 0.8; // Smaller when zoomed in
+          const maxAltitude = 2.5;
+          const minAltitude = 0.1;
+          const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+         
+          globeInstance.current.pointRadius(radius);
+        })
         (document.getElementById('globeViz'));
 
       // Enable controls with adjusted minDistance
@@ -91,6 +96,8 @@ window.BlogList = ({ handleTimelineClick }) => {
       // Show popover on marker click
       globeInstance.current.onPointClick(point => {
         try {
+          if (!point) return;
+
           console.log("Point clicked, zooming and showing popover");
           if (isZooming.current) return;
           isZooming.current = true;
@@ -160,6 +167,8 @@ window.BlogList = ({ handleTimelineClick }) => {
       console.error("Globe instance not initialized");
       return;
     }
+
+    if (!post) return;
 
     try {
       if (isZooming.current) return;
