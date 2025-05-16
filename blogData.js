@@ -1,5 +1,6 @@
 window.blogPosts = [
   {
+    id: "post-1",
     title: "An Epic Day Vibing in Austin",
     date: "Posted on May 10, 2025",
     timelineDate: "March 2024",
@@ -16,6 +17,7 @@ window.blogPosts = [
     stayDuration: 10 // 10 days in Austin
   },
   {
+    id: "post-2",
     title: "Beach Volleyball in Destin",
     date: "Posted on January 15, 2024",
     timelineDate: "January 2024",
@@ -32,6 +34,7 @@ window.blogPosts = [
     stayDuration: 8 // 8 days in Destin
   },
   {
+    id: "post-3",
     title: "Jazz and Beignets in New Orleans",
     date: "Posted on February 10, 2024",
     timelineDate: "February 2024",
@@ -48,6 +51,7 @@ window.blogPosts = [
     stayDuration: 2 // 2 days in New Orleans
   },
   {
+    id: "post-4",
     title: "Rocky Mountain High in Denver",
     date: "Posted on April 5, 2024",
     timelineDate: "April 2024",
@@ -64,6 +68,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Denver
   },
   {
+    id: "post-5",
     title: "Skiing in Breckenridge",
     date: "Posted on May 1, 2024",
     timelineDate: "May 2024",
@@ -80,6 +85,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Breckenridge
   },
   {
+    id: "post-6",
     title: "Snowy Adventures in Salt Lake City",
     date: "Posted on June 10, 2024",
     timelineDate: "June 2024",
@@ -96,6 +102,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Salt Lake City
   },
   {
+    id: "post-7",
     title: "Lights and Action in Las Vegas",
     date: "Posted on July 15, 2024",
     timelineDate: "July 2024",
@@ -112,6 +119,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Las Vegas
   },
   {
+    id: "post-8",
     title: "Surf and Sun in San Diego",
     date: "Posted on August 20, 2024",
     timelineDate: "August 2024",
@@ -128,6 +136,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in San Diego
   },
   {
+    id: "post-9",
     title: "Island Life in Hawaii",
     date: "Posted on September 10, 2024",
     timelineDate: "September 2024",
@@ -144,6 +153,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Honolulu
   },
   {
+    id: "post-10",
     title: "Tropical Vibes in the Philippines",
     date: "Posted on October 5, 2024",
     timelineDate: "October 2024",
@@ -160,6 +170,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Manila
   },
   {
+    id: "post-11",
     title: "Temples and Markets in Thailand",
     date: "Posted on November 1, 2024",
     timelineDate: "November 2024",
@@ -176,6 +187,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Bangkok
   },
   {
+    id: "post-12",
     title: "Tech and Tradition in Japan",
     date: "Posted on December 10, 2024",
     timelineDate: "December 2024",
@@ -192,6 +204,7 @@ window.blogPosts = [
     stayDuration: 1 // 1 day in Tokyo
   },
   {
+    id: "post-13",
     title: "Beaches and Beats in Miami",
     date: "Posted on January 15, 2025",
     timelineDate: "January 2025",

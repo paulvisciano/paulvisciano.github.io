@@ -1,7 +1,4 @@
-window.Footer = () => {
-  const handleTimelineClick = window.handleTimelineClick || (() => console.error("handleTimelineClick not defined"));
-  const [selectedIndex, setSelectedIndex] = React.useState(null);
-
+window.Footer = ({ handleTimelineClick, selectedId, setSelectedId }) => {
   return React.createElement(
     'footer',
     null,
@@ -12,19 +9,19 @@ window.Footer = () => {
       React.createElement(
         'div',
         { className: 'timeline' },
-        window.blogPosts.map((post, index) => {
+        window.blogPosts.map(post => {
           // Calculate dot size based on stayDuration
           const dotSize = Math.min(8 + post.stayDuration * 0.5, 16); // 8px base + 0.5px per day, max 16px
           return React.createElement(
             'div',
             {
-              key: post.title,
-              className: `timeline-entry ${selectedIndex === index ? 'selected' : ''}`,
+              key: post.id,
+              className: `timeline-entry ${selectedId === post.id ? 'selected' : ''}`,
+              'data-id': post.id,
               onClick: () => {
-                setSelectedIndex(index);
+                setSelectedId(post.id);
                 handleTimelineClick(post);
-              },
-              style: { '--index': index }
+              }
             },
             React.createElement('div', { 
               className: 'timeline-dot',

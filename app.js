@@ -1,6 +1,38 @@
-window.App = () => React.createElement(
-  'div',
-  null,
-  React.createElement(window.BlogList),
-  React.createElement(window.Footer)
-);
+window.App = () => {
+  const [selectedId, setSelectedId] = React.useState(null);
+  const [zoomCallback, setZoomCallback] = React.useState(null);
+
+  const handleTimelineClick = (post) => {
+    if (!post || !post.id) return;
+    setSelectedId(post.id);
+    // Scroll timeline item into view
+    const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
+    if (timelineItem) {
+      document.querySelectorAll('.timeline-entry.selected').forEach(item => 
+        item.classList.remove('selected')
+      );
+      timelineItem.classList.add('selected');
+      timelineItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    // Trigger zoom in BlogList
+    if (zoomCallback) {
+      zoomCallback(post);
+    }
+  };
+
+  return React.createElement(
+    'div',
+    { className: 'app-container' },
+    React.createElement(window.BlogList, { 
+      handleTimelineClick, 
+      selectedId, 
+      setSelectedId,
+      setZoomCallback
+    }),
+    React.createElement(window.Footer, { 
+      handleTimelineClick, 
+      selectedId, 
+      setSelectedId 
+    })
+  );
+};

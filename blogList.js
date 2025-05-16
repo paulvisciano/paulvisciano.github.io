@@ -1,4 +1,4 @@
-window.BlogList = ({ handleTimelineClick }) => {
+window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCallback }) => {
   if (typeof window.blogPosts === 'undefined') {
     return React.createElement('div', null, 'Error: Data not loaded');
   }
@@ -28,6 +28,58 @@ window.BlogList = ({ handleTimelineClick }) => {
     };
   }, []);
 
+  // Provide zoom callback to App.js
+  React.useEffect(() => {
+    setZoomCallback(() => (post) => {
+      if (!globeInstance.current || !post) {
+        return;
+      }
+
+      try {
+        if (isZooming.current) {
+          return;
+        }
+        isZooming.current = true;
+        globeInstance.current.controls().autoRotate = false;
+
+        // Zoom out first
+        globeInstance.current.pointOfView({
+          lat: post.location.lat,
+          lng: post.location.lng,
+          altitude: 1.0
+        }, 2000);
+
+        // Then zoom in closer
+        waitForZoom(2000).then(() => {
+          globeInstance.current.pointOfView({
+            lat: post.location.lat,
+            lng: post.location.lng,
+            altitude: 0.1 // Zoom in further
+          }, 1500);
+
+          // Show popover after both animations
+          waitForZoom(1500).then(() => {
+            const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.5);
+            setPopoverPosition({
+              top: finalCoords.y + 20,
+              left: finalCoords.x
+            });
+            setPopoverContent({
+              title: post.title || "No Title",
+              snippet: post.snippet || "No Snippet",
+              fullLink: post.fullLink || "#",
+              lat: post.location.lat,
+              lng: post.location.lng
+            });
+            isZooming.current = false;
+          });
+        });
+      } catch (error) {
+        isZooming.current = false;
+      }
+    });
+  }, [setZoomCallback]);
+
   // Initialize the Globe.GL after the component renders
   React.useEffect(() => {
     try {
@@ -38,7 +90,8 @@ window.BlogList = ({ handleTimelineClick }) => {
         fullLink: post.fullLink,
         snippet: post.snippet,
         title: post.title,
-        stayDuration: post.stayDuration
+        stayDuration: post.stayDuration,
+        id: post.id
       }));
 
       // Load texture with filtering
@@ -63,7 +116,7 @@ window.BlogList = ({ handleTimelineClick }) => {
         if (altitude < maxAltitude / 2) {
           pointAltitude = 0.02; // Minimum altitude when max zoomed in
         } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
-          pointAltitude = 0.08; // mix point
+          pointAltitude = 0.08; // Mid-range
         } else if (altitude >= maxAltitude - 0.1) {
           pointAltitude = 0.8; // Maximum altitude when max zoomed out
         }
@@ -117,30 +170,40 @@ window.BlogList = ({ handleTimelineClick }) => {
           isZooming.current = true;
           globeInstance.current.controls().autoRotate = false;
 
+          // Find the corresponding post in window.blogPosts
+          const post = window.blogPosts.find(p => 
+            p.location.lat === point.lat && p.location.lng === point.lng
+          );
 
-          // Then zoom in closer
-            globeInstance.current.pointOfView({
-              lat: point.lat,
-              lng: point.lng,
-              altitude: 0.1 // Zoom in further
-            }, 1500);
+          // Update timeline highlight and scroll into view
+          if (post && post.id) {
+            setSelectedId(post.id);
+            handleTimelineClick(post);
+          }
 
-            // Show popover after both animations
-            waitForZoom(1500).then(() => {
-              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.5);
-              setPopoverPosition({
-                top: finalCoords.y + 20,
-                left: finalCoords.x
-              });
-              setPopoverContent({
-                title: point.title || "No Title",
-                snippet: point.snippet || "No Snippet",
-                fullLink: point.fullLink || "#",
-                lat: point.lat,
-                lng: point.lng
-              });
-              isZooming.current = false;
+          // Zoom in to the point
+          globeInstance.current.pointOfView({
+            lat: point.lat,
+            lng: point.lng,
+            altitude: 0.1 // Zoom in
+          }, 1500);
+
+          // Show popover after animation
+          waitForZoom(1500).then(() => {
+            const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.5);
+            setPopoverPosition({
+              top: finalCoords.y + 20,
+              left: finalCoords.x
             });
+            setPopoverContent({
+              title: point.title || "No Title",
+              snippet: point.snippet || "No Snippet",
+              fullLink: point.fullLink || "#",
+              lat: point.lat,
+              lng: point.lng
+            });
+            isZooming.current = false;
+          });
         } catch (error) {
           isZooming.current = false;
         }
@@ -164,60 +227,6 @@ window.BlogList = ({ handleTimelineClick }) => {
     } catch (error) {
     }
   }, []);
-
-  // Expose handleTimelineClick to parent component
-  window.handleTimelineClick = (post) => {
-    if (!globeInstance.current) {
-      return;
-    }
-
-    if (!post) {
-      return;
-    }
-
-    try {
-      if (isZooming.current) {
-        return;
-      }
-      isZooming.current = true;
-      globeInstance.current.controls().autoRotate = false;
-
-      // Zoom out first
-      globeInstance.current.pointOfView({
-        lat: post.location.lat,
-        lng: post.location.lng,
-        altitude: 1.0
-      }, 2000);
-
-      // Then zoom in closer
-      waitForZoom(2000).then(() => {
-        globeInstance.current.pointOfView({
-          lat: post.location.lat,
-          lng: post.location.lng,
-          altitude: 0.1 // Zoom in further
-        }, 1500);
-
-        // Show popover after both animations
-        waitForZoom(1500).then(() => {
-          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.5);
-          setPopoverPosition({
-            top: finalCoords.y + 20,
-            left: finalCoords.x
-          });
-          setPopoverContent({
-            title: post.title || "No Title",
-            snippet: post.snippet || "No Snippet",
-            fullLink: post.fullLink || "#",
-            lat: post.location.lat,
-            lng: post.location.lng
-          });
-          isZooming.current = false;
-        });
-      });
-    } catch (error) {
-      isZooming.current = false;
-    }
-  };
 
   // Popover Component
   const Popover = ({ title, snippet, fullLink, onClose, position }) => {
