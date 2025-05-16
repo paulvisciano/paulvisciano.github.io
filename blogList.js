@@ -117,15 +117,8 @@ window.BlogList = ({ handleTimelineClick }) => {
           isZooming.current = true;
           globeInstance.current.controls().autoRotate = false;
 
-          // Zoom out first
-          globeInstance.current.pointOfView({
-            lat: point.lat,
-            lng: point.lng,
-            altitude: 1.0
-          }, 2000);
 
           // Then zoom in closer
-          waitForZoom(2000).then(() => {
             globeInstance.current.pointOfView({
               lat: point.lat,
               lng: point.lng,
@@ -148,7 +141,6 @@ window.BlogList = ({ handleTimelineClick }) => {
               });
               isZooming.current = false;
             });
-          });
         } catch (error) {
           isZooming.current = false;
         }
