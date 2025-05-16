@@ -12,7 +12,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/5gKqL9nL8J3mX5zK7",
     mapText: "📍 Find Cosmic Coffee on Google Maps",
     fullLink: "austin-post.html",
-    location: { lat: 30.2672, lng: -97.7431, name: "Austin, Texas" }
+    location: { lat: 30.2672, lng: -97.7431, name: "Austin, Texas" },
+    stayDuration: 10 // 10 days in Austin
   },
   {
     title: "Beach Volleyball in Destin",
@@ -27,7 +28,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Destin on Google Maps",
     fullLink: "#",
-    location: { lat: 30.3935, lng: -86.4958, name: "Destin, Florida" }
+    location: { lat: 30.3935, lng: -86.4958, name: "Destin, Florida" },
+    stayDuration: 8 // 8 days in Destin
   },
   {
     title: "Jazz and Beignets in New Orleans",
@@ -42,7 +44,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find New Orleans on Google Maps",
     fullLink: "#",
-    location: { lat: 29.9511, lng: -90.0715, name: "New Orleans, Louisiana" }
+    location: { lat: 29.9511, lng: -90.0715, name: "New Orleans, Louisiana" },
+    stayDuration: 2 // 2 days in New Orleans
   },
   {
     title: "Rocky Mountain High in Denver",
@@ -57,7 +60,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Denver on Google Maps",
     fullLink: "#",
-    location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" }
+    location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" },
+    stayDuration: 1 // 1 day in Denver
   },
   {
     title: "Skiing in Breckenridge",
@@ -72,7 +76,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Breckenridge on Google Maps",
     fullLink: "#",
-    location: { lat: 39.4817, lng: -106.0384, name: "Breckenridge, Colorado" }
+    location: { lat: 39.4817, lng: -106.0384, name: "Breckenridge, Colorado" },
+    stayDuration: 1 // 1 day in Breckenridge
   },
   {
     title: "Snowy Adventures in Salt Lake City",
@@ -87,7 +92,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Salt Lake City on Google Maps",
     fullLink: "#",
-    location: { lat: 40.7608, lng: -111.8910, name: "Salt Lake City, Utah" }
+    location: { lat: 40.7608, lng: -111.8910, name: "Salt Lake City, Utah" },
+    stayDuration: 1 // 1 day in Salt Lake City
   },
   {
     title: "Lights and Action in Las Vegas",
@@ -102,7 +108,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Las Vegas on Google Maps",
     fullLink: "#",
-    location: { lat: 36.1699, lng: -115.1398, name: "Las Vegas, Nevada" }
+    location: { lat: 36.1699, lng: -115.1398, name: "Las Vegas, Nevada" },
+    stayDuration: 1 // 1 day in Las Vegas
   },
   {
     title: "Surf and Sun in San Diego",
@@ -117,7 +124,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find San Diego on Google Maps",
     fullLink: "#",
-    location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" }
+    location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
+    stayDuration: 1 // 1 day in San Diego
   },
   {
     title: "Island Life in Hawaii",
@@ -132,7 +140,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Honolulu on Google Maps",
     fullLink: "#",
-    location: { lat: 21.3069, lng: -157.8583, name: "Honolulu, Hawaii" }
+    location: { lat: 21.3069, lng: -157.8583, name: "Honolulu, Hawaii" },
+    stayDuration: 1 // 1 day in Honolulu
   },
   {
     title: "Tropical Vibes in the Philippines",
@@ -147,7 +156,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Manila on Google Maps",
     fullLink: "#",
-    location: { lat: 14.5995, lng: 120.9842, name: "Manila, Philippines" }
+    location: { lat: 14.5995, lng: 120.9842, name: "Manila, Philippines" },
+    stayDuration: 1 // 1 day in Manila
   },
   {
     title: "Temples and Markets in Thailand",
@@ -162,7 +172,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Bangkok on Google Maps",
     fullLink: "#",
-    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" }
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1 // 1 day in Bangkok
   },
   {
     title: "Tech and Tradition in Japan",
@@ -177,7 +188,8 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Tokyo on Google Maps",
     fullLink: "#",
-    location: { lat: 35.6762, lng: 139.6503, name: "Tokyo, Japan" }
+    location: { lat: 35.6762, lng: 139.6503, name: "Tokyo, Japan" },
+    stayDuration: 1 // 1 day in Tokyo
   },
   {
     title: "Beaches and Beats in Miami",
@@ -192,6 +204,7 @@ window.blogPosts = [
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Miami on Google Maps",
     fullLink: "#",
-    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" }
+    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
+    stayDuration: 1 // 1 day in Miami
   }
 ];
