@@ -6,10 +6,10 @@
   --text-secondary: #d1d5db; /* Popover body text */
   --primary-orange: #ffa500; /* Timeline dot, links, points */
   --orange-hover: #ffcc33; /* Link hover */
-  --orange-tint-20: rgba(255, 165, 0, 0.2); /* Filter tag hover */
-  --orange-tint-30: rgba(255, 165, 0, 0.3); /* Filter tag active */
+  --orange-tint-20: rgba(255, 165, 0, 0.2); /* Filter tag hover (unused in new styling) */
+  --orange-tint-30: rgba(255, 165, 0, 0.3); /* Filter tag active (unused in new styling) */
   --orange-tint-10: rgba(255, 165, 0, 0.1); /* Popover border */
-  --white-10: rgba(255, 255, 255, 0.1); /* Filter tag, timeline card selected */
+  --white-10: rgba(255, 255, 255, 0.1); /* Timeline card selected */
   --white-05: rgba(255, 255, 255, 0.05); /* Timeline card */
   --white-30: rgba(255, 255, 255, 0.3); /* Timeline card selected shadow */
   --black-80: rgba(0, 0, 0, 0.8); /* Label text shadow */
@@ -27,13 +27,16 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 a {
   color: var(--primary-orange); /* Orange to match markers */
   transition: color 0.3s ease;
 }
+
 a:hover {
   color: var(--orange-hover); /* Lighter orange on hover */
 }
+
 footer {
   position: fixed;
   bottom: 0;
@@ -44,24 +47,53 @@ footer {
   z-index: 20;
   padding: 8px 0;
 }
+
 /* Tag Styling */
-.tag, .filter-tag {
+.filter-tag {
   display: inline-block;
-  background: var(--white-10);
-  color: var(--text-light);
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  transition: background 0.3s ease;
+  background: rgba(26, 26, 26, 0.8); /* Darker, semi-transparent background for contrast */
+  color: var(--text-light); /* White text for readability */
+  font-size: 1rem; /* Larger font for visibility */
+  font-weight: 500; /* Medium weight for modern look */
+  padding: 8px 16px; /* Increased padding for tap targets */
+  margin: 6px; /* Spacing between tags */
+  border-radius: 9999px; /* Fully rounded for sleek design */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: all 0.2s ease-in-out; /* Smooth transitions */
+  cursor: pointer;
+  z-index: 10; /* Above globe */
 }
-.tag:hover, .filter-tag:hover {
-  background: var(--orange-tint-20); /* Orange tint */
+
+.filter-tag:hover {
+  background: rgba(26, 26, 26, 0.95); /* Slightly darker on hover */
+  border-color: rgba(255, 255, 255, 0.4); /* Brighter border */
+  transform: translateY(-2px); /* Slight lift effect */
 }
+
 .filter-tag.active {
-  background: var(--orange-tint-30);
+  background: var(--primary-orange); /* Solid orange to match points */
+  border-color: var(--primary-orange); /* Match border */
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Glow effect */
+  color: #ffffff; /* White text for contrast */
 }
+
+.filter-tag.active:hover {
+  background: var(--orange-hover); /* Lighter orange on hover */
+  transform: translateY(-2px); /* Maintain lift effect */
+}
+
+/* Tag container styling */
+.mb-8.flex.flex-wrap.justify-center {
+  position: sticky;
+  top: 1rem;
+  z-index: 20; /* Above globe and popovers */
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent); /* Subtle gradient */
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
 /* Globe Styling */
 #globeViz {
   position: fixed;
@@ -72,6 +104,7 @@ footer {
   width: 100%;
   z-index: 1;
 }
+
 /* Main Content Styling */
 .main-content {
   flex: 1;
@@ -83,10 +116,12 @@ footer {
   position: relative;
   z-index: 10;
 }
+
 /* Container Styling */
 .container {
   padding: 4px;
 }
+
 /* Timeline Styling */
 .timeline-container {
   position: relative;
@@ -96,12 +131,14 @@ footer {
   background: var(--transparent);
   border-radius: 0;
 }
+
 .timeline {
   display: flex;
   align-items: center;
   padding: 0 16px;
   position: relative;
 }
+
 .timeline-entry {
   display: inline-block;
   text-align: center;
@@ -109,21 +146,26 @@ footer {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+
 .timeline-entry:hover .timeline-card {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px var(--orange-tint-20);
 }
+
 .timeline-entry:hover .timeline-dot {
   background: var(--primary-orange);
 }
+
 .timeline-entry.selected .timeline-card {
   background: var(--white-10);
   transform: translateY(-2px);
   box-shadow: 0 4px 10px var(--white-30);
 }
+
 .timeline-entry.selected .timeline-dot {
   background: var(--primary-orange);
 }
+
 .timeline-dot {
   background: var(--text-light);
   border-radius: 50%;
@@ -131,6 +173,7 @@ footer {
   transition: all 0.3s ease;
   opacity: 0.8;
 }
+
 .timeline-card {
   background: var(--white-05);
   border-radius: 4px;
@@ -140,26 +183,31 @@ footer {
   animation: fadeIn 0.5s forwards;
   animation-delay: calc(var(--index) * 0.2s);
 }
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
 .timeline-date {
   font-size: 0.75rem;
   color: var(--text-muted);
   margin-bottom: 2px;
   opacity: 0.9;
 }
+
 .timeline-highlight {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-light);
   opacity: 0.9;
 }
+
 /* Popover Styling */
 .popover {
   z-index: 40;
 }
+
 .popover-content {
   background: rgba(26, 26, 26, 0.95); /* Dark, nearly opaque */
   border-radius: 4px;
@@ -169,6 +217,7 @@ footer {
   position: relative;
   border: 1px solid var(--orange-tint-10);
 }
+
 .popover-content::before {
   content: '';
   position: absolute;
@@ -179,17 +228,20 @@ footer {
   border-right: 10px solid transparent;
   border-bottom: 10px solid rgba(26, 26, 26, 0.95);
 }
+
 .popover-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
+
 .popover-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-light);
 }
+
 .popover-close {
   background: none;
   border: none;
@@ -198,27 +250,33 @@ footer {
   cursor: pointer;
   transition: color 0.3s ease;
 }
+
 .popover-close:hover {
   color: #ffffff;
 }
+
 .popover-body {
   font-size: 0.875rem;
   color: var(--text-secondary);
   margin-bottom: 10px;
 }
+
 .popover-footer {
   text-align: right;
 }
+
 .popover-link {
   color: var(--primary-orange);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.875rem;
 }
+
 .popover-link:hover {
   text-decoration: underline;
   color: var(--orange-hover);
 }
+
 /* Site Label Styling (Matching moon-landing-sites example, with timeline dot orange) */
 #globeViz .scene-container .site-label {
   display: block !important;
@@ -237,6 +295,7 @@ footer {
   text-align: center !important;
   opacity: 1 !important;
 }
+
 /* Responsive Styling */
 @media (max-width: 640px) {
   #globeViz {
@@ -247,13 +306,12 @@ footer {
     padding-bottom: 80px;
   }
   .filter-tag {
-    font-size: 0.65rem;
-    padding: 3px 10px;
-    background: var(--white-10);
-    color: var(--text-light);
+    font-size: 0.875rem; /* Slightly smaller but readable */
+    padding: 6px 12px; /* Adjusted for mobile tap targets */
+    margin: 4px;
   }
   .filter-tag:hover, .filter-tag.active {
-    background: var(--orange-tint-30);
+    background: var(--primary-orange); /* Consistent orange for active/hover */
   }
   .container {
     padding: 2px;
