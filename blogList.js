@@ -71,13 +71,16 @@ window.BlogList = ({ handleTimelineClick }) => {
 
           // Adjust point radius based on altitude
           const altitude = globeInstance.current.pointOfView().altitude;
-          const maxRadius = 0.05; // Larger when zoomed out
-          const minRadius = 0.8; // Smaller when zoomed in
+          const maxRadius = 0.05; // Smaller when zoomed out
+          const minRadius = 0.8; // Larger when zoomed in
           const maxAltitude = 2.5;
           const minAltitude = 0.1;
           const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
          
           globeInstance.current.pointRadius(radius);
+
+          // Toggle rotation based on altitude
+          globeInstance.current.controls().autoRotate = altitude > 2.2;
         })
         (document.getElementById('globeViz'));
 
