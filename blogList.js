@@ -69,17 +69,11 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointsData(pointsData)
         .pointLat('lat')
         .pointLng('lng')
-        .pointRadius(0.1) // Larger circles
+        .pointColor(() => '#ffa500') // Orange to match timeline dot
+        .pointRadius(0.2) // Larger circles
         .pointAltitude(0.01) // Slight elevation
         .pointsMerge(true)
-        .labelsData(labelsData)
-        .labelLat('lat')
-        .labelLng('lng')
-        .labelText('name')
-        .labelSize(0.2)
-        .labelColor(() => '#ffcc33')
-        .labelAltitude(0.01) // Adjusted to position below raised points
-        .labelsTransitionDuration(0)
+       
         (document.getElementById('globeViz'));
 
       // Enable controls with adjusted minDistance
