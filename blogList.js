@@ -42,88 +42,47 @@ window.BlogList = ({ handleTimelineClick }) => {
         stayDuration: post.stayDuration
       }));
 
-      console.log("Initializing Globe.GL to match world-cities example with semi-transparent globe and topographic texture");
+      console.log("Initializing Globe.GL with earth-night.jpg texture");
+
+      // Load texture with filtering
+      const textureLoader = new THREE.TextureLoader();
+      const globeTexture = textureLoader.load('//unpkg.com/three-globe/example/img/earth-night.jpg');
+      globeTexture.anisotropy = 4; // Enable anisotropic filtering
+      globeTexture.minFilter = THREE.LinearMipmapLinearFilter; // Mipmapping for zoom
+      globeTexture.magFilter = THREE.LinearFilter;
 
       globeInstance.current = Globe()
-        .backgroundColor('rgba(0, 0, 0, 1)')
-        .globeMaterial(new THREE.MeshPhongMaterial({ 
-          color: '#1a2526', 
-          shininess: 0, 
-          transparent: true, 
-          opacity: 0.8,
+        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+        .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+        .globeMaterial(new THREE.MeshPhongMaterial({
+          map: globeTexture,
           side: THREE.DoubleSide
         }))
-        .bumpImageUrl('https://unpkg.com/three-globe@2.31.0/example/img/earth-topology.png')
         .pointOfView({ lat: 0, lng: 0, altitude: 2.5 }, 0)
         .pointsData(pointsData)
         .pointLat('lat')
         .pointLng('lng')
-        .pointRadius(d => Math.min(0.3 + d.stayDuration * 0.05, 0.8))
-        .pointColor(() => '#00D4FF')
-        .labelText('label')
-        .labelSize(d => d.hovered ? 1.5 : (window.innerWidth < 640 ? 0.8 : 1.2))
-        .labelDotRadius(0.5)
-        .labelColor(() => '#ffffff')
-        .labelAltitude(0.02)
-        .labelsTransitionDuration(500)
+        .pointColor(() => 'orange')
+        .pointRadius(0.04)
+        .pointAltitude(0)
         .pointsMerge(true)
-        .pointAltitude(0.01)
+        .labelText('label')
+        .labelSize(0.5)
+        .labelDotRadius(0.5)
+        .labelColor(() => 'rgba(255, 255, 255, 0.75)')
+        .labelAltitude(0.05)
+        .labelLabel(d => `<div class="globe-tooltip">${d.label}</div>`)
+        .labelsTransitionDuration(0)
         .pointLabel("label")
-        .customThreeObject(d => {
-          console.log("Creating city marker with CircleGeometry");
-          const radius = Math.min(0.3 + d.stayDuration * 0.05, 0.8);
-          const geometry = new THREE.CircleGeometry(radius, 32);
-          const material = new THREE.MeshBasicMaterial({ color: '#00D4FF', transparent: true, opacity: 0.8 });
-          return new THREE.Mesh(geometry, material);
-        })
-        .customThreeObjectUpdate((obj, d) => {
-          Object.assign(obj.position, globeInstance.current.getCoords(d.lat, d.lng, 0.01));
-        })
         (document.getElementById('globeViz'));
 
-      // Add lighting
-      try {
-        console.log("Adding lighting to enhance topographic texture");
-        const scene = globeInstance.current.scene();
-        const ambientLight = new THREE.AmbientLight(0x404040, 1);
-        scene.add(ambientLight);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-        directionalLight.position.set(5, 3, 5);
-        scene.add(directionalLight);
-      } catch (error) {
-        console.error("Error adding lighting:", error);
-      }
-
-      // Add starfield
-      try {
-        console.log("Adding starfield to scene background");
-        const starCount = 5000;
-        const starPositions = new Float32Array(starCount * 3);
-        for (let i = 0; i < starCount; i++) {
-          const r = 200;
-          const theta = Math.random() * 2 * Math.PI;
-          const phi = Math.acos(2 * Math.random() - 1);
-          starPositions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-          starPositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-          starPositions[i * 3 + 2] = r * Math.cos(phi);
-        }
-        const starGeometry = new THREE.BufferGeometry();
-        starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-        const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 1, transparent: true, opacity: 0.7 });
-        const stars = new THREE.Points(starGeometry, starMaterial);
-        globeInstance.current.scene().background = null;
-        globeInstance.current.scene().add(stars);
-      } catch (error) {
-        console.error("Error adding starfield:", error);
-      }
-
-      // Enable controls
+      // Enable controls with adjusted minDistance
       try {
         console.log("Enabling Globe.GL controls");
         globeInstance.current.controls().autoRotate = true;
         globeInstance.current.controls().autoRotateSpeed = 0.5;
         globeInstance.current.controls().enableZoom = true;
-        globeInstance.current.controls().minDistance = 100;
+        globeInstance.current.controls().minDistance = 120; // Adjusted to allow closer zoom
         globeInstance.current.controls().maxDistance = 500;
       } catch (error) {
         console.error("Error enabling Globe.GL controls:", error);
@@ -144,17 +103,17 @@ window.BlogList = ({ handleTimelineClick }) => {
             altitude: 1.0
           }, 2000);
 
-          // Then zoom in after zoom-out completes
+          // Then zoom in closer
           waitForZoom(2000).then(() => {
             globeInstance.current.pointOfView({
               lat: point.lat,
               lng: point.lng,
-              altitude: 0.1
+              altitude: 0.1 // Zoom in further
             }, 1500);
 
             // Show popover after both animations
             waitForZoom(1500).then(() => {
-              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.01);
+              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0);
               setPopoverPosition({
                 top: finalCoords.y + 20,
                 left: finalCoords.x
@@ -172,23 +131,6 @@ window.BlogList = ({ handleTimelineClick }) => {
         } catch (error) {
           console.error("Error handling point click:", error);
           isZooming.current = false;
-        }
-      });
-
-      // Emphasize city name on hover
-      globeInstance.current.onPointHover(point => {
-        try {
-          pointsData.forEach(p => {
-            if (point && p.label === point.label) {
-              p.hovered = true;
-            } else {
-              p.hovered = false;
-              p.label = p.label.split('\n')[0];
-            }
-          });
-          globeInstance.current.pointsData(pointsData);
-        } catch (error) {
-          console.error("Error handling point hover:", error);
         }
       });
 
@@ -232,17 +174,17 @@ window.BlogList = ({ handleTimelineClick }) => {
         altitude: 1.0
       }, 2000);
 
-      // Then zoom in after zoom-out completes
+      // Then zoom in closer
       waitForZoom(2000).then(() => {
         globeInstance.current.pointOfView({
           lat: post.location.lat,
           lng: post.location.lng,
-          altitude: 0.1
+          altitude: 0.1 // Zoom in further
         }, 1500);
 
         // Show popover after both animations
         waitForZoom(1500).then(() => {
-          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.01);
+          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0);
           setPopoverPosition({
             top: finalCoords.y + 20,
             left: finalCoords.x

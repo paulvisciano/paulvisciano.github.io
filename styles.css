@@ -1,6 +1,6 @@
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: transparent; /* Allow starfield to show through */
+  background: transparent; /* Allow starry background to show through */
   color: #e0e0e0;
   margin: 0;
   line-height: 1.6;
@@ -9,41 +9,39 @@ body {
   flex-direction: column;
 }
 a {
-  color: #007AFF;
+  color: #ffa500; /* Orange to match markers */
   transition: color 0.3s ease;
 }
 a:hover {
-  color: #40C4FF;
+  color: #ffcc33; /* Lighter orange on hover */
 }
 footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #1a1a1a; /* Darker background for better visibility */
-  border-top: 1px solid #333; /* Slightly lighter border for contrast */
-  z-index: 20; /* Above globe (z-index 1) and main content (z-index 10) */
-  padding: 8px 0; /* Reduced padding */
+  background: #1a1a1a; /* Dark background */
+  border-top: 1px solid #333;
+  z-index: 20;
+  padding: 8px 0;
 }
 /* Tag Styling */
 .tag, .filter-tag {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.2); /* Increased opacity for clearer background */
-  color: #ffffff; /* Brighter text for readability */
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
   padding: 4px 12px;
-  border-radius: 9999px;
-  font-size: 0.875rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
   margin-right: 8px;
   margin-bottom: 8px;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease;
 }
 .tag:hover, .filter-tag:hover {
-  background: #007AFF;
-  color: #ffffff;
+  background: rgba(255, 165, 0, 0.2); /* Orange tint */
 }
 .filter-tag.active {
-  background: #007AFF;
-  color: #ffffff;
+  background: rgba(255, 165, 0, 0.3);
 }
 /* Globe Styling */
 #globeViz {
@@ -51,9 +49,9 @@ footer {
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh; /* Full viewport height to match starfield */
+  height: 100vh;
   width: 100%;
-  z-index: 1; /* Lower z-index to place in background */
+  z-index: 1;
 }
 /* Main Content Styling */
 .main-content {
@@ -61,23 +59,23 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding-top: 300px; /* Account for globe height */
-  padding-bottom: 100px; /* Reduced to account for smaller footer height */
+  padding-top: 300px;
+  padding-bottom: 100px;
   position: relative;
-  z-index: 10; /* Higher z-index to bring content to foreground */
+  z-index: 10;
 }
-/* Container Styling for Full Width */
+/* Container Styling */
 .container {
   padding: 4px;
 }
-/* Apple-Inspired Timeline Styling (Now in Footer) */
+/* Timeline Styling */
 .timeline-container {
   position: relative;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 8px 0; /* Reduced padding for footer */
-  background: transparent; /* No background in footer */
-  border-radius: 0; /* No border radius in footer */
+  padding: 8px 0;
+  background: transparent;
+  border-radius: 0;
 }
 .timeline {
   display: flex;
@@ -88,38 +86,36 @@ footer {
 .timeline-entry {
   display: inline-block;
   text-align: center;
-  margin-right: 32px; /* Reduced margin for footer */
+  margin-right: 32px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 .timeline-entry:hover .timeline-card {
-  transform: translateY(-2px); /* Smaller lift for footer */
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.2);
 }
 .timeline-entry:hover .timeline-dot {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  background: #007AFF;
+  background: #ffa500;
 }
 .timeline-entry.selected .timeline-card {
-  background: rgba(255, 255, 255, 0.3); /* Brighter background for highlight */
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
 }
 .timeline-entry.selected .timeline-dot {
-  background: #007AFF; /* Highlighted dot color */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  background: #ffa500;
 }
 .timeline-dot {
   background: #e0e0e0;
   border-radius: 50%;
   margin: 0 auto 8px;
   transition: all 0.3s ease;
-  opacity: 0.8; /* Increased opacity for visibility */
+  opacity: 0.8;
 }
 .timeline-card {
-  background: rgba(255, 255, 255, 0.15); /* Slightly lighter background for contrast */
-  border-radius: 8px;
-  padding: 8px 12px; /* Reduced padding for footer */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 8px 12px;
   transition: all 0.3s ease;
   opacity: 0;
   animation: fadeIn 0.5s forwards;
@@ -130,30 +126,29 @@ footer {
   to { opacity: 1; }
 }
 .timeline-date {
-  font-size: 0.75rem; /* Smaller font for footer */
+  font-size: 0.75rem;
   color: #a1a1aa;
   margin-bottom: 2px;
-  opacity: 0.9; /* Increased opacity for visibility */
+  opacity: 0.9;
 }
 .timeline-highlight {
-  font-size: 0.875rem; /* Smaller font for footer */
+  font-size: 0.875rem;
   font-weight: 500;
   color: #e0e0e0;
-  opacity: 0.9; /* Increased opacity for visibility */
+  opacity: 0.9;
 }
 /* Popover Styling */
 .popover {
-  z-index: 40; /* Above globe and other elements but below potential overlays */
+  z-index: 40;
 }
 .popover-content {
-  background: #2c2c2c;
-  border-radius: 8px;
+  background: rgba(26, 26, 26, 0.95); /* Dark, nearly opaque */
+  border-radius: 4px;
   padding: 15px;
   width: 300px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   position: relative;
-  /* Caret (pointer) on top, pointing to the pin */
-  border-top: 1px solid rgba(255, 255, 295, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.1);
 }
 .popover-content::before {
   content: '';
@@ -163,7 +158,7 @@ footer {
   transform: translateX(-50%);
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #2c2c2c;
+  border-bottom: 10px solid rgba(26, 26, 26, 0.95);
 }
 .popover-header {
   display: flex;
@@ -196,78 +191,65 @@ footer {
   text-align: right;
 }
 .popover-link {
-  color: #007AFF;
+  color: #ffa500;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.875rem;
 }
 .popover-link:hover {
   text-decoration: underline;
-  color: #40C4FF;
+  color: #ffcc33;
 }
-/* City Name Label Styling (Permanent, Right Under Circles, Emphasized on Hover) */
-.scene-container .globe-tooltip {
-  display: block !important; /* Ensure labels are always visible */
+/* City Name Label Styling */
+#globeViz .scene-container .globe-tooltip {
+  display: block !important;
   background: transparent !important;
-  color: #ffffff !important;
+  color: rgba(255, 255, 255, 0.75) !important; /* White with slight transparency */
   font-family: 'Inter', sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
+  font-size: 0.5rem !important; /* Small, like the example */
+  font-weight: 400 !important;
   padding: 0 !important;
   border-radius: 0 !important;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 1) !important; /* Increased shadow for better readability on dark globe */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important; /* Subtle shadow for readability */
   white-space: nowrap !important;
-  z-index: 5 !important; /* Above globe but below popover */
-  transition: all 0.3s ease !important;
-  transform: translateY(5px); /* Slight offset to position label right under the circle */
-  text-align: center; /* Center the label text */
+  z-index: 5 !important;
+  transition: none !important; /* No hover effect */
+  transform: translateY(6px) !important; /* Position below point */
+  text-align: center !important;
+  opacity: 1 !important;
 }
-/* Emphasize on hover */
-.scene-container .globe-tooltip:hover {
-  background: rgba(0, 0, 0, 0.9) !important;
-  padding: 4px 8px !important;
-  border-radius: 6px !important;
-  transform: translateY(5px); /* Maintain position on hover */
-}
-/* Responsive Globe Height and Tags for Mobile */
+/* Responsive Styling */
 @media (max-width: 640px) {
   #globeViz {
-    height: 100vh; /* Full viewport height for mobile */
+    height: 100vh;
   }
   .main-content {
-    padding-top: 250px; /* Account for smaller globe height */
-    padding-bottom: 80px; /* Reduced to account for smaller footer height */
+    padding-top: 250px;
+    padding-bottom: 80px;
   }
   .filter-tag {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     padding: 3px 10px;
-    background: rgba(255, 255, 255, 0.2); /* Match desktop clarity */
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
   }
   .filter-tag:hover, .filter-tag.active {
-    background: #007AFF;
-    color: #ffffff;
+    background: rgba(255, 165, 0, 0.3);
   }
   .container {
     padding: 2px;
   }
   .timeline-entry {
-    margin-right: 16px; /* Further reduced margin for mobile */
+    margin-right: 16px;
   }
   .timeline-date {
-    font-size: 0.625rem; /* Smaller font for mobile */
+    font-size: 0.625rem;
   }
   .timeline-highlight {
-    font-size: 0.75rem; /* Smaller font for mobile */
+    font-size: 0.75rem;
   }
-  .timeline-dot {
-    /* Base size will be overridden by inline styles */
-  }
-  .timeline-card {
-    padding: 6px 8px; /* Further reduced padding for mobile */
-  }
-  .scene-container .globe-tooltip {
-    font-size: 12px !important; /* Smaller city name label on mobile */
+  #globeViz .scene-container .globe-tooltip {
+    font-size: 0.4rem !important;
   }
   .popover-content {
     width: 250px;
