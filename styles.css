@@ -200,21 +200,21 @@ footer {
   text-decoration: underline;
   color: #ffcc33;
 }
-/* City Name Label Styling */
-#globeViz .scene-container .globe-tooltip {
+/* Site Label Styling (Matching moon-landing-sites example, with brighter color) */
+#globeViz .scene-container .site-label {
   display: block !important;
   background: transparent !important;
-  color: rgba(255, 255, 255, 0.75) !important; /* White with slight transparency */
+  color: #ffff00 !important; /* Bright yellow for better visibility */
   font-family: 'Inter', sans-serif !important;
-  font-size: 0.5rem !important; /* Small, like the example */
-  font-weight: 400 !important;
+  font-size: 12px !important; /* Slightly larger for legibility */
+  font-weight: bold !important;
   padding: 0 !important;
   border-radius: 0 !important;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5) !important; /* Subtle shadow for readability */
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8), 0 0 6px rgba(0, 0, 0, 0.8) !important; /* Enhanced shadow for contrast */
   white-space: nowrap !important;
   z-index: 5 !important;
-  transition: none !important; /* No hover effect */
-  transform: translateY(6px) !important; /* Position below point */
+  transition: none !important;
+  transform: translate(-50%, 0) !important; /* Center below point */
   text-align: center !important;
   opacity: 1 !important;
 }
@@ -248,8 +248,8 @@ footer {
   .timeline-highlight {
     font-size: 0.75rem;
   }
-  #globeViz .scene-container .globe-tooltip {
-    font-size: 0.4rem !important;
+  #globeViz .scene-container .site-label {
+    font-size: 10px !important; /* Smaller for mobile */
   }
   .popover-content {
     width: 250px;

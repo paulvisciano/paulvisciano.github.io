@@ -42,7 +42,14 @@ window.BlogList = ({ handleTimelineClick }) => {
         stayDuration: post.stayDuration
       }));
 
-      console.log("Initializing Globe.GL with earth-night.jpg texture");
+      // Prepare labels data
+      const labelsData = window.blogPosts.map(post => ({
+        name: post.location.name,
+        lat: post.location.lat,
+        lng: post.location.lng
+      }));
+
+      console.log("Initializing Globe.GL with earth-night.jpg texture and enhanced point markers");
 
       // Load texture with filtering
       const textureLoader = new THREE.TextureLoader();
@@ -62,18 +69,17 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointsData(pointsData)
         .pointLat('lat')
         .pointLng('lng')
-        .pointColor(() => 'orange')
-        .pointRadius(0.04)
-        .pointAltitude(0)
+        .pointRadius(0.1) // Larger circles
+        .pointAltitude(0.01) // Slight elevation
         .pointsMerge(true)
-        .labelText('label')
-        .labelSize(0.5)
-        .labelDotRadius(0.5)
-        .labelColor(() => 'rgba(255, 255, 255, 0.75)')
-        .labelAltitude(0.05)
-        .labelLabel(d => `<div class="globe-tooltip">${d.label}</div>`)
+        .labelsData(labelsData)
+        .labelLat('lat')
+        .labelLng('lng')
+        .labelText('name')
+        .labelSize(0.2)
+        .labelColor(() => '#ffcc33')
+        .labelAltitude(0.01) // Adjusted to position below raised points
         .labelsTransitionDuration(0)
-        .pointLabel("label")
         (document.getElementById('globeViz'));
 
       // Enable controls with adjusted minDistance
@@ -113,7 +119,7 @@ window.BlogList = ({ handleTimelineClick }) => {
 
             // Show popover after both animations
             waitForZoom(1500).then(() => {
-              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0);
+              const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.01);
               setPopoverPosition({
                 top: finalCoords.y + 20,
                 left: finalCoords.x
@@ -184,7 +190,7 @@ window.BlogList = ({ handleTimelineClick }) => {
 
         // Show popover after both animations
         waitForZoom(1500).then(() => {
-          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0);
+          const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.01);
           setPopoverPosition({
             top: finalCoords.y + 20,
             left: finalCoords.x
