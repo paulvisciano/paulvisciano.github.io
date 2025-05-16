@@ -19,7 +19,8 @@ window.BlogList = ({ handleTimelineClick }) => {
         label: post.location.name, // City name for label
         fullLink: post.fullLink, // Include the link for navigation
         snippet: post.snippet, // Include the snippet for the popover
-        title: post.title // Include the blog title for the popover
+        title: post.title, // Include the blog title for the popover
+        stayDuration: post.stayDuration // Include stayDuration for circle size
       }));
 
       console.log("Initializing Globe.GL to match world-cities example with semi-transparent globe and topographic texture");
@@ -38,7 +39,7 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointsData(pointsData)
         .pointLat('lat')
         .pointLng('lng')
-        .pointRadius(0.3) // Circle radius
+        .pointRadius(d => Math.min(0.3 + d.stayDuration * 0.05, 0.8)) // Scale radius based on stayDuration, max 0.8
         .pointColor(() => '#00D4FF') // Cyan color from world-cities example
         .labelText('label')
         .labelSize(d => d.hovered ? 1.5 : (window.innerWidth < 640 ? 0.8 : 1.2)) // Larger label on hover
@@ -49,9 +50,10 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointsMerge(true) // Optimize rendering
         .pointAltitude(0.01) // Flat circles on surface
         .pointLabel("label") // Bind label to point
-        .customThreeObject(() => {
+        .customThreeObject(d => {
           console.log("Creating city marker with CircleGeometry");
-          const geometry = new THREE.CircleGeometry(0.3, 32); // Flat circle geometry
+          const radius = Math.min(0.3 + d.stayDuration * 0.05, 0.8); // Match pointRadius logic
+          const geometry = new THREE.CircleGeometry(radius, 32); // Flat circle geometry
           const material = new THREE.MeshBasicMaterial({ color: '#00D4FF', transparent: true, opacity: 0.8 });
           return new THREE.Mesh(geometry, material);
         })
