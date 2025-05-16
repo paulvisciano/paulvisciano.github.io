@@ -69,7 +69,6 @@ window.BlogList = ({ handleTimelineClick }) => {
         }
 
         globeInstance.current.pointRadius(radius);
-        console.log('pointAltitude', pointAltitude)
         globeInstance.current.pointAltitude(pointAltitude);
 
         // Toggle rotation based on altitude
