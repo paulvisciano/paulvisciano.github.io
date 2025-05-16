@@ -121,6 +121,36 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag
     });
   }, [setZoomCallback, setSelectedId]);
 
+  // Define onZoomHandler outside useEffect for reuse
+  const onZoomHandler = () => {
+    if (!globeInstance.current) return;
+
+    // Adjust point radius and altitude based on camera altitude
+    const altitude = globeInstance.current.pointOfView().altitude;
+    const maxRadius = 0.2; // Larger when zoomed out for mobile
+    const minRadius = 0.5; // Larger when zoomed in for mobile
+    const maxPointAltitude = 0.4; // Lower when zoomed out for better tap detection
+    const minPointAltitude = 0.02; // Same when zoomed in
+    const maxAltitude = 2.5;
+    const minAltitude = 0.1;
+    const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+    let pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+
+    if (altitude < maxAltitude / 2) {
+      pointAltitude = 0.02; // Minimum altitude when max zoomed in
+    } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
+      pointAltitude = 0.08; // Mid-range
+    } else if (altitude >= maxAltitude - 0.1) {
+      pointAltitude = 0.4; // Maximum altitude when max zoomed out
+    }
+
+    globeInstance.current.pointRadius(radius);
+    globeInstance.current.pointAltitude(pointAltitude);
+
+    // Toggle rotation based on altitude
+    globeInstance.current.controls().autoRotate = altitude > 2.2;
+  };
+
   // Initialize the Globe.GL on mount
   React.useEffect(() => {
     try {
@@ -130,35 +160,6 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag
       globeTexture.anisotropy = 4; // Enable anisotropic filtering
       globeTexture.minFilter = THREE.LinearMipmapLinearFilter; // Mipmapping for zoom
       globeTexture.magFilter = THREE.LinearFilter;
-
-      const onZoomHandler = () => {
-        if (!globeInstance.current) return;
-
-        // Adjust point radius and altitude based on camera altitude
-        const altitude = globeInstance.current.pointOfView().altitude;
-        const maxRadius = 0.2; // Larger when zoomed out for mobile
-        const minRadius = 0.5; // Larger when zoomed in for mobile
-        const maxPointAltitude = 0.4; // Lower when zoomed out for better tap detection
-        const minPointAltitude = 0.02; // Same when zoomed in
-        const maxAltitude = 2.5;
-        const minAltitude = 0.1;
-        const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-        let pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-
-        if (altitude < maxAltitude / 2) {
-          pointAltitude = 0.02; // Minimum altitude when max zoomed in
-        } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
-          pointAltitude = 0.08; // Mid-range
-        } else if (altitude >= maxAltitude - 0.1) {
-          pointAltitude = 0.4; // Maximum altitude when max zoomed out
-        }
-
-        globeInstance.current.pointRadius(radius);
-        globeInstance.current.pointAltitude(pointAltitude);
-
-        // Toggle rotation based on altitude
-        globeInstance.current.controls().autoRotate = altitude > 2.2;
-      };
 
       globeInstance.current = Globe()
         .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
@@ -200,7 +201,7 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag
       // Enable controls with adjusted minDistance
       try {
         globeInstance.current.controls().autoRotate = true;
-        globeInstance.current.controls().autoRotateSpeed = 0.5;
+        globeInstance.current.controls().autoRotateSpeed = 0.1;
         globeInstance.current.controls().enableZoom = true;
         globeInstance.current.controls().minDistance = 120; // Adjusted to allow closer zoom
         globeInstance.current.controls().maxDistance = 500;
@@ -279,7 +280,7 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag
     }
   }, []); // Empty dependency array to run only on mount
 
-  // Update pointsData when selectedTag changes
+  // Update pointsData and trigger zoom handler when selectedTag changes
   React.useEffect(() => {
     if (globeInstance.current) {
       const filteredPosts = selectedTag === "All" 
@@ -298,6 +299,7 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag
       }));
 
       globeInstance.current.pointsData(pointsData);
+      onZoomHandler(); // Ensure pin altitude is set correctly
     }
   }, [selectedTag]);
 
