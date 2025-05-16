@@ -22,7 +22,7 @@ window.BlogList = ({ handleTimelineClick }) => {
         title: post.title // Include the blog title for the popover
       }));
 
-      console.log("Initializing Globe.GL to match world-cities example");
+      console.log("Initializing Globe.GL to match world-cities example with semi-transparent globe and topographic texture");
 
       globeInstance = Globe()
         .backgroundColor('rgba(0, 0, 0, 1)') // Black background for starfield
@@ -30,9 +30,10 @@ window.BlogList = ({ handleTimelineClick }) => {
           color: '#1a2526', 
           shininess: 0, 
           transparent: true, 
-          opacity: 0.8 // Semi-transparent globe
+          opacity: 0.8, // Semi-transparent globe
+          side: THREE.DoubleSide // Render both sides of the globe
         }))
-        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png') // Topographic texture for mountains
+        .bumpImageUrl('https://unpkg.com/three-globe@2.31.0/example/img/earth-topology.png') // Topographic texture for mountains
         .pointOfView({ lat: 0, lng: 0, altitude: 2.5 }, 0) // Initial view similar to example
         .pointsData(pointsData)
         .pointLat('lat')
@@ -58,6 +59,21 @@ window.BlogList = ({ handleTimelineClick }) => {
           Object.assign(obj.position, globeInstance.getCoords(d.lat, d.lng, 0.01));
         })
         (document.getElementById('globeViz'));
+
+      // Add lighting to enhance topographic texture visibility
+      try {
+        console.log("Adding lighting to enhance topographic texture");
+        const scene = globeInstance.scene();
+        // Ambient light for overall illumination
+        const ambientLight = new THREE.AmbientLight(0x404040, 1); // Soft white light
+        scene.add(ambientLight);
+        // Directional light to highlight topography
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+      } catch (error) {
+        console.error("Error adding lighting:", error);
+      }
 
       // Add starfield to the scene background
       try {
