@@ -23,8 +23,10 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside); // Support touch events
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
   }, []);
 
@@ -106,19 +108,21 @@ window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, setZoomCall
 
         // Adjust point radius and altitude based on camera altitude
         const altitude = globeInstance.current.pointOfView().altitude;
-        const maxRadius = 0.12; // Smaller when zoomed out
-        const minRadius = 0.3; // Larger when zoomed in
+        const maxRadius = 0.2; // Larger when zoomed out for mobile
+        const minRadius = 0.5; // Larger when zoomed in for mobile
+        const maxPointAltitude = 0.4; // Lower when zoomed out for better tap detection
+        const minPointAltitude = 0.02; // Same when zoomed in
         const maxAltitude = 2.5;
         const minAltitude = 0.1;
         const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-        let pointAltitude = 0.8; // Default for zoomed out
+        let pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
 
         if (altitude < maxAltitude / 2) {
           pointAltitude = 0.02; // Minimum altitude when max zoomed in
         } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
           pointAltitude = 0.08; // Mid-range
         } else if (altitude >= maxAltitude - 0.1) {
-          pointAltitude = 0.8; // Maximum altitude when max zoomed out
+          pointAltitude = 0.4; // Maximum altitude when max zoomed out
         }
 
         globeInstance.current.pointRadius(radius);
