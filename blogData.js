@@ -206,7 +206,7 @@ window.blogPosts = [
   {
     id: "post-13",
     title: "Beaches and Beats in Miami",
-    date: "Posted on January 15, 2025",
+    date: "Posted on January 15, 2026",
     timelineDate: "January 2025",
     timelineHighlight: "Beaches in Miami",
     tags: ["beach", "nightlife"],
