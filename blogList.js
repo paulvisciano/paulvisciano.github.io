@@ -63,21 +63,23 @@ window.BlogList = ({ handleTimelineClick }) => {
         .pointLat('lat')
         .pointLng('lng')
         .pointColor(() => '#ffa500') // Orange to match timeline dot
-        .pointRadius(0.8) // Initial radius
-        .pointAltitude(0.01) // Slight elevation
         .pointsMerge(true)
         .onZoom(() => {
           if (!globeInstance.current || !pointsData) return;
 
-          // Adjust point radius based on altitude
+          // Adjust point radius and altitude based on camera altitude
           const altitude = globeInstance.current.pointOfView().altitude;
-          const maxRadius = 0.05; // Smaller when zoomed out
-          const minRadius = 0.8; // Larger when zoomed in
+          const maxRadius = 0.12; // Smaller when zoomed out
+          const minRadius = 0.3; // Larger when zoomed in
+          const maxPointAltitude = 0.001; // Higher when zoomed out
+          const minPointAltitude = 0.1; // Lower when zoomed in
           const maxAltitude = 2.5;
           const minAltitude = 0.1;
           const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
-         
+          const pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+          
           globeInstance.current.pointRadius(radius);
+          globeInstance.current.pointAltitude(pointAltitude);
 
           // Toggle rotation based on altitude
           globeInstance.current.controls().autoRotate = altitude > 2.2;
