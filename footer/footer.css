@@ -138,22 +138,9 @@ footer {
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--text-muted);
-    margin-top: 4px;
+    margin-top: 2px;
     opacity: 0.85;
-    position: relative;
-    padding-top: 4px;
     white-space: nowrap;
-}
-
-.timeline-date-combined::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 10%;
-    width: 80%;
-    height: 1px;
-    background: var(--text-muted);
-    opacity: 0.3;
 }
 
 .timeline-date-combined:hover {
@@ -165,6 +152,7 @@ footer {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-light);
+    margin-top: 2px;
     opacity: 0.9;
 }
 
@@ -185,15 +173,11 @@ footer {
     }
     .timeline-date-combined {
         font-size: 0.625rem;
-        margin-top: 3px;
-        padding-top: 3px;
-    }
-    .timeline-date-combined::before {
-        left: 15%;
-        width: 70%;
+        margin-top: 1px;
     }
     .timeline-highlight {
         font-size: 0.75rem;
+        margin-top: 1px;
     }
     .timeline-card {
         padding: 6px 10px;

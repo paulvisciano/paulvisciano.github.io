@@ -106,15 +106,15 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
                   React.createElement(
                     'div',
                     { className: 'timeline-card' },
-                    React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight),
                     React.createElement(
                       'div',
                       { 
                         className: 'timeline-date-combined',
-                        title: fullDateRange // Tooltip with full date
+                        title: fullDateRange
                       },
                       combinedDate
-                    )
+                    ),
+                    React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight)
                   )
                 );
               })
