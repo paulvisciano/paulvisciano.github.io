@@ -144,7 +144,15 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       pointAltitude = 0.4; // Maximum altitude when max zoomed out
     }
 
-    globeInstance.current.pointRadius(radius);
+    globeInstance.current.pointRadius(d => {
+      const duration = d.stayDuration || 1;
+      const baseRadius = radius;
+      
+      // Scale radius: min 0.5x for 1 day, max 2x for 10+ days
+      const scale = Math.min(Math.max(duration / 5, 0.1), 1);
+
+      return baseRadius * scale;
+    });
     globeInstance.current.pointAltitude(pointAltitude);
 
     // Toggle rotation based on altitude
