@@ -53,7 +53,11 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
             ...yearPosts
               .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
               .map(post => {
-                const abbrevMonth = post.date.toLocaleDateString('en-US', { month: 'short' });
+                // Use UTC date for month display
+                const utcDate = new Date(post.date);
+                const abbrevMonth = utcDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+                // Debug: Log date details for all posts
+                console.log(`Post: ${post.title}, Raw Date: ${post.date}, UTC Date: ${utcDate}, Displayed Month: ${abbrevMonth}`);
                 return React.createElement(
                   'div',
                   {

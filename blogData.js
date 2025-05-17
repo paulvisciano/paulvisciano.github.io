@@ -1,24 +1,8 @@
 window.blogPosts = [
   {
-    id: "post-1",
-    title: "An Epic Day Vibing in Austin",
-    date: new Date('2025-05-10'),
-    timelineHighlight: "Volleyball & Coffee in Austin",
-    tags: ["beach volleyball", "coffee", "hookah"],
-    snippet: "Austin, Texas, knows how to deliver a day packed with energy, and today was a testament to that. From a double espresso with a jaw-dropping skyline view to spiking volleyballs and chilling at Mezze, here’s how I soaked up ATX’s best.",
-    image: "attachment://cosmic-skyline.jpg",
-    imageAlt: "Austin Skyline from Cosmic Coffee",
-    caption: "The breathtaking view of downtown Austin from Cosmic Coffee, complete with a red train cruising by and modern buildings under a perfect sky.",
-    mapLink: "https://maps.app.goo.gl/5gKqL9nL8J3mX5zK7",
-    mapText: "📍 Find Cosmic Coffee on Google Maps",
-    fullLink: "austin-post.html",
-    location: { lat: 30.2672, lng: -97.7431, name: "Austin, Texas" },
-    stayDuration: 10 // 10 days in Austin
-  },
-  {
     id: "post-2",
     title: "Beach Volleyball in Destin",
-    date: new Date('2024-01-15'),
+    date: new Date('2024-01-15T00:00:00Z'),
     timelineHighlight: "Beach Volleyball in Destin",
     tags: ["beach volleyball", "beach"],
     snippet: "Kicked off my journey with sun, sand, and epic volleyball matches in Destin’s emerald waters.",
@@ -34,7 +18,7 @@ window.blogPosts = [
   {
     id: "post-3",
     title: "Jazz and Beignets in New Orleans",
-    date: new Date('2024-02-10'),
+    date: new Date('2024-02-10T00:00:00Z'),
     timelineHighlight: "Jazz in New Orleans",
     tags: ["live music", "food"],
     snippet: "Soaked in the vibrant jazz scene and savored beignets in the heart of the French Quarter.",
@@ -50,7 +34,7 @@ window.blogPosts = [
   {
     id: "post-4",
     title: "Rocky Mountain High in Denver",
-    date: new Date('2024-04-05'),
+    date: new Date('2024-04-05T00:00:00Z'),
     timelineHighlight: "Exploring Denver",
     tags: ["hiking", "city"],
     snippet: "Explored Denver’s urban charm and took in stunning views from nearby trails.",
@@ -66,7 +50,7 @@ window.blogPosts = [
   {
     id: "post-5",
     title: "Skiing in Breckenridge",
-    date: new Date('2024-05-01'),
+    date: new Date('2024-05-01T00:00:00Z'),
     timelineHighlight: "Skiing in Breckenridge",
     tags: ["skiing", "mountains"],
     snippet: "Hit the snowy slopes of Breckenridge for an epic skiing adventure.",
@@ -82,7 +66,7 @@ window.blogPosts = [
   {
     id: "post-6",
     title: "Snowy Adventures in Salt Lake City",
-    date: new Date('2024-06-10'),
+    date: new Date('2024-06-10T00:00:00Z'),
     timelineHighlight: "Snow in Salt Lake City",
     tags: ["skiing", "nature"],
     snippet: "Explored the snowy landscapes around Salt Lake City, from ski resorts to serene hikes.",
@@ -98,7 +82,7 @@ window.blogPosts = [
   {
     id: "post-7",
     title: "Lights and Action in Las Vegas",
-    date: new Date('2024-07-15'),
+    date: new Date('2024-07-15T00:00:00Z'),
     timelineHighlight: "Lights in Las Vegas",
     tags: ["nightlife", "city"],
     snippet: "Experienced the dazzling lights and vibrant nightlife of the Las Vegas Strip.",
@@ -114,7 +98,7 @@ window.blogPosts = [
   {
     id: "post-8",
     title: "Surf and Sun in San Diego",
-    date: new Date('2024-08-20'),
+    date: new Date('2024-08-20T00:00:00Z'),
     timelineHighlight: "Surfing in San Diego",
     tags: ["beach", "surfing"],
     snippet: "Caught some waves and soaked up the sun on San Diego’s beautiful beaches.",
@@ -130,7 +114,7 @@ window.blogPosts = [
   {
     id: "post-9",
     title: "Island Life in Hawaii",
-    date: new Date('2024-09-10'),
+    date: new Date('2024-09-10T00:00:00Z'),
     timelineHighlight: "Island Life in Hawaii",
     tags: ["beach", "nature"],
     snippet: "Embraced island life in Honolulu with stunning beaches and lush hikes.",
@@ -146,7 +130,7 @@ window.blogPosts = [
   {
     id: "post-10",
     title: "Tropical Vibes in the Philippines",
-    date: new Date('2024-10-05'),
+    date: new Date('2024-10-05T00:00:00Z'),
     timelineHighlight: "Tropical Vibes in the Philippines",
     tags: ["beach", "culture"],
     snippet: "Explored the vibrant culture and pristine beaches of Manila and beyond.",
@@ -162,7 +146,7 @@ window.blogPosts = [
   {
     id: "post-11",
     title: "Temples and Markets in Thailand",
-    date: new Date('2024-11-01'),
+    date: new Date('2024-11-01T00:00:00Z'),
     timelineHighlight: "Temples in Thailand",
     tags: ["culture", "markets"],
     snippet: "Immersed myself in Bangkok’s stunning temples and bustling markets.",
@@ -178,7 +162,7 @@ window.blogPosts = [
   {
     id: "post-12",
     title: "Tech and Tradition in Japan",
-    date: new Date('2024-12-10'),
+    date: new Date('2024-12-10T00:00:00Z'),
     timelineHighlight: "Tech in Japan",
     tags: ["culture", "city"],
     snippet: "Experienced the blend of tech and tradition in Tokyo’s vibrant streets.",
@@ -194,7 +178,7 @@ window.blogPosts = [
   {
     id: "post-13",
     title: "Beaches and Beats in Miami",
-    date: new Date('2025-01-15'),
+    date: new Date('2025-01-15T00:00:00Z'),
     timelineHighlight: "Beaches in Miami",
     tags: ["beach", "nightlife"],
     snippet: "Danced to the beats and relaxed on the beaches of Miami.",
@@ -206,5 +190,21 @@ window.blogPosts = [
     fullLink: "#",
     location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
     stayDuration: 1 // 1 day in Miami
+  },
+  {
+    id: "post-1",
+    title: "An Epic Day Vibing in Austin",
+    date: new Date('2025-05-10T00:00:00Z'),
+    timelineHighlight: "Volleyball & Coffee in Austin",
+    tags: ["beach volleyball", "coffee", "hookah"],
+    snippet: "Austin, Texas, knows how to deliver a day packed with energy, and today was a testament to that. From a double espresso with a jaw-dropping skyline view to spiking volleyballs and chilling at Mezze, here’s how I soaked up ATX’s best.",
+    image: "attachment://cosmic-skyline.jpg",
+    imageAlt: "Austin Skyline from Cosmic Coffee",
+    caption: "The breathtaking view of downtown Austin from Cosmic Coffee, complete with a red train cruising by and modern buildings under a perfect sky.",
+    mapLink: "https://maps.app.goo.gl/5gKqL9nL8J3mX5zK7",
+    mapText: "📍 Find Cosmic Coffee on Google Maps",
+    fullLink: "austin-post.html",
+    location: { lat: 30.2672, lng: -97.7431, name: "Austin, Texas" },
+    stayDuration: 10 // 10 days in Austin
   }
-];
+].sort((a, b) => a.date - b.date); // Sort posts by date ascending
