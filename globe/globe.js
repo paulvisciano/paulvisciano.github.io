@@ -131,13 +131,11 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     if (!globeInstance.current) return;
 
     const altitude = globeInstance.current.pointOfView().altitude;
-    const maxRadius = 0.2;
-    const minRadius = 0.5;
     const maxPointAltitude = 0.4;
     const minPointAltitude = 0.02;
     const maxAltitude = 2.5;
     const minAltitude = 0.1;
-    const radius = maxRadius - (maxRadius - minRadius) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+
     let pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
 
     if (altitude < maxAltitude / 2) {
@@ -148,7 +146,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       pointAltitude = 0.4;
     }
 
-    globeInstance.current.pointRadius(radius);
     globeInstance.current.pointAltitude(pointAltitude);
     globeInstance.current.controls().autoRotate = altitude > 2.2;
   };
@@ -174,6 +171,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .pointLat('lat')
         .pointLng('lng')
         .pointColor(() => '#ffa500')
+        .pointRadius('radius') // Use custom radius from pointsData
         .pointsMerge(false)
         .onZoom(onZoomHandler)
         .onPointHover((point) => {
@@ -280,16 +278,25 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         return tagMatch && yearMatch;
       });
       
-      const pointsData = filteredPosts.map(post => ({
-        lat: post.location.lat,
-        lng: post.location.lng,
-        label: post.location.name,
-        fullLink: post.fullLink,
-        snippet: post.snippet,
-        title: post.title,
-        stayDuration: post.stayDuration,
-        id: post.id
-      }));
+      const minDuration = 1;
+      const maxDuration = 730; // 2 years
+      const minRadius = 0.2;
+      const maxRadius = 0.8;
+
+      const pointsData = filteredPosts.map(post => {
+        const radius = minRadius + (maxRadius - minRadius) * (post.stayDuration - minDuration) / (maxDuration - minDuration);
+        return {
+          lat: post.location.lat,
+          lng: post.location.lng,
+          label: post.location.name,
+          fullLink: post.fullLink,
+          snippet: post.snippet,
+          title: post.title,
+          stayDuration: post.stayDuration,
+          id: post.id,
+          radius: radius
+        };
+      });
 
       globeInstance.current.pointsData(pointsData);
       onZoomHandler();
@@ -369,6 +376,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       isDrawerOpen && React.createElement(
         'div',
         { className: 'filter-drawer open' },
+        React.createElement(
+          'button',
+          {
+            className: 'filter-drawer-close',
+            onClick: () => setIsDrawerOpen(false)
+          },
+          '×'
+        ),
         React.createElement(
           'div',
           { className: 'year-filter-container' },
