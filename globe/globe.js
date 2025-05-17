@@ -149,7 +149,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       const baseRadius = radius;
       
       // Scale radius: min 0.5x for 1 day, max 2x for 10+ days
-      const scale = Math.min(Math.max(duration / 5, 0.1), 1);
+      const scale = Math.min(Math.max(duration / 5, 0.1), 2);
 
       return baseRadius * scale;
     });

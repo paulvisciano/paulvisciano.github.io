@@ -1,8 +1,14 @@
 window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }) => {
   // Group posts by year
-  const years = [...new Set(window.blogPosts.map(post => post.date.getFullYear()))].sort();
+  const years = [...new Set(window.blogPosts.map(post => {
+    const year = new Date(post.date).getUTCFullYear();
+    return year;
+  }))].sort((a, b) => a - b);
   const postsByYear = years.reduce((acc, year) => {
-    acc[year] = window.blogPosts.filter(post => post.date.getFullYear() === year);
+    acc[year] = window.blogPosts.filter(post => {
+      const postYear = new Date(post.date).getUTCFullYear();
+      return postYear === year;
+    });
     return acc;
   }, {});
 
@@ -11,14 +17,39 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
     const timeline = document.querySelector('.timeline');
     const timelineLine = document.querySelector('.timeline-line');
     if (timeline && timelineLine) {
-      // Calculate total width based on timeline entries and year entries
       const entries = document.querySelectorAll('.timeline-entry, .timeline-year-entry');
       const totalWidth = Array.from(entries).reduce((acc, entry) => {
         return acc + entry.offsetWidth + 32; // Include margin-right (32px)
       }, 0) + 32; // Extra padding
       timelineLine.style.width = `${totalWidth}px`;
     }
-  }, [selectedTag]); // Re-run when selectedTag changes
+  }, [selectedTag]);
+
+  // Helper function to format combined date (month and day range)
+  const formatCombinedDate = (startDate, duration) => {
+    const start = new Date(startDate);
+    const end = new Date(start);
+    end.setDate(start.getDate() + duration - 1);
+    const startMonth = start.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+    const endMonth = end.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+    const startDay = start.getUTCDate();
+    const endDay = end.getUTCDate();
+    if (duration === 1) {
+      return `${startMonth} ${startDay}`;
+    }
+    return startMonth === endMonth 
+      ? `${startMonth} ${startDay}–${endDay}`
+      : `${startMonth} ${startDay}–${endMonth} ${endDay}`;
+  };
+
+  // Helper function for tooltip full date
+  const formatFullDateRange = (startDate, duration) => {
+    const start = new Date(startDate);
+    const end = new Date(start);
+    end.setDate(start.getDate() + duration - 1);
+    const options = { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
+    return `${start.toLocaleDateString('en-US', options)} – ${end.toLocaleDateString('en-US', options)}`;
+  };
 
   return React.createElement(
     'footer',
@@ -41,7 +72,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
               {
                 key: `year-${year}`,
                 className: 'timeline-year-entry',
-                style: { '--index': index } // For fade-in animation
+                style: { '--index': index }
               },
               React.createElement('div', { className: 'timeline-dot' }),
               React.createElement(
@@ -53,9 +84,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
             ...yearPosts
               .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
               .map(post => {
-                // Use UTC date for month display
-                const utcDate = new Date(post.date);
-                const abbrevMonth = utcDate.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+                const combinedDate = formatCombinedDate(post.date, post.stayDuration);
+                const fullDateRange = formatFullDateRange(post.date, post.stayDuration);
 
                 return React.createElement(
                   'div',
@@ -67,7 +97,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
                       setSelectedId(post.id);
                       handleTimelineClick(post);
                     },
-                    style: { '--index': index + 1 } // Adjust index for animation
+                    style: { '--index': index + 1 }
                   },
                   React.createElement('div', { 
                     className: 'timeline-dot',
@@ -77,7 +107,14 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
                     'div',
                     { className: 'timeline-card' },
                     React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight),
-                    React.createElement('div', { className: 'timeline-date' }, abbrevMonth)
+                    React.createElement(
+                      'div',
+                      { 
+                        className: 'timeline-date-combined',
+                        title: fullDateRange // Tooltip with full date
+                      },
+                      combinedDate
+                    )
                   )
                 );
               })
