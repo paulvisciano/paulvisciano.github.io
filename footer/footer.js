@@ -6,10 +6,10 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     return tagMatch && yearMatch;
   });
 
-  // Get unique years from filtered posts, or all posts if filteredPosts is empty but posts exist
+  // Get unique years from filtered posts
   const years = filteredPosts.length > 0 
     ? [...new Set(filteredPosts.map(post => new Date(post.date).getUTCFullYear()))].sort((a, b) => a - b)
-    : [...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear()))].sort((a, b) => a - b);
+    : [];
 
   // Group filtered posts by year
   const postsByYear = years.reduce((acc, year) => {
@@ -69,8 +69,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       React.createElement(
         'div',
         { className: 'timeline' },
-        filteredPosts.length === 0 && window.blogPosts.length === 0 ? 
-          React.createElement('div', { className: 'timeline-empty' }, 'No posts available') :
+        filteredPosts.length === 0 ? 
+          React.createElement('div', { className: 'timeline-empty' }, 'No adventures found for the selected filters') :
           years.map((year, index) => {
             const yearPosts = postsByYear[year] || [];
             if (yearPosts.length === 0) return null; // Skip empty years
