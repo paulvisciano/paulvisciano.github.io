@@ -1,18 +1,38 @@
 window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }) => {
-  // Group posts by year for year markers
-  const years = [...new Set(window.blogPosts.map(post => post.date.getFullYear()))].sort();
-  const postsByYear = years.reduce((acc, year) => {
-    acc[year] = window.blogPosts.filter(post => post.date.getFullYear() === year);
-    return acc;
-  }, {});
+  // Filter posts by selectedTag
+  const filteredPosts = window.blogPosts.filter(post => selectedTag === "All" || post.tags.includes(selectedTag));
+  
+  // Get unique years from filtered posts
+  const years = [...new Set(filteredPosts.map(post => post.date.getFullYear()))].sort();
 
-  // Calculate approximate positions for year markers
-  let entryCount = 0;
-  const yearPositions = years.reduce((acc, year) => {
-    acc[year] = entryCount * 180 + 16; // Start of year
-    entryCount += postsByYear[year].length;
-    return acc;
-  }, {});
+  // Create a flat list of timeline items (year cards and post cards)
+  const timelineItems = [];
+  years.forEach(year => {
+    // Add year card
+    timelineItems.push({
+      type: 'year',
+      year,
+      id: `year-${year}`
+    });
+    // Add posts for this year
+    filteredPosts
+      .filter(post => post.date.getFullYear() === year)
+      .forEach(post => {
+        timelineItems.push({
+          type: 'post',
+          post,
+          id: post.id
+        });
+      });
+  });
+
+  // Auto-scroll to start when tag changes
+  React.useEffect(() => {
+    const timelineContainer = document.querySelector('.timeline-container');
+    if (timelineContainer) {
+      timelineContainer.scrollLeft = 0; // Scroll to the start
+    }
+  }, [selectedTag]);
 
   return React.createElement(
     'footer',
@@ -23,24 +43,32 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
       React.createElement(
         'div',
         { className: 'timeline-line' },
-        years.map(year => 
-          React.createElement(
-            'div',
-            {
-              key: `year-${year}`,
-              className: 'timeline-year',
-              style: { marginLeft: `${yearPositions[year] - (entryCount > 0 ? 90 : 16)}px` }
-            },
-            year
-          )
-        )
+        null
       ),
       React.createElement(
         'div',
         { className: 'timeline' },
-        window.blogPosts
-          .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
-          .map((post) => {
+        timelineItems.map((item, index) => {
+          if (item.type === 'year') {
+            return React.createElement(
+              'div',
+              {
+                key: item.id,
+                className: 'timeline-entry timeline-year-entry',
+                style: { '--index': index }
+              },
+              React.createElement('div', { 
+                className: 'timeline-dot timeline-year-dot',
+                style: { width: '12px', height: '12px' }
+              }),
+              React.createElement(
+                'div',
+                { className: 'timeline-card timeline-year-card' },
+                React.createElement('div', { className: 'timeline-year-text' }, item.year)
+              )
+            );
+          } else {
+            const { post } = item;
             const dotSize = Math.min(8 + post.stayDuration * 0.5, 16);
             const abbrevMonth = post.date.toLocaleDateString('en-US', { month: 'short' });
             return React.createElement(
@@ -52,11 +80,12 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
                 onClick: () => {
                   setSelectedId(post.id);
                   handleTimelineClick(post);
-                }
+                },
+                style: { '--index': index }
               },
               React.createElement('div', { 
                 className: 'timeline-dot',
-                style: { width: `${10}px`, height: `${10}px` }
+                style: { width: `${dotSize}px`, height: `${dotSize}px` }
               }),
               React.createElement(
                 'div',
@@ -65,7 +94,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
                 React.createElement('div', { className: 'timeline-date' }, abbrevMonth)
               )
             );
-          })
+          }
+        })
       )
     )
   );
