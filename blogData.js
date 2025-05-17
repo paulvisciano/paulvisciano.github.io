@@ -2,8 +2,7 @@ window.blogPosts = [
   {
     id: "post-1",
     title: "An Epic Day Vibing in Austin",
-    date: "Posted on May 10, 2025",
-    timelineDate: "March 2024",
+    date: new Date('2025-05-10'),
     timelineHighlight: "Volleyball & Coffee in Austin",
     tags: ["beach volleyball", "coffee", "hookah"],
     snippet: "Austin, Texas, knows how to deliver a day packed with energy, and today was a testament to that. From a double espresso with a jaw-dropping skyline view to spiking volleyballs and chilling at Mezze, here’s how I soaked up ATX’s best.",
@@ -19,8 +18,7 @@ window.blogPosts = [
   {
     id: "post-2",
     title: "Beach Volleyball in Destin",
-    date: "Posted on January 15, 2024",
-    timelineDate: "January 2024",
+    date: new Date('2024-01-15'),
     timelineHighlight: "Beach Volleyball in Destin",
     tags: ["beach volleyball", "beach"],
     snippet: "Kicked off my journey with sun, sand, and epic volleyball matches in Destin’s emerald waters.",
@@ -36,8 +34,7 @@ window.blogPosts = [
   {
     id: "post-3",
     title: "Jazz and Beignets in New Orleans",
-    date: "Posted on February 10, 2024",
-    timelineDate: "February 2024",
+    date: new Date('2024-02-10'),
     timelineHighlight: "Jazz in New Orleans",
     tags: ["live music", "food"],
     snippet: "Soaked in the vibrant jazz scene and savored beignets in the heart of the French Quarter.",
@@ -53,8 +50,7 @@ window.blogPosts = [
   {
     id: "post-4",
     title: "Rocky Mountain High in Denver",
-    date: "Posted on April 5, 2024",
-    timelineDate: "April 2024",
+    date: new Date('2024-04-05'),
     timelineHighlight: "Exploring Denver",
     tags: ["hiking", "city"],
     snippet: "Explored Denver’s urban charm and took in stunning views from nearby trails.",
@@ -70,8 +66,7 @@ window.blogPosts = [
   {
     id: "post-5",
     title: "Skiing in Breckenridge",
-    date: "Posted on May 1, 2024",
-    timelineDate: "May 2024",
+    date: new Date('2024-05-01'),
     timelineHighlight: "Skiing in Breckenridge",
     tags: ["skiing", "mountains"],
     snippet: "Hit the snowy slopes of Breckenridge for an epic skiing adventure.",
@@ -87,8 +82,7 @@ window.blogPosts = [
   {
     id: "post-6",
     title: "Snowy Adventures in Salt Lake City",
-    date: "Posted on June 10, 2024",
-    timelineDate: "June 2024",
+    date: new Date('2024-06-10'),
     timelineHighlight: "Snow in Salt Lake City",
     tags: ["skiing", "nature"],
     snippet: "Explored the snowy landscapes around Salt Lake City, from ski resorts to serene hikes.",
@@ -104,8 +98,7 @@ window.blogPosts = [
   {
     id: "post-7",
     title: "Lights and Action in Las Vegas",
-    date: "Posted on July 15, 2024",
-    timelineDate: "July 2024",
+    date: new Date('2024-07-15'),
     timelineHighlight: "Lights in Las Vegas",
     tags: ["nightlife", "city"],
     snippet: "Experienced the dazzling lights and vibrant nightlife of the Las Vegas Strip.",
@@ -121,8 +114,7 @@ window.blogPosts = [
   {
     id: "post-8",
     title: "Surf and Sun in San Diego",
-    date: "Posted on August 20, 2024",
-    timelineDate: "August 2024",
+    date: new Date('2024-08-20'),
     timelineHighlight: "Surfing in San Diego",
     tags: ["beach", "surfing"],
     snippet: "Caught some waves and soaked up the sun on San Diego’s beautiful beaches.",
@@ -138,8 +130,7 @@ window.blogPosts = [
   {
     id: "post-9",
     title: "Island Life in Hawaii",
-    date: "Posted on September 10, 2024",
-    timelineDate: "September 2024",
+    date: new Date('2024-09-10'),
     timelineHighlight: "Island Life in Hawaii",
     tags: ["beach", "nature"],
     snippet: "Embraced island life in Honolulu with stunning beaches and lush hikes.",
@@ -155,8 +146,7 @@ window.blogPosts = [
   {
     id: "post-10",
     title: "Tropical Vibes in the Philippines",
-    date: "Posted on October 5, 2024",
-    timelineDate: "October 2024",
+    date: new Date('2024-10-05'),
     timelineHighlight: "Tropical Vibes in the Philippines",
     tags: ["beach", "culture"],
     snippet: "Explored the vibrant culture and pristine beaches of Manila and beyond.",
@@ -172,8 +162,7 @@ window.blogPosts = [
   {
     id: "post-11",
     title: "Temples and Markets in Thailand",
-    date: "Posted on November 1, 2024",
-    timelineDate: "November 2024",
+    date: new Date('2024-11-01'),
     timelineHighlight: "Temples in Thailand",
     tags: ["culture", "markets"],
     snippet: "Immersed myself in Bangkok’s stunning temples and bustling markets.",
@@ -189,8 +178,7 @@ window.blogPosts = [
   {
     id: "post-12",
     title: "Tech and Tradition in Japan",
-    date: "Posted on December 10, 2024",
-    timelineDate: "December 2024",
+    date: new Date('2024-12-10'),
     timelineHighlight: "Tech in Japan",
     tags: ["culture", "city"],
     snippet: "Experienced the blend of tech and tradition in Tokyo’s vibrant streets.",
@@ -206,8 +194,7 @@ window.blogPosts = [
   {
     id: "post-13",
     title: "Beaches and Beats in Miami",
-    date: "Posted on January 15, 2026",
-    timelineDate: "January 2025",
+    date: new Date('2025-01-15'),
     timelineHighlight: "Beaches in Miami",
     tags: ["beach", "nightlife"],
     snippet: "Danced to the beats and relaxed on the beaches of Miami.",

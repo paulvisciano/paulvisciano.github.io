@@ -1,8 +1,8 @@
 window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }) => {
   // Group posts by year for year markers
-  const years = [...new Set(window.blogPosts.map(post => post.timelineDate.split(' ')[1]))].sort();
+  const years = [...new Set(window.blogPosts.map(post => post.date.getFullYear()))].sort();
   const postsByYear = years.reduce((acc, year) => {
-    acc[year] = window.blogPosts.filter(post => post.timelineDate.endsWith(year));
+    acc[year] = window.blogPosts.filter(post => post.date.getFullYear() === year);
     return acc;
   }, {});
 
@@ -13,22 +13,6 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
     entryCount += postsByYear[year].length;
     return acc;
   }, {});
-
-  // Month abbreviation map
-  const monthAbbrev = {
-    'January': 'Jan',
-    'February': 'Feb',
-    'March': 'Mar',
-    'April': 'Apr',
-    'May': 'May',
-    'June': 'Jun',
-    'July': 'Jul',
-    'August': 'Aug',
-    'September': 'Sep',
-    'October': 'Oct',
-    'November': 'Nov',
-    'December': 'Dec'
-  };
 
   return React.createElement(
     'footer',
@@ -58,8 +42,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
           .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
           .map((post) => {
             const dotSize = Math.min(8 + post.stayDuration * 0.5, 16);
-            const [month] = post.timelineDate.split(' ');
-            const abbrevMonth = monthAbbrev[month] || month.substring(0, 3);
+            const abbrevMonth = post.date.toLocaleDateString('en-US', { month: 'short' });
             return React.createElement(
               'div',
               {
