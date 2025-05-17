@@ -1,4 +1,4 @@
-window.BlogList = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, setSelectedTag, setZoomCallback }) => {
+window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, setSelectedTag, setZoomCallback }) => {
   if (typeof window.blogPosts === 'undefined') {
     return React.createElement('div', null, 'Error: Data not loaded');
   }

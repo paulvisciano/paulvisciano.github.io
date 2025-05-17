@@ -1,0 +1,191 @@
+:root {
+  --text-light: #e0e0e0; /* Body text, popover title */
+  --text-muted: #a1a1aa; /* Popover close */
+  --text-secondary: #d1d5db; /* Popover body text */
+  --primary-orange: #ffa500; /* Timeline dot, links, points */
+  --orange-hover: #ffcc33; /* Link hover */
+  --orange-tint-10: rgba(255, 165, 0, 0.1); /* Popover border */
+  --black-80: rgba(0, 0, 0, 0.8); /* Label text shadow */
+  --black-50: rgba(0, 0, 0, 0.5); /* Popover shadow */
+}
+
+/* Tag Styling */
+.filter-tag {
+  display: inline-block;
+  background: rgba(26, 26, 26, 0.8); /* Darker, semi-transparent background for contrast */
+  color: var(--text-light); /* White text for readability */
+  font-size: 1rem; /* Larger font for visibility */
+  font-weight: 500; /* Medium weight for modern look */
+  padding: 8px 16px; /* Increased padding for tap targets */
+  margin: 6px; /* Spacing between tags */
+  border-radius: 9999px; /* Fully rounded for sleek design */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: all 0.2s ease-in-out; /* Smooth transitions */
+  cursor: pointer;
+  z-index: 10; /* Above globe */
+}
+
+.filter-tag:hover {
+  background: rgba(26, 26, 26, 0.95); /* Slightly darker on hover */
+  border-color: rgba(255, 255, 255, 0.4); /* Brighter border */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.filter-tag.active {
+  background: var(--primary-orange); /* Solid orange to match points */
+  border-color: var(--primary-orange); /* Match border */
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Glow effect */
+  color: #ffffff; /* White text for contrast */
+}
+
+.filter-tag.active:hover {
+  background: var(--orange-hover); /* Lighter orange on hover */
+  transform: translateY(-2px); /* Maintain lift effect */
+}
+
+/* Tag container styling */
+.mb-8.flex.flex-wrap.justify-center {
+  position: sticky;
+  top: 1rem;
+  z-index: 20; /* Above globe and popovers */
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent); /* Subtle gradient */
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+/* Globe Styling */
+#globeViz {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Popover Styling */
+.popover {
+  z-index: 40;
+}
+
+.popover-content {
+  background: rgba(26, 26, 26, 0.95); /* Dark, nearly opaque */
+  border-radius: 4px;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 4px 10px var(--black-50);
+  position: relative;
+  border: 1px solid var(--orange-tint-10);
+}
+
+.popover-content::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgba(26, 26, 26, 0.95);
+}
+
+.popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.popover-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.popover-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.popover-close:hover {
+  color: #ffffff;
+}
+
+.popover-body {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.popover-footer {
+  text-align: right;
+}
+
+.popover-link {
+  color: var(--primary-orange);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.popover-link:hover {
+  text-decoration: underline;
+  color: var(--orange-hover);
+}
+
+/* Site Label Styling */
+#globeViz .scene-container .site-label {
+  display: block !important;
+  background: transparent !important;
+  color: var(--primary-orange) !important; /* Orange to match timeline dot */
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important; /* Slightly larger for legibility */
+  font-weight: bold !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  text-shadow: 0 0 6px var(--black-80), 0 0 6px var(--black-80) !important; /* Enhanced shadow for contrast */
+  white-space: nowrap !important;
+  z-index: 5 !important;
+  transition: none !important;
+  transform: translate(-50%, 0) !important; /* Center below point */
+  text-align: center !important;
+  opacity: 1 !important;
+}
+
+/* Responsive Styling for Globe */
+@media (max-width: 640px) {
+  #globeViz {
+    height: 100vh;
+  }
+  .filter-tag {
+    font-size: 0.875rem; /* Slightly smaller but readable */
+    padding: 6px 12px; /* Adjusted for mobile tap targets */
+    margin: 4px;
+  }
+  .filter-tag:hover, .filter-tag.active {
+    background: var(--primary-orange); /* Consistent orange for active/hover */
+  }
+  #globeViz .scene-container .site-label {
+    font-size: 10px !important; /* Smaller for mobile */
+  }
+  .popover-content {
+    width: 250px;
+    padding: 10px;
+  }
+  .popover-title {
+    font-size: 1rem;
+  }
+  .popover-body {
+    font-size: 0.75rem;
+  }
+  .popover-link {
+    font-size: 0.75rem;
+  }
+}

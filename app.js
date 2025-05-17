@@ -15,7 +15,7 @@ window.App = () => {
       timelineItem.classList.add('selected');
       timelineItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-    // Trigger zoom in BlogList
+    // Trigger zoom in Globe
     if (zoomCallback) {
       zoomCallback(post);
     }
@@ -24,7 +24,7 @@ window.App = () => {
   return React.createElement(
     'div',
     { className: 'app-container' },
-    React.createElement(window.BlogList, { 
+    React.createElement(window.GlobeComponent, { 
       handleTimelineClick, 
       selectedId, 
       setSelectedId,
