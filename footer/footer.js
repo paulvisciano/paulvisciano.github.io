@@ -1,14 +1,19 @@
-window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }) => {
-  // Group posts by year
-  const years = [...new Set(window.blogPosts.map(post => {
-    const year = new Date(post.date).getUTCFullYear();
-    return year;
-  }))].sort((a, b) => a - b);
+window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, selectedYear }) => {
+  // Filter posts by selectedTag and selectedYear
+  const filteredPosts = window.blogPosts.filter(post => {
+    const tagMatch = selectedTag === "All" || post.tags.includes(selectedTag);
+    const yearMatch = !selectedYear || selectedYear === "All" || new Date(post.date).getUTCFullYear().toString() === selectedYear;
+    return tagMatch && yearMatch;
+  });
+
+  // Get unique years from filtered posts, or all posts if filteredPosts is empty but posts exist
+  const years = filteredPosts.length > 0 
+    ? [...new Set(filteredPosts.map(post => new Date(post.date).getUTCFullYear()))].sort((a, b) => a - b)
+    : [...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear()))].sort((a, b) => a - b);
+
+  // Group filtered posts by year
   const postsByYear = years.reduce((acc, year) => {
-    acc[year] = window.blogPosts.filter(post => {
-      const postYear = new Date(post.date).getUTCFullYear();
-      return postYear === year;
-    });
+    acc[year] = filteredPosts.filter(post => new Date(post.date).getUTCFullYear() === year);
     return acc;
   }, {});
 
@@ -23,7 +28,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
       }, 0) + 32; // Extra padding
       timelineLine.style.width = `${totalWidth}px`;
     }
-  }, [selectedTag]);
+  }, [selectedTag, selectedYear]);
 
   // Helper function to format combined date (month and day range)
   const formatCombinedDate = (startDate, duration) => {
@@ -64,26 +69,27 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
       React.createElement(
         'div',
         { className: 'timeline' },
-        years.map((year, index) => {
-          const yearPosts = postsByYear[year];
-          return [
-            React.createElement(
-              'div',
-              {
-                key: `year-${year}`,
-                className: 'timeline-year-entry',
-                style: { '--index': index }
-              },
-              React.createElement('div', { className: 'timeline-dot' }),
+        filteredPosts.length === 0 && window.blogPosts.length === 0 ? 
+          React.createElement('div', { className: 'timeline-empty' }, 'No posts available') :
+          years.map((year, index) => {
+            const yearPosts = postsByYear[year] || [];
+            if (yearPosts.length === 0) return null; // Skip empty years
+            return [
               React.createElement(
                 'div',
-                { className: 'timeline-year-card' },
-                React.createElement('div', { className: 'timeline-year-text' }, year)
-              )
-            ),
-            ...yearPosts
-              .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
-              .map(post => {
+                {
+                  key: `year-${year}`,
+                  className: 'timeline-year-entry',
+                  style: { '--index': index }
+                },
+                React.createElement('div', { className: 'timeline-dot' }),
+                React.createElement(
+                  'div',
+                  { className: 'timeline-year-card' },
+                  React.createElement('div', { className: 'timeline-year-text' }, year)
+                )
+              ),
+              ...yearPosts.map(post => {
                 const combinedDate = formatCombinedDate(post.date, post.stayDuration);
                 const fullDateRange = formatFullDateRange(post.date, post.stayDuration);
 
@@ -118,8 +124,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
                   )
                 );
               })
-          ];
-        }).flat()
+            ];
+          }).flat()
       )
     )
   );

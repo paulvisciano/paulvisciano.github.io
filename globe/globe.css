@@ -12,47 +12,68 @@
 /* Tag Styling */
 .filter-tag {
   display: inline-block;
-  background: rgba(26, 26, 26, 0.8); /* Darker, semi-transparent background for contrast */
-  color: var(--text-light); /* White text for readability */
-  font-size: 1rem; /* Larger font for visibility */
-  font-weight: 500; /* Medium weight for modern look */
-  padding: 8px 16px; /* Increased padding for tap targets */
-  margin: 6px; /* Spacing between tags */
-  border-radius: 9999px; /* Fully rounded for sleek design */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* Text shadow for contrast */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-  transition: all 0.2s ease-in-out; /* Smooth transitions */
+  background: rgba(26, 26, 26, 0.8);
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  margin: 6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
-  z-index: 10; /* Above globe */
+  z-index: 10;
+}
+
+.filter-tag.year-tag {
+  font-weight: 600;
+  background: rgba(26, 26, 26, 0.85);
+  padding: 6px 12px;
 }
 
 .filter-tag:hover {
-  background: rgba(26, 26, 26, 0.95); /* Slightly darker on hover */
-  border-color: rgba(255, 255, 255, 0.4); /* Brighter border */
-  transform: translateY(-2px); /* Slight lift effect */
+  background: rgba(26, 26, 26, 0.95);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
 }
 
 .filter-tag.active {
-  background: var(--primary-orange); /* Solid orange to match points */
-  border-color: var(--primary-orange); /* Match border */
-  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Glow effect */
-  color: #ffffff; /* White text for contrast */
+  background: var(--primary-orange);
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+  color: #ffffff;
 }
 
 .filter-tag.active:hover {
-  background: var(--orange-hover); /* Lighter orange on hover */
-  transform: translateY(-2px); /* Maintain lift effect */
+  background: var(--orange-hover);
+  transform: translateY(-2px);
 }
 
-/* Tag container styling */
-.mb-8.flex.flex-wrap.justify-center {
+/* Tag and Year filter container styling */
+.year-filter-container {
   position: sticky;
   top: 1rem;
-  z-index: 20; /* Above globe and popovers */
-  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent); /* Subtle gradient */
-  padding: 1rem;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent);
+  padding: 0.5rem;
   border-radius: 1rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.tag-filter-container {
+  position: sticky;
+  top: 3rem;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
 }
 
 /* Globe Styling */
@@ -72,7 +93,7 @@
 }
 
 .popover-content {
-  background: rgba(26, 26, 26, 0.95); /* Dark, nearly opaque */
+  background: rgba(26, 26, 26, 0.95);
   border-radius: 4px;
   padding: 15px;
   width: 300px;
@@ -144,17 +165,17 @@
 #globeViz .scene-container .site-label {
   display: block !important;
   background: transparent !important;
-  color: var(--primary-orange) !important; /* Orange to match timeline dot */
+  color: var(--primary-orange) !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 12px !important; /* Slightly larger for legibility */
+  font-size: 12px !important;
   font-weight: bold !important;
   padding: 0 !important;
   border-radius: 0 !important;
-  text-shadow: 0 0 6px var(--black-80), 0 0 6px var(--black-80) !important; /* Enhanced shadow for contrast */
+  text-shadow: 0 0 6px var(--black-80), 0 0 6px var(--black-80) !important;
   white-space: nowrap !important;
   z-index: 5 !important;
   transition: none !important;
-  transform: translate(-50%, 0) !important; /* Center below point */
+  transform: translate(-50%, 0) !important;
   text-align: center !important;
   opacity: 1 !important;
 }
@@ -165,15 +186,24 @@
     height: 100vh;
   }
   .filter-tag {
-    font-size: 0.875rem; /* Slightly smaller but readable */
-    padding: 6px 12px; /* Adjusted for mobile tap targets */
+    font-size: 0.875rem;
+    padding: 6px 12px;
     margin: 4px;
   }
-  .filter-tag:hover, .filter-tag.active {
-    background: var(--primary-orange); /* Consistent orange for active/hover */
+  .filter-tag.year-tag {
+    font-size: 0.875rem;
+    padding: 5px 10px;
+  }
+  .year-filter-container,
+  .tag-filter-container {
+    padding: 0.25rem;
+    gap: 6px;
+  }
+  .tag-filter-container {
+    top: 4rem;
   }
   #globeViz .scene-container .site-label {
-    font-size: 10px !important; /* Smaller for mobile */
+    font-size: 10px !important;
   }
   .popover-content {
     width: 250px;

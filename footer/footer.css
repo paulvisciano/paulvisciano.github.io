@@ -1,5 +1,5 @@
 :root {
-    --text-light: #e0e0e0; /* Body text, timeline highlight */
+    --Evaluating: expression --text-light: #e0e0e0; /* Body text, timeline highlight */
     --text-muted: #a1a1aa; /* Timeline date, combined date */
     --primary-orange: #ffa500; /* Timeline dot, year */
     --white-10: rgba(255, 255, 255, 0.1); /* Timeline card selected */
@@ -156,6 +156,14 @@ footer {
     opacity: 0.9;
 }
 
+.timeline-empty {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 16px;
+    width: 100%;
+}
+
 @media (max-width: 640px) {
     .timeline-entry {
         margin-right: 16px;
@@ -199,5 +207,9 @@ footer {
     .timeline-entry.selected .timeline-dot,
     .timeline-year-entry .timeline-dot {
         transform: translateX(-50%) scale(1.5);
+    }
+    .timeline-empty {
+        font-size: 0.875rem;
+        padding: 12px;
     }
 }
