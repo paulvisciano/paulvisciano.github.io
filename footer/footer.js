@@ -1,38 +1,24 @@
 window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }) => {
-  // Filter posts by selectedTag
-  const filteredPosts = window.blogPosts.filter(post => selectedTag === "All" || post.tags.includes(selectedTag));
-  
-  // Get unique years from filtered posts
-  const years = [...new Set(filteredPosts.map(post => post.date.getFullYear()))].sort();
+  // Group posts by year
+  const years = [...new Set(window.blogPosts.map(post => post.date.getFullYear()))].sort();
+  const postsByYear = years.reduce((acc, year) => {
+    acc[year] = window.blogPosts.filter(post => post.date.getFullYear() === year);
+    return acc;
+  }, {});
 
-  // Create a flat list of timeline items (year cards and post cards)
-  const timelineItems = [];
-  years.forEach(year => {
-    // Add year card
-    timelineItems.push({
-      type: 'year',
-      year,
-      id: `year-${year}`
-    });
-    // Add posts for this year
-    filteredPosts
-      .filter(post => post.date.getFullYear() === year)
-      .forEach(post => {
-        timelineItems.push({
-          type: 'post',
-          post,
-          id: post.id
-        });
-      });
-  });
-
-  // Auto-scroll to start when tag changes
+  // UseEffect to dynamically set timeline-line width
   React.useEffect(() => {
-    const timelineContainer = document.querySelector('.timeline-container');
-    if (timelineContainer) {
-      timelineContainer.scrollLeft = 0; // Scroll to the start
+    const timeline = document.querySelector('.timeline');
+    const timelineLine = document.querySelector('.timeline-line');
+    if (timeline && timelineLine) {
+      // Calculate total width based on timeline entries and year entries
+      const entries = document.querySelectorAll('.timeline-entry, .timeline-year-entry');
+      const totalWidth = Array.from(entries).reduce((acc, entry) => {
+        return acc + entry.offsetWidth + 32; // Include margin-right (32px)
+      }, 0) + 32; // Extra padding
+      timelineLine.style.width = `${totalWidth}px`;
     }
-  }, [selectedTag]);
+  }, [selectedTag]); // Re-run when selectedTag changes
 
   return React.createElement(
     'footer',
@@ -42,60 +28,58 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag }
       { className: 'timeline-container' },
       React.createElement(
         'div',
-        { className: 'timeline-line' },
-        null
+        { className: 'timeline-line' }
       ),
       React.createElement(
         'div',
         { className: 'timeline' },
-        timelineItems.map((item, index) => {
-          if (item.type === 'year') {
-            return React.createElement(
+        years.map((year, index) => {
+          const yearPosts = postsByYear[year];
+          return [
+            React.createElement(
               'div',
               {
-                key: item.id,
-                className: 'timeline-entry timeline-year-entry',
-                style: { '--index': index }
+                key: `year-${year}`,
+                className: 'timeline-year-entry',
+                style: { '--index': index } // For fade-in animation
               },
-              React.createElement('div', { 
-                className: 'timeline-dot timeline-year-dot',
-                style: { width: '12px', height: '12px' }
-              }),
+              React.createElement('div', { className: 'timeline-dot' }),
               React.createElement(
                 'div',
-                { className: 'timeline-card timeline-year-card' },
-                React.createElement('div', { className: 'timeline-year-text' }, item.year)
+                { className: 'timeline-year-card' },
+                React.createElement('div', { className: 'timeline-year-text' }, year)
               )
-            );
-          } else {
-            const { post } = item;
-            const dotSize = Math.min(8 + post.stayDuration * 0.5, 16);
-            const abbrevMonth = post.date.toLocaleDateString('en-US', { month: 'short' });
-            return React.createElement(
-              'div',
-              {
-                key: post.id,
-                className: `timeline-entry ${selectedId === post.id ? 'selected' : ''}`,
-                'data-id': post.id,
-                onClick: () => {
-                  setSelectedId(post.id);
-                  handleTimelineClick(post);
-                },
-                style: { '--index': index }
-              },
-              React.createElement('div', { 
-                className: 'timeline-dot',
-                style: { width: `${dotSize}px`, height: `${dotSize}px` }
-              }),
-              React.createElement(
-                'div',
-                { className: 'timeline-card' },
-                React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight),
-                React.createElement('div', { className: 'timeline-date' }, abbrevMonth)
-              )
-            );
-          }
-        })
+            ),
+            ...yearPosts
+              .filter(post => selectedTag === "All" || post.tags.includes(selectedTag))
+              .map(post => {
+                const abbrevMonth = post.date.toLocaleDateString('en-US', { month: 'short' });
+                return React.createElement(
+                  'div',
+                  {
+                    key: post.id,
+                    className: `timeline-entry ${selectedId === post.id ? 'selected' : ''}`,
+                    'data-id': post.id,
+                    onClick: () => {
+                      setSelectedId(post.id);
+                      handleTimelineClick(post);
+                    },
+                    style: { '--index': index + 1 } // Adjust index for animation
+                  },
+                  React.createElement('div', { 
+                    className: 'timeline-dot',
+                    style: { width: `${10}px`, height: `${10}px` }
+                  }),
+                  React.createElement(
+                    'div',
+                    { className: 'timeline-card' },
+                    React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight),
+                    React.createElement('div', { className: 'timeline-date' }, abbrevMonth)
+                  )
+                );
+              })
+          ];
+        }).flat()
       )
     )
   );
