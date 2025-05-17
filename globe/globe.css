@@ -9,6 +9,63 @@
   --black-50: rgba(0, 0, 0, 0.5); /* Popover shadow */
 }
 
+/* Filter Drawer Styling */
+.filter-drawer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+}
+
+.filter-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 26, 26, 0.9);
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  margin: 0 auto;
+}
+
+.filter-toggle-button:hover {
+  background: rgba(26, 26, 26, 1);
+}
+
+.filter-toggle-button .chevron {
+  margin-left: 8px;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.filter-toggle-button.open .chevron {
+  transform: rotate(180deg);
+}
+
+.filter-drawer {
+  background: rgba(26, 26, 26, 0.95);
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.filter-drawer.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
 /* Tag Styling */
 .filter-tag {
   display: inline-block;
@@ -53,10 +110,6 @@
 
 /* Tag and Year filter container styling */
 .year-filter-container {
-  position: sticky;
-  top: 1rem;
-  z-index: 20;
-  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent);
   padding: 0.5rem;
   border-radius: 1rem;
   flex-wrap: wrap;
@@ -65,10 +118,6 @@
 }
 
 .tag-filter-container {
-  position: sticky;
-  top: 3rem;
-  z-index: 20;
-  background: linear-gradient(to bottom, rgba(26, 26, 26, 0.5), transparent);
   padding: 0.5rem;
   border-radius: 1rem;
   flex-wrap: wrap;
@@ -199,8 +248,12 @@
     padding: 0.25rem;
     gap: 6px;
   }
-  .tag-filter-container {
-    top: 4rem;
+  .filter-toggle-button {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+  .filter-drawer {
+    padding: 0.5rem;
   }
   #globeViz .scene-container .site-label {
     font-size: 10px !important;

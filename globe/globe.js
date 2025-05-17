@@ -8,8 +8,10 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const yearTags = ["All", ...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false); // State for drawer visibility
   const globeInstance = React.useRef(null);
   const popoverRef = React.useRef(null);
+  const drawerRef = React.useRef(null); // Ref for filter drawer container
   const isZooming = React.useRef(false);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
@@ -17,12 +19,17 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   // Utility to wait for zoom animation
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
-  // Handle clicks and taps outside the popover to dismiss it
+  // Handle clicks and taps outside the popover and filter drawer
   React.useEffect(() => {
     const handleClickOutside = (event) => {
+      // Handle popover dismissal
       if (popoverRef.current && !popoverRef.current.contains(event.target)) {
         setPopoverContent(null);
         setSelectedId(null);
+      }
+      // Handle filter drawer dismissal
+      if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target)) {
+        setIsDrawerOpen(false);
       }
     };
 
@@ -66,7 +73,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [popoverContent, setSelectedId]);
+  }, [popoverContent, setSelectedId, isDrawerOpen]);
 
   // Provide zoom callback to App.js
   React.useEffect(() => {
@@ -349,44 +356,57 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     { className: 'container mx-auto main-content' },
     React.createElement(
       'div',
-      null,
+      { className: 'filter-drawer-container', ref: drawerRef },
       React.createElement(
+        'button',
+        {
+          className: `filter-toggle-button ${isDrawerOpen ? 'open' : ''}`,
+          onClick: () => setIsDrawerOpen(!isDrawerOpen)
+        },
+        'Filters',
+        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
+      ),
+      isDrawerOpen && React.createElement(
         'div',
-        { className: 'mb-4 flex flex-wrap justify-center year-filter-container' },
-        yearTags.map(year =>
-          React.createElement(
-            'button',
-            {
-              key: `year-${year}`,
-              onClick: () => setSelectedYear(year),
-              className: `filter-tag year-tag ${selectedYear === year ? 'active' : ''}`
-            },
-            year
+        { className: 'filter-drawer open' },
+        React.createElement(
+          'div',
+          { className: 'year-filter-container' },
+          yearTags.map(year =>
+            React.createElement(
+              'button',
+              {
+                key: `year-${year}`,
+                onClick: () => setSelectedYear(year),
+                className: `filter-tag year-tag ${selectedYear === year ? 'active' : ''}`
+              },
+              year
+            )
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'tag-filter-container' },
+          regularTags.map(tag =>
+            React.createElement(
+              'button',
+              {
+                key: `tag-${tag}`,
+                onClick: () => setSelectedTag(tag),
+                className: `filter-tag ${selectedTag === tag ? 'active' : ''}`
+              },
+              tag
+            )
           )
         )
-      ),
-      React.createElement(
-        'div',
-        { className: 'mb-8 flex flex-wrap justify-center tag-filter-container' },
-        regularTags.map(tag =>
-          React.createElement(
-            'button',
-            {
-              key: `tag-${tag}`,
-              onClick: () => setSelectedTag(tag),
-              className: `filter-tag ${selectedTag === tag ? 'active' : ''}`
-            },
-            tag
-          )
-        )
-      ),
-      popoverContent && React.createElement(Popover, {
-        title: popoverContent.title,
-        snippet: popoverContent.snippet,
-        fullLink: popoverContent.fullLink,
-        onClose: () => setPopoverContent(null),
-        position: popoverPosition
-      })
-    )
+      )
+    ),
+    popoverContent && React.createElement(Popover, {
+      title: popoverContent.title,
+      snippet: popoverContent.snippet,
+      fullLink: popoverContent.fullLink,
+      onClose: () => setPopoverContent(null),
+      position: popoverPosition
+    })
   );
 };
