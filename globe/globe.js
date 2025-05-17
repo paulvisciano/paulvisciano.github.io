@@ -5,7 +5,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
   // Separate regular tags and years
   const regularTags = ["All", ...new Set(window.blogPosts.flatMap(post => post.tags))];
-  const yearTags = ["All", ...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear().toString()))].sort();
+  const yearTags = ["All", ...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
   const globeInstance = React.useRef(null);
