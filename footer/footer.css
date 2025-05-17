@@ -1,6 +1,6 @@
 :root {
-    --Evaluating: expression --text-light: #e0e0e0; /* Body text, timeline highlight */
-    --text-muted: #a1a1aa; /* Timeline date, combined date */
+    --text-light: #e0e0e0; /* Body text, timeline highlight */
+    --text-muted: #a1a1aa; /* Timeline date */
     --primary-orange: #ffa500; /* Timeline dot, year */
     --white-10: rgba(255, 255, 255, 0.1); /* Timeline card selected */
     --white-05: rgba(255, 255, 255, 0.05); /* Timeline card */
@@ -16,7 +16,7 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--background-dark);
+    background: var(--background-dark); /* Dark background */
     border-top: 1px solid var(--border-dark);
     z-index: 20;
 }
@@ -25,11 +25,11 @@ footer {
     position: relative;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 32px 0;
+    padding: 32px 0; /* For year clearance */
     background: var(--transparent);
     border-radius: 0;
     width: 100%;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
 }
 
 .timeline {
@@ -37,12 +37,12 @@ footer {
     align-items: flex-start;
     padding: 0 16px;
     position: relative;
-    width: max-content;
+    width: max-content; /* Ensure timeline width matches content */
 }
 
 .timeline-line {
     position: absolute;
-    top: 25px;
+    top: 25px; /* Line position */
     left: 16px;
     height: 2px;
     background: var(--primary-orange);
@@ -54,17 +54,17 @@ footer {
     display: inline-block;
     text-align: center;
     margin-right: 32px;
-    width: 100px;
+    width: 100px; /* Smaller width for year cards */
     position: relative;
 }
 
 .timeline-year-card {
-    background: var(--background-dark);
-    border: 1px solid var(--border-dark);
+    background: var(--background-dark); /* Dark card background */
+    border: 1px solid var(--border-dark); /* Subtle border */
     border-radius: 4px;
     padding: 6px 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-top: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    margin-top: 12px; /* Space below dot */
     opacity: 0;
     animation: fadeIn 0.5s forwards;
     animation-delay: calc(var(--index) * 0.2s);
@@ -82,7 +82,7 @@ footer {
     margin-right: 32px;
     cursor: pointer;
     transition: transform 0.3s ease;
-    width: 180px;
+    width: 180px; /* Fixed width for post entries */
     position: relative;
 }
 
@@ -99,7 +99,7 @@ footer {
 
 .timeline-dot {
     position: absolute;
-    top: -11px;
+    top: -11px; /* Center vertically on 2px line */
     left: 50%;
     transform: translateX(-50%);
     width: 10px;
@@ -115,7 +115,7 @@ footer {
 .timeline-entry.selected .timeline-dot,
 .timeline-year-entry .timeline-dot {
     background: var(--primary-orange);
-    transform: translateX(-50%) scale(1.5);
+    transform: translateX(-50%) scale(1.5); /* Enlarge for year and post dots */
 }
 
 .timeline-card {
@@ -126,7 +126,7 @@ footer {
     opacity: 0;
     animation: fadeIn 0.5s forwards;
     animation-delay: calc(var(--index) * 0.2s);
-    margin-top: 12px;
+    margin-top: 12px; /* Space below dot */
 }
 
 @keyframes fadeIn {
@@ -134,34 +134,18 @@ footer {
     to { opacity: 1; }
 }
 
-.timeline-date-combined {
+.timeline-date {
     font-size: 0.75rem;
-    font-weight: 400;
     color: var(--text-muted);
     margin-top: 2px;
-    opacity: 0.85;
-    white-space: nowrap;
-}
-
-.timeline-date-combined:hover {
-    color: var(--text-light);
-    opacity: 1;
+    opacity: 0.9;
 }
 
 .timeline-highlight {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-light);
-    margin-top: 2px;
     opacity: 0.9;
-}
-
-.timeline-empty {
-    font-size: 1rem;
-    color: var(--text-muted);
-    text-align: center;
-    padding: 16px;
-    width: 100%;
 }
 
 @media (max-width: 640px) {
@@ -179,13 +163,11 @@ footer {
     .timeline-year-text {
         font-size: 0.875rem;
     }
-    .timeline-date-combined {
+    .timeline-date {
         font-size: 0.625rem;
-        margin-top: 1px;
     }
     .timeline-highlight {
         font-size: 0.75rem;
-        margin-top: 1px;
     }
     .timeline-card {
         padding: 6px 10px;
@@ -195,11 +177,11 @@ footer {
         padding: 28px 0;
     }
     .timeline-line {
-        top: 18px;
+        top: 4px; /* Adjusted to center with 8px dot */
         left: 16px;
     }
     .timeline-dot {
-        top: -4px;
+        top: -4px; /* Center on 2px line for 8px dot */
         width: 8px;
         height: 8px;
     }
@@ -207,9 +189,5 @@ footer {
     .timeline-entry.selected .timeline-dot,
     .timeline-year-entry .timeline-dot {
         transform: translateX(-50%) scale(1.5);
-    }
-    .timeline-empty {
-        font-size: 0.875rem;
-        padding: 12px;
     }
 }
