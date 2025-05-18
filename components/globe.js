@@ -163,26 +163,30 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     const altitude = globeInstance.current.pointOfView().altitude;
     const minAltitude = 0.1;
-    const minHexAltitude = 0.05;
+    const minHexAltitude = 0.02;
     const maxHexAltitude = 0.1;
 
     // Define altitude thresholds and corresponding hex altitudes
     const zoomLevels = [
-      { threshold: 1, hexAltitude: maxHexAltitude },
-      { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75 },
-      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.5 },
-      { threshold: minAltitude, hexAltitude: minHexAltitude }
+      { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution : 4  },
+      { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution : 4 },
+      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.5 , hexBinResolution : 5 },
+      { threshold: minAltitude, hexAltitude: minHexAltitude, hexBinResolution : 5 }
     ];
 
     // Find the appropriate hex altitude based on current altitude
     let hexAltitude = minAltitude;
+    let hexBinResolution = 4;
+
     for (const level of zoomLevels) {
       if (altitude >= level.threshold) {
+        hexBinResolution = level.hexBinResolution;
         hexAltitude = level.hexAltitude;
         break;
       }
     }
 
+    globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
     globeInstance.current.controls().autoRotate = altitude > 0.8;
   };
