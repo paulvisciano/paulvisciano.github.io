@@ -20,6 +20,12 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
 
+  // Expose state setters and refs to window for BlogPostDrawer
+  window.setBlogPostContent = setBlogPostContent;
+  window.isLoading = isLoading;
+  window.error = error;
+  window.blogDrawerRef = blogDrawerRef;
+
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
   React.useEffect(() => {
@@ -311,34 +317,39 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
   const handleOpenBlogPost = async (postId) => {
     const post = window.blogPosts.find(p => p.id === postId);
+
     if (post) {
       setIsLoading(true);
       setError(null);
+
       try {
-        // Fetch the HTML content from the fullLink
-        const response = await fetch(post.fullLink);
+        const htmlFile = post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`;
+        const response = await fetch(htmlFile);
+
         if (!response.ok) {
           throw new Error('Failed to load post content');
         }
+        
         const htmlContent = await response.text();
-        // Parse the HTML to extract the body content (excluding <html>, <head>, etc.)
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
         const bodyContent = doc.body.innerHTML;
-        
+
         setBlogPostContent({
           title: post.title,
-          content: bodyContent, // Full HTML content from the file
+          content: bodyContent,
           image: post.image ? post.image.replace('attachment://', '') : null,
           imageAlt: post.imageAlt,
           caption: post.caption,
           mapLink: post.mapLink,
           mapText: post.mapText
         });
+
         setIsBlogDrawerOpen(true);
         setPopoverContent(null);
       } catch (err) {
         setError('Failed to load the full post. Please try again.');
+        
         setBlogPostContent({
           title: post.title,
           content: `<p>${err.message}</p>`,
@@ -389,7 +400,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         React.createElement(
           'div',
           { className: 'popover-body' },
-          React.createElement('pRendered', null, snippet)
+          React.createElement('p', null, snippet)
         ),
         React.createElement(
           'div',
@@ -402,64 +413,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             },
             'View Full Post'
           )
-        )
-      )
-    );
-  };
-
-  const BlogPostDrawer = ({ content, onClose }) => {
-    return React.createElement(
-      'div',
-      {
-        className: `blog-post-drawer ${isBlogDrawerOpen ? 'open' : ''}`,
-        ref: blogDrawerRef
-      },
-      React.createElement(
-        'button',
-        {
-          className: 'close-button',
-          onClick: () => {
-            onClose();
-            setBlogPostContent(null);
-          }
-        },
-        '×'
-      ),
-      React.createElement(
-        'div',
-        { className: 'blog-post-drawer-content' },
-        isLoading && React.createElement('p', null, 'Loading...'),
-        error && React.createElement('p', { style: { color: 'red' } }, error),
-        content && (
-          [
-            React.createElement('h1', { key: 'title' }, content.title),
-            content.image && React.createElement('img', { 
-              key: 'image',
-              src: content.image, 
-              alt: content.imageAlt,
-              className: 'blog-post-image'
-            }),
-            content.caption && React.createElement('p', { 
-              key: 'caption',
-              className: 'caption'
-            }, content.caption),
-            React.createElement('div', {
-              key: 'content',
-              className: 'blog-post-body',
-              dangerouslySetInnerHTML: { __html: content.content }
-            }),
-            content.mapLink && React.createElement(
-              'a',
-              { 
-                key: 'map',
-                href: content.mapLink, 
-                target: '_blank', 
-                rel: 'noopener noreferrer',
-                className: 'map-link'
-              },
-              content.mapText
-            )
-          ]
         )
       )
     );
@@ -531,7 +484,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       position: popoverPosition,
       id: popoverContent.id
     }),
-    isBlogDrawerOpen && blogPostContent && React.createElement(BlogPostDrawer, {
+    isBlogDrawerOpen && blogPostContent && React.createElement(window.BlogPostDrawer, {
       content: blogPostContent,
       onClose: () => setIsBlogDrawerOpen(false)
     })
