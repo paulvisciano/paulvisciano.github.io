@@ -544,20 +544,20 @@ window.blogPosts = [
     stayDuration: 10
   },
   {
-    id: "post-boulder",
-    title: "Hiking and Chilling in Boulder",
-    date: new Date('2025-05-12T00:00:00Z'),
-    timelineHighlight: "Boulder Trails",
-    tags: ["hiking", "nature", "live music"],
-    snippet: "Hiked Boulder’s scenic trails, enjoyed live music at Rayback Collective, and soaked in the laid-back vibe of Pearl Street.",
+    id: "post-boulder-2",
+    title: "Chasing Vibes in Boulder",
+    date: new Date('2025-05-17T00:00:00Z'),
+    timelineHighlight: "Coffee & Music in Boulder",
+    tags: ["coffee", "live music", "wellness"],
+    snippet: "Soaking up Boulder’s chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center.",
     image: "attachment://placeholder-boulder.jpg",
-    imageAlt: "Boulder Flatirons",
-    caption: "Boulder’s Flatirons in the morning light!",
-    mapLink: "https://maps.app.goo.gl/placeholder",
+    imageAlt: "Trident Booksellers & Café in Boulder",
+    caption: "Catching a live band at Trident Booksellers & Café!",
+    mapLink: "https://maps.app.goo.gl/7zZ9kL5nJ3mX5zK7",
     mapText: "📍 Find Boulder on Google Maps",
-    fullLink: "#",
+    fullLink: "boulder-post.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
-    stayDuration: 8
+    stayDuration: 10 // 10 days in Boulder
   },
   {
     id: "post-san-diego-2",
