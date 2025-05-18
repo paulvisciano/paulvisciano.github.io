@@ -540,7 +540,7 @@ window.blogPosts =
     caption: "The breathtaking view of downtown Austin from Cosmic Coffee!",
     mapLink: "https://maps.app.goo.gl/5gKqL9nL8J3mX5zK7",
     mapText: "📍 Find Cosmic Coffee on Google Maps",
-    fullLink: "austin-post.html",
+    fullLink: "#",
     location: { lat: 30.2672, lng: -97.7431, name: "Austin, Texas" },
     stayDuration: 10
   },
@@ -588,7 +588,7 @@ window.blogPosts =
     caption: "Spiking with Bartik in Deerfield!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Fort Lauderdale on Google Maps",
-    fullLink: "fort-lauderdale-post.html",
+    fullLink: "#",
     location: { lat: 26.1224, lng: -80.1373, name: "Fort Lauderdale, Florida" },
     stayDuration: 2
   },
@@ -604,7 +604,7 @@ window.blogPosts =
     caption: "Volleyball action on South Beach!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Miami Beach on Google Maps",
-    fullLink: "miami-south-beach-post.html",
+    fullLink: "#",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
     stayDuration: 7
   },
@@ -616,7 +616,7 @@ window.blogPosts =
     tags: ["travel", "relocation"],
     snippet: "Spent a weekend in Tampa picking up luggage for my big move to Hawaii, with a side of waterfront views.",
     image: "attachment://placeholder-tampa.jpg",
-    imageAlt: "T权益ampa Waterfront",
+    imageAlt: "Tampa Waterfront",
     caption: "Tampa’s waterfront during my relocation prep!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Tampa on Google Maps",

@@ -112,7 +112,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                   'div',
                   {
                     key: post.id,
-                    className: `timeline-entry ${selectedId === post.id ? 'selected' : ''}`,
+                    className: `timeline-entry ${selectedId === post.id ? 'selected' : ''} ${post.fullLink !== '#' ? 'has-full-post' : ''}`,
                     'data-id': post.id,
                     onClick: () => {
                       setSelectedId(post.id);
@@ -135,7 +135,16 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                       },
                       combinedDate
                     ),
-                    React.createElement('div', { className: 'timeline-highlight' }, post.timelineHighlight)
+                    React.createElement(
+                      'div',
+                      { className: 'timeline-highlight' },
+                      post.timelineHighlight,
+                      post.fullLink !== '#' && React.createElement(
+                        'span',
+                        { className: 'full-post-indicator', title: 'Full blog post available' },
+                        '★'
+                      )
+                    )
                   )
                 );
               })

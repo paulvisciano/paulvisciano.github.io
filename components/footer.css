@@ -148,6 +148,21 @@ footer {
     font-weight: 600; /* Bolder for emphasis */
     color: var(--text-light);
     opacity: 1; /* Full opacity for prominence */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.full-post-indicator {
+    color: var(--primary-orange);
+    font-size: 0.75rem;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-entry:hover .full-post-indicator,
+.timeline-entry.selected .full-post-indicator {
+    opacity: 1;
 }
 
 @media (max-width: 640px) {
@@ -194,5 +209,8 @@ footer {
     .timeline-entry.selected .timeline-dot,
     .timeline-year-entry .timeline-dot {
         transform: translateX(-50%) scale(1.5);
+    }
+    .full-post-indicator {
+        font-size: 0.625rem;
     }
 }

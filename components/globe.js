@@ -402,7 +402,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           { className: 'popover-body' },
           React.createElement('p', null, snippet)
         ),
-        React.createElement(
+        fullLink && fullLink !== '#' && React.createElement(
           'div',
           { className: 'popover-footer' },
           React.createElement(
