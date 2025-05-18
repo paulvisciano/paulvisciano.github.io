@@ -140,31 +140,34 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     if (!globeInstance.current) return;
 
     const altitude = globeInstance.current.pointOfView().altitude;
-    const maxAltitude = 2.5;
     const minAltitude = 0.1;
-    const maxPointAltitude = 0.4;
     const minPointAltitude = 0.001;
+    const minPointRadius = 0.1;
 
     // Define altitude thresholds and corresponding point altitudes
     const zoomLevels = [
-      { threshold: maxAltitude * 0.9, pointAltitude: maxPointAltitude }, // Highest
-      { threshold: maxAltitude / 2, pointAltitude: 0.08 }, // Higher
-      { threshold: maxAltitude / 10, pointAltitude: 0.02 }, // Mid
-      { threshold: minAltitude, pointAltitude: minPointAltitude } // Smallest
+      { threshold: 1, pointAltitude: 0.15, pointRadius : 0.25 }, // Highest
+      { threshold: 0.5, pointAltitude: 0.04, pointRadius : 0.2 }, // Higher
+      { threshold: 0.3, pointAltitude: 0.02 , pointRadius : 0.15}, // Mid
+      { threshold: minAltitude, pointAltitude: minPointAltitude, pointRadius : minPointRadius } // Smallest
     ];
 
     // Find the appropriate point altitude based on current altitude
     let pointAltitude = minPointAltitude;
+    let pointRadius = minPointRadius;
     
     for (const level of zoomLevels) {
-      if (altitude >= level.threshold) {
+    if (altitude >= level.threshold) {
+        pointRadius = level.pointRadius;
         pointAltitude = level.pointAltitude;
+
         break;
       }
     }
 
+    globeInstance.current.pointRadius(pointRadius);
     globeInstance.current.pointAltitude(pointAltitude);
-    globeInstance.current.controls().autoRotate = altitude > 1;
+    globeInstance.current.controls().autoRotate = altitude > 0.8;
   };
 
   React.useEffect(() => {
