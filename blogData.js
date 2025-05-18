@@ -545,9 +545,9 @@ window.blogPosts =
     stayDuration: 10
   },
   {
-    id: "boulder-2025-05-17",
+    id: "boulder-2025-05-13",
     title: "Chasing Vibes in Boulder",
-    date: new Date('2025-05-17T00:00:00Z'),
+    date: new Date('2025-05-13T00:00:00Z'),
     timelineHighlight: "Coffee & Music in Boulder",
     tags: ["coffee", "live music", "wellness"],
     snippet: "Soaking up Boulder’s chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center.",
@@ -558,7 +558,7 @@ window.blogPosts =
     mapText: "📍 Find Boulder on Google Maps",
     fullLink: "posts/boulder-2025-05-17.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
-    stayDuration: 10
+    stayDuration: 7
   },
   {
     id: "san-diego-2025-05-20",
