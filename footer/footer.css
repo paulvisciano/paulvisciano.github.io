@@ -82,7 +82,8 @@ footer {
     margin-right: 32px;
     cursor: pointer;
     transition: transform 0.3s ease;
-    width: 180px; /* Fixed width for post entries */
+    width: auto; /* Allow card to stretch based on content */
+    min-width: 180px; /* Minimum width to prevent shrinking too much */
     position: relative;
 }
 
@@ -127,6 +128,7 @@ footer {
     animation: fadeIn 0.5s forwards;
     animation-delay: calc(var(--index) * 0.2s);
     margin-top: 12px; /* Space below dot */
+    white-space: normal; /* Allow text wrapping if needed */
 }
 
 @keyframes fadeIn {
@@ -134,24 +136,25 @@ footer {
     to { opacity: 1; }
 }
 
-.timeline-date {
-    font-size: 0.75rem;
+.timeline-date-combined {
+    font-size: 0.8125rem; /* Slightly larger for more prominence */
     color: var(--text-muted);
+    opacity: 0.85; /* Maintain visibility */
     margin-top: 2px;
-    opacity: 0.9;
 }
 
 .timeline-highlight {
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 1rem; /* Keep prominent */
+    font-weight: 600; /* Bolder for emphasis */
     color: var(--text-light);
-    opacity: 0.9;
+    opacity: 1; /* Full opacity for prominence */
 }
 
 @media (max-width: 640px) {
     .timeline-entry {
         margin-right: 16px;
-        width: 140px;
+        width: auto; /* Allow stretch on mobile */
+        min-width: 140px; /* Minimum width on mobile */
     }
     .timeline-year-entry {
         margin-right: 16px;
@@ -163,11 +166,13 @@ footer {
     .timeline-year-text {
         font-size: 0.875rem;
     }
-    .timeline-date {
-        font-size: 0.625rem;
+    .timeline-date-combined {
+        font-size: 0.6875rem; /* Slightly larger on mobile */
+        opacity: 0.8; /* Maintain visibility */
     }
     .timeline-highlight {
-        font-size: 0.75rem;
+        font-size: 0.875rem; /* Slightly smaller but still prominent */
+        font-weight: 600;
     }
     .timeline-card {
         padding: 6px 10px;
@@ -177,11 +182,11 @@ footer {
         padding: 28px 0;
     }
     .timeline-line {
-        top: 4px; /* Adjusted to center with 8px dot */
+        top: 18px;
         left: 16px;
     }
     .timeline-dot {
-        top: -4px; /* Center on 2px line for 8px dot */
+        top: -4px; /* Center on line for 8px dot */
         width: 8px;
         height: 8px;
     }
