@@ -147,16 +147,24 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     let pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
 
-    if (altitude < maxAltitude / 2) {
+    if(altitude < maxAltitude / 10) {
+      console.log('Smallest point')
+      pointAltitude = 0.001;
+    }
+    else if (altitude < maxAltitude / 2) {
+      console.log('Mid point')
       pointAltitude = 0.02;
     } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
+      console.log('Higher')
       pointAltitude = 0.08;
     } else if (altitude >= maxAltitude - 0.1) {
+      console.log('Highest')
+
       pointAltitude = 0.4;
     }
 
     globeInstance.current.pointAltitude(pointAltitude);
-    globeInstance.current.controls().autoRotate = altitude > 2.2;
+    globeInstance.current.controls().autoRotate = altitude > 1;
   };
 
   React.useEffect(() => {
