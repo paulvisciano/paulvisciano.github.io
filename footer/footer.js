@@ -29,11 +29,18 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       timelineLine.style.width = `${totalWidth}px`;
     }
 
-    // Scroll to selected post
+    // Scroll to selected post, centering it in the timeline
     if (selectedId) {
       const selectedEntry = document.querySelector(`.timeline-entry[data-id="${selectedId}"]`);
       if (selectedEntry) {
-        selectedEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const timelineContainer = document.querySelector('.timeline-container');
+        const entryRect = selectedEntry.getBoundingClientRect();
+        const containerRect = timelineContainer.getBoundingClientRect();
+        const scrollOffset = entryRect.left + (entryRect.width / 2) - (containerRect.width / 2);
+        timelineContainer.scrollTo({
+          left: timelineContainer.scrollLeft + scrollOffset,
+          behavior: 'smooth'
+        });
       }
     }
   }, [selectedTag, selectedYear, selectedId]);
