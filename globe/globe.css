@@ -9,6 +9,26 @@
   --black-50: rgba(0, 0, 0, 0.5); /* Popover shadow */
 }
 
+/* Shared Close Button Styling */
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem; /* Larger size for both pin popup and filter drawer */
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.close-button:hover {
+  color: #ffffff;
+}
+
 /* Filter Drawer Styling */
 .filter-drawer-container {
   position: fixed;
@@ -67,22 +87,6 @@
   transform: translateY(0);
   opacity: 1;
   visibility: visible;
-}
-
-.filter-drawer-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.filter-drawer-close:hover {
-  color: #ffffff;
 }
 
 /* Tag Styling */
@@ -186,25 +190,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  position: relative; /* Ensure close button positioning */
 }
 
 .popover-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-light);
-}
-
-.popover-close {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.popover-close:hover {
-  color: #ffffff;
 }
 
 .popover-body {
@@ -270,8 +262,8 @@
   .filter-drawer {
     padding: 0.5rem;
   }
-  .filter-drawer-close {
-    font-size: 1rem;
+  .close-button {
+    font-size: 1.75rem; /* Slightly smaller on mobile */
     top: 8px;
     right: 8px;
   }

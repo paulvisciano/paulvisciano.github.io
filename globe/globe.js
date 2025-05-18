@@ -23,17 +23,18 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       // Handle popover dismissal
-      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+      if (popoverRef.current && !popoverRef.current.contains(event.target) && !event.target.closest('.overlay')) {
         setPopoverContent(null);
         setSelectedId(null);
       }
       // Handle filter drawer dismissal
-      if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target)) {
+      if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('.filter-toggle-button')) {
         setIsDrawerOpen(false);
       }
     };
 
     const handleTouchStart = (event) => {
+      if (event.target.closest('.overlay')) return; // Ignore overlay touches
       if (event.touches.length === 1) {
         touchStartX.current = event.touches[0].clientX;
         touchStartY.current = event.touches[0].clientY;
@@ -41,6 +42,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     };
 
     const handleTouchMove = (event) => {
+      if (event.target.closest('.overlay')) return; // Ignore overlay touches
       if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {
         const touchEndX = event.touches[0].clientX;
         const touchEndY = event.touches[0].clientY;
@@ -333,7 +335,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           React.createElement('h2', { className: 'popover-title' }, title),
           React.createElement(
             'button',
-            { className: 'popover-close', onClick: () => {
+            { className: 'close-button', onClick: () => {
               onClose();
               setSelectedId(null);
             }},
@@ -379,7 +381,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         React.createElement(
           'button',
           {
-            className: 'filter-drawer-close',
+            className: 'close-button',
             onClick: () => setIsDrawerOpen(false)
           },
           '×'
