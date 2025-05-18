@@ -15,7 +15,6 @@
   width: 100%;
   max-width: 600px;
   background: rgba(26, 26, 26, 0.95);
-  padding: 2rem;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
   opacity: 0;
@@ -23,6 +22,11 @@
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   z-index: 50;
   overflow-y: auto;
+}
+
+.blog-post-drawer .close-button {
+  font-size: 3rem;
+  right: 16px;
 }
 
 .blog-post-drawer.open {
@@ -33,6 +37,7 @@
 
 .blog-post-drawer-content {
   color: var(--text-light);
+  padding: 2rem;
 }
 
 .blog-post-drawer-content h1,
@@ -114,6 +119,8 @@
 @media (max-width: 640px) {
   .blog-post-drawer {
     max-width: 100%;
+  }
+  .blog-post-drawer-content {
     padding: 1rem;
   }
   .blog-post-drawer-content h1,
