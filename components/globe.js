@@ -26,6 +26,28 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   window.error = error;
   window.blogDrawerRef = blogDrawerRef;
 
+  // Define linear scales for each duration range for smooth gradients
+  const scaleShort = d3.scaleLinear()
+  .domain([1, 3])
+  .range(["#FF4500", "#FF4500"])
+  const scaleWeek = d3.scaleLinear()
+    .domain([4, 14])
+    .range(["#FF4500", "#A32F00"]); // 4–14 days: Yellowish-orange to orange
+  const scaleMonth = d3.scaleLinear()
+    .domain([15, 90])
+    .range(["#A32F00", "#A32F00"]); // 15–90 days: Yellowish-orange to orange
+  const scaleLong = d3.scaleLinear()
+    .domain([91, 365])
+    .range(["#A32F00", "#4F1F00"]); // >90 days: Orange to reddish
+
+  // Combine scales into a single weightColor function
+  const weightColor = (duration) => {
+    if (duration <= 3) return scaleShort(duration);
+    if (duration <= 14) return scaleWeek(duration);
+    if (duration <= 90) return scaleMonth(duration);
+    return scaleLong(Math.min(duration, 365)); // Cap at 365 days
+  };
+
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
   React.useEffect(() => {
@@ -141,32 +163,27 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     const altitude = globeInstance.current.pointOfView().altitude;
     const minAltitude = 0.1;
-    const minPointAltitude = 0.001;
-    const minPointRadius = 0.1;
+    const minHexAltitude = 0.05;
+    const maxHexAltitude = 0.1;
 
-    // Define altitude thresholds and corresponding point altitudes
+    // Define altitude thresholds and corresponding hex altitudes
     const zoomLevels = [
-      { threshold: 1, pointAltitude: 0.15, pointRadius : 0.25 }, // Highest
-      { threshold: 0.5, pointAltitude: 0.04, pointRadius : 0.2 }, // Higher
-      { threshold: 0.3, pointAltitude: 0.02 , pointRadius : 0.15}, // Mid
-      { threshold: minAltitude, pointAltitude: minPointAltitude, pointRadius : minPointRadius } // Smallest
+      { threshold: 1, hexAltitude: maxHexAltitude },
+      { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75 },
+      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.5 },
+      { threshold: minAltitude, hexAltitude: minHexAltitude }
     ];
 
-    // Find the appropriate point altitude based on current altitude
-    let pointAltitude = minPointAltitude;
-    let pointRadius = minPointRadius;
-    
+    // Find the appropriate hex altitude based on current altitude
+    let hexAltitude = minAltitude;
     for (const level of zoomLevels) {
-    if (altitude >= level.threshold) {
-        pointRadius = level.pointRadius;
-        pointAltitude = level.pointAltitude;
-
+      if (altitude >= level.threshold) {
+        hexAltitude = level.hexAltitude;
         break;
       }
     }
 
-    globeInstance.current.pointRadius(pointRadius);
-    globeInstance.current.pointAltitude(pointAltitude);
+    globeInstance.current.hexAltitude(hexAltitude);
     globeInstance.current.controls().autoRotate = altitude > 0.8;
   };
 
@@ -183,21 +200,22 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
         .globeMaterial(new THREE.MeshPhongMaterial({
           map: globeTexture,
-          side: THREE.DoubleSide
+          side: THREE.DoubleSide,
+          shininess : 5,
         }))
         .pointOfView({ lat: 0, lng: 0, altitude: 2.5 }, 0)
-        .pointsData([])
-        .pointLat('lat')
-        .pointLng('lng')
-        .pointColor(() => '#ffa500')
-        .pointRadius('radius')
-        .pointsMerge(false)
+        .hexBinPointsData([])
+        .hexBinPointLat('lat')
+        .hexBinPointLng('lng')
+        .hexBinPointWeight('weight')
+        .hexBinResolution(5)
+        .hexTopColor(d => weightColor(d.sumWeight))
+        .hexSideColor(d => weightColor(d.sumWeight))
+        .hexLabel(d => `${Math.round(d.sumWeight)} days`)
         .onZoom(onZoomHandler)
-        .onPointHover((point) => {
-          if (point) {
-            const post = window.blogPosts.find(p => 
-              p.location.lat === point.lat && p.location.lng === point.lng
-            );
+        .onHexHover((hex) => {
+          if (hex && hex.points.length > 0) {
+            const post = hex.points[length]; // Select the first post in the bin for highlighting
             if (post && post.id) {
               const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
               if (timelineItem) {
@@ -223,9 +241,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       } catch (error) {
       }
 
-      globeInstance.current.onPointClick(point => {
+      globeInstance.current.onHexClick(hex => {
         try {
-          if (!point) {
+          if (!hex || hex.points.length === 0) {
             return;
           }
 
@@ -235,33 +253,31 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           isZooming.current = true;
           globeInstance.current.controls().autoRotate = false;
 
-          const post = window.blogPosts.find(p => 
-            p.location.lat === point.lat && p.location.lng === point.lng
-          );
-
+          const post = hex.points[hex.points.length - 1]; // Select the first post in the bin
           if (post && post.id) {
             setSelectedId(post.id);
             handleTimelineClick(post);
           }
 
           globeInstance.current.pointOfView({
-            lat: point.lat,
-            lng: point.lng,
+            lat: post.lat,
+            lng: post.lng,
             altitude: 0.1
           }, 1500);
 
           waitForZoom(1500).then(() => {
-            const finalCoords = globeInstance.current.getScreenCoords(point.lat, point.lng, 0.5);
+            const finalCoords = globeInstance.current.getScreenCoords(post.lat, post.lng, 0.5);
             setPopoverPosition({
               top: finalCoords.y + 20,
               left: finalCoords.x
             });
+
             setPopoverContent({
-              title: point.title || "No Title",
-              snippet: point.snippet || "No Snippet",
-              fullLink: point.fullLink || "#",
-              lat: point.lat,
-              lng: point.lng,
+              title: post.title || "No Title",
+              snippet: post.snippet || "No Snippet",
+              fullLink: post.fullLink || "#",
+              lat: post.lat,
+              lng: post.lng,
               id: post.id
             });
             isZooming.current = false;
@@ -295,28 +311,20 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         const yearMatch = !selectedYear || selectedYear === "All" || new Date(post.date).getUTCFullYear().toString() === selectedYear;
         return tagMatch && yearMatch;
       });
-      
-      const minDuration = 1;
-      const maxDuration = 730;
-      const minRadius = 0.2;
-      const maxRadius = 0.8;
 
-      const pointsData = filteredPosts.map(post => {
-        const radius = minRadius + (maxRadius - minRadius) * (post.stayDuration - minDuration) / (maxDuration - minDuration);
-        return {
-          lat: post.location.lat,
-          lng: post.location.lng,
-          label: post.location.name,
-          fullLink: post.fullLink,
-          snippet: post.snippet,
-          title: post.title,
-          stayDuration: post.stayDuration,
-          id: post.id,
-          radius: radius
-        };
-      });
+      const hexBinData = filteredPosts.map(post => ({
+        lat: post.location.lat,
+        lng: post.location.lng,
+        weight: post.stayDuration, // Use stayDuration as weight
+        label: post.location.name,
+        fullLink: post.fullLink,
+        snippet: post.snippet,
+        title: post.title,
+        stayDuration: post.stayDuration,
+        id: post.id
+      }));
 
-      globeInstance.current.pointsData(pointsData);
+      globeInstance.current.hexBinPointsData(hexBinData);
       onZoomHandler();
     }
   }, [selectedTag, selectedYear]);
