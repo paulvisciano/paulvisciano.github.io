@@ -140,27 +140,27 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     if (!globeInstance.current) return;
 
     const altitude = globeInstance.current.pointOfView().altitude;
-    const maxPointAltitude = 0.4;
-    const minPointAltitude = 0.02;
     const maxAltitude = 2.5;
     const minAltitude = 0.1;
+    const maxPointAltitude = 0.4;
+    const minPointAltitude = 0.001;
 
-    let pointAltitude = maxPointAltitude - (maxPointAltitude - minPointAltitude) * (altitude - minAltitude) / (maxAltitude - minAltitude);
+    // Define altitude thresholds and corresponding point altitudes
+    const zoomLevels = [
+      { threshold: maxAltitude * 0.9, pointAltitude: maxPointAltitude }, // Highest
+      { threshold: maxAltitude / 2, pointAltitude: 0.08 }, // Higher
+      { threshold: maxAltitude / 10, pointAltitude: 0.02 }, // Mid
+      { threshold: minAltitude, pointAltitude: minPointAltitude } // Smallest
+    ];
 
-    if(altitude < maxAltitude / 10) {
-      console.log('Smallest point')
-      pointAltitude = 0.001;
-    }
-    else if (altitude < maxAltitude / 2) {
-      console.log('Mid point')
-      pointAltitude = 0.02;
-    } else if (altitude > (maxAltitude / 2) && altitude < (maxAltitude - 0.1)) {
-      console.log('Higher')
-      pointAltitude = 0.08;
-    } else if (altitude >= maxAltitude - 0.1) {
-      console.log('Highest')
-
-      pointAltitude = 0.4;
+    // Find the appropriate point altitude based on current altitude
+    let pointAltitude = minPointAltitude;
+    
+    for (const level of zoomLevels) {
+      if (altitude >= level.threshold) {
+        pointAltitude = level.pointAltitude;
+        break;
+      }
     }
 
     globeInstance.current.pointAltitude(pointAltitude);
