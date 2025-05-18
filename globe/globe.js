@@ -8,10 +8,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const yearTags = ["All", ...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false); // State for drawer visibility
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false); // State for filter drawer visibility
+  const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false); // State for blog post drawer visibility
+  const [blogPostContent, setBlogPostContent] = React.useState(null); // State for blog post content
   const globeInstance = React.useRef(null);
   const popoverRef = React.useRef(null);
   const drawerRef = React.useRef(null); // Ref for filter drawer container
+  const blogDrawerRef = React.useRef(null); // Ref for blog post drawer container
   const isZooming = React.useRef(false);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
@@ -19,7 +22,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   // Utility to wait for zoom animation
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
-  // Handle clicks and taps outside the popover and filter drawer
+  // Handle clicks and taps outside the popover, filter drawer, and blog post drawer
   React.useEffect(() => {
     const handleClickOutside = (event) => {
       // Handle popover dismissal
@@ -30,6 +33,10 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       // Handle filter drawer dismissal
       if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('.filter-toggle-button')) {
         setIsDrawerOpen(false);
+      }
+      // Handle blog post drawer dismissal
+      if (isBlogDrawerOpen && blogDrawerRef.current && !blogDrawerRef.current.contains(event.target) && !event.target.closest('.popover-link')) {
+        setIsBlogDrawerOpen(false);
       }
     };
 
@@ -75,7 +82,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [popoverContent, setSelectedId, isDrawerOpen]);
+  }, [popoverContent, setSelectedId, isDrawerOpen, isBlogDrawerOpen]);
 
   // Provide zoom callback to App.js
   React.useEffect(() => {
@@ -311,8 +318,26 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     setPopoverContent(null);
   }, [selectedTag, selectedYear, setSelectedId]);
 
+  // Handle opening blog post drawer
+  const handleOpenBlogPost = (postId) => {
+    const post = window.blogPosts.find(p => p.id === postId);
+    if (post) {
+      setBlogPostContent({
+        title: post.title,
+        content: post.snippet, // Placeholder: Replace with full content if available
+        image: post.image.replace('attachment://', ''), // Adjust path as needed
+        imageAlt: post.imageAlt,
+        caption: post.caption,
+        mapLink: post.mapLink,
+        mapText: post.mapText
+      });
+      setIsBlogDrawerOpen(true);
+      setPopoverContent(null); // Close popover when opening drawer
+    }
+  };
+
   // Popover Component
-  const Popover = ({ title, snippet, fullLink, onClose, position }) => {
+  const Popover = ({ title, snippet, fullLink, onClose, position, id }) => {
     return React.createElement(
       'div',
       {
@@ -351,10 +376,51 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           'div',
           { className: 'popover-footer' },
           React.createElement(
-            'a',
-            { href: fullLink, className: 'popover-link' },
+            'button',
+            { 
+              className: 'popover-link',
+              onClick: () => handleOpenBlogPost(id)
+            },
             'Read Full Post'
           )
+        )
+      )
+    );
+  };
+
+  // Blog Post Drawer Component
+  const BlogPostDrawer = ({ content, onClose }) => {
+    return React.createElement(
+      'div',
+      {
+        className: `blog-post-drawer ${isBlogDrawerOpen ? 'open' : ''}`,
+        ref: blogDrawerRef
+      },
+      React.createElement(
+        'button',
+        {
+          className: 'close-button',
+          onClick: () => {
+            onClose();
+            setBlogPostContent(null);
+          }
+        },
+        '×'
+      ),
+      React.createElement(
+        'div',
+        { className: 'blog-post-drawer-content' },
+        React.createElement('h2', null, content.title),
+        content.image && React.createElement(
+          'img',
+          { src: content.image, alt: content.imageAlt }
+        ),
+        content.caption && React.createElement('p', { style: { fontStyle: 'italic' } }, content.caption),
+        React.createElement('p', null, content.content), // Placeholder content
+        content.mapLink && React.createElement(
+          'a',
+          { href: content.mapLink, target: '_blank', rel: 'noopener noreferrer' },
+          content.mapText
         )
       )
     );
@@ -423,7 +489,12 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       snippet: popoverContent.snippet,
       fullLink: popoverContent.fullLink,
       onClose: () => setPopoverContent(null),
-      position: popoverPosition
+      position: popoverPosition,
+      id: popoverContent.id
+    }),
+    isBlogDrawerOpen && blogPostContent && React.createElement(BlogPostDrawer, {
+      content: blogPostContent,
+      onClose: () => setIsBlogDrawerOpen(false)
     })
   );
 };
