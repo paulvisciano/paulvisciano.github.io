@@ -149,6 +149,7 @@ footer {
     color: var(--text-light);
     opacity: 1; /* Full opacity for prominence */
     display: flex;
+    justify-content: center; /* Center the title */
     align-items: center;
     gap: 8px;
 }
@@ -188,6 +189,7 @@ footer {
     .timeline-highlight {
         font-size: 0.875rem; /* Slightly smaller but still prominent */
         font-weight: 600;
+        justify-content: center; /* Center the title on mobile */
     }
     .timeline-card {
         padding: 6px 10px;
