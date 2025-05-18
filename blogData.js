@@ -1,6 +1,7 @@
-window.blogPosts = [
+window.blogPosts = 
+[
   {
-    id: "post-medellin",
+    id: "medellin-2022-11-01",
     title: "Vibrant Streets of Medellín",
     date: new Date('2022-11-01T00:00:00Z'),
     timelineHighlight: "Medellín Culture",
@@ -16,7 +17,7 @@ window.blogPosts = [
     stayDuration: 60
   },
   {
-    id: "post-st-petersburg-1",
+    id: "st-petersburg-2023-01-01",
     title: "Sun and Art in St. Petersburg",
     date: new Date('2023-01-01T00:00:00Z'),
     timelineHighlight: "St. Petersburg Art",
@@ -32,7 +33,7 @@ window.blogPosts = [
     stayDuration: 217
   },
   {
-    id: "post-miami-1",
+    id: "miami-2023-08-07",
     title: "Beaches and Beats in Miami",
     date: new Date('2023-08-07T00:00:00Z'),
     timelineHighlight: "Miami Nightlife",
@@ -48,7 +49,7 @@ window.blogPosts = [
     stayDuration: 1
   },
   {
-    id: "post-beirut",
+    id: "beirut-2023-08-09",
     title: "History and Vibes in Beirut",
     date: new Date('2023-08-09T00:00:00Z'),
     timelineHighlight: "Beirut Culture",
@@ -64,7 +65,7 @@ window.blogPosts = [
     stayDuration: 8
   },
   {
-    id: "post-athens",
+    id: "athens-2023-08-18",
     title: "Ancient Wonders in Athens",
     date: new Date('2023-08-18T00:00:00Z'),
     timelineHighlight: "Athens History",
@@ -80,7 +81,7 @@ window.blogPosts = [
     stayDuration: 3
   },
   {
-    id: "post-barcelona",
+    id: "barcelona-2023-08-21",
     title: "Art and Architecture in Barcelona",
     date: new Date('2023-08-21T00:00:00Z'),
     timelineHighlight: "Barcelona Art",
@@ -96,7 +97,7 @@ window.blogPosts = [
     stayDuration: 23
   },
   {
-    id: "post-sofia",
+    id: "sofia-2023-09-13",
     title: "Hidden Gems in Sofia",
     date: new Date('2023-09-13T00:00:00Z'),
     timelineHighlight: "Sofia Culture",
@@ -112,7 +113,7 @@ window.blogPosts = [
     stayDuration: 38
   },
   {
-    id: "post-dubai",
+    id: "dubai-2023-10-05",
     title: "Luxury and Adventure in Dubai",
     date: new Date('2023-10-05T00:00:00Z'),
     timelineHighlight: "Dubai Skyline",
@@ -128,7 +129,7 @@ window.blogPosts = [
     stayDuration: 4
   },
   {
-    id: "post-varna",
+    id: "varna-2023-10-18",
     title: "Black Sea Bliss in Varna",
     date: new Date('2023-10-18T00:00:00Z'),
     timelineHighlight: "Varna Beaches",
@@ -144,7 +145,7 @@ window.blogPosts = [
     stayDuration: 39
   },
   {
-    id: "post-chattanooga",
+    id: "chattanooga-2024-05-14",
     title: "Outdoor Vibes in Chattanooga",
     date: new Date('2024-05-14T00:00:00Z'),
     timelineHighlight: "Chattanooga Trails",
@@ -160,7 +161,7 @@ window.blogPosts = [
     stayDuration: 5
   },
   {
-    id: "post-st-petersburg-2",
+    id: "st-petersburg-2024-05-19",
     title: "Back to St. Petersburg’s Shores",
     date: new Date('2024-05-19T00:00:00Z'),
     timelineHighlight: "St. Petersburg Beaches",
@@ -176,7 +177,7 @@ window.blogPosts = [
     stayDuration: 12
   },
   {
-    id: "post-chicago-1",
+    id: "chicago-2024-06-01",
     title: "Windy City Adventures in Chicago",
     date: new Date('2024-06-01T00:00:00Z'),
     timelineHighlight: "Chicago Skyline",
@@ -192,7 +193,7 @@ window.blogPosts = [
     stayDuration: 60
   },
   {
-    id: "post-clearwater-1",
+    id: "clearwater-2024-08-01",
     title: "Sunsets in Clearwater",
     date: new Date('2024-08-01T00:00:00Z'),
     timelineHighlight: "Clearwater Beaches",
@@ -208,7 +209,7 @@ window.blogPosts = [
     stayDuration: 6
   },
   {
-    id: "post-miami-beach-1",
+    id: "miami-beach-2024-08-08",
     title: "Vibrant Miami Beach",
     date: new Date('2024-08-08T00:00:00Z'),
     timelineHighlight: "Miami Beach Vibes",
@@ -224,7 +225,7 @@ window.blogPosts = [
     stayDuration: 7
   },
   {
-    id: "post-hermosa-beach",
+    id: "hermosa-beach-2024-08-15",
     title: "Chill Vibes in Hermosa Beach",
     date: new Date('2024-08-15T00:00:00Z'),
     timelineHighlight: "Hermosa Beach Surf",
@@ -240,7 +241,7 @@ window.blogPosts = [
     stayDuration: 7
   },
   {
-    id: "post-san-diego-1",
+    id: "san-diego-2024-08-22",
     title: "Surf and Sun in San Diego",
     date: new Date('2024-08-22T00:00:00Z'),
     timelineHighlight: "San Diego Surfing",
@@ -256,7 +257,7 @@ window.blogPosts = [
     stayDuration: 9
   },
   {
-    id: "post-honolulu",
+    id: "honolulu-2024-09-01",
     title: "Island Life in Honolulu",
     date: new Date('2024-09-01T00:00:00Z'),
     timelineHighlight: "Honolulu Beaches",
@@ -272,7 +273,7 @@ window.blogPosts = [
     stayDuration: 38
   },
   {
-    id: "post-st-petersburg-3",
+    id: "st-petersburg-2024-10-10",
     title: "St. Petersburg’s Coastal Charm",
     date: new Date('2024-10-10T00:00:00Z'),
     timelineHighlight: "St. Petersburg Sunsets",
@@ -288,7 +289,7 @@ window.blogPosts = [
     stayDuration: 6
   },
   {
-    id: "post-destin-1",
+    id: "destin-2024-10-16",
     title: "Beach Volleyball in Destin",
     date: new Date('2024-10-16T00:00:00Z'),
     timelineHighlight: "Destin Volleyball",
@@ -304,7 +305,7 @@ window.blogPosts = [
     stayDuration: 5
   },
   {
-    id: "post-miami-2",
+    id: "miami-2024-10-23",
     title: "Miami’s Electric Energy",
     date: new Date('2024-10-23T00:00:00Z'),
     timelineHighlight: "Miami Beaches",
@@ -320,7 +321,7 @@ window.blogPosts = [
     stayDuration: 8
   },
   {
-    id: "post-playa-del-carmen",
+    id: "playa-del-carmen-2024-11-01",
     title: "Mayan Riviera Magic in Playa del Carmen",
     date: new Date('2024-11-01T00:00:00Z'),
     timelineHighlight: "Playa del Carmen Beaches",
@@ -336,7 +337,7 @@ window.blogPosts = [
     stayDuration: 14
   },
   {
-    id: "post-clearwater-2",
+    id: "clearwater-2024-11-16",
     title: "More Clearwater Sunsets",
     date: new Date('2024-11-16T00:00:00Z'),
     timelineHighlight: "Clearwater Sunsets",
@@ -352,7 +353,7 @@ window.blogPosts = [
     stayDuration: 12
   },
   {
-    id: "post-denver",
+    id: "denver-2024-11-28",
     title: "Rocky Mountain High in Denver",
     date: new Date('2024-11-28T00:00:00Z'),
     timelineHighlight: "Denver Trails",
@@ -368,7 +369,7 @@ window.blogPosts = [
     stayDuration: 3
   },
   {
-    id: "post-breckenridge",
+    id: "breckenridge-2024-12-01",
     title: "Skiing in Breckenridge",
     date: new Date('2024-12-01T00:00:00Z'),
     timelineHighlight: "Breckenridge Slopes",
@@ -384,7 +385,7 @@ window.blogPosts = [
     stayDuration: 30
   },
   {
-    id: "post-miami-beach-2",
+    id: "miami-beach-2024-12-30",
     title: "Miami Beach Winter Escape",
     date: new Date('2024-12-30T00:00:00Z'),
     timelineHighlight: "Miami Beach Winter",
@@ -400,7 +401,7 @@ window.blogPosts = [
     stayDuration: 34
   },
   {
-    id: "post-st-petersburg-4",
+    id: "st-petersburg-2025-02-02",
     title: "St. Petersburg’s Winter Glow",
     date: new Date('2025-02-02T00:00:00Z'),
     timelineHighlight: "St. Petersburg Winter",
@@ -416,7 +417,7 @@ window.blogPosts = [
     stayDuration: 5
   },
   {
-    id: "post-sao-paulo-1",
+    id: "sao-paulo-2025-02-07",
     title: "Urban Energy in São Paulo",
     date: new Date('2025-02-07T00:00:00Z'),
     timelineHighlight: "São Paulo Culture",
@@ -432,7 +433,7 @@ window.blogPosts = [
     stayDuration: 9
   },
   {
-    id: "post-rio-de-janeiro",
+    id: "rio-de-janeiro-2025-02-16",
     title: "Carnival Vibes in Rio de Janeiro",
     date: new Date('2025-02-16T00:00:00Z'),
     timelineHighlight: "Rio Beaches",
@@ -448,7 +449,7 @@ window.blogPosts = [
     stayDuration: 11
   },
   {
-    id: "post-sao-paulo-2",
+    id: "sao-paulo-2025-02-27",
     title: "Back to São Paulo’s Beat",
     date: new Date('2025-02-27T00:00:00Z'),
     timelineHighlight: "São Paulo Art",
@@ -464,7 +465,7 @@ window.blogPosts = [
     stayDuration: 10
   },
   {
-    id: "post-st-petersburg-5",
+    id: "st-petersburg-2025-03-09",
     title: "Spring in St. Petersburg",
     date: new Date('2025-03-09T00:00:00Z'),
     timelineHighlight: "St. Petersburg Spring",
@@ -480,7 +481,7 @@ window.blogPosts = [
     stayDuration: 44
   },
   {
-    id: "post-destin-2",
+    id: "destin-2025-04-22",
     title: "More Destin Beach Days",
     date: new Date('2025-04-22T00:00:00Z'),
     timelineHighlight: "Destin Beaches",
@@ -496,7 +497,7 @@ window.blogPosts = [
     stayDuration: 6
   },
   {
-    id: "post-new-orleans",
+    id: "new-orleans-2025-04-28",
     title: "Jazz and Beignets in New Orleans",
     date: new Date('2025-04-28T00:00:00Z'),
     timelineHighlight: "New Orleans Jazz",
@@ -512,7 +513,7 @@ window.blogPosts = [
     stayDuration: 3
   },
   {
-    id: "post-houston",
+    id: "houston-2025-05-01",
     title: "Urban Exploration in Houston",
     date: new Date('2025-05-01T00:00:00Z'),
     timelineHighlight: "Houston Culture",
@@ -528,7 +529,7 @@ window.blogPosts = [
     stayDuration: 1
   },
   {
-    id: "post-austin",
+    id: "austin-2025-05-02",
     title: "An Epic Day Vibing in Austin",
     date: new Date('2025-05-02T00:00:00Z'),
     timelineHighlight: "Austin Volleyball",
@@ -544,7 +545,7 @@ window.blogPosts = [
     stayDuration: 10
   },
   {
-    id: "post-boulder-2",
+    id: "boulder-2025-05-17",
     title: "Chasing Vibes in Boulder",
     date: new Date('2025-05-17T00:00:00Z'),
     timelineHighlight: "Coffee & Music in Boulder",
@@ -557,10 +558,10 @@ window.blogPosts = [
     mapText: "📍 Find Boulder on Google Maps",
     fullLink: "boulder-post.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
-    stayDuration: 10 // 10 days in Boulder
+    stayDuration: 10
   },
   {
-    id: "post-san-diego-2",
+    id: "san-diego-2025-05-20",
     title: "Quick Stop in San Diego",
     date: new Date('2025-05-20T00:00:00Z'),
     timelineHighlight: "San Diego Layover",
@@ -576,7 +577,7 @@ window.blogPosts = [
     stayDuration: 1
   },
   {
-    id: "post-fort-lauderdale-1",
+    id: "fort-lauderdale-2025-05-21",
     title: "Volleyball Reunion in Fort Lauderdale",
     date: new Date('2025-05-21T00:00:00Z'),
     timelineHighlight: "Fort Lauderdale Volleyball",
@@ -592,7 +593,7 @@ window.blogPosts = [
     stayDuration: 2
   },
   {
-    id: "post-miami-beach-3",
+    id: "miami-beach-2025-05-23",
     title: "South Beach Volleyball with Friends",
     date: new Date('2025-05-23T00:00:00Z'),
     timelineHighlight: "South Beach Volleyball",
@@ -608,14 +609,14 @@ window.blogPosts = [
     stayDuration: 7
   },
   {
-    id: "post-tampa-1",
+    id: "tampa-2025-05-30",
     title: "Tampa Stop for Hawaii Prep",
     date: new Date('2025-05-30T00:00:00Z'),
     timelineHighlight: "Tampa Relocation",
     tags: ["travel", "relocation"],
     snippet: "Spent a weekend in Tampa picking up luggage for my big move to Hawaii, with a side of waterfront views.",
     image: "attachment://placeholder-tampa.jpg",
-    imageAlt: "Tampa Waterfront",
+    imageAlt: "T权益ampa Waterfront",
     caption: "Tampa’s waterfront during my relocation prep!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Tampa on Google Maps",
@@ -624,7 +625,7 @@ window.blogPosts = [
     stayDuration: 3
   },
   {
-    id: "post-san-diego-3",
+    id: "san-diego-2025-06-01",
     title: "San Diego Coastal Reset",
     date: new Date('2025-06-01T00:00:00Z'),
     timelineHighlight: "San Diego Beaches",
@@ -640,7 +641,7 @@ window.blogPosts = [
     stayDuration: 14
   },
   {
-    id: "post-oahu",
+    id: "oahu-2025-06-15",
     title: "New Beginnings in Oahu",
     date: new Date('2025-06-15T00:00:00Z'),
     timelineHighlight: "Oahu New Home",
@@ -656,7 +657,7 @@ window.blogPosts = [
     stayDuration: 110
   },
   {
-    id: "post-chicago-2",
+    id: "chicago-2025-10-03",
     title: "Chicago’s Fall Charm",
     date: new Date('2025-10-03T00:00:00Z'),
     timelineHighlight: "Chicago Fall",
@@ -672,7 +673,7 @@ window.blogPosts = [
     stayDuration: 5
   },
   {
-    id: "post-canggu",
+    id: "canggu-2025-10-24",
     title: "Surf and Serenity in Canggu",
     date: new Date('2025-10-24T00:00:00Z'),
     timelineHighlight: "Canggu Surf",
