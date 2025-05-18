@@ -556,7 +556,7 @@ window.blogPosts =
     caption: "Catching a live band at Trident Booksellers & Café!",
     mapLink: "https://maps.app.goo.gl/7zZ9kL5nJ3mX5zK7",
     mapText: "📍 Find Boulder on Google Maps",
-    fullLink: "boulder-post.html",
+    fullLink: "posts/boulder-2025-05-17.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
     stayDuration: 10
   },

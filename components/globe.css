@@ -1,20 +1,19 @@
 :root {
-  --text-light: #e0e0e0; /* Body text, popover title */
-  --text-muted: #a1a1aa; /* Popover close */
-  --text-secondary: #d1d5db; /* Popover body text */
-  --primary-orange: #ffa500; /* Timeline dot, links, points */
-  --orange-hover: #ffcc33; /* Link hover */
-  --orange-tint-10: rgba(255, 165, 0, 0.1); /* Popover border */
-  --black-80: rgba(0, 0, 0, 0.8); /* Label text shadow */
-  --black-50: rgba(0, 0, 0, 0.5); /* Popover shadow */
+  --text-light: #e0e0e0;
+  --text-muted: #a1a1aa;
+  --text-secondary: #d1d5db;
+  --primary-orange: #ffa500;
+  --orange-hover: #ffcc33;
+  --orange-tint-10: rgba(255, 165, 0, 0.1);
+  --black-80: rgba(0, 0, 0, 0.8);
+  --black-50: rgba(0, 0, 0, 0.5);
 }
 
-/* Shared Close Button Styling */
 .close-button {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 2rem; /* Larger size for both pin popup and filter drawer */
+  font-size: 2rem;
   line-height: 1;
   padding: 0;
   margin: 0;
@@ -29,7 +28,6 @@
   color: #ffffff;
 }
 
-/* Filter Drawer Styling */
 .filter-drawer-container {
   position: fixed;
   top: 0;
@@ -89,14 +87,13 @@
   visibility: visible;
 }
 
-/* Blog Post Drawer Styling */
 .blog-post-drawer {
   position: fixed;
   top: 0;
   right: 0;
   height: 100vh;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   background: rgba(26, 26, 26, 0.95);
   padding: 2rem;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
@@ -118,6 +115,7 @@
   color: var(--text-light);
 }
 
+.blog-post-drawer-content h1,
 .blog-post-drawer-content h2 {
   font-size: 1.5rem;
   font-weight: 600;
@@ -125,10 +123,18 @@
   margin-bottom: 1rem;
 }
 
+.blog-post-drawer-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0.75rem 0;
+}
+
 .blog-post-drawer-content p {
   font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 .blog-post-drawer-content img {
@@ -149,7 +155,42 @@
   text-decoration: underline;
 }
 
-/* Tag Styling */
+.blog-post-drawer-content .caption {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.blog-post-drawer-content .blog-post-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.blog-post-drawer-content .blog-post-body h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 1rem 0 0.5rem;
+}
+
+.blog-post-drawer-content .blog-post-body h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0.75rem 0;
+}
+
+.blog-post-drawer-content .blog-post-body p {
+  margin-bottom: 1rem;
+}
+
+.blog-post-drawer-content .map-link {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
 .filter-tag {
   display: inline-block;
   background: rgba(26, 26, 26, 0.8);
@@ -191,15 +232,7 @@
   transform: translateY(-2px);
 }
 
-/* Tag and Year filter container styling */
-.year-filter-container {
-  padding: 0.5rem;
-  border-radius: 1rem;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-}
-
+.year-filter-container,
 .tag-filter-container {
   padding: 0.5rem;
   border-radius: 1rem;
@@ -208,7 +241,6 @@
   justify-content: center;
 }
 
-/* Globe Styling */
 #globeViz {
   position: fixed;
   top: 0;
@@ -219,7 +251,6 @@
   z-index: 1;
 }
 
-/* Popover Styling */
 .popover {
   z-index: 40;
 }
@@ -250,7 +281,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  position: relative; /* Ensure close button positioning */
+  position: relative;
 }
 
 .popover-title {
@@ -270,18 +301,37 @@
 }
 
 .popover-link {
-  color: var(--primary-orange);
+  display: inline-block;
+  background: linear-gradient(90deg, var(--primary-orange), #ff8c00);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--primary-orange);
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.875rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .popover-link:hover {
-  text-decoration: underline;
-  color: var(--orange-hover);
+  background: linear-gradient(90deg, var(--orange-hover), #ffb84d);
+  border-color: var(--orange-hover);
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4);
+  transform: scale(1.05);
+  text-decoration: none;
 }
 
-/* Site Label Styling */
+.popover-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.3);
+}
+
+.popover-link:active {
+  transform: scale(0.95);
+}
+
 #globeViz .scene-container .site-label {
   display: block !important;
   background: transparent !important;
@@ -300,7 +350,6 @@
   opacity: 1 !important;
 }
 
-/* Responsive Styling for Globe */
 @media (max-width: 640px) {
   #globeViz {
     height: 100vh;
@@ -323,12 +372,9 @@
     padding: 0.5rem;
   }
   .close-button {
-    font-size: 1.75rem; /* Slightly smaller on mobile */
+    font-size: 1.75rem;
     top: 8px;
     right: 8px;
-  }
-  #globeViz .scene-container .site-label {
-    font-size: 10px !important;
   }
   .popover-content {
     width: 250px;
@@ -341,16 +387,27 @@
     font-size: 0.75rem;
   }
   .popover-link {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
+    padding: 6px 12px;
   }
   .blog-post-drawer {
-    max-width: 100%; /* Full width on mobile */
+    max-width: 100%;
     padding: 1rem;
   }
+  .blog-post-drawer-content h1,
   .blog-post-drawer-content h2 {
     font-size: 1.25rem;
   }
+  .blog-post-drawer-content h3 {
+    font-size: 1rem;
+  }
   .blog-post-drawer-content p {
     font-size: 0.875rem;
+  }
+  .blog-post-drawer-content .blog-post-body h2 {
+    font-size: 1.25rem;
+  }
+  .blog-post-drawer-content .blog-post-body h3 {
+    font-size: 1rem;
   }
 }

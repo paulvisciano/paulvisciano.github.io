@@ -3,45 +3,41 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     return React.createElement('div', null, 'Error: Data not loaded');
   }
 
-  // Separate regular tags and years
   const regularTags = ["All", ...new Set(window.blogPosts.flatMap(post => post.tags))];
   const yearTags = ["All", ...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false); // State for filter drawer visibility
-  const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false); // State for blog post drawer visibility
-  const [blogPostContent, setBlogPostContent] = React.useState(null); // State for blog post content
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false);
+  const [blogPostContent, setBlogPostContent] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
   const globeInstance = React.useRef(null);
   const popoverRef = React.useRef(null);
-  const drawerRef = React.useRef(null); // Ref for filter drawer container
-  const blogDrawerRef = React.useRef(null); // Ref for blog post drawer container
+  const drawerRef = React.useRef(null);
+  const blogDrawerRef = React.useRef(null);
   const isZooming = React.useRef(false);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
 
-  // Utility to wait for zoom animation
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
-  // Handle clicks and taps outside the popover, filter drawer, and blog post drawer
   React.useEffect(() => {
     const handleClickOutside = (event) => {
-      // Handle popover dismissal
       if (popoverRef.current && !popoverRef.current.contains(event.target) && !event.target.closest('.overlay')) {
         setPopoverContent(null);
         setSelectedId(null);
       }
-      // Handle filter drawer dismissal
       if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('.filter-toggle-button')) {
         setIsDrawerOpen(false);
       }
-      // Handle blog post drawer dismissal
       if (isBlogDrawerOpen && blogDrawerRef.current && !blogDrawerRef.current.contains(event.target) && !event.target.closest('.popover-link')) {
         setIsBlogDrawerOpen(false);
       }
     };
 
     const handleTouchStart = (event) => {
-      if (event.target.closest('.overlay')) return; // Ignore overlay touches
+      if (event.target.closest('.overlay')) return;
       if (event.touches.length === 1) {
         touchStartX.current = event.touches[0].clientX;
         touchStartY.current = event.touches[0].clientY;
@@ -49,7 +45,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     };
 
     const handleTouchMove = (event) => {
-      if (event.target.closest('.overlay')) return; // Ignore overlay touches
+      if (event.target.closest('.overlay')) return;
       if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {
         const touchEndX = event.touches[0].clientX;
         const touchEndY = event.touches[0].clientY;
@@ -84,7 +80,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     };
   }, [popoverContent, setSelectedId, isDrawerOpen, isBlogDrawerOpen]);
 
-  // Provide zoom callback to App.js
   React.useEffect(() => {
     setZoomCallback(() => (post) => {
       if (!globeInstance.current || !post) {
@@ -135,7 +130,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     });
   }, [setZoomCallback, setSelectedId]);
 
-  // Define onZoomHandler
   const onZoomHandler = () => {
     if (!globeInstance.current) return;
 
@@ -159,7 +153,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     globeInstance.current.controls().autoRotate = altitude > 2.2;
   };
 
-  // Initialize the Globe.GL on mount
   React.useEffect(() => {
     try {
       const textureLoader = new THREE.TextureLoader();
@@ -180,7 +173,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .pointLat('lat')
         .pointLng('lng')
         .pointColor(() => '#ffa500')
-        .pointRadius('radius') // Use custom radius from pointsData
+        .pointRadius('radius')
         .pointsMerge(false)
         .onZoom(onZoomHandler)
         .onPointHover((point) => {
@@ -278,7 +271,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }
   }, []);
 
-  // Update pointsData and trigger zoom handler when filters change
   React.useEffect(() => {
     if (globeInstance.current) {
       const filteredPosts = window.blogPosts.filter(post => {
@@ -288,7 +280,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       });
       
       const minDuration = 1;
-      const maxDuration = 730; // 2 years
+      const maxDuration = 730;
       const minRadius = 0.2;
       const maxRadius = 0.8;
 
@@ -312,31 +304,58 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }
   }, [selectedTag, selectedYear]);
 
-  // Clear selectedId and popover when changing filters
   React.useEffect(() => {
     setSelectedId(null);
     setPopoverContent(null);
   }, [selectedTag, selectedYear, setSelectedId]);
 
-  // Handle opening blog post drawer
-  const handleOpenBlogPost = (postId) => {
+  const handleOpenBlogPost = async (postId) => {
     const post = window.blogPosts.find(p => p.id === postId);
     if (post) {
-      setBlogPostContent({
-        title: post.title,
-        content: post.snippet, // Placeholder: Replace with full content if available
-        image: post.image.replace('attachment://', ''), // Adjust path as needed
-        imageAlt: post.imageAlt,
-        caption: post.caption,
-        mapLink: post.mapLink,
-        mapText: post.mapText
-      });
-      setIsBlogDrawerOpen(true);
-      setPopoverContent(null); // Close popover when opening drawer
+      setIsLoading(true);
+      setError(null);
+      try {
+        // Fetch the HTML content from the fullLink
+        const response = await fetch(post.fullLink);
+        if (!response.ok) {
+          throw new Error('Failed to load post content');
+        }
+        const htmlContent = await response.text();
+        // Parse the HTML to extract the body content (excluding <html>, <head>, etc.)
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        const bodyContent = doc.body.innerHTML;
+        
+        setBlogPostContent({
+          title: post.title,
+          content: bodyContent, // Full HTML content from the file
+          image: post.image ? post.image.replace('attachment://', '') : null,
+          imageAlt: post.imageAlt,
+          caption: post.caption,
+          mapLink: post.mapLink,
+          mapText: post.mapText
+        });
+        setIsBlogDrawerOpen(true);
+        setPopoverContent(null);
+      } catch (err) {
+        setError('Failed to load the full post. Please try again.');
+        setBlogPostContent({
+          title: post.title,
+          content: `<p>${err.message}</p>`,
+          image: post.image ? post.image.replace('attachment://', '') : null,
+          imageAlt: post.imageAlt,
+          caption: post.caption,
+          mapLink: post.mapLink,
+          mapText: post.mapText
+        });
+        setIsBlogDrawerOpen(true);
+        setPopoverContent(null);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
-  // Popover Component
   const Popover = ({ title, snippet, fullLink, onClose, position, id }) => {
     return React.createElement(
       'div',
@@ -370,7 +389,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         React.createElement(
           'div',
           { className: 'popover-body' },
-          React.createElement('p', null, snippet)
+          React.createElement('pRendered', null, snippet)
         ),
         React.createElement(
           'div',
@@ -381,14 +400,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
               className: 'popover-link',
               onClick: () => handleOpenBlogPost(id)
             },
-            'Read Full Post'
+            'View Full Post'
           )
         )
       )
     );
   };
 
-  // Blog Post Drawer Component
   const BlogPostDrawer = ({ content, onClose }) => {
     return React.createElement(
       'div',
@@ -410,17 +428,38 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       React.createElement(
         'div',
         { className: 'blog-post-drawer-content' },
-        React.createElement('h2', null, content.title),
-        content.image && React.createElement(
-          'img',
-          { src: content.image, alt: content.imageAlt }
-        ),
-        content.caption && React.createElement('p', { style: { fontStyle: 'italic' } }, content.caption),
-        React.createElement('p', null, content.content), // Placeholder content
-        content.mapLink && React.createElement(
-          'a',
-          { href: content.mapLink, target: '_blank', rel: 'noopener noreferrer' },
-          content.mapText
+        isLoading && React.createElement('p', null, 'Loading...'),
+        error && React.createElement('p', { style: { color: 'red' } }, error),
+        content && (
+          [
+            React.createElement('h1', { key: 'title' }, content.title),
+            content.image && React.createElement('img', { 
+              key: 'image',
+              src: content.image, 
+              alt: content.imageAlt,
+              className: 'blog-post-image'
+            }),
+            content.caption && React.createElement('p', { 
+              key: 'caption',
+              className: 'caption'
+            }, content.caption),
+            React.createElement('div', {
+              key: 'content',
+              className: 'blog-post-body',
+              dangerouslySetInnerHTML: { __html: content.content }
+            }),
+            content.mapLink && React.createElement(
+              'a',
+              { 
+                key: 'map',
+                href: content.mapLink, 
+                target: '_blank', 
+                rel: 'noopener noreferrer',
+                className: 'map-link'
+              },
+              content.mapText
+            )
+          ]
         )
       )
     );
