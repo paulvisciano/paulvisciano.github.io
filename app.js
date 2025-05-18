@@ -4,30 +4,57 @@ window.App = () => {
   const [selectedYear, setSelectedYear] = React.useState("All");
   const [zoomCallback, setZoomCallback] = React.useState(null);
 
+  // Handle timeline click
   const handleTimelineClick = (post) => {
-    if (!post || !post.id) return;
-    setSelectedId(post.id);
-    // Scroll timeline item into view
-    const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
-    if (timelineItem) {
-      document.querySelectorAll('.timeline-entry.selected').forEach(item => 
-        item.classList.remove('selected')
-      );
-      timelineItem.classList.add('selected');
-      timelineItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    // Trigger zoom in Globe
     if (zoomCallback) {
       zoomCallback(post);
     }
   };
 
+  // Manage overlay display
+  React.useEffect(() => {
+    let isMounted = true;
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'flex';
+    overlay.style.opacity = '1';
+    const timer = setTimeout(() => {
+      if (isMounted) {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 1000); // Fade-out duration
+      }
+    }, 3000); // Show for 3 seconds
+    return () => {
+      clearTimeout(timer);
+      isMounted = false;
+    };
+  }, []);
+
+  // Determine current location based on today's date
+  const today = new Date();
+  React.useEffect(() => {
+    const currentPost = window.blogPosts.find(post => {
+      const startDate = new Date(post.date);
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + post.stayDuration);
+      return today >= startDate && today <= endDate;
+    });
+
+    if (currentPost) {
+      setSelectedId(currentPost.id);
+      if (zoomCallback) {
+        zoomCallback(currentPost);
+      }
+    }
+  }, [zoomCallback]);
+
   return React.createElement(
     'div',
-    { className: 'app-container' },
-    React.createElement(window.GlobeComponent, { 
-      handleTimelineClick, 
-      selectedId, 
+    { style: { position: 'relative' } },
+    React.createElement(window.GlobeComponent, {
+      handleTimelineClick,
+      selectedId,
       setSelectedId,
       selectedTag,
       setSelectedTag,
@@ -35,9 +62,9 @@ window.App = () => {
       setSelectedYear,
       setZoomCallback
     }),
-    React.createElement(window.Footer, { 
-      handleTimelineClick, 
-      selectedId, 
+    React.createElement(window.Footer, {
+      handleTimelineClick,
+      selectedId,
       setSelectedId,
       selectedTag,
       selectedYear

@@ -17,7 +17,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     return acc;
   }, {});
 
-  // UseEffect to dynamically set timeline-line width
+  // UseEffect to dynamically set timeline-line width and scroll to selected post
   React.useEffect(() => {
     const timeline = document.querySelector('.timeline');
     const timelineLine = document.querySelector('.timeline-line');
@@ -28,7 +28,15 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       }, 0) + 32; // Extra padding
       timelineLine.style.width = `${totalWidth}px`;
     }
-  }, [selectedTag, selectedYear]);
+
+    // Scroll to selected post
+    if (selectedId) {
+      const selectedEntry = document.querySelector(`.timeline-entry[data-id="${selectedId}"]`);
+      if (selectedEntry) {
+        selectedEntry.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [selectedTag, selectedYear, selectedId]);
 
   // Helper function to format combined date (month and day range)
   const formatCombinedDate = (startDate, duration) => {
