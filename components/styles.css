@@ -54,6 +54,14 @@ body {
   100% { transform: scale(1); }
 }
 
+.grok-badge {
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  z-index: 999;
+}
+
+
 @media (max-width: 640px) {
   .overlay-message {
     font-size: 1.5rem;
