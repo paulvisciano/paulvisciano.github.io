@@ -387,15 +387,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         React.createElement(
           'div',
           { className: 'popover-header' },
-          React.createElement('h2', { className: 'popover-title' }, title),
-          React.createElement(
-            'button',
-            { className: 'close-button', onClick: () => {
-              onClose();
-              setSelectedId(null);
-            }},
-            '×'
-          )
+          React.createElement('h2', { className: 'popover-title' }, title)
         ),
         React.createElement(
           'div',
