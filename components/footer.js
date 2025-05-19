@@ -6,14 +6,32 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     return tagMatch && yearMatch;
   });
 
-  // Get unique years from filtered posts
+  // Get unique years from filtered posts and compute years spanned by each post
   const years = filteredPosts.length > 0 
-    ? [...new Set(filteredPosts.map(post => new Date(post.date).getUTCFullYear()))].sort((a, b) => a - b)
+    ? [...new Set(filteredPosts.flatMap(post => {
+        const startDate = new Date(post.date);
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + post.stayDuration - 1);
+        const startYear = startDate.getUTCFullYear();
+        const endYear = endDate.getUTCFullYear();
+        const yearRange = [];
+        for (let year = startYear; year <= endYear; year++) {
+          yearRange.push(year);
+        }
+        return yearRange;
+      }))].sort((a, b) => a - b)
     : [];
 
-  // Group filtered posts by year
+  // Group filtered posts by year, allowing posts to appear in multiple years
   const postsByYear = years.reduce((acc, year) => {
-    acc[year] = filteredPosts.filter(post => new Date(post.date).getUTCFullYear() === year);
+    acc[year] = filteredPosts.filter(post => {
+      const startDate = new Date(post.date);
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + post.stayDuration - 1);
+      const startYear = startDate.getUTCFullYear();
+      const endYear = endDate.getUTCFullYear();
+      return year >= startYear && year <= endYear;
+    });
     return acc;
   }, {});
 
@@ -111,7 +129,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                 return React.createElement(
                   'div',
                   {
-                    key: post.id,
+                    key: `${post.id}-${year}`, // Unique key for each post-year combination
                     className: `timeline-entry ${selectedId === post.id ? 'selected' : ''} ${post.fullLink !== '#' ? 'has-full-post' : ''}`,
                     'data-id': post.id,
                     onClick: () => {
