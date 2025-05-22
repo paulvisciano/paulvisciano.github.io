@@ -396,7 +396,7 @@ window.momentsInTime =
     caption: "Winter sun in Miami Beach!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Miami Beach on Google Maps",
-    fullLink: "moment/miami-beach-2024-12-30.html",
+    fullLink: "miami-beach-2024-12-30.html",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
     stayDuration: 34
   },
@@ -556,7 +556,7 @@ window.momentsInTime =
     caption: "Catching a live band at Trident Booksellers & Café!",
     mapLink: "https://maps.app.goo.gl/7zZ9kL5nJ3mX5zK7",
     mapText: "📍 Find Boulder on Google Maps",
-    fullLink: "moment/boulder-2025-05-17.html",
+    fullLink: "boulder-2025-05-17.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
     stayDuration: 7
   },
@@ -572,7 +572,7 @@ window.momentsInTime =
     caption: "Wouter and Ray stealing the show at Moonshine Beach!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find San Diego on Google Maps",
-    fullLink: "moment/san-diego-2025-05-20.html",
+    fullLink: "san-diego-2025-05-20.html",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
     stayDuration: 1
   },
@@ -588,7 +588,7 @@ window.momentsInTime =
     caption: "Ready to spike with Bartek in Deerfield!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Fort Lauderdale on Google Maps",
-    fullLink: "moment/fort-lauderdale-2025-05-21.html",
+    fullLink: "fort-lauderdale-2025-05-21.html",
     location: { lat: 26.1224, lng: -80.1373, name: "Fort Lauderdale, Florida" },
     stayDuration: 2
   },
