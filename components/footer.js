@@ -1,14 +1,14 @@
 window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, selectedYear }) => {
   // Filter moments by selectedTag and selectedYear
-  const filteredMoments = window.momentsInTime.filter(moment => {
+  const filteredMomentsInTime = window.momentsInTime.filter(moment => {
     const tagMatch = selectedTag === "All" || moment.tags.includes(selectedTag);
     const yearMatch = !selectedYear || selectedYear === "All" || new Date(moment.date).getUTCFullYear().toString() === selectedYear;
     return tagMatch && yearMatch;
   });
 
   // Get unique years from filtered moments and compute years spanned by each moment
-  const years = filteredMoments.length > 0 
-    ? [...new Set(filteredMoments.flatMap(moment => {
+  const years = filteredMomentsInTime.length > 0 
+    ? [...new Set(filteredMomentsInTime.flatMap(moment => {
         const startDate = new Date(moment.date);
         const endDate = new Date(startDate);
         endDate.setDate(startDate.getDate() + moment.stayDuration - 1);
@@ -23,8 +23,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     : [];
 
   // Group filtered moments by year, allowing moments to appear in multiple years
-  const momentsByYear = years.reduce((acc, year) => {
-    acc[year] = filteredMoments.filter(moment => {
+  const momentsInTimeByYear = years.reduce((acc, year) => {
+    acc[year] = filteredMomentsInTime.filter(moment => {
       const startDate = new Date(moment.date);
       const endDate = new Date(startDate);
       endDate.setDate(startDate.getDate() + moment.stayDuration - 1);
@@ -102,11 +102,11 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       React.createElement(
         'div',
         { className: 'timeline' },
-        filteredMoments.length === 0 ? 
+        filteredMomentsInTime.length === 0 ? 
           React.createElement('div', { className: 'timeline-empty' }, 'No adventures found for the selected filters') :
           years.map((year, index) => {
-            const yearMoments = momentsByYear[year] || [];
-            if (yearMoments.length === 0) return null; // Skip empty years
+            const yearMomentsInTime = momentsInTimeByYear[year] || [];
+            if (yearMomentsInTime.length === 0) return null; // Skip empty years
             return [
               React.createElement(
                 'div',
@@ -122,7 +122,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                   React.createElement('div', { className: 'timeline-year-text' }, year)
                 )
               ),
-              ...yearMoments.map(moment => {
+              ...yearMomentsInTime.map(moment => {
                 const combinedDate = formatCombinedDate(moment.date, moment.stayDuration);
                 const fullDateRange = formatFullDateRange(moment.date, moment.stayDuration);
 
