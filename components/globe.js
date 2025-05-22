@@ -1,10 +1,10 @@
 window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, setSelectedTag, selectedYear, setSelectedYear, setZoomCallback }) => {
-  if (typeof window.blogPosts === 'undefined') {
+  if (typeof window.momentsInTime === 'undefined') {
     return React.createElement('div', null, 'Error: Data not loaded');
   }
 
-  const regularTags = ["All", ...new Set(window.blogPosts.flatMap(post => post.tags))];
-  const yearTags = ["All", ...new Set(window.blogPosts.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
+  const regularTags = ["All", ...new Set(window.momentsInTime.flatMap(post => post.tags))];
+  const yearTags = ["All", ...new Set(window.momentsInTime.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -310,7 +310,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
   React.useEffect(() => {
     if (globeInstance.current) {
-      const filteredPosts = window.blogPosts.filter(post => {
+      const filteredPosts = window.momentsInTime.filter(post => {
         const tagMatch = selectedTag === "All" || post.tags.includes(selectedTag);
         const yearMatch = !selectedYear || selectedYear === "All" || new Date(post.date).getUTCFullYear().toString() === selectedYear;
         return tagMatch && yearMatch;
@@ -339,7 +339,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   }, [selectedTag, selectedYear, setSelectedId]);
 
   const handleOpenBlogPost = async (postId) => {
-    const post = window.blogPosts.find(p => p.id === postId);
+    const post = window.momentsInTime.find(p => p.id === postId);
 
     if (post) {
       setIsLoading(true);
