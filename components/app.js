@@ -4,18 +4,18 @@ window.App = () => {
   const [selectedYear, setSelectedYear] = React.useState("All");
   const [zoomCallback, setZoomCallback] = React.useState(null);
 
-  // Unified logic for selecting a post (used for clicks, initial load, and popstate)
-  const handlePostSelection = (post) => {
-    if (post) {
-      setSelectedId(post.id);
+  // Unified logic for selecting a moment (used for clicks, initial load, and popstate)
+  const handleMomentSelection = (moment) => {
+    if (moment) {
+      setSelectedId(moment.id);
       if (zoomCallback) {
-        zoomCallback(post);
+        zoomCallback(moment);
       }
       // Normalize and update the URL only if it doesn't already match
-      const intendedPath = `/post/${post.id}`;
+      const intendedPath = `/moment/${moment.id}`;
       const currentPath = window.location.pathname;
       if (currentPath !== intendedPath) {
-        window.history.pushState({ postId: post.id }, '', intendedPath);
+        window.history.pushState({ momentId: moment.id }, '', intendedPath);
       }
     }
   };
@@ -34,14 +34,14 @@ window.App = () => {
       window.history.replaceState({}, '', path);
     }
 
-    const match = path.match(/^\/post\/(.+)/);
+    const match = path.match(/^\/moment\/(.+)/);
     if (match) {
-      const postId = match[1];
-      const post = window.blogPosts.find(p => p.id === postId);
-      if (post) {
-        handlePostSelection(post); // Use the unified logic
+      const momentId = match[1];
+      const moment = window.momentsInTime.find(m => m.id === momentId);
+      if (moment) {
+        handleMomentSelection(moment); // Use the unified logic
       } else {
-        // If post ID is invalid, redirect to root (will trigger current location logic)
+        // If moment ID is invalid, redirect to root (will trigger current location logic)
         window.history.replaceState({}, '', '/');
       }
     }
@@ -51,12 +51,12 @@ window.App = () => {
   React.useEffect(() => {
     const handlePopState = (event) => {
       const state = event.state || {};
-      const postId = state.postId;
-      const post = postId ? window.blogPosts.find(p => p.id === postId) : null;
-      if (post) {
-        handlePostSelection(post); // Use the unified logic
+      const momentId = state.momentId;
+      const moment = momentId ? window.momentsInTime.find(m => m.id === momentId) : null;
+      if (moment) {
+        handleMomentSelection(moment); // Use the unified logic
       } else {
-        setSelectedId(null); // Reset if no postId in URL
+        setSelectedId(null); // Reset if no momentId in URL
         // Redirect to root to trigger current location logic
         window.history.replaceState({}, '', '/');
       }
@@ -89,21 +89,21 @@ window.App = () => {
   // Determine current location based on today's date and update URL
   const today = new Date();
   React.useEffect(() => {
-    // Skip if URL already has a post ID (direct access takes precedence)
+    // Skip if URL already has a moment ID (direct access takes precedence)
     const path = window.location.pathname;
-    if (path.match(/^\/post\/(.+)/)) {
+    if (path.match(/^\/moment\/(.+)/)) {
       return; // URL already set by initial load logic
     }
 
-    const currentPost = window.blogPosts.find(post => {
-      const startDate = new Date(post.date);
+    const currentMoment = window.momentsInTime.find(moment => {
+      const startDate = new Date(moment.date);
       const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + post.stayDuration);
+      endDate.setDate(startDate.getDate() + moment.stayDuration);
       return today >= startDate && today <= endDate;
     });
 
-    if (currentPost) {
-      handlePostSelection(currentPost); // Use the unified logic
+    if (currentMoment) {
+      handleMomentSelection(currentMoment); // Use the unified logic
     }
   }, [zoomCallback]);
 
@@ -111,7 +111,7 @@ window.App = () => {
     'div',
     { style: { position: 'relative' } },
     React.createElement(window.GlobeComponent, {
-      handleTimelineClick: handlePostSelection, // Pass the unified function
+      handleTimelineClick: handleMomentSelection, // Pass the unified function
       selectedId,
       setSelectedId,
       selectedTag,
@@ -121,7 +121,7 @@ window.App = () => {
       setZoomCallback
     }),
     React.createElement(window.Footer, {
-      handleTimelineClick: handlePostSelection, // Pass the unified function
+      handleTimelineClick: handleMomentSelection, // Pass the unified function
       selectedId,
       setSelectedId,
       selectedTag,

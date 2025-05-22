@@ -1,17 +1,17 @@
 window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, selectedYear }) => {
-  // Filter posts by selectedTag and selectedYear
-  const filteredPosts = window.blogPosts.filter(post => {
-    const tagMatch = selectedTag === "All" || post.tags.includes(selectedTag);
-    const yearMatch = !selectedYear || selectedYear === "All" || new Date(post.date).getUTCFullYear().toString() === selectedYear;
+  // Filter moments by selectedTag and selectedYear
+  const filteredMoments = window.momentsInTime.filter(moment => {
+    const tagMatch = selectedTag === "All" || moment.tags.includes(selectedTag);
+    const yearMatch = !selectedYear || selectedYear === "All" || new Date(moment.date).getUTCFullYear().toString() === selectedYear;
     return tagMatch && yearMatch;
   });
 
-  // Get unique years from filtered posts and compute years spanned by each post
-  const years = filteredPosts.length > 0 
-    ? [...new Set(filteredPosts.flatMap(post => {
-        const startDate = new Date(post.date);
+  // Get unique years from filtered moments and compute years spanned by each moment
+  const years = filteredMoments.length > 0 
+    ? [...new Set(filteredMoments.flatMap(moment => {
+        const startDate = new Date(moment.date);
         const endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + post.stayDuration - 1);
+        endDate.setDate(startDate.getDate() + moment.stayDuration - 1);
         const startYear = startDate.getUTCFullYear();
         const endYear = endDate.getUTCFullYear();
         const yearRange = [];
@@ -22,12 +22,12 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       }))].sort((a, b) => a - b)
     : [];
 
-  // Group filtered posts by year, allowing posts to appear in multiple years
-  const postsByYear = years.reduce((acc, year) => {
-    acc[year] = filteredPosts.filter(post => {
-      const startDate = new Date(post.date);
+  // Group filtered moments by year, allowing moments to appear in multiple years
+  const momentsByYear = years.reduce((acc, year) => {
+    acc[year] = filteredMoments.filter(moment => {
+      const startDate = new Date(moment.date);
       const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + post.stayDuration - 1);
+      endDate.setDate(startDate.getDate() + moment.stayDuration - 1);
       const startYear = startDate.getUTCFullYear();
       const endYear = endDate.getUTCFullYear();
       return year >= startYear && year <= endYear;
@@ -35,7 +35,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     return acc;
   }, {});
 
-  // UseEffect to dynamically set timeline-line width and scroll to selected post
+  // UseEffect to dynamically set timeline-line width and scroll to selected moment
   React.useEffect(() => {
     const timeline = document.querySelector('.timeline');
     const timelineLine = document.querySelector('.timeline-line');
@@ -47,7 +47,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       timelineLine.style.width = `${totalWidth}px`;
     }
 
-    // Scroll to selected post, centering it in the timeline
+    // Scroll to selected moment, centering it in the timeline
     if (selectedId) {
       const selectedEntry = document.querySelector(`.timeline-entry[data-id="${selectedId}"]`);
       if (selectedEntry) {
@@ -102,11 +102,11 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       React.createElement(
         'div',
         { className: 'timeline' },
-        filteredPosts.length === 0 ? 
+        filteredMoments.length === 0 ? 
           React.createElement('div', { className: 'timeline-empty' }, 'No adventures found for the selected filters') :
           years.map((year, index) => {
-            const yearPosts = postsByYear[year] || [];
-            if (yearPosts.length === 0) return null; // Skip empty years
+            const yearMoments = momentsByYear[year] || [];
+            if (yearMoments.length === 0) return null; // Skip empty years
             return [
               React.createElement(
                 'div',
@@ -122,22 +122,18 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                   React.createElement('div', { className: 'timeline-year-text' }, year)
                 )
               ),
-              ...yearPosts.map(post => {
-                const combinedDate = formatCombinedDate(post.date, post.stayDuration);
-                const fullDateRange = formatFullDateRange(post.date, post.stayDuration);
+              ...yearMoments.map(moment => {
+                const combinedDate = formatCombinedDate(moment.date, moment.stayDuration);
+                const fullDateRange = formatFullDateRange(moment.date, moment.stayDuration);
 
                 return React.createElement(
                   'div',
                   {
-                    key: `${post.id}-${year}`, // Unique key for each post-year combination
-                    className: `timeline-entry ${selectedId === post.id ? 'selected' : ''} ${post.fullLink !== '#' ? 'has-full-post' : ''}`,
-                    'data-id': post.id,
+                    key: `${moment.id}-${year}`, // Unique key for each moment-year combination
+                    className: `timeline-entry ${selectedId === moment.id ? 'selected' : ''} ${moment.fullLink !== '#' ? 'has-full-moment' : ''}`,
+                    'data-id': moment.id,
                     onClick: () => {
-                      setSelectedId(post.id);
-                      handleTimelineClick(post);
-                      
-                      // Update the URL without reloading the page
-                      window.history.pushState({ postId: post.id }, '', `/post/${post.id}`);
+                      handleTimelineClick(moment); // Use the unified logic (includes URL update)
                     },
                     style: { '--index': index + 1 }
                   },
@@ -159,10 +155,10 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                     React.createElement(
                       'div',
                       { className: 'timeline-highlight' },
-                      post.timelineHighlight,
-                      post.fullLink !== '#' && React.createElement(
+                      moment.timelineHighlight,
+                      moment.fullLink !== '#' && React.createElement(
                         'span',
-                        { className: 'full-post-indicator', title: 'Full blog post available' },
+                        { className: 'full-moment-indicator', title: 'Full blog moment available' },
                         '★'
                       )
                     )
