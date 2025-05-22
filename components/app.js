@@ -4,28 +4,45 @@ window.App = () => {
   const [selectedYear, setSelectedYear] = React.useState("All");
   const [zoomCallback, setZoomCallback] = React.useState(null);
 
-  // Handle timeline click
-  const handleTimelineClick = (post) => {
-    if (zoomCallback) {
-      zoomCallback(post);
+  // Unified logic for selecting a post (used for clicks, initial load, and popstate)
+  const handlePostSelection = (post) => {
+    if (post) {
+      setSelectedId(post.id);
+      if (zoomCallback) {
+        zoomCallback(post);
+      }
+      // Normalize and update the URL only if it doesn't already match
+      const intendedPath = `/post/${post.id}`;
+      const currentPath = window.location.pathname;
+      if (currentPath !== intendedPath) {
+        window.history.pushState({ postId: post.id }, '', intendedPath);
+      }
     }
   };
 
   // Check URL on initial load to set selectedId
   React.useEffect(() => {
-    const path = window.location.pathname; // e.g., "/post/san-diego-2025-05-20"
+    // Check for a 'path' query parameter (GitHub Pages 404 redirect)
+    const params = new URLSearchParams(window.location.search);
+    const pathFromQuery = params.get('path');
+    let path = window.location.pathname;
+
+    // If there's a 'path' query parameter, use it as the initial path
+    if (pathFromQuery) {
+      path = pathFromQuery;
+      // Clean up the URL to remove the query parameter and set the correct path
+      window.history.replaceState({}, '', path);
+    }
+
     const match = path.match(/^\/post\/(.+)/);
-    
     if (match) {
       const postId = match[1];
-    
       const post = window.blogPosts.find(p => p.id === postId);
-    
       if (post) {
-        setSelectedId(postId);
-        if (zoomCallback) {
-          zoomCallback(post);
-        }
+        handlePostSelection(post); // Use the unified logic
+      } else {
+        // If post ID is invalid, redirect to root (will trigger current location logic)
+        window.history.replaceState({}, '', '/');
       }
     }
   }, [zoomCallback]);
@@ -35,16 +52,13 @@ window.App = () => {
     const handlePopState = (event) => {
       const state = event.state || {};
       const postId = state.postId;
-      if (postId) {
-        const post = window.blogPosts.find(p => p.id === postId);
-        if (post) {
-          setSelectedId(postId);
-          if (zoomCallback) {
-            zoomCallback(post);
-          }
-        }
+      const post = postId ? window.blogPosts.find(p => p.id === postId) : null;
+      if (post) {
+        handlePostSelection(post); // Use the unified logic
       } else {
         setSelectedId(null); // Reset if no postId in URL
+        // Redirect to root to trigger current location logic
+        window.history.replaceState({}, '', '/');
       }
     };
 
@@ -77,7 +91,6 @@ window.App = () => {
   React.useEffect(() => {
     // Skip if URL already has a post ID (direct access takes precedence)
     const path = window.location.pathname;
-
     if (path.match(/^\/post\/(.+)/)) {
       return; // URL already set by initial load logic
     }
@@ -90,12 +103,7 @@ window.App = () => {
     });
 
     if (currentPost) {
-      setSelectedId(currentPost.id);
-      if (zoomCallback) {
-        zoomCallback(currentPost);
-      }
-      // Update the URL to reflect the current location
-      window.history.pushState({ postId: currentPost.id }, '', `/post/${currentPost.id}`);
+      handlePostSelection(currentPost); // Use the unified logic
     }
   }, [zoomCallback]);
 
@@ -103,7 +111,7 @@ window.App = () => {
     'div',
     { style: { position: 'relative' } },
     React.createElement(window.GlobeComponent, {
-      handleTimelineClick,
+      handleTimelineClick: handlePostSelection, // Pass the unified function
       selectedId,
       setSelectedId,
       selectedTag,
@@ -113,7 +121,7 @@ window.App = () => {
       setZoomCallback
     }),
     React.createElement(window.Footer, {
-      handleTimelineClick,
+      handleTimelineClick: handlePostSelection, // Pass the unified function
       selectedId,
       setSelectedId,
       selectedTag,
