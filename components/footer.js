@@ -158,8 +158,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                       moment.timelineHighlight,
                       moment.fullLink !== '#' && React.createElement(
                         'span',
-                        { className: 'full-moment-indicator', title: 'Full blog moment available' },
-                        '★'
+                        { className: 'full-moment-indicator', title: 'Full blog post available' },
+                        '📖'
                       )
                     )
                   )
