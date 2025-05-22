@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Going to the past...</title>
+  <script>
+    // Redirect to index.html with the original path as a query parameter
+    const path = window.location.pathname + window.location.search + window.location.hash;
+
+    window.location.replace(`/index.html?path=${encodeURIComponent(path)}`);
+  </script>
+</head>
+<body>
+  <p>Going to the past...</p>
+</body>
+</html>
