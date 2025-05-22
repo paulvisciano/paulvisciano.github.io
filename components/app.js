@@ -11,6 +11,47 @@ window.App = () => {
     }
   };
 
+  // Check URL on initial load to set selectedId
+  React.useEffect(() => {
+    const path = window.location.pathname; // e.g., "/post/san-diego-2025-05-20"
+    const match = path.match(/^\/post\/(.+)/);
+    
+    if (match) {
+      const postId = match[1];
+    
+      const post = window.blogPosts.find(p => p.id === postId);
+    
+      if (post) {
+        setSelectedId(postId);
+        if (zoomCallback) {
+          zoomCallback(post);
+        }
+      }
+    }
+  }, [zoomCallback]);
+
+  // Listen for popstate events (back/forward navigation)
+  React.useEffect(() => {
+    const handlePopState = (event) => {
+      const state = event.state || {};
+      const postId = state.postId;
+      if (postId) {
+        const post = window.blogPosts.find(p => p.id === postId);
+        if (post) {
+          setSelectedId(postId);
+          if (zoomCallback) {
+            zoomCallback(post);
+          }
+        }
+      } else {
+        setSelectedId(null); // Reset if no postId in URL
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [zoomCallback]);
+
   // Manage overlay display
   React.useEffect(() => {
     let isMounted = true;
@@ -31,9 +72,16 @@ window.App = () => {
     };
   }, []);
 
-  // Determine current location based on today's date
+  // Determine current location based on today's date and update URL
   const today = new Date();
   React.useEffect(() => {
+    // Skip if URL already has a post ID (direct access takes precedence)
+    const path = window.location.pathname;
+
+    if (path.match(/^\/post\/(.+)/)) {
+      return; // URL already set by initial load logic
+    }
+
     const currentPost = window.blogPosts.find(post => {
       const startDate = new Date(post.date);
       const endDate = new Date(startDate);
@@ -46,6 +94,8 @@ window.App = () => {
       if (zoomCallback) {
         zoomCallback(currentPost);
       }
+      // Update the URL to reflect the current location
+      window.history.pushState({ postId: currentPost.id }, '', `/post/${currentPost.id}`);
     }
   }, [zoomCallback]);
 

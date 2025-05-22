@@ -135,6 +135,9 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                     onClick: () => {
                       setSelectedId(post.id);
                       handleTimelineClick(post);
+                      
+                      // Update the URL without reloading the page
+                      window.history.pushState({ postId: post.id }, '', `/post/${post.id}`);
                     },
                     style: { '--index': index + 1 }
                   },
