@@ -240,7 +240,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         globeInstance.current.controls().autoRotate = true;
         globeInstance.current.controls().autoRotateSpeed = 0.1;
         globeInstance.current.controls().enableZoom = true;
-        globeInstance.current.controls().minDistance = 120;
+        globeInstance.current.controls().minDistance = 140;
         globeInstance.current.controls().maxDistance = 500;
       } catch (error) {
       }
