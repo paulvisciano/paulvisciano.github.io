@@ -219,7 +219,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .onZoom(onZoomHandler)
         .onHexHover((hex) => {
           if (hex && hex.points.length > 0) {
-            const post = hex.points[length]; // Select the first post in the bin for highlighting
+            const post = hex.points[hex.points.length - 1]; // Select the first post in the bin for highlighting
             if (post && post.id) {
               const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
               if (timelineItem) {
