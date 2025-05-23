@@ -588,7 +588,7 @@ window.momentsInTime =
     caption: "Ready to spike with Bartek in Deerfield!",
     mapLink: "https://maps.app.goo.gl/placeholder",
     mapText: "📍 Find Fort Lauderdale on Google Maps",
-    fullLink: "moment/fort-lauderdale-2025-05-21.html",
+    fullLink: "fort-lauderdale-2025-05-21.html",
     location: { lat: 26.1224, lng: -80.1373, name: "Fort Lauderdale, Florida" },
     stayDuration: 2
   },
