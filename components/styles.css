@@ -100,7 +100,7 @@ body {
   .location-button {
     bottom: 160px; /* Higher on mobile to avoid timeline overlap */
     right : 10px;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
   }
 }
