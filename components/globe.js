@@ -144,8 +144,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
               title: post.title || "No Title",
               snippet: post.snippet || "No Snippet",
               fullLink: post.fullLink || "#",
-              lat: post.location.lat,
-              lng: post.location.lng,
+              lat: post.lat,
+              lng: post.lng,
               id: post.id
             });
             setSelectedId(post.id);
@@ -165,26 +165,36 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const minAltitude = 0.1;
     const minHexAltitude = 0.02;
     const maxHexAltitude = 0.1;
+    const isMobile = window.innerWidth <= 640; // Detect mobile screens
 
     // Define altitude thresholds and corresponding hex altitudes
-    const zoomLevels = [
-      { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution : 4  },
-      { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution : 4 },
-      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.5 , hexBinResolution : 5 },
-      { threshold: minAltitude, hexAltitude: minHexAltitude, hexBinResolution : 5 }
+    const zoomLevels = isMobile ? [
+      { threshold: 1, hexAltitude: 0.3, hexBinResolution: 3 }, // Larger hexagons on mobile
+      { threshold: 0.7, hexAltitude: 0.1, hexBinResolution: 3.8 },
+      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.6, hexBinResolution: 4.5 },
+      { threshold: minAltitude, hexAltitude: minHexAltitude * 1.5, hexBinResolution: 4 } // Slightly larger at closest zoom
+    ] : [
+      { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution: 4 },
+      { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution: 4 },
+      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.5, hexBinResolution: 5 },
+      { threshold: minAltitude, hexAltitude: minHexAltitude, hexBinResolution: 5 }
     ];
 
     // Find the appropriate hex altitude based on current altitude
     let hexAltitude = minAltitude;
-    let hexBinResolution = 4;
+    let hexBinResolution = isMobile ? 4 : 5; // Default resolution
 
     for (const level of zoomLevels) {
       if (altitude >= level.threshold) {
-        hexBinResolution = level.hexBinResolution;
+        console.log("Alt", altitude)
+        console.log("Level", level)
+
         hexAltitude = level.hexAltitude;
+        hexBinResolution = level.hexBinResolution;
         break;
       }
     }
+
 
     globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
