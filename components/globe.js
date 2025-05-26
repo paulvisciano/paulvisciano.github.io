@@ -21,7 +21,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const touchStartY = React.useRef(null);
   const lastTap = React.useRef(0);
   const doubleTapTimeout = React.useRef(null);
-  const isDoubleTapSliding = React.useRef(false);
+  const zoomDirection = React.useRef("in"); // Track zoom direction: "in" or "out"
 
   // Expose state setters and refs to window for BlogPostDrawer
   window.setBlogPostContent = setBlogPostContent;
@@ -83,7 +83,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           handleDoubleTap(event);
         } else {
           lastTap.current = currentTime;
-          // Set a timeout to handle single tap if no second tap occurs
           doubleTapTimeout.current = setTimeout(() => {
             touchStartX.current = null;
             touchStartY.current = null;
@@ -99,25 +98,36 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       event.preventDefault();
 
       const currentPOV = globeInstance.current.pointOfView();
-      const newAltitude = Math.max(0.1, currentPOV.altitude * 0.7); // Zoom in by 30%
+      const minAltitude = 140 / 200; // Approx conversion from minDistance to altitude
+      const maxAltitude = 500 / 200; // Approx conversion from maxDistance to altitude
+      let newAltitude;
+
+      // Toggle zoom direction based on current altitude
+      if (zoomDirection.current === "in" && currentPOV.altitude <= minAltitude) {
+        zoomDirection.current = "out";
+      } else if (zoomDirection.current === "out" && currentPOV.altitude >= maxAltitude) {
+        zoomDirection.current = "in";
+      }
+
+      // Calculate new altitude based on direction
+      if (zoomDirection.current === "in") {
+        newAltitude = Math.max(minAltitude, currentPOV.altitude * 0.7); // Zoom in by 30%
+      } else {
+        newAltitude = Math.min(maxAltitude, currentPOV.altitude / 0.7); // Zoom out (reverse of 30%)
+      }
 
       globeInstance.current.pointOfView({
         lat: currentPOV.lat,
         lng: currentPOV.lng,
         altitude: newAltitude
       }, 500);
-
-      isDoubleTapSliding.current = true; // Enable sliding for zoom adjustment
-      setTimeout(() => {
-        isDoubleTapSliding.current = false; // Reset after 1s to allow new gestures
-      }, 1000);
     };
 
     const handleTouchMove = (event) => {
       if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer')) {
         return;
       }
-      if (event.touches.length === 1 && touchStartX.current !== null && touchStartY.current !== null) {
+      if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {
         const touchEndX = event.touches[0].clientX;
         const touchEndY = event.touches[0].clientY;
         const deltaX = touchEndX - touchStartX.current;
@@ -125,35 +135,11 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
         // Handle swipe-to-dismiss popover
-        if (popoverContent && distance > 50) {
+        if (distance > 50) {
           setPopoverContent(null);
           setSelectedId(null);
           touchStartX.current = null;
           touchStartY.current = null;
-          isDoubleTapSliding.current = false;
-          return;
-        }
-
-        // Handle double-tap slide for zooming
-        if (isDoubleTapSliding.current && !isZooming.current) {
-          event.preventDefault(); // Prevent scrolling
-          const deltaY = touchEndY - touchStartY.current;
-          const zoomSensitivity = 0.005; // Adjust zoom speed
-          const currentPOV = globeInstance.current.pointOfView();
-          let newAltitude = currentPOV.altitude + deltaY * zoomSensitivity;
-
-          // Respect minDistance (140) and maxDistance (500) converted to altitude
-          const minAltitude = 140 / 200; // Approx conversion from distance to altitude
-          const maxAltitude = 500 / 200;
-          newAltitude = Math.max(minAltitude, Math.min(maxAltitude, newAltitude));
-
-          globeInstance.current.pointOfView({
-            lat: currentPOV.lat,
-            lng: currentPOV.lng,
-            altitude: newAltitude
-          }, 0); // Immediate update for smooth sliding
-
-          touchStartY.current = touchEndY; // Update start position for continuous sliding
         }
       }
     };
@@ -161,11 +147,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const handleTouchEnd = () => {
       touchStartX.current = null;
       touchStartY.current = null;
-      if (isDoubleTapSliding.current) {
-        setTimeout(() => {
-          isDoubleTapSliding.current = false; // Ensure reset after gesture
-        }, 100);
-      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -244,7 +225,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       { threshold: 1, hexAltitude: 0.3, hexBinResolution: 3 },
       { threshold: 0.7, hexAltitude: 0.1, hexBinResolution: 3.8 },
       { threshold: 0.3, hexAltitude: maxHexAltitude * 0.6, hexBinResolution: 4.5 },
-      { threshold: minAltitude, hexAltitude: minAltitude * 1.5, hexBinResolution: 4 }
+      { threshold: minAltitude, hexAltitude: minHexAltitude * 1.5, hexBinResolution: 4 }
     ] : [
       { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution: 4 },
       { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution: 4 },
