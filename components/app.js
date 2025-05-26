@@ -33,6 +33,27 @@ window.App = () => {
     }
   };
 
+  // Find the most recent moment for the location button
+  const findCurrentMoment = () => {
+    const today = new Date();
+    // Find the most recent moment where end date is before or on today
+    const sortedMoments = window.momentsInTime.sort((a, b) => b.date - a.date);
+    return sortedMoments.find(moment => {
+      const startDate = new Date(moment.date);
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + moment.stayDuration);
+      return endDate <= today || startDate <= today;
+    }) || sortedMoments[0]; // Fallback to the most recent moment
+  };
+
+  // Handle location button click
+  const handleLocationButtonClick = () => {
+    const currentMoment = findCurrentMoment();
+    if (currentMoment) {
+      handleMomentSelection(currentMoment); // Zoom and select the moment
+    }
+  };
+
   // Check URL on initial load to set selectedId and zoom to location
   React.useEffect(() => {
     // Check for a 'path' query parameter (GitHub Pages 404 redirect)
@@ -137,6 +158,30 @@ window.App = () => {
       setSelectedId,
       selectedTag,
       selectedYear
-    })
+    }),
+    React.createElement(
+      'button',
+      {
+        className: 'location-button',
+        onClick: handleLocationButtonClick,
+        title: 'Zoom to current location'
+      },
+      React.createElement(
+        'svg',
+        {
+          xmlns: 'http://www.w3.org/2000/svg',
+          viewBox: '0 0 24 24',
+          fill: 'none',
+          stroke: 'currentColor',
+          width: '24px',
+          height: '24px'
+        },
+        React.createElement('path', {
+          d: 'M12 2a6 6 0 0 1 6 6c0 5-6 10-6 10s-6-5-6-10a6 6 0 0 1 6-6z',
+          strokeWidth: '2'
+        }),
+        React.createElement('circle', { cx: '12', cy: '8', r: '2', fill: 'currentColor' })
+      )
+    )
   );
 };
