@@ -3,13 +3,24 @@ window.App = () => {
   const [selectedTag, setSelectedTag] = React.useState("All");
   const [selectedYear, setSelectedYear] = React.useState("All");
   const [zoomCallback, setZoomCallback] = React.useState(null);
+  const [overlayMessage, setOverlayMessage] = React.useState(null); // Initialize as null
+
+  // Function to update overlay message
+  const updateOverlayMessage = (message) => {
+    setOverlayMessage(message);
+    const overlayMessageEl = document.getElementById('overlay-message');
+    if (overlayMessageEl) {
+      overlayMessageEl.textContent = message;
+    }
+  };
 
   // Unified logic for selecting a moment (used for clicks, initial load, and popstate)
   const handleMomentSelection = (moment) => {
     if (moment) {
       setSelectedId(moment.id);
+      updateOverlayMessage(`${moment.title}...`); // Set moment-specific message
       if (zoomCallback) {
-        zoomCallback(moment);
+        zoomCallback(moment); // Trigger zoom to the moment's location
       }
       // Normalize and update the URL only if it doesn't already match
       const intendedPath = `/moment/${moment.id}`;
@@ -17,10 +28,12 @@ window.App = () => {
       if (currentPath !== intendedPath) {
         window.history.pushState({ momentId: moment.id }, '', intendedPath);
       }
+    } else {
+      updateOverlayMessage('Looking for Paul'); // Default message
     }
   };
 
-  // Check URL on initial load to set selectedId
+  // Check URL on initial load to set selectedId and zoom to location
   React.useEffect(() => {
     // Check for a 'path' query parameter (GitHub Pages 404 redirect)
     const params = new URLSearchParams(window.location.search);
@@ -39,10 +52,28 @@ window.App = () => {
       const momentId = match[1];
       const moment = window.momentsInTime.find(m => m.id === momentId);
       if (moment) {
-        handleMomentSelection(moment); // Use the unified logic
+        updateOverlayMessage(`Exploring ${moment.title}`); // Set moment-specific message upfront
+        handleMomentSelection(moment); // Use the unified logic to select and zoom
       } else {
-        // If moment ID is invalid, redirect to root (will trigger current location logic)
+        // If moment ID is invalid, redirect to root
         window.history.replaceState({}, '', '/');
+        updateOverlayMessage('Looking for Paul');
+      }
+    } else {
+      // Check for current moment based on today's date
+      const today = new Date();
+      const currentMoment = window.momentsInTime.find(moment => {
+        const startDate = new Date(moment.date);
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + moment.stayDuration);
+        return today >= startDate && today <= endDate;
+      });
+
+      if (currentMoment) {
+        updateOverlayMessage(`Exploring ${currentMoment.title}`); // Set moment-specific message upfront
+        handleMomentSelection(currentMoment); // Use the unified logic to select and zoom
+      } else {
+        updateOverlayMessage('Looking for Paul'); // Default message
       }
     }
   }, [zoomCallback]);
@@ -54,11 +85,12 @@ window.App = () => {
       const momentId = state.momentId;
       const moment = momentId ? window.momentsInTime.find(m => m.id === momentId) : null;
       if (moment) {
-        handleMomentSelection(moment); // Use the unified logic
+        handleMomentSelection(moment); // Use the unified logic to select and zoom
       } else {
         setSelectedId(null); // Reset if no momentId in URL
         // Redirect to root to trigger current location logic
         window.history.replaceState({}, '', '/');
+        updateOverlayMessage('Looking for Paul');
       }
     };
 
@@ -85,27 +117,6 @@ window.App = () => {
       isMounted = false;
     };
   }, []);
-
-  // Determine current location based on today's date and update URL
-  const today = new Date();
-  React.useEffect(() => {
-    // Skip if URL already has a moment ID (direct access takes precedence)
-    const path = window.location.pathname;
-    if (path.match(/^\/moment\/(.+)/)) {
-      return; // URL already set by initial load logic
-    }
-
-    const currentMoment = window.momentsInTime.find(moment => {
-      const startDate = new Date(moment.date);
-      const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + moment.stayDuration);
-      return today >= startDate && today <= endDate;
-    });
-
-    if (currentMoment) {
-      handleMomentSelection(currentMoment); // Use the unified logic
-    }
-  }, [zoomCallback]);
 
   return React.createElement(
     'div',
