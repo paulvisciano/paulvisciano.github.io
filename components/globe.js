@@ -19,6 +19,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const isZooming = React.useRef(false);
   const touchStartX = React.useRef(null);
   const touchStartY = React.useRef(null);
+  const lastTap = React.useRef(0);
+  const doubleTapTimeout = React.useRef(null);
+  const isDoubleTapSliding = React.useRef(false);
 
   // Expose state setters and refs to window for BlogPostDrawer
   window.setBlogPostContent = setBlogPostContent;
@@ -28,24 +31,24 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
   // Define linear scales for each duration range for smooth gradients
   const scaleShort = d3.scaleLinear()
-  .domain([1, 3])
-  .range(["#FF4500", "#FF4500"])
+    .domain([1, 3])
+    .range(["#FF4500", "#FF4500"]);
   const scaleWeek = d3.scaleLinear()
     .domain([4, 14])
-    .range(["#FF4500", "#A32F00"]); // 4–14 days: Yellowish-orange to orange
+    .range(["#FF4500", "#A32F00"]);
   const scaleMonth = d3.scaleLinear()
     .domain([15, 90])
-    .range(["#A32F00", "#A32F00"]); // 15–90 days: Yellowish-orange to orange
+    .range(["#A32F00", "#A32F00"]);
   const scaleLong = d3.scaleLinear()
     .domain([91, 365])
-    .range(["#A32F00", "#4F1F00"]); // >90 days: Orange to reddish
+    .range(["#A32F00", "#4F1F00"]);
 
   // Combine scales into a single weightColor function
   const weightColor = (duration) => {
     if (duration <= 3) return scaleShort(duration);
     if (duration <= 14) return scaleWeek(duration);
     if (duration <= 90) return scaleMonth(duration);
-    return scaleLong(Math.min(duration, 365)); // Cap at 365 days
+    return scaleLong(Math.min(duration, 365));
   };
 
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
@@ -65,27 +68,92 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     };
 
     const handleTouchStart = (event) => {
-      if (event.target.closest('.overlay')) return;
+      if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer')) {
+        return;
+      }
       if (event.touches.length === 1) {
         touchStartX.current = event.touches[0].clientX;
         touchStartY.current = event.touches[0].clientY;
+        const currentTime = new Date().getTime();
+        const timeSinceLastTap = currentTime - lastTap.current;
+
+        // Detect double-tap (within 300ms)
+        if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
+          clearTimeout(doubleTapTimeout.current);
+          handleDoubleTap(event);
+        } else {
+          lastTap.current = currentTime;
+          // Set a timeout to handle single tap if no second tap occurs
+          doubleTapTimeout.current = setTimeout(() => {
+            touchStartX.current = null;
+            touchStartY.current = null;
+          }, 300);
+        }
       }
     };
 
+    const handleDoubleTap = (event) => {
+      if (!globeInstance.current || isZooming.current) return;
+
+      // Prevent default to avoid browser zoom
+      event.preventDefault();
+
+      const currentPOV = globeInstance.current.pointOfView();
+      const newAltitude = Math.max(0.1, currentPOV.altitude * 0.7); // Zoom in by 30%
+
+      globeInstance.current.pointOfView({
+        lat: currentPOV.lat,
+        lng: currentPOV.lng,
+        altitude: newAltitude
+      }, 500);
+
+      isDoubleTapSliding.current = true; // Enable sliding for zoom adjustment
+      setTimeout(() => {
+        isDoubleTapSliding.current = false; // Reset after 1s to allow new gestures
+      }, 1000);
+    };
+
     const handleTouchMove = (event) => {
-      if (event.target.closest('.overlay')) return;
-      if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {
+      if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer')) {
+        return;
+      }
+      if (event.touches.length === 1 && touchStartX.current !== null && touchStartY.current !== null) {
         const touchEndX = event.touches[0].clientX;
         const touchEndY = event.touches[0].clientY;
         const deltaX = touchEndX - touchStartX.current;
         const deltaY = touchEndY - touchStartY.current;
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        if (distance > 50) {
+        // Handle swipe-to-dismiss popover
+        if (popoverContent && distance > 50) {
           setPopoverContent(null);
           setSelectedId(null);
           touchStartX.current = null;
           touchStartY.current = null;
+          isDoubleTapSliding.current = false;
+          return;
+        }
+
+        // Handle double-tap slide for zooming
+        if (isDoubleTapSliding.current && !isZooming.current) {
+          event.preventDefault(); // Prevent scrolling
+          const deltaY = touchEndY - touchStartY.current;
+          const zoomSensitivity = 0.005; // Adjust zoom speed
+          const currentPOV = globeInstance.current.pointOfView();
+          let newAltitude = currentPOV.altitude + deltaY * zoomSensitivity;
+
+          // Respect minDistance (140) and maxDistance (500) converted to altitude
+          const minAltitude = 140 / 200; // Approx conversion from distance to altitude
+          const maxAltitude = 500 / 200;
+          newAltitude = Math.max(minAltitude, Math.min(maxAltitude, newAltitude));
+
+          globeInstance.current.pointOfView({
+            lat: currentPOV.lat,
+            lng: currentPOV.lng,
+            altitude: newAltitude
+          }, 0); // Immediate update for smooth sliding
+
+          touchStartY.current = touchEndY; // Update start position for continuous sliding
         }
       }
     };
@@ -93,11 +161,16 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const handleTouchEnd = () => {
       touchStartX.current = null;
       touchStartY.current = null;
+      if (isDoubleTapSliding.current) {
+        setTimeout(() => {
+          isDoubleTapSliding.current = false; // Ensure reset after gesture
+        }, 100);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
 
     return () => {
@@ -165,14 +238,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const minAltitude = 0.1;
     const minHexAltitude = 0.02;
     const maxHexAltitude = 0.1;
-    const isMobile = window.innerWidth <= 640; // Detect mobile screens
+    const isMobile = window.innerWidth <= 640;
 
-    // Define altitude thresholds and corresponding hex altitudes
     const zoomLevels = isMobile ? [
-      { threshold: 1, hexAltitude: 0.3, hexBinResolution: 3 }, // Larger hexagons on mobile
+      { threshold: 1, hexAltitude: 0.3, hexBinResolution: 3 },
       { threshold: 0.7, hexAltitude: 0.1, hexBinResolution: 3.8 },
       { threshold: 0.3, hexAltitude: maxHexAltitude * 0.6, hexBinResolution: 4.5 },
-      { threshold: minAltitude, hexAltitude: minHexAltitude * 1.5, hexBinResolution: 4 } // Slightly larger at closest zoom
+      { threshold: minAltitude, hexAltitude: minAltitude * 1.5, hexBinResolution: 4 }
     ] : [
       { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution: 4 },
       { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution: 4 },
@@ -180,21 +252,16 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       { threshold: minAltitude, hexAltitude: minHexAltitude, hexBinResolution: 5 }
     ];
 
-    // Find the appropriate hex altitude based on current altitude
     let hexAltitude = minAltitude;
-    let hexBinResolution = isMobile ? 4 : 5; // Default resolution
+    let hexBinResolution = isMobile ? 4 : 5;
 
     for (const level of zoomLevels) {
       if (altitude >= level.threshold) {
-        console.log("Alt", altitude)
-        console.log("Level", level)
-
         hexAltitude = level.hexAltitude;
         hexBinResolution = level.hexBinResolution;
         break;
       }
     }
-
 
     globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
@@ -215,7 +282,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .globeMaterial(new THREE.MeshPhongMaterial({
           map: globeTexture,
           side: THREE.DoubleSide,
-          shininess : 5,
+          shininess: 5,
         }))
         .pointOfView({ lat: 0, lng: 0, altitude: 2.5 }, 0)
         .hexBinPointsData([])
@@ -229,11 +296,11 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .onZoom(onZoomHandler)
         .onHexHover((hex) => {
           if (hex && hex.points.length > 0) {
-            const post = hex.points[hex.points.length - 1]; // Select the first post in the bin for highlighting
+            const post = hex.points[hex.points.length - 1];
             if (post && post.id) {
               const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
               if (timelineItem) {
-                document.querySelectorAll('.timeline-entry.selected').forEach(item => 
+                document.querySelectorAll('.timeline-entry.selected').forEach(item =>
                   item.classList.remove('selected')
                 );
                 timelineItem.classList.add('selected');
@@ -267,7 +334,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           isZooming.current = true;
           globeInstance.current.controls().autoRotate = false;
 
-          const post = hex.points[hex.points.length - 1]; // Select the first post in the bin
+          const post = hex.points[hex.points.length - 1];
           if (post && post.id) {
             setSelectedId(post.id);
             handleTimelineClick(post);
@@ -329,7 +396,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       const hexBinData = filteredPosts.map(post => ({
         lat: post.location.lat,
         lng: post.location.lng,
-        weight: post.stayDuration, // Use stayDuration as weight
+        weight: post.stayDuration,
         label: post.location.name,
         fullLink: post.fullLink,
         snippet: post.snippet,
@@ -362,7 +429,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         if (!response.ok) {
           throw new Error('Failed to load post content');
         }
-        
+
         const htmlContent = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
@@ -382,7 +449,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         setPopoverContent(null);
       } catch (err) {
         setError('Failed to load the full post. Please try again.');
-        
+
         setBlogPostContent({
           title: post.title,
           content: `<p>${err.message}</p>`,
@@ -432,7 +499,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           { className: 'popover-footer' },
           React.createElement(
             'button',
-            { 
+            {
               className: 'popover-link',
               onClick: () => handleOpenBlogPost(id)
             },
