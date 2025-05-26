@@ -246,7 +246,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
-    globeInstance.current.controls().autoRotate = altitude > 0.8;
+    globeInstance.current.controls().autoRotate = altitude > 1;
   };
 
   React.useEffect(() => {
