@@ -46,6 +46,8 @@ body {
   color: var(--primary-orange);
   text-shadow: 0 0 4px var(--black-80);
   animation: pulse 1.5s infinite;
+  text-align: center; /* Ensure text is centered */
+  max-width: 90%; /* Prevent overflow on small screens */
 }
 
 @keyframes pulse {
@@ -63,7 +65,7 @@ body {
 
 .location-button {
   position: fixed;
-  bottom: 150px; /* Moved higher */
+  bottom: 180px; /* Moved higher to clear timeline */
   right: 16px;
   background: rgba(26, 26, 26, 0.9); /* Matches timeline and filter drawer */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
@@ -92,9 +94,12 @@ body {
 @media (max-width: 640px) {
   .overlay-message {
     font-size: 1.5rem;
+    max-width: 80%; /* Tighter max-width for mobile */
+    line-height: 1.2; /* Improve readability */
   }
   .location-button {
-    bottom: 120px; /* Moved higher for mobile */
+    bottom: 160px; /* Higher on mobile to avoid timeline overlap */
+    right : 10px;
     width: 36px;
     height: 36px;
   }
