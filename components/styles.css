@@ -65,7 +65,7 @@ body {
 
 .location-button {
   position: fixed;
-  bottom: 180px; /* Moved higher to clear timeline */
+  bottom: 145px; /* Moved higher to clear timeline */
   right: 16px;
   background: rgba(26, 26, 26, 0.9); /* Matches timeline and filter drawer */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
