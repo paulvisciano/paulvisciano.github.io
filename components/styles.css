@@ -61,9 +61,41 @@ body {
   z-index: 999;
 }
 
+.location-button {
+  position: fixed;
+  bottom: 150px; /* Moved higher */
+  right: 16px;
+  background: rgba(26, 26, 26, 0.9); /* Matches timeline and filter drawer */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  border-radius: 8px; /* Rounded square */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Consistent shadow */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  z-index: 30;
+}
+
+.location-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-color: var(--primary-orange); /* Orange border on hover */
+}
+
+.location-button svg {
+  color: var(--primary-orange); /* Orange icon to match app theme */
+}
 
 @media (max-width: 640px) {
   .overlay-message {
     font-size: 1.5rem;
+  }
+  .location-button {
+    bottom: 120px; /* Moved higher for mobile */
+    width: 36px;
+    height: 36px;
   }
 }
