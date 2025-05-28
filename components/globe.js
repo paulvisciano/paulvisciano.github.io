@@ -21,7 +21,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const touchStartY = React.useRef(null);
   const lastTap = React.useRef(0);
   const doubleTapTimeout = React.useRef(null);
-  const zoomDirection = React.useRef("in"); // Track zoom direction: "in" or "out"
+  const pinchStartDistance = React.useRef(null);
+  const pinchStartAltitude = React.useRef(null);
 
   // Expose state setters and refs to window for BlogPostDrawer
   window.setBlogPostContent = setBlogPostContent;
@@ -88,6 +89,15 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             touchStartY.current = null;
           }, 300);
         }
+      } else if (event.touches.length === 2) {
+        // Initialize pinch-to-zoom
+        const touch1 = event.touches[0];
+        const touch2 = event.touches[1];
+        pinchStartDistance.current = Math.hypot(
+          touch1.clientX - touch2.clientX,
+          touch1.clientY - touch2.clientY
+        );
+        pinchStartAltitude.current = globeInstance.current.pointOfView().altitude;
       }
     };
 
@@ -98,28 +108,26 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       event.preventDefault();
 
       const currentPOV = globeInstance.current.pointOfView();
-      const minAltitude = 140 / 200; // Approx conversion from minDistance to altitude
-      const maxAltitude = 500 / 200; // Approx conversion from maxDistance to altitude
+      const minAltitude = 0.3; // Tighter min for mobile
+      const defaultAltitude = 1.0; // Default zoom-out level
       let newAltitude;
 
-      // Toggle zoom direction based on current altitude
-      if (zoomDirection.current === "in" && currentPOV.altitude <= minAltitude) {
-        zoomDirection.current = "out";
-      } else if (zoomDirection.current === "out" && currentPOV.altitude >= maxAltitude) {
-        zoomDirection.current = "in";
-      }
-
-      // Calculate new altitude based on direction
-      if (zoomDirection.current === "in") {
-        newAltitude = Math.max(minAltitude, currentPOV.altitude * 0.7); // Zoom in by 30%
+      // If zoomed in (below default), zoom out; otherwise, zoom in
+      if (currentPOV.altitude <= defaultAltitude) {
+        newAltitude = minAltitude; // Zoom in to close view
       } else {
-        newAltitude = Math.min(maxAltitude, currentPOV.altitude / 0.7); // Zoom out (reverse of 30%)
+        newAltitude = defaultAltitude; // Zoom out to default
       }
 
+      isZooming.current = true;
       globeInstance.current.pointOfView({
         lat: currentPOV.lat,
         lng: currentPOV.lng,
         altitude: newAltitude
+      }, 500);
+
+      setTimeout(() => {
+        isZooming.current = false;
       }, 500);
     };
 
@@ -141,12 +149,42 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           touchStartX.current = null;
           touchStartY.current = null;
         }
+      } else if (event.touches.length === 2) {
+        // Handle pinch-to-zoom
+        event.preventDefault();
+        if (!globeInstance.current || isZooming.current) return;
+
+        const touch1 = event.touches[0];
+        const touch2 = event.touches[1];
+        const currentDistance = Math.hypot(
+          touch1.clientX - touch2.clientX,
+          touch1.clientY - touch2.clientY
+        );
+
+        if (pinchStartDistance.current && pinchStartAltitude.current) {
+          const scale = currentDistance / pinchStartDistance.current;
+          const currentPOV = globeInstance.current.pointOfView();
+          let newAltitude = pinchStartAltitude.current / scale;
+
+          // Clamp altitude between min and max
+          const minAltitude = 0.3;
+          const maxAltitude = 2.5;
+          newAltitude = Math.max(minAltitude, Math.min(maxAltitude, newAltitude));
+
+          globeInstance.current.pointOfView({
+            lat: currentPOV.lat,
+            lng: currentPOV.lng,
+            altitude: newAltitude
+          }, 0); // Immediate update for smooth pinch
+        }
       }
     };
 
     const handleTouchEnd = () => {
       touchStartX.current = null;
       touchStartY.current = null;
+      pinchStartDistance.current = null;
+      pinchStartAltitude.current = null;
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -185,7 +223,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.pointOfView({
             lat: post.location.lat,
             lng: post.location.lng,
-            altitude: 0.1
+            altitude: 0.3
           }, 1500);
 
           waitForZoom(1500).then(() => {
@@ -216,7 +254,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     if (!globeInstance.current) return;
 
     const altitude = globeInstance.current.pointOfView().altitude;
-    const minAltitude = 0.1;
+    const minAltitude = 0.3;
     const minHexAltitude = 0.02;
     const maxHexAltitude = 0.1;
     const isMobile = window.innerWidth <= 640;
@@ -246,7 +284,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
-    globeInstance.current.controls().autoRotate = altitude > 1;
+    globeInstance.current.controls().autoRotate = altitude > 1.3;
   };
 
   React.useEffect(() => {
@@ -324,7 +362,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.pointOfView({
             lat: post.lat,
             lng: post.lng,
-            altitude: 0.1
+            altitude: 0.3
           }, 1500);
 
           waitForZoom(1500).then(() => {
@@ -504,7 +542,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           onClick: () => setIsDrawerOpen(!isDrawerOpen)
         },
         'Filters',
-        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
+        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '↑' : '↓')
       ),
       isDrawerOpen && React.createElement(
         'div',
