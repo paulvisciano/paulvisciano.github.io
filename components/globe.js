@@ -81,7 +81,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         // Detect double-tap (within 300ms)
         if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
           clearTimeout(doubleTapTimeout.current);
-          handleDoubleTap(event);
+          handleDoubleZoom(event);
         } else {
           lastTap.current = currentTime;
           doubleTapTimeout.current = setTimeout(() => {
@@ -101,14 +101,15 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       }
     };
 
-    const handleDoubleTap = (event) => {
+    const handleDoubleZoom = (event) => {
       if (!globeInstance.current || isZooming.current) return;
 
-      // Prevent default to avoid browser zoom
+      // Prevent default to avoid browser zoom and stop propagation to avoid hex clicks
       event.preventDefault();
+      event.stopPropagation();
 
       const currentPOV = globeInstance.current.pointOfView();
-      const minAltitude = 0.3; // Tighter min for mobile
+      const minAltitude = 0.3; // Tighter min for mobile and desktop
       const defaultAltitude = 1.0; // Default zoom-out level
       let newAltitude;
 
@@ -187,16 +188,27 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       pinchStartAltitude.current = null;
     };
 
+    const handleDoubleClick = (event) => {
+      handleDoubleZoom(event);
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
+    const globeContainer = document.getElementById('globeViz');
+    if (globeContainer) {
+      globeContainer.addEventListener('dblclick', handleDoubleClick, { passive: false });
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
+      if (globeContainer) {
+        globeContainer.removeEventListener('dblclick', handleDoubleClick);
+      }
     };
   }, [popoverContent, setSelectedId, isDrawerOpen, isBlogDrawerOpen]);
 
@@ -227,7 +239,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           }, 1500);
 
           waitForZoom(1500).then(() => {
-            const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.5);
+            const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.lng, 0.5);
             setPopoverPosition({
               top: finalCoords.y + 20,
               left: finalCoords.x
@@ -396,6 +408,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
       return () => {
         globeContainer.removeEventListener('wheel', preventScroll);
+        if (globeContainer) {
+          globeContainer.removeEventListener('dblclick', handleDoubleClick);
+        }
         if (globeInstance.current) {
           globeInstance.current.destroy();
         }
