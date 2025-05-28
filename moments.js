@@ -1,6 +1,22 @@
 window.momentsInTime = 
 [
   {
+    id: "medellin-2022-07-02",
+    title: "Exploring Medellín’s Markets",
+    date: new Date('2022-07-02T00:00:00Z'),
+    timelineHighlight: "Medellín Markets",
+    tags: ["culture", "city"],
+    snippet: "Wandered through Medellín’s bustling markets, soaking in the local vibes at Homecenter and beyond.",
+    image: "attachment://placeholder-medellin.jpg",
+    imageAlt: "Medellín Market",
+    caption: "Vibrant market scenes in Medellín!",
+    mapLink: "https://maps.app.goo.gl/placeholder",
+    mapText: "📍 Find Medellín on Google Maps",
+    fullLink: "#",
+    location: { lat: 6.2442, lng: -75.5812, name: "Medellín, Colombia" },
+    stayDuration: 30
+  },
+  {
     id: "medellin-2022-11-01",
     title: "Vibrant Streets of Medellín",
     date: new Date('2022-11-01T00:00:00Z'),
@@ -63,6 +79,22 @@ window.momentsInTime =
     fullLink: "#",
     location: { lat: 33.8938, lng: 35.5018, name: "Beirut, Lebanon" },
     stayDuration: 8
+  },
+  {
+    id: "baalbek-2023-08-09",
+    title: "Ancient Ruins in Baalbek",
+    date: new Date('2023-08-09T00:00:00Z'),
+    timelineHighlight: "Baalbek Ruins",
+    tags: ["history", "culture"],
+    snippet: "Explored the majestic Temple of Bacchus in Baalbek, a stunning journey into Lebanon’s ancient past.",
+    image: "attachment://placeholder-baalbek.jpg",
+    imageAlt: "Temple of Bacchus",
+    caption: "The grandeur of Baalbek’s ruins!",
+    mapLink: "https://maps.app.goo.gl/placeholder",
+    mapText: "📍 Find Baalbek on Google Maps",
+    fullLink: "#",
+    location: { lat: 34.0069, lng: 36.2039, name: "Baalbek, Lebanon" },
+    stayDuration: 1
   },
   {
     id: "athens-2023-08-18",
@@ -353,6 +385,22 @@ window.momentsInTime =
     stayDuration: 12
   },
   {
+    id: "denver-2024-11-20",
+    title: "Denver’s Urban Pulse",
+    date: new Date('2024-11-20T00:00:00Z'),
+    timelineHighlight: "Denver City",
+    tags: ["city", "culture"],
+    snippet: "Dove into Denver’s vibrant urban scene, exploring Broadway and the city’s eclectic neighborhoods.",
+    image: "attachment://placeholder-denver.jpg",
+    imageAlt: "Denver Streets",
+    caption: "Denver’s lively urban vibe!",
+    mapLink: "https://maps.app.goo.gl/placeholder",
+    mapText: "📍 Find Denver on Google Maps",
+    fullLink: "#",
+    location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" },
+    stayDuration: 3
+  },
+  {
     id: "denver-2024-11-28",
     title: "Rocky Mountain High in Denver",
     date: new Date('2024-11-28T00:00:00Z'),
@@ -479,6 +527,38 @@ window.momentsInTime =
     fullLink: "#",
     location: { lat: 27.7676, lng: -82.6403, name: "St. Petersburg, Florida" },
     stayDuration: 44
+  },
+  {
+    id: "williston-2025-03-13",
+    title: "Diving Devil’s Den in Williston",
+    date: new Date('2025-03-13T00:00:00Z'),
+    timelineHighlight: "Devil’s Den Spring",
+    tags: ["nature", "adventure"],
+    snippet: "Dove into the crystal-clear waters of Devil’s Den Prehistoric Spring for an unforgettable adventure.",
+    image: "attachment://placeholder-williston.jpg",
+    imageAlt: "Devil’s Den Spring",
+    caption: "Exploring the depths of Devil’s Den!",
+    mapLink: "https://maps.app.goo.gl/placeholder",
+    mapText: "📍 Find Williston on Google Maps",
+    fullLink: "#",
+    location: { lat: 29.4086, lng: -82.4757, name: "Williston, Florida" },
+    stayDuration: 1
+  },
+  {
+    id: "chicago-2025-03-29",
+    title: "Spring Vibes in Chicago",
+    date: new Date('2025-03-29T00:00:00Z'),
+    timelineHighlight: "Chicago Spring",
+    tags: ["city", "culture"],
+    snippet: "Embraced Chicago’s spring energy, visiting Paylocity and exploring the city’s vibrant neighborhoods.",
+    image: "attachment://placeholder-chicago.jpg",
+    imageAlt: "Chicago Spring",
+    caption: "Chicago’s springtime charm!",
+    mapLink: "https://maps.app.goo.gl/placeholder",
+    mapText: "📍 Find Chicago on Google Maps",
+    fullLink: "#",
+    location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
+    stayDuration: 5
   },
   {
     id: "destin-2025-04-22",
