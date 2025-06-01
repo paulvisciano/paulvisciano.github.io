@@ -238,18 +238,23 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             altitude: 0.3
           }, 1500);
 
-          waitForZoom(1500).then(() => {
-            const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.lng, 0.5);
+          waitForZoom(1600).then(() => {
+            // Get the globe canvas's position relative to the viewport
+            const globeContainer = document.getElementById('globeViz');
+            const rect = globeContainer.getBoundingClientRect();
+            const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.3);
+            
+            // Adjust coordinates to account for canvas offset
             setPopoverPosition({
-              top: finalCoords.y + 20,
-              left: finalCoords.x
+              top: rect.top + finalCoords.y + 20, // Add offset below the point
+              left: rect.left + finalCoords.x // Center horizontally
             });
             setPopoverContent({
               title: post.title || "No Title",
               snippet: post.snippet || "No Snippet",
               fullLink: post.fullLink || "#",
-              lat: post.lat,
-              lng: post.lng,
+              lat: post.location.lat,
+              lng: post.location.lng,
               id: post.id
             });
             setSelectedId(post.id);
@@ -377,11 +382,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             altitude: 0.3
           }, 1500);
 
-          waitForZoom(1500).then(() => {
-            const finalCoords = globeInstance.current.getScreenCoords(post.lat, post.lng, 0.5);
+          waitForZoom(1600).then(() => {
+            const globeContainer = document.getElementById('globeViz');
+            const rect = globeContainer.getBoundingClientRect();
+            const finalCoords = globeInstance.current.getScreenCoords(post.lat, post.lng, 0.3);
             setPopoverPosition({
-              top: finalCoords.y + 20,
-              left: finalCoords.x
+              top: rect.top + finalCoords.y + 20,
+              left: rect.left + finalCoords.x
             });
 
             setPopoverContent({
