@@ -564,7 +564,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           onClick: () => setIsDrawerOpen(!isDrawerOpen)
         },
         'Filters',
-        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '↑' : '↓')
+        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
       ),
       isDrawerOpen && React.createElement(
         'div',
