@@ -1,0 +1,78 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes</title>
+  <meta name="description" content="A weekend in Tampa Bay with a road trip from Miami, Brazilian steakhouse feasts, yoga and smoothies in St. Petersburg, and recovery in Clearwater for a Hawaii move.">
+  <meta name="keywords" content="Tampa, St. Petersburg, Clearwater, Florida, travel, yoga, Brazilian steakhouse, Rollin Oats, Tampa Riverwalk, travel blog">
+  <meta name="author" content="Paul Visciano">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes</h1>
+    <p><strong>Location:</strong> Tampa, Florida</p>
+    <p><strong>Date:</strong> May 30–June 1, 2025</p>
+    <p>Hey, travel enthusiasts! My weekend in Tampa was a whirlwind of road trips, epic eats, and chill vibes with friends, all while gearing up for my big Hawaii move. From cruising from Miami to St. Petersburg, feasting at a Brazilian steakhouse, flowing through a packed yoga class in St. Pete, to pampering with my mom in Clearwater, here’s the full scoop on my Tampa Bay adventure—packed with food, friends, and recovery.</p>
+    
+    <h2>Road Trip and Brazilian Steakhouse Vibes</h2>
+    <p>I kicked off the weekend driving from Miami to St. Petersburg, a 260-mile haul up I-75 in a compact Mitsubishi rental. En route, I booked a spot for me, Welli, and Leo—dubbed the “Tampapis”—at Terra Gaúcha, a Brazilian steakhouse in Tampa. After a quick shower at Welli’s in St. Pete, Leo rolled up, and we Ubered to Tampa for dinner. The steakhouse was a meat lover’s paradise: endless skewers of juicy picanha, lamb, and chicken, with a vibrant salad bar to match. Post-feast, we hit The Castle in Ybor City, a quirky Goth club where we danced into the early hours. Big thanks to Leo for hosting me at his place for the night!</p>
+    
+    <h2>Yoga and Smoothies in St. Pete</h2>
+    <p>The next morning, Leigha, Leo, and I headed to Beach Town Yoga in St. Petersburg for a class led by our friend Leigha. The studio was electric—packed with yogis, banging music, and Leigha’s killer flow that had us all stretched and energized. Afterward, the three of us swung by Rollin’ Oats, a St. Pete favorite, for fresh smoothies bursting with tropical goodness. The market’s laid-back vibe and healthy eats made it the perfect post-yoga stop. If you’re in St. Pete, Rollin’ Oats is a must for smoothies and organic goodies.</p>
+    
+    <h2>Clearwater Recovery with Mom</h2>
+    <p>After our St. Pete morning, I drove to Clearwater to link up with my mom for some TLC. We indulged in massages and pedicures at Yanni’s Day Spa, leaving us totally relaxed. Mom had cooked up a storm for lunch, and though I missed the main spread, her leftovers—hearty, home-cooked comfort food—were divine. Wiped out from the previous night’s party, yoga, and spa day, I passed out for a few hours. Refreshed, I packed the last of my stuff into two suitcases for my Hawaii move, booking an early Alaska Airlines flight to San Diego and an Alamo rental car for when I land. I’m typing this mid-flight, ready for the next chapter!</p>
+    
+    <h2>Why Tampa Bay Shines</h2>
+    <p>The Tampa Bay area’s got it all: urban buzz, coastal charm, and a vibrant mix of cultures. St. Petersburg’s artsy vibe and spots like Rollin’ Oats add a chill contrast to Tampa’s lively Ybor City, with its cigar-making history and nightlife. The Tampa Riverwalk, perfect for sunset strolls, and foodie havens like Armature Works keep the energy high. Whether you’re kayaking the Hillsborough River, catching a Rays game at Tropicana Field, or relaxing in Clearwater, this region delivers. My weekend was the perfect blend of friends, family, and prep for Oahu.</p>
+    
+    <figure>
+      <img src="placeholder-tampa.jpg" alt="Tampa Waterfront">
+      <figcaption>Tampa’s waterfront during my relocation prep!</figcaption>
+    </figure>
+    
+    <p><a href="https://maps.app.goo.gl/placeholder" target="_blank">📍 Find Tampa on Google Maps</a></p>
+  </main>
+</body>
+</html>
