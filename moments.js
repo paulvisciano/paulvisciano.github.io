@@ -689,21 +689,21 @@ window.momentsInTime =
       stayDuration: 7
     },
     {
-      id: "tampa-2025-05-30",
-      title: "Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes",
-      date: new Date('2025-05-30T00:00:00Z'),
+  id: "tampa-2025-05-30",
+  title: "Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes",
+  date: new Date('2025-05-30T00:00:00Z'),
       timelineHighlight: "Tampa Bay Vibes",
       tags: ["travel", "yoga", "food", "friends", "relocation"],
       snippet: "Cruised from Miami to St. Pete, feasted at a Brazilian steakhouse, flowed through yoga in St. Petersburg, and recovered in Clearwater while prepping for Hawaii.",
-      image: "attachment://placeholder-tampa.jpg",
+  image: "attachment://tampa-2025-05-30-1.jpg",
       imageAlt: "Tampa Waterfront",
       caption: "Tampa’s waterfront during my relocation prep!",
-      mapLink: "https://maps.app.goo.gl/placeholder",
-      mapText: "📍 Find Tampa on Google Maps",
-      fullLink: "tampa-2025-05-30.html",
-      location: { lat: 27.9506, lng: -82.4572, name: "Tampa, Florida" },
-      stayDuration: 3
-    },
+  mapLink: "https://maps.app.goo.gl/placeholder",
+  mapText: "📍 Find Tampa on Google Maps",
+  fullLink: "tampa-2025-05-30.html",
+  location: { lat: 27.9506, lng: -82.4572, name: "Tampa, Florida" },
+  stayDuration: 3
+},
     {
       id: "san-diego-2025-06-01",
       title: "San Diego Coastal Reset",

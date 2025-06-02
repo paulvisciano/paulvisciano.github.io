@@ -6,7 +6,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const regularTags = ["All", ...new Set(window.momentsInTime.flatMap(post => post.tags))];
   const yearTags = ["All", ...new Set(window.momentsInTime.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
   const [popoverContent, setPopoverContent] = React.useState(null);
-  const [popoverPosition, setPopoverPosition] = React.useState({ top: 0, left: 0 });
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false);
   const [blogPostContent, setBlogPostContent] = React.useState(null);
@@ -63,7 +62,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('.filter-toggle-button')) {
         setIsDrawerOpen(false);
       }
-      if (isBlogDrawerOpen && blogDrawerRef.current && !blogDrawerRef.current.contains(event.target) && !event.target.closest('.popover-link')) {
+      if (isBlogDrawerOpen && blogDrawerRef.current && !event.target.closest('.popover-link')) {
         setIsBlogDrawerOpen(false);
       }
     };
@@ -78,7 +77,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         const currentTime = new Date().getTime();
         const timeSinceLastTap = currentTime - lastTap.current;
 
-        // Detect double-tap (within 300ms)
         if (timeSinceLastTap < 300 && timeSinceLastTap > 0) {
           clearTimeout(doubleTapTimeout.current);
           handleDoubleZoom(event);
@@ -90,7 +88,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           }, 300);
         }
       } else if (event.touches.length === 2) {
-        // Initialize pinch-to-zoom
         const touch1 = event.touches[0];
         const touch2 = event.touches[1];
         pinchStartDistance.current = Math.hypot(
@@ -104,20 +101,18 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const handleDoubleZoom = (event) => {
       if (!globeInstance.current || isZooming.current) return;
 
-      // Prevent default to avoid browser zoom and stop propagation to avoid hex clicks
       event.preventDefault();
       event.stopPropagation();
 
       const currentPOV = globeInstance.current.pointOfView();
-      const minAltitude = 0.3; // Tighter min for mobile and desktop
-      const defaultAltitude = 1.0; // Default zoom-out level
+      const minAltitude = 0.3;
+      const defaultAltitude = 1.0;
       let newAltitude;
 
-      // If zoomed in (below default), zoom out; otherwise, zoom in
       if (currentPOV.altitude <= defaultAltitude) {
-        newAltitude = minAltitude; // Zoom in to close view
+        newAltitude = minAltitude;
       } else {
-        newAltitude = defaultAltitude; // Zoom out to default
+        newAltitude = defaultAltitude;
       }
 
       isZooming.current = true;
@@ -143,7 +138,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         const deltaY = touchEndY - touchStartY.current;
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        // Handle swipe-to-dismiss popover
         if (distance > 50) {
           setPopoverContent(null);
           setSelectedId(null);
@@ -151,7 +145,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           touchStartY.current = null;
         }
       } else if (event.touches.length === 2) {
-        // Handle pinch-to-zoom
         event.preventDefault();
         if (!globeInstance.current || isZooming.current) return;
 
@@ -167,7 +160,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           const currentPOV = globeInstance.current.pointOfView();
           let newAltitude = pinchStartAltitude.current / scale;
 
-          // Clamp altitude between min and max
           const minAltitude = 0.3;
           const maxAltitude = 2.5;
           newAltitude = Math.max(minAltitude, Math.min(maxAltitude, newAltitude));
@@ -176,7 +168,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             lat: currentPOV.lat,
             lng: currentPOV.lng,
             altitude: newAltitude
-          }, 0); // Immediate update for smooth pinch
+          }, 0);
         }
       }
     };
@@ -238,24 +230,16 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             altitude: 0.3
           }, 1500);
 
-          waitForZoom(1600).then(() => {
-            // Get the globe canvas's position relative to the viewport
-            const globeContainer = document.getElementById('globeViz');
-            const rect = globeContainer.getBoundingClientRect();
-            const finalCoords = globeInstance.current.getScreenCoords(post.location.lat, post.location.lng, 0.3);
-            
-            // Adjust coordinates to account for canvas offset
-            setPopoverPosition({
-              top: rect.top + finalCoords.y + 20, // Add offset below the point
-              left: rect.left + finalCoords.x // Center horizontally
-            });
+          waitForZoom(1500).then(() => {
             setPopoverContent({
               title: post.title || "No Title",
               snippet: post.snippet || "No Snippet",
               fullLink: post.fullLink || "#",
-              lat: post.location.lat,
-              lng: post.location.lng,
-              id: post.id
+              lat: post.lat,
+              lng: post.lng,
+              id: post.id,
+              image: post.image ? post.image.replace('attachment://', '') : null,
+              imageAlt: post.imageAlt
             });
             setSelectedId(post.id);
             isZooming.current = false;
@@ -382,22 +366,16 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             altitude: 0.3
           }, 1500);
 
-          waitForZoom(1600).then(() => {
-            const globeContainer = document.getElementById('globeViz');
-            const rect = globeContainer.getBoundingClientRect();
-            const finalCoords = globeInstance.current.getScreenCoords(post.lat, post.lng, 0.3);
-            setPopoverPosition({
-              top: rect.top + finalCoords.y + 20,
-              left: rect.left + finalCoords.x
-            });
-
+          waitForZoom(1500).then(() => {
             setPopoverContent({
               title: post.title || "No Title",
               snippet: post.snippet || "No Snippet",
               fullLink: post.fullLink || "#",
               lat: post.lat,
               lng: post.lng,
-              id: post.id
+              id: post.id,
+              image: post.image ? post.image.replace('attachment://', '') : null,
+              imageAlt: post.imageAlt
             });
             isZooming.current = false;
           });
@@ -425,6 +403,21 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     } catch (error) {
     }
   }, []);
+
+  // Apply highlight to selected hex
+  React.useEffect(() => {
+    if (globeInstance.current && selectedId) {
+      const hexBins = globeInstance.current.hexBinPointsData();
+      hexBins.forEach(hex => {
+        if (hex.points?.some(point => point.id === selectedId)) {
+          hex.highlight = true; // Custom property to trigger highlight
+        } else {
+          hex.highlight = false;
+        }
+      });
+      globeInstance.current.hexBinPointsData(hexBins); // Re-render with updated data
+    }
+  }, [selectedId]);
 
   React.useEffect(() => {
     if (globeInstance.current) {
@@ -508,43 +501,80 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }
   };
 
-  const Popover = ({ title, snippet, fullLink, onClose, position, id }) => {
+  const Popover = ({ title, snippet, fullLink, onClose, id, image, imageAlt }) => {
     return React.createElement(
       'div',
       {
-        className: 'popover',
-        ref: popoverRef,
-        style: {
-          position: 'absolute',
-          top: `${position.top}px`,
-          left: `${position.left}px`,
-          transform: 'translateX(-50%)',
-          animation: 'fadeIn 0.5s ease-in-out'
-        }
+        className: 'popover popover-static',
+        ref: popoverRef
       },
       React.createElement(
         'div',
         { className: 'popover-content' },
-        React.createElement(
-          'div',
-          { className: 'popover-header' },
-          React.createElement('h2', { className: 'popover-title' }, title)
-        ),
-        React.createElement(
-          'div',
-          { className: 'popover-body' },
-          React.createElement('p', null, snippet)
-        ),
-        fullLink && fullLink !== '#' && React.createElement(
-          'div',
-          { className: 'popover-footer' },
+        id === 'tampa-2025-05-30' && image ? (
+          // Enhanced layout for Tampa with image as primary focus
           React.createElement(
-            'button',
-            {
-              className: 'popover-link',
-              onClick: () => handleOpenBlogPost(id)
-            },
-            'View Full Post'
+            'div',
+            { className: 'popover-enhanced' },
+            React.createElement(
+              'div',
+              { className: 'popover-image-container' },
+              React.createElement('img', {
+                src: image,
+                alt: imageAlt,
+                className: 'popover-image-enhanced'
+              })
+            ),
+            React.createElement(
+              'h2',
+              { className: 'popover-title-enhanced' },
+              title
+            ),
+            React.createElement(
+              'div',
+              { className: 'popover-body-enhanced' },
+              React.createElement('p', null, snippet)
+            ),
+            fullLink && fullLink !== '#' && React.createElement(
+              'div',
+              { className: 'popover-footer-enhanced' },
+              React.createElement(
+                'button',
+                {
+                  className: 'popover-link',
+                  onClick: () => handleOpenBlogPost(id)
+                },
+                'View Full Post'
+              )
+            )
+          )
+        ) : (
+          // Default layout for other moments
+          React.createElement(
+            'div',
+            null,
+            React.createElement(
+              'div',
+              { className: 'popover-header' },
+              React.createElement('h2', { className: 'popover-title' }, title)
+            ),
+            React.createElement(
+              'div',
+              { className: 'popover-body' },
+              React.createElement('p', null, snippet)
+            ),
+            fullLink && fullLink !== '#' && React.createElement(
+              'div',
+              { className: 'popover-footer' },
+              React.createElement(
+                'button',
+                {
+                  className: 'popover-link',
+                  onClick: () => handleOpenBlogPost(id)
+                },
+                'View Full Post'
+              )
+            )
           )
         )
       )
@@ -614,8 +644,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       snippet: popoverContent.snippet,
       fullLink: popoverContent.fullLink,
       onClose: () => setPopoverContent(null),
-      position: popoverPosition,
-      id: popoverContent.id
+      id: popoverContent.id,
+      image: popoverContent.image,
+      imageAlt: popoverContent.imageAlt
     }),
     isBlogDrawerOpen && blogPostContent && React.createElement(window.BlogPostDrawer, {
       content: blogPostContent,
