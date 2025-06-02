@@ -474,7 +474,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         title: post.title,
         stayDuration: post.stayDuration,
         id: post.id,
-        date: post.date // Include date for sorting
+        date: post.date,
+        image: post.image,
+        imageAlt: post.imageAlt
       }));
 
       globeInstance.current.hexBinPointsData(hexBinData);
@@ -552,8 +554,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       React.createElement(
         'div',
         { className: 'popover-content' },
-        id === 'tampa-2025-05-30' && image ? (
-          // Enhanced layout for Tampa with image as primary focus
+        image ? (
+          // Enhanced layout for moments with an image
           React.createElement(
             'div',
             { className: 'popover-enhanced' },
@@ -570,7 +572,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
               { className: 'popover-image-container' },
               React.createElement('img', {
                 src: image,
-                alt: imageAlt,
+                alt: imageAlt || 'Moment image',
                 className: 'popover-image-enhanced'
               })
             ),
@@ -598,7 +600,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             )
           )
         ) : (
-          // Default layout for other moments
+          // Default layout for moments without an image
           React.createElement(
             'div',
             null,
