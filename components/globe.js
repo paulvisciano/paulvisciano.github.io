@@ -51,6 +51,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     return scaleLong(Math.min(duration, 365));
   };
 
+  // Color interpolator for ripple rings (orange theme with fade)
+  const ringColorInterpolator = t => `rgba(255, 165, 0, ${Math.sqrt(1 - t)})`;
+
   const waitForZoom = (duration) => new Promise(resolve => setTimeout(resolve, duration));
 
   React.useEffect(() => {
@@ -323,6 +326,11 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .hexTopColor(d => weightColor(d.sumWeight))
         .hexSideColor(d => weightColor(d.sumWeight))
         .hexLabel(d => `${Math.round(d.sumWeight)} days`)
+        .ringsData([])
+        .ringColor(() => ringColorInterpolator)
+        .ringMaxRadius(4)
+        .ringPropagationSpeed(1)
+        .ringRepeatPeriod(2000)
         .onZoom(onZoomHandler)
         .onHexHover((hex) => {
           if (hex && hex.points.length > 0) {
@@ -414,18 +422,33 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }
   }, []);
 
-  // Apply highlight to selected hex
+  // Apply highlight to selected hex and update rings
   React.useEffect(() => {
-    if (globeInstance.current && selectedId) {
+    if (globeInstance.current) {
       const hexBins = globeInstance.current.hexBinPointsData();
       hexBins.forEach(hex => {
-        if (hex.points?.some(point => point.id === selectedId)) {
-          hex.highlight = true; // Custom property to trigger highlight
-        } else {
-          hex.highlight = false;
-        }
+        hex.highlight = hex.points?.some(point => point.id === selectedId);
       });
-      globeInstance.current.hexBinPointsData(hexBins); // Re-render with updated data
+      globeInstance.current.hexBinPointsData(hexBins); // Re-render with updated highlight
+
+      // Update rings for the selected moment
+      if (selectedId) {
+        const selectedPost = window.momentsInTime.find(post => post.id === selectedId);
+        if (selectedPost) {
+          const ringData = [{
+            lat: selectedPost.location.lat,
+            lng: selectedPost.location.lng,
+            maxR: 5,
+            propagationSpeed: 3,
+            repeatPeriod: 1000
+          }];
+          globeInstance.current.ringsData(ringData);
+        } else {
+          globeInstance.current.ringsData([]);
+        }
+      } else {
+        globeInstance.current.ringsData([]);
+      }
     }
   }, [selectedId]);
 
@@ -457,6 +480,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   React.useEffect(() => {
     setSelectedId(null);
     setPopoverContent(null);
+    if (globeInstance.current) {
+      globeInstance.current.ringsData([]); // Clear rings when filters change
+    }
   }, [selectedTag, selectedYear, setSelectedId]);
 
   const handleOpenBlogPost = async (postId) => {
