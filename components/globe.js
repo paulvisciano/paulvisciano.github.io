@@ -55,6 +55,10 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
   React.useEffect(() => {
     const handleClickOutside = (event) => {
+      // Prevent dismissing popover when interacting with the globe
+      if (event.target.closest('#globeViz')) {
+        return;
+      }
       if (popoverRef.current && !popoverRef.current.contains(event.target) && !event.target.closest('.overlay')) {
         setPopoverContent(null);
         setSelectedId(null);
@@ -105,8 +109,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       event.stopPropagation();
 
       const currentPOV = globeInstance.current.pointOfView();
-      const minAltitude = 0.8; // Increased from 0.5
-      const defaultAltitude = 2.0; // Increased from 1.5
+      const minAltitude = 0.8;
+      const defaultAltitude = 2.0;
       let newAltitude;
 
       if (currentPOV.altitude <= defaultAltitude) {
@@ -132,6 +136,12 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         return;
       }
       if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {
+        // Prevent dismissing popover when touch starts on the globe
+        if (event.target.closest('#globeViz')) {
+          touchStartX.current = null;
+          touchStartY.current = null;
+          return;
+        }
         const touchEndX = event.touches[0].clientX;
         const touchEndY = event.touches[0].clientY;
         const deltaX = touchEndX - touchStartX.current;
@@ -160,8 +170,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           const currentPOV = globeInstance.current.pointOfView();
           let newAltitude = pinchStartAltitude.current / scale;
 
-          const minAltitude = 0.8; // Increased from 0.5
-          const maxAltitude = 3.5; // Increased from 3.0
+          const minAltitude = 0.8;
+          const maxAltitude = 3.5;
           newAltitude = Math.max(minAltitude, Math.min(maxAltitude, newAltitude));
 
           globeInstance.current.pointOfView({
@@ -220,14 +230,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         globeInstance.current.pointOfView({
           lat: post.location.lat,
           lng: post.location.lng,
-          altitude: 2.0 // Increased from 1.5
+          altitude: 2.0
         }, 2000);
 
         waitForZoom(2000).then(() => {
           globeInstance.current.pointOfView({
             lat: post.location.lat,
             lng: post.location.lng,
-            altitude: 0.8 // Increased from 0.5
+            altitude: 0.8
           }, 1500);
 
           waitForZoom(1500).then(() => {
@@ -255,9 +265,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     if (!globeInstance.current) return;
 
     const altitude = globeInstance.current.pointOfView().altitude;
-    const minAltitude = 0.8; // Increased from 0.5
-    const minHexAltitude = 0.04; // Increased from 0.03
-    const maxHexAltitude = 0.15; // Increased from 0.12
+    const minAltitude = 0.8;
+    const minHexAltitude = 0.04;
+    const maxHexAltitude = 0.15;
     const isMobile = window.innerWidth <= 640;
 
     const zoomLevels = isMobile ? [
@@ -285,7 +295,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
-    globeInstance.current.controls().autoRotate = altitude > 2.0; // Increased from 1.5
+    globeInstance.current.controls().autoRotate = altitude > 2.0;
   };
 
   React.useEffect(() => {
@@ -337,8 +347,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         globeInstance.current.controls().autoRotate = true;
         globeInstance.current.controls().autoRotateSpeed = 0.1;
         globeInstance.current.controls().enableZoom = true;
-        globeInstance.current.controls().minDistance = 180; // Increased from 160
-        globeInstance.current.controls().maxDistance = 700; // Increased from 600
+        globeInstance.current.controls().minDistance = 180;
+        globeInstance.current.controls().maxDistance = 700;
       } catch (error) {
       }
 
@@ -363,7 +373,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.pointOfView({
             lat: post.lat,
             lng: post.lng,
-            altitude: 0.8 // Increased from 0.5
+            altitude: 0.8
           }, 1500);
 
           waitForZoom(1500).then(() => {
