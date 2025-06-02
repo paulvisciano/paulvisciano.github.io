@@ -16,23 +16,26 @@ window.BlogPostDrawer = ({ content, onClose }) => {
       },
       '×'
     ),
+    content && content.image && React.createElement(
+      'div',
+      { key: 'cover', className: 'blog-post-cover' },
+      React.createElement('img', {
+        src: content.image,
+        alt: content.imageAlt,
+        className: 'blog-post-cover-image'
+      }),
+      React.createElement(
+        'div',
+        { className: 'blog-post-title-bar' },
+        React.createElement('h1', { className: 'blog-post-title' }, content.title)
+      )
+    ),
     React.createElement(
       'div',
       { className: 'blog-post-drawer-content' },
       window.isLoading && React.createElement('p', null, 'Loading...'),
       window.error && React.createElement('p', { style: { color: 'red' } }, window.error),
       content && [
-        React.createElement('h1', { key: 'title' }, content.title),
-        content.image && React.createElement('img', { 
-          key: 'image',
-          src: content.image, 
-          alt: content.imageAlt,
-          className: 'blog-post-image'
-        }),
-        content.caption && React.createElement('p', { 
-          key: 'caption',
-          className: 'caption'
-        }, content.caption),
         React.createElement('div', {
           key: 'content',
           className: 'blog-post-body',
