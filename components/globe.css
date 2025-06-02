@@ -83,8 +83,8 @@
 
 .filter-drawer .close-button {
   font-size: 2.5rem;
-  top : 8px;
-  right : 14px;
+  top: 8px;
+  right: 14px;
 }
 
 .filter-drawer.open {
@@ -157,25 +157,21 @@
   z-index: 40;
 }
 
+.popover-static {
+  position: fixed;
+  top: 45%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
 .popover-content {
   background: rgba(26, 26, 26, 0.95);
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 15px;
   width: 300px;
   box-shadow: 0 4px 10px var(--black-50);
   position: relative;
   border: 1px solid var(--orange-tint-10);
-}
-
-.popover-content::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid rgba(26, 26, 26, 0.95);
 }
 
 .popover-header {
@@ -200,6 +196,44 @@
 
 .popover-footer {
   text-align: right;
+}
+
+.popover-enhanced {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.popover-image-container {
+  margin-bottom: 10px;
+}
+
+.popover-image-enhanced {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.popover-title-enhanced {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-align: center;
+  margin: 8px 0;
+}
+
+.popover-body-enhanced {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.popover-footer-enhanced {
+  text-align: center;
 }
 
 .popover-link {
@@ -252,6 +286,12 @@
   opacity: 1 !important;
 }
 
+.hex-highlight {
+  outline: 2px solid var(--primary-orange);
+  outline-offset: 2px;
+  box-shadow: 0 0 8px var(--primary-orange);
+}
+
 @media (max-width: 640px) {
   #globeViz {
     height: 100vh;
@@ -279,6 +319,11 @@
     right: 8px;
   }
 
+  .popover-static {
+    right: 5px;
+    width: 250px;
+  }
+
   .popover-content {
     width: 250px;
     padding: 10px;
@@ -292,5 +337,15 @@
   .popover-link {
     font-size: 0.875rem;
     padding: 6px 12px;
+  }
+  .popover-image-enhanced {
+    width: 120px;
+    height: 120px;
+  }
+  .popover-title-enhanced {
+    font-size: 1rem;
+  }
+  .popover-body-enhanced {
+    font-size: 0.75rem;
   }
 }
