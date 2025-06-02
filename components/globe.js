@@ -517,6 +517,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             'div',
             { className: 'popover-enhanced' },
             React.createElement(
+              'button',
+              {
+                className: 'close-button',
+                onClick: onClose
+              },
+              '×'
+            ),
+            React.createElement(
               'div',
               { className: 'popover-image-container' },
               React.createElement('img', {
@@ -556,7 +564,15 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             React.createElement(
               'div',
               { className: 'popover-header' },
-              React.createElement('h2', { className: 'popover-title' }, title)
+              React.createElement('h2', { className: 'popover-title' }, title),
+              React.createElement(
+                'button',
+                {
+                  className: 'close-button',
+                  onClick: onClose
+                },
+                '×'
+              )
             ),
             React.createElement(
               'div',
@@ -594,7 +610,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           onClick: () => setIsDrawerOpen(!isDrawerOpen)
         },
         'Filters',
-        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '↑' : '↓')
+        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
       ),
       isDrawerOpen && React.createElement(
         'div',
