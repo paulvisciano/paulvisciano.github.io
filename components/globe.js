@@ -105,8 +105,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       event.stopPropagation();
 
       const currentPOV = globeInstance.current.pointOfView();
-      const minAltitude = 0.3;
-      const defaultAltitude = 1.0;
+      const minAltitude = 0.8; // Increased from 0.5
+      const defaultAltitude = 2.0; // Increased from 1.5
       let newAltitude;
 
       if (currentPOV.altitude <= defaultAltitude) {
@@ -160,8 +160,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           const currentPOV = globeInstance.current.pointOfView();
           let newAltitude = pinchStartAltitude.current / scale;
 
-          const minAltitude = 0.3;
-          const maxAltitude = 2.5;
+          const minAltitude = 0.8; // Increased from 0.5
+          const maxAltitude = 3.5; // Increased from 3.0
           newAltitude = Math.max(minAltitude, Math.min(maxAltitude, newAltitude));
 
           globeInstance.current.pointOfView({
@@ -220,14 +220,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         globeInstance.current.pointOfView({
           lat: post.location.lat,
           lng: post.location.lng,
-          altitude: 1.0
+          altitude: 2.0 // Increased from 1.5
         }, 2000);
 
         waitForZoom(2000).then(() => {
           globeInstance.current.pointOfView({
             lat: post.location.lat,
             lng: post.location.lng,
-            altitude: 0.3
+            altitude: 0.8 // Increased from 0.5
           }, 1500);
 
           waitForZoom(1500).then(() => {
@@ -255,9 +255,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     if (!globeInstance.current) return;
 
     const altitude = globeInstance.current.pointOfView().altitude;
-    const minAltitude = 0.3;
-    const minHexAltitude = 0.02;
-    const maxHexAltitude = 0.1;
+    const minAltitude = 0.8; // Increased from 0.5
+    const minHexAltitude = 0.04; // Increased from 0.03
+    const maxHexAltitude = 0.15; // Increased from 0.12
     const isMobile = window.innerWidth <= 640;
 
     const zoomLevels = isMobile ? [
@@ -285,7 +285,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     globeInstance.current.hexBinResolution(hexBinResolution);
     globeInstance.current.hexAltitude(hexAltitude);
-    globeInstance.current.controls().autoRotate = altitude > 1.3;
+    globeInstance.current.controls().autoRotate = altitude > 2.0; // Increased from 1.5
   };
 
   React.useEffect(() => {
@@ -337,8 +337,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         globeInstance.current.controls().autoRotate = true;
         globeInstance.current.controls().autoRotateSpeed = 0.1;
         globeInstance.current.controls().enableZoom = true;
-        globeInstance.current.controls().minDistance = 140;
-        globeInstance.current.controls().maxDistance = 500;
+        globeInstance.current.controls().minDistance = 180; // Increased from 160
+        globeInstance.current.controls().maxDistance = 700; // Increased from 600
       } catch (error) {
       }
 
@@ -363,7 +363,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.pointOfView({
             lat: post.lat,
             lng: post.lng,
-            altitude: 0.3
+            altitude: 0.8 // Increased from 0.5
           }, 1500);
 
           waitForZoom(1500).then(() => {
@@ -594,7 +594,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           onClick: () => setIsDrawerOpen(!isDrawerOpen)
         },
         'Filters',
-        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
+        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '↑' : '↓')
       ),
       isDrawerOpen && React.createElement(
         'div',
