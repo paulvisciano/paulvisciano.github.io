@@ -334,7 +334,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .onZoom(onZoomHandler)
         .onHexHover((hex) => {
           if (hex && hex.points.length > 0) {
-            const post = hex.points[hex.points.length - 1];
+            // Select the most recent moment for hover
+            const sortedPoints = hex.points.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const post = sortedPoints[0];
             if (post && post.id) {
               const timelineItem = document.querySelector(`.timeline-entry[data-id="${post.id}"]`);
               if (timelineItem) {
@@ -372,7 +374,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           isZooming.current = true;
           globeInstance.current.controls().autoRotate = false;
 
-          const post = hex.points[hex.points.length - 1];
+          // Sort points by date (descending) and select the most recent
+          const sortedPoints = hex.points.sort((a, b) => new Date(b.date) - new Date(a.date));
+          const post = sortedPoints[0];
           if (post && post.id) {
             setSelectedId(post.id);
             handleTimelineClick(post);
@@ -469,7 +473,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         snippet: post.snippet,
         title: post.title,
         stayDuration: post.stayDuration,
-        id: post.id
+        id: post.id,
+        date: post.date // Include date for sorting
       }));
 
       globeInstance.current.hexBinPointsData(hexBinData);
