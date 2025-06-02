@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -50,9 +11,6 @@
 </head>
 <body>
   <main>
-    <h1>Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes</h1>
-    <p><strong>Location:</strong> Tampa, Florida</p>
-    <p><strong>Date:</strong> May 30–June 1, 2025</p>
     <p>Hey, travel enthusiasts! My weekend in Tampa was a whirlwind of road trips, epic eats, and chill vibes with friends, all while gearing up for my big Hawaii move. From cruising from Miami to St. Petersburg, feasting at a Brazilian steakhouse, flowing through a packed yoga class in St. Pete, to pampering with my mom in Clearwater, here’s the full scoop on my Tampa Bay adventure—packed with food, friends, and recovery.</p>
     
     <h2>Road Trip and Brazilian Steakhouse Vibes</h2>
@@ -66,13 +24,6 @@
     
     <h2>Why Tampa Bay Shines</h2>
     <p>The Tampa Bay area’s got it all: urban buzz, coastal charm, and a vibrant mix of cultures. St. Petersburg’s artsy vibe and spots like Rollin’ Oats add a chill contrast to Tampa’s lively Ybor City, with its cigar-making history and nightlife. The Tampa Riverwalk, perfect for sunset strolls, and foodie havens like Armature Works keep the energy high. Whether you’re kayaking the Hillsborough River, catching a Rays game at Tropicana Field, or relaxing in Clearwater, this region delivers. My weekend was the perfect blend of friends, family, and prep for Oahu.</p>
-    
-    <figure>
-      <img src="placeholder-tampa.jpg" alt="Tampa Waterfront">
-      <figcaption>Tampa’s waterfront during my relocation prep!</figcaption>
-    </figure>
-    
-    <p><a href="https://maps.app.goo.gl/placeholder" target="_blank">📍 Find Tampa on Google Maps</a></p>
   </main>
 </body>
 </html>
