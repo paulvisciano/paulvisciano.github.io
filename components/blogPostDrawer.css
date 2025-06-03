@@ -163,7 +163,7 @@
     padding: 1rem;
   }
   .blog-post-cover {
-    height: 200px; /* Smaller height for mobile */
+    height: 300px; /* Smaller height for mobile */
   }
   .blog-post-title {
     font-size: 1.25rem;

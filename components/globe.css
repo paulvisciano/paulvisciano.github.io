@@ -323,12 +323,17 @@
   }
 
   .close-button {
-    top: 8px;
-    right: 8px;
+    top: 12px;
+    right: 12px;
+    font-size: 2.25rem;
+    padding: 8px;
+    color: var(--text-light);
+    text-shadow: 0 0 4px var(--black-80);
+    z-index: 51;
   }
 
   .popover-static {
-    right: 5px;
+    right: 30px;
     width: 250px;
   }
 
