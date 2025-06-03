@@ -1,4 +1,10 @@
 window.BlogPostDrawer = ({ content, onClose }) => {
+  // If there's an image, we want to remove the title from the content since it's already shown in the title bar
+  const processedContent = content && content.image ? {
+    ...content,
+    content: content.content.replace(/<h2>[^<]*<\/h2>/, '') // Remove the first h2 tag which is typically the title
+  } : content;
+
   return React.createElement(
     React.Fragment,
     null,
@@ -45,22 +51,22 @@ window.BlogPostDrawer = ({ content, onClose }) => {
         { className: 'blog-post-drawer-content' },
         window.isLoading && React.createElement('p', null, 'Loading...'),
         window.error && React.createElement('p', { style: { color: 'red' } }, window.error),
-        content && [
+        processedContent && [
           React.createElement('div', {
             key: 'content',
             className: 'blog-post-body',
-            dangerouslySetInnerHTML: { __html: content.content }
+            dangerouslySetInnerHTML: { __html: processedContent.content }
           }),
-          content.mapLink && React.createElement(
+          processedContent.mapLink && React.createElement(
             'a',
             { 
               key: 'map',
-              href: content.mapLink, 
+              href: processedContent.mapLink, 
               target: '_blank', 
               rel: 'noopener noreferrer',
               className: 'map-link'
             },
-            content.mapText
+            processedContent.mapText
           )
         ]
       )
