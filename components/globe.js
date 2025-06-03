@@ -333,7 +333,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .ringRepeatPeriod(2000)
         .onZoom(onZoomHandler)
         .onHexHover((hex) => {
-          if (hex && hex.points.length > 0) {
+          if (hex && hex.points.length > 0 && !popoverContent && !isZooming.current) {
             // Select the most recent moment for hover
             const sortedPoints = hex.points.sort((a, b) => new Date(b.date) - new Date(a.date));
             const post = sortedPoints[0];
