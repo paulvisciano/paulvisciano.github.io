@@ -1,61 +1,35 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volleyball, Vibes, and Relaxation in Fort Lauderdale</title>
   <meta name="description" content="Join my Fort Lauderdale adventure with beach volleyball at Deerfield Beach, a delicious deli lunch at Broward Meat and Fish Market, and a relaxing massage with Bartek.">
   <meta name="keywords" content="Fort Lauderdale travel, Deerfield Beach volleyball, Broward Meat and Fish Market, Fort Lauderdale massage, beach adventures, Florida travel">
-  <meta name="author" content="Paul">
-  <title>Volleyball, Vibes, and Relaxation in Fort Lauderdale</title>
+  <meta name="author" content="Paul Visciano">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <h1>Volleyball, Vibes, and Relaxation in Fort Lauderdale</h1>
-  <p><em>May 21–23, 2025</em></p>
-  <div class="blog-post-body">
-    <p>Touching down in Fort Lauderdale was the start of a whirlwind adventure. My buddy Bartek picked me up from the airport, and we headed straight to his place. A coffee buzz from the flight kept me wired, so I ended up tweaking my travel blog until 3 a.m.—nothing like a late-night creative session to kick things off.</p>
-    <p>Morning brought work meetings for my new role at OutSystems, which I started this week. Working remotely from Bartek's apartment was seamless, but the real gem was lunch at Broward Meat and Fish Market. This place is a food lover's paradise, with a deli counter boasting 8–10 kinds of meats, fresh salads, and colorful veggies, all within a sprawling supermarket. We grabbed a haul of deliciousness, and I was blown away by the selection.</p>
-    <p>After a quick nap and more work, we headed to Deerfield Beach for volleyball. The warm-up got us pumped, the games were intense, and the ocean was just the right temperature for a refreshing swim to cool off. A storm threatened but passed us by, letting us play on. Afterward, Bartek and I treated ourselves to a relaxing massage together—a perfect way to unwind after spiking and diving. We polished off our deli goodies and stayed up late catching up, those heart-to-heart chats making the trip unforgettable.</p>
-    <p>This morning, I tackled more work meetings and squeezed in a quick workout. Now, I'm waiting for an Enterprise rental to drive to Miami International Airport for my Global Entry renewal—hoping it's a breeze. Fort Lauderdale served up the ultimate mix of work, play, and relaxation, and I'm already itching to return.</p>
-    <p><strong>Pro Tip</strong>: Hit Deerfield Beach for volleyball in the late afternoon—games are lively, and the ocean is your cooldown spot. Don't miss Broward Meat and Fish Market for a lunch that'll leave you spoiled for choice, and book a massage to cap off an active day.</p>
-  </div>
+  <main>
+    <h2>Volleyball, Vibes, and Relaxation in Fort Lauderdale</h2>
+    <div class="post-content">
+      <p class="date">May 21–23, 2025</p>
+      
+      <h2>Late Night Arrival and Creative Flow</h2>
+      <p>Touching down in Fort Lauderdale was the start of a whirlwind adventure. My buddy Bartek picked me up from the airport, and we headed straight to his place. A coffee buzz from the flight kept me wired, so I ended up tweaking my travel blog until 3 a.m.—nothing like a late-night creative session to kick things off.</p>
+
+      <h2>Work and Local Food Discoveries</h2>
+      <p>Morning brought work meetings for my new role at OutSystems, which I started this week. Working remotely from Bartek's apartment was seamless, but the real gem was lunch at Broward Meat and Fish Market. This place is a food lover's paradise, with a deli counter boasting 8–10 kinds of meats, fresh salads, and colorful veggies, all within a sprawling supermarket. We grabbed a haul of deliciousness, and I was blown away by the selection.</p>
+
+      <h2>Beach Volleyball and Relaxation</h2>
+      <p>After a quick nap and more work, we headed to Deerfield Beach for volleyball. The warm-up got us pumped, the games were intense, and the ocean was just the right temperature for a refreshing swim to cool off. A storm threatened but passed us by, letting us play on. Afterward, Bartek and I treated ourselves to a relaxing massage together—a perfect way to unwind after spiking and diving. We polished off our deli goodies and stayed up late catching up, those heart-to-heart chats making the trip unforgettable.</p>
+
+      <h2>Wrapping Up and Moving On</h2>
+      <p>This morning, I tackled more work meetings and squeezed in a quick workout. Now, I'm waiting for an Enterprise rental to drive to Miami International Airport for my Global Entry renewal—hoping it's a breeze. Fort Lauderdale served up the ultimate mix of work, play, and relaxation, and I'm already itching to return.</p>
+
+      <h2>Pro Tips</h2>
+      <p>Hit Deerfield Beach for volleyball in the late afternoon—games are lively, and the ocean is your cooldown spot. Don't miss Broward Meat and Fish Market for a lunch that'll leave you spoiled for choice, and book a massage to cap off an active day.</p>
+    </div>
+  </main>
 </body>
 </html>
