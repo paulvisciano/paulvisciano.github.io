@@ -526,7 +526,7 @@ window.momentsInTime = [
     timelineHighlight: "Playa Volleyball",
     tags: ["beach volleyball", "beach", "friends"],
     snippet: "Will team up with Zacharias to smash serves and dive for digs at a thrilling beach volleyball tournament in Playa del Carmen.",
-    fullLink: "2025/10-28-playa-del-carmen.html",
+    fullLink: "#",
     location: { lat: 20.6296, lng: -87.0739, name: "Playa del Carmen, Mexico" },
     stayDuration: 10
   },
