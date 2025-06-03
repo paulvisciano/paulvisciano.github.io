@@ -4,15 +4,15 @@
 
 <h3><a href="https://paulvisciano.github.io/" target="_blank" rel="noopener noreferrer" style={{ color: '#007AFF', textDecoration: 'none' }}>https://paulvisciano.github.io/</a></h3>
 
-Explore my journey and passions on an interactive 3D globe—don’t miss out! 🌐
+Explore my journey and passions on an interactive 3D globe—don't miss out! 🌐
 
 ---
 
-Welcome to my personal blog! 🎉 This site is a vibrant space where I share a variety of passions and experiences, from **coding tips** 💻 to **volleyball** 🏐, **travel adventures** ✈️, **coffee shop discoveries** ☕, **nutrition insights** 🥗, **travel tips** 🗺️, **philosophical thoughts** 🤔, **personal opinions** 💬, and so much more! The blog features an interactive 3D globe 🌐 powered by [Globe.GL](https://globe.gl/), showcasing locations tied to my posts, with a minimalist design inspired by the [world-cities example](https://globe.gl/example/world-cities/). Through a series of blog posts, I’m mapping out my entire life—from birth to my current adventures and future travel plans—detailing how long I’ve stayed in each place and including photos from those locations 📸. I’m only getting started on this journey, and it will take a while to add back posts mapping my life, but I’ll be doing this by dictating notes to Grok, so stay tuned for more updates! 🕰️
+Welcome to my personal blog! 🎉 This site is a vibrant space where I share a variety of passions and experiences, from **coding tips** 💻 to **volleyball** 🏐, **travel adventures** ✈️, **coffee shop discoveries** ☕, **nutrition insights** 🥗, **travel tips** 🗺️, **philosophical thoughts** 🤔, **personal opinions** 💬, and so much more! The blog features an interactive 3D globe 🌐 powered by [Globe.GL](https://globe.gl/), showcasing locations tied to my posts, with a minimalist design inspired by the [world-cities example](https://globe.gl/example/world-cities/). Through a series of blog posts, I'm mapping out my entire life—from birth to my current adventures and future travel plans—detailing how long I've stayed in each place and including photos from those locations 📸. I'm only getting started on this journey, and it will take a while to add back posts mapping my life, but I'll be doing this by dictating notes to Grok, so stay tuned for more updates! 🕰️
 
 ## Development Process 🚀
 
-This website was brought to life through a collaborative journey with Grok, an AI assistant created by xAI, starting on May 15, 2025. Here’s how we built it step by step:
+This website was brought to life through a collaborative journey with Grok, an AI assistant created by xAI, starting on May 15, 2025. Here's how we built it step by step:
 
 1. **Dreaming Big & Setting Goals** 🎯:
    - I wanted a personal blog with an interactive 3D globe to highlight locations tied to my diverse posts, mirroring the sleek style of the world-cities example on Globe.GL.
@@ -26,42 +26,42 @@ This website was brought to life through a collaborative journey with Grok, an A
 
 3. **Enhancing the Globe** 🌐:
    - Transitioned from point markers to **hexagonal bin visualization** in `globe.js`, aggregating posts by location (e.g., multiple St. Petersburg visits) and using `stayDuration` as weights.
-   - Implemented a vibrant color gradient (orange to reddish, `#FF4500` to `#4F1F00`) for hex bins based on stay duration, with dynamic `hexTopColor`, `hexSideColor`, and labels showing total days (e.g., “217 days” for St. Petersburg).
+   - Implemented a vibrant color gradient (orange to reddish, `#FF4500` to `#4F1F00`) for hex bins based on stay duration, with dynamic `hexTopColor`, `hexSideColor`, and labels showing total days (e.g., "217 days" for St. Petersburg).
    - Added zoom-dependent visuals: hex bin resolution (4 to 5) and altitude (0.02 to 0.1) adjust dynamically via `onZoomHandler`, ensuring clarity at different zoom levels.
    - Switched to a high-resolution NASA Blue Marble texture (`earth-night.jpg`) for the globe, hosted locally to avoid CORS issues, enhancing detail when zoomed in.
 
 4. **Building the Timeline & Filters** ⏳:
    - Created a fixed footer in `footer.js` with a horizontal timeline, dynamically generating years (2022–2025) and posts from `moments.js`, sorted chronologically.
    - Added year-start dots and a book icon (📖) to indicate full blog posts (e.g., `fort-lauderdale-2025-05-21.html`), with clickable entries that zoom the globe to the location.
-   - Implemented a filter drawer in `globe.js` with tag (e.g., “beach volleyball”) and year filters, updating the globe and timeline dynamically.
-   - Ensured smooth navigation with URL updates (`/moment/{id}`) in `app.js`, handling direct access, back/forward navigation, and current location based on today’s date (May 26, 2025).
+   - Implemented a filter drawer in `globe.js` with tag (e.g., "beach volleyball") and year filters, updating the globe and timeline dynamically.
+   - Ensured smooth navigation with URL updates (`/moments/{id}`) in `app.js`, handling direct access, back/forward navigation, and current location based on today's date (May 26, 2025).
 
 5. **Crafting Blog Posts** ✍️:
-   - Generated engaging HTML blog posts (e.g., `san-diego-2025-05-20.html`) from dictated notes, incorporating activities like volleyball, yoga, or coffee shop visits, and enhancing them with local insights (e.g., Fort Lauderdale’s beach culture).
-   - Added SEO meta tags (e.g., keywords: “Fort Lauderdale travel”, “beach volleyball”) and structured posts with images, captions, and Google Maps links for interactivity.
+   - Generated engaging HTML blog posts (e.g., `san-diego-2025-05-20.html`) from dictated notes, incorporating activities like volleyball, yoga, or coffee shop visits, and enhancing them with local insights (e.g., Fort Lauderdale's beach culture).
+   - Added SEO meta tags (e.g., keywords: "Fort Lauderdale travel", "beach volleyball") and structured posts with images, captions, and Google Maps links for interactivity.
    - Integrated photos when provided (e.g., `san-diego-user-photo.jpg`) or used placeholders (e.g., `placeholder-miami-beach.jpg`), with alt text and captions for accessibility.
    - Created a `BlogPostDrawer` component in `blogPostDrawer.js` to display full posts in a mobile-friendly drawer, styled with Tailwind CSS in `blogPostDrawer.css`.
 
 6. **Modularizing & Debugging** 🛠️:
    - Organized code into modular files: `globe.js`, `footer.js`, `app.js`, `moments.js`, `globe.css`, `footer.css`, `blogPostDrawer.js`, and `styles.css`, with subfolders for components.
-   - Fixed URL issues (e.g., duplicated `moment/` prefixes) by updating `moments.js` and `globe.js`, ensuring correct links like `/moment/miami-beach-2024-12-30`.
+   - Fixed URL issues (e.g., duplicated `moments/` prefixes) by updating `moments.js` and `globe.js`, ensuring correct links like `/moments/miami-beach-2024-12-30`.
    - Converted date strings in `moments.js` to JavaScript `Date` objects for better compatibility and removed redundant fields, using `toLocaleDateString` for formatting.
    - Added error handling in `globe.js` for robust data loading and fetch operations, ensuring a smooth user experience.
 
 7. **Deploying & Sharing** 🎈:
    - Hosted the site on **GitHub Pages** at `https://paulvisciano.github.io/`, with a clean `.gitignore` to exclude temporary files.
    - Structured the project for easy updates via GitHub, allowing manual syncing of `moments.js` and blog post HTML files.
-   - Added a loading overlay in `index.html` with a “Looking for Paul” message, fading out after 3 seconds for a polished start.
+   - Added a loading overlay in `index.html` with a "Looking for Paul" message, fading out after 3 seconds for a polished start.
 
 ## Features 🌟
 
-- **Interactive 3D Globe** 🌍: A dynamic globe with a dark, semi-transparent base, NASA Blue Marble texture, and hexagonal bins colored by stay duration, inspired by Globe.GL’s world-cities example.
-- **Hexagonal Bin Visualization** 📍: Locations (e.g., Miami, St. Petersburg) are aggregated into hex bins, with vibrant orange-to-red gradients, dynamic labels (e.g., “217 days”), and zoom-dependent resolution/altitude.
+- **Interactive 3D Globe** 🌍: A dynamic globe with a dark, semi-transparent base, NASA Blue Marble texture, and hexagonal bins colored by stay duration, inspired by Globe.GL's world-cities example.
+- **Hexagonal Bin Visualization** 📍: Locations (e.g., Miami, St. Petersburg) are aggregated into hex bins, with vibrant orange-to-red gradients, dynamic labels (e.g., "217 days"), and zoom-dependent resolution/altitude.
 - **Timeline Footer** ⏳: A fixed footer with a horizontal timeline, showing years (2022–2025), post dots, and book icons (📖) for full posts, clickable to zoom the globe (z-index 20).
-- **Filter Drawer** 🏷️: A top drawer (z-index 30) with tag (e.g., “beach volleyball”) and year filters, updating the globe and timeline dynamically.
-- **Blog Post Drawer** 💬: Full posts load in a mobile-friendly drawer (z-index 50), with images, captions, and Google Maps links, styled consistently with the site’s orange theme (`#ffa500`).
-- **SEO & Accessibility** 🔍: Blog posts include meta tags for discoverability (e.g., “San Diego travel”) and accessible image alt text/captions.
-- **URL Navigation** 🔗: Supports direct access to moments (e.g., `/moment/fort-lauderdale-2025-05-21`), with back/forward navigation and current location detection based on today’s date.
+- **Filter Drawer** 🏷️: A top drawer (z-index 30) with tag (e.g., "beach volleyball") and year filters, updating the globe and timeline dynamically.
+- **Blog Post Drawer** 💬: Full posts load in a mobile-friendly drawer (z-index 50), with images, captions, and Google Maps links, styled consistently with the site's orange theme (`#ffa500`).
+- **SEO & Accessibility** 🔍: Blog posts include meta tags for discoverability (e.g., "San Diego travel") and accessible image alt text/captions.
+- **URL Navigation** 🔗: Supports direct access to moments (e.g., `/moments/fort-lauderdale-2025-05-21`), with back/forward navigation and current location detection based on today's date.
 
 ## Disclaimer ⚠️
 
@@ -77,4 +77,4 @@ For any issues or further enhancements, please refer to the development process 
 
 ## Progress Summary 📈
 
-Since starting on May 15, 2025, we’ve transformed a vision for a travel blog into a fully functional site hosted on GitHub Pages. From an initial 3D globe with basic markers, we’ve built a dynamic hexagonal bin visualization, a responsive timeline footer, and a filter drawer for seamless exploration. Blog posts, crafted from dictated notes, now bring destinations like San Diego and Fort Lauderdale to life with photos and SEO. Modular code, robust navigation, and a polished UI mark our progress, with over 40 moments mapped and more to come as we continue this journey!
+Since starting on May 15, 2025, we've transformed a vision for a travel blog into a fully functional site hosted on GitHub Pages. From an initial 3D globe with basic markers, we've built a dynamic hexagonal bin visualization, a responsive timeline footer, and a filter drawer for seamless exploration. Blog posts, crafted from dictated notes, now bring destinations like San Diego and Fort Lauderdale to life with photos and SEO. Modular code, robust navigation, and a polished UI mark our progress, with over 40 moments mapped and more to come as we continue this journey!

@@ -23,7 +23,7 @@ window.App = () => {
         zoomCallback(moment); // Trigger zoom to the moment's location
       }
       // Normalize and update the URL only if it doesn't already match
-      const intendedPath = `/moment/${moment.id}`;
+      const intendedPath = `/moments/${moment.id}`;
       const currentPath = window.location.pathname;
       if (currentPath !== intendedPath) {
         window.history.pushState({ momentId: moment.id }, '', intendedPath);
@@ -68,7 +68,7 @@ window.App = () => {
       window.history.replaceState({}, '', path);
     }
 
-    const match = path.match(/^\/moment\/(.+)/);
+    const match = path.match(/^\/moments\/(.+)/);
     if (match) {
       const momentId = match[1];
       const moment = window.momentsInTime.find(m => m.id === momentId);
