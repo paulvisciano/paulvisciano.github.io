@@ -274,10 +274,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const isMobile = window.innerWidth <= 640;
 
     const zoomLevels = isMobile ? [
-      { threshold: 1, hexAltitude: 0.3, hexBinResolution: 3 },
-      { threshold: 0.7, hexAltitude: 0.1, hexBinResolution: 3.8 },
-      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.6, hexBinResolution: 4.5 },
-      { threshold: minAltitude, hexAltitude: minHexAltitude * 1.5, hexBinResolution: 4 }
+      { threshold: 1, hexAltitude: 0.08, hexBinResolution: 3.5 },
+      { threshold: 0.7, hexAltitude: 0.05, hexBinResolution: 3 },
     ] : [
       { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution: 4 },
       { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution: 4 },
@@ -290,6 +288,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     for (const level of zoomLevels) {
       if (altitude >= level.threshold) {
+        console.log(altitude, level);
         hexAltitude = level.hexAltitude;
         hexBinResolution = level.hexBinResolution;
         break;
