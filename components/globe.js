@@ -304,7 +304,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
     for (const level of zoomLevels) {
       if (altitude >= level.threshold) {
-        console.log(altitude, level);
         hexAltitude = level.hexAltitude;
         hexBinResolution = level.hexBinResolution;
         break;
