@@ -295,10 +295,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       { threshold: 1, hexAltitude: 0.08, hexBinResolution: 3.5 },
       { threshold: 0.7, hexAltitude: 0.05, hexBinResolution: 3 },
     ] : [
-      { threshold: 1, hexAltitude: maxHexAltitude, hexBinResolution: 4 },
-      { threshold: 0.5, hexAltitude: maxHexAltitude * 0.75, hexBinResolution: 4 },
-      { threshold: 0.3, hexAltitude: maxHexAltitude * 0.5, hexBinResolution: 5 },
-      { threshold: minAltitude, hexAltitude: minHexAltitude, hexBinResolution: 5 }
+      { threshold: 1, hexAltitude: 0.08, hexBinResolution: 3.8 },
+      { threshold: 0.5, hexAltitude: 0.05, hexBinResolution: 4 },
     ];
 
     let hexAltitude = minAltitude;
