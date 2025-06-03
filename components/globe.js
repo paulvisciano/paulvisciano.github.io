@@ -69,7 +69,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('.filter-toggle-button')) {
         setIsDrawerOpen(false);
       }
-      if (isBlogDrawerOpen && blogDrawerRef.current && !event.target.closest('.popover-link')) {
+      if (isBlogDrawerOpen && blogDrawerRef.current && !blogDrawerRef.current.contains(event.target) && !event.target.closest('.blog-post-drawer')) {
         setIsBlogDrawerOpen(false);
       }
     };
