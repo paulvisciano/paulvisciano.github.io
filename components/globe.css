@@ -323,8 +323,8 @@
   }
 
   .close-button {
-    top: 12px;
-    right: 12px;
+    top: -4px;
+    right: 0px;
     font-size: 2.25rem;
     padding: 8px;
     color: var(--text-light);
