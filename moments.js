@@ -1,11 +1,11 @@
 window.momentsInTime = [
   {
     id: "medellin-2022-07-02",
-    title: "Exploring Medellín’s Markets",
+    title: "Exploring Medellín's Markets",
     date: new Date('2022-07-02T00:00:00Z'),
     timelineHighlight: "Medellín Markets",
     tags: ["culture", "city"],
-    snippet: "Wandered through Medellín’s bustling markets, soaking in the local vibes at Homecenter and beyond.",
+    snippet: "Wandered through Medellín's bustling markets, soaking in the local vibes at Homecenter and beyond.",
     fullLink: "#",
     location: { lat: 6.2442, lng: -75.5812, name: "Medellín, Colombia" },
     stayDuration: 30
@@ -27,7 +27,7 @@ window.momentsInTime = [
     date: new Date('2023-01-01T00:00:00Z'),
     timelineHighlight: "St. Petersburg Art",
     tags: ["beach", "art"],
-    snippet: "Soaked up the sun and explored vibrant murals in St. Petersburg’s artsy downtown.",
+    snippet: "Soaked up the sun and explored vibrant murals in St. Petersburg's artsy downtown.",
     fullLink: "#",
     location: { lat: 27.7676, lng: -82.6403, name: "St. Petersburg, Florida" },
     stayDuration: 217
@@ -49,7 +49,7 @@ window.momentsInTime = [
     date: new Date('2023-08-09T00:00:00Z'),
     timelineHighlight: "Beirut Culture",
     tags: ["culture", "history"],
-    snippet: "Explored Beirut’s historic souks and vibrant nightlife along the Mediterranean coast.",
+    snippet: "Explored Beirut's historic souks and vibrant nightlife along the Mediterranean coast.",
     fullLink: "#",
     location: { lat: 33.8938, lng: 35.5018, name: "Beirut, Lebanon" },
     stayDuration: 8
@@ -60,7 +60,7 @@ window.momentsInTime = [
     date: new Date('2023-08-09T00:00:00Z'),
     timelineHighlight: "Baalbek Ruins",
     tags: ["history", "culture"],
-    snippet: "Explored the majestic Temple of Bacchus in Baalbek, a stunning journey into Lebanon’s ancient past.",
+    snippet: "Explored the majestic Temple of Bacchus in Baalbek, a stunning journey into Lebanon's ancient past.",
     fullLink: "#",
     location: { lat: 34.0069, lng: 36.2039, name: "Baalbek, Lebanon" },
     stayDuration: 1
@@ -82,7 +82,7 @@ window.momentsInTime = [
     date: new Date('2023-08-21T00:00:00Z'),
     timelineHighlight: "Barcelona Art",
     tags: ["art", "architecture"],
-    snippet: "Marveled at Gaudí’s masterpieces and strolled along La Rambla in vibrant Barcelona.",
+    snippet: "Marveled at Gaudí's masterpieces and strolled along La Rambla in vibrant Barcelona.",
     fullLink: "#",
     location: { lat: 41.3851, lng: 2.1734, name: "Barcelona, Spain" },
     stayDuration: 23
@@ -93,7 +93,7 @@ window.momentsInTime = [
     date: new Date('2023-09-13T00:00:00Z'),
     timelineHighlight: "Sofia Culture",
     tags: ["culture", "history"],
-    snippet: "Discovered Sofia’s historic churches and vibrant markets in Bulgaria’s capital.",
+    snippet: "Discovered Sofia's historic churches and vibrant markets in Bulgaria's capital.",
     fullLink: "#",
     location: { lat: 42.6977, lng: 23.3219, name: "Sofia, Bulgaria" },
     stayDuration: 38
@@ -104,7 +104,7 @@ window.momentsInTime = [
     date: new Date('2023-10-05T00:00:00Z'),
     timelineHighlight: "Dubai Skyline",
     tags: ["city", "luxury"],
-    snippet: "Admired Dubai’s towering skyline and explored the desert dunes on an epic adventure.",
+    snippet: "Admired Dubai's towering skyline and explored the desert dunes on an epic adventure.",
     fullLink: "#",
     location: { lat: 25.2048, lng: 55.2708, name: "Dubai, United Arab Emirates" },
     stayDuration: 4
@@ -115,7 +115,7 @@ window.momentsInTime = [
     date: new Date('2023-10-18T00:00:00Z'),
     timelineHighlight: "Varna Beaches",
     tags: ["beach", "culture"],
-    snippet: "Relaxed on Varna’s Black Sea beaches and explored its ancient Roman baths.",
+    snippet: "Relaxed on Varna's Black Sea beaches and explored its ancient Roman baths.",
     fullLink: "#",
     location: { lat: 43.2141, lng: 27.9147, name: "Varna, Bulgaria" },
     stayDuration: 39
@@ -133,7 +133,7 @@ window.momentsInTime = [
   },
   {
     id: "st-petersburg-2024-05-19",
-    title: "Back to St. Petersburg’s Shores",
+    title: "Back to St. Petersburg's Shores",
     date: new Date('2024-05-19T00:00:00Z'),
     timelineHighlight: "St. Petersburg Beaches",
     tags: ["beach", "art"],
@@ -148,7 +148,7 @@ window.momentsInTime = [
     date: new Date('2024-06-01T00:00:00Z'),
     timelineHighlight: "Chicago Skyline",
     tags: ["city", "culture"],
-    snippet: "Explored Chicago’s iconic skyline, deep-dish pizza, and vibrant art scene.",
+    snippet: "Explored Chicago's iconic skyline, deep-dish pizza, and vibrant art scene.",
     fullLink: "#",
     location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
     stayDuration: 60
@@ -170,7 +170,7 @@ window.momentsInTime = [
     date: new Date('2024-08-08T00:00:00Z'),
     timelineHighlight: "Miami Beach Vibes",
     tags: ["beach", "nightlife"],
-    snippet: "Soaked up the sun and danced through the night in Miami Beach’s lively scene.",
+    snippet: "Soaked up the sun and danced through the night in Miami Beach's lively scene.",
     fullLink: "#",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
     stayDuration: 7
@@ -181,7 +181,7 @@ window.momentsInTime = [
     date: new Date('2024-08-15T00:00:00Z'),
     timelineHighlight: "Hermosa Beach Surf",
     tags: ["beach", "surfing"],
-    snippet: "Caught waves and enjoyed laid-back vibes on Hermosa Beach’s sunny shores.",
+    snippet: "Caught waves and enjoyed laid-back vibes on Hermosa Beach's sunny shores.",
     fullLink: "#",
     location: { lat: 33.8622, lng: -118.3995, name: "Hermosa Beach, California" },
     stayDuration: 7
@@ -192,7 +192,7 @@ window.momentsInTime = [
     date: new Date('2024-08-22T00:00:00Z'),
     timelineHighlight: "San Diego Surfing",
     tags: ["beach", "surfing"],
-    snippet: "Caught waves and soaked up the sun on San Diego’s beautiful beaches.",
+    snippet: "Caught waves and soaked up the sun on San Diego's beautiful beaches.",
     fullLink: "#",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
     stayDuration: 9
@@ -210,7 +210,7 @@ window.momentsInTime = [
   },
   {
     id: "st-petersburg-2024-10-10",
-    title: "St. Petersburg’s Coastal Charm",
+    title: "St. Petersburg's Coastal Charm",
     date: new Date('2024-10-10T00:00:00Z'),
     timelineHighlight: "St. Petersburg Sunsets",
     tags: ["beach", "art"],
@@ -225,14 +225,14 @@ window.momentsInTime = [
     date: new Date('2024-10-16T00:00:00Z'),
     timelineHighlight: "Destin Volleyball",
     tags: ["beach volleyball", "beach"],
-    snippet: "Kicked off with sun, sand, and epic volleyball matches in Destin’s emerald waters.",
+    snippet: "Kicked off with sun, sand, and epic volleyball matches in Destin's emerald waters.",
     fullLink: "#",
     location: { lat: 30.3935, lng: -86.4958, name: "Destin, Florida" },
     stayDuration: 5
   },
   {
     id: "miami-2024-10-23",
-    title: "Miami’s Electric Energy",
+    title: "Miami's Electric Energy",
     date: new Date('2024-10-23T00:00:00Z'),
     timelineHighlight: "Miami Beaches",
     tags: ["beach", "nightlife"],
@@ -247,7 +247,7 @@ window.momentsInTime = [
     date: new Date('2024-11-01T00:00:00Z'),
     timelineHighlight: "Playa del Carmen Beaches",
     tags: ["beach", "culture"],
-    snippet: "Relaxed on Playa del Carmen’s beaches and explored nearby Mayan ruins.",
+    snippet: "Relaxed on Playa del Carmen's beaches and explored nearby Mayan ruins.",
     fullLink: "#",
     location: { lat: 20.6296, lng: -87.0739, name: "Playa del Carmen, Mexico" },
     stayDuration: 14
@@ -265,11 +265,11 @@ window.momentsInTime = [
   },
   {
     id: "denver-2024-11-20",
-    title: "Denver’s Urban Pulse",
+    title: "Denver's Urban Pulse",
     date: new Date('2024-11-20T00:00:00Z'),
     timelineHighlight: "Denver City",
     tags: ["city", "culture"],
-    snippet: "Dove into Denver’s vibrant urban scene, exploring Broadway and the city’s eclectic neighborhoods.",
+    snippet: "Dove into Denver's vibrant urban scene, exploring Broadway and the city's eclectic neighborhoods.",
     fullLink: "#",
     location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" },
     stayDuration: 3
@@ -280,7 +280,7 @@ window.momentsInTime = [
     date: new Date('2024-11-28T00:00:00Z'),
     timelineHighlight: "Denver Trails",
     tags: ["hiking", "city"],
-    snippet: "Explored Denver’s urban charm and took in stunning views from nearby trails.",
+    snippet: "Explored Denver's urban charm and took in stunning views from nearby trails.",
     fullLink: "#",
     location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" },
     stayDuration: 3
@@ -303,13 +303,13 @@ window.momentsInTime = [
     timelineHighlight: "Miami Beach Winter",
     tags: ["beach", "nightlife"],
     snippet: "Escaped winter with sunny days and vibrant nights in Miami Beach.",
-    fullLink: "miami-beach-2024-12-30.html",
+    fullLink: "2024/12-30-miami-beach.html",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
     stayDuration: 34
   },
   {
     id: "st-petersburg-2025-02-02",
-    title: "St. Petersburg’s Winter Glow",
+    title: "St. Petersburg's Winter Glow",
     date: new Date('2025-02-02T00:00:00Z'),
     timelineHighlight: "St. Petersburg Winter",
     tags: ["beach", "art"],
@@ -324,7 +324,7 @@ window.momentsInTime = [
     date: new Date('2025-02-07T00:00:00Z'),
     timelineHighlight: "São Paulo Culture",
     tags: ["city", "culture"],
-    snippet: "Immersed in São Paulo’s bustling streets, street art, and vibrant food scene.",
+    snippet: "Immersed in São Paulo's bustling streets, street art, and vibrant food scene.",
     fullLink: "#",
     location: { lat: -23.5505, lng: -46.6333, name: "São Paulo, Brazil" },
     stayDuration: 9
@@ -342,7 +342,7 @@ window.momentsInTime = [
   },
   {
     id: "sao-paulo-2025-02-27",
-    title: "Back to São Paulo’s Beat",
+    title: "Back to São Paulo's Beat",
     date: new Date('2025-02-27T00:00:00Z'),
     timelineHighlight: "São Paulo Art",
     tags: ["city", "art"],
@@ -364,11 +364,11 @@ window.momentsInTime = [
   },
   {
     id: "williston-2025-03-13",
-    title: "Diving Devil’s Den in Williston",
+    title: "Diving Devil's Den in Williston",
     date: new Date('2025-03-13T00:00:00Z'),
-    timelineHighlight: "Devil’s Den Spring",
+    timelineHighlight: "Devil's Den Spring",
     tags: ["nature", "adventure"],
-    snippet: "Dove into the crystal-clear waters of Devil’s Den Prehistoric Spring for an unforgettable adventure.",
+    snippet: "Dove into the crystal-clear waters of Devil's Den Prehistoric Spring for an unforgettable adventure.",
     fullLink: "#",
     location: { lat: 29.4086, lng: -82.4757, name: "Williston, Florida" },
     stayDuration: 1
@@ -379,7 +379,7 @@ window.momentsInTime = [
     date: new Date('2025-03-29T00:00:00Z'),
     timelineHighlight: "Chicago Spring",
     tags: ["city", "culture"],
-    snippet: "Embraced Chicago’s spring energy, visiting Paylocity and exploring the city’s vibrant neighborhoods.",
+    snippet: "Embraced Chicago's spring energy, visiting Paylocity and exploring the city's vibrant neighborhoods.",
     fullLink: "#",
     location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
     stayDuration: 5
@@ -412,7 +412,7 @@ window.momentsInTime = [
     date: new Date('2025-05-01T00:00:00Z'),
     timelineHighlight: "Houston Culture",
     tags: ["city", "culture"],
-    snippet: "Explored Houston’s museums and vibrant food scene in a quick city stop.",
+    snippet: "Explored Houston's museums and vibrant food scene in a quick city stop.",
     fullLink: "#",
     location: { lat: 29.7604, lng: -95.3698, name: "Houston, Texas" },
     stayDuration: 1
@@ -434,8 +434,8 @@ window.momentsInTime = [
     date: new Date('2025-05-13T00:00:00Z'),
     timelineHighlight: "Coffee & Music in Boulder",
     tags: ["coffee", "live music", "wellness"],
-    snippet: "Soaking up Boulder’s chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center.",
-    fullLink: "boulder-2025-05-17.html",
+    snippet: "Soaking up Boulder's chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center.",
+    fullLink: "2025/05-17-boulder.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
     stayDuration: 7
   },
@@ -445,8 +445,8 @@ window.momentsInTime = [
     date: new Date('2025-05-20T00:00:00Z'),
     timelineHighlight: "San Diego Line Dancing",
     tags: ["yoga", "friends", "line dancing", "food"],
-    snippet: "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the middle—Ray’s punctuality ensured a smooth airport send-off.",
-    fullLink: "san-diego-2025-05-20.html",
+    snippet: "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the middle—Ray's punctuality ensured a smooth airport send-off.",
+    fullLink: "2025/05-20-san-diego.html",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
     stayDuration: 1
   },
@@ -457,7 +457,7 @@ window.momentsInTime = [
     timelineHighlight: "Fort Lauderdale Volleyball",
     tags: ["beach", "beach volleyball", "friends"],
     snippet: "Arrived in Fort Lauderdale after a Denver layover, staying with Bartek for work, beach volleyball in Deerfield, and a relaxing massage together.",
-    fullLink: "fort-lauderdale-2025-05-21.html",
+    fullLink: "2025/05-21-fort-lauderdale.html",
     location: { lat: 26.1224, lng: -80.1373, name: "Fort Lauderdale, Florida" },
     stayDuration: 2
   },
@@ -467,8 +467,8 @@ window.momentsInTime = [
     date: new Date('2025-05-23T00:00:00Z'),
     timelineHighlight: "South Beach Adventures",
     tags: ["beach", "beach volleyball", "nightlife", "friends", "bachata"],
-    snippet: "Played high-energy volleyball, danced bachata at Alain’s, and drove to St. Pete",
-    fullLink: "miami-beach-2025-05-23.html",
+    snippet: "Played high-energy volleyball, danced bachata at Alain's, and drove to St. Pete",
+    fullLink: "2025/05-23-miami-beach.html",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
     stayDuration: 7
   },
@@ -479,10 +479,10 @@ window.momentsInTime = [
     timelineHighlight: "Tampa Bay Vibes",
     tags: ["travel", "yoga", "food", "friends", "relocation"],
     snippet: "Cruised from Miami to St. Pete, feasted at a Brazilian steakhouse, flowed through yoga in St. Petersburg, and recovered in Clearwater while prepping for Hawaii.",
-    image: "attachment://tampa-2025-05-30-1.jpg",
+    image: "attachment://2025/05-30-tampa.jpg",
     imageAlt: "Post yoga smoothie",
     caption: "Leigha, Leo & Paul enjoying a smoothie after Yoga",
-    fullLink: "tampa-2025-05-30.html",
+    fullLink: "2025/05-30-tampa.html",
     location: { lat: 27.9506, lng: -82.4572, name: "Tampa, Florida" },
     stayDuration: 3
   },
@@ -510,7 +510,7 @@ window.momentsInTime = [
   },
   {
     id: "chicago-2025-10-03",
-    title: "Chicago’s Fall Charm",
+    title: "Chicago's Fall Charm",
     date: new Date('2025-10-03T00:00:00Z'),
     timelineHighlight: "Chicago Fall",
     tags: ["city", "culture"],
@@ -526,7 +526,7 @@ window.momentsInTime = [
     timelineHighlight: "Playa Volleyball",
     tags: ["beach volleyball", "beach", "friends"],
     snippet: "Will team up with Zacharias to smash serves and dive for digs at a thrilling beach volleyball tournament in Playa del Carmen.",
-    fullLink: "playa-del-carmen-2025-10-28.html",
+    fullLink: "2025/10-28-playa-del-carmen.html",
     location: { lat: 20.6296, lng: -87.0739, name: "Playa del Carmen, Mexico" },
     stayDuration: 10
   },
@@ -536,7 +536,7 @@ window.momentsInTime = [
     date: new Date('2025-11-03T00:00:00Z'),
     timelineHighlight: "Canggu Yoga",
     tags: ["yoga", "beach", "wellness", "friends"],
-    snippet: "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu’s rice fields and beaches.",
+    snippet: "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu's rice fields and beaches.",
     fullLink: "#",
     location: { lat: -8.6596, lng: 115.1326, name: "Canggu, Indonesia" },
     stayDuration: 21
