@@ -333,12 +333,14 @@
   }
 
   .popover-static {
-    right: 30px;
-    width: 250px;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 90%;
+    max-width: 300px;
   }
 
   .popover-content {
-    width: 250px;
+    width: 100%;
     padding: 10px;
   }
   .popover-title {
