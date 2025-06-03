@@ -230,32 +230,50 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         isZooming.current = true;
         globeInstance.current.controls().autoRotate = false;
 
+        // Initial zoom out to transition
         globeInstance.current.pointOfView({
           lat: post.location.lat,
           lng: post.location.lng,
-          altitude: 2.0
-        }, 2000);
+          altitude: 2.5
+        }, 1000);
 
-        waitForZoom(2000).then(() => {
+        waitForZoom(1000).then(() => {
+          // Final position with adjusted camera angle
+          const finalLat = post.location.lat;
+          const finalLng = post.location.lng;
+          
           globeInstance.current.pointOfView({
-            lat: post.location.lat,
-            lng: post.location.lng,
-            altitude: 0.8
-          }, 1500);
+            lat: finalLat,
+            lng: finalLng,
+            altitude: 1.2
+          }, 1000);
 
-          waitForZoom(1500).then(() => {
-            setPopoverContent({
-              title: post.title || "No Title",
-              snippet: post.snippet || "No Snippet",
-              fullLink: post.fullLink || "#",
-              lat: post.lat,
-              lng: post.lng,
-              id: post.id,
-              image: post.image ? post.image.replace('attachment://', '') : null,
-              imageAlt: post.imageAlt
+          // After the main zoom, adjust the camera angle
+          waitForZoom(1000).then(() => {
+            if (globeInstance.current.controls()) {
+              globeInstance.current.controls().enableDamping = true;
+              globeInstance.current.controls().dampingFactor = 0.2;
+              globeInstance.current.pointOfView({
+                lat: finalLat - 15,  // Reduced tilt angle for lower position
+                lng: finalLng,
+                altitude: 0.8
+              }, 800);
+            }
+
+            waitForZoom(800).then(() => {
+              setPopoverContent({
+                title: post.title || "No Title",
+                snippet: post.snippet || "No Snippet",
+                fullLink: post.fullLink || "#",
+                lat: post.lat,
+                lng: post.lng,
+                id: post.id,
+                image: post.image ? post.image.replace('attachment://', '') : null,
+                imageAlt: post.imageAlt
+              });
+              setSelectedId(post.id);
+              isZooming.current = false;
             });
-            setSelectedId(post.id);
-            isZooming.current = false;
           });
         });
       } catch (error) {
@@ -381,9 +399,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             handleTimelineClick(post);
           }
 
+          const finalLat = post.lat;
+          const finalLng = post.lng;
+
+          // Direct zoom with adjusted camera angle
           globeInstance.current.pointOfView({
-            lat: post.lat,
-            lng: post.lng,
+            lat: finalLat - 15,  // Reduced tilt angle for lower position
+            lng: finalLng,
             altitude: 0.8
           }, 1500);
 
