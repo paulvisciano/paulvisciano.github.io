@@ -6,6 +6,9 @@
   <meta name="description" content="Explore my personal blog with coding tips, volleyball updates, travel adventures, coffee shops, nutrition, philosophical thoughts, and more, featuring an interactive 3D globe powered by Globe.GL! 🌍">
   <meta name="keywords" content="personal blog, coding tips, volleyball, travel, coffee shops, nutrition, philosophy, 3D interactive globe, Globe.GL, Austin, Destin, Tokyo">
   <title>Where is Paul?</title>
+  <!-- PWA Support -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#000000">
   <!-- Local Libraries -->
   <script src="lib/tailwind.min.js" crossorigin="anonymous"></script>
   <script src="lib/react.production.min.js" crossorigin="anonymous"></script>
@@ -19,6 +22,21 @@
   <link rel="stylesheet" href="components/blogPostDrawer.css">
   <link rel="stylesheet" href="components/footer.css">
   <link rel="stylesheet" href="components/globe.css">
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
 </head>
 <body>
  <div id="overlay" class="overlay">
