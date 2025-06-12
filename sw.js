@@ -21,6 +21,13 @@ const STATIC_ASSETS = [
   '/components/app.js'
 ];
 
+// Add paths that should use network-first strategy
+const NETWORK_FIRST_PATTERNS = [
+  /moments\.js$/,
+  /icons\/.*\.png$/,
+  /manifest\.json$/
+];
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -34,8 +41,12 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // Network-first strategy for moments.js
-  if (url.pathname.includes('moments.js')) {
+  // Check if the request matches any network-first patterns
+  const shouldUseNetworkFirst = NETWORK_FIRST_PATTERNS.some(pattern => 
+    pattern.test(url.pathname)
+  );
+  
+  if (shouldUseNetworkFirst) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
