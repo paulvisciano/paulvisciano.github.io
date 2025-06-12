@@ -488,25 +488,28 @@ window.momentsInTime = [
   },
   {
     id: "san-diego-2025-06-01",
-    title: "San Diego Coastal Reset",
+    title: "Finding Rhythm in San Diego's June Gloom",
     date: new Date('2025-06-01T00:00:00Z'),
-    timelineHighlight: "San Diego Beaches",
-    tags: ["beach", "surfing"],
-    snippet: "Will head back to San Diego for two weeks of surfing, beach vibes, and gearing up for the Hawaii move.",
-    fullLink: "#",
+    timelineHighlight: "San Diego Life",
+    tags: ["beach volleyball", "remote work", "coffee", "culture", "wellness", "friends", "hookah"],
+    snippet: "Two weeks of balanced living in San Diego, combining European team meetings, beach volleyball at South Mission, and exploring local gems - all while embracing the city's famous June Gloom.",
+    image: "attachment://2025/06-01-san-diego.jpg",
+    imageAlt: "Whale watching in San Diego",
+    caption: "Taking a break from the routine for some ocean adventures!",
+    fullLink: "2025/06-01-san-diego.html",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
-    stayDuration: 14
+    stayDuration: 12
   },
   {
-    id: "oahu-2025-06-15",
+    id: "oahu-2025-06-13",
     title: "New Beginnings in Oahu",
-    date: new Date('2025-06-15T00:00:00Z'),
+    date: new Date('2025-06-13T00:00:00Z'),
     timelineHighlight: "Oahu New Home",
     tags: ["beach", "nature", "relocation"],
     snippet: "Will launch a new chapter in Oahu, settling into island life with beaches and volcanic trails.",
     fullLink: "#",
     location: { lat: 21.4389, lng: -158.0001, name: "Oahu, Hawaii" },
-    stayDuration: 110
+    stayDuration: 111
   },
   {
     id: "chicago-2025-10-03",
