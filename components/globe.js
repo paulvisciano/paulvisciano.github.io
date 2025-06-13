@@ -346,7 +346,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         .ringPropagationSpeed(1)
         .ringRepeatPeriod(2000)
         .onZoom(onZoomHandler)
-        .onHexHover((hex) => {
+        .onHexHover(hex => {
           if (hex && hex.points.length > 0 && !popoverContent && !isZooming.current) {
             // Select the most recent moment for hover
             const sortedPoints = hex.points.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -364,6 +364,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           }
         })
         (document.getElementById('globeViz'));
+
+      // Expose globe instance to window
+      window.globeInstance = globeInstance.current;
 
       onZoomHandler();
 

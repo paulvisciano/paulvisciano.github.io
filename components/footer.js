@@ -62,6 +62,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
   React.useEffect(() => {
     const timeline = document.querySelector('.timeline');
     const timelineLine = document.querySelector('.timeline-line');
+    const timelineContainer = document.querySelector('.timeline-container');
+    
     if (timeline && timelineLine) {
       const entries = document.querySelectorAll('.timeline-entry, .timeline-year-entry');
       const totalWidth = Array.from(entries).reduce((acc, entry) => {
@@ -70,11 +72,36 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       timelineLine.style.width = `${totalWidth}px`;
     }
 
+    // Handle scroll events to rotate the globe
+    const handleScroll = (event) => {
+      if (!window.globeInstance) return;
+      
+      const scrollDelta = event.deltaX || event.deltaY;
+      if (scrollDelta === 0) return;
+
+      const currentPOV = window.globeInstance.pointOfView();
+      const rotationSpeed = 0.2; // Reduced rotation speed for slower rotation
+      const zoomSpeed = 0.001; // Very subtle zoom effect
+      // Scroll right (positive delta) = going to past = rotate west (negative)
+      // Scroll left (negative delta) = going to future = rotate east (positive)
+      const newLng = currentPOV.lng + (scrollDelta > 0 ? -rotationSpeed : rotationSpeed);
+      const newAltitude = Math.min(3.5, currentPOV.altitude + zoomSpeed); // Zoom out slightly, max altitude of 3.5
+      
+      window.globeInstance.pointOfView({
+        lat: currentPOV.lat,
+        lng: newLng,
+        altitude: newAltitude
+      }, 0);
+    };
+
+    if (timelineContainer) {
+      timelineContainer.addEventListener('wheel', handleScroll, { passive: false });
+    }
+
     // Scroll to selected moment, centering it in the timeline
     if (selectedId) {
       const selectedEntry = document.querySelector(`.timeline-entry[data-id="${selectedId}"]`);
       if (selectedEntry) {
-        const timelineContainer = document.querySelector('.timeline-container');
         const entryRect = selectedEntry.getBoundingClientRect();
         const containerRect = timelineContainer.getBoundingClientRect();
         const scrollOffset = entryRect.left + (entryRect.width / 2) - (containerRect.width / 2);
@@ -84,6 +111,12 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
         });
       }
     }
+
+    return () => {
+      if (timelineContainer) {
+        timelineContainer.removeEventListener('wheel', handleScroll);
+      }
+    };
   }, [selectedTag, selectedYear, selectedId]);
 
   // Helper function to format combined date (month and day range)
