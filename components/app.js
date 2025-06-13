@@ -37,7 +37,7 @@ window.App = () => {
   const findCurrentMoment = () => {
     const today = new Date();
     // Find the most recent moment where end date is before or on today
-    const sortedMoments = window.momentsInTime.sort((a, b) => b.date - a.date);
+    const sortedMoments = [...window.momentsInTime].sort((a, b) => b.date - a.date);
     return sortedMoments.find(moment => {
       const startDate = new Date(moment.date);
       const endDate = new Date(startDate);
