@@ -144,22 +144,27 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                   React.createElement(
                     'div',
                     { className: 'timeline-card' },
+                    moment.fullLink !== '#' && React.createElement(
+                      'span',
+                      { className: 'full-moment-indicator', title: 'Full blog post available' },
+                      '📖'
+                    ),
+                    React.createElement(
+                      'div',
+                      { className: 'timeline-highlight' },
+                      moment.timelineHighlight
+                    ),
                     React.createElement(
                       'div',
                       { 
                         className: 'timeline-date-combined',
                         title: fullDateRange
                       },
-                      combinedDate
-                    ),
-                    React.createElement(
-                      'div',
-                      { className: 'timeline-highlight' },
-                      moment.timelineHighlight,
-                      moment.fullLink !== '#' && React.createElement(
+                      combinedDate,
+                      React.createElement(
                         'span',
-                        { className: 'full-moment-indicator', title: 'Full blog post available' },
-                        '📖'
+                        { className: 'timeline-duration' },
+                        ` · ${moment.stayDuration} ${moment.stayDuration === 1 ? 'day' : 'days'}`
                       )
                     )
                   )
