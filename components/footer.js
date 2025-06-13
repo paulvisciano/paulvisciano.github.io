@@ -8,11 +8,24 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
 
   // Group moments by year while preserving original order
   const momentsByYear = filteredMoments.reduce((acc, moment) => {
-    const year = new Date(moment.date).getUTCFullYear().toString();
-    if (!acc[year]) {
-      acc[year] = [];
+    const startDate = new Date(moment.date);
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + moment.stayDuration - 1);
+    const startYear = startDate.getUTCFullYear().toString();
+    const endYear = endDate.getUTCFullYear().toString();
+    
+    // Add moment to both start and end years if they differ
+    if (!acc[startYear]) {
+      acc[startYear] = [];
     }
-    acc[year].push(moment);
+    acc[startYear].push(moment);
+    
+    if (startYear !== endYear) {
+      if (!acc[endYear]) {
+        acc[endYear] = [];
+      }
+      acc[endYear].push(moment);
+    }
     return acc;
   }, {});
 
