@@ -61,7 +61,7 @@ footer {
 .timeline-year-card {
     background: var(--background-dark); /* Dark card background */
     border: 1px solid var(--border-dark); /* Subtle border */
-    border-radius: 4px;
+    border-radius: 8px; /* Increased from 4px */
     padding: 6px 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow for depth */
     margin-top: 12px; /* Space below dot */
@@ -121,14 +121,41 @@ footer {
 
 .timeline-card {
     background: var(--white-05);
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 8px 12px;
     transition: all 0.3s ease;
     opacity: 0;
     animation: fadeIn 0.5s forwards;
     animation-delay: calc(var(--index) * 0.2s);
-    margin-top: 12px; /* Space below dot */
-    white-space: normal; /* Allow text wrapping if needed */
+    margin-top: 12px;
+    white-space: normal;
+    position: relative;
+}
+
+.full-moment-indicator {
+    color: var(--primary-orange);
+    font-size: 0.875rem;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: -10px;
+    right: -14px;
+    z-index: 2;
+    background: var(--background-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-entry:hover .full-moment-indicator,
+.timeline-entry.selected .full-moment-indicator {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 @keyframes fadeIn {
@@ -137,21 +164,36 @@ footer {
 }
 
 .timeline-date-combined {
-    font-size: 0.8125rem; /* Slightly larger for more prominence */
+    font-size: 0.8125rem;
     color: var(--text-muted);
-    opacity: 0.85; /* Maintain visibility */
-    margin-top: 2px;
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    margin-top: 4px; /* Add space from the title */
+}
+
+.timeline-duration {
+    color: var(--text-muted);
+    opacity: 0.75;
+    text-align: center;
 }
 
 .timeline-highlight {
-    font-size: 1rem; /* Keep prominent */
-    font-weight: 600; /* Bolder for emphasis */
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--text-light);
-    opacity: 1; /* Full opacity for prominence */
+    opacity: 1;
     display: flex;
-    justify-content: center; /* Center the title */
+    justify-content: center;
     align-items: center;
     gap: 8px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
 }
 
 .full-post-indicator {
@@ -184,11 +226,14 @@ footer {
     }
     .timeline-date-combined {
         opacity: 0.8; /* Maintain visibility */
+        margin-top: 2px; /* Smaller margin on mobile */
     }
     .timeline-highlight {
-        padding: 8px 0px;
-        font-weight: 600;
-        justify-content: center; /* Center the title on mobile */
+        padding: 4px 0px;
+        font-weight: 700;
+        font-size: 1.125rem;
+        justify-content: center;
+        margin-bottom: 4px;
     }
     .timeline-card {
         padding: 6px 10px;
@@ -213,5 +258,12 @@ footer {
     }
     .full-post-indicator {
         font-size: 0.625rem;
+    }
+    .full-moment-indicator {
+        font-size: 0.75rem;
+        width: 20px;
+        height: 20px;
+        top: -4px;
+        right: -4px;
     }
 }
