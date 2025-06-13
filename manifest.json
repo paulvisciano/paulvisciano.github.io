@@ -11,13 +11,13 @@
   "categories": ["blog", "travel", "lifestyle"],
   "icons": [
     {
-      "src": "/icons/icon-2-192x192.png",
+      "src": "/icons/icon-3-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-2-512x512.png",
+      "src": "/icons/icon-3-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -27,7 +27,7 @@
     {
       "name": "Latest Posts",
       "url": "/",
-      "icons": [{ "src": "/icons/icon-2-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/icons/icon-3-192x192.png", "sizes": "192x192" }]
     }
   ],
   "prefer_related_applications": false
