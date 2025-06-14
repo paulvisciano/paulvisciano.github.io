@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Run the cache version bump script
+./bump-cache.sh
+
+# Get the new version from sw.js
+NEW_VERSION=$(grep -o "CACHE_VERSION = '[^']*'" sw.js | cut -d"'" -f2)
+
+# Get the list of changed files
+CHANGED_FILES=$(git diff --name-only HEAD)
+
+# Create a descriptive commit message
+COMMIT_MSG="🔄 Bump service worker cache to $NEW_VERSION
+
+Changes detected in:
+$(echo "$CHANGED_FILES" | sed 's/^/- /')
+
+This update ensures users receive the latest version of the site."
+
+# Update the commit message
+git commit --amend -m "$COMMIT_MSG" --no-edit
+
+echo "Cache version bumped to $NEW_VERSION before push" 
