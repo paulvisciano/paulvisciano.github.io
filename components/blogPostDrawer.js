@@ -38,7 +38,8 @@ window.BlogPostDrawer = ({ content, onClose }) => {
         React.createElement('img', {
           src: content.image,
           alt: content.imageAlt,
-          className: 'blog-post-cover-image'
+          className: 'blog-post-cover-image',
+          style: content.image.includes('03-20-sofia.jpg') ? { objectFit: 'scale-down', objectPosition: 'center' } : undefined
         }),
         React.createElement(
           'div',
