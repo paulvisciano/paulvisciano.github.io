@@ -39,7 +39,7 @@ window.BlogPostDrawer = ({ content, onClose }) => {
           src: content.image,
           alt: content.imageAlt,
           className: 'blog-post-cover-image',
-          style: content.image.includes('03-20-sofia.jpg') ? { objectFit: 'scale-down', objectPosition: 'center' } : undefined
+          style: content.image.includes('03-20-sofia-childhood.jpg') ? { objectFit: 'scale-down', objectPosition: 'center' } : undefined
         }),
         React.createElement(
           'div',

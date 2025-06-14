@@ -37,7 +37,7 @@ window.momentsInTime = [
     location: { lat: 42.6977, lng: 23.3219, name: "Sofia, Bulgaria" },
     stayDuration: 3650,
     formattedDuration: formatDuration(3650),
-    image: "attachment://2005/03-20-sofia.jpg",
+    image: "attachment://2005/03-20-sofia-childhood.jpg",
     imageAlt: "Young Paul in Sofia",
     caption: "Exploring the streets of Sofia as a young boy",
     popoverImageStyle: {
