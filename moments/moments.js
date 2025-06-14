@@ -28,15 +28,23 @@ window.momentsInTime = [
   },
   {
     id: "sofia-1994-11-24",
-    title: "City Life in Sofia",
+    title: "Wild Teenage Years in Sofia",
     date: new Date('1994-11-24T00:00:00Z'),
     timelineHighlight: "Sofia Youth",
-    tags: ["city", "culture"],
-    snippet: "Moved to Sofia at six, exploring historic streets and vibrant markets as a young adventurer.",
-    fullLink: "#",
+    tags: ["city", "culture", "sports", "education"],
+    snippet: "Started at 119th High School at age 6, where I spent grades 1-6. Later transferred to Doris Tenedi German High School for grades 7-10, balancing my studies with an adventurous social life. By 13, I was already exploring Sofia's nightlife, hanging out downtown with friends, and playing intense street soccer on concrete courts - the scars on my knees still tell those stories. Those early teenage years in Sofia shaped my adventurous spirit.",
+    fullLink: "2005/03-20-sofia-childhood.html",
     location: { lat: 42.6977, lng: 23.3219, name: "Sofia, Bulgaria" },
     stayDuration: 3650,
-    formattedDuration: formatDuration(3650)
+    formattedDuration: formatDuration(3650),
+    image: "attachment://2005/03-20-sofia.jpg",
+    imageAlt: "Young Paul in Sofia",
+    caption: "Exploring the streets of Sofia as a young boy",
+    popoverImageStyle: {
+      objectFit: "contain",
+      objectPosition: "center",
+      borderRadius: "0"
+    }
   },
   {
     id: "osseo-2004-08-01",
