@@ -245,7 +245,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.pointOfView({
             lat: finalLat,
             lng: finalLng,
-            altitude: 1.2
+            altitude: 1.8
           }, 1000);
 
           // After the main zoom, adjust the camera angle
@@ -256,7 +256,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
               globeInstance.current.pointOfView({
                 lat: finalLat - 15,  // Reduced tilt angle for lower position
                 lng: finalLng,
-                altitude: 0.8
+                altitude: 1.5
               }, 800);
             }
 
@@ -406,7 +406,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.pointOfView({
             lat: finalLat - 15,  // Reduced tilt angle for lower position
             lng: finalLng,
-            altitude: 0.8
+            altitude: 1.5
           }, 1500);
 
           waitForZoom(1500).then(() => {
