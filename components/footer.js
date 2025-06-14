@@ -72,6 +72,62 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       timelineLine.style.width = `${totalWidth}px`;
     }
 
+    let touchStartX = null;
+    let lastTouchX = null;
+    let lastTouchTime = null;
+    let touchVelocity = 0;
+    let momentumAnimation = null;
+    let isDragging = false;
+    let initialAltitude = null;
+    let selectionTimeout = null;
+    let lastInteractionTime = Date.now();
+
+    // Function to find and select the entry closest to the center
+    const selectCenterEntry = () => {
+      // Clear any existing selection timeout
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout);
+      }
+
+      // Only proceed with selection if enough time has passed since last interaction
+      const timeSinceLastInteraction = Date.now() - lastInteractionTime;
+      if (timeSinceLastInteraction < 500) { // If less than 500ms since last interaction, wait
+        selectionTimeout = setTimeout(selectCenterEntry, 500 - timeSinceLastInteraction);
+        return;
+      }
+
+      // Wait for the timeline to settle before selecting
+      selectionTimeout = setTimeout(() => {
+        const containerRect = timelineContainer.getBoundingClientRect();
+        const containerCenter = containerRect.left + (containerRect.width / 2);
+        
+        const entries = Array.from(document.querySelectorAll('.timeline-entry'));
+        let closestEntry = null;
+        let minDistance = Infinity;
+        
+        entries.forEach(entry => {
+          const entryRect = entry.getBoundingClientRect();
+          const entryCenter = entryRect.left + (entryRect.width / 2);
+          const distance = Math.abs(entryCenter - containerCenter);
+          
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestEntry = entry;
+          }
+        });
+        
+        if (closestEntry) {
+          const entryId = closestEntry.getAttribute('data-id');
+          if (entryId) {
+            const moment = window.momentsInTime.find(m => m.id === entryId);
+            if (moment) {
+              handleTimelineClick(moment);
+            }
+          }
+        }
+      }, 300); // Increased delay to 300ms for better settling
+    };
+
     // Handle scroll events to rotate the globe
     const handleScroll = (event) => {
       if (!window.globeInstance) return;
@@ -79,9 +135,10 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       const scrollDelta = event.deltaX || event.deltaY;
       if (scrollDelta === 0) return;
 
+      lastInteractionTime = Date.now();
       const currentPOV = window.globeInstance.pointOfView();
-      const rotationSpeed = 0.2; // Reduced rotation speed for slower rotation
-      const zoomSpeed = 0.001; // Very subtle zoom effect
+      const rotationSpeed = 0.15; // Slightly reduced for smoother rotation
+      const zoomSpeed = 0.001; // Base zoom speed
       // Scroll right (positive delta) = going to past = rotate west (negative)
       // Scroll left (negative delta) = going to future = rotate east (positive)
       const newLng = currentPOV.lng + (scrollDelta > 0 ? -rotationSpeed : rotationSpeed);
@@ -94,8 +151,123 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       }, 0);
     };
 
+    // Handle touch events for mobile
+    const handleTouchStart = (event) => {
+      touchStartX = event.touches[0].clientX;
+      lastTouchX = touchStartX;
+      lastTouchTime = Date.now();
+      lastInteractionTime = Date.now();
+      touchVelocity = 0;
+      isDragging = true;
+      
+      // Store initial altitude for smooth zoom return
+      if (window.globeInstance) {
+        initialAltitude = window.globeInstance.pointOfView().altitude;
+      }
+      
+      // Cancel any ongoing momentum animation and selection timeout
+      if (momentumAnimation) {
+        cancelAnimationFrame(momentumAnimation);
+        momentumAnimation = null;
+      }
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout);
+        selectionTimeout = null;
+      }
+    };
+
+    const handleTouchMove = (event) => {
+      if (!window.globeInstance || !touchStartX || !isDragging) return;
+
+      lastInteractionTime = Date.now();
+      const currentTouchX = event.touches[0].clientX;
+      const currentTime = Date.now();
+      const deltaX = currentTouchX - lastTouchX;
+      const deltaTime = currentTime - lastTouchTime;
+      
+      // Calculate velocity (pixels per millisecond)
+      touchVelocity = deltaTime > 0 ? deltaX / deltaTime : 0;
+      
+      lastTouchX = currentTouchX;
+      lastTouchTime = currentTime;
+
+      const currentPOV = window.globeInstance.pointOfView();
+      const rotationSpeed = 0.15; // Slightly reduced for smoother rotation
+      const zoomSpeed = 0.001; // Base zoom speed
+      const isMobile = window.innerWidth <= 640;
+      const mobileZoomMultiplier = 8; // Dramatic zoom effect on mobile
+      const effectiveZoomSpeed = isMobile ? zoomSpeed * mobileZoomMultiplier : zoomSpeed;
+      
+      // Calculate zoom based on drag speed
+      const dragSpeed = Math.abs(touchVelocity);
+      const speedBasedZoom = Math.min(0.01, dragSpeed * 0.0001); // Cap the zoom speed
+      
+      // Drag right (positive delta) = going to past = rotate west (negative)
+      // Drag left (negative delta) = going to future = rotate east (positive)
+      const newLng = currentPOV.lng + (deltaX > 0 ? -rotationSpeed : rotationSpeed);
+      const newAltitude = Math.min(3.5, currentPOV.altitude + effectiveZoomSpeed + speedBasedZoom);
+      
+      window.globeInstance.pointOfView({
+        lat: currentPOV.lat,
+        lng: newLng,
+        altitude: newAltitude
+      }, 0);
+    };
+
+    const handleTouchEnd = () => {
+      if (!window.globeInstance) return;
+      isDragging = false;
+      lastInteractionTime = Date.now();
+
+      // Convert velocity to rotation speed (adjust multiplier to control momentum strength)
+      const momentumMultiplier = 0.3; // Reduced for more controlled momentum
+      let momentumVelocity = touchVelocity * momentumMultiplier;
+      
+      // Apply momentum animation
+      const animateMomentum = () => {
+        if (Math.abs(momentumVelocity) < 0.001) {
+          momentumAnimation = null;
+          // Smoothly return to initial altitude
+          if (initialAltitude !== null) {
+            const currentPOV = window.globeInstance.pointOfView();
+            window.globeInstance.pointOfView({
+              lat: currentPOV.lat,
+              lng: currentPOV.lng,
+              altitude: initialAltitude
+            }, 1000); // Smooth transition back
+          }
+          // Select the entry in the center after momentum ends
+          selectCenterEntry();
+          return;
+        }
+
+        const currentPOV = window.globeInstance.pointOfView();
+        const newLng = currentPOV.lng + (momentumVelocity > 0 ? -0.15 : 0.15);
+        
+        window.globeInstance.pointOfView({
+          lat: currentPOV.lat,
+          lng: newLng,
+          altitude: currentPOV.altitude
+        }, 0);
+
+        // Decay the velocity
+        momentumVelocity *= 0.92; // Slower decay for smoother stop
+        
+        momentumAnimation = requestAnimationFrame(animateMomentum);
+      };
+
+      momentumAnimation = requestAnimationFrame(animateMomentum);
+      
+      touchStartX = null;
+      lastTouchX = null;
+      lastTouchTime = null;
+    };
+
     if (timelineContainer) {
       timelineContainer.addEventListener('wheel', handleScroll, { passive: false });
+      timelineContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+      timelineContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+      timelineContainer.addEventListener('touchend', handleTouchEnd);
     }
 
     // Scroll to selected moment, centering it in the timeline
@@ -115,9 +287,18 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     return () => {
       if (timelineContainer) {
         timelineContainer.removeEventListener('wheel', handleScroll);
+        timelineContainer.removeEventListener('touchstart', handleTouchStart);
+        timelineContainer.removeEventListener('touchmove', handleTouchMove);
+        timelineContainer.removeEventListener('touchend', handleTouchEnd);
+      }
+      if (momentumAnimation) {
+        cancelAnimationFrame(momentumAnimation);
+      }
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout);
       }
     };
-  }, [selectedTag, selectedYear, selectedId]);
+  }, [selectedId]);
 
   // Helper function to format combined date (month and day range)
   const formatCombinedDate = (startDate, duration) => {
