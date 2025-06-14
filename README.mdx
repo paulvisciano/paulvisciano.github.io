@@ -78,3 +78,32 @@ For any issues or further enhancements, please refer to the development process 
 ## Progress Summary 📈
 
 Since starting on May 15, 2025, we've transformed a vision for a travel blog into a fully functional site hosted on GitHub Pages. From an initial 3D globe with basic markers, we've built a dynamic hexagonal bin visualization, a responsive timeline footer, and a filter drawer for seamless exploration. Blog posts, crafted from dictated notes, now bring destinations like San Diego and Fort Lauderdale to life with photos and SEO. Modular code, robust navigation, and a polished UI mark our progress, with over 40 moments mapped and more to come as we continue this journey!
+
+## Git Hooks Setup 🔧
+
+This repository includes Git hooks to automate certain tasks. To set up the hooks after cloning:
+
+```bash
+./setup-hooks.sh
+```
+
+### Available Hooks
+
+- **pre-push**: Automatically bumps the service worker cache version before pushing changes
+  - Updates the version number with a timestamp (YYYY.MM.DD.HHMM)
+  - Commits the changes with a descriptive message
+  - Ensures users always get the latest version of the site
+
+### Manual Hook Installation
+
+If you prefer to install hooks manually:
+
+1. Copy the hooks from the `hooks` directory to `.git/hooks`:
+   ```bash
+   cp hooks/* .git/hooks/
+   ```
+
+2. Make the hooks executable:
+   ```bash
+   chmod +x .git/hooks/*
+   ```
