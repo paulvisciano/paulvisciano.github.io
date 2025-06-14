@@ -135,12 +135,20 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       const scrollDelta = event.deltaX || event.deltaY;
       if (scrollDelta === 0) return;
 
+      // Dismiss popover if present
+      if (window.setPopoverContent) {
+        window.setPopoverContent(null);
+      }
+      if (window.setSelectedId) {
+        window.setSelectedId(null);
+      }
+
       lastInteractionTime = Date.now();
       const currentPOV = window.globeInstance.pointOfView();
       const rotationSpeed = 0.15; // Slightly reduced for smoother rotation
       const zoomSpeed = 0.001; // Base zoom speed
-      // Scroll right (positive delta) = going to past = rotate west (negative)
-      // Scroll left (negative delta) = going to future = rotate east (positive)
+      // Scroll right (positive delta) = going to future = rotate west (negative)
+      // Scroll left (negative delta) = going to past = rotate east (positive)
       const newLng = currentPOV.lng + (scrollDelta > 0 ? -rotationSpeed : rotationSpeed);
       const newAltitude = Math.min(3.5, currentPOV.altitude + zoomSpeed); // Zoom out slightly, max altitude of 3.5
       
@@ -153,6 +161,14 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
 
     // Handle touch events for mobile
     const handleTouchStart = (event) => {
+      // Dismiss popover if present
+      if (window.setPopoverContent) {
+        window.setPopoverContent(null);
+      }
+      if (window.setSelectedId) {
+        window.setSelectedId(null);
+      }
+
       touchStartX = event.touches[0].clientX;
       lastTouchX = touchStartX;
       lastTouchTime = Date.now();
@@ -179,6 +195,14 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     const handleTouchMove = (event) => {
       if (!window.globeInstance || !touchStartX || !isDragging) return;
 
+      // Dismiss popover if present
+      if (window.setPopoverContent) {
+        window.setPopoverContent(null);
+      }
+      if (window.setSelectedId) {
+        window.setSelectedId(null);
+      }
+
       lastInteractionTime = Date.now();
       const currentTouchX = event.touches[0].clientX;
       const currentTime = Date.now();
@@ -202,8 +226,8 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       const dragSpeed = Math.abs(touchVelocity);
       const speedBasedZoom = Math.min(0.01, dragSpeed * 0.0001); // Cap the zoom speed
       
-      // Drag right (positive delta) = going to past = rotate west (negative)
-      // Drag left (negative delta) = going to future = rotate east (positive)
+      // Drag right (positive delta) = going to future = rotate west (negative)
+      // Drag left (negative delta) = going to past = rotate east (positive)
       const newLng = currentPOV.lng + (deltaX > 0 ? -rotationSpeed : rotationSpeed);
       const newAltitude = Math.min(3.5, currentPOV.altitude + effectiveZoomSpeed + speedBasedZoom);
       
@@ -242,7 +266,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
         }
 
         const currentPOV = window.globeInstance.pointOfView();
-        const newLng = currentPOV.lng + (momentumVelocity > 0 ? -0.15 : 0.15);
+        const newLng = currentPOV.lng + (momentumVelocity > 0 ? 0.15 : -0.15);
         
         window.globeInstance.pointOfView({
           lat: currentPOV.lat,
@@ -268,6 +292,17 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       timelineContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
       timelineContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
       timelineContainer.addEventListener('touchend', handleTouchEnd);
+      
+      // Add scroll event listener for timeline scrolling
+      timelineContainer.addEventListener('scroll', () => {
+        // Dismiss popover if present
+        if (window.setPopoverContent) {
+          window.setPopoverContent(null);
+        }
+        if (window.setSelectedId) {
+          window.setSelectedId(null);
+        }
+      });
     }
 
     // Scroll to selected moment, centering it in the timeline
@@ -290,6 +325,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
         timelineContainer.removeEventListener('touchstart', handleTouchStart);
         timelineContainer.removeEventListener('touchmove', handleTouchMove);
         timelineContainer.removeEventListener('touchend', handleTouchEnd);
+        timelineContainer.removeEventListener('scroll', () => {});
       }
       if (momentumAnimation) {
         cancelAnimationFrame(momentumAnimation);
