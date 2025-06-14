@@ -14,34 +14,20 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     const startYear = startDate.getUTCFullYear().toString();
     const endYear = endDate.getUTCFullYear().toString();
     
-    // Add moment to both start and end years if they differ
+    // Only add moment to its start year
     if (!acc[startYear]) {
       acc[startYear] = [];
     }
     acc[startYear].push(moment);
     
-    if (startYear !== endYear) {
-      if (!acc[endYear]) {
-        acc[endYear] = [];
-      }
-      acc[endYear].push(moment);
-    }
     return acc;
   }, {});
 
-  // Get unique years from filtered moments and compute years spanned by each moment
+  // Get unique years from filtered moments
   const years = filteredMoments.length > 0 
-    ? [...new Set(filteredMoments.flatMap(moment => {
+    ? [...new Set(filteredMoments.map(moment => {
         const startDate = new Date(moment.date);
-        const endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + moment.stayDuration - 1);
-        const startYear = startDate.getUTCFullYear();
-        const endYear = endDate.getUTCFullYear();
-        const yearRange = [];
-        for (let year = startYear; year <= endYear; year++) {
-          yearRange.push(year);
-        }
-        return yearRange;
+        return startDate.getUTCFullYear();
       }))].sort((a, b) => a - b)
     : [];
 
@@ -338,6 +324,9 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
 
   // Helper function to format combined date (month and day range)
   const formatCombinedDate = (startDate, duration) => {
+    if (duration >= 365) {
+      return ''; // Return empty string for entries longer than a year
+    }
     const start = new Date(startDate);
     const end = new Date(start);
     end.setDate(start.getDate() + duration - 1);
@@ -433,11 +422,11 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                         className: 'timeline-date-combined',
                         title: fullDateRange
                       },
-                      combinedDate,
+                      moment.stayDuration >= 365 ? '' : combinedDate,
                       React.createElement(
                         'span',
                         { className: 'timeline-duration' },
-                        ` · ${moment.stayDuration} ${moment.stayDuration === 1 ? 'day' : 'days'}`
+                        moment.stayDuration >= 365 ? moment.formattedDuration : ` · ${moment.formattedDuration}`
                       )
                     )
                   )
