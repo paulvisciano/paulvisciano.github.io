@@ -625,20 +625,68 @@ window.momentsInTime = [
     snippet: "Will launch a new chapter in Oahu, settling into island life with beaches and volcanic trails.",
     fullLink: "#",
     location: { lat: 21.4389, lng: -158.0001, name: "Oahu, Hawaii" },
-    stayDuration: 111,
-    formattedDuration: formatDuration(111)
+    stayDuration: 60,
+    formattedDuration: formatDuration(60)
   },
   {
-    id: "chicago-2025-10-03",
-    title: "Chicago's Fall Charm",
-    date: new Date('2025-10-03T00:00:00Z'),
-    timelineHighlight: "Chicago Fall",
-    tags: ["city", "culture"],
-    snippet: "Will revisit Chicago to enjoy fall vibes, art walks, and cozy coffee shops.",
+    id: "philippines-2025-08-12",
+    title: "Reconnecting with Leo & Wellness Center Vision in the Philippines",
+    date: new Date('2025-08-12T00:00:00Z'),
+    timelineHighlight: "Philippines with Leo",
+    tags: ["beach", "culture", "islands", "friends", "wellness", "business"],
+    snippet: "Will meet up with Leo in his hometown north of Manila, then head to Siargao to scout potential land for a wellness center featuring beach volleyball, yoga, smoothies, and recovery options like cold plunge, sauna, and steam room.",
+    fullLink: "#",
+    location: { lat: 12.8797, lng: 121.7740, name: "Philippines" },
+    stayDuration: 12,
+    formattedDuration: formatDuration(12)
+  },
+  {
+    id: "bangkok-2025-08-24",
+    title: "Digital Nomad Life in Bangkok with Bozhi",
+    date: new Date('2025-08-24T00:00:00Z'),
+    timelineHighlight: "Bangkok Digital Nomad",
+    tags: ["culture", "food", "city", "friends", "remote work", "nightlife"],
+    snippet: "Bozhi might join to explore why Bangkok is rated #1 for digital nomads - enjoying nightlife, rooftops, lounges, working from cool coffee shops, finding a nice gym, and staying in a sick building for cheap.",
+    fullLink: "#",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 10,
+    formattedDuration: formatDuration(10)
+  },
+  {
+    id: "japan-2025-09-03",
+    title: "Cherry Blossoms and Zen in Japan",
+    date: new Date('2025-09-03T00:00:00Z'),
+    timelineHighlight: "Japan Culture",
+    tags: ["culture", "nature", "city"],
+    snippet: "Will immerse in Japanese culture, from ancient temples to modern cities, experiencing the perfect blend of tradition and innovation.",
+    fullLink: "#",
+    location: { lat: 35.6762, lng: 139.6503, name: "Japan" },
+    stayDuration: 14,
+    formattedDuration: formatDuration(14)
+  },
+  {
+    id: "maui-2025-09-17",
+    title: "Reconnecting with Jaime & Nature Adventures in Maui",
+    date: new Date('2025-09-17T00:00:00Z'),
+    timelineHighlight: "Maui Adventures",
+    tags: ["beach", "nature", "islands", "friends", "hiking", "snorkeling"],
+    snippet: "Will reconnect with Jaime and enjoy tons of adventures in nature, cool hikes, and snorkeling in Maui's pristine waters.",
+    fullLink: "#",
+    location: { lat: 20.7984, lng: -156.3319, name: "Maui, Hawaii" },
+    stayDuration: 7,
+    formattedDuration: formatDuration(7)
+  },
+  {
+    id: "chicago-2025-09-24",
+    title: "Family Reunion & Wedding in Chicago",
+    date: new Date('2025-09-24T00:00:00Z'),
+    timelineHighlight: "Chicago Family",
+    tags: ["city", "culture", "family", "wedding"],
+    snippet: "Will attend my step-dad Mike's daughter's wedding and have an emotional reunion with my dad after 16 years apart - we recently reconnected over the phone and he's excited to meet my brother and I in person.",
     fullLink: "#",
     location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
-    stayDuration: 5,
-    formattedDuration: formatDuration(5)
+    stayDuration: 14,
+    formattedDuration: formatDuration(14)
   },
   {
     id: "playa-del-carmen-2025-10-24",
