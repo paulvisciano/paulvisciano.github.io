@@ -4,7 +4,8 @@
   "technology_stack": {
     "frontend": ["React", "JavaScript", "D3.js", "Globe.GL", "Tailwind CSS"],
     "build_tools": ["Babel"],
-    "deployment": "Git commit hooks with auto-publishing"
+    "deployment": "Git commit hooks with auto-publishing",
+    "asset_management": "Git LFS for efficient binary file handling"
   },
   "architecture": {
     "main_components": {
@@ -17,6 +18,11 @@
       "source": "moments/moments.js",
       "format": "JavaScript array of moment objects",
       "fields": ["id", "title", "date", "location", "snippet", "tags", "stayDuration"]
+    },
+    "asset_management": {
+      "git_lfs": "Configured for PNG, JPG, GIF, MP4, MOV, AVI, PDF files",
+      "image_optimization": "Efficient storage and serving of large binary assets",
+      "urban_runner_assets": "9 high-quality PNG images from Episode 4"
     }
   },
   "workflow_patterns": {
@@ -29,12 +35,49 @@
       "Prefer editing existing files over creating new ones",
       "No manual npm script execution needed",
       "Detailed, narrative-style content with rich context"
+    ],
+    "asset_workflow": [
+      "Git LFS automatically tracks binary files",
+      "Large images stored efficiently in LFS storage",
+      "Fast repository operations with on-demand asset downloads"
     ]
   },
   "key_features": {
     "globe_visualization": "3D interactive globe with location markers",
     "timeline_filtering": "Filter moments by tags and years",
     "moment_details": "Rich content with images and detailed descriptions",
-    "responsive_design": "Mobile and desktop optimized"
+    "responsive_design": "Mobile and desktop optimized",
+    "urban_runner_integration": "Running routes, checkpoints, and wealth redistribution visualization"
+  },
+  "integrated_projects": {
+    "urban_runner": {
+      "name": "Urban Runner",
+      "vision": "A global movement for wealth redistribution — one run at a time",
+      "type": "global movement + game universe",
+      "integration": "Creates globe pins for running routes, checkpoints, spending patterns, episode maps",
+      "current_status": "System architecture complete, Episode 4 executed in Bangkok",
+      "episode_structure": {
+        "format": "Each run = episode with checkpoints, fuel-ups, redistribution drops",
+        "checkpoints": "parks, gyms, activities, food stops",
+        "recovery": "massage, home, final rest point",
+        "side_events": "volleyball, wildlife encounters, bonus activities"
+      },
+      "game_systems": {
+        "checkpoint_cards": "stylized cards with photos, activity tags, cash overlays",
+        "spend_types": "Item Purchase (Blue), Donation (Green), Tip (Gold)",
+        "effects": "stamina, focus, endurance boosts",
+        "maps": "Google Maps GPS timeline + game world overlay",
+        "cutscenes": "real footage with game-world render transitions"
+      },
+      "episode_4": {
+        "title": "Bangkok Botanical Run",
+        "date": "2025-08-31",
+        "duration": "11:29 AM - 9:22 PM (~10 hours)",
+        "distance": "12 miles walked, 4 hours walking time",
+        "wealth_redistribution": "441 THB total (tips + donations)",
+        "side_quests": "The Bangkok Hustle scam (6,500 THB loss)",
+        "assets": "9 high-quality PNG images documenting the episode"
+      }
+    }
   }
 }
