@@ -1,0 +1,22 @@
+{
+  "id": "2025-09-01-moments-integration",
+  "timestamp": "2025-09-01T08:22:09.172Z",
+  "type": "moments_integration",
+  "summary": "Integrated moments into AI memory summary",
+  "files_modified": [
+    "memories/contexts/moments-aggregate.json"
+  ],
+  "key_changes": [
+    "Parsed moments/moments.js",
+    "Generated aggregated summaries by year/tag/location",
+    "Recorded recent moments"
+  ],
+  "context": {
+    "source": "moments/moments.js"
+  },
+  "tags": [
+    "integration",
+    "moments",
+    "summary"
+  ]
+}
