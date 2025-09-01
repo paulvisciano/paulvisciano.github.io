@@ -1787,10 +1787,91 @@
         "visits": 1
       },
       {
-        "name": "Breckenridge, Colorado",
+        "name":         "Breckenridge, Colorado",
         "total_days": 30,
         "visits": 1
       }
     ]
+  },
+  "urban_runner_project": {
+    "name": "Urban Runner",
+    "vision": "A global movement for wealth redistribution — one run at a time",
+    "type": "global movement + game universe",
+    "current_status": "System architecture complete, Episode 4 executed in Bangkok",
+    "core_mechanics": [
+      "Real-world runs documented as episodes",
+      "Checkpoint card system with stylized game world aesthetic",
+      "Wealth redistribution through donations and tips",
+      "Gamified storytelling with photos, videos, and live updates"
+    ],
+    "episode_structure": {
+      "format": "Each run = episode with checkpoints, fuel-ups, redistribution drops",
+      "checkpoints": "parks, gyms, activities, food stops",
+      "recovery": "massage, home, final rest point",
+      "side_events": "volleyball, wildlife encounters, bonus activities"
+    },
+    "game_systems": {
+      "checkpoint_cards": "stylized cards with photos, activity tags, cash overlays",
+      "spend_types": "Item Purchase (Blue), Donation (Green), Tip (Gold)",
+      "effects": "stamina, focus, endurance boosts",
+      "maps": "Google Maps GPS timeline + game world overlay",
+      "cutscenes": "real footage with game-world render transitions"
+    },
+    "episodes": {
+      "episode_4": {
+        "title": "Bangkok Botanical Run",
+        "date": "2025-08-31",
+        "duration": "11:29 AM - 9:22 PM (~10 hours)",
+        "distance": "12 miles walked, 4 hours walking time",
+        "checkpoints": [
+          "Volleyball with locals",
+          "Thai Cannabis Club (Weed Spot)",
+          "Wachirabenchathat Park (Botanical Garden)"
+        ],
+        "wealth_redistribution": {
+          "tips": [
+            { "amount": 30, "location": "Street Vendor" },
+            { "amount": 141, "location": "Bekku Tonkatsu" }
+          ],
+          "donations": [
+            { "amount": 100, "to": "homeless man" },
+            { "amount": 100, "to": "another homeless man" }
+          ],
+          "total_given": 441
+        },
+        "side_quests": [
+          {
+            "title": "The Bangkok Hustle",
+            "description": "Scammed into buying overpriced herbs and honey by men posing as healers",
+            "loss": 6500,
+            "game_integration": "Real-world scams integrated as in-game side quests"
+          }
+        ],
+        "fuel_ups": [
+          "Street food: 70 THB + 30 THB tip",
+          "Bekku Tonkatsu: Excellent meal with dessert (Total: 745 THB incl. tip)",
+          "Final sit-down at anime-themed restaurant near botanical garden"
+        ],
+        "game_dynamics": [
+          "Real-world scams like 'The Bangkok Hustle' integrated as side quests",
+          "Jamie joins remotely via WhatsApp for game assets and storyline",
+          "New checkpoint card system with stylized game world aesthetic"
+        ],
+        "observations": [
+          "Bangkok's side streets often don't connect — careful route planning required",
+          "Serendipitous signs: volleyball on TV, temples hidden in alleys",
+          "Decision-making and perseverance key — from refusing train to navigating scams"
+        ],
+        "recovery": "Mission completed, grab home, planned massage session for full recovery",
+        "assets": "9 high-quality PNG images documenting the episode",
+        "runner": "Paul",
+        "collaborator": "Jamie (remote)"
+      }
+    },
+    "integration": {
+      "globe_pins": "Running routes, checkpoints, spending patterns, episode maps",
+      "asset_management": "Git LFS optimized for image storage",
+      "community": "WhatsApp group for live updates and episode recaps"
+    }
   }
 }
