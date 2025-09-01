@@ -642,39 +642,15 @@ window.momentsInTime = [
   },
   {
     id: "bangkok-2025-08-24",
-    title: "Digital Nomad Life in Bangkok with Bozhi",
+    title: "Digital Nomad Life in Bangkok with Jamie",
     date: new Date('2025-08-24T00:00:00Z'),
     timelineHighlight: "Bangkok Digital Nomad",
-    tags: ["culture", "food", "city", "friends", "remote work", "nightlife"],
-    snippet: "Bozhi might join to explore why Bangkok is rated #1 for digital nomads - enjoying nightlife, rooftops, lounges, working from cool coffee shops, finding a nice gym, and staying in a sick building for cheap.",
+    tags: ["culture", "food", "city", "friends", "remote work", "nightlife", "running", "beach volleyball", "wellness", "hookah"],
+    snippet: "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants, getting massages, and staying super active exploring different neighborhoods. Found an amazing volleyball spot, a great hookah place where we smoke and eat, plus tons of Turkish spots with incredible food. Bozhi might still join next week, and Boy (Leo's brother) will definitely join on the 12th - it'll be amazing having a group of guys roaming around the city together.",
     fullLink: "#",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
-    stayDuration: 10,
-    formattedDuration: formatDuration(10)
-  },
-  {
-    id: "japan-2025-09-03",
-    title: "Cherry Blossoms and Zen in Japan",
-    date: new Date('2025-09-03T00:00:00Z'),
-    timelineHighlight: "Japan Culture",
-    tags: ["culture", "nature", "city"],
-    snippet: "Will immerse in Japanese culture, from ancient temples to modern cities, experiencing the perfect blend of tradition and innovation.",
-    fullLink: "#",
-    location: { lat: 35.6762, lng: 139.6503, name: "Japan" },
-    stayDuration: 14,
-    formattedDuration: formatDuration(14)
-  },
-  {
-    id: "maui-2025-09-17",
-    title: "Reconnecting with Jaime & Nature Adventures in Maui",
-    date: new Date('2025-09-17T00:00:00Z'),
-    timelineHighlight: "Maui Adventures",
-    tags: ["beach", "nature", "islands", "friends", "hiking", "snorkeling"],
-    snippet: "Will reconnect with Jaime and enjoy tons of adventures in nature, cool hikes, and snorkeling in Maui's pristine waters.",
-    fullLink: "#",
-    location: { lat: 20.7984, lng: -156.3319, name: "Maui, Hawaii" },
-    stayDuration: 7,
-    formattedDuration: formatDuration(7)
+    stayDuration: 29,
+    formattedDuration: formatDuration(29)
   },
   {
     id: "chicago-2025-09-24",
