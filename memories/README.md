@@ -2,21 +2,33 @@
 
 A personal AI memory system that captures and stores context from AI interactions to provide better assistance over time.
 
+## At a glance
+
+- Purpose: Portable, versioned AI context that travels with this repo
+- Scope: Does not impact runtime; lives entirely under `memories/`
+- Inputs: Manual "remember" notes and automatic aggregation of `moments/moments.js`
+- Outputs: JSON summaries, session records, and relationship/context docs
+- Inspired by: Cursor's local memory/checkpoint model (credit below)
+
 ## Structure
 
 ```
 memories/
-├── ai-memory.js              # Main memory data and utilities
-├── memory-utils.js           # Helper functions for memory management
-├── README.md                 # This file
-├── sessions/                 # Individual AI session records
-│   ├── session-template.json # Template for new sessions
-│   └── YYYY-MM-DD-*.json    # Actual session files
-├── contexts/                 # Project and user context
-│   └── project-knowledge.json # Technical project information
-└── relationships/            # People and places data
-    ├── current-people.json   # Active relationships
-    └── current-places.json   # Location context
+├── README.md                          # This file
+├── ai-memory.js                       # Main memory data and utilities
+├── memory-utils.js                    # Helper functions for memory management
+├── aggregate-moments.js               # Node script: aggregates moments → summary + session
+├── remember.js                        # CLI: save portable "remember" notes into sessions
+├── sessions/                          # Individual AI session records
+│   ├── session-template.json          # Template for new sessions
+│   ├── YYYY-MM-DD-*.json              # Actual session files (e.g., remember notes)
+│   └── 2025-09-01-moments-integration.json
+├── contexts/                          # Project and user context
+│   ├── project-knowledge.json         # Technical project information
+│   └── moments-aggregate.json         # Auto-generated summary from moments.js
+└── relationships/                     # People and places data
+    ├── current-people.json            # Active relationships
+    └── current-places.json            # Location context
 ```
 
 ## Features
@@ -26,6 +38,18 @@ memories/
 - **Project Context**: Maintains technical knowledge about the website
 - **Search & Query**: Find relevant past interactions
 - **Export/Import**: Backup and restore memory data
+
+## Commands
+
+- Save a portable memory note (saved under `memories/sessions/`):
+```bash
+npm run remember -- "Your note to remember"
+```
+
+- Aggregate existing moments into AI memory summaries and record a session:
+```bash
+node memories/aggregate-moments.js
+```
 
 ## Usage
 
@@ -73,3 +97,7 @@ This memory system is designed to:
 ## Privacy
 
 All memory data is stored locally in your git repository. Nothing is sent to external services beyond what's needed for AI interactions during active conversations.
+
+## Credit & model
+
+This project’s memory system is modeled after how Cursor stores local AI context (e.g., checkpoints with snapshots, diffs, and metadata). Credit to the Cursor team for the approach. This implementation is portable and repo-based, and can be re-done or evolved later without affecting the runtime site.
