@@ -1,0 +1,40 @@
+{
+  "project_name": "Personal Travel Website",
+  "description": "Interactive globe-based visualization of travel moments and experiences",
+  "technology_stack": {
+    "frontend": ["React", "JavaScript", "D3.js", "Globe.GL", "Tailwind CSS"],
+    "build_tools": ["Babel"],
+    "deployment": "Git commit hooks with auto-publishing"
+  },
+  "architecture": {
+    "main_components": {
+      "app.js": "Main React application component",
+      "globe.js": "Interactive 3D globe visualization", 
+      "blogPostDrawer.js": "Sidebar for detailed moment content",
+      "footer.js": "Site footer with filters and controls"
+    },
+    "data_structure": {
+      "source": "moments/moments.js",
+      "format": "JavaScript array of moment objects",
+      "fields": ["id", "title", "date", "location", "snippet", "tags", "stayDuration"]
+    }
+  },
+  "workflow_patterns": {
+    "content_updates": [
+      "Edit moments/moments.js directly",
+      "Commit changes to git", 
+      "Auto-publishing via commit hooks"
+    ],
+    "preferences": [
+      "Prefer editing existing files over creating new ones",
+      "No manual npm script execution needed",
+      "Detailed, narrative-style content with rich context"
+    ]
+  },
+  "key_features": {
+    "globe_visualization": "3D interactive globe with location markers",
+    "timeline_filtering": "Filter moments by tags and years",
+    "moment_details": "Rich content with images and detailed descriptions",
+    "responsive_design": "Mobile and desktop optimized"
+  }
+}

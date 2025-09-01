@@ -1,0 +1,54 @@
+{
+  "current_locations": {
+    "Bangkok": {
+      "status": "current favorite city",
+      "stay_duration": "29 days starting August 24th, 2025",
+      "visa_constraint": "30-day limit without visa",
+      "departure_plan": "leave by day 29 to head toward Chicago for wedding",
+      "why_favorite": "officially favorite city visited so far",
+      "companions": ["Jamie", "potentially Bozhi next week", "Boy joining September 12th"],
+      "activities": {
+        "fitness": ["running throughout city", "Urban Runner donation project", "volleyball spot found"],
+        "food": ["Turkish spots with incredible food", "hookah spot for smoking and eating"],
+        "wellness": ["massage sessions", "staying super active"],
+        "exploration": ["rooftops", "restaurants", "different neighborhoods"],
+        "work": ["digital nomad lifestyle", "rated #1 city for digital nomads"]
+      },
+      "discoveries": {
+        "volleyball_spot": "found good location for playing",
+        "hookah_spot": "place to smoke and eat",
+        "turkish_food": "tons of spots with incredible Turkish cuisine"
+      },
+      "last_updated": "2025-01-01"
+    }
+  },
+  "recent_locations": {
+    "Philippines": {
+      "visit_purpose": "visit Leo and his brother Boy",
+      "experience": "incredible time",
+      "status": "recently departed",
+      "memories": "will share photos of moments with Leo and Boy",
+      "last_updated": "2025-01-01"
+    }
+  },
+  "removed_destinations": {
+    "Japan": {
+      "reason": "too expensive this time of year",
+      "original_plan": "visit after Philippines",
+      "status": "removed from itinerary"
+    },
+    "Maui": {
+      "reason": "Jamie left Maui, no longer visiting him there",
+      "original_plan": "visit Jamie in Maui",
+      "status": "removed from itinerary",
+      "note": "Jamie joined in Bangkok instead"
+    }
+  },
+  "future_destinations": {
+    "Chicago": {
+      "purpose": "wedding attendance",
+      "constraint": "must arrive on time from Bangkok",
+      "travel_date": "approximately September 22nd (29 days from Aug 24th)"
+    }
+  }
+}
