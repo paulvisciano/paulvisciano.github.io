@@ -1,0 +1,803 @@
+{
+  "generatedAt": "2025-09-01T08:22:09.171Z",
+  "totals": {
+    "momentsCount": 55,
+    "totalStayDays": 10636
+  },
+  "byYear": {
+    "1988": {
+      "count": 1,
+      "totalStayDays": 2190,
+      "ids": [
+        "varna-1988-11-24"
+      ]
+    },
+    "1994": {
+      "count": 1,
+      "totalStayDays": 3650,
+      "ids": [
+        "sofia-1994-11-24"
+      ]
+    },
+    "2004": {
+      "count": 1,
+      "totalStayDays": 180,
+      "ids": [
+        "osseo-2004-08-01"
+      ]
+    },
+    "2005": {
+      "count": 1,
+      "totalStayDays": 3650,
+      "ids": [
+        "chicago-2005-02-01"
+      ]
+    },
+    "2022": {
+      "count": 2,
+      "totalStayDays": 90,
+      "ids": [
+        "medellin-2022-07-02",
+        "medellin-2022-11-01"
+      ]
+    },
+    "2023": {
+      "count": 9,
+      "totalStayDays": 334,
+      "ids": [
+        "st-petersburg-2023-01-01",
+        "miami-2023-08-07",
+        "beirut-2023-08-09",
+        "baalbek-2023-08-09",
+        "athens-2023-08-18",
+        "barcelona-2023-08-21",
+        "sofia-2023-09-13",
+        "dubai-2023-10-05",
+        "varna-2023-10-18"
+      ]
+    },
+    "2024": {
+      "count": 17,
+      "totalStayDays": 259,
+      "ids": [
+        "chattanooga-2024-05-14",
+        "st-petersburg-2024-05-19",
+        "chicago-2024-06-01",
+        "clearwater-2024-08-01",
+        "miami-beach-2024-08-08",
+        "hermosa-beach-2024-08-15",
+        "san-diego-2024-08-22",
+        "honolulu-2024-09-01",
+        "st-petersburg-2024-10-10",
+        "destin-2024-10-16",
+        "miami-2024-10-23",
+        "playa-del-carmen-2024-11-01",
+        "clearwater-2024-11-16",
+        "denver-2024-11-20",
+        "denver-2024-11-28",
+        "breckenridge-2024-12-01",
+        "miami-beach-2024-12-30"
+      ]
+    },
+    "2025": {
+      "count": 23,
+      "totalStayDays": 283,
+      "ids": [
+        "st-petersburg-2025-02-02",
+        "sao-paulo-2025-02-07",
+        "rio-de-janeiro-2025-02-16",
+        "sao-paulo-2025-02-27",
+        "st-petersburg-2025-03-09",
+        "williston-2025-03-13",
+        "chicago-2025-03-29",
+        "destin-2025-04-22",
+        "new-orleans-2025-04-28",
+        "houston-2025-05-01",
+        "austin-2025-05-02",
+        "boulder-2025-05-13",
+        "san-diego-2025-05-20",
+        "fort-lauderdale-2025-05-21",
+        "miami-beach-2025-05-23",
+        "tampa-2025-05-30",
+        "san-diego-2025-06-01",
+        "oahu-2025-06-13",
+        "philippines-2025-08-12",
+        "bangkok-2025-08-24",
+        "chicago-2025-09-24",
+        "playa-del-carmen-2025-10-24",
+        "canggu-2025-11-03"
+      ]
+    }
+  },
+  "topTags": [
+    {
+      "name": "city",
+      "count": 14,
+      "totalStayDays": 7528,
+      "ids": [
+        "sofia-1994-11-24",
+        "chicago-2005-02-01",
+        "medellin-2022-07-02",
+        "medellin-2022-11-01",
+        "dubai-2023-10-05",
+        "chicago-2024-06-01",
+        "denver-2024-11-20",
+        "denver-2024-11-28",
+        "sao-paulo-2025-02-07",
+        "sao-paulo-2025-02-27",
+        "chicago-2025-03-29",
+        "houston-2025-05-01",
+        "bangkok-2025-08-24",
+        "chicago-2025-09-24"
+      ]
+    },
+    {
+      "name": "education",
+      "count": 3,
+      "totalStayDays": 7480,
+      "ids": [
+        "sofia-1994-11-24",
+        "osseo-2004-08-01",
+        "chicago-2005-02-01"
+      ]
+    },
+    {
+      "name": "sports",
+      "count": 2,
+      "totalStayDays": 7300,
+      "ids": [
+        "sofia-1994-11-24",
+        "chicago-2005-02-01"
+      ]
+    },
+    {
+      "name": "culture",
+      "count": 21,
+      "totalStayDays": 6369,
+      "ids": [
+        "varna-1988-11-24",
+        "sofia-1994-11-24",
+        "osseo-2004-08-01",
+        "medellin-2022-07-02",
+        "medellin-2022-11-01",
+        "beirut-2023-08-09",
+        "baalbek-2023-08-09",
+        "athens-2023-08-18",
+        "sofia-2023-09-13",
+        "varna-2023-10-18",
+        "chicago-2024-06-01",
+        "playa-del-carmen-2024-11-01",
+        "denver-2024-11-20",
+        "sao-paulo-2025-02-07",
+        "rio-de-janeiro-2025-02-16",
+        "chicago-2025-03-29",
+        "houston-2025-05-01",
+        "san-diego-2025-06-01",
+        "philippines-2025-08-12",
+        "bangkok-2025-08-24",
+        "chicago-2025-09-24"
+      ]
+    },
+    {
+      "name": "relationships",
+      "count": 1,
+      "totalStayDays": 3650,
+      "ids": [
+        "chicago-2005-02-01"
+      ]
+    },
+    {
+      "name": "beach",
+      "count": 26,
+      "totalStayDays": 2783,
+      "ids": [
+        "varna-1988-11-24",
+        "st-petersburg-2023-01-01",
+        "miami-2023-08-07",
+        "varna-2023-10-18",
+        "st-petersburg-2024-05-19",
+        "clearwater-2024-08-01",
+        "miami-beach-2024-08-08",
+        "hermosa-beach-2024-08-15",
+        "san-diego-2024-08-22",
+        "honolulu-2024-09-01",
+        "st-petersburg-2024-10-10",
+        "destin-2024-10-16",
+        "miami-2024-10-23",
+        "playa-del-carmen-2024-11-01",
+        "clearwater-2024-11-16",
+        "miami-beach-2024-12-30",
+        "st-petersburg-2025-02-02",
+        "rio-de-janeiro-2025-02-16",
+        "st-petersburg-2025-03-09",
+        "destin-2025-04-22",
+        "fort-lauderdale-2025-05-21",
+        "miami-beach-2025-05-23",
+        "oahu-2025-06-13",
+        "philippines-2025-08-12",
+        "playa-del-carmen-2025-10-24",
+        "canggu-2025-11-03"
+      ]
+    },
+    {
+      "name": "art",
+      "count": 7,
+      "totalStayDays": 317,
+      "ids": [
+        "st-petersburg-2023-01-01",
+        "barcelona-2023-08-21",
+        "st-petersburg-2024-05-19",
+        "st-petersburg-2024-10-10",
+        "st-petersburg-2025-02-02",
+        "sao-paulo-2025-02-27",
+        "st-petersburg-2025-03-09"
+      ]
+    },
+    {
+      "name": "nature",
+      "count": 6,
+      "totalStayDays": 122,
+      "ids": [
+        "chattanooga-2024-05-14",
+        "clearwater-2024-08-01",
+        "honolulu-2024-09-01",
+        "clearwater-2024-11-16",
+        "williston-2025-03-13",
+        "oahu-2025-06-13"
+      ]
+    },
+    {
+      "name": "friends",
+      "count": 9,
+      "totalStayDays": 97,
+      "ids": [
+        "san-diego-2025-05-20",
+        "fort-lauderdale-2025-05-21",
+        "miami-beach-2025-05-23",
+        "tampa-2025-05-30",
+        "san-diego-2025-06-01",
+        "philippines-2025-08-12",
+        "bangkok-2025-08-24",
+        "playa-del-carmen-2025-10-24",
+        "canggu-2025-11-03"
+      ]
+    },
+    {
+      "name": "nightlife",
+      "count": 6,
+      "totalStayDays": 86,
+      "ids": [
+        "miami-2023-08-07",
+        "miami-beach-2024-08-08",
+        "miami-2024-10-23",
+        "miami-beach-2024-12-30",
+        "miami-beach-2025-05-23",
+        "bangkok-2025-08-24"
+      ]
+    },
+    {
+      "name": "beach volleyball",
+      "count": 8,
+      "totalStayDays": 81,
+      "ids": [
+        "destin-2024-10-16",
+        "destin-2025-04-22",
+        "austin-2025-05-02",
+        "fort-lauderdale-2025-05-21",
+        "miami-beach-2025-05-23",
+        "san-diego-2025-06-01",
+        "bangkok-2025-08-24",
+        "playa-del-carmen-2025-10-24"
+      ]
+    },
+    {
+      "name": "wellness",
+      "count": 5,
+      "totalStayDays": 81,
+      "ids": [
+        "boulder-2025-05-13",
+        "san-diego-2025-06-01",
+        "philippines-2025-08-12",
+        "bangkok-2025-08-24",
+        "canggu-2025-11-03"
+      ]
+    },
+    {
+      "name": "relocation",
+      "count": 2,
+      "totalStayDays": 63,
+      "ids": [
+        "tampa-2025-05-30",
+        "oahu-2025-06-13"
+      ]
+    },
+    {
+      "name": "history",
+      "count": 4,
+      "totalStayDays": 50,
+      "ids": [
+        "beirut-2023-08-09",
+        "baalbek-2023-08-09",
+        "athens-2023-08-18",
+        "sofia-2023-09-13"
+      ]
+    },
+    {
+      "name": "remote work",
+      "count": 2,
+      "totalStayDays": 41,
+      "ids": [
+        "san-diego-2025-06-01",
+        "bangkok-2025-08-24"
+      ]
+    },
+    {
+      "name": "hookah",
+      "count": 2,
+      "totalStayDays": 41,
+      "ids": [
+        "san-diego-2025-06-01",
+        "bangkok-2025-08-24"
+      ]
+    },
+    {
+      "name": "food",
+      "count": 4,
+      "totalStayDays": 36,
+      "ids": [
+        "new-orleans-2025-04-28",
+        "san-diego-2025-05-20",
+        "tampa-2025-05-30",
+        "bangkok-2025-08-24"
+      ]
+    },
+    {
+      "name": "skiing",
+      "count": 1,
+      "totalStayDays": 30,
+      "ids": [
+        "breckenridge-2024-12-01"
+      ]
+    },
+    {
+      "name": "mountains",
+      "count": 1,
+      "totalStayDays": 30,
+      "ids": [
+        "breckenridge-2024-12-01"
+      ]
+    },
+    {
+      "name": "coffee",
+      "count": 3,
+      "totalStayDays": 29,
+      "ids": [
+        "austin-2025-05-02",
+        "boulder-2025-05-13",
+        "san-diego-2025-06-01"
+      ]
+    }
+  ],
+  "topLocations": [
+    {
+      "name": "Chicago, Illinois",
+      "count": 4,
+      "totalStayDays": 3729,
+      "coords": {
+        "lat": 41.8781,
+        "lng": -87.6298,
+        "name": "Chicago, Illinois"
+      },
+      "ids": [
+        "chicago-2005-02-01",
+        "chicago-2024-06-01",
+        "chicago-2025-03-29",
+        "chicago-2025-09-24"
+      ]
+    },
+    {
+      "name": "Sofia, Bulgaria",
+      "count": 2,
+      "totalStayDays": 3688,
+      "coords": {
+        "lat": 42.6977,
+        "lng": 23.3219,
+        "name": "Sofia, Bulgaria"
+      },
+      "ids": [
+        "sofia-1994-11-24",
+        "sofia-2023-09-13"
+      ]
+    },
+    {
+      "name": "Varna, Bulgaria",
+      "count": 2,
+      "totalStayDays": 2229,
+      "coords": {
+        "lat": 43.2141,
+        "lng": 27.9147,
+        "name": "Varna, Bulgaria"
+      },
+      "ids": [
+        "varna-1988-11-24",
+        "varna-2023-10-18"
+      ]
+    },
+    {
+      "name": "St. Petersburg, Florida",
+      "count": 5,
+      "totalStayDays": 284,
+      "coords": {
+        "lat": 27.7676,
+        "lng": -82.6403,
+        "name": "St. Petersburg, Florida"
+      },
+      "ids": [
+        "st-petersburg-2023-01-01",
+        "st-petersburg-2024-05-19",
+        "st-petersburg-2024-10-10",
+        "st-petersburg-2025-02-02",
+        "st-petersburg-2025-03-09"
+      ]
+    },
+    {
+      "name": "Osseo, Wisconsin",
+      "count": 1,
+      "totalStayDays": 180,
+      "coords": {
+        "lat": 44.5722,
+        "lng": -91.2271,
+        "name": "Osseo, Wisconsin"
+      },
+      "ids": [
+        "osseo-2004-08-01"
+      ]
+    },
+    {
+      "name": "Medellín, Colombia",
+      "count": 2,
+      "totalStayDays": 90,
+      "coords": {
+        "lat": 6.2442,
+        "lng": -75.5812,
+        "name": "Medellín, Colombia"
+      },
+      "ids": [
+        "medellin-2022-07-02",
+        "medellin-2022-11-01"
+      ]
+    },
+    {
+      "name": "Oahu, Hawaii",
+      "count": 1,
+      "totalStayDays": 60,
+      "coords": {
+        "lat": 21.4389,
+        "lng": -158.0001,
+        "name": "Oahu, Hawaii"
+      },
+      "ids": [
+        "oahu-2025-06-13"
+      ]
+    },
+    {
+      "name": "Miami Beach, Florida",
+      "count": 3,
+      "totalStayDays": 48,
+      "coords": {
+        "lat": 25.7907,
+        "lng": -80.13,
+        "name": "Miami Beach, Florida"
+      },
+      "ids": [
+        "miami-beach-2024-08-08",
+        "miami-beach-2024-12-30",
+        "miami-beach-2025-05-23"
+      ]
+    },
+    {
+      "name": "Honolulu, Hawaii",
+      "count": 1,
+      "totalStayDays": 38,
+      "coords": {
+        "lat": 21.3069,
+        "lng": -157.8583,
+        "name": "Honolulu, Hawaii"
+      },
+      "ids": [
+        "honolulu-2024-09-01"
+      ]
+    },
+    {
+      "name": "Breckenridge, Colorado",
+      "count": 1,
+      "totalStayDays": 30,
+      "coords": {
+        "lat": 39.4817,
+        "lng": -106.0384,
+        "name": "Breckenridge, Colorado"
+      },
+      "ids": [
+        "breckenridge-2024-12-01"
+      ]
+    },
+    {
+      "name": "Bangkok, Thailand",
+      "count": 1,
+      "totalStayDays": 29,
+      "coords": {
+        "lat": 13.7563,
+        "lng": 100.5018,
+        "name": "Bangkok, Thailand"
+      },
+      "ids": [
+        "bangkok-2025-08-24"
+      ]
+    },
+    {
+      "name": "Playa del Carmen, Mexico",
+      "count": 2,
+      "totalStayDays": 24,
+      "coords": {
+        "lat": 20.6296,
+        "lng": -87.0739,
+        "name": "Playa del Carmen, Mexico"
+      },
+      "ids": [
+        "playa-del-carmen-2024-11-01",
+        "playa-del-carmen-2025-10-24"
+      ]
+    },
+    {
+      "name": "Barcelona, Spain",
+      "count": 1,
+      "totalStayDays": 23,
+      "coords": {
+        "lat": 41.3851,
+        "lng": 2.1734,
+        "name": "Barcelona, Spain"
+      },
+      "ids": [
+        "barcelona-2023-08-21"
+      ]
+    },
+    {
+      "name": "San Diego, California",
+      "count": 3,
+      "totalStayDays": 22,
+      "coords": {
+        "lat": 32.7157,
+        "lng": -117.1611,
+        "name": "San Diego, California"
+      },
+      "ids": [
+        "san-diego-2024-08-22",
+        "san-diego-2025-05-20",
+        "san-diego-2025-06-01"
+      ]
+    },
+    {
+      "name": "Canggu, Indonesia",
+      "count": 1,
+      "totalStayDays": 21,
+      "coords": {
+        "lat": -8.6596,
+        "lng": 115.1326,
+        "name": "Canggu, Indonesia"
+      },
+      "ids": [
+        "canggu-2025-11-03"
+      ]
+    },
+    {
+      "name": "São Paulo, Brazil",
+      "count": 2,
+      "totalStayDays": 19,
+      "coords": {
+        "lat": -23.5505,
+        "lng": -46.6333,
+        "name": "São Paulo, Brazil"
+      },
+      "ids": [
+        "sao-paulo-2025-02-07",
+        "sao-paulo-2025-02-27"
+      ]
+    },
+    {
+      "name": "Clearwater, Florida",
+      "count": 2,
+      "totalStayDays": 18,
+      "coords": {
+        "lat": 27.9659,
+        "lng": -82.8001,
+        "name": "Clearwater, Florida"
+      },
+      "ids": [
+        "clearwater-2024-08-01",
+        "clearwater-2024-11-16"
+      ]
+    },
+    {
+      "name": "Philippines",
+      "count": 1,
+      "totalStayDays": 12,
+      "coords": {
+        "lat": 12.8797,
+        "lng": 121.774,
+        "name": "Philippines"
+      },
+      "ids": [
+        "philippines-2025-08-12"
+      ]
+    },
+    {
+      "name": "Destin, Florida",
+      "count": 2,
+      "totalStayDays": 11,
+      "coords": {
+        "lat": 30.3935,
+        "lng": -86.4958,
+        "name": "Destin, Florida"
+      },
+      "ids": [
+        "destin-2024-10-16",
+        "destin-2025-04-22"
+      ]
+    },
+    {
+      "name": "Rio de Janeiro, Brazil",
+      "count": 1,
+      "totalStayDays": 11,
+      "coords": {
+        "lat": -22.9068,
+        "lng": -43.1729,
+        "name": "Rio de Janeiro, Brazil"
+      },
+      "ids": [
+        "rio-de-janeiro-2025-02-16"
+      ]
+    }
+  ],
+  "recent": [
+    {
+      "id": "canggu-2025-11-03",
+      "title": "Yoga Retreat in Canggu",
+      "date": "2025-11-03T00:00:00.000Z",
+      "location": "Canggu, Indonesia",
+      "stayDuration": 21,
+      "tags": [
+        "yoga",
+        "beach",
+        "wellness",
+        "friends"
+      ]
+    },
+    {
+      "id": "playa-del-carmen-2025-10-24",
+      "title": "Beach Volleyball Tournament in Playa del Carmen",
+      "date": "2025-10-24T00:00:00.000Z",
+      "location": "Playa del Carmen, Mexico",
+      "stayDuration": 10,
+      "tags": [
+        "beach volleyball",
+        "beach",
+        "friends"
+      ]
+    },
+    {
+      "id": "chicago-2025-09-24",
+      "title": "Family Reunion & Wedding in Chicago",
+      "date": "2025-09-24T00:00:00.000Z",
+      "location": "Chicago, Illinois",
+      "stayDuration": 14,
+      "tags": [
+        "city",
+        "culture",
+        "family",
+        "wedding"
+      ]
+    },
+    {
+      "id": "bangkok-2025-08-24",
+      "title": "Digital Nomad Life in Bangkok with Jamie",
+      "date": "2025-08-24T00:00:00.000Z",
+      "location": "Bangkok, Thailand",
+      "stayDuration": 29,
+      "tags": [
+        "culture",
+        "food",
+        "city",
+        "friends",
+        "remote work",
+        "nightlife",
+        "running",
+        "beach volleyball",
+        "wellness",
+        "hookah"
+      ]
+    },
+    {
+      "id": "philippines-2025-08-12",
+      "title": "Reconnecting with Leo & Wellness Center Vision in the Philippines",
+      "date": "2025-08-12T00:00:00.000Z",
+      "location": "Philippines",
+      "stayDuration": 12,
+      "tags": [
+        "beach",
+        "culture",
+        "islands",
+        "friends",
+        "wellness",
+        "business"
+      ]
+    },
+    {
+      "id": "oahu-2025-06-13",
+      "title": "New Beginnings in Oahu",
+      "date": "2025-06-13T00:00:00.000Z",
+      "location": "Oahu, Hawaii",
+      "stayDuration": 60,
+      "tags": [
+        "beach",
+        "nature",
+        "relocation"
+      ]
+    },
+    {
+      "id": "san-diego-2025-06-01",
+      "title": "Finding Rhythm in San Diego's June Gloom",
+      "date": "2025-06-01T00:00:00.000Z",
+      "location": "San Diego, California",
+      "stayDuration": 12,
+      "tags": [
+        "beach volleyball",
+        "remote work",
+        "coffee",
+        "culture",
+        "wellness",
+        "friends",
+        "hookah"
+      ]
+    },
+    {
+      "id": "tampa-2025-05-30",
+      "title": "Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes",
+      "date": "2025-05-30T00:00:00.000Z",
+      "location": "Tampa, Florida",
+      "stayDuration": 3,
+      "tags": [
+        "travel",
+        "yoga",
+        "food",
+        "friends",
+        "relocation"
+      ]
+    },
+    {
+      "id": "miami-beach-2025-05-23",
+      "title": "South Beach Volleyball, Bachata, and a Drive to St. Pete",
+      "date": "2025-05-23T00:00:00.000Z",
+      "location": "Miami Beach, Florida",
+      "stayDuration": 7,
+      "tags": [
+        "beach",
+        "beach volleyball",
+        "nightlife",
+        "friends",
+        "bachata"
+      ]
+    },
+    {
+      "id": "fort-lauderdale-2025-05-21",
+      "title": "Volleyball and Vibes in Fort Lauderdale",
+      "date": "2025-05-21T00:00:00.000Z",
+      "location": "Fort Lauderdale, Florida",
+      "stayDuration": 2,
+      "tags": [
+        "beach",
+        "beach volleyball",
+        "friends"
+      ]
+    }
+  ]
+}
