@@ -1,0 +1,1796 @@
+{
+  "generated_at": "2025-09-01T08:47:11.619Z",
+  "source": "moments + conversation history",
+  "people": {
+    "from_moments": {
+      "Wouter": {
+        "name": "Wouter",
+        "moments": [
+          {
+            "id": "san-diego-2025-05-20",
+            "title": "San Diego Whirlwind: Yoga, Thai, and Line Dancing",
+            "date": "2025-05-20T00:00:00.000Z",
+            "location": "San Diego, California",
+            "snippet": "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the mi"
+          },
+          {
+            "id": "san-diego-2025-05-20",
+            "title": "San Diego Whirlwind: Yoga, Thai, and Line Dancing",
+            "date": "2025-05-20T00:00:00.000Z",
+            "location": "San Diego, California",
+            "snippet": "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the mi"
+          }
+        ],
+        "locations": [
+          "San Diego, California"
+        ],
+        "activities": [
+          "yoga",
+          "friends",
+          "line dancing",
+          "food"
+        ],
+        "relationship_context": []
+      },
+      "Ray": {
+        "name": "Ray",
+        "moments": [
+          {
+            "id": "san-diego-2025-05-20",
+            "title": "San Diego Whirlwind: Yoga, Thai, and Line Dancing",
+            "date": "2025-05-20T00:00:00.000Z",
+            "location": "San Diego, California",
+            "snippet": "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the mi"
+          },
+          {
+            "id": "san-diego-2025-05-20",
+            "title": "San Diego Whirlwind: Yoga, Thai, and Line Dancing",
+            "date": "2025-05-20T00:00:00.000Z",
+            "location": "San Diego, California",
+            "snippet": "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the mi"
+          }
+        ],
+        "locations": [
+          "San Diego, California"
+        ],
+        "activities": [
+          "yoga",
+          "friends",
+          "line dancing",
+          "food"
+        ],
+        "relationship_context": []
+      },
+      "Bartek": {
+        "name": "Bartek",
+        "moments": [
+          {
+            "id": "fort-lauderdale-2025-05-21",
+            "title": "Volleyball and Vibes in Fort Lauderdale",
+            "date": "2025-05-21T00:00:00.000Z",
+            "location": "Fort Lauderdale, Florida",
+            "snippet": "Arrived in Fort Lauderdale after a Denver layover, staying with Bartek for work, beach volleyball in Deerfield, and a relaxing massage together."
+          }
+        ],
+        "locations": [
+          "Fort Lauderdale, Florida"
+        ],
+        "activities": [
+          "beach",
+          "beach volleyball",
+          "friends"
+        ],
+        "relationship_context": []
+      },
+      "Alain": {
+        "name": "Alain",
+        "moments": [
+          {
+            "id": "miami-beach-2025-05-23",
+            "title": "South Beach Volleyball, Bachata, and a Drive to St. Pete",
+            "date": "2025-05-23T00:00:00.000Z",
+            "location": "Miami Beach, Florida",
+            "snippet": "Played high-energy volleyball, danced bachata at Alain's, and drove to St. Pete."
+          }
+        ],
+        "locations": [
+          "Miami Beach, Florida"
+        ],
+        "activities": [
+          "beach",
+          "beach volleyball",
+          "nightlife",
+          "friends",
+          "bachata"
+        ],
+        "relationship_context": []
+      },
+      "Leo": {
+        "name": "Leo",
+        "moments": [
+          {
+            "id": "philippines-2025-08-12",
+            "title": "Reconnecting with Leo & Wellness Center Vision in the Philippines",
+            "date": "2025-08-12T00:00:00.000Z",
+            "location": "Philippines",
+            "snippet": "Will meet up with Leo in his hometown north of Manila, then head to Siargao to scout potential land for a wellness center featuring beach volleyball, yoga, smoothies, and recovery options like cold pl"
+          },
+          {
+            "id": "philippines-2025-08-12",
+            "title": "Reconnecting with Leo & Wellness Center Vision in the Philippines",
+            "date": "2025-08-12T00:00:00.000Z",
+            "location": "Philippines",
+            "snippet": "Will meet up with Leo in his hometown north of Manila, then head to Siargao to scout potential land for a wellness center featuring beach volleyball, yoga, smoothies, and recovery options like cold pl"
+          },
+          {
+            "id": "bangkok-2025-08-24",
+            "title": "Digital Nomad Life in Bangkok with Jamie",
+            "date": "2025-08-24T00:00:00.000Z",
+            "location": "Bangkok, Thailand",
+            "snippet": "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants,"
+          },
+          {
+            "id": "canggu-2025-11-03",
+            "title": "Yoga Retreat in Canggu",
+            "date": "2025-11-03T00:00:00.000Z",
+            "location": "Canggu, Indonesia",
+            "snippet": "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu's rice fields and beaches."
+          }
+        ],
+        "locations": [
+          "Philippines",
+          "Bangkok, Thailand",
+          "Canggu, Indonesia"
+        ],
+        "activities": [
+          "beach",
+          "culture",
+          "islands",
+          "friends",
+          "wellness",
+          "business",
+          "food",
+          "city",
+          "remote work",
+          "nightlife",
+          "running",
+          "beach volleyball",
+          "hookah",
+          "yoga"
+        ],
+        "relationship_context": [
+          "brother"
+        ]
+      },
+      "Jamie": {
+        "name": "Jamie",
+        "moments": [
+          {
+            "id": "bangkok-2025-08-24",
+            "title": "Digital Nomad Life in Bangkok with Jamie",
+            "date": "2025-08-24T00:00:00.000Z",
+            "location": "Bangkok, Thailand",
+            "snippet": "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants,"
+          },
+          {
+            "id": "bangkok-2025-08-24",
+            "title": "Digital Nomad Life in Bangkok with Jamie",
+            "date": "2025-08-24T00:00:00.000Z",
+            "location": "Bangkok, Thailand",
+            "snippet": "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants,"
+          }
+        ],
+        "locations": [
+          "Bangkok, Thailand"
+        ],
+        "activities": [
+          "culture",
+          "food",
+          "city",
+          "friends",
+          "remote work",
+          "nightlife",
+          "running",
+          "beach volleyball",
+          "wellness",
+          "hookah"
+        ],
+        "relationship_context": [
+          "brother"
+        ]
+      },
+      "Bozhi": {
+        "name": "Bozhi",
+        "moments": [
+          {
+            "id": "bangkok-2025-08-24",
+            "title": "Digital Nomad Life in Bangkok with Jamie",
+            "date": "2025-08-24T00:00:00.000Z",
+            "location": "Bangkok, Thailand",
+            "snippet": "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants,"
+          }
+        ],
+        "locations": [
+          "Bangkok, Thailand"
+        ],
+        "activities": [
+          "culture",
+          "food",
+          "city",
+          "friends",
+          "remote work",
+          "nightlife",
+          "running",
+          "beach volleyball",
+          "wellness",
+          "hookah"
+        ],
+        "relationship_context": [
+          "brother"
+        ]
+      },
+      "Boy": {
+        "name": "Boy",
+        "moments": [
+          {
+            "id": "bangkok-2025-08-24",
+            "title": "Digital Nomad Life in Bangkok with Jamie",
+            "date": "2025-08-24T00:00:00.000Z",
+            "location": "Bangkok, Thailand",
+            "snippet": "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants,"
+          }
+        ],
+        "locations": [
+          "Bangkok, Thailand"
+        ],
+        "activities": [
+          "culture",
+          "food",
+          "city",
+          "friends",
+          "remote work",
+          "nightlife",
+          "running",
+          "beach volleyball",
+          "wellness",
+          "hookah"
+        ],
+        "relationship_context": [
+          "brother"
+        ]
+      },
+      "Zacharias": {
+        "name": "Zacharias",
+        "moments": [
+          {
+            "id": "playa-del-carmen-2025-10-24",
+            "title": "Beach Volleyball Tournament in Playa del Carmen",
+            "date": "2025-10-24T00:00:00.000Z",
+            "location": "Playa del Carmen, Mexico",
+            "snippet": "Will team up with Zacharias to smash serves and dive for digs at a thrilling beach volleyball tournament in Playa del Carmen."
+          }
+        ],
+        "locations": [
+          "Playa del Carmen, Mexico"
+        ],
+        "activities": [
+          "beach volleyball",
+          "beach",
+          "friends"
+        ],
+        "relationship_context": []
+      },
+      "Leigha": {
+        "name": "Leigha",
+        "moments": [
+          {
+            "id": "canggu-2025-11-03",
+            "title": "Yoga Retreat in Canggu",
+            "date": "2025-11-03T00:00:00.000Z",
+            "location": "Canggu, Indonesia",
+            "snippet": "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu's rice fields and beaches."
+          }
+        ],
+        "locations": [
+          "Canggu, Indonesia"
+        ],
+        "activities": [
+          "yoga",
+          "beach",
+          "wellness",
+          "friends"
+        ],
+        "relationship_context": []
+      },
+      "Hallie": {
+        "name": "Hallie",
+        "moments": [
+          {
+            "id": "canggu-2025-11-03",
+            "title": "Yoga Retreat in Canggu",
+            "date": "2025-11-03T00:00:00.000Z",
+            "location": "Canggu, Indonesia",
+            "snippet": "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu's rice fields and beaches."
+          }
+        ],
+        "locations": [
+          "Canggu, Indonesia"
+        ],
+        "activities": [
+          "yoga",
+          "beach",
+          "wellness",
+          "friends"
+        ],
+        "relationship_context": []
+      }
+    },
+    "from_conversations": {
+      "Jamie": 7,
+      "Boy": 7,
+      "Leo": 6,
+      "Bozhi": 4
+    },
+    "merged_insights": {}
+  },
+  "places": {
+    "from_moments": {
+      "Varna, Bulgaria": {
+        "name": "Varna, Bulgaria",
+        "coordinates": {
+          "lat": 43.2141,
+          "lng": 27.9147,
+          "name": "Varna, Bulgaria"
+        },
+        "visits": [
+          {
+            "id": "varna-1988-11-24",
+            "title": "Growing Up in Varna",
+            "date": "1988-11-24T00:00:00.000Z",
+            "duration": 2190,
+            "snippet": "Spent my early years in Varna, playing on Black Sea beaches and soaking in Bulgarian culture."
+          },
+          {
+            "id": "varna-2023-10-18",
+            "title": "Black Sea Bliss in Varna",
+            "date": "2023-10-18T00:00:00.000Z",
+            "duration": 39,
+            "snippet": "Relaxed on Varna's Black Sea beaches and explored its ancient Roman baths."
+          }
+        ],
+        "total_days": 2229,
+        "activities": [
+          "beach",
+          "culture"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach",
+          "culture"
+        ]
+      },
+      "Sofia, Bulgaria": {
+        "name": "Sofia, Bulgaria",
+        "coordinates": {
+          "lat": 42.6977,
+          "lng": 23.3219,
+          "name": "Sofia, Bulgaria"
+        },
+        "visits": [
+          {
+            "id": "sofia-1994-11-24",
+            "title": "Wild Teenage Years in Sofia",
+            "date": "1994-11-24T00:00:00.000Z",
+            "duration": 3650,
+            "snippet": "Started at 119th High School at age 6, where I spent grades 1-6. Later transferred to Doris Tenedi German High School for grades 7-10, balancing my studies with an adventurous social life. By 13, I wa"
+          },
+          {
+            "id": "sofia-2023-09-13",
+            "title": "Hidden Gems in Sofia",
+            "date": "2023-09-13T00:00:00.000Z",
+            "duration": 38,
+            "snippet": "Discovered Sofia's historic churches and vibrant markets in Bulgaria's capital."
+          }
+        ],
+        "total_days": 3688,
+        "activities": [
+          "city",
+          "culture",
+          "sports",
+          "education",
+          "history"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "city",
+          "culture",
+          "sports",
+          "education",
+          "history"
+        ]
+      },
+      "Osseo, Wisconsin": {
+        "name": "Osseo, Wisconsin",
+        "coordinates": {
+          "lat": 44.5722,
+          "lng": -91.2271,
+          "name": "Osseo, Wisconsin"
+        },
+        "visits": [
+          {
+            "id": "osseo-2004-08-01",
+            "title": "Exchange Year in Osseo",
+            "date": "2004-08-01T00:00:00.000Z",
+            "duration": 180,
+            "snippet": "Lived with a foster family in Osseo, Wisconsin, diving into American high school life at Osseo-Fairchild."
+          }
+        ],
+        "total_days": 180,
+        "activities": [
+          "culture",
+          "education"
+        ],
+        "experiences": [],
+        "tags": [
+          "culture",
+          "education"
+        ]
+      },
+      "Chicago, Illinois": {
+        "name": "Chicago, Illinois",
+        "coordinates": {
+          "lat": 41.8781,
+          "lng": -87.6298,
+          "name": "Chicago, Illinois"
+        },
+        "visits": [
+          {
+            "id": "chicago-2005-02-01",
+            "title": "Chicago: High School, College & Volleyball Beginnings",
+            "date": "2005-02-01T00:00:00.000Z",
+            "duration": 3650,
+            "snippet": "Transferred to Gordon Tech, graduated high school, attended college, met my ex-wife, and started my volleyball journey at 18 - a transformative decade in the Windy City."
+          },
+          {
+            "id": "chicago-2024-06-01",
+            "title": "Windy City Adventures in Chicago",
+            "date": "2024-06-01T00:00:00.000Z",
+            "duration": 60,
+            "snippet": "Explored Chicago's iconic skyline, deep-dish pizza, and vibrant art scene."
+          },
+          {
+            "id": "chicago-2025-03-29",
+            "title": "Spring Vibes in Chicago",
+            "date": "2025-03-29T00:00:00.000Z",
+            "duration": 5,
+            "snippet": "Embraced Chicago's spring energy, visiting Paylocity and exploring the city's vibrant neighborhoods."
+          },
+          {
+            "id": "chicago-2025-09-24",
+            "title": "Family Reunion & Wedding in Chicago",
+            "date": "2025-09-24T00:00:00.000Z",
+            "duration": 14,
+            "snippet": "Will attend my step-dad Mike's daughter's wedding and have an emotional reunion with my dad after 16 years apart - we recently reconnected over the phone and he's excited to meet my brother and I in p"
+          }
+        ],
+        "total_days": 3729,
+        "activities": [
+          "city",
+          "education",
+          "sports",
+          "relationships",
+          "culture",
+          "family",
+          "wedding"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "city",
+          "education",
+          "sports",
+          "relationships",
+          "culture",
+          "family",
+          "wedding"
+        ]
+      },
+      "Medellín, Colombia": {
+        "name": "Medellín, Colombia",
+        "coordinates": {
+          "lat": 6.2442,
+          "lng": -75.5812,
+          "name": "Medellín, Colombia"
+        },
+        "visits": [
+          {
+            "id": "medellin-2022-07-02",
+            "title": "Exploring Medellín's Markets",
+            "date": "2022-07-02T00:00:00.000Z",
+            "duration": 30,
+            "snippet": "Wandered through Medellín's bustling markets, soaking in the local vibes at Homecenter and beyond."
+          },
+          {
+            "id": "medellin-2022-11-01",
+            "title": "Vibrant Streets of Medellín",
+            "date": "2022-11-01T00:00:00.000Z",
+            "duration": 60,
+            "snippet": "Dived into the colorful streets of Medellín, from Comuna 13's street art to lively salsa nights."
+          }
+        ],
+        "total_days": 90,
+        "activities": [
+          "culture",
+          "city"
+        ],
+        "experiences": [],
+        "tags": [
+          "culture",
+          "city"
+        ]
+      },
+      "St. Petersburg, Florida": {
+        "name": "St. Petersburg, Florida",
+        "coordinates": {
+          "lat": 27.7676,
+          "lng": -82.6403,
+          "name": "St. Petersburg, Florida"
+        },
+        "visits": [
+          {
+            "id": "st-petersburg-2023-01-01",
+            "title": "Sun and Art in St. Petersburg",
+            "date": "2023-01-01T00:00:00.000Z",
+            "duration": 217,
+            "snippet": "Soaked up the sun and explored vibrant murals in St. Petersburg's artsy downtown."
+          },
+          {
+            "id": "st-petersburg-2024-05-19",
+            "title": "Back to St. Petersburg's Shores",
+            "date": "2024-05-19T00:00:00.000Z",
+            "duration": 12,
+            "snippet": "Returned to St. Petersburg for more beach vibes and local art galleries."
+          },
+          {
+            "id": "st-petersburg-2024-10-10",
+            "title": "St. Petersburg's Coastal Charm",
+            "date": "2024-10-10T00:00:00.000Z",
+            "duration": 6,
+            "snippet": "Back again to St. Petersburg for coastal sunsets and local art vibes."
+          },
+          {
+            "id": "st-petersburg-2025-02-02",
+            "title": "St. Petersburg's Winter Glow",
+            "date": "2025-02-02T00:00:00.000Z",
+            "duration": 5,
+            "snippet": "Enjoyed winter warmth and art-filled streets in St. Petersburg."
+          },
+          {
+            "id": "st-petersburg-2025-03-09",
+            "title": "Spring in St. Petersburg",
+            "date": "2025-03-09T00:00:00.000Z",
+            "duration": 44,
+            "snippet": "Welcomed spring with beach days and art walks in St. Petersburg."
+          }
+        ],
+        "total_days": 284,
+        "activities": [
+          "beach",
+          "art"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "beach",
+          "art"
+        ]
+      },
+      "Miami, Florida": {
+        "name": "Miami, Florida",
+        "coordinates": {
+          "lat": 25.7617,
+          "lng": -80.1918,
+          "name": "Miami, Florida"
+        },
+        "visits": [
+          {
+            "id": "miami-2023-08-07",
+            "title": "Beaches and Beats in Miami",
+            "date": "2023-08-07T00:00:00.000Z",
+            "duration": 1,
+            "snippet": "Danced to the beats and relaxed on the vibrant beaches of South Beach, Miami."
+          },
+          {
+            "id": "miami-2024-10-23",
+            "title": "Miami's Electric Energy",
+            "date": "2024-10-23T00:00:00.000Z",
+            "duration": 8,
+            "snippet": "Returned to Miami for more beach days and electric nightlife in South Beach."
+          }
+        ],
+        "total_days": 9,
+        "activities": [
+          "beach",
+          "nightlife"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "beach",
+          "nightlife"
+        ]
+      },
+      "Beirut, Lebanon": {
+        "name": "Beirut, Lebanon",
+        "coordinates": {
+          "lat": 33.8938,
+          "lng": 35.5018,
+          "name": "Beirut, Lebanon"
+        },
+        "visits": [
+          {
+            "id": "beirut-2023-08-09",
+            "title": "History and Vibes in Beirut",
+            "date": "2023-08-09T00:00:00.000Z",
+            "duration": 8,
+            "snippet": "Explored Beirut's historic souks and vibrant nightlife along the Mediterranean coast."
+          }
+        ],
+        "total_days": 8,
+        "activities": [
+          "culture",
+          "history"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "culture",
+          "history"
+        ]
+      },
+      "Baalbek, Lebanon": {
+        "name": "Baalbek, Lebanon",
+        "coordinates": {
+          "lat": 34.0069,
+          "lng": 36.2039,
+          "name": "Baalbek, Lebanon"
+        },
+        "visits": [
+          {
+            "id": "baalbek-2023-08-09",
+            "title": "Ancient Ruins in Baalbek",
+            "date": "2023-08-09T00:00:00.000Z",
+            "duration": 1,
+            "snippet": "Explored the majestic Temple of Bacchus in Baalbek, a stunning journey into Lebanon's ancient past."
+          }
+        ],
+        "total_days": 1,
+        "activities": [
+          "history",
+          "culture"
+        ],
+        "experiences": [
+          "stunning"
+        ],
+        "tags": [
+          "history",
+          "culture"
+        ]
+      },
+      "Athens, Greece": {
+        "name": "Athens, Greece",
+        "coordinates": {
+          "lat": 37.9838,
+          "lng": 23.7275,
+          "name": "Athens, Greece"
+        },
+        "visits": [
+          {
+            "id": "athens-2023-08-18",
+            "title": "Ancient Wonders in Athens",
+            "date": "2023-08-18T00:00:00.000Z",
+            "duration": 3,
+            "snippet": "Walked through history at the Acropolis and savored Greek flavors in Plaka."
+          }
+        ],
+        "total_days": 3,
+        "activities": [
+          "history",
+          "culture"
+        ],
+        "experiences": [],
+        "tags": [
+          "history",
+          "culture"
+        ]
+      },
+      "Barcelona, Spain": {
+        "name": "Barcelona, Spain",
+        "coordinates": {
+          "lat": 41.3851,
+          "lng": 2.1734,
+          "name": "Barcelona, Spain"
+        },
+        "visits": [
+          {
+            "id": "barcelona-2023-08-21",
+            "title": "Art and Architecture in Barcelona",
+            "date": "2023-08-21T00:00:00.000Z",
+            "duration": 23,
+            "snippet": "Marveled at Gaudí's masterpieces and strolled along La Rambla in vibrant Barcelona."
+          }
+        ],
+        "total_days": 23,
+        "activities": [
+          "art",
+          "architecture"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "art",
+          "architecture"
+        ]
+      },
+      "Dubai, United Arab Emirates": {
+        "name": "Dubai, United Arab Emirates",
+        "coordinates": {
+          "lat": 25.2048,
+          "lng": 55.2708,
+          "name": "Dubai, United Arab Emirates"
+        },
+        "visits": [
+          {
+            "id": "dubai-2023-10-05",
+            "title": "Luxury and Adventure in Dubai",
+            "date": "2023-10-05T00:00:00.000Z",
+            "duration": 4,
+            "snippet": "Admired Dubai's towering skyline and explored the desert dunes on an epic adventure."
+          }
+        ],
+        "total_days": 4,
+        "activities": [
+          "city",
+          "luxury"
+        ],
+        "experiences": [],
+        "tags": [
+          "city",
+          "luxury"
+        ]
+      },
+      "Chattanooga, Tennessee": {
+        "name": "Chattanooga, Tennessee",
+        "coordinates": {
+          "lat": 35.0456,
+          "lng": -85.3097,
+          "name": "Chattanooga, Tennessee"
+        },
+        "visits": [
+          {
+            "id": "chattanooga-2024-05-14",
+            "title": "Outdoor Vibes in Chattanooga",
+            "date": "2024-05-14T00:00:00.000Z",
+            "duration": 5,
+            "snippet": "Hiked scenic trails and explored the vibrant riverfront in Chattanooga."
+          }
+        ],
+        "total_days": 5,
+        "activities": [
+          "hiking",
+          "nature"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "hiking",
+          "nature"
+        ]
+      },
+      "Clearwater, Florida": {
+        "name": "Clearwater, Florida",
+        "coordinates": {
+          "lat": 27.9659,
+          "lng": -82.8001,
+          "name": "Clearwater, Florida"
+        },
+        "visits": [
+          {
+            "id": "clearwater-2024-08-01",
+            "title": "Sunsets in Clearwater",
+            "date": "2024-08-01T00:00:00.000Z",
+            "duration": 6,
+            "snippet": "Chased epic sunsets and relaxed on the white sands of Clearwater Beach."
+          },
+          {
+            "id": "clearwater-2024-11-16",
+            "title": "More Clearwater Sunsets",
+            "date": "2024-11-16T00:00:00.000Z",
+            "duration": 12,
+            "snippet": "Back to Clearwater for more stunning sunsets and beach relaxation."
+          }
+        ],
+        "total_days": 18,
+        "activities": [
+          "beach",
+          "nature"
+        ],
+        "experiences": [
+          "stunning"
+        ],
+        "tags": [
+          "beach",
+          "nature"
+        ]
+      },
+      "Miami Beach, Florida": {
+        "name": "Miami Beach, Florida",
+        "coordinates": {
+          "lat": 25.7907,
+          "lng": -80.13,
+          "name": "Miami Beach, Florida"
+        },
+        "visits": [
+          {
+            "id": "miami-beach-2024-08-08",
+            "title": "Vibrant Miami Beach",
+            "date": "2024-08-08T00:00:00.000Z",
+            "duration": 7,
+            "snippet": "Soaked up the sun and danced through the night in Miami Beach's lively scene."
+          },
+          {
+            "id": "miami-beach-2024-12-30",
+            "title": "Miami Beach Winter Escape",
+            "date": "2024-12-30T00:00:00.000Z",
+            "duration": 34,
+            "snippet": "Escaped winter with sunny days and vibrant nights in Miami Beach."
+          },
+          {
+            "id": "miami-beach-2025-05-23",
+            "title": "South Beach Volleyball, Bachata, and a Drive to St. Pete",
+            "date": "2025-05-23T00:00:00.000Z",
+            "duration": 7,
+            "snippet": "Played high-energy volleyball, danced bachata at Alain's, and drove to St. Pete."
+          }
+        ],
+        "total_days": 48,
+        "activities": [
+          "beach",
+          "nightlife",
+          "beach volleyball",
+          "friends",
+          "bachata"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "beach",
+          "nightlife",
+          "beach volleyball",
+          "friends",
+          "bachata"
+        ]
+      },
+      "Hermosa Beach, California": {
+        "name": "Hermosa Beach, California",
+        "coordinates": {
+          "lat": 33.8622,
+          "lng": -118.3995,
+          "name": "Hermosa Beach, California"
+        },
+        "visits": [
+          {
+            "id": "hermosa-beach-2024-08-15",
+            "title": "Chill Vibes in Hermosa Beach",
+            "date": "2024-08-15T00:00:00.000Z",
+            "duration": 7,
+            "snippet": "Caught waves and enjoyed laid-back vibes on Hermosa Beach's sunny shores."
+          }
+        ],
+        "total_days": 7,
+        "activities": [
+          "beach",
+          "surfing"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach",
+          "surfing"
+        ]
+      },
+      "San Diego, California": {
+        "name": "San Diego, California",
+        "coordinates": {
+          "lat": 32.7157,
+          "lng": -117.1611,
+          "name": "San Diego, California"
+        },
+        "visits": [
+          {
+            "id": "san-diego-2024-08-22",
+            "title": "Surf and Sun in San Diego",
+            "date": "2024-08-22T00:00:00.000Z",
+            "duration": 9,
+            "snippet": "Caught waves and soaked up the sun on San Diego's beautiful beaches."
+          },
+          {
+            "id": "san-diego-2025-05-20",
+            "title": "San Diego Whirlwind: Yoga, Thai, and Line Dancing",
+            "date": "2025-05-20T00:00:00.000Z",
+            "duration": 1,
+            "snippet": "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the mi"
+          },
+          {
+            "id": "san-diego-2025-06-01",
+            "title": "Finding Rhythm in San Diego's June Gloom",
+            "date": "2025-06-01T00:00:00.000Z",
+            "duration": 12,
+            "snippet": "Two weeks of balanced living in San Diego, combining European team meetings, beach volleyball at South Mission, and exploring local gems - all while embracing the city's famous June Gloom."
+          }
+        ],
+        "total_days": 22,
+        "activities": [
+          "beach",
+          "surfing",
+          "yoga",
+          "friends",
+          "line dancing",
+          "food",
+          "beach volleyball",
+          "remote work",
+          "coffee",
+          "culture",
+          "wellness",
+          "hookah"
+        ],
+        "experiences": [
+          "beautiful"
+        ],
+        "tags": [
+          "beach",
+          "surfing",
+          "yoga",
+          "friends",
+          "line dancing",
+          "food",
+          "beach volleyball",
+          "remote work",
+          "coffee",
+          "culture",
+          "wellness",
+          "hookah"
+        ]
+      },
+      "Honolulu, Hawaii": {
+        "name": "Honolulu, Hawaii",
+        "coordinates": {
+          "lat": 21.3069,
+          "lng": -157.8583,
+          "name": "Honolulu, Hawaii"
+        },
+        "visits": [
+          {
+            "id": "honolulu-2024-09-01",
+            "title": "Island Life in Honolulu",
+            "date": "2024-09-01T00:00:00.000Z",
+            "duration": 38,
+            "snippet": "Embraced island life in Honolulu with stunning beaches and lush hikes."
+          }
+        ],
+        "total_days": 38,
+        "activities": [
+          "beach",
+          "nature"
+        ],
+        "experiences": [
+          "stunning"
+        ],
+        "tags": [
+          "beach",
+          "nature"
+        ]
+      },
+      "Destin, Florida": {
+        "name": "Destin, Florida",
+        "coordinates": {
+          "lat": 30.3935,
+          "lng": -86.4958,
+          "name": "Destin, Florida"
+        },
+        "visits": [
+          {
+            "id": "destin-2024-10-16",
+            "title": "Beach Volleyball in Destin",
+            "date": "2024-10-16T00:00:00.000Z",
+            "duration": 5,
+            "snippet": "Kicked off with sun, sand, and epic volleyball matches in Destin's emerald waters."
+          },
+          {
+            "id": "destin-2025-04-22",
+            "title": "More Destin Beach Days",
+            "date": "2025-04-22T00:00:00.000Z",
+            "duration": 6,
+            "snippet": "Back to Destin for more volleyball and emerald-green beach days."
+          }
+        ],
+        "total_days": 11,
+        "activities": [
+          "beach volleyball",
+          "beach"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach volleyball",
+          "beach"
+        ]
+      },
+      "Playa del Carmen, Mexico": {
+        "name": "Playa del Carmen, Mexico",
+        "coordinates": {
+          "lat": 20.6296,
+          "lng": -87.0739,
+          "name": "Playa del Carmen, Mexico"
+        },
+        "visits": [
+          {
+            "id": "playa-del-carmen-2024-11-01",
+            "title": "Mayan Riviera Magic in Playa del Carmen",
+            "date": "2024-11-01T00:00:00.000Z",
+            "duration": 14,
+            "snippet": "Relaxed on Playa del Carmen's beaches and explored nearby Mayan ruins."
+          },
+          {
+            "id": "playa-del-carmen-2025-10-24",
+            "title": "Beach Volleyball Tournament in Playa del Carmen",
+            "date": "2025-10-24T00:00:00.000Z",
+            "duration": 10,
+            "snippet": "Will team up with Zacharias to smash serves and dive for digs at a thrilling beach volleyball tournament in Playa del Carmen."
+          }
+        ],
+        "total_days": 24,
+        "activities": [
+          "beach",
+          "culture",
+          "beach volleyball",
+          "friends"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach",
+          "culture",
+          "beach volleyball",
+          "friends"
+        ]
+      },
+      "Denver, Colorado": {
+        "name": "Denver, Colorado",
+        "coordinates": {
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "name": "Denver, Colorado"
+        },
+        "visits": [
+          {
+            "id": "denver-2024-11-20",
+            "title": "Denver's Urban Pulse",
+            "date": "2024-11-20T00:00:00.000Z",
+            "duration": 3,
+            "snippet": "Dove into Denver's vibrant urban scene, exploring Broadway and the city's eclectic neighborhoods."
+          },
+          {
+            "id": "denver-2024-11-28",
+            "title": "Rocky Mountain High in Denver",
+            "date": "2024-11-28T00:00:00.000Z",
+            "duration": 3,
+            "snippet": "Explored Denver's urban charm and took in stunning views from nearby trails."
+          }
+        ],
+        "total_days": 6,
+        "activities": [
+          "city",
+          "culture",
+          "hiking"
+        ],
+        "experiences": [
+          "vibrant",
+          "stunning"
+        ],
+        "tags": [
+          "city",
+          "culture",
+          "hiking"
+        ]
+      },
+      "Breckenridge, Colorado": {
+        "name": "Breckenridge, Colorado",
+        "coordinates": {
+          "lat": 39.4817,
+          "lng": -106.0384,
+          "name": "Breckenridge, Colorado"
+        },
+        "visits": [
+          {
+            "id": "breckenridge-2024-12-01",
+            "title": "Skiing in Breckenridge",
+            "date": "2024-12-01T00:00:00.000Z",
+            "duration": 30,
+            "snippet": "Hit the snowy slopes of Breckenridge for an epic skiing adventure."
+          }
+        ],
+        "total_days": 30,
+        "activities": [
+          "skiing",
+          "mountains"
+        ],
+        "experiences": [],
+        "tags": [
+          "skiing",
+          "mountains"
+        ]
+      },
+      "São Paulo, Brazil": {
+        "name": "São Paulo, Brazil",
+        "coordinates": {
+          "lat": -23.5505,
+          "lng": -46.6333,
+          "name": "São Paulo, Brazil"
+        },
+        "visits": [
+          {
+            "id": "sao-paulo-2025-02-07",
+            "title": "Urban Energy in São Paulo",
+            "date": "2025-02-07T00:00:00.000Z",
+            "duration": 9,
+            "snippet": "Immersed in São Paulo's bustling streets, street art, and vibrant food scene."
+          },
+          {
+            "id": "sao-paulo-2025-02-27",
+            "title": "Back to São Paulo's Beat",
+            "date": "2025-02-27T00:00:00.000Z",
+            "duration": 10,
+            "snippet": "Returned to São Paulo for more street art and vibrant nightlife."
+          }
+        ],
+        "total_days": 19,
+        "activities": [
+          "city",
+          "culture",
+          "art"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "city",
+          "culture",
+          "art"
+        ]
+      },
+      "Rio de Janeiro, Brazil": {
+        "name": "Rio de Janeiro, Brazil",
+        "coordinates": {
+          "lat": -22.9068,
+          "lng": -43.1729,
+          "name": "Rio de Janeiro, Brazil"
+        },
+        "visits": [
+          {
+            "id": "rio-de-janeiro-2025-02-16",
+            "title": "Carnival Vibes in Rio de Janeiro",
+            "date": "2025-02-16T00:00:00.000Z",
+            "duration": 11,
+            "snippet": "Danced to samba rhythms and relaxed on Copacabana Beach in Rio."
+          }
+        ],
+        "total_days": 11,
+        "activities": [
+          "beach",
+          "culture"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach",
+          "culture"
+        ]
+      },
+      "Williston, Florida": {
+        "name": "Williston, Florida",
+        "coordinates": {
+          "lat": 29.4086,
+          "lng": -82.4757,
+          "name": "Williston, Florida"
+        },
+        "visits": [
+          {
+            "id": "williston-2025-03-13",
+            "title": "Diving Devil's Den in Williston",
+            "date": "2025-03-13T00:00:00.000Z",
+            "duration": 1,
+            "snippet": "Dove into the crystal-clear waters of Devil's Den Prehistoric Spring for an unforgettable adventure."
+          }
+        ],
+        "total_days": 1,
+        "activities": [
+          "nature",
+          "adventure"
+        ],
+        "experiences": [],
+        "tags": [
+          "nature",
+          "adventure"
+        ]
+      },
+      "New Orleans, Louisiana": {
+        "name": "New Orleans, Louisiana",
+        "coordinates": {
+          "lat": 29.9511,
+          "lng": -90.0715,
+          "name": "New Orleans, Louisiana"
+        },
+        "visits": [
+          {
+            "id": "new-orleans-2025-04-28",
+            "title": "Jazz and Beignets in New Orleans",
+            "date": "2025-04-28T00:00:00.000Z",
+            "duration": 3,
+            "snippet": "Soaked in the vibrant jazz scene and savored beignets in the French Quarter."
+          }
+        ],
+        "total_days": 3,
+        "activities": [
+          "live music",
+          "food"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "live music",
+          "food"
+        ]
+      },
+      "Houston, Texas": {
+        "name": "Houston, Texas",
+        "coordinates": {
+          "lat": 29.7604,
+          "lng": -95.3698,
+          "name": "Houston, Texas"
+        },
+        "visits": [
+          {
+            "id": "houston-2025-05-01",
+            "title": "Urban Exploration in Houston",
+            "date": "2025-05-01T00:00:00.000Z",
+            "duration": 1,
+            "snippet": "Explored Houston's museums and vibrant food scene in a quick city stop."
+          }
+        ],
+        "total_days": 1,
+        "activities": [
+          "city",
+          "culture"
+        ],
+        "experiences": [
+          "vibrant"
+        ],
+        "tags": [
+          "city",
+          "culture"
+        ]
+      },
+      "Austin, Texas": {
+        "name": "Austin, Texas",
+        "coordinates": {
+          "lat": 30.2672,
+          "lng": -97.7431,
+          "name": "Austin, Texas"
+        },
+        "visits": [
+          {
+            "id": "austin-2025-05-02",
+            "title": "An Epic Day Vibing in Austin",
+            "date": "2025-05-02T00:00:00.000Z",
+            "duration": 10,
+            "snippet": "From a double espresso with a jaw-dropping skyline view to spiking volleyballs, Austin delivered energy and vibes."
+          }
+        ],
+        "total_days": 10,
+        "activities": [
+          "beach volleyball",
+          "coffee"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach volleyball",
+          "coffee"
+        ]
+      },
+      "Boulder, Colorado": {
+        "name": "Boulder, Colorado",
+        "coordinates": {
+          "lat": 40.015,
+          "lng": -105.2705,
+          "name": "Boulder, Colorado"
+        },
+        "visits": [
+          {
+            "id": "boulder-2025-05-13",
+            "title": "Chasing Vibes in Boulder",
+            "date": "2025-05-13T00:00:00.000Z",
+            "duration": 7,
+            "snippet": "Soaking up Boulder's chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center."
+          }
+        ],
+        "total_days": 7,
+        "activities": [
+          "coffee",
+          "live music",
+          "wellness"
+        ],
+        "experiences": [],
+        "tags": [
+          "coffee",
+          "live music",
+          "wellness"
+        ]
+      },
+      "Fort Lauderdale, Florida": {
+        "name": "Fort Lauderdale, Florida",
+        "coordinates": {
+          "lat": 26.1224,
+          "lng": -80.1373,
+          "name": "Fort Lauderdale, Florida"
+        },
+        "visits": [
+          {
+            "id": "fort-lauderdale-2025-05-21",
+            "title": "Volleyball and Vibes in Fort Lauderdale",
+            "date": "2025-05-21T00:00:00.000Z",
+            "duration": 2,
+            "snippet": "Arrived in Fort Lauderdale after a Denver layover, staying with Bartek for work, beach volleyball in Deerfield, and a relaxing massage together."
+          }
+        ],
+        "total_days": 2,
+        "activities": [
+          "beach",
+          "beach volleyball",
+          "friends"
+        ],
+        "experiences": [
+          "relaxing"
+        ],
+        "tags": [
+          "beach",
+          "beach volleyball",
+          "friends"
+        ]
+      },
+      "Tampa, Florida": {
+        "name": "Tampa, Florida",
+        "coordinates": {
+          "lat": 27.9506,
+          "lng": -82.4572,
+          "name": "Tampa, Florida"
+        },
+        "visits": [
+          {
+            "id": "tampa-2025-05-30",
+            "title": "Tampa Weekend: Road Trips, Brazilian Feasts, and St. Pete Yoga Vibes",
+            "date": "2025-05-30T00:00:00.000Z",
+            "duration": 3,
+            "snippet": "Cruised from Miami to St. Pete, feasted at a Brazilian steakhouse, flowed through yoga in St. Petersburg, and recovered in Clearwater while prepping for Hawaii."
+          }
+        ],
+        "total_days": 3,
+        "activities": [
+          "travel",
+          "yoga",
+          "food",
+          "friends",
+          "relocation"
+        ],
+        "experiences": [],
+        "tags": [
+          "travel",
+          "yoga",
+          "food",
+          "friends",
+          "relocation"
+        ]
+      },
+      "Oahu, Hawaii": {
+        "name": "Oahu, Hawaii",
+        "coordinates": {
+          "lat": 21.4389,
+          "lng": -158.0001,
+          "name": "Oahu, Hawaii"
+        },
+        "visits": [
+          {
+            "id": "oahu-2025-06-13",
+            "title": "New Beginnings in Oahu",
+            "date": "2025-06-13T00:00:00.000Z",
+            "duration": 60,
+            "snippet": "Will launch a new chapter in Oahu, settling into island life with beaches and volcanic trails."
+          }
+        ],
+        "total_days": 60,
+        "activities": [
+          "beach",
+          "nature",
+          "relocation"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach",
+          "nature",
+          "relocation"
+        ]
+      },
+      "Philippines": {
+        "name": "Philippines",
+        "coordinates": {
+          "lat": 12.8797,
+          "lng": 121.774,
+          "name": "Philippines"
+        },
+        "visits": [
+          {
+            "id": "philippines-2025-08-12",
+            "title": "Reconnecting with Leo & Wellness Center Vision in the Philippines",
+            "date": "2025-08-12T00:00:00.000Z",
+            "duration": 12,
+            "snippet": "Will meet up with Leo in his hometown north of Manila, then head to Siargao to scout potential land for a wellness center featuring beach volleyball, yoga, smoothies, and recovery options like cold pl"
+          }
+        ],
+        "total_days": 12,
+        "activities": [
+          "beach",
+          "culture",
+          "islands",
+          "friends",
+          "wellness",
+          "business"
+        ],
+        "experiences": [],
+        "tags": [
+          "beach",
+          "culture",
+          "islands",
+          "friends",
+          "wellness",
+          "business"
+        ]
+      },
+      "Bangkok, Thailand": {
+        "name": "Bangkok, Thailand",
+        "coordinates": {
+          "lat": 13.7563,
+          "lng": 100.5018,
+          "name": "Bangkok, Thailand"
+        },
+        "visits": [
+          {
+            "id": "bangkok-2025-08-24",
+            "title": "Digital Nomad Life in Bangkok with Jamie",
+            "date": "2025-08-24T00:00:00.000Z",
+            "duration": 29,
+            "snippet": "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants,"
+          }
+        ],
+        "total_days": 29,
+        "activities": [
+          "culture",
+          "food",
+          "city",
+          "friends",
+          "remote work",
+          "nightlife",
+          "running",
+          "beach volleyball",
+          "wellness",
+          "hookah"
+        ],
+        "experiences": [
+          "incredible",
+          "amazing"
+        ],
+        "tags": [
+          "culture",
+          "food",
+          "city",
+          "friends",
+          "remote work",
+          "nightlife",
+          "running",
+          "beach volleyball",
+          "wellness",
+          "hookah"
+        ]
+      },
+      "Canggu, Indonesia": {
+        "name": "Canggu, Indonesia",
+        "coordinates": {
+          "lat": -8.6596,
+          "lng": 115.1326,
+          "name": "Canggu, Indonesia"
+        },
+        "visits": [
+          {
+            "id": "canggu-2025-11-03",
+            "title": "Yoga Retreat in Canggu",
+            "date": "2025-11-03T00:00:00.000Z",
+            "duration": 21,
+            "snippet": "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu's rice fields and beaches."
+          }
+        ],
+        "total_days": 21,
+        "activities": [
+          "yoga",
+          "beach",
+          "wellness",
+          "friends"
+        ],
+        "experiences": [],
+        "tags": [
+          "yoga",
+          "beach",
+          "wellness",
+          "friends"
+        ]
+      }
+    },
+    "from_conversations": {
+      "Bangkok": 12,
+      "Philippines": 5,
+      "Maui": 3,
+      "Chicago": 2,
+      "Japan": 1
+    },
+    "merged_insights": {}
+  },
+  "user_profile": {
+    "travel_preferences": {
+      "top_activities": [
+        {
+          "activity": "city",
+          "total_days": 7528
+        },
+        {
+          "activity": "education",
+          "total_days": 7480
+        },
+        {
+          "activity": "sports",
+          "total_days": 7300
+        },
+        {
+          "activity": "culture",
+          "total_days": 6369
+        },
+        {
+          "activity": "relationships",
+          "total_days": 3650
+        },
+        {
+          "activity": "beach",
+          "total_days": 2783
+        },
+        {
+          "activity": "art",
+          "total_days": 317
+        },
+        {
+          "activity": "nature",
+          "total_days": 122
+        },
+        {
+          "activity": "friends",
+          "total_days": 97
+        },
+        {
+          "activity": "nightlife",
+          "total_days": 86
+        },
+        {
+          "activity": "beach volleyball",
+          "total_days": 81
+        },
+        {
+          "activity": "wellness",
+          "total_days": 81
+        },
+        {
+          "activity": "relocation",
+          "total_days": 63
+        },
+        {
+          "activity": "history",
+          "total_days": 50
+        },
+        {
+          "activity": "remote work",
+          "total_days": 41
+        }
+      ],
+      "travel_patterns": {
+        "preferred_durations": [
+          2190,
+          3650,
+          180,
+          3650,
+          30,
+          60,
+          217,
+          1,
+          8,
+          1,
+          3,
+          23,
+          38,
+          4,
+          39,
+          5,
+          12,
+          60,
+          6,
+          7,
+          7,
+          9,
+          38,
+          6,
+          5,
+          8,
+          14,
+          12,
+          3,
+          3,
+          30,
+          34,
+          5,
+          9,
+          11,
+          10,
+          44,
+          1,
+          5,
+          6,
+          3,
+          1,
+          10,
+          7,
+          1,
+          2,
+          7,
+          3,
+          12,
+          60,
+          12,
+          29,
+          14,
+          10,
+          21
+        ],
+        "seasonal_preferences": {
+          "fall": 16,
+          "summer": 16,
+          "winter": 9,
+          "spring": 14
+        },
+        "location_types": [
+          {
+            "type": "city",
+            "total_days": 7540
+          },
+          {
+            "type": "culture",
+            "total_days": 6369
+          },
+          {
+            "type": "beach",
+            "total_days": 2796
+          },
+          {
+            "type": "nature",
+            "total_days": 122
+          },
+          {
+            "type": "island",
+            "total_days": 98
+          },
+          {
+            "type": "mountains",
+            "total_days": 30
+          },
+          {
+            "type": "desert",
+            "total_days": 4
+          }
+        ],
+        "avg_stay_duration": 193.38181818181818
+      },
+      "travel_style": [
+        "nightlife",
+        "adventure",
+        "relaxation",
+        "food",
+        "wellness",
+        "digital nomad",
+        "active"
+      ]
+    },
+    "conversation_themes": {
+      "travel": 8,
+      "food": 5,
+      "running": 3,
+      "volleyball": 3,
+      "wellness": 3,
+      "massage": 2,
+      "digital nomad": 1,
+      "rooftop": 1
+    },
+    "total_travel_days": 10636,
+    "countries_visited": 35,
+    "most_visited_places": [
+      {
+        "name": "Chicago, Illinois",
+        "total_days": 3729,
+        "visits": 4
+      },
+      {
+        "name": "Sofia, Bulgaria",
+        "total_days": 3688,
+        "visits": 2
+      },
+      {
+        "name": "Varna, Bulgaria",
+        "total_days": 2229,
+        "visits": 2
+      },
+      {
+        "name": "St. Petersburg, Florida",
+        "total_days": 284,
+        "visits": 5
+      },
+      {
+        "name": "Osseo, Wisconsin",
+        "total_days": 180,
+        "visits": 1
+      },
+      {
+        "name": "Medellín, Colombia",
+        "total_days": 90,
+        "visits": 2
+      },
+      {
+        "name": "Oahu, Hawaii",
+        "total_days": 60,
+        "visits": 1
+      },
+      {
+        "name": "Miami Beach, Florida",
+        "total_days": 48,
+        "visits": 3
+      },
+      {
+        "name": "Honolulu, Hawaii",
+        "total_days": 38,
+        "visits": 1
+      },
+      {
+        "name": "Breckenridge, Colorado",
+        "total_days": 30,
+        "visits": 1
+      }
+    ]
+  }
+}
