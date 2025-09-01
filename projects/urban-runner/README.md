@@ -4,7 +4,7 @@
 A global movement for wealth redistribution — one run at a time.
 
 ## Project Overview
-Urban Runner is a **global movement + game universe** that blends real-world runs, wealth redistribution, lifestyle stops, and community storytelling into a gamified system. Runs are documented through photos, videos, live WhatsApp updates, stylized game cards, cutscenes, and game maps.
+Urban Runner is a **global movement + game universe** created by Paul that blends real-world runs, wealth redistribution, lifestyle stops, and community storytelling into a gamified system. Runs are documented through photos, videos, live WhatsApp updates, stylized game cards, cutscenes, and game maps.
 
 ## Core Mission
 A global movement for wealth redistribution — one run at a time.
@@ -16,8 +16,11 @@ Each run (episode) includes:
 - **Side events** (volleyball, wildlife encounters)
 - **Recovery** (massage, home)
 
+Runners spend, donate, or tip along the way; totals are logged at the end.
+Each episode produces game cards + cutscenes + a final mission map.
+
 ## Episode Structure
-- **Runs are treated as episodes** (e.g., Episode 3 – Bangkok Run)
+- **Runs are treated as episodes** (e.g., Episode 4 – Bangkok Botanical Run)
 - Each episode = a path of checkpoints with a final recovery point
 - Side events can be included as bonus cards
 - At the end: Mission Complete card + map summary
@@ -50,7 +53,7 @@ At the end of each episode:
   - Route traced (running = blue solid, car = dashed green)
   - Checkpoints marked with icons + spend type tags
   - Totals displayed in corner (Distance, Time, Cash Spent, Cash Given)
-  - Repeated routes glow brighter to show game world getting "more detailed"
+  - Repeated routes glow brighter to show game world getting "more detailed" with more footage
 
 ## Cutscenes
 - **Videos used as cutscenes** in the game world
@@ -90,8 +93,9 @@ This project creates globe pins for:
 ## Current Status
 - **Started**: 5 days ago in Bangkok, Thailand
 - **Development**: All planning and system design through ChatGPT
-- **Status**: System architecture complete, ready for first episode execution
-- **Next**: Execute first Bangkok run following the episode structure
+- **Status**: System architecture complete, Episode 4 executed
+- **Latest Episode**: Episode 4 - Bangkok Botanical Run (Aug 31, 2025)
+- **Next**: Continue building the game world with future episodes
 
 ## AI Memory Integration
 - **Project Context**: Complete episode system and game mechanics
@@ -104,3 +108,6 @@ This project creates globe pins for:
 - **Global Coverage**: Cities and countries where episodes occur
 - **Community Engagement**: WhatsApp group participation and sharing
 - **Game World Growth**: How detailed the virtual world becomes with repeated routes
+
+## Future Conversations Rule
+Each new conversation = one Urban Runner episode. Follow this system to generate cards, maps, and cutscenes based on Paul's inputs (photos, videos, spend notes, routes).

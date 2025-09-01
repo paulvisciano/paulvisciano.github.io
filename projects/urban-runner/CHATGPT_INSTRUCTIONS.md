@@ -18,7 +18,7 @@ Each episode produces game cards + cutscenes + a final mission map.
 
 ## Episode Structure
 
-Runs are treated as episodes (e.g. Episode 3 – Bangkok Run).
+Runs are treated as episodes (e.g. Episode 4 – Bangkok Botanical Run).
 
 Each episode = a path of checkpoints with a final recovery point.
 
@@ -66,7 +66,7 @@ Each stop becomes a stylized card.
 At the end of each episode, Paul shares his Google Maps GPS timeline.
 
 A **Game Map Overlay** is created:
-- Base layer = real Bangkok (or city) streets from Google Maps
+- Base layer = real city streets from Google Maps
 - Route traced (running = blue solid, car = dashed green)
 - Checkpoints marked with icons + spend type tags
 - Totals displayed in a corner (Distance, Time, Cash Spent, Cash Given)
@@ -107,6 +107,47 @@ Can be placed between checkpoints or at episode start/end for atmosphere.
 **Community description** (pinned):
 > 🌍 Urban Runner
 > A global movement for wealth redistribution — one run at a time.
+
+---
+
+## Latest Episode: Episode 4 - Bangkok Botanical Run
+
+**Date:** August 31, 2025  
+**Duration:** 11:29 AM - 9:22 PM (~10 hours)  
+**Distance:** 12 miles walked, 4 hours walking time
+
+**Checkpoints:**
+- Volleyball with locals
+- Thai Cannabis Club (Weed Spot)
+- Wachirabenchathat Park (Botanical Garden)
+
+**Wealth Redistribution:**
+- Tips: 171 THB total (Street Vendor: 30 THB, Bekku Tonkatsu: 141 THB)
+- Donations: 200 THB total (2 homeless individuals: 100 THB each)
+- **Total Given:** 441 THB
+
+**Side Quests:**
+- **The Bangkok Hustle:** Scammed into buying overpriced herbs and honey by men posing as healers (Loss: 6,500 THB)
+- Real-world scams integrated as in-game side quests
+
+**Fuel-Ups:**
+- Street food: 70 THB + 30 THB tip
+- Bekku Tonkatsu: Excellent meal with dessert (Total: 745 THB incl. tip)
+- Final sit-down at anime-themed restaurant near botanical garden
+
+**Game Dynamics:**
+- Jamie joins remotely via WhatsApp for game assets and storyline
+- New checkpoint card system with stylized game world aesthetic
+- Real-world events become game world content
+
+**Observations:**
+- Bangkok's side streets often don't connect — careful route planning required
+- Serendipitous signs: volleyball on TV, temples hidden in alleys
+- Decision-making and perseverance key — from refusing train to navigating scams
+
+**Recovery:** Mission completed, grab home, planned massage session for full recovery
+
+**Assets:** 9 high-quality PNG images documenting the episode
 
 ---
 
