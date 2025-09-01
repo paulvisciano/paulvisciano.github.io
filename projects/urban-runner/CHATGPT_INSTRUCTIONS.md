@@ -52,6 +52,35 @@ Each stop becomes a stylized card.
 
 ---
 
+## Available Templates
+
+**Use these templates when generating content for future episodes:**
+
+### **Card Templates:**
+- **`fuel-up-template.png`** - For food, drinks, coffee stops
+- **`drop-template.png`** - For donation and tip activities
+- **`side-quest-template.png`** - For bonus encounters and special events
+- **`multi-card-template.png`** - For complex multi-activity stops
+- **`level-up-template.png** - For achievement and milestone moments
+- **`next-up-template.png** - For previewing upcoming checkpoints
+
+### **Episode Templates:**
+- **`mission-summary-template.png`** - For episode completion summaries
+- **`map-template.png** - For route visualization and game world maps
+
+### **Marketing Materials:**
+- **`whatsapp-1.png`** - Main Urban Runner branding
+- **`whatsapp-2.png`** - Community engagement
+- **`whatsapp-3.png`** - Charity and donation focus
+
+**Template Usage Guidelines:**
+- Match template style to episode content and mood
+- Maintain consistent visual language across episodes
+- Use marketing templates for community engagement posts
+- Adapt templates to fit specific episode themes and locations
+
+---
+
 ## Spend Type System
 
 🛒 **Item Purchase (Blue)** → food, drinks, coffee, fuel
@@ -108,6 +137,11 @@ Can be placed between checkpoints or at episode start/end for atmosphere.
 > 🌍 Urban Runner
 > A global movement for wealth redistribution — one run at a time.
 
+**Marketing Integration:**
+- Use marketing poster templates for community announcements
+- Share template-based content to maintain visual consistency
+- Engage community with branded materials during episodes
+
 ---
 
 ## Latest Episode: Episode 4 - Bangkok Botanical Run
@@ -148,6 +182,32 @@ Can be placed between checkpoints or at episode start/end for atmosphere.
 **Recovery:** Mission completed, grab home, planned massage session for full recovery
 
 **Assets:** 9 high-quality PNG images documenting the episode
+
+---
+
+## Content Generation with Templates
+
+**When creating content for new episodes:**
+
+1. **Select Appropriate Template:**
+   - Match template to episode activity type
+   - Consider episode mood and location
+   - Use marketing templates for community engagement
+
+2. **Maintain Visual Consistency:**
+   - Follow established color schemes and styles
+   - Keep branding elements consistent
+   - Ensure WhatsApp compatibility (dark theme, good contrast)
+
+3. **Template Customization:**
+   - Adapt templates to specific episode content
+   - Maintain Urban Runner aesthetic
+   - Include episode-specific details and local elements
+
+4. **Quality Standards:**
+   - High-resolution output for all templates
+   - Consistent formatting across episode elements
+   - Professional game world aesthetic
 
 ---
 
@@ -214,5 +274,7 @@ Clean JSON or markdown that can be copied into project memory.
 ## 👉 Future Conversations Rule
 
 Each new conversation = one Urban Runner episode. Follow this system to generate cards, maps, and cutscenes based on Paul's inputs (photos, videos, spend notes, routes).
+
+**Use the available templates** to maintain visual consistency and professional quality across all episode content.
 
 When Paul requests exports, use the privacy guidelines above to create sanitized summaries suitable for GitHub while keeping sensitive details in ChatGPT only.
