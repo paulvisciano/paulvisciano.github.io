@@ -54,6 +54,73 @@ window.App = () => {
     }
   };
 
+  // Smooth transition function for episode navigation
+  const smoothEpisodeTransition = (nextEpisodeId) => {
+    // Find the next episode moment
+    const nextMoment = window.momentsInTime.find(m => m.id === nextEpisodeId);
+    if (!nextMoment) {
+      console.error('Next episode not found:', nextEpisodeId);
+      return;
+    }
+    
+    // Add transitioning class to current content for crossfade effect
+    const currentContent = document.querySelector('.blog-post-drawer-content');
+    if (currentContent) {
+      currentContent.classList.add('transitioning');
+    }
+    
+    // Start the transition sequence
+    setTimeout(() => {
+      // Close current blog drawer
+      if (window.setBlogPostContent) {
+        window.setBlogPostContent(null);
+      }
+      
+      // Select the next episode in timeline (this will update URL and zoom)
+      handleMomentSelection(nextMoment);
+      
+      // Wait for drawer to close, then open new content
+      setTimeout(() => {
+        if (window.setBlogPostContent && nextMoment.fullLink && nextMoment.fullLink !== '#') {
+          // Load and open the blog post
+          fetch(nextMoment.fullLink)
+            .then(response => response.text())
+            .then(html => {
+              // Extract content from the HTML
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, 'text/html');
+              const title = doc.querySelector('title')?.textContent || nextMoment.title;
+              const content = doc.querySelector('.post-content')?.innerHTML || '';
+              const image = nextMoment.image?.replace('attachment://', '') || '';
+              
+              window.setBlogPostContent({
+                title: title,
+                content: content,
+                image: image,
+                imageAlt: nextMoment.imageAlt || title
+              });
+              
+              // Remove transitioning class from new content after a brief delay
+              setTimeout(() => {
+                const newContent = document.querySelector('.blog-post-drawer-content');
+                if (newContent) {
+                  newContent.classList.remove('transitioning');
+                }
+              }, 200);
+            })
+            .catch(error => {
+              console.error('Error loading blog post:', error);
+              // Fallback to regular navigation
+              window.location.href = `/moments/${nextEpisodeId}`;
+            });
+        }
+      }, 300); // Wait for drawer close animation
+    }, 200); // Brief crossfade delay
+  };
+
+  // Expose the smooth transition function globally
+  window.smoothEpisodeTransition = smoothEpisodeTransition;
+
   // Check URL on initial load to set selectedId and zoom to location
   React.useEffect(() => {
     // Check for a 'path' query parameter (GitHub Pages 404 redirect)
