@@ -1,0 +1,48 @@
+{
+  "active_relationships": {
+    "Jamie": {
+      "relationship": "travel companion",
+      "current_status": "traveling together in Bangkok",
+      "shared_activities": [
+        "Urban Runner donation project",
+        "rooftop exploration",
+        "restaurant hopping",
+        "massage sessions",
+        "neighborhood running",
+        "volleyball playing",
+        "hookah and food experiences"
+      ],
+      "context": "Originally planned for Bozhi to join, but Jamie came instead",
+      "last_updated": "2025-01-01"
+    },
+    "Leo": {
+      "relationship": "close friend",
+      "location": "Philippines (north of Manila)",
+      "recent_interaction": "visited Leo and his brother Boy in Philippines",
+      "experience": "incredible time together",
+      "family": {
+        "Boy": "Leo's brother, planning to join in Bangkok on Sept 12th"
+      },
+      "last_updated": "2025-01-01"
+    },
+    "Boy": {
+      "relationship": "Leo's brother, friend",
+      "current_status": "planning to join in Bangkok",
+      "join_date": "September 12th, 2025",
+      "context": "Met during Philippines visit, excited about Bangkok group dynamics",
+      "last_updated": "2025-01-01"
+    },
+    "Bozhi": {
+      "relationship": "potential travel companion",
+      "current_status": "might join next week in Bangkok",
+      "context": "Originally planned to be primary Bangkok companion",
+      "uncertainty": "still planning but not confirmed",
+      "last_updated": "2025-01-01"
+    }
+  },
+  "relationship_notes": {
+    "group_dynamics": "Excited about potential 4-person group (Paul, Jamie, Bozhi, Boy) roaming Bangkok together",
+    "travel_style": "Active exploration, food-focused, wellness-oriented",
+    "shared_interests": ["volleyball", "running", "food exploration", "rooftops", "wellness activities"]
+  }
+}
