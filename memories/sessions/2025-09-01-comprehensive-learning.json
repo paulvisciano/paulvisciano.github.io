@@ -1,0 +1,22 @@
+{
+  "id": "2025-09-01-comprehensive-learning",
+  "timestamp": "2025-09-01T08:47:11.620Z",
+  "type": "comprehensive_learning",
+  "summary": "Learned from 55 moments + conversation history: extracted people, places, preferences",
+  "files_modified": [
+    "memories/contexts/comprehensive-knowledge.json"
+  ],
+  "key_insights": [
+    "11 people identified from moments",
+    "35 places analyzed",
+    "10636 total travel days",
+    "35 countries visited",
+    "Top activities: city, education, sports, culture, relationships"
+  ],
+  "tags": [
+    "learning",
+    "comprehensive",
+    "moments",
+    "conversations"
+  ]
+}

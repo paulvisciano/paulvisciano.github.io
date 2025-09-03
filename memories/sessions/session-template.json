@@ -1,0 +1,25 @@
+{
+  "id": "YYYY-MM-DD-session-type",
+  "timestamp": "2025-01-01T00:00:00Z",
+  "type": "coding_session | content_update | planning | debugging",
+  "summary": "Brief description of what was accomplished",
+  "files_modified": [
+    "path/to/file.js"
+  ],
+  "key_changes": [
+    "Specific change 1",
+    "Specific change 2"
+  ],
+  "context": {
+    "project_focus": "what aspect of the project",
+    "user_goal": "what the user was trying to achieve",
+    "challenges": "any issues encountered",
+    "discoveries": "new insights or learnings"
+  },
+  "tags": ["relevant", "tags", "for", "categorization"],
+  "related_sessions": ["session-id-1", "session-id-2"],
+  "follow_up_items": [
+    "Things to remember for next time",
+    "Pending tasks or ideas"
+  ]
+}
