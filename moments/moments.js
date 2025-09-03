@@ -683,6 +683,21 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "urban-runner-episode-6-2025-09-02",
+    title: "Urban Runner Episode 6: Amsterdam Café Cutscene",
+    date: new Date('2025-09-02T00:00:00Z'),
+    timelineHighlight: "Urban Runner Episode 6",
+    tags: ["urban runner", "sewer city", "outdoor gym", "amsterdam cafe", "wealth redistribution", "bangkok", "gamification"],
+    snippet: "The wildest Urban Runner episode yet - 13 miles through Sewer City, outdoor gym workouts, El Gaucho tourist tax, Amsterdam Café cutscene, and late-night Decathlon shopping. Proved that Urban Runner could handle multiple storylines and urban exploration in a single day.",
+    image: "attachment://2025/09-02-episode6-amsterdam-cafe-cutscene.png",
+    imageAlt: "Urban Runner Episode 6: Amsterdam Café Cutscene",
+    caption: "Amsterdam Café Cutscene - Night Adventures",
+    fullLink: "2025/09-02-episode6-amsterdam-cafe-cutscene.html",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "chicago-2025-09-24",
     title: "Family Reunion & Wedding in Chicago",
     date: new Date('2025-09-24T00:00:00Z'),
