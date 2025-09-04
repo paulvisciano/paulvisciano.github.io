@@ -8,6 +8,7 @@
   <meta name="keywords" content="Urban Runner, Bangkok, Bangkok Hustle, scam, wealth redistribution, urban exploration, travel blog, gamification">
   <meta name="author" content="Paul Visciano">
   <link rel="stylesheet" href="../../components/styles.css">
+  <script src="../../components/episodeNavigation.js"></script>
   <style>
     .post-content {
       max-width: 800px;
@@ -142,6 +143,8 @@
         <p>August 31, 2025 • Bangkok, Thailand</p>
       </div>
 
+      <div id="episode-breadcrumb"></div>
+
       <div class="comic-panel">
         <div class="comic-caption">
           <h3>Mission Brief - Bangkok Hustle Begins</h3>
@@ -263,14 +266,39 @@
 
       <p><strong>Urban Runner continues to evolve, one episode at a time. Episode 5 awaits.</strong></p>
 
-      <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: rgba(26, 26, 26, 0.3); border-radius: 12px; border: 1px solid rgba(255, 165, 0, 0.2);">
-        <h3 style="color: var(--primary-orange); margin-top: 0;">🎮 Continue the Story</h3>
-        <p>The Bangkok Hustle scam from this episode sets up the dramatic confrontation in Part 2...</p>
-        <a href="javascript:void(0)" onclick="window.smoothEpisodeTransition('urban-runner-episode-5-2025-09-01')" style="display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: var(--primary-orange); color: #000; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer;">
-          → Episode 5: Bangkok Hustle - Part 2
-        </a>
-      </div>
+      <div id="episode-navigation"></div>
     </div>
   </main>
+
+  <script>
+    // Wait for the navigation component to load
+    function initNavigation() {
+      if (window.EpisodeNavigation) {
+        // Add breadcrumb
+        const breadcrumb = window.EpisodeNavigation.generateBreadcrumb('urban-runner-episode-4-2025-08-31');
+        const breadcrumbDiv = document.getElementById('episode-breadcrumb');
+        if (breadcrumbDiv) {
+          breadcrumbDiv.innerHTML = breadcrumb;
+        }
+
+        // Add episode navigation
+        const episodeNav = window.EpisodeNavigation.generateEpisodeNav('urban-runner-episode-4-2025-08-31');
+        const navDiv = document.getElementById('episode-navigation');
+        if (navDiv) {
+          navDiv.innerHTML = episodeNav;
+        }
+      } else {
+        // Retry after a short delay
+        setTimeout(initNavigation, 100);
+      }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initNavigation);
+    } else {
+      initNavigation();
+    }
+  </script>
 </body>
 </html>

@@ -545,6 +545,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
         setIsBlogDrawerOpen(true);
         setPopoverContent(null);
+        
+        // Add Urban Runner navigation if this is an Urban Runner episode
+        if (post.title && post.title.includes('Urban Runner')) {
+          setTimeout(() => {
+            window.addUrbanRunnerNavigation(post.id);
+          }, 100);
+        }
       } catch (err) {
         setError('Failed to load the full post. Please try again.');
 

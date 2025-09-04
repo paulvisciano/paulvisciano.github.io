@@ -100,6 +100,13 @@ window.App = () => {
                 imageAlt: nextMoment.imageAlt || title
               });
               
+              // Add Urban Runner navigation if this is an Urban Runner episode
+              if (title && title.includes('Urban Runner')) {
+                setTimeout(() => {
+                  window.addUrbanRunnerNavigation(nextMoment.id);
+                }, 100);
+              }
+              
               // Remove transitioning class from new content after a brief delay
               setTimeout(() => {
                 const newContent = document.querySelector('.blog-post-drawer-content');
@@ -120,6 +127,31 @@ window.App = () => {
 
   // Expose the smooth transition function globally
   window.smoothEpisodeTransition = smoothEpisodeTransition;
+  
+  // Urban Runner navigation function
+  window.addUrbanRunnerNavigation = (episodeId) => {
+    if (window.EpisodeNavigation) {
+      const navContainer = document.getElementById('episode-navigation-container');
+      
+      if (navContainer) {
+        // Add breadcrumb navigation
+        const breadcrumb = window.EpisodeNavigation.generateBreadcrumb(episodeId);
+        const episodeNav = window.EpisodeNavigation.generateEpisodeNav(episodeId);
+        
+        navContainer.innerHTML = `
+          <div style="margin-bottom: 1rem;">
+            ${breadcrumb}
+          </div>
+          <div>
+            ${episodeNav}
+          </div>
+        `;
+      }
+    } else {
+      // Retry if navigation component isn't loaded yet
+      setTimeout(() => window.addUrbanRunnerNavigation(episodeId), 100);
+    }
+  };
 
   // Check URL on initial load to set selectedId and zoom to location
   React.useEffect(() => {

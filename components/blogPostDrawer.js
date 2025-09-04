@@ -58,6 +58,12 @@ window.BlogPostDrawer = ({ content, onClose }) => {
             className: 'blog-post-body',
             dangerouslySetInnerHTML: { __html: processedContent.content }
           }),
+          // Add Urban Runner episode navigation if this is an Urban Runner episode
+          processedContent.title && processedContent.title.includes('Urban Runner') && React.createElement('div', {
+            key: 'episode-nav',
+            id: 'episode-navigation-container',
+            style: { marginTop: '2rem' }
+          }),
           processedContent.mapLink && React.createElement(
             'a',
             { 
