@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Runner Episode 7: Pura Vida</title>
+  <meta name="description" content="Episode 7 of Urban Runner: Pura Vida - A journey through Bangkok featuring K-FIT power-ups, market detours, volleyball victories, and holistic recovery at Let's Relax Spa.">
+  <meta name="keywords" content="Urban Runner, Bangkok, Pura Vida, K-FIT, volleyball, spa reset, market detour, recovery, urban exploration">
+  <meta name="author" content="Paul Visciano">
+  <link rel="stylesheet" href="../../components/styles.css">
+  <script src="../../components/episodeNavigation.js"></script>
+  <style>
+    .post-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .episode-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.1), rgba(255, 165, 0, 0.05));
+      border-radius: 12px;
+      border: 1px solid rgba(255, 165, 0, 0.2);
+    }
+    .episode-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(26, 26, 26, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 165, 0, 0.2);
+    }
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-orange);
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    .comic-panel {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(26, 26, 26, 0.3);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 165, 0, 0.1);
+    }
+    .comic-caption h3 {
+      color: var(--primary-orange);
+      margin-top: 0;
+    }
+    .buffs {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .buff {
+      background: rgba(255, 165, 0, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(255, 165, 0, 0.2);
+    }
+    .checkpoint {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(26, 26, 26, 0.3);
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-orange);
+    }
+    .checkpoint h3 {
+      color: var(--primary-orange);
+      margin-top: 0;
+    }
+    
+    /* Horizontal scroll cards */
+    .scroll-container {
+      overflow-x: auto;
+      padding: 1rem 0;
+      margin: 2rem 0;
+    }
+    .scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .scroll-container::-webkit-scrollbar-track {
+      background: rgba(26, 26, 26, 0.3);
+      border-radius: 4px;
+    }
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: var(--primary-orange);
+      border-radius: 4px;
+    }
+    .cards-horizontal {
+      display: flex;
+      gap: 1rem;
+      padding: 0 0.5rem;
+      min-width: max-content;
+    }
+    .card {
+      flex: 0 0 300px;
+      background: rgba(26, 26, 26, 0.4);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 165, 0, 0.2);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(255, 165, 0, 0.2);
+    }
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-title {
+      color: var(--primary-orange);
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 0 0 0.5rem 0;
+    }
+    .card-description {
+      color: var(--text-color);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    /* K-FIT special section */
+    .kfit-section {
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.15), rgba(255, 165, 0, 0.05));
+      border: 2px solid rgba(255, 165, 0, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .kfit-title {
+      color: var(--primary-orange);
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 0 1rem 0;
+    }
+    .kfit-timeline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .kfit-step {
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+      padding: 1rem;
+      background: rgba(26, 26, 26, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 165, 0, 0.2);
+    }
+    .kfit-step-title {
+      color: var(--primary-orange);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .kfit-arrow {
+      color: var(--primary-orange);
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+    }
+    
+    /* 5-panel scenes */
+    .five-panel {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    .panel {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 165, 0, 0.2);
+    }
+    .panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3), 0 2px 8px rgba(0,0,0,0.3);
+      }
+      50% {
+        box-shadow: 0 6px 16px rgba(255, 165, 0, 0.5), 0 4px 12px rgba(0,0,0,0.3);
+      }
+      100% {
+        box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3), 0 2px 8px rgba(0,0,0,0.3);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .five-panel {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .kfit-timeline {
+        flex-direction: column;
+      }
+      .kfit-arrow {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="post-content">
+      <div class="episode-header">
+        <p>September 3, 2025 • Bangkok, Thailand</p>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const breadcrumb = window.EpisodeNavigation.generateBreadcrumb('urban-runner-episode-7-2025-09-03');
+          const episodeHeader = document.querySelector('.episode-header');
+          episodeHeader.insertAdjacentHTML('afterend', breadcrumb);
+        });
+      </script>
+
+      <div class="comic-panel">
+        <div class="comic-caption">
+          <h3>Mission Start & Amsterdam Café Cluster</h3>
+          <p><strong>Morning - Fuel Up + Tip + Donation + Side Quest</strong></p>
+          <p>Episode 7 began with familiar ground at Amsterdam Café, but this wasn't just another fuel-up. This was about carrying a vision forward — the K-FIT story from Valencia, Philippines, and exploring what Pura Vida actually looks like. I was told there's volleyball there, but had no idea what to expect. The day kicked off with a solid meal (฿517), a small tip into the jar (฿100), and even a donation (฿100) to a blind man carrying a little box on the street. Small acts of generosity feel different in Bangkok — they become boosts, woven into the rhythm of the run.</p>
+          <div class="buffs">
+            <span class="buff">+Fuel Up 🍽️</span>
+            <span class="buff">+Generosity Boost 💝</span>
+            <span class="buff">+Side Quest 🎮</span>
+            <span class="buff">+K-FIT Vision 🏋️</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin: 1rem 0; overflow-x: auto; padding: 0.5rem 0; scrollbar-width: thin; scrollbar-color: var(--primary-orange) rgba(26, 26, 26, 0.3);">
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-1.png" alt="Amsterdam Café scene" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Mission Bootstrap</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-2.png" alt="Generosity and community" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Community Connection</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="comic-panel">
+        <div class="comic-caption">
+          <h3>VIVIN Café & Route Planning</h3>
+          <p><strong>Light Fuel-Up + Route to Pura Vida</strong></p>
+          <p>From Amsterdam, the journey moved toward VIVIN Café for a light fuel-up — coconut, nuts, and a reminder that pacing matters on long runs. Energy topped up, ready for the exploration ahead. The route to Pura Vida was mapped out, a journey through Bangkok's urban landscape to discover what this facility actually offers.</p>
+          <div class="buffs">
+            <span class="buff">+Hydration 💧</span>
+            <span class="buff">+Energy ⚡</span>
+            <span class="buff">+Route Planning 🗺️</span>
+            <span class="buff">+Pacing 🏃‍♂️</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin: 1rem 0; overflow-x: auto; padding: 0.5rem 0; scrollbar-width: thin; scrollbar-color: var(--primary-orange) rgba(26, 26, 26, 0.3);">
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-3.png" alt="VIVIN Café" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">VIVIN Café</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-4.png" alt="Route to Pura Vida" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Route to Pura Vida</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comic-panel">
+        <div class="comic-caption">
+          <h3>K-FIT Power-Up & Gear Change</h3>
+          <p><strong>Valencia Vision + Bangkok Integration</strong></p>
+          <p>Walking further and getting hot, I stopped on the side of the road to change gear into the K-FIT sleeveless. This wasn't just a change of clothes — it was carrying forward a vision from Valencia, Philippines. The K-FIT vision is fitness, sports, healthy food, and recovery all in one spot. Wearing the logo of Leo and Boy's project from Valencia, I felt plugged into something bigger. A vision of complete wellness integration that could be realized anywhere.</p>
+          <p>Follow their journey: <a href="https://www.instagram.com/kfitvalencia/" target="_blank" style="color: var(--primary-orange); text-decoration: none;">@kfitvalencia</a></p>
+          <div class="buffs">
+            <span class="buff">+Valencia Vision 🌏</span>
+            <span class="buff">+Cultural Bridge 🌉</span>
+            <span class="buff">+Gear Change 👕</span>
+            <span class="buff">+Vision Connection 🔮</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin: 1rem 0; overflow-x: auto; padding: 0.5rem 0; scrollbar-width: thin; scrollbar-color: var(--primary-orange) rgba(26, 26, 26, 0.3);">
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-5.png" alt="K-FIT gear change" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">K-FIT Gear Change</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-6.png" alt="K-FIT vision" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">K-FIT Vision</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comic-panel">
+        <div class="comic-caption">
+          <h3>Market Discovery & Havana Flashback</h3>
+          <p><strong>Street Market + Memory Lane</strong></p>
+          <p>Continuing on the main road, I stumbled upon a vibrant market. At the market, I saw an old car which took me back to my days in Havana. This became one of the most vivid sequences of Episode 7 — a retro Ford parked nearby sparked a sudden Havana flashback, a memory of cruising in old cars through Cuba, linking past adventures with the present. That's how the flashback mechanic was born: sights in Bangkok triggering memories from other places.</p>
+          <p><strong>💡 Experience the flashback by clicking on the car card below to see the memory from Havana!</strong></p>
+          <p>Finished the fuel up at the market spot with a mango smoothie and coconut, then proceeded onto Pura Vida.</p>
+          <div class="buffs">
+            <span class="buff">+Market Discovery 🛍️</span>
+            <span class="buff">+Memory Lane 🧠</span>
+            <span class="buff">+Havana Flashback 🇨🇺</span>
+            <span class="buff">+Fuel Up 🥭</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin: 1rem 0; overflow-x: auto; padding: 0.5rem 0; scrollbar-width: thin; scrollbar-color: var(--primary-orange) rgba(26, 26, 26, 0.3);">
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-7.png" alt="Market discovery" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Market Discovery</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 2px solid rgba(255, 165, 0, 0.6); box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3), 0 2px 8px rgba(0,0,0,0.3); cursor: pointer; position: relative; animation: pulse 2s infinite;" onclick="this.querySelector('img').src = this.querySelector('img').src.includes('havana') ? '2025/09-03-episode7-pura-vida-8.png' : '2025/09-03-episode7-pura-vida-havana-flashback.jpg'; this.querySelector('p').textContent = this.querySelector('img').src.includes('havana') ? 'Havana Flashback - Feb 26, 2023 (Click to flip)' : 'Bangkok Market (Click to flip)'">
+            <img src="2025/09-03-episode7-pura-vida-8.png" alt="Havana flashback car" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Havana Flashback - Feb 26, 2023 (Click to flip)</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-9.png" alt="Mango smoothie and coconut" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Mango & Coconut</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comic-panel">
+        <div class="comic-caption">
+          <h3>Pura Vida - Future of K-FIT</h3>
+          <p><strong>Beach Volleyball + Community Connection + Vision Realized</strong></p>
+          <p>Pura Vida delivered exactly what I was told — volleyball was there, but I had no idea what to expect. This facility felt like the future version of K-FIT — multiple indoor sand courts, a gym, yoga space, even soccer fields. More volleyball courts, more sports. The K-FIT vision of fitness, sports, healthy food, and recovery all in one spot was realized here. The games were competitive but friendly, the energy was infectious, and the community connection was real. This wasn't just a checkpoint; it was a celebration of what Urban Runner is all about and proof that the K-FIT concept can work anywhere.</p>
+          <div class="buffs">
+            <span class="buff">+Beach Volleyball 🏐</span>
+            <span class="buff">+Community Connection 🤝</span>
+            <span class="buff">+Future Vision 🔮</span>
+            <span class="buff">+K-FIT Evolution 🚀</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin: 1rem 0; overflow-x: auto; padding: 0.5rem 0; scrollbar-width: thin; scrollbar-color: var(--primary-orange) rgba(26, 26, 26, 0.3);">
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-10.png" alt="Pura Vida facility" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Pura Vida Facility</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="comic-panel">
+        <div class="comic-caption">
+          <h3>Japanese Restaurant & Spa Recovery</h3>
+          <p><strong>Food Checkpoint + Complete Recovery</strong></p>
+          <p>After checking out the space and getting some games in at Pura Vida, I started walking to a spa nearby hoping it's open late. Stumbled on a Japanese restaurant and ate there, then reached the spa for the final recovery checkpoint. From there took a Grab back to my place and that finishes the mission.</p>
+          <div class="buffs">
+            <span class="buff">+Food Checkpoint 🍣</span>
+            <span class="buff">+Spa Recovery 🧖‍♂️</span>
+            <span class="buff">+Mission Complete 🎯</span>
+            <span class="buff">+Grab Home 🚗</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin: 1rem 0; overflow-x: auto; padding: 0.5rem 0; scrollbar-width: thin; scrollbar-color: var(--primary-orange) rgba(26, 26, 26, 0.3);">
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-11.png" alt="Japanese restaurant" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Japanese Restaurant</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-12.png" alt="Spa recovery" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Spa Recovery</p>
+          </div>
+          <div style="flex-shrink: 0; width: 300px; background: rgba(26, 26, 26, 0.3); border-radius: 8px; padding: 1rem; border: 1px solid rgba(255, 165, 0, 0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <img src="2025/09-03-episode7-pura-vida-mission-complete.png" alt="Mission complete celebration" style="width: 100%; height: auto; border-radius: 6px; margin-bottom: 0.8rem;">
+            <p style="margin: 0; font-size: 0.9rem; color: var(--primary-orange); text-align: center; font-weight: bold;">Mission Complete</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mission-complete">
+        <h2>🎯 Mission Complete - Pura Vida</h2>
+        <p><strong>Episode 7 delivered exactly what Urban Runner needed — a perfect blend of adventure, community, and discovery.</strong></p>
+        <p>The K-FIT story from Valencia found its Bangkok expression at Pura Vida, creating a bridge between two cultures and proving that the vision of fitness, sports, healthy food, and recovery all in one spot can work anywhere. The market detour proved that Urban Runner thrives on unexpected discoveries, while the Pura Vida exploration showed how the K-FIT concept can be realized in different ways.</p>
+        <p>The mission was simple: go check out what Pura Vida looks like. What I discovered was a facility that embodied the K-FIT vision — multiple sports courts, gym facilities, and recovery options all integrated into one space. The Japanese restaurant and spa recovery completed the journey, showing how the wellness ecosystem can extend beyond a single facility.</p>
+        <p><strong>Urban Runner continues to evolve, one episode at a time. Pura Vida proved that the K-FIT vision of integrated wellness can be realized anywhere, waiting to be discovered in Bangkok's urban landscape.</strong></p>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const episodeNav = window.EpisodeNavigation.generateEpisodeNav('urban-runner-episode-7-2025-09-03');
+          const lastPanel = document.querySelector('.comic-panel:last-of-type');
+          lastPanel.insertAdjacentHTML('afterend', episodeNav);
+        });
+      </script>
+    </div>
+  </main>
+</body>
+</html>
