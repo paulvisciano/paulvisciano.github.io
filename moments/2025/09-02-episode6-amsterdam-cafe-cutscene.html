@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Urban Runner Episode 6: Amsterdam Café Cutscene</title>
   <link rel="stylesheet" href="../../components/styles.css">
+  <script src="../../components/episodeNavigation.js"></script>
   <style>
     .comic-panel {
       margin: 2rem 0;
@@ -73,6 +74,8 @@
       <div class="episode-header">
         <p>September 2, 2025 • Bangkok, Thailand</p>
       </div>
+
+      <div id="episode-breadcrumb"></div>
 
       <div class="comic-panel">
         <div class="comic-caption">
@@ -206,9 +209,40 @@
       <p>But perhaps most importantly, Episode 6 demonstrated the power of wealth redistribution through spontaneous street interactions. The 200 baht given to flower sellers and street vendors showed how Urban Runner's core mission could come to life through genuine acts of kindness.</p>
       
       <p><strong>Urban Runner continues to evolve, one episode at a time. The Sewer City Hustle proved that even the most unexpected locations could become epic adventures.</strong></p>
+
+      <div id="episode-navigation"></div>
     </div>
   </main>
 
+  <script>
+    // Wait for the navigation component to load
+    function initNavigation() {
+      if (window.EpisodeNavigation) {
+        // Add breadcrumb
+        const breadcrumb = window.EpisodeNavigation.generateBreadcrumb('urban-runner-episode-6-2025-09-02');
+        const breadcrumbDiv = document.getElementById('episode-breadcrumb');
+        if (breadcrumbDiv) {
+          breadcrumbDiv.innerHTML = breadcrumb;
+        }
 
+        // Add episode navigation
+        const episodeNav = window.EpisodeNavigation.generateEpisodeNav('urban-runner-episode-6-2025-09-02');
+        const navDiv = document.getElementById('episode-navigation');
+        if (navDiv) {
+          navDiv.innerHTML = episodeNav;
+        }
+      } else {
+        // Retry after a short delay
+        setTimeout(initNavigation, 100);
+      }
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initNavigation);
+    } else {
+      initNavigation();
+    }
+  </script>
 </body>
 </html>
