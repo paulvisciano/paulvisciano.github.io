@@ -698,6 +698,21 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "urban-runner-episode-7-2025-09-03",
+    title: "Urban Runner Episode 7: Pura Vida",
+    date: new Date('2025-09-03T00:00:00Z'),
+    timelineHighlight: "Urban Runner Episode 7",
+    tags: ["urban runner", "pura vida", "k-fit", "volleyball", "spa reset", "market detour", "bangkok", "recovery"],
+    snippet: "Episode 7: Pura Vida - A journey through Bangkok featuring K-FIT power-ups, market detours with Havana flashbacks, volleyball victories at Pura Vida, and complete recovery at Let's Relax Spa. Blended athletic victories, cultural immersion, and personal recovery while carrying the K-FIT vision forward.",
+    image: "attachment://2025/09-03-episode7-pura-vida-0.png",
+    imageAlt: "Urban Runner Episode 7: Pura Vida",
+    caption: "Pura Vida Victory - K-FIT Vision Forward",
+    fullLink: "2025/09-03-episode7-pura-vida.html",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "chicago-2025-09-24",
     title: "Family Reunion & Wedding in Chicago",
     date: new Date('2025-09-24T00:00:00Z'),
