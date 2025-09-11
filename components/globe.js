@@ -32,7 +32,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   // Function to determine if a post is an interactive episode
   const isInteractiveEpisode = (postId, title) => {
     // Only Episode 13 is interactive for now
-    return postId === 'urban-runner-episode-13-2025-09-03';
+    return postId === 'urban-runner-episode-13-2025-09-09';
   };
 
   // Define linear scales for each duration range for smooth gradients

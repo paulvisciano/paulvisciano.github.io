@@ -713,9 +713,9 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
-    id: "urban-runner-episode-13-2025-09-03",
+    id: "urban-runner-episode-13-2025-09-09",
     title: "Urban Runner Episode 13: Bangkok Green Lung & City Cross",
-    date: new Date('2025-09-03T00:00:00Z'),
+    date: new Date('2025-09-09T00:00:00Z'),
     timelineHighlight: "Urban Runner Episode 13",
     tags: ["urban runner", "bangkok green lung", "nature", "city exploration", "bike adventure", "wildlife", "massage", "piano academy", "amsterdam cafe", "latin dancing", "interactive cards"],
     snippet: "Episode 13: Bangkok Green Lung & City Cross - An interactive Tinder-style card journey through Bangkok's hidden jungle island and back to urban chaos. Features 32 swipeable checkpoint cards, wildlife encounters, bike adventures through Bang Kachao, piano academy detours, and late-night Latin dancing.",
