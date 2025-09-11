@@ -523,6 +523,18 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     const post = window.momentsInTime.find(p => p.id === postId);
 
     if (post) {
+      // Update moment selection (URL and globe zoom) if not already selected
+      if (selectedId !== postId) {
+        setSelectedId(postId);
+        // Update URL
+        const intendedPath = `/moments/${postId}`;
+        const currentPath = window.location.pathname;
+        if (currentPath !== intendedPath) {
+          window.history.pushState({ momentId: postId }, '', intendedPath);
+        }
+        // Globe zoom will be handled automatically by React state change
+      }
+      
       setIsLoading(true);
       setError(null);
 
@@ -619,8 +631,32 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           mapText: post.mapText,
           isInteractive: isInteractiveEpisode(postId, post.title)
         });
-        setIsBlogDrawerOpen(true);
+        // Only open drawer if it's not already open
+        if (!isBlogDrawerOpen) {
+          setIsBlogDrawerOpen(true);
+        }
         setPopoverContent(null);
+        
+        // Remove transitioning class and loading overlay after content is loaded
+        setTimeout(() => {
+          const contentElement = document.querySelector('.blog-post-drawer-content') || 
+                                document.querySelector('.interactive-episode-body');
+          if (contentElement) {
+            contentElement.classList.remove('transitioning');
+          }
+          
+          // Remove loading overlay
+          const loadingOverlay = document.querySelector('.episode-loading-overlay');
+          if (loadingOverlay) {
+            loadingOverlay.remove();
+          }
+          
+          // Ensure drawer is scrolled to top
+          const drawer = document.querySelector('.blog-post-drawer');
+          if (drawer) {
+            drawer.scrollTop = 0;
+          }
+        }, 600); // Longer delay to show loading indicator
         
         // Add Urban Runner navigation if this is an Urban Runner episode
         if (post.title && post.title.includes('Urban Runner')) {
@@ -641,13 +677,40 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           mapLink: post.mapLink,
           mapText: post.mapText
         });
-        setIsBlogDrawerOpen(true);
+        // Only open drawer if it's not already open
+        if (!isBlogDrawerOpen) {
+          setIsBlogDrawerOpen(true);
+        }
         setPopoverContent(null);
+        
+        // Remove transitioning class and loading overlay after error content is loaded
+        setTimeout(() => {
+          const contentElement = document.querySelector('.blog-post-drawer-content') || 
+                                document.querySelector('.interactive-episode-body');
+          if (contentElement) {
+            contentElement.classList.remove('transitioning');
+          }
+          
+          // Remove loading overlay
+          const loadingOverlay = document.querySelector('.episode-loading-overlay');
+          if (loadingOverlay) {
+            loadingOverlay.remove();
+          }
+          
+          // Ensure drawer is scrolled to top
+          const drawer = document.querySelector('.blog-post-drawer');
+          if (drawer) {
+            drawer.scrollTop = 0;
+          }
+        }, 600); // Longer delay to show loading indicator
       } finally {
         setIsLoading(false);
       }
     }
   };
+
+  // Expose handleOpenBlogPost globally after it's defined
+  window.handleOpenBlogPost = handleOpenBlogPost;
 
   const Popover = ({ title, snippet, fullLink, onClose, id, image, imageAlt }) => {
     return React.createElement(

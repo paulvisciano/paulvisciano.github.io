@@ -63,66 +63,53 @@ window.App = () => {
       return;
     }
     
-    // Add transitioning class to current content for crossfade effect
-    const currentContent = document.querySelector('.blog-post-drawer-content');
-    if (currentContent) {
-      currentContent.classList.add('transitioning');
-    }
+    // Check if drawer is currently open
+    const isDrawerOpen = window.isBlogDrawerOpen || document.querySelector('.blog-post-drawer');
     
-    // Start the transition sequence
-    setTimeout(() => {
-      // Close current blog drawer
-      if (window.setBlogPostContent) {
-        window.setBlogPostContent(null);
+    if (isDrawerOpen) {
+      // Smooth transition: keep drawer open, just change content
+      const currentContent = document.querySelector('.blog-post-drawer-content') || 
+                            document.querySelector('.interactive-episode-body');
+      if (currentContent) {
+        currentContent.classList.add('transitioning');
       }
       
-      // Select the next episode in timeline (this will update URL and zoom)
-      handleMomentSelection(nextMoment);
+      // Add loading indicator
+      const drawer = document.querySelector('.blog-post-drawer');
+      if (drawer) {
+        // Create loading overlay
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.className = 'episode-loading-overlay';
+        loadingOverlay.innerHTML = `
+          <div class="episode-loading-content">
+            <div class="episode-loading-spinner"></div>
+            <div class="episode-loading-text">Loading ${nextMoment.title}...</div>
+          </div>
+        `;
+        drawer.appendChild(loadingOverlay);
+        
+        // Scroll to top
+        drawer.scrollTop = 0;
+      }
       
-      // Wait for drawer to close, then open new content
+      // Start the transition sequence
       setTimeout(() => {
-        if (window.setBlogPostContent && nextMoment.fullLink && nextMoment.fullLink !== '#') {
-          // Load and open the blog post
-          fetch(nextMoment.fullLink)
-            .then(response => response.text())
-            .then(html => {
-              // Extract content from the HTML
-              const parser = new DOMParser();
-              const doc = parser.parseFromString(html, 'text/html');
-              const title = doc.querySelector('title')?.textContent || nextMoment.title;
-              const content = doc.querySelector('.post-content')?.innerHTML || '';
-              const image = nextMoment.image?.replace('attachment://', '') || '';
-              
-              window.setBlogPostContent({
-                title: title,
-                content: content,
-                image: image,
-                imageAlt: nextMoment.imageAlt || title
-              });
-              
-              // Add Urban Runner navigation if this is an Urban Runner episode
-              if (title && title.includes('Urban Runner')) {
-                setTimeout(() => {
-                  window.addUrbanRunnerNavigation(nextMoment.id);
-                }, 100);
-              }
-              
-              // Remove transitioning class from new content after a brief delay
-              setTimeout(() => {
-                const newContent = document.querySelector('.blog-post-drawer-content');
-                if (newContent) {
-                  newContent.classList.remove('transitioning');
-                }
-              }, 200);
-            })
-            .catch(error => {
-              console.error('Error loading blog post:', error);
-              // Fallback to regular navigation
-              window.location.href = `/moments/${nextEpisodeId}`;
-            });
+        // Just call handleOpenBlogPost directly - it will handle moment selection internally
+        if (window.handleOpenBlogPost) {
+          window.handleOpenBlogPost(nextMoment.id);
+        } else {
+          console.error('handleOpenBlogPost not available');
         }
-      }, 300); // Wait for drawer close animation
-    }, 200); // Brief crossfade delay
+      }, 800); // Longer delay to show loading indicator
+    } else {
+      // Drawer is closed, use normal flow
+      handleMomentSelection(nextMoment);
+      setTimeout(() => {
+        if (window.handleOpenBlogPost) {
+          window.handleOpenBlogPost(nextMoment.id);
+        }
+      }, 100);
+    }
   };
 
   // Expose the smooth transition function globally
