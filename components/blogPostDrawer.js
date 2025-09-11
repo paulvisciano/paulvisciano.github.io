@@ -4,6 +4,8 @@ window.BlogPostDrawer = ({ content, onClose }) => {
     ...content,
     content: content.content.replace(/<h2>[^<]*<\/h2>/, '') // Remove the first h2 tag which is typically the title
   } : content;
+  
+  // BlogPostDrawer is only used for regular episodes, so always apply the wrapper
 
   return React.createElement(
     React.Fragment,

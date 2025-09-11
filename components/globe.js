@@ -29,6 +29,12 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   window.error = error;
   window.blogDrawerRef = blogDrawerRef;
 
+  // Function to determine if a post is an interactive episode
+  const isInteractiveEpisode = (postId, title) => {
+    // Only Episode 13 is interactive for now
+    return postId === 'urban-runner-episode-13-2025-09-03';
+  };
+
   // Define linear scales for each duration range for smooth gradients
   const scaleShort = d3.scaleLinear()
     .domain([1, 3])
@@ -521,7 +527,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       setError(null);
 
       try {
-        const htmlFile = post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`;
+        let htmlFile = post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`;
+        
+        // Add cache-busting parameter for interactive episodes
+        if (isInteractiveEpisode(postId, post.title)) {
+          const separator = htmlFile.includes('?') ? '&' : '?';
+          htmlFile += `${separator}t=${Date.now()}`;
+        }
+        
         const response = await fetch(htmlFile);
 
         if (!response.ok) {
@@ -531,18 +544,81 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         const htmlContent = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
-        const bodyContent = doc.body.innerHTML;
+        
+        // Special handling for interactive episodes (cards with JavaScript)
+        let bodyContent;
+        if (isInteractiveEpisode(postId, post.title)) {
+          // Extract data path from fullLink URL parameters
+          let dataPath = 'data.json'; // default
+          if (post.fullLink && post.fullLink.includes('?data=')) {
+            try {
+              const url = new URL(post.fullLink, window.location.origin);
+              dataPath = url.searchParams.get('data') || 'data.json';
+            } catch (e) {
+              console.log('Could not parse fullLink URL');
+            }
+          }
+          
+          // Inject the data path into the HTML content
+          let htmlWithDataPath = htmlContent.replace(
+            /function getEpisodeDataPath\(\)\s*\{[\s\S]*?\}/,
+            `function getEpisodeDataPath() { return '${dataPath}'; }`
+          );
+          
+          // Re-parse the modified HTML
+          const modifiedDoc = parser.parseFromString(htmlWithDataPath, 'text/html');
+          
+          // For interactive episodes, we need to execute the JavaScript after content is loaded
+          bodyContent = modifiedDoc.body.innerHTML;
+          
+          // Store the styles to inject later
+          const styles = modifiedDoc.querySelectorAll('style');
+          const styleContents = Array.from(styles).map(style => style.textContent).filter(content => content);
+          
+          // Store the scripts to execute later
+          const scripts = modifiedDoc.querySelectorAll('script');
+          const scriptContents = Array.from(scripts).map(script => script.textContent).filter(content => content);
+          
+          // Execute scripts and inject styles after the content is inserted into the DOM
+          setTimeout(() => {
+            // Inject styles first
+            styleContents.forEach(styleContent => {
+              try {
+                const newStyle = document.createElement('style');
+                newStyle.textContent = styleContent;
+                document.head.appendChild(newStyle);
+              } catch (error) {
+                console.error('Error injecting interactive episode styles:', error);
+              }
+            });
+            
+            // Then execute scripts
+            scriptContents.forEach(scriptContent => {
+              try {
+                const newScript = document.createElement('script');
+                newScript.textContent = scriptContent;
+                document.head.appendChild(newScript);
+                document.head.removeChild(newScript);
+              } catch (error) {
+                console.error('Error executing interactive episode script:', error);
+              }
+            });
+          }, 100);
+        } else {
+          bodyContent = doc.body.innerHTML;
+        }
 
         setBlogPostContent({
+          postId: postId,
           title: post.title,
           content: bodyContent,
           image: post.image ? post.image.replace('attachment://', '') : null,
           imageAlt: post.imageAlt,
           caption: post.caption,
           mapLink: post.mapLink,
-          mapText: post.mapText
+          mapText: post.mapText,
+          isInteractive: isInteractiveEpisode(postId, post.title)
         });
-
         setIsBlogDrawerOpen(true);
         setPopoverContent(null);
         
@@ -556,6 +632,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         setError('Failed to load the full post. Please try again.');
 
         setBlogPostContent({
+          postId: postId,
           title: post.title,
           content: `<p>${err.message}</p>`,
           image: post.image ? post.image.replace('attachment://', '') : null,
@@ -735,9 +812,16 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       image: popoverContent.image,
       imageAlt: popoverContent.imageAlt
     }),
-    isBlogDrawerOpen && blogPostContent && React.createElement(window.BlogPostDrawer, {
-      content: blogPostContent,
-      onClose: () => setIsBlogDrawerOpen(false)
-    })
+    isBlogDrawerOpen && blogPostContent && (
+      isInteractiveEpisode(blogPostContent.postId || '', blogPostContent.title) 
+        ? React.createElement(window.InteractiveEpisodeDrawer, {
+            content: blogPostContent,
+            onClose: () => setIsBlogDrawerOpen(false)
+          })
+        : React.createElement(window.BlogPostDrawer, {
+            content: blogPostContent,
+            onClose: () => setIsBlogDrawerOpen(false)
+          })
+    )
   );
 };

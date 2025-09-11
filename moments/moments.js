@@ -713,6 +713,21 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "urban-runner-episode-13-2025-09-03",
+    title: "Urban Runner Episode 13: Bangkok Green Lung & City Cross",
+    date: new Date('2025-09-03T00:00:00Z'),
+    timelineHighlight: "Urban Runner Episode 13",
+    tags: ["urban runner", "bangkok green lung", "nature", "city exploration", "bike adventure", "wildlife", "massage", "piano academy", "amsterdam cafe", "latin dancing", "interactive cards"],
+    snippet: "Episode 13: Bangkok Green Lung & City Cross - An interactive Tinder-style card journey through Bangkok's hidden jungle island and back to urban chaos. Features 32 swipeable checkpoint cards, wildlife encounters, bike adventures through Bang Kachao, piano academy detours, and late-night Latin dancing.",
+    image: "attachment://2025/episode-13/0-bangkok-green-lung-serenity.png",
+    imageAlt: "Urban Runner Episode 13: Bangkok Green Lung & City Cross",
+    caption: "Bangkok Green Lung Serenity - Interactive Card Adventure",
+    fullLink: "../components/interactive-episode.html?data=2025/episode-13/data.json",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "chicago-2025-09-24",
     title: "Family Reunion & Wedding in Chicago",
     date: new Date('2025-09-24T00:00:00Z'),
