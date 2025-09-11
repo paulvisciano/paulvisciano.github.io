@@ -32,10 +32,10 @@ window.EpisodeNavigation = {
       description: 'Recovery & resilience - volleyball victory and spa healing'
     },
     {
-      id: 'urban-runner-episode-13-2025-09-03',
+      id: 'urban-runner-episode-13-2025-09-09',
       title: 'Episode 13: Bangkok Green Lung & City Cross',
-      date: '2025-09-03', 
-      link: '2025/09-03-episode13-bangkok-green-lung.html',
+      date: '2025-09-09', 
+      link: '2025/09-09-episode13-bangkok-green-lung.html',
       description: 'Interactive Tinder-style card journey through Bangkok\'s Green Lung'
     }
   ],

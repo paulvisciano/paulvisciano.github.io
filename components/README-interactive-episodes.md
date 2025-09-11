@@ -118,7 +118,7 @@ async function loadEpisodeData() {
 ### Detection Rules
 
 The system automatically detects interactive episodes based on:
-- **Post ID**: Specific IDs like `urban-runner-episode-13-2025-09-03`
+- **Post ID**: Specific IDs like `urban-runner-episode-13-2025-09-09`
 - **Title Pattern**: Contains "Episode" AND "Urban Runner"
 
 ## Benefits
