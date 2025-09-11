@@ -11,17 +11,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: calc(100vh - 80px);
             position: relative;
             overflow: hidden;
             background: transparent;
+            padding-bottom: 80px;
         }
         
         .card-container {
             position: relative;
             width: 100%;
             max-width: 520px;
-            height: 800px;
+            height: 700px;
             margin: 0 auto;
             perspective: 1000px;
         }
@@ -114,7 +115,7 @@
         .card-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: fill;
             border-radius: 20px;
             position: absolute;
             top: 0;
@@ -220,14 +221,14 @@
         
         .progress-bar {
             position: fixed;
-            bottom: 20px;
+            bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
             height: 4px;
             background: rgba(255,255,255,0.3);
             border-radius: 2px;
-            z-index: 10;
+            z-index: 1001;
         }
         
         .progress-fill {
@@ -288,6 +289,115 @@
             60% {
                 transform: translateY(-3px);
             }
+        }
+
+        /* Compact Episode Navigation Footer */
+        .episode-nav-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 165, 0, 0.2);
+            padding: 8px 16px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 60px;
+        }
+
+        .episode-nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .episode-nav-btn {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            color: var(--primary-orange);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .episode-nav-btn:hover {
+            background: rgba(255, 165, 0, 0.2);
+            border-color: var(--primary-orange);
+        }
+
+        .episode-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .episode-list-container {
+            flex: 1;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-orange) transparent;
+        }
+
+        .episode-list-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .episode-list-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .episode-list-container::-webkit-scrollbar-thumb {
+            background: var(--primary-orange);
+            border-radius: 2px;
+        }
+
+        .episode-list {
+            display: flex;
+            gap: 6px;
+            padding: 4px 0;
+            min-width: max-content;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .episode-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 165, 0, 0.2);
+            color: var(--text-light);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .episode-item:hover {
+            background: rgba(255, 165, 0, 0.1);
+            border-color: var(--primary-orange);
+        }
+
+        .episode-item.current {
+            background: var(--primary-orange);
+            color: #000;
+            border-color: var(--primary-orange);
+            font-weight: bold;
+        }
+
+        .episode-item.completed {
+            opacity: 0.8;
+        }
+
+        .episode-item.upcoming {
+            opacity: 0.5;
         }
         
         .card.dragging {
@@ -388,6 +498,25 @@
                 <div id="loading-message" style="color: white; text-align: center; padding: 50px;">
                     Loading interactive cards...
                 </div>
+            </div>
+        </div>
+
+        <!-- Compact Episode Navigation Footer -->
+        <div class="episode-nav-footer">
+            <div class="episode-nav-controls">
+                <button class="episode-nav-btn" id="prevEpisodeBtn" onclick="navigateToPreviousEpisode()">
+                    ← Prev
+                </button>
+            </div>
+            <div class="episode-list-container">
+                <div class="episode-list" id="episodeList">
+                    <!-- Episodes will be populated here -->
+                </div>
+            </div>
+            <div class="episode-nav-controls">
+                <button class="episode-nav-btn" id="nextEpisodeBtn" onclick="navigateToNextEpisode()">
+                    Next →
+                </button>
             </div>
         </div>
     
@@ -499,6 +628,11 @@
             addEventListeners();
             
             console.log('[Interactive Episode] Event listeners attached!');
+            
+            // Initialize compact episode navigation
+            setTimeout(() => {
+                initializeEpisodeNavigation();
+            }, 200);
         }
 
         // Create a single card
@@ -842,6 +976,93 @@
         }
 
         // Initialize when DOM is ready
+        // Episode Navigation Functions
+        function initializeEpisodeNavigation() {
+            const episodes = [
+                { id: 'urban-runner-episode-4-2025-08-31', title: 'Episode 4', number: 4 },
+                { id: 'urban-runner-episode-5-2025-09-01', title: 'Episode 5', number: 5 },
+                { id: 'urban-runner-episode-6-2025-09-02', title: 'Episode 6', number: 6 },
+                { id: 'urban-runner-episode-7-2025-09-03', title: 'Episode 7', number: 7 },
+                { id: 'urban-runner-episode-13-2025-09-03', title: 'Episode 13', number: 13 }
+            ];
+            
+            const currentEpisodeId = 'urban-runner-episode-13-2025-09-03';
+            const currentIndex = episodes.findIndex(ep => ep.id === currentEpisodeId);
+            
+            // Populate episode list
+            const episodeList = document.getElementById('episodeList');
+            episodeList.innerHTML = '';
+            
+            episodes.forEach((episode, index) => {
+                const episodeItem = document.createElement('div');
+                episodeItem.className = 'episode-item';
+                episodeItem.textContent = `Ep ${episode.number}`;
+                
+                if (index === currentIndex) {
+                    episodeItem.classList.add('current');
+                } else if (index < currentIndex) {
+                    episodeItem.classList.add('completed');
+                } else {
+                    episodeItem.classList.add('upcoming');
+                }
+                
+                episodeItem.onclick = () => {
+                    if (window.smoothEpisodeTransition) {
+                        window.smoothEpisodeTransition(episode.id);
+                    }
+                };
+                
+                episodeList.appendChild(episodeItem);
+            });
+            
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevEpisodeBtn');
+            const nextBtn = document.getElementById('nextEpisodeBtn');
+            
+            prevBtn.disabled = currentIndex <= 0;
+            nextBtn.disabled = currentIndex >= episodes.length - 1;
+            
+            // Scroll to current episode
+            const currentItem = episodeList.children[currentIndex];
+            if (currentItem) {
+                currentItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+        
+        function navigateToPreviousEpisode() {
+            const episodes = [
+                'urban-runner-episode-4-2025-08-31',
+                'urban-runner-episode-5-2025-09-01',
+                'urban-runner-episode-6-2025-09-02',
+                'urban-runner-episode-7-2025-09-03',
+                'urban-runner-episode-13-2025-09-03'
+            ];
+            
+            const currentEpisodeId = 'urban-runner-episode-13-2025-09-03';
+            const currentIndex = episodes.indexOf(currentEpisodeId);
+            
+            if (currentIndex > 0 && window.smoothEpisodeTransition) {
+                window.smoothEpisodeTransition(episodes[currentIndex - 1]);
+            }
+        }
+        
+        function navigateToNextEpisode() {
+            const episodes = [
+                'urban-runner-episode-4-2025-08-31',
+                'urban-runner-episode-5-2025-09-01',
+                'urban-runner-episode-6-2025-09-02',
+                'urban-runner-episode-7-2025-09-03',
+                'urban-runner-episode-13-2025-09-03'
+            ];
+            
+            const currentEpisodeId = 'urban-runner-episode-13-2025-09-03';
+            const currentIndex = episodes.indexOf(currentEpisodeId);
+            
+            if (currentIndex < episodes.length - 1 && window.smoothEpisodeTransition) {
+                window.smoothEpisodeTransition(episodes[currentIndex + 1]);
+            }
+        }
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initializeEpisode);
         } else {
