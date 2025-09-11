@@ -158,27 +158,40 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            background: linear-gradient(135deg, #ffa500, #ff8c00);
+            color: #000;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
             cursor: pointer;
             z-index: 3;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4), 0 2px 8px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: storyButtonPulse 2s ease-in-out infinite;
         }
         
         .story-button:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: scale(1.05);
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 165, 0, 0.6), 0 4px 12px rgba(0,0,0,0.4);
         }
         
         .story-button:active {
             transform: scale(0.95);
+        }
+        
+        @keyframes storyButtonPulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4), 0 2px 8px rgba(0,0,0,0.3);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(255, 165, 0, 0.6), 0 2px 12px rgba(0,0,0,0.4);
+            }
         }
         
         .backstory-content {
@@ -657,11 +670,13 @@
                 </div>
             `;
             
-            // Add click event for story button
-            const storyButton = card.querySelector('.story-button');
-            storyButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                card.classList.toggle('flipped');
+            // Add click event for all story buttons (both Story and Back)
+            const storyButtons = card.querySelectorAll('.story-button');
+            storyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    card.classList.toggle('flipped');
+                });
             });
             
             return card;
