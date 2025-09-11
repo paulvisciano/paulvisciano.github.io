@@ -1,0 +1,242 @@
+{
+  "episode": 13,
+  "title": "Bangkok Green Lung & City Cross",
+  "checkpoints": [
+    {
+      "id": 0,
+      "episode": 13,
+      "title": "Episode Cover",
+      "backstory": "Welcome to Episode 13: Bangkok Green Lung & City Cross. This adventure takes us from the chaotic streets of Bangkok to the peaceful Green Lung island, then back into the urban jungle. Get ready to explore hidden gems, encounter wildlife, and experience the contrast between city and nature.",
+      "image": "2025/episode-13/0-bangkok-green-lung-serenity.png"
+    },
+    {
+      "id": 1,
+      "episode": 13,
+      "title": "Dog with the Large Balls 🐕",
+      "backstory": "Bangkok streets never fail to surprise me. Just a few minutes into my run, I passed a scrappy street dog strutting around like he owned the block. What stood out wasn’t his bark or bite — it was his oversized balls swinging with every step. The whole scene was so absurd it broke me into laughter mid-stride. That’s the Urban Runner life: some days you dodge scooters, other days it’s dogs that remind you not to take yourself too seriously.",
+      "image": "2025/episode-13/1-checkpoint-1-sidewalk-stroll.png"
+    },
+    {
+      "id": 2,
+      "episode": 13,
+      "title": "License to Blend 🥤",
+      "backstory": "Stopped for a green juice and smoothie — the checkpoint I call ‘License to Blend.’ It was fuel before the long trek into Bang Kachao. The name itself felt like something out of a spy spoof, as if this smoothie stand was the gateway to unlocking today’s mission.",
+      "image": "2025/episode-13/2-license-to-blend.png"
+    },
+    {
+      "id": 3,
+      "episode": 13,
+      "title": "Park Run 🌳",
+      "backstory": "Warmed up with laps through the local park. My legs were still heavy from volleyball, but once I settled into a rhythm, the soreness faded. The park was alive: kids kicking balls, vendors setting up stalls, birds darting between trees. It was the calm before the ferry ride into Bangkok’s hidden jungle.",
+      "image": "2025/episode-13/3-checkpoint-3-park-path.png"
+    },
+    {
+      "id": 4,
+      "episode": 13,
+      "title": "Dock Entrance (temple gate)",
+      "backstory": "At the dock, I paused in front of a small temple gate. It wasn’t grand, but it felt important — a gateway between the chaos of Sukhumvit and the adventure waiting across the river. Incense smoke drifted from a small shrine nearby, and for a moment I felt like the city itself was blessing the journey ahead.",
+      "image": "2025/episode-13/5-dock-entrance.png"
+    },
+    {
+      "id": 5,
+      "episode": 13,
+      "title": "Boat Crossing ⛴️",
+      "backstory": "The ferry crossing was quick, but it shifted everything. The moment the boat left the dock, the air felt fresher. Bangkok’s skyline faded into the distance while the green canopy of Bang Kachao drew closer. The crossing became a symbolic moment: leaving noise and fumes behind for stillness and discovery.",
+      "image": "2025/episode-13/6-boat-journey-at-checkpoint-6.png"
+    },
+    {
+      "id": 6,
+      "episode": 13,
+      "title": "Bike Rental 🚲",
+      "backstory": "The first stop on the island was a small bike rental. For 100 THB, I picked up a sturdy city bike. No gears, no suspension — just a simple machine ready to carry me into the Green Lung. The bike became my new companion for the jungle loops.",
+      "image": "2025/episode-13/7-bike-rental-at-checkpoint-7.png"
+    },
+    {
+      "id": 7,
+      "episode": 13,
+      "title": "Botanical Garden 🌿 (+ Backstory)",
+      "backstory": "Inside the botanical garden, the path narrowed into shaded tunnels of bamboo and palms. Metal steps crossed flooded patches. Canals glistened between the trees. It felt like stepping into a secret map within the game — dense, quiet, alive. This checkpoint deserves a backstory card all its own.",
+      "backstory_planned": true,
+      "image": "2025/episode-13/8-botanical-garden-entrance.png"
+    },
+    {
+      "id": 8,
+      "episode": 13,
+      "title": "Off-Road Crossing 🌱",
+      "backstory": "The pavement gave way to mud and roots. I shouldered the bike and pushed across, shoes sinking slightly with each step. It was messy, but it reminded me that Urban Runner is about adapting: city, jungle, or mud, you keep moving forward.",
+      "image": "2025/episode-13/9-rustic-bridge-crossing.png"
+    },
+    {
+      "id": 9,
+      "episode": 13,
+      "title": "Wildlife Spotting 🦎",
+      "backstory": "A monitor lizard slid off the path and into the canal. It was massive, prehistoric in its movements. For a second, I stopped pedaling just to watch. Encounters like this are why I love exploring — the city hides wild surprises if you know where to look.",
+      "image": "2025/episode-13/10-asian-water-monitor.png"
+    },
+    {
+      "id": 10,
+      "episode": 13,
+      "title": "Hidden Woods Café 🍜☕ (Fuel Up)",
+      "backstory": "Hidden Woods Café lived up to its name. Tucked away deep in the greenery, it felt like stumbling upon a secret safe house. I ordered noodles and coffee. The food was simple but perfect, tasting twice as good after miles of riding. Here, the air was clean and the noise of Bangkok vanished.",
+      "type": "fuel_up",
+      "image": "2025/episode-13/11-energize-at-hidden-woods-cafe.png"
+    },
+    {
+      "id": 11,
+      "episode": 13,
+      "title": "Kickback Recovery 🧢",
+      "backstory": "After eating, I leaned back under my cap and let the breeze pass through. It was a small reset, the kind you only appreciate after hours of movement. I wasn’t just fueling the body — I was recharging the mind before the ride back.",
+      "image": "2025/episode-13/12-pulsating-descent-to-adventure.png"
+    },
+    {
+      "id": 12,
+      "episode": 13,
+      "title": "Return Ride 🚲",
+      "backstory": "Hopped back on the bike and retraced my path through the green maze. The ride felt easier this time — momentum carried me forward. It was the sense of closing a loop, of finishing what I’d started.",
+      "image": "2025/episode-13/13-dock-return.png"
+    },
+    {
+      "id": 13,
+      "episode": 13,
+      "title": "Dock Return ⛴️",
+      "backstory": "Back at the dock, I returned the bike and bought water. Tipped the rental and water lady 20 THB each. These small exchanges are part of the Urban Runner rhythm — redistribute a little, say thanks, move on.",
+      "image": "2025/episode-13/14-boat-return.png"
+    },
+    {
+      "id": 14,
+      "episode": 13,
+      "title": "Back Across the River 🌆 (+ Backstory: City vs. Green Lung)",
+      "backstory": "Crossing back into Bangkok hit like a wall. On one side: birdsong and fresh air. On the other: exhaust fumes, honking, and heat. It’s the kind of contrast that only Bangkok can offer. I planned a flip-side card here: City vs. Green Lung, a meditation on two worlds divided by a river.",
+      "backstory_planned": true,
+      "image": "2025/episode-13/4-alleyway-dash-in-urban-grit.png"
+    },
+    {
+      "id": 15,
+      "episode": 13,
+      "title": "Alley Run 🏙️",
+      "backstory": "Now back in the city, I cut through alleys to escape gridlock. The sois twisted and turned, full of life: food carts, laundry lines, kids chasing each other. Alley runs are part survival, part discovery — they make you realize the map of Bangkok is infinite.",
+      "image": "2025/episode-13/17-side-street-shortcut-in-urban-runner.png"
+    },
+    {
+      "id": 16,
+      "episode": 13,
+      "title": "Bus Stop Lady 🙅‍♀️ (NPC encounter)",
+      "backstory": "At a bus stop, an older woman looked at me and immediately asked, ‘Money, money.’ It wasn’t a request so much as a demand. I laughed it off and kept walking. Redistribution works best when it feels authentic, not expected.",
+      "image": "2025/episode-13/16-lung-armor-card-illustration.png"
+    },
+    {
+      "id": 17,
+      "episode": 13,
+      "title": "Side Street Shortcut 🛣️ (Pro Tip)",
+      "backstory": "Urban Runner Pro Tip: side streets are your best friend. Less traffic, cleaner air, more discoveries. Cutting through them isn’t just faster — it’s how you unlock the real city hidden behind the main roads.",
+      "image": "2025/episode-13/18-converted-motorbike-cart-in-southeast-asia.png"
+    },
+    {
+      "id": 18,
+      "episode": 13,
+      "title": "Street Cart Bike 🛺 (Random Encounter)",
+      "backstory": "On the roadside, I spotted a half-chopped motorcycle turned into a cargo cart. Rough, improvised, yet perfectly functional. It was a reminder that Bangkok thrives on adaptation — turning scraps into survival tools.",
+      "image": "2025/episode-13/20-donation.png"
+    },
+    {
+      "id": 19,
+      "episode": 13,
+      "title": "Closing In 🏙️ (25 minutes left)",
+      "backstory": "Time pressure checkpoint: only 25 minutes left before my next mission. I quickened the pace, weaving through crowds and traffic. Sometimes the checkpoint isn’t a place, it’s a clock ticking down.",
+      "image": "2025/episode-13/21-detour-to-piano-academy.png"
+    },
+    {
+      "id": 20,
+      "episode": 13,
+      "title": "Street Ask 💸 (Donation, 100 THB)",
+      "backstory": "A young man, sweaty and desperate, ran up to me asking for 550 THB. Said he just needed help until payday. I gave him 100. It felt like the right balance — helping without feeding the hustle. Redistribution in real time.",
+      "type": "donation",
+      "amount_thb": 100,
+      "image": "2025/episode-13/25-piano-office.png"
+    },
+    {
+      "id": 21,
+      "episode": 13,
+      "title": "Piano Academy Detour 🎶",
+      "backstory": "On impulse, I detoured 20 minutes the opposite direction to check out the Piano Academy of Bangkok. Sometimes curiosity itself becomes a checkpoint. I wanted to know if lessons were possible, even if it threw off the schedule.",
+      "image": "2025/episode-13/25-piano-office.png"
+    },
+    {
+      "id": 22,
+      "episode": 13,
+      "title": "Piano Academy Tower 🎹 (18th floor misdirect)",
+      "backstory": "I was told to go to the 18th floor. When the elevator opened, it was clearly wrong: a quiet, empty corridor. Classic Bangkok misdirection — sometimes the journey up is just a false lead.",
+      "image": "2025/episode-13/27-massage.png"
+    },
+    {
+      "id": 23,
+      "episode": 13,
+      "title": "Ghost Office 🎹 (Dark & closed)",
+      "backstory": "The office I found was dark and empty, despite it being normal hours. This was the Ghost Office checkpoint: the uncertainty of whether a business is even open or not. In Bangkok, you never really know until you’re there.",
+      "image": "2025/episode-13/27-1-knee-pain.png"
+    },
+    {
+      "id": 24,
+      "episode": 13,
+      "title": "Basement Relocation 🎶",
+      "backstory": "Finally, someone redirected me to the basement. It felt odd walking down after being told to go up, but sure enough, the academy had moved below ground. Bangkok loves to keep you guessing.",
+      "image": "2025/episode-13/28-supermarket.png"
+    },
+    {
+      "id": 25,
+      "episode": 13,
+      "title": "Piano Academy Lobby 🎹",
+      "backstory": "The lobby was legit: polished counters, flowers, instruments, even recital videos playing on loop. I learned about pricing: Level 1 at 1,800 THB/hr, Level 2 at 2,200, Level 3 at 4,000. Serious rates for serious players. I hadn’t signed up yet, but the door was open.",
+      "image": "2025/episode-13/25-piano-office.png"
+    },
+    {
+      "id": 26,
+      "episode": 13,
+      "title": "Feet Air Out 🦶 (Recovery micro-checkpoint)",
+      "backstory": "Before the massage, I took my shoes off and let my feet breathe. They stank from the miles, but they’d carried me through. Sometimes the smallest acts of recovery matter most. This became a micro-checkpoint on its own.",
+      "image": "2025/episode-13/31. Latin Dance Social.png"
+    },
+    {
+      "id": 27,
+      "episode": 13,
+      "title": "Massage Recovery 💆 (Hide Spa)",
+      "backstory": "At HIDE Spa, I booked 90 minutes with James again. This time I asked him to work on my inner thighs, because I’d realized that tightness was pulling on my kneecap. The massage was brutal — pain that makes you wince — but when it ended, my knee felt light and free. Recovery isn’t optional; it’s essential.",
+      "image": "2025/episode-13/27-massage.png"
+    },
+    {
+      "id": 28,
+      "episode": 13,
+      "title": "Supermarket Supply Run 🛒",
+      "backstory": "Stopped at Villa Market and stocked up: eco cleaners, Sawaday air sticks, aloe gel, bananas, juice, digestion aid. The total was ~1,909 THB. Urban Runner isn’t just about exploration — it’s about keeping your base camp supplied.",
+      "image": "2025/episode-13/28-supermarket.png"
+    },
+    {
+      "id": 29,
+      "episode": 13,
+      "title": "Grab Driver Traffic Escape 🚶‍♂️",
+      "backstory": "The Grab driver complained the whole ride: traffic, delays, nothing moving. He said it could take two hours. I bailed halfway, paid up, and walked the rest. Added miles to the day and proved again that walking beats waiting.",
+      "image": "2025/episode-13/30. Amsterdam Cafe Vibes and Colorful Details.png"
+    },
+    {
+      "id": 30,
+      "episode": 13,
+      "title": "Amsterdam Hidden Gems 🚬",
+      "backstory": "Amsterdam Café is always an adventure. The neon lounge sits inside a multi-floor hostel. One moment you’re smoking a preroll, the next a hostel guest in a robe and towel steps into the elevator. The vibe is chaotic, surreal, but always alive. Leaving, I ordered an Uber Premium — BMW — and rolled to the next mission in style. Bangkok in a nutshell: stoner chaos to baller luxury in the span of an elevator ride.",
+      "image": "2025/episode-13/30. Amsterdam Cafe Vibes and Colorful Details.png"
+    },
+    {
+      "id": 31,
+      "episode": 13,
+      "title": "Latin Social at One One 🕺💃",
+      "backstory": "At One One Hotel in Thonglor, the Latin Social was in full swing. Sensual Bachata, dim lights, strong dancers. Daisy, the host, greeted me at the door and pulled me straight into a dance. Later, she mentioned private lessons at 2,000 THB/hr. I haven’t signed up yet, but it felt like a door opening into another skill tree.",
+      "image": "2025/episode-13/31. Latin Dance Social.png"
+    },
+    {
+      "id": 32,
+      "episode": 13,
+      "title": "Saffron 24/7 Indian 🍛",
+      "backstory": "It was 2:30 AM and I was starving. Across from where I was staying, I found Saffron, an Indian restaurant open 24/7. I ordered a feast — curries, bread, spice. Shocked it was still open, grateful it was. This was the night’s final checkpoint: comfort food closing the loop before sleep.",
+      "image": "2025/episode-13/0-bangkok-green-lung-serenity.png"
+    }
+  ]
+}

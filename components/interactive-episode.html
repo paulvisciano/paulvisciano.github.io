@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Episode</title>
+    <style>
+        /* Card Interface Styles */
+        .card-interface {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+        }
+        
+        .card-container {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            height: 800px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        .card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: transform 0.6s ease, opacity 0.3s ease;
+            transform-style: preserve-3d;
+            z-index: 1;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+        }
+        
+        .card:nth-child(2) {
+            z-index: 2;
+            transform: scale(0.95) translateY(5px);
+        }
+        
+        .card:nth-child(3) {
+            z-index: 3;
+            transform: scale(0.9) translateY(10px);
+        }
+        
+        .card:nth-child(4) {
+            z-index: 4;
+            transform: scale(0.85) translateY(15px);
+        }
+        
+        .card:nth-child(5) {
+            z-index: 5;
+            transform: scale(0.8) translateY(20px);
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .card-front {
+            background: white;
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card:first-child {
+            z-index: 10;
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+        
+        .card-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin: 0 20px 15px;
+            text-align: center;
+        }
+        
+        .story-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+        
+        .story-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+        
+        .story-button:active {
+            transform: scale(0.95);
+        }
+        
+        .backstory-content {
+            padding: 30px 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .backstory-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .backstory-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: left;
+            max-height: 70%;
+            overflow-y: auto;
+            padding: 0 10px;
+        }
+        
+        .flip-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        
+        .progress-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            z-index: 10;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        
+        .swipe-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(0,0,0,0.7);
+            font-size: 0.9rem;
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px 25px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .swipe-instructions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .swipe-icon {
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .card-counter {
+            font-weight: bold;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-5px);
+            }
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+        
+        .card.dragging {
+            transition: none;
+            z-index: 20 !important;
+        }
+        
+        .card.swipe-left {
+            transform: translateX(-100%) rotate(-30deg);
+            opacity: 0;
+        }
+        
+        .card.swipe-right {
+            transform: translateX(100%) rotate(30deg);
+            opacity: 0;
+        }
+        
+        .card.swipe-preview-left {
+            transform: translateX(-20px) rotate(-5deg);
+            transition: transform 0.2s ease;
+        }
+        
+        .card.swipe-preview-right {
+            transform: translateX(20px) rotate(5deg);
+            transition: transform 0.2s ease;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card-container {
+                max-width: 450px;
+                height: 600px;
+            }
+            
+            .card-title {
+                font-size: 1.2rem;
+            }
+            
+            .backstory-title {
+                font-size: 1.4rem;
+            }
+            
+            .backstory-text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card-container {
+                width: 95%;
+                height: 550px;
+            }
+            
+            .swipe-hint {
+                bottom: 15px;
+                font-size: 0.8rem;
+                padding: 12px 20px;
+            }
+            
+            .card-title {
+                font-size: 1.1rem;
+                top: 15px;
+                padding: 6px 12px;
+            }
+            
+            .story-button {
+                top: 15px;
+                right: 15px;
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+            
+            .backstory-title {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+            
+            .backstory-text {
+                font-size: 0.85rem;
+                padding: 0 5px;
+            }
+            
+            .tap-hint, .flip-hint {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-interface">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="card-container">
+            <div id="cardStack" class="card-stack">
+                <div id="loading-message" style="color: white; text-align: center; padding: 50px;">
+                    Loading interactive cards...
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <script>
+        // Interactive Episode Script - Reusable across all episodes
+        // Prevent redeclaration errors by checking if variables exist
+        if (typeof window.episodeData === 'undefined') {
+            window.episodeData = null;
+        }
+        if (typeof window.currentCardIndex === 'undefined') {
+            window.currentCardIndex = 0;
+        }
+        if (typeof window.isDragging === 'undefined') {
+            window.isDragging = false;
+        }
+        if (typeof window.startX === 'undefined') {
+            window.startX = 0;
+        }
+        if (typeof window.currentX === 'undefined') {
+            window.currentX = 0;
+        }
+
+        // Get episode data path from URL parameters or default
+        function getEpisodeDataPath() {
+            // This function will be replaced by globe.js with the correct data path
+            const urlParams = new URLSearchParams(window.location.search);
+            const episodePath = urlParams.get('data') || 'data.json';
+            return episodePath;
+        }
+
+        // Load episode data from JSON file
+        async function loadEpisodeData() {
+            try {
+                const dataPath = getEpisodeDataPath();
+                const response = await fetch(dataPath);
+                if (!response.ok) {
+                    throw new Error(`Failed to load episode data: ${response.status} ${response.statusText}`);
+                }
+                window.episodeData = await response.json();
+                return window.episodeData;
+            } catch (error) {
+                console.error('Error loading episode data:', error);
+                // Fallback to a simple error state
+                window.episodeData = {
+                    episode: 0,
+                    title: "Error Loading Episode",
+                    checkpoints: [
+                        {
+                            id: 0,
+                            title: "Error",
+                            backstory: "Failed to load episode data. Please check the data path and try again.",
+                            image: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkVycm9yIGxvYWRpbmcgZXBpc29kZSBkYXRhPC90ZXh0Pjwvc3ZnPg=="
+                        }
+                    ]
+                };
+                return episodeData;
+            }
+        }
+
+        // Initialize the episode
+        async function initializeEpisode() {
+            console.log('[Interactive Episode] Script loaded, attempting initialization...');
+            
+            // Wait a bit for DOM to be ready
+            setTimeout(async () => {
+                console.log('[Interactive Episode] Attempting initialization after delay...');
+                await initializeCards();
+            }, 100);
+        }
+
+        // Initialize cards
+        async function initializeCards() {
+            console.log('[Interactive Episode] Initializing cards...');
+            
+            await loadEpisodeData();
+            
+            if (!window.episodeData || !window.episodeData.checkpoints) {
+                console.error('No episode data available');
+                return;
+            }
+
+            console.log('[Interactive Episode] Episode data loaded, rendering cards...');
+            
+            const cardStack = document.getElementById('cardStack');
+            const episodeTitle = document.getElementById('episodeTitle');
+            
+            // Clear loading message
+            cardStack.innerHTML = '';
+            
+            // Update episode title
+            if (episodeTitle && window.episodeData.title) {
+                episodeTitle.textContent = `Episode ${window.episodeData.episode}: ${window.episodeData.title}`;
+            }
+            
+            // Create cards
+            window.episodeData.checkpoints.forEach((checkpoint, index) => {
+                const card = createCard(checkpoint, index);
+                cardStack.appendChild(card);
+            });
+            
+            // Show first card
+            showCard(0);
+            
+            console.log('[Interactive Episode] Cards rendered successfully!');
+            
+            // Add event listeners
+            addEventListeners();
+            
+            console.log('[Interactive Episode] Event listeners attached!');
+        }
+
+        // Create a single card
+        function createCard(checkpoint, index) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.index = index;
+            
+            card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="${checkpoint.image}" alt="${checkpoint.title}" class="card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4='">
+                        <button class="story-button">Story</button>
+                    </div>
+                    <div class="card-back">
+                        <div class="backstory-content">
+                            <h3 class="backstory-title">${checkpoint.title}</h3>
+                            <p class="backstory-text">${checkpoint.backstory}</p>
+                            <button class="story-button">Back</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event for story button
+            const storyButton = card.querySelector('.story-button');
+            storyButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                card.classList.toggle('flipped');
+            });
+            
+            return card;
+        }
+
+        // Show specific card and stack
+        function showCard(index) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, i) => {
+                if (i < index) {
+                    // Hide cards that have been swiped away
+                    card.style.display = 'none';
+                } else if (i === index) {
+                    // Current card on top
+                    card.style.display = 'block';
+                    card.style.zIndex = 10;
+                    card.style.transform = 'scale(1) translateY(0px)';
+                } else {
+                    // Show cards in stack underneath
+                    card.style.display = 'block';
+                    const stackIndex = i - index;
+                    card.style.zIndex = 10 - stackIndex;
+                    if (stackIndex === 1) {
+                        card.style.transform = 'scale(0.95) translateY(5px)';
+                    } else if (stackIndex === 2) {
+                        card.style.transform = 'scale(0.9) translateY(10px)';
+                    } else if (stackIndex === 3) {
+                        card.style.transform = 'scale(0.85) translateY(15px)';
+                    } else if (stackIndex === 4) {
+                        card.style.transform = 'scale(0.8) translateY(20px)';
+                    } else {
+                        card.style.transform = 'scale(0.75) translateY(25px)';
+                    }
+                }
+            });
+            
+            window.currentCardIndex = index;
+            updateProgress();
+            updateNavigation();
+            updateCardCounter();
+        }
+
+        // Update progress indicator
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill && window.episodeData) {
+                const progress = ((window.currentCardIndex + 1) / window.episodeData.checkpoints.length) * 100;
+                progressFill.style.width = `${progress}%`;
+            }
+        }
+        
+        // Update card counter
+        function updateCardCounter() {
+            const currentCardElement = document.getElementById('currentCard');
+            const totalCardsElement = document.getElementById('totalCards');
+            if (currentCardElement && totalCardsElement && window.episodeData) {
+                currentCardElement.textContent = window.currentCardIndex + 1;
+                totalCardsElement.textContent = window.episodeData.checkpoints.length;
+            }
+        }
+
+        // Update navigation buttons (removed - no longer needed)
+        function updateNavigation() {
+            // Navigation buttons removed - swipe only
+        }
+
+        // Navigation functions
+        function nextCard() {
+            if (window.currentCardIndex < window.episodeData.checkpoints.length - 1) {
+                showCard(window.currentCardIndex + 1);
+            }
+        }
+
+        function prevCard() {
+            if (window.currentCardIndex > 0) {
+                showCard(window.currentCardIndex - 1);
+            }
+        }
+
+        // Add event listeners
+        function addEventListeners() {
+            // Navigation buttons removed - swipe only
+            
+            // Touch events for swiping
+            const cardStack = document.getElementById('cardStack');
+            if (cardStack) {
+                cardStack.addEventListener('touchstart', handleTouchStart);
+                cardStack.addEventListener('touchmove', handleTouchMove);
+                cardStack.addEventListener('touchend', handleTouchEnd);
+                
+                // Mouse events for desktop
+                cardStack.addEventListener('mousedown', handleMouseDown);
+                cardStack.addEventListener('mousemove', handleMouseMove);
+                cardStack.addEventListener('mouseup', handleMouseUp);
+            }
+            
+            // Global mouse up listener to handle mouse release outside card area
+            document.addEventListener('mouseup', function(e) {
+                if (window.mousePressed) {
+                    handleMouseUp(e);
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        // Touch event handlers
+        function handleTouchStart(e) {
+            window.isDragging = false; // Start as false, only set to true if we detect movement
+            window.startX = e.touches[0].clientX;
+            window.currentX = e.touches[0].clientX;
+        }
+
+        function handleTouchMove(e) {
+            if (!window.isDragging) {
+                // Check if we've moved enough to consider this a swipe
+                const diffX = Math.abs(e.touches[0].clientX - window.startX);
+                if (diffX > 10) { // Small threshold to start swiping
+                    window.isDragging = true;
+                    const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+                    if (currentCard) {
+                        currentCard.classList.add('dragging');
+                    }
+                }
+            }
+            if (window.isDragging) {
+                e.preventDefault();
+                window.currentX = e.touches[0].clientX;
+                const diffX = e.touches[0].clientX - window.startX;
+                const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+                if (currentCard) {
+                    // Apply real-time transform based on drag distance
+                    const maxDrag = 200; // Maximum drag distance
+                    const dragPercent = Math.min(Math.abs(diffX) / maxDrag, 1);
+                    const rotation = (diffX / maxDrag) * 30; // Max 30 degrees rotation
+                    
+                    currentCard.style.transform = `translateX(${diffX}px) rotate(${rotation}deg)`;
+                    currentCard.style.opacity = 1 - (dragPercent * 0.3); // Slight fade as dragged
+                }
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (!window.isDragging) {
+                // This was just a tap, let the card's click event handle it
+                return;
+            }
+            
+            window.isDragging = false;
+            
+            const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+            const diffX = window.startX - window.currentX;
+            const threshold = 50;
+            
+            if (currentCard) {
+                // Only navigate if there was significant movement (swipe)
+                if (Math.abs(diffX) > threshold) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Animate card off screen
+                    const direction = diffX > 0 ? 1 : -1;
+                    const screenWidth = window.innerWidth;
+                    
+                    currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    currentCard.style.transform = `translateX(${direction * screenWidth}px) rotate(${direction * 30}deg)`;
+                    currentCard.style.opacity = '0';
+                    
+                    // Wait for animation to complete, then navigate
+                    setTimeout(() => {
+                        if (diffX > 0) {
+                            nextCard();
+                        } else {
+                            prevCard();
+                        }
+                        // Reset card styles
+                        currentCard.style.transition = '';
+                        currentCard.style.transform = '';
+                        currentCard.style.opacity = '';
+                        currentCard.classList.remove('dragging');
+                    }, 300);
+                } else {
+                    // Snap back to original position
+                    currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    currentCard.style.transform = '';
+                    currentCard.style.opacity = '';
+                    currentCard.classList.remove('dragging');
+                    
+                    // Remove transition after animation
+                    setTimeout(() => {
+                        currentCard.style.transition = '';
+                    }, 300);
+                }
+            }
+        }
+
+        // Mouse event handlers
+        function handleMouseDown(e) {
+            e.preventDefault(); // Prevent default drag behavior
+            window.isDragging = false; // Start as false, only set to true if we detect movement
+            window.startX = e.clientX;
+            window.currentX = e.clientX;
+            // Mark that mouse is pressed
+            window.mousePressed = true;
+        }
+
+        function handleMouseMove(e) {
+            e.preventDefault(); // Prevent default drag behavior
+            
+            // Only process if mouse is actually pressed
+            if (!window.mousePressed) return;
+            
+            if (!window.isDragging) {
+                // Check if we've moved enough to consider this a drag
+                const diffX = Math.abs(e.clientX - window.startX);
+                if (diffX > 10) { // Small threshold to start dragging
+                    window.isDragging = true;
+                    const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+                    if (currentCard) {
+                        currentCard.classList.add('dragging');
+                    }
+                }
+            }
+            if (window.isDragging) {
+                window.currentX = e.clientX;
+                const diffX = e.clientX - window.startX;
+                const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+                if (currentCard) {
+                    // Apply real-time transform based on drag distance
+                    const maxDrag = 200; // Maximum drag distance
+                    const dragPercent = Math.min(Math.abs(diffX) / maxDrag, 1);
+                    const rotation = (diffX / maxDrag) * 30; // Max 30 degrees rotation
+                    
+                    currentCard.style.transform = `translateX(${diffX}px) rotate(${rotation}deg)`;
+                    currentCard.style.opacity = 1 - (dragPercent * 0.3); // Slight fade as dragged
+                }
+            }
+        }
+
+        function handleMouseUp(e) {
+            // Reset mouse pressed state
+            window.mousePressed = false;
+            
+            if (!window.isDragging) {
+                // This was just a click, let the card's click event handle it
+                return;
+            }
+            
+            window.isDragging = false;
+            
+            const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+            const diffX = window.startX - window.currentX;
+            const threshold = 50;
+            
+            if (currentCard) {
+                // Only navigate if there was significant movement (drag)
+                if (Math.abs(diffX) > threshold) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Animate card off screen
+                    const direction = diffX > 0 ? 1 : -1;
+                    const screenWidth = window.innerWidth;
+                    
+                    currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    currentCard.style.transform = `translateX(${direction * screenWidth}px) rotate(${direction * 30}deg)`;
+                    currentCard.style.opacity = '0';
+                    
+                    // Wait for animation to complete, then navigate
+                    setTimeout(() => {
+                        if (diffX > 0) {
+                            nextCard();
+                        } else {
+                            prevCard();
+                        }
+                        // Reset card styles
+                        currentCard.style.transition = '';
+                        currentCard.style.transform = '';
+                        currentCard.style.opacity = '';
+                        currentCard.classList.remove('dragging');
+                    }, 300);
+                } else {
+                    // Snap back to original position
+                    currentCard.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    currentCard.style.transform = '';
+                    currentCard.style.opacity = '';
+                    currentCard.classList.remove('dragging');
+                    
+                    // Remove transition after animation
+                    setTimeout(() => {
+                        currentCard.style.transition = '';
+                    }, 300);
+                }
+            }
+        }
+
+        // Keyboard navigation
+        function handleKeyDown(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    prevCard();
+                    break;
+                case 'ArrowRight':
+                    nextCard();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    nextCard();
+                    break;
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeEpisode);
+        } else {
+            initializeEpisode();
+        }
+    </script>
+</body>
+</html>
