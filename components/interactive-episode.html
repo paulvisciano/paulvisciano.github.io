@@ -653,7 +653,6 @@
                 window.episodeData = await response.json();
                 return window.episodeData;
             } catch (error) {
-                console.error('Error loading episode data:', error);
                 // Fallback to a simple error state
                 window.episodeData = {
                     episode: 0,
@@ -673,27 +672,19 @@
 
         // Initialize the episode
         async function initializeEpisode() {
-            console.log('[Interactive Episode] Script loaded, attempting initialization...');
-            
             // Wait a bit for DOM to be ready
             setTimeout(async () => {
-                console.log('[Interactive Episode] Attempting initialization after delay...');
                 await initializeCards();
             }, 100);
         }
 
         // Initialize cards
         async function initializeCards() {
-            console.log('[Interactive Episode] Initializing cards...');
-            
             await loadEpisodeData();
             
             if (!window.episodeData || !window.episodeData.checkpoints) {
-                console.error('No episode data available');
                 return;
             }
-
-            console.log('[Interactive Episode] Episode data loaded, rendering cards...');
             
             const cardStack = document.getElementById('cardStack');
             const episodeTitle = document.getElementById('episodeTitle');
@@ -715,12 +706,8 @@
             // Show first card
             showCard(0);
             
-            console.log('[Interactive Episode] Cards rendered successfully!');
-            
             // Add event listeners
             addEventListeners();
-            
-            console.log('[Interactive Episode] Event listeners attached!');
             
             // Initialize compact episode navigation
             setTimeout(() => {
