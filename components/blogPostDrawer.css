@@ -78,14 +78,66 @@
   color: var(--text-light);
   padding: 2rem;
   padding-top : 10px;
-  opacity: 1;
+  opacity: 1 !important;
   transform: translateY(0);
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .blog-post-drawer-content.transitioning {
   opacity: 0;
   transform: translateY(20px);
+}
+
+.interactive-episode-body {
+  opacity: 1 !important;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.interactive-episode-body.transitioning {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Episode Loading Overlay */
+.episode-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 26, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(2px);
+}
+
+.episode-loading-content {
+  text-align: center;
+  color: var(--text-light);
+}
+
+.episode-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 165, 0, 0.3);
+  border-top: 3px solid var(--primary-orange);
+  border-radius: 50%;
+  animation: episode-loading-spin 1s linear infinite;
+  margin: 0 auto 1rem auto;
+}
+
+.episode-loading-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-orange);
+}
+
+@keyframes episode-loading-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .blog-post-drawer-content h2 {
