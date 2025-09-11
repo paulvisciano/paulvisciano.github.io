@@ -1,4 +1,4 @@
-const CACHE_VERSION = '2025.09.11.1421';
+const CACHE_VERSION = '2025.09.11.1430';
 const CACHE_NAME = `whereispaul-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE_NAME = `whereispaul-dynamic-v${CACHE_VERSION}`;
 
@@ -26,7 +26,10 @@ const STATIC_ASSETS = [
 const NETWORK_FIRST_PATTERNS = [
   /moments\.js$/,
   /icons\/.*\.png$/,
-  /manifest\.json$/
+  /manifest\.json$/,
+  /moments\/.*\.html$/,  // All moment HTML files
+  /components\/.*\.html$/, // All component HTML files
+  /moments\/.*\/data\.json$/ // Episode data files
 ];
 
 // Force the service worker to activate immediately
@@ -68,6 +71,29 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+  
+  // Always use network-first for navigation requests
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Clone the response because it's a stream and can only be consumed once
+          const responseToCache = response.clone();
+          
+          caches.open(DYNAMIC_CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+            
+          return response;
+        })
+        .catch(() => {
+          // If network fails, try to get from cache
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
   
   // Check if the request matches any network-first patterns
   const shouldUseNetworkFirst = NETWORK_FIRST_PATTERNS.some(pattern => 
