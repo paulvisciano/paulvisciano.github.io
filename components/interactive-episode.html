@@ -10,21 +10,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: calc(100vh - 80px);
+            justify-content: flex-start;
+            height: 100vh;
             position: relative;
             overflow: hidden;
             background: transparent;
-            padding-bottom: 80px;
+            padding: 20px 20px 0;
         }
         
         .card-container {
             position: relative;
             width: 100%;
-            max-width: 520px;
-            height: 700px;
+            max-width: 480px;
+            height: 680px;
             margin: 0 auto;
             perspective: 1000px;
+            margin-top: 15px;
         }
         
         .card-stack {
@@ -41,7 +42,6 @@
             height: 100%;
             cursor: pointer;
             transition: transform 0.6s ease, opacity 0.3s ease;
-            transform-style: preserve-3d;
             z-index: 1;
             user-select: none;
             -webkit-user-drag: none;
@@ -51,24 +51,26 @@
             user-drag: none;
         }
         
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
         .card:nth-child(2) {
             z-index: 2;
-            transform: scale(0.95) translateY(5px);
         }
         
         .card:nth-child(3) {
             z-index: 3;
-            transform: scale(0.9) translateY(10px);
         }
         
         .card:nth-child(4) {
             z-index: 4;
-            transform: scale(0.85) translateY(15px);
         }
         
         .card:nth-child(5) {
             z-index: 5;
-            transform: scale(0.8) translateY(20px);
         }
         
         .card-inner {
@@ -155,29 +157,31 @@
         }
         
         .story-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
             background: linear-gradient(135deg, #ffa500, #ff8c00);
             color: #000;
             border: 2px solid rgba(255, 255, 255, 0.8);
-            padding: 10px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
-            z-index: 3;
+            z-index: 1002;
             box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4), 0 2px 8px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             animation: storyButtonPulse 2s ease-in-out infinite;
+            white-space: nowrap;
         }
         
         .story-button:hover {
             background: linear-gradient(135deg, #ff8c00, #ffa500);
-            transform: scale(1.1);
+            transform: translateX(-50%) scale(1.05);
             box-shadow: 0 6px 20px rgba(255, 165, 0, 0.6), 0 4px 12px rgba(0,0,0,0.4);
         }
         
@@ -194,6 +198,32 @@
             }
         }
         
+        .backstory-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 2;
+        }
+        
+        .card.showing-story .backstory-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .card.showing-story .card-image {
+            opacity: 0.3;
+        }
+        
         .backstory-content {
             padding: 30px 20px;
             height: 100%;
@@ -201,6 +231,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            color: var(--text-light);
         }
         
         .backstory-title {
@@ -233,8 +265,8 @@
         
         
         .progress-bar {
-            position: fixed;
-            bottom: 100px;
+            position: absolute;
+            top: calc(100% + 15px);
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
@@ -441,8 +473,8 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .card-container {
-                max-width: 450px;
-                height: 600px;
+                max-width: 350px;
+                height: 450px;
             }
             
             .card-title {
@@ -461,7 +493,7 @@
         @media (max-width: 480px) {
             .card-container {
                 width: 95%;
-                height: 550px;
+                height: 400px;
             }
             
             .swipe-hint {
@@ -502,15 +534,17 @@
 </head>
 <body>
     <div class="card-interface">
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
+        <!-- Global Story Button -->
+        <button class="story-button" id="globalStoryButton">Reveal Backstory</button>
 
         <div class="card-container">
             <div id="cardStack" class="card-stack">
                 <div id="loading-message" style="color: white; text-align: center; padding: 50px;">
                     Loading interactive cards...
                 </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
         </div>
 
@@ -646,6 +680,9 @@
             setTimeout(() => {
                 initializeEpisodeNavigation();
             }, 200);
+            
+            // Initialize global story button
+            initializeGlobalStoryButton();
         }
 
         // Create a single card
@@ -655,29 +692,19 @@
             card.dataset.index = index;
             
             card.innerHTML = `
-                <div class="card-inner">
-                    <div class="card-front">
-                        <img src="${checkpoint.image}" alt="${checkpoint.title}" class="card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4='">
-                        <button class="story-button">Story</button>
-                    </div>
-                    <div class="card-back">
+                <div class="card-content">
+                    <img src="${checkpoint.image}" alt="${checkpoint.title}" class="card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4='">
+                    <div class="backstory-overlay">
                         <div class="backstory-content">
                             <h3 class="backstory-title">${checkpoint.title}</h3>
                             <p class="backstory-text">${checkpoint.backstory}</p>
-                            <button class="story-button">Back</button>
                         </div>
                     </div>
                 </div>
             `;
             
-            // Add click event for all story buttons (both Story and Back)
-            const storyButtons = card.querySelectorAll('.story-button');
-            storyButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    card.classList.toggle('flipped');
-                });
-            });
+            // Store card reference for global button
+            card.dataset.checkpointIndex = index;
             
             return card;
         }
@@ -690,26 +717,12 @@
                     // Hide cards that have been swiped away
                     card.style.display = 'none';
                 } else if (i === index) {
-                    // Current card on top
+                    // Current card visible
                     card.style.display = 'block';
                     card.style.zIndex = 10;
-                    card.style.transform = 'scale(1) translateY(0px)';
                 } else {
-                    // Show cards in stack underneath
-                    card.style.display = 'block';
-                    const stackIndex = i - index;
-                    card.style.zIndex = 10 - stackIndex;
-                    if (stackIndex === 1) {
-                        card.style.transform = 'scale(0.95) translateY(5px)';
-                    } else if (stackIndex === 2) {
-                        card.style.transform = 'scale(0.9) translateY(10px)';
-                    } else if (stackIndex === 3) {
-                        card.style.transform = 'scale(0.85) translateY(15px)';
-                    } else if (stackIndex === 4) {
-                        card.style.transform = 'scale(0.8) translateY(20px)';
-                    } else {
-                        card.style.transform = 'scale(0.75) translateY(25px)';
-                    }
+                    // Hide other cards
+                    card.style.display = 'none';
                 }
             });
             
@@ -1075,6 +1088,29 @@
             
             if (currentIndex < episodes.length - 1 && window.smoothEpisodeTransition) {
                 window.smoothEpisodeTransition(episodes[currentIndex + 1]);
+            }
+        }
+        
+        function initializeGlobalStoryButton() {
+            const storyButton = document.getElementById('globalStoryButton');
+            if (storyButton) {
+                storyButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const currentCard = document.querySelector('.card[data-index="' + window.currentCardIndex + '"]');
+                    if (currentCard) {
+                        const isShowingStory = currentCard.classList.contains('showing-story');
+                        
+                        if (isShowingStory) {
+                            // Hide backstory, show image
+                            currentCard.classList.remove('showing-story');
+                            storyButton.textContent = 'Reveal Backstory';
+                        } else {
+                            // Show backstory, dim image
+                            currentCard.classList.add('showing-story');
+                            storyButton.textContent = 'Hide Backstory';
+                        }
+                    }
+                });
             }
         }
 
