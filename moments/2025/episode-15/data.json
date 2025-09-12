@@ -1,0 +1,56 @@
+{
+  "episode": 15,
+  "title": "Dinner Date",
+  "date": "2025-09-11",
+  "checkpoints": [
+    {
+      "id": 0,
+      "episode": 15,
+      "title": "Episode Cover",
+      "backstory": "Episode 15 was about balance. The day started quietly, a grind at home, finally hitting publish on Episode 13 in the new card-swipe format. Sunlight broke through, leading to rooftop stillness and meditation. Work crept in with a sync call to Europe, but the night was for connection.\n\nDinner with Nann at AVA Brasserie brought conversation that outweighed the food, and persistence paid off at Tichuca — not for the rooftop itself (a tourist trap), but for the dialogue it framed. The night closed on a first: Bangkok's train system. At Nana station, paths split, a hug said goodbye, and the rails carried you home.\n\nThe mission wasn't flashy, but it was full: building, balancing, connecting, moving, and closing with rest.",
+      "image": "2025/episode-15/cover.png"
+    },
+    {
+      "id": 1,
+      "episode": 15,
+      "title": "Home Base Build",
+      "backstory": "The morning wasn't about running the streets — it was about running code. Hours at the desk, tinkering, refactoring, until the new episode structure finally clicked. Now Urban Runner doesn't just look like a blog; it feels like a game. The swipeable cards echo the way checkpoints are lived: one decision, one flick, one moment at a time. Hitting *publish* wasn't just uploading a story — it was leveling up the entire system.\n\nAnd inside the game, you can see it: **Episode 13 – Bangkok Green Lung** (https://paulvisciano.github.io/moments/urban-runner-episode-13-2025-09-09) went live, published from within Episode 15 itself. The runner builds the world while also playing it — a recursive loop where reality and the game merge.",
+      "image": "2025/episode-15/cp-1.png"
+    },
+    {
+      "id": 2,
+      "episode": 15,
+      "title": "Rooftop Reset",
+      "backstory": "The sun finally broke through Bangkok's clouds, and the rooftop became a sanctuary. Half an hour stretched into something more: warmth on the skin, eyes closed, body heavy with rest. By the pool, a meditation soundtrack played — waves of sound carrying the mind further away from the grind. Not just rest, but reset. A checkpoint of sunlight, stillness, and subtle healing.",
+      "image": "2025/episode-15/cp-2.png"
+    },
+    {
+      "id": 3,
+      "episode": 15,
+      "title": "Global Sync",
+      "backstory": "Back inside, back online. The glow of the laptop shifted from creative grind to professional sync. One screen in Bangkok, another somewhere in Europe — time zones bending so that work could meet in the middle. The rhythm of rooftop calm gave way to conversation, tasks, and strategy. A reminder that while Urban Runner moves through streets, the other game — work — never stops.",
+      "image": "2025/episode-15/cp-3.png"
+    },
+    {
+      "id": 4,
+      "episode": 15,
+      "title": "Dinner with Nann",
+      "backstory": "You and Nann had only started chatting last week, but the vibe clicked quickly enough that she suggested meeting before her trip. The spot: AVA Brasserie, a polished but overpriced restaurant on the 4th floor of the InterContinental. The plates were fancy, the atmosphere sleek, but in Bangkok terms it hardly justified the cost — especially knowing better meals exist on the street for a fraction. Still, this wasn't about value for money, it was about value in the moment. You picked up the bill, and conversation flowed with surprising ease, breaking the ice over food that was more set dressing than substance.",
+      "image": "2025/episode-15/cp-4.png"
+    },
+    {
+      "id": 5,
+      "episode": 15,
+      "title": "Rooftop Ascent",
+      "backstory": "Tichuca Rooftop Bar sits sky‑high on the **46th floor of the T‑One Building** on Soi Sukhumvit 40. It's not a hotel rooftop — it's an office building turned sky escape, with an \"urban jungle\" vibe: lots of wood, bamboo, greenery lining the walls, woven textures, and a giant LED‑lit tree at the center that greets you as you emerge from the elevator.\n\nThis was my **third attempt** to get in: first I came too late (doors stop admitting after ~12:30), second time the cover/drink requirement was steep (~400 baht), and now, finally, all the stars aligned. The entry path involves several layers: a security check, a bag search, a wristband checkpoint, then a switch between elevators inside the building. The flow feels more like navigating a theme‑park ride than a bar. But once you reach the rooftop, the payoff is real: panoramic 360‑degree city views, the skyline stretching in every direction; warm lights, subtle jungle soundtrack; lush plants and the LED tree glowing beneath the night sky.\n\nThe crowd is stylish, photo‑ready, expecting spectacle. Drinks are expensive. The atmosphere hides between \"magical rooftop view\" and \"tourist trap\" depending on what you're comparing it to. But you and Nann found a table in the back, and the people‑watching, the conversation, and the skyline made it worthwhile — not because it's the most exclusive or the rarest, but because the setting amplified the moment. For someone who usually avoids pretentious rooftop hype, Tichuca felt mostly earned this time.",
+      "image": "2025/episode-15/cp-5.png"
+    },
+    {
+      "id": 6,
+      "episode": 15,
+      "title": "First Train Ride",
+      "backstory": "We walked together to the station, but that's where the paths split. She was heading one way, I was heading the other. Before parting, I hugged her, thanked her for dinner, and for nudging me to finally try Bangkok's train.\n\nThe station: **BTS Nana**, on the Sukhumvit Line. It sits right above Sukhumvit Road, in one of Bangkok's busiest nightlife districts. The elevated platform overlooks neon-lit streets packed with traffic, vendors, and bars — but above it all, the station feels strangely calm, suspended over the chaos. Access is via long staircases and escalators leading up from the street. Ticket machines here still use **stored-value Rabbit cards** or single-journey tokens, and bilingual signs make navigation easy for visitors.\n\nThe BTS runs every 3‑8 minutes during peak hours, usually until midnight. Nana connects north to Mo Chit and south toward Samrong, forming one of the spine routes of Bangkok. From here you can easily transfer to Asok for the MRT subway. The ride is smooth, quiet, and air-conditioned — a stark contrast to the humid heat of the streets below.\n\nIt was my first time stepping onto a Bangkok train — usually I walk or Grab my way across the city. From up here, though, the ride felt effortless. No gridlock, no honking horns, just the hum of the tracks and the skyline sliding by. The checkpoint wasn't just about transport; it was about closing one connection and opening a new path home.",
+      "image": "2025/episode-15/cp-6.png"
+    }
+  ]
+}
