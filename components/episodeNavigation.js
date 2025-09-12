@@ -37,6 +37,13 @@ window.EpisodeNavigation = {
       date: '2025-09-09', 
       link: '2025/09-09-episode13-bangkok-green-lung.html',
       description: 'Interactive Tinder-style card journey through Bangkok\'s Green Lung'
+    },
+    {
+      id: 'urban-runner-episode-15-2025-09-11',
+      title: 'Episode 15: Dinner Date',
+      date: '2025-09-11', 
+      link: '2025/09-11-episode15-dinner-date.html',
+      description: 'A day of balance between coding grind and human connection'
     }
   ],
 

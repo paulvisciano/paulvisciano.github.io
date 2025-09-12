@@ -722,10 +722,27 @@ window.momentsInTime = [
     image: "attachment://2025/episode-13/0-bangkok-green-lung-serenity.png",
     imageAlt: "Urban Runner Episode 13: Bangkok Green Lung & City Cross",
     caption: "Bangkok Green Lung Serenity - Interactive Card Adventure",
-    fullLink: "../components/interactive-episode.html?data=2025/episode-13/data.json",
+    fullLink: "../components/interactive-episode.html?data=../moments/2025/episode-13/data.json",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 1,
-    formattedDuration: formatDuration(1)
+    formattedDuration: formatDuration(1),
+    isInteractive: true
+  },
+  {
+    id: "urban-runner-episode-15-2025-09-11",
+    title: "Urban Runner Episode 15: Dinner Date",
+    date: new Date('2025-09-11T00:00:00Z'),
+    timelineHighlight: "Urban Runner Episode 15",
+    tags: ["urban runner", "dinner date", "bangkok", "rooftop", "tichuca", "bts", "nann", "ava brasserie", "interactive cards"],
+    snippet: "Episode 15: Dinner Date - A day of balance between coding grind and human connection. From publishing Episode 13 in the new card-swipe format to rooftop meditation, work sync calls, dinner with Nann at AVA Brasserie, and finally experiencing Bangkok's BTS train system for the first time.",
+    image: "attachment://2025/episode-15/cover.png",
+    imageAlt: "Urban Runner Episode 15: Dinner Date",
+    caption: "Dinner Date - Interactive Card Adventure",
+    fullLink: "../components/interactive-episode.html?data=../moments/2025/episode-15/data.json",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+    isInteractive: true
   },
   {
     id: "chicago-2025-09-24",

@@ -709,10 +709,8 @@
             // Add event listeners
             addEventListeners();
             
-            // Initialize compact episode navigation
-            setTimeout(() => {
-                initializeEpisodeNavigation();
-            }, 200);
+            // Initialize compact episode navigation after data is loaded
+            initializeEpisodeNavigation();
             
             // Initialize global story button
             initializeGlobalStoryButton();
@@ -1039,15 +1037,29 @@
         // Initialize when DOM is ready
         // Episode Navigation Functions
         function initializeEpisodeNavigation() {
+            if (!window.episodeData) {
+                return;
+            }
+            
             const episodes = [
                 { id: 'urban-runner-episode-4-2025-08-31', title: 'Episode 4', number: 4 },
                 { id: 'urban-runner-episode-5-2025-09-01', title: 'Episode 5', number: 5 },
                 { id: 'urban-runner-episode-6-2025-09-02', title: 'Episode 6', number: 6 },
                 { id: 'urban-runner-episode-7-2025-09-03', title: 'Episode 7', number: 7 },
-                { id: 'urban-runner-episode-13-2025-09-09', title: 'Episode 13', number: 13 }
+                { id: 'urban-runner-episode-13-2025-09-09', title: 'Episode 13', number: 13 },
+                { id: 'urban-runner-episode-15-2025-09-11', title: 'Episode 15', number: 15 }
             ];
             
-            const currentEpisodeId = 'urban-runner-episode-13-2025-09-09';
+            // Determine current episode from loaded data
+            let currentEpisodeId = 'urban-runner-episode-13-2025-09-09'; // fallback
+            if (window.episodeData) {
+                if (window.episodeData.date) {
+                    currentEpisodeId = `urban-runner-episode-${window.episodeData.episode}-${window.episodeData.date.replace(/-/g, '-')}`;
+                } else {
+                    // For episodes without date field, use a default date format
+                    currentEpisodeId = `urban-runner-episode-${window.episodeData.episode}-2025-09-09`;
+                }
+            }
             const currentIndex = episodes.findIndex(ep => ep.id === currentEpisodeId);
             
             // Populate episode list
@@ -1096,10 +1108,20 @@
                 'urban-runner-episode-5-2025-09-01',
                 'urban-runner-episode-6-2025-09-02',
                 'urban-runner-episode-7-2025-09-03',
-                'urban-runner-episode-13-2025-09-09'
+                'urban-runner-episode-13-2025-09-09',
+                'urban-runner-episode-15-2025-09-11'
             ];
             
-            const currentEpisodeId = 'urban-runner-episode-13-2025-09-09';
+            // Determine current episode from loaded data
+            let currentEpisodeId = 'urban-runner-episode-13-2025-09-09'; // fallback
+            if (window.episodeData) {
+                if (window.episodeData.date) {
+                    currentEpisodeId = `urban-runner-episode-${window.episodeData.episode}-${window.episodeData.date.replace(/-/g, '-')}`;
+                } else {
+                    // For episodes without date field, use a default date format
+                    currentEpisodeId = `urban-runner-episode-${window.episodeData.episode}-2025-09-09`;
+                }
+            }
             const currentIndex = episodes.indexOf(currentEpisodeId);
             
             if (currentIndex > 0 && window.smoothEpisodeTransition) {
@@ -1113,10 +1135,20 @@
                 'urban-runner-episode-5-2025-09-01',
                 'urban-runner-episode-6-2025-09-02',
                 'urban-runner-episode-7-2025-09-03',
-                'urban-runner-episode-13-2025-09-09'
+                'urban-runner-episode-13-2025-09-09',
+                'urban-runner-episode-15-2025-09-11'
             ];
             
-            const currentEpisodeId = 'urban-runner-episode-13-2025-09-09';
+            // Determine current episode from loaded data
+            let currentEpisodeId = 'urban-runner-episode-13-2025-09-09'; // fallback
+            if (window.episodeData) {
+                if (window.episodeData.date) {
+                    currentEpisodeId = `urban-runner-episode-${window.episodeData.episode}-${window.episodeData.date.replace(/-/g, '-')}`;
+                } else {
+                    // For episodes without date field, use a default date format
+                    currentEpisodeId = `urban-runner-episode-${window.episodeData.episode}-2025-09-09`;
+                }
+            }
             const currentIndex = episodes.indexOf(currentEpisodeId);
             
             if (currentIndex < episodes.length - 1 && window.smoothEpisodeTransition) {
