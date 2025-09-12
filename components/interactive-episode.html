@@ -50,6 +50,10 @@
             user-drag: none;
         }
         
+        .card:hover {
+            transform: scale(1.02);
+        }
+        
         .card-content {
             position: relative;
             width: 100%;
@@ -232,7 +236,9 @@
             align-items: center;
             text-align: center;
             color: var(--text-light);
+            position: relative;
         }
+        
         
         .backstory-title {
             font-size: 1.6rem;
@@ -714,6 +720,7 @@
             
             // Initialize global story button
             initializeGlobalStoryButton();
+            updateBackstoryButton();
         }
 
         // Create a single card
@@ -725,7 +732,7 @@
             card.innerHTML = `
                 <div class="card-content">
                     <img src="${checkpoint.image}" alt="${checkpoint.title}" class="card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4='">
-                    <div class="backstory-overlay">
+                    <div class="backstory-overlay" onclick="event.stopPropagation(); this.closest('.card').classList.remove('showing-story'); updateBackstoryButton();">
                         <div class="backstory-content">
                             <h3 class="backstory-title">${checkpoint.title}</h3>
                             <p class="backstory-text">${checkpoint.backstory}</p>
@@ -737,7 +744,41 @@
             // Store card reference for global button
             card.dataset.checkpointIndex = index;
             
+            // Add tap functionality to toggle backstory
+            card.addEventListener('click', (e) => {
+                // Prevent triggering swipe when tapping
+                e.stopPropagation();
+                toggleBackstory(card);
+            });
+            
             return card;
+        }
+
+        // Toggle backstory overlay on card tap
+        function toggleBackstory(card) {
+            // Close any other open backstories first
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('showing-story');
+                }
+            });
+            
+            // Toggle the current card's backstory
+            card.classList.toggle('showing-story');
+            updateBackstoryButton();
+        }
+
+        function updateBackstoryButton() {
+            const backstoryButton = document.getElementById('globalStoryButton');
+            if (!backstoryButton) return;
+            
+            const currentCard = document.querySelector('.card.showing-story');
+            if (currentCard) {
+                backstoryButton.textContent = 'Hide Backstory';
+            } else {
+                backstoryButton.textContent = 'Reveal Backstory';
+            }
         }
 
         // Show specific card and stack
@@ -757,9 +798,15 @@
                 }
             });
             
+            // Close any open backstories when changing cards
+            cards.forEach(card => {
+                card.classList.remove('showing-story');
+            });
+            
             window.currentCardIndex = index;
             updateProgress();
             updateNavigation();
+            updateBackstoryButton();
             updateCardCounter();
         }
 
@@ -1168,12 +1215,11 @@
                         if (isShowingStory) {
                             // Hide backstory, show image
                             currentCard.classList.remove('showing-story');
-                            storyButton.textContent = 'Reveal Backstory';
                         } else {
                             // Show backstory, dim image
                             currentCard.classList.add('showing-story');
-                            storyButton.textContent = 'Hide Backstory';
                         }
+                        updateBackstoryButton();
                     }
                 });
             }
