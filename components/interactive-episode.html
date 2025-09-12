@@ -249,11 +249,28 @@
         
         .backstory-text {
             font-size: 1rem;
-            line-height: 1.6;
+            line-height: 1.7;
             text-align: left;
             max-height: 70%;
             overflow-y: auto;
             padding: 0 10px;
+            white-space: pre-line;
+            text-align: justify;
+            hyphens: auto;
+            word-wrap: break-word;
+        }
+        
+        .backstory-text strong {
+            font-weight: bold;
+            color: var(--text-light);
+        }
+        
+        .backstory-text p {
+            margin: 0 0 1em 0;
+        }
+        
+        .backstory-text p:last-child {
+            margin-bottom: 0;
         }
         
         .flip-hint {
@@ -735,7 +752,7 @@
                     <div class="backstory-overlay" onclick="event.stopPropagation(); this.closest('.card').classList.remove('showing-story'); updateBackstoryButton();">
                         <div class="backstory-content">
                             <h3 class="backstory-title">${checkpoint.title}</h3>
-                            <p class="backstory-text">${checkpoint.backstory}</p>
+                            <p class="backstory-text">${formatBackstoryText(checkpoint.backstory)}</p>
                         </div>
                     </div>
                 </div>
@@ -779,6 +796,25 @@
             } else {
                 backstoryButton.textContent = 'Reveal Backstory';
             }
+        }
+
+        function formatBackstoryText(text) {
+            if (!text) return '';
+            
+            // First, handle the specific formatting patterns in the data
+            let formatted = text
+                // Convert **bold** text to proper formatting
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                // Handle existing paragraph breaks (double newlines)
+                .replace(/\n\n+/g, '\n\n')
+                // Convert single newlines to double for paragraph breaks
+                .replace(/\n/g, '\n\n')
+                .trim();
+            
+            // Add some spacing after periods for better readability
+            formatted = formatted.replace(/\.([A-Z])/g, '. $1');
+            
+            return formatted;
         }
 
         // Show specific card and stack
