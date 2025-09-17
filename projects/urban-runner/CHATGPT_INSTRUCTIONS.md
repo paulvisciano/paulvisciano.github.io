@@ -1,153 +1,94 @@
-Urban Runner Project Instructions (v4.3 – Unified JSON Schema)
+Urban Runner Project Instructions (v5.0 – Comic Page Workflow)
 
-Last Updated: September 12, 2025
+Last Updated: September 17, 2025
 
 Core Mission
 
 A global movement for wealth redistribution — one run at a time.
+Now told through comic book pages instead of scattered checkpoint cards.
 
 Episode Structure
 
-Each episode = path of sequential checkpoints, with an Episode Cover (id: 0) at the start and an Episode Summary (final id) at the end.
+Each episode is structured as a comic book.
 
-Every checkpoint must generate a card (checkpoint, fuel-up, drop, side quest, cutscene, or building/restaurant).
+Episode Cover (Page 0) opens the story.
 
-Bonus events are included as side-quest cards.
+Episode Pages (Page 1 → N) sequentially capture the flow of the adventure.
 
-Daytime + Nighttime arcs can run in parallel, but checkpoints are numbered continuously across both.
+Final Page = Episode Summary (mission complete recap, maps, totals, etc.).
 
-The Episode Summary (mission complete card + map + recap) is always the final checkpoint, but its number depends on how many events occurred.
+Page Workflow
 
-Checkpoint Flow
+Pages replace checkpoints:
 
-Each new moment is logged as a checkpoint (no skipped numbering).
+Instead of many individual cards, each page integrates multiple beats of the story.
 
-Immediately generate asset(s) for that checkpoint before moving on.
+A single page can cover what used to be multiple checkpoints (scene, drop, fuel-up, etc.).
 
-Example: CP12 → Fuel-Up card → Backstory text → then continue to CP13.
+Template-driven: every page uses the same comic template (cream background, bold outlines, footer with Ep.XX pg.Y).
 
-Checkpoint Numbers:
+Sequential Numbering:
 
-id: 0 = Episode Cover
+Cover = Page 0
 
-id: 1+ = Sequential checkpoints
+Episode events = Pages 1 → N
 
-Last id = Episode Summary
+Summary = Last page
 
-Checkpoint Categories
+Categories (Now Story Elements)
 
-Scene Cards → Encounters, cutscenes, comedic beats
+Scenes: Encounters, group dynamics, comedic beats.
 
-Fuel-Ups → Meals, coffee, drinks (with receipt)
+Fuel-Ups / Drops: Still appear, but folded into pages (e.g., smoothies, tips, donations shown in-panel).
 
-Drops → Donations, tips, redistribution moments
+Side Quests: Woven naturally into page flow as full or half-page beats.
 
-Bonus / Side-Quest → Unexpected detours
+Restaurants & Buildings: Appear as feature pages when central to story.
 
-Restaurant Cards → Postcard-style, always with optional back
-
-Building Cards → Architecture, always front + researched back
-
-Cutscenes → Comic-style sequences using scene template
-
-City Scorecards → End-of-arc evaluations
+Cutscenes: Cinematic-style pages (romance, humor, drama) using same template.
 
 Maps
 
-Source: Google Maps GPS timeline
+Maps still included, but appear as panels or full pages inside the comic (instead of separate cards).
 
-Base = real streets
+Source: Google Maps GPS timeline.
 
-Running = blue solid line, car = green dashed line
+Show route with totals (distance, time, cash spent/given).
 
-Checkpoints marked with spend type icons
+Narrative
 
-Totals: Distance, Time, Cash Spent, Cash Given
+Backstories and narration are embedded directly into the panels with yellow narration boxes.
 
-Repeated routes glow brighter for “detail unlock”
-
-Flip-Side Backstory
-
-Every checkpoint is eligible for a backstory text card.
-
-Used when context or deeper story elevates the moment.
-
-Example: scam encounter, building history, wellness reflection.
-
-Backstory is stored as pure text (HTML-ready), not an image.
+No separate flip-side text cards needed.
 
 Asset Rules
 
-Episode Numbering Rule: All generated assets must include the abbreviated episode number (e.g., Ep.13) + checkpoint number.
+Episode Number & Page Number must appear in the footer of every page (e.g., Ep.20 pg.6).
 
-Cover Exception: Episode Cover (id: 0) uses the full episode title.
+File Naming Convention:
 
-WhatsApp Optimization: Dark contrast, GTA/AR style, cards designed to crop cleanly.
+ep-XX-page-Y.png
 
-File Naming:
+Example: ep-20-page-6.png
 
-cover.png
+Folder Structure:
 
-cp-1.png, cp-2.png, … (sequential checkpoints)
-
-summary.png
-
-Assets are always stored in a date/episode folder structure:
-YYYY/episode-XX/filename.png
+YYYY/episode-XX/ep-XX-page-Y.png
 
 Episode Flow
 
-CP0 → Episode Cover
+Page 0 → Episode Cover
 
-Sequential Checkpoints → Asset generated per checkpoint
+Sequential Story Pages → built from template, merging multiple events into natural comic flow.
 
-Bonus/Side Quests → Added in flow as their own checkpoints
+Final Page → Episode Summary
 
-Cutscenes → Interspersed, cinematic highlights
+Export Rule
 
-Restaurants & Buildings → Special card categories
+Export only the comic pages (cover → summary).
 
-Final Recovery Point (if relevant)
+No JSON, story markdowns, or backstory text exports needed.
 
-Final CP → Episode Summary (Mission Complete)
+The comic itself is the deliverable.
 
-Export Rule (Updated JSON Schema)
-
-Each episode must export a single data.json file in this structure:
-
-{
-  "episode": 16,
-  "title": "Your Episode Title",
-  "date": "2025-09-12",
-  "checkpoints": [
-    {
-      "id": 0,
-      "title": "Episode Cover",
-      "backstory": "Your episode overview and description...",
-      "image": "2025/episode-16/cover.png"
-    },
-    {
-      "id": 1,
-      "title": "First Checkpoint",
-      "backstory": "Your first checkpoint story...",
-      "image": "2025/episode-16/cp-1.png"
-    }
-  ]
-}
-
-
-episode = integer episode number
-
-title = episode title string
-
-date = ISO date string
-
-checkpoints[] = ordered list of checkpoints
-
-id = checkpoint number (0 = cover, last = summary)
-
-title = short title of checkpoint
-
-backstory = flip-side text
-
-image = relative path to asset
+👉 This streamlined workflow means fewer, higher-quality pages per episode, quicker generation, easier exporting, and simpler site integration.
