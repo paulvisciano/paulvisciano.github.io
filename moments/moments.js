@@ -745,6 +745,22 @@ window.momentsInTime = [
     isInteractive: true
   },
   {
+    id: "urban-runner-episode-20-2025-09-16",
+    title: "Urban Runner Episode 20: Comic Book Edition",
+    date: new Date('2025-09-16T00:00:00Z'),
+    timelineHighlight: "Urban Runner Episode 20",
+    tags: ["urban runner", "comic book", "bangkok", "digital storytelling", "innovation", "turn.js", "flipbook"],
+    snippet: "Episode 20: Comic Book Edition - A revolutionary shift in Urban Runner storytelling, breaking the boundaries between digital and physical worlds. Experience the first comic book-style episode with realistic page-flipping using Turn.js technology.",
+    image: "attachment://2025/episode-20/cover.png",
+    imageAlt: "Urban Runner Episode 20: Comic Book Edition",
+    caption: "Comic Book Edition - Breaking Digital Boundaries",
+    fullLink: "#",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+    isComic: true
+  },
+  {
     id: "chicago-2025-09-24",
     title: "Family Reunion & Wedding in Chicago",
     date: new Date('2025-09-24T00:00:00Z'),
