@@ -35,6 +35,12 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     return post && post.isInteractive === true;
   };
 
+  // Function to determine if a post is a comic episode
+  const isComicEpisode = (postId, title) => {
+    const post = window.momentsInTime.find(p => p.id === postId);
+    return post && post.isComic === true;
+  };
+
   // Define linear scales for each duration range for smooth gradients
   const scaleShort = d3.scaleLinear()
     .domain([1, 3])
@@ -199,27 +205,25 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       pinchStartAltitude.current = null;
     };
 
-    const handleDoubleClick = (event) => {
-      handleDoubleZoom(event);
-    };
-
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleTouchStart, { passive: false });
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
     document.addEventListener('touchend', handleTouchEnd);
     const globeContainer = document.getElementById('globeViz');
-    if (globeContainer) {
-      globeContainer.addEventListener('dblclick', handleDoubleClick, { passive: false });
-    }
+    // Temporarily disable double-click to prevent errors
+    // if (globeContainer) {
+    //   globeContainer.addEventListener('dblclick', handleDoubleZoom, { passive: false });
+    // }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
-      if (globeContainer) {
-        globeContainer.removeEventListener('dblclick', handleDoubleClick);
-      }
+      // Temporarily disabled double-click
+      // if (globeContainer) {
+      //   globeContainer.removeEventListener('dblclick', handleDoubleZoom);
+      // }
     };
   }, [popoverContent, setSelectedId, isDrawerOpen, isBlogDrawerOpen]);
 
@@ -267,16 +271,19 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             }
 
             waitForZoom(800).then(() => {
-              setPopoverContent({
-                title: post.title || "No Title",
-                snippet: post.snippet || "No Snippet",
-                fullLink: post.fullLink || "#",
-                lat: post.lat,
-                lng: post.lng,
-                id: post.id,
-                image: post.image ? post.image.replace('attachment://', '') : null,
-                imageAlt: post.imageAlt
-              });
+              // Skip popover for comic episodes - they open directly
+              if (!isComicEpisode(post.id, post.title)) {
+                setPopoverContent({
+                  title: post.title || "No Title",
+                  snippet: post.snippet || "No Snippet",
+                  fullLink: post.fullLink || "#",
+                  lat: post.lat,
+                  lng: post.lng,
+                  id: post.id,
+                  image: post.image ? post.image.replace('attachment://', '') : null,
+                  imageAlt: post.imageAlt
+                });
+              }
               setSelectedId(post.id);
               isZooming.current = false;
             });
@@ -416,16 +423,19 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           }, 1500);
 
           waitForZoom(1500).then(() => {
-            setPopoverContent({
-              title: post.title || "No Title",
-              snippet: post.snippet || "No Snippet",
-              fullLink: post.fullLink || "#",
-              lat: post.lat,
-              lng: post.lng,
-              id: post.id,
-              image: post.image ? post.image.replace('attachment://', '') : null,
-              imageAlt: post.imageAlt
-            });
+            // Skip popover for comic episodes - they open directly
+            if (!isComicEpisode(post.id, post.title)) {
+              setPopoverContent({
+                title: post.title || "No Title",
+                snippet: post.snippet || "No Snippet",
+                fullLink: post.fullLink || "#",
+                lat: post.lat,
+                lng: post.lng,
+                id: post.id,
+                image: post.image ? post.image.replace('attachment://', '') : null,
+                imageAlt: post.imageAlt
+              });
+            }
             isZooming.current = false;
           });
         } catch (error) {
@@ -442,9 +452,10 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
       return () => {
         globeContainer.removeEventListener('wheel', preventScroll);
-        if (globeContainer) {
-          globeContainer.removeEventListener('dblclick', handleDoubleClick);
-        }
+        // Temporarily disabled double-click
+        // if (globeContainer) {
+        //   globeContainer.removeEventListener('dblclick', handleDoubleZoom);
+        // }
         if (globeInstance.current) {
           globeInstance.current.destroy();
         }
@@ -539,9 +550,38 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       setError(null);
 
       try {
+        // Comic episodes don't need to fetch HTML - they use React components directly
+        if (isComicEpisode(postId, post.title)) {
+          console.log('Comic episode detected, skipping HTML fetch');
+          
+          // Set up comic episode content directly
+          const blogPostContent = {
+            title: post.title || "No Title",
+            content: '', // No HTML content needed for comics
+            snippet: post.snippet || "No Snippet",
+            fullLink: post.fullLink || "#",
+            lat: post.lat,
+            lng: post.lng,
+            location: post.location,
+            mapText: post.mapText,
+            isInteractive: false,
+            isComic: true,
+            postId: postId
+          };
+          
+          setBlogPostContent(blogPostContent);
+          setIsLoading(false);
+          
+          // Only open drawer if it's not already open
+          if (!isBlogDrawerOpen) {
+            setIsBlogDrawerOpen(true);
+          }
+          return;
+        }
+        
         let htmlFile = post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`;
         
-        // Add cache-busting parameter for interactive episodes
+        // Add cache-busting parameter for interactive episodes only
         if (isInteractiveEpisode(postId, post.title)) {
           const separator = htmlFile.includes('?') ? '&' : '?';
           htmlFile += `${separator}t=${Date.now()}`;
@@ -629,7 +669,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           caption: post.caption,
           mapLink: post.mapLink,
           mapText: post.mapText,
-          isInteractive: isInteractiveEpisode(postId, post.title)
+          isInteractive: isInteractiveEpisode(postId, post.title),
+          isComic: isComicEpisode(postId, post.title)
         });
         // Only open drawer if it's not already open
         if (!isBlogDrawerOpen) {
@@ -876,15 +917,20 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       imageAlt: popoverContent.imageAlt
     }),
     isBlogDrawerOpen && blogPostContent && (
-      isInteractiveEpisode(blogPostContent.postId || '', blogPostContent.title) 
-        ? React.createElement(window.InteractiveEpisodeDrawer, {
+      isComicEpisode(blogPostContent.postId || '', blogPostContent.title)
+        ? React.createElement(window.ComicEpisodeDrawer, {
             content: blogPostContent,
             onClose: () => setIsBlogDrawerOpen(false)
           })
-        : React.createElement(window.BlogPostDrawer, {
-            content: blogPostContent,
-            onClose: () => setIsBlogDrawerOpen(false)
-          })
+        : isInteractiveEpisode(blogPostContent.postId || '', blogPostContent.title) 
+          ? React.createElement(window.InteractiveEpisodeDrawer, {
+              content: blogPostContent,
+              onClose: () => setIsBlogDrawerOpen(false)
+            })
+          : React.createElement(window.BlogPostDrawer, {
+              content: blogPostContent,
+              onClose: () => setIsBlogDrawerOpen(false)
+            })
     )
   );
 };

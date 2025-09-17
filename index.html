@@ -35,18 +35,59 @@
   <link rel="stylesheet" href="components/footer.css">
   <link rel="stylesheet" href="components/globe.css">
 
-  <!-- Service Worker Registration -->
+  <!-- Service Worker Registration with Emergency Cache Clearing -->
   <script>
-    if ('serviceWorker' in navigator) {
+    // Emergency cache clear function
+    window.emergencyCacheClear = async () => {
+      console.log('Emergency cache clear initiated...');
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map(name => caches.delete(name)));
+        console.log('All caches cleared');
+      }
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.map(reg => reg.unregister()));
+        console.log('All service workers unregistered');
+      }
+      window.location.reload(true);
+    };
+
+    // Check for black screen and auto-recover (DISABLED to prevent loops)
+    let blackScreenTimer = setTimeout(() => {
+      if (!document.body || document.body.children.length === 0) {
+        console.warn('Potential black screen detected, but NOT auto-clearing to prevent loops');
+        // Just log for now - user can manually use triple-click debug panel
+      }
+    }, 5000);
+
+    // Clear timer when content loads
+    window.addEventListener('DOMContentLoaded', () => {
+      clearTimeout(blackScreenTimer);
+    });
+
+    // Temporarily disable service worker to prevent issues
+    if (false && 'serviceWorker' in navigator) {
+      // Listen for service worker messages
+      navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data.type === 'SW_UPDATED') {
+          console.log('Service Worker updated to version:', event.data.version);
+        if (event.data.emergency > 0) {
+          console.log('Emergency cache bust detected, but NOT auto-clearing to prevent loops');
+          // Don't automatically clear - just log for now
+        }
+        }
+      });
+
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
           .then(registration => {
             console.log('ServiceWorker registration successful');
 
-            // Check for updates every hour
+            // Check for updates more frequently during development
             setInterval(() => {
               registration.update();
-            }, 60 * 60 * 1000);
+            }, 30 * 60 * 1000); // Every 30 minutes
 
             // Handle updates
             registration.addEventListener('updatefound', () => {
@@ -55,22 +96,58 @@
 
               newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  // New content is available, refresh the page
-                  window.location.reload();
+                  console.log('New service worker installed, but NOT auto-reloading to prevent loops');
+                  // Don't auto-reload - let user manually refresh if needed
+                  // The new worker will take control on next navigation
                 }
               });
             });
           })
           .catch(err => {
-            console.log('ServiceWorker registration failed: ', err);
+            console.error('ServiceWorker registration failed:', err);
+            // If service worker fails, still try to load the app
+            console.log('Continuing without service worker...');
           });
       });
     }
+
+    // Global error handler for unhandled promise rejections
+    window.addEventListener('unhandledrejection', event => {
+      console.error('Unhandled promise rejection:', event.reason);
+      if (event.reason && event.reason.message && event.reason.message.includes('cache')) {
+        console.warn('Cache-related error detected, may need emergency clear');
+      }
+    });
+
+    // Triple-click to show debug panel
+    let clickCount = 0;
+    let clickTimer = null;
+    document.addEventListener('click', () => {
+      clickCount++;
+      if (clickCount === 1) {
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 1000);
+      } else if (clickCount === 3) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        console.log('Triple-click detected, showing debug panel');
+        document.getElementById('debug-panel').style.display = 'block';
+      }
+    });
   </script>
 </head>
 <body>
  <div id="overlay" class="overlay">
     <div class="overlay-message" id="overlay-message"></div>
+  </div>
+  
+  <!-- Emergency Debug Panel (hidden by default) -->
+  <div id="debug-panel" style="display: none; position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.9); color: white; padding: 15px; border-radius: 8px; z-index: 10001; font-family: monospace; font-size: 12px;">
+    <div style="margin-bottom: 10px; font-weight: bold;">🚨 Emergency Debug Panel</div>
+    <button onclick="window.emergencyCacheClear()" style="background: #ff4757; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px;">Clear All Caches</button>
+    <button onclick="document.getElementById('debug-panel').style.display='none'" style="background: #666; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Close</button>
+    <div style="margin-top: 8px; font-size: 10px; opacity: 0.7;">Use this if you're stuck on a black screen</div>
   </div>
   <div id="root"></div>
   <!-- Globe Div at Root Level -->
@@ -94,11 +171,15 @@
 
   <!-- Data (Load First) -->
   <script type="text/babel" defer src="moments/moments.js"></script>
+  <!-- jQuery for Turn.js -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="lib/turn.min.js"></script>
 
   <!-- Local Scripts -->
   <script type="text/babel" defer src="components/globe.js"></script>
   <script type="text/babel" defer src="components/blogPostDrawer.js"></script>
   <script type="text/babel" defer src="components/interactiveEpisodeDrawer.js"></script>
+  <script type="text/babel" defer src="components/comicEpisodeDrawer-simple.js"></script>
   <script type="text/babel" defer src="components/footer.js"></script>
   <script type="text/babel" defer src="components/app.js"></script>
   <script defer src="components/episodeNavigation.js"></script>

@@ -6,19 +6,99 @@ window.App = () => {
   const [overlayMessage, setOverlayMessage] = React.useState(null); // Initialize as null
 
   // Function to update overlay message
-  const updateOverlayMessage = (message) => {
+  const updateOverlayMessage = (message, isComicClickable = false, momentId = null) => {
     setOverlayMessage(message);
     const overlayMessageEl = document.getElementById('overlay-message');
+    const overlay = document.getElementById('overlay');
+    
     if (overlayMessageEl) {
       overlayMessageEl.textContent = message;
+      
+      // Make clickable for comic episodes
+      if (isComicClickable && momentId) {
+        overlayMessageEl.style.cursor = 'pointer';
+        overlayMessageEl.style.textDecoration = 'underline';
+        overlayMessageEl.title = 'Click to open comic book';
+        
+        // Remove existing handlers
+        overlayMessageEl.onclick = null;
+        
+        // Add click handler
+        overlayMessageEl.onclick = () => {
+          console.log('Overlay clicked for comic episode:', momentId);
+          if (window.handleOpenBlogPost) {
+            window.handleOpenBlogPost(momentId);
+          }
+        };
+        
+        if (overlay) {
+          overlay.style.pointerEvents = 'auto';
+        }
+      } else {
+        // Reset to non-clickable
+        overlayMessageEl.style.cursor = 'default';
+        overlayMessageEl.style.textDecoration = 'none';
+        overlayMessageEl.title = '';
+        overlayMessageEl.onclick = null;
+        
+        if (overlay) {
+          overlay.style.pointerEvents = 'none';
+        }
+      }
     }
+  };
+
+  // Function to determine if a post is a comic episode
+  const isComicEpisode = (moment) => {
+    return moment && moment.isComic === true;
   };
 
   // Unified logic for selecting a moment (used for clicks, initial load, and popstate)
   const handleMomentSelection = (moment) => {
     if (moment) {
       setSelectedId(moment.id);
-      updateOverlayMessage(`${moment.title}...`); // Set moment-specific message
+      
+      // For comic episodes, skip the overlay entirely and go straight to comic
+      if (isComicEpisode(moment)) {
+        console.log('Comic episode detected - bypassing overlay, opening comic directly');
+        // Hide the overlay immediately for comics
+        updateOverlayMessage(null);
+        const overlay = document.getElementById('overlay');
+        if (overlay) {
+          overlay.classList.add('hidden');
+        }
+        console.log('Comic episode detected, attempting to open comic for:', moment.id);
+        
+        // Function to try opening the comic
+        const tryOpenComic = (attempts = 0) => {
+          if (window.handleOpenBlogPost) {
+            console.log('Opening comic via handleOpenBlogPost');
+            window.handleOpenBlogPost(moment.id);
+            // Clear the overlay message when comic opens
+            setTimeout(() => {
+              updateOverlayMessage(null);
+              const overlay = document.getElementById('overlay');
+              if (overlay) {
+                overlay.classList.add('hidden');
+              }
+            }, 500);
+          } else if (attempts < 10) {
+            // Retry if handleOpenBlogPost isn't ready yet
+            console.log(`handleOpenBlogPost not ready, retrying... (attempt ${attempts + 1})`);
+            setTimeout(() => tryOpenComic(attempts + 1), 200);
+          } else {
+            console.error('Failed to open comic: handleOpenBlogPost never became available');
+            updateOverlayMessage('Unable to load comic book - please try refreshing');
+          }
+        };
+        
+        // Wait a bit for the zoom to start, then try opening the comic
+        setTimeout(tryOpenComic, 100);
+      } else {
+        // For non-comic episodes, show the normal overlay message
+        updateOverlayMessage(`${moment.title}...`, false, null);
+      }
+      
       if (zoomCallback) {
         zoomCallback(moment); // Trigger zoom to the moment's location
       }
