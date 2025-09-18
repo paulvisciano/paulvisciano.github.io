@@ -4,18 +4,17 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   const [bootPhase, setBootPhase] = React.useState('initializing');
   const [bootMessages, setBootMessages] = React.useState([]);
   const [showCover, setShowCover] = React.useState(false);
-  const [isTransitioning, setIsTransitioning] = React.useState(false);
   const [showFlipbook, setShowFlipbook] = React.useState(false);
-  const [isOpeningFlipbook, setIsOpeningFlipbook] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(8);
   const [error, setError] = React.useState(null);
+  const [isPortrait, setIsPortrait] = React.useState(window.innerHeight > window.innerWidth);
   
   const flipbookRef = React.useRef(null);
   
-  // Comic pages
+  // Comic pages (add blank page at start for proper double-page layout)
   const pages = [
-    'cover.png',
+    '', // Blank first page for proper double-page alignment
     'ep-20-page-1.png',
     'ep-20-page-2.png',
     'ep-20-page-3.png',
@@ -54,14 +53,13 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
         
         setTimeout(() => {
           setBootPhase('complete');
-          // Start transition sequence
-          setIsTransitioning(true);
           
-          // After transition starts, hide console and show cover
+          // Show cover first
           setTimeout(() => {
+            console.log('Boot sequence complete, showing cover');
             setIsLoading(false);
             setShowCover(true);
-          }, 400); // Start cover fade sooner for longer overlap
+          }, 400);
         }, 400);
       }, 800);
     }, 1400);
@@ -77,66 +75,161 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       
       console.log('Creating flipbook with', pages.length, 'pages');
       
-      // Create pages
+      // Create pages with explicit Turn.js page attributes
       for (let i = 0; i < pages.length; i++) {
         const pageDiv = document.createElement('div');
         pageDiv.className = 'page';
+        pageDiv.setAttribute('data-page', i + 1); // Turn.js page numbering starts at 1
         pageDiv.style.backgroundColor = 'transparent';
         
-        const img = document.createElement('img');
-        img.src = `/moments/2025/episode-20/${pages[i]}`;
-        img.alt = `Page ${i + 1}`;
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'contain';
-        img.draggable = false;
-        img.style.userSelect = 'none';
-        img.style.webkitUserDrag = 'none';
-        // Don't set pointer-events: none - Turn.js needs mouse events
+        console.log(`Creating page ${i + 1}: ${pages[i] || 'blank'}`);
         
-        // Add error handling for images
-        img.onerror = () => {
-          console.error(`Failed to load image: ${pages[i]}`);
-          pageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f0f0f0; color: #666;">Page ${i + 1}<br>Image not found</div>`;
-        };
+        if (pages[i] === '') {
+          // Blank first page for proper double-page alignment
+          pageDiv.innerHTML = `<div style="width: 100%; height: 100%; background: transparent; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 12px;">Page ${i + 1} (blank)</div>`;
+        } else {
+          const img = document.createElement('img');
+          img.src = `/moments/2025/episode-20/${pages[i]}`;
+          img.alt = `Page ${i + 1}`;
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'contain';
+          img.draggable = false;
+          img.style.userSelect = 'none';
+          img.style.webkitUserDrag = 'none';
+          
+          // Add error handling for images
+          img.onerror = () => {
+            console.error(`Failed to load image: ${pages[i]}`);
+            pageDiv.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f0f0f0; color: #666;">Page ${i + 1}<br>Image not found: ${pages[i]}</div>`;
+          };
+          
+          img.onload = () => {
+            console.log(`Successfully loaded: ${pages[i]}`);
+          };
+          
+          pageDiv.appendChild(img);
+        }
         
-        pageDiv.appendChild(img);
         flipbookElement.appendChild(pageDiv);
       }
       
       // Initialize Turn.js
       setTimeout(() => {
-        if (window.$ && window.$.fn.turn) {
-          console.log('Initializing Turn.js...');
-          window.$(flipbookElement).turn({
-            width: 1200,
-            height: 900,
+        // Verify element exists and is in DOM
+        if (!flipbookElement || !flipbookElement.parentNode) {
+          console.error('Flipbook element not in DOM');
+          setError('Flipbook element not properly mounted');
+          return;
+        }
+        
+        // Verify jQuery and Turn.js are available
+        if (!window.$ || !window.$.fn.turn) {
+          console.error('jQuery or Turn.js not available');
+          setError('Required libraries not loaded');
+          return;
+        }
+        
+        // Verify pages exist
+        if (flipbookElement.children.length === 0) {
+          console.error('No pages found in flipbook element');
+          setError('No pages created');
+          return;
+        }
+        
+        console.log('Initializing Turn.js with', flipbookElement.children.length, 'pages...');
+        
+        // Ensure jQuery can find the element
+        const $flipbook = window.$(flipbookElement);
+        if ($flipbook.length === 0) {
+          console.error('jQuery cannot find flipbook element');
+          setError('Element not accessible by jQuery');
+          return;
+        }
+        
+        try {
+          // Determine initial display mode based on device and orientation
+          const isMobile = window.innerWidth < 768;
+          const initialDisplay = (isMobile && isPortrait) ? 'single' : 'double';
+          const initialPage = (isMobile && isPortrait) ? 1 : 2; // Start on page 1 in mobile portrait
+          
+          console.log(`Initializing Turn.js with display: ${initialDisplay}, mobile: ${isMobile}, portrait: ${isPortrait}`);
+          
+          // Mobile gets larger dimensions for better readability
+          const flipbookWidth = isMobile ? 
+            (isPortrait ? Math.min(window.innerWidth * 0.9, 450) : Math.min(window.innerWidth * 0.95, 800)) : 
+            780;
+          const flipbookHeight = isMobile ? 
+            (isPortrait ? Math.min(window.innerHeight * 0.8, 700) : Math.min(window.innerHeight * 0.8, 600)) : 
+            560;
+          
+          $flipbook.turn({
+            width: flipbookWidth,
+            height: flipbookHeight,
             autoCenter: true,
-            duration: 600,
+            duration: 600, // Slower for visible animation
             pages: pages.length,
-            display: 'double',
-            page: 2, // Start directly on page 2
-            elevation: 50,
-            gradients: true,
-            acceleration: true,
+            display: initialDisplay,
+            page: initialPage,
+            elevation: 50, // Restore elevation for 3D effect
+            gradients: true, // Enable gradients for realistic shadows
+            acceleration: true, // Enable acceleration for smooth animation
             turnCorners: "bl,br,tl,tr",
+            inclination: 75, // Angle of the page flip
             when: {
               turning: (event, page, view) => {
+                console.log(`Turn.js turning to page ${page}, view: ${view}`);
                 setCurrentPage(page);
+                
+                // Hide page 6 during problematic transitions
+                const $flipbook = window.$(flipbookRef.current);
+                if ((page === 4 && view.includes('4')) || (page === 2 && view.includes('2'))) {
+                  // Hide page 6 specifically during 1-2 <-> 3-4 transitions
+                  $flipbook.find('[data-page="6"]').css('visibility', 'hidden');
+                  
+                  // Restore after transition
+                  setTimeout(() => {
+                    $flipbook.find('[data-page="6"]').css('visibility', 'visible');
+                  }, 650); // Slightly longer than animation duration
+                }
               },
               turned: (event, page, view) => {
+                console.log(`Turn.js turned to page ${page}, view: ${view}`);
                 setCurrentPage(page);
+                
+                // Ensure all pages are visible after transition completes
+                const $flipbook = window.$(flipbookRef.current);
+                $flipbook.find('.page').css('visibility', 'visible');
+              },
+              start: (event, pageObject, corner) => {
+                console.log(`Turn.js start event, page: ${pageObject.page}, corner: ${corner}`);
+              },
+              end: (event, pageObject, turned) => {
+                console.log(`Turn.js end event, page: ${pageObject.page}, turned: ${turned}`);
               }
             }
           });
           
-          // Set current page state immediately
-          setCurrentPage(2);
+          // Set current page state based on initial display mode
+          setCurrentPage(initialPage);
+          
+          // Make flipbook visible after Turn.js is fully initialized
+          setTimeout(() => {
+            if (flipbookRef.current) {
+              console.log('Making flipbook visible');
+              flipbookRef.current.style.visibility = 'visible';
+              flipbookRef.current.style.opacity = '1';
+              flipbookRef.current.style.transform = 'scale(1)';
+            } else {
+              console.error('flipbookRef.current is null when trying to make visible');
+            }
+          }, 300); // Longer delay to ensure Turn.js is completely ready
           
           console.log('Turn.js flipbook initialized successfully');
-        } else {
-          console.error('Turn.js not available');
-          setError('Turn.js library not loaded');
+          
+        } catch (turnError) {
+          console.error('Turn.js initialization failed:', turnError);
+          setError('Turn.js failed to initialize: ' + turnError.message);
         }
       }, 200);
       
@@ -147,23 +240,58 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   };
 
   const openComicBook = () => {
-    console.log('openComicBook called - starting transition');
-    // Start transition
-    setIsOpeningFlipbook(true);
+    console.log('Opening comic book - transitioning to flipbook');
+    setShowCover(false);
+    setShowFlipbook(true);
     
-    // After cover fades out, show flipbook
+    // Create flipbook after state update
     setTimeout(() => {
-      console.log('Transition timeout reached - switching to flipbook');
-      setShowCover(false);
-      setShowFlipbook(true);
-      
-      // Create flipbook after state update
-      setTimeout(() => {
-        console.log('About to call createFlipbook');
-        createFlipbook();
-      }, 100);
-    }, 600); // Wait for cover fade-out
+      createFlipbook();
+    }, 100);
   };
+
+  // Orientation change handler
+  React.useEffect(() => {
+    const handleOrientationChange = () => {
+      const newIsPortrait = window.innerHeight > window.innerWidth;
+      setIsPortrait(newIsPortrait);
+      
+      // Update Turn.js display mode and size based on orientation
+      if (showFlipbook && flipbookRef.current && window.$ && window.$.fn.turn) {
+        const $flipbook = window.$(flipbookRef.current);
+        const isMobile = window.innerWidth < 768;
+        
+        if (isMobile) {
+          // Calculate new dimensions for larger single pages
+          const newWidth = newIsPortrait ? 
+            Math.min(window.innerWidth * 0.9, 450) : 
+            Math.min(window.innerWidth * 0.95, 800);
+          const newHeight = newIsPortrait ? 
+            Math.min(window.innerHeight * 0.8, 700) : 
+            Math.min(window.innerHeight * 0.8, 600);
+          
+          // Update Turn.js size and display mode
+          $flipbook.turn('size', newWidth, newHeight);
+          
+          if (newIsPortrait) {
+            $flipbook.turn('display', 'single');
+            console.log(`Switched to single page mode (portrait) - ${newWidth}x${newHeight}`);
+          } else {
+            $flipbook.turn('display', 'double');
+            console.log(`Switched to double page mode (landscape) - ${newWidth}x${newHeight}`);
+          }
+        }
+      }
+    };
+    
+    window.addEventListener('resize', handleOrientationChange);
+    window.addEventListener('orientationchange', handleOrientationChange);
+    
+    return () => {
+      window.removeEventListener('resize', handleOrientationChange);
+      window.removeEventListener('orientationchange', handleOrientationChange);
+    };
+  }, [showFlipbook]);
 
   // Keyboard navigation
   React.useEffect(() => {
@@ -195,21 +323,20 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
     left: 0,
     width: '100vw',
     height: '100vh',
-    background: 'rgba(0, 0, 0, 0.7)',
+    background: 'transparent', // Make main overlay transparent
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10000,
-    backdropFilter: 'blur(8px)'
+    zIndex: 10000
   };
 
   const containerStyle = {
     background: 'rgba(0, 0, 0, 0.85)',
     border: '1px solid rgba(255, 255, 255, 0.2)',
     borderRadius: '8px',
-    padding: '24px',
-    width: '420px',
-    minHeight: '280px',
+    padding: window.innerWidth < 768 ? '16px' : '24px', // Less padding on mobile
+    width: window.innerWidth < 768 ? '300px' : '420px', // Smaller on mobile
+    minHeight: window.innerWidth < 768 ? '220px' : '280px', // Shorter on mobile
     textAlign: 'center',
     fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, monospace',
     color: '#e0e0e0',
@@ -234,8 +361,8 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   // Console with crossfade transition
   const consoleStyle = {
     ...containerStyle,
-    opacity: isTransitioning ? 0 : 1,
-    transform: isTransitioning ? 'scale(0.95)' : 'scale(1)',
+    opacity: 1,
+    transform: 'scale(1)',
     transition: 'opacity 1.2s ease-out, transform 1.2s ease-out'
   };
 
@@ -325,13 +452,67 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
     ]);
   }
 
+  if (showCover) {
+    return React.createElement('div', { style: overlayStyle }, [
+        React.createElement('div', { 
+        key: 'cover-container', 
+        style: {
+          background: 'rgba(0, 0, 0, 0.3)',
+          backdropFilter: 'blur(4px)',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: window.innerWidth < 768 ? '10px' : '20px', // Less padding on mobile
+          boxSizing: 'border-box'
+        }
+      }, [
+        React.createElement('button', {
+          key: 'close',
+          style: {
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            background: '#ff4757',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            cursor: 'pointer',
+            fontSize: '20px',
+            zIndex: 10001
+          },
+          onClick: onClose
+        }, '×'),
+        
+        React.createElement('img', {
+          key: 'cover',
+          src: `/moments/2025/episode-20/cover.png`,
+          alt: 'Episode 20 Cover',
+          style: {
+            width: window.innerWidth < 768 ? '80vw' : '400px', // Slightly smaller width
+            height: window.innerWidth < 768 ? '70vh' : '600px', // Less tall to prevent cropping
+            maxWidth: window.innerWidth < 768 ? '400px' : '400px', // Reasonable max width
+            objectFit: 'contain', // Contain to show full cover without cropping
+            cursor: 'pointer',
+            borderRadius: '8px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
+          },
+          onClick: openComicBook
+        })
+      ])
+    ]);
+  }
+
   if (showFlipbook) {
     return React.createElement('div', { style: overlayStyle }, [
       React.createElement('div', { 
         key: 'flipbook-container', 
         style: {
-          background: 'rgba(0, 0, 0, 0.9)',
-          backdropFilter: 'blur(8px)',
+          background: 'rgba(0, 0, 0, 0.3)',
+          backdropFilter: 'blur(4px)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -364,9 +545,10 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
           ref: flipbookRef,
           style: {
             margin: '0 auto',
-            opacity: showFlipbook ? 1 : 0,
-            transform: showFlipbook ? 'scale(1)' : 'scale(0.95)',
-            transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
+            opacity: 0, // Start invisible, will be made visible by Turn.js init
+            transform: 'scale(0.95)',
+            transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+            visibility: 'hidden' // Keep hidden until Turn.js is ready
           },
           className: 'flipbook'
         }),
@@ -380,91 +562,11 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
             fontSize: '14px',
             opacity: 0.7
           }
-        }, `Page ${currentPage} of ${totalPages} • Use ← → arrow keys or drag to flip pages`)
+        }, 'Use ← → arrow keys or drag to flip pages')
       ])
     ]);
   }
 
-  if (showCover) {
-    return React.createElement('div', { style: overlayStyle }, [
-      React.createElement('div', { 
-        key: 'cover-container', 
-        style: {
-          background: 'rgba(0, 0, 0, 0.8)',
-          backdropFilter: 'blur(8px)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }
-      }, [
-        React.createElement('button', {
-          key: 'close',
-          style: {
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            background: '#ff4757',
-            color: 'white',
-            border: 'none',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            cursor: 'pointer',
-            fontSize: '20px',
-            zIndex: 10001
-          },
-          onClick: onClose
-        }, '×'),
-        
-        React.createElement('div', {
-          key: 'cover',
-          style: {
-            width: '500px',
-            height: '667px',
-            margin: '0 auto',
-            borderRadius: '15px',
-            overflow: 'hidden',
-            background: '#000',
-            boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-            cursor: 'pointer',
-            position: 'relative',
-            opacity: isOpeningFlipbook ? 0 : 1,
-            transform: isOpeningFlipbook ? 'scale(0.9)' : 'scale(1)',
-            transition: 'opacity 0.6s ease-out, transform 0.6s ease-out'
-          },
-          onClick: openComicBook
-        }, [
-          React.createElement('img', {
-            key: 'cover-img',
-            src: '/moments/2025/episode-20/cover.png',
-            alt: 'Episode 20 Cover',
-            style: {
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
-            }
-          }),
-          React.createElement('div', {
-            key: 'overlay-text',
-            style: {
-              position: 'absolute',
-              bottom: '20px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              background: 'rgba(0, 0, 0, 0.8)',
-              color: 'white',
-              padding: '10px 20px',
-              borderRadius: '25px',
-              fontSize: '14px',
-              fontWeight: 'bold'
-            }
-          }, '🖱️ Click to open comic book')
-        ])
-      ])
-    ]);
-  }
 
   // Fallback
   return React.createElement('div', { style: overlayStyle }, [
@@ -487,12 +589,97 @@ if (!document.querySelector('#comic-flipbook-styles')) {
   style.textContent = `
     .flipbook {
       margin: 0 auto;
+      font-size: 0 !important;
+      line-height: 0 !important;
+    }
+    
+    
+    .flipbook .hard {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .flipbook .odd {
+      margin-right: 0 !important;
+      float: left !important;
+    }
+    
+    .flipbook .even {
+      margin-left: 0 !important;
+      float: right !important;
+    }
+    
+    .flipbook > div {
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      display: inline-block !important;
+      vertical-align: top !important;
     }
     
     .flipbook .page {
       background-color: transparent;
       background-size: 100% 100%;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      position: relative !important;
+      display: inline-block !important;
+      vertical-align: top !important;
+    }
+    
+    .flipbook .page:nth-child(even) {
+      margin-left: 0 !important;
+      left: 0 !important;
+    }
+    
+    .flipbook .page:nth-child(odd) {
+      margin-right: 0 !important;
+      right: 0 !important;
+    }
+    
+    /* Force pages to touch - aggressive approach */
+    .flipbook .page.p1 { 
+      right: 0 !important; 
+      margin-right: -2px !important;
+    }
+    .flipbook .page.p2 { 
+      left: 0 !important; 
+      margin-left: -2px !important;
+    }
+    .flipbook .page.p3 { 
+      right: 0 !important; 
+      margin-right: -2px !important;
+    }
+    .flipbook .page.p4 { 
+      left: 0 !important; 
+      margin-left: -2px !important;
+    }
+    .flipbook .page.p5 { 
+      right: 0 !important; 
+      margin-right: -2px !important;
+    }
+    .flipbook .page.p6 { 
+      left: 0 !important; 
+      margin-left: -2px !important;
+    }
+    .flipbook .page.p7 { 
+      right: 0 !important; 
+      margin-right: -2px !important;
+    }
+    .flipbook .page.p8 { 
+      left: 0 !important; 
+      margin-left: -2px !important;
+    }
+    
+    /* Additional gap elimination */
+    .flipbook .page:first-child {
+      margin-right: -2px !important;
+    }
+    
+    .flipbook .page:last-child {
+      margin-left: -2px !important;
     }
     
     .flipbook .page img {
@@ -505,13 +692,67 @@ if (!document.querySelector('#comic-flipbook-styles')) {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
+    
+    /* Prevent flash of wrong pages during transitions */
+    .flipbook .page {
+      overflow: hidden;
+    }
+    
+    /* Ensure pages render in correct z-order */
+    .flipbook .page:nth-child(1) { z-index: 1; }
+    .flipbook .page:nth-child(2) { z-index: 2; }
+    .flipbook .page:nth-child(3) { z-index: 3; }
+    .flipbook .page:nth-child(4) { z-index: 4; }
+    .flipbook .page:nth-child(5) { z-index: 5; }
+    .flipbook .page:nth-child(6) { z-index: 6; }
+    .flipbook .page:nth-child(7) { z-index: 7; }
+    .flipbook .page:nth-child(8) { z-index: 8; }
+    
     
     .flipbook-container {
       perspective: 1000px;
     }
     
-    /* Responsive flipbook sizes */
+    /* Mobile responsive flipbook sizes - match cover dimensions */
+    @media (max-width: 768px) {
+      /* Portrait mode - single page, larger than cover */
+      @media (orientation: portrait) {
+        .flipbook {
+          width: 90vw !important;
+          height: 80vh !important;
+          max-width: 450px !important;
+          max-height: 700px !important;
+        }
+        .flipbook .page {
+          width: 90vw !important;
+          height: 80vh !important;
+          max-width: 450px !important;
+          max-height: 700px !important;
+        }
+      }
+      
+      /* Landscape mode - double page, wider */
+      @media (orientation: landscape) {
+        .flipbook {
+          width: 95vw !important;
+          height: 85vh !important;
+          max-width: 800px !important;
+          max-height: 600px !important;
+        }
+        .flipbook .page {
+          width: 47vw !important;
+          height: 85vh !important;
+          max-width: 400px !important;
+          max-height: 600px !important;
+        }
+      }
+    }
+    
     @media (max-width: 1300px) {
       .flipbook {
         width: 1000px !important;
