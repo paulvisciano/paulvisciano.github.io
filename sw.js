@@ -1,4 +1,4 @@
-const CACHE_VERSION = '2025.09.17.2301';
+const CACHE_VERSION = '2025.09.18.1629';
 const CACHE_NAME = `whereispaul-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE_NAME = `whereispaul-dynamic-v${CACHE_VERSION}`;
 

@@ -456,7 +456,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         // if (globeContainer) {
         //   globeContainer.removeEventListener('dblclick', handleDoubleZoom);
         // }
-        if (globeInstance.current) {
+        if (globeInstance.current && typeof globeInstance.current.destroy === 'function') {
           globeInstance.current.destroy();
         }
       };
