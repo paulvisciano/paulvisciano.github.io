@@ -213,6 +213,14 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
           // Set current page state based on initial display mode
           setCurrentPage(initialPage);
           
+          // Force size update for mobile after initialization
+          if (isMobile && isPortrait) {
+            setTimeout(() => {
+              $flipbook.turn('size', flipbookWidth, flipbookHeight);
+              console.log(`Forced size update to ${flipbookWidth}x${flipbookHeight}`);
+            }, 100);
+          }
+          
           // Make flipbook visible after Turn.js is fully initialized
           setTimeout(() => {
             if (flipbookRef.current) {
@@ -727,12 +735,16 @@ if (!document.querySelector('#comic-flipbook-styles')) {
           height: 80vh !important;
           max-width: 450px !important;
           max-height: 700px !important;
+          min-width: 90vw !important;
+          min-height: 80vh !important;
         }
         .flipbook .page {
           width: 90vw !important;
           height: 80vh !important;
           max-width: 450px !important;
           max-height: 700px !important;
+          min-width: 90vw !important;
+          min-height: 80vh !important;
         }
       }
       
