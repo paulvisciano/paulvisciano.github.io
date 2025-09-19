@@ -81,12 +81,16 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
         pageDiv.className = 'page';
         pageDiv.setAttribute('data-page', i + 1); // Turn.js page numbering starts at 1
         pageDiv.style.backgroundColor = 'transparent';
+        pageDiv.style.width = '100%';
+        pageDiv.style.height = '100%';
+        pageDiv.style.position = 'relative';
+        pageDiv.style.overflow = 'hidden';
         
         console.log(`Creating page ${i + 1}: ${pages[i] || 'blank'}`);
         
         if (pages[i] === '') {
-          // Blank first page for proper double-page alignment
-          pageDiv.innerHTML = `<div style="width: 100%; height: 100%; background: transparent; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 12px;">Page ${i + 1} (blank)</div>`;
+          // Blank first page for proper double-page alignment - no visible content
+          pageDiv.innerHTML = `<div style="width: 100%; height: 100%; background: transparent;"></div>`;
         } else {
           const img = document.createElement('img');
           img.src = `/moments/2025/episode-20/${pages[i]}`;
@@ -154,14 +158,17 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
           const initialPage = (isMobile && isPortrait) ? 1 : 2; // Start on page 1 in mobile portrait
           
           console.log(`Initializing Turn.js with display: ${initialDisplay}, mobile: ${isMobile}, portrait: ${isPortrait}`);
+          console.log(`Screen size: ${window.innerWidth}x${window.innerHeight}`);
           
-          // Mobile gets larger dimensions for better readability
+          // Mobile dimensions to match cover size for smooth transition
           const flipbookWidth = isMobile ? 
-            (isPortrait ? Math.min(window.innerWidth * 0.9, 450) : Math.min(window.innerWidth * 0.95, 800)) : 
+            (isPortrait ? Math.min(window.innerWidth * 0.8, 400) : Math.min(window.innerWidth * 0.95, 800)) : 
             780;
           const flipbookHeight = isMobile ? 
-            (isPortrait ? Math.min(window.innerHeight * 0.8, 700) : Math.min(window.innerHeight * 0.8, 600)) : 
+            (isPortrait ? Math.min(window.innerHeight * 0.7, 600) : Math.min(window.innerHeight * 0.8, 600)) : 
             560;
+            
+          console.log(`Calculated flipbook dimensions: ${flipbookWidth}x${flipbookHeight}`);
           
           $flipbook.turn({
             width: flipbookWidth,
@@ -181,6 +188,15 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
                 console.log(`Turn.js turning to page ${page}, view: ${view}`);
                 setCurrentPage(page);
                 
+                // Re-force dimensions during page turns on mobile
+                if (isMobile && flipbookRef.current) {
+                  const allPages = flipbookRef.current.querySelectorAll('div');
+                  allPages.forEach((pageEl) => {
+                    pageEl.style.setProperty('width', flipbookWidth + 'px', 'important');
+                    pageEl.style.setProperty('height', flipbookHeight + 'px', 'important');
+                  });
+                }
+                
                 // Hide page 6 during problematic transitions
                 const $flipbook = window.$(flipbookRef.current);
                 if ((page === 4 && view.includes('4')) || (page === 2 && view.includes('2'))) {
@@ -196,6 +212,35 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
               turned: (event, page, view) => {
                 console.log(`Turn.js turned to page ${page}, view: ${view}`);
                 setCurrentPage(page);
+                
+                // Handle mobile single page mode navigation
+                if (isMobile && isPortrait) {
+                  const $flipbook = window.$(flipbookRef.current);
+                  
+                  // Ensure we're in single mode
+                  $flipbook.turn('display', 'single');
+                  
+                  // Force correct page display
+                  if (page === 1) {
+                    // On blank page, show just blank
+                    console.log('On blank page 1');
+                  } else {
+                    // On content pages, ensure correct single page is shown
+                    console.log(`Showing single page ${page}`);
+                  }
+                }
+                
+                // Re-force dimensions after page turn completes on mobile
+                if (isMobile && flipbookRef.current) {
+                  setTimeout(() => {
+                    const allPages = flipbookRef.current.querySelectorAll('div');
+                    allPages.forEach((pageEl) => {
+                      pageEl.style.setProperty('width', flipbookWidth + 'px', 'important');
+                      pageEl.style.setProperty('height', flipbookHeight + 'px', 'important');
+                    });
+                    console.log(`Re-forced all page dimensions to ${flipbookWidth}x${flipbookHeight} after page turn`);
+                  }, 50);
+                }
                 
                 // Ensure all pages are visible after transition completes
                 const $flipbook = window.$(flipbookRef.current);
@@ -214,10 +259,35 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
           setCurrentPage(initialPage);
           
           // Force size update for mobile after initialization
-          if (isMobile && isPortrait) {
+          if (isMobile) {
             setTimeout(() => {
               $flipbook.turn('size', flipbookWidth, flipbookHeight);
               console.log(`Forced size update to ${flipbookWidth}x${flipbookHeight}`);
+              
+              // Also force CSS dimensions
+              if (flipbookRef.current) {
+                flipbookRef.current.style.width = flipbookWidth + 'px';
+                flipbookRef.current.style.height = flipbookHeight + 'px';
+                flipbookRef.current.style.minWidth = flipbookWidth + 'px';
+                flipbookRef.current.style.minHeight = flipbookHeight + 'px';
+                flipbookRef.current.style.maxWidth = flipbookWidth + 'px';
+                flipbookRef.current.style.maxHeight = flipbookHeight + 'px';
+                flipbookRef.current.style.setProperty('width', flipbookWidth + 'px', 'important');
+                flipbookRef.current.style.setProperty('height', flipbookHeight + 'px', 'important');
+                
+                // Force all child elements to match container size
+                const allPages = flipbookRef.current.querySelectorAll('div');
+                allPages.forEach((pageEl, index) => {
+                  pageEl.style.width = flipbookWidth + 'px';
+                  pageEl.style.height = flipbookHeight + 'px';
+                  pageEl.style.maxWidth = flipbookWidth + 'px';
+                  pageEl.style.maxHeight = flipbookHeight + 'px';
+                  console.log(`Forced page ${index} to ${flipbookWidth}x${flipbookHeight}`);
+                });
+                
+                console.log(`Forced CSS dimensions to ${flipbookWidth}x${flipbookHeight}`);
+                console.log(`Actual element size after force:`, flipbookRef.current.offsetWidth, 'x', flipbookRef.current.offsetHeight);
+              }
             }, 100);
           }
           
@@ -270,16 +340,22 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
         const isMobile = window.innerWidth < 768;
         
         if (isMobile) {
-          // Calculate new dimensions for larger single pages
+          // Calculate new dimensions to match cover size
           const newWidth = newIsPortrait ? 
-            Math.min(window.innerWidth * 0.9, 450) : 
+            Math.min(window.innerWidth * 0.8, 400) : 
             Math.min(window.innerWidth * 0.95, 800);
           const newHeight = newIsPortrait ? 
-            Math.min(window.innerHeight * 0.8, 700) : 
+            Math.min(window.innerHeight * 0.7, 600) : 
             Math.min(window.innerHeight * 0.8, 600);
           
           // Update Turn.js size and display mode
           $flipbook.turn('size', newWidth, newHeight);
+          
+          // Force CSS dimensions as well
+          if (flipbookRef.current) {
+            flipbookRef.current.style.width = newWidth + 'px';
+            flipbookRef.current.style.height = newHeight + 'px';
+          }
           
           if (newIsPortrait) {
             $flipbook.turn('display', 'single');
@@ -309,12 +385,35 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         if (flipbookRef.current && window.$ && window.$.fn.turn) {
-          window.$(flipbookRef.current).turn('previous');
+          const $flipbook = window.$(flipbookRef.current);
+          const currentPage = $flipbook.turn('page');
+          console.log(`Arrow left: current page ${currentPage}`);
+          
+          // Handle mobile single mode navigation
+          if (window.innerWidth < 768 && window.innerHeight > window.innerWidth) {
+            if (currentPage > 1) {
+              $flipbook.turn('page', currentPage - 1);
+            }
+          } else {
+            $flipbook.turn('previous');
+          }
         }
       } else if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         if (flipbookRef.current && window.$ && window.$.fn.turn) {
-          window.$(flipbookRef.current).turn('next');
+          const $flipbook = window.$(flipbookRef.current);
+          const currentPage = $flipbook.turn('page');
+          const totalPages = $flipbook.turn('pages');
+          console.log(`Arrow right: current page ${currentPage}, total ${totalPages}`);
+          
+          // Handle mobile single mode navigation
+          if (window.innerWidth < 768 && window.innerHeight > window.innerWidth) {
+            if (currentPage < totalPages) {
+              $flipbook.turn('page', currentPage + 1);
+            }
+          } else {
+            $flipbook.turn('next');
+          }
         }
       } else if (e.key === 'Escape') {
         onClose();
@@ -503,7 +602,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
             width: window.innerWidth < 768 ? '80vw' : '400px', // Slightly smaller width
             height: window.innerWidth < 768 ? '70vh' : '600px', // Less tall to prevent cropping
             maxWidth: window.innerWidth < 768 ? '400px' : '400px', // Reasonable max width
-            objectFit: 'contain', // Contain to show full cover without cropping
+            objectFit: 'fill', // Fill to show full cover without cropping
             cursor: 'pointer',
             borderRadius: '8px',
             boxShadow: '0 20px 40px rgba(0,0,0,0.3)'
@@ -626,15 +725,19 @@ if (!document.querySelector('#comic-flipbook-styles')) {
     }
     
     .flipbook .page {
-      background-color: transparent;
+      background-color: transparent !important;
+      background: transparent !important;
       background-size: 100% 100%;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      box-shadow: none !important;
       margin: 0 !important;
       padding: 0 !important;
       border: none !important;
       position: relative !important;
       display: inline-block !important;
       vertical-align: top !important;
+      overflow: hidden !important;
+      width: 100% !important;
+      height: 100% !important;
     }
     
     .flipbook .page:nth-child(even) {
@@ -693,7 +796,7 @@ if (!document.querySelector('#comic-flipbook-styles')) {
     .flipbook .page img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       user-select: none;
       -webkit-user-drag: none;
       -webkit-touch-callout: none;
@@ -728,23 +831,28 @@ if (!document.querySelector('#comic-flipbook-styles')) {
     
     /* Mobile responsive flipbook sizes - match cover dimensions */
     @media (max-width: 768px) {
-      /* Portrait mode - single page, larger than cover */
+      /* Portrait mode - single page, match cover dimensions */
       @media (orientation: portrait) {
         .flipbook {
-          width: 90vw !important;
-          height: 80vh !important;
-          max-width: 450px !important;
-          max-height: 700px !important;
-          min-width: 90vw !important;
-          min-height: 80vh !important;
+          width: 80vw !important;
+          height: 70vh !important;
+          max-width: 80vw !important;
+          max-height: 70vh !important;
+          min-width: 80vw !important;
+          min-height: 70vh !important;
         }
         .flipbook .page {
-          width: 90vw !important;
-          height: 80vh !important;
-          max-width: 450px !important;
-          max-height: 700px !important;
-          min-width: 90vw !important;
-          min-height: 80vh !important;
+          width: 100% !important;
+          height: 100% !important;
+          max-width: none !important;
+          max-height: none !important;
+          min-width: 100% !important;
+          min-height: 100% !important;
+        }
+        .flipbook .page img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: fill !important;
         }
       }
       
