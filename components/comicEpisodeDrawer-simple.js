@@ -569,9 +569,12 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
           width: '100%',
           height: '100%',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: window.innerWidth < 768 ? 'flex-start' : 'center', // Higher on mobile
           justifyContent: 'center',
-          padding: window.innerWidth < 768 ? '10px' : '20px', // Less padding on mobile
+          paddingTop: window.innerWidth < 768 ? '80px' : '20px', // Only top padding on mobile
+          paddingLeft: '10px',
+          paddingRight: '10px',
+          paddingBottom: '10px',
           boxSizing: 'border-box'
         }
       }, [
