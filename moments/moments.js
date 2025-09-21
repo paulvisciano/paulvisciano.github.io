@@ -642,15 +642,15 @@ window.momentsInTime = [
   },
   {
     id: "bangkok-2025-08-24",
-    title: "Digital Nomad Life in Bangkok with Jamie",
+    title: "Bangkok Digital Nomad Adventure - The Complete Experience",
     date: new Date('2025-08-24T00:00:00Z'),
     timelineHighlight: "Bangkok Digital Nomad",
-    tags: ["culture", "food", "city", "friends", "remote work", "nightlife", "running", "beach volleyball", "wellness", "hookah"],
-    snippet: "Jamie joined me to explore why Bangkok is rated #1 for digital nomads - we've been having a blast running throughout the city for my Urban Runner donation project, hitting up rooftops and restaurants, getting massages, and staying super active exploring different neighborhoods. Found an amazing volleyball spot, a great hookah place where we smoke and eat, plus tons of Turkish spots with incredible food. Bozhi might still join next week, and Boy (Leo's brother) will definitely join on the 12th - it'll be amazing having a group of guys roaming around the city together.",
+    tags: ["culture", "food", "city", "friends", "remote work", "nightlife", "running", "beach volleyball", "wellness", "hookah", "urban runner", "gym", "adult playground", "chicago", "atlanta", "group adventures"],
+    snippet: "Epic month-long Bangkok adventure coming to a close! What a journey: Bozhi couldn't make it but Jamie flew in from Maui and absolutely crushed it with me. Then Boy (Leo's brother) and his buddy Sean arrived with a crew of guys from Chicago and Atlanta for incredible group adventures. Solo time was equally amazing - hitting the gym religiously, eating incredible food, and truly living it up in Bangkok, the ultimate adult playground. Logged multiple Urban Runner episodes capturing the city's energy. Bangkok proved why it's #1 for digital nomads - this place has everything.",
     fullLink: "#",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
-    stayDuration: 29,
-    formattedDuration: formatDuration(29)
+    stayDuration: 31,
+    formattedDuration: formatDuration(31)
   },
   {
     id: "urban-runner-episode-4-2025-08-31",
