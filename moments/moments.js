@@ -814,11 +814,11 @@ window.momentsInTime = [
     date: new Date('2025-10-20T00:00:00Z'),
     timelineHighlight: "St. Pete Mega Reunion",
     tags: ["family", "friends", "st petersburg", "florida", "relaxation", "reunion", "zacharias", "volleyball planning", "welli", "leo", "mo", "mom", "mike"],
-    snippet: "Epic St. Pete reunion week! Catching up with Welli, Zacharias, Leo, Mo, Mom & Mike, and even more friends after the intense Lisbon work trip. Quality time with the whole crew, exploring familiar spots, and planning the Mexico tournament strategy with Zacharias before flying to Mexico on Sunday the 28th.",
+    snippet: "Epic St. Pete reunion week! Catching up with Welli, Zacharias, Leo, Mo, Mom & Mike, and even more friends after the intense Lisbon work trip. Quality time with the whole crew, exploring familiar spots, and planning the Mexico tournament strategy with Zacharias before flying to Mexico on Sunday the 26th.",
     fullLink: "#",
     location: { lat: 27.7676, lng: -82.6403, name: "St. Petersburg, Florida" },
-    stayDuration: 8,
-    formattedDuration: formatDuration(8)
+    stayDuration: 6,
+    formattedDuration: formatDuration(6)
   },
   {
     id: "lisbon-2025-10-12",
@@ -833,16 +833,16 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
   {
-    id: "playa-del-carmen-2025-10-28",
+    id: "playa-del-carmen-2025-10-26",
     title: "Beach Volleyball Tournament in Playa del Carmen",
-    date: new Date('2025-10-28T00:00:00Z'),
+    date: new Date('2025-10-26T00:00:00Z'),
     timelineHighlight: "Playa Volleyball",
     tags: ["beach volleyball", "beach", "friends", "tournament"],
-    snippet: "After missing the Fuds volleyball tournament due to the Lisbon work trip, finally teaming up with Zacharias for our Mexico beach volleyball tournament! Flying from St. Pete on Sunday Oct 28th, arriving early in the week to prep and enjoy Playa before the tournament (Fri Oct 31 - Sun Nov 2). This one was non-negotiable.",
+    snippet: "After missing the Fuds volleyball tournament due to the Lisbon work trip, finally teaming up with Zacharias for our Mexico beach volleyball tournament! Flying from St. Pete on Sunday Oct 26th, giving us a full week in Mexico to prep, train, and enjoy Playa before the tournament (Fri Oct 31 - Sun Nov 2). This one was non-negotiable.",
     fullLink: "#",
     location: { lat: 20.6296, lng: -87.0739, name: "Playa del Carmen, Mexico" },
-    stayDuration: 6,
-    formattedDuration: formatDuration(6)
+    stayDuration: 8,
+    formattedDuration: formatDuration(8)
   },
   {
     id: "canggu-2025-11-03",
