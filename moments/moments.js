@@ -773,12 +773,24 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
   {
+    id: "amman-2025-09-30",
+    title: "Amman Layover - Smart Travel Strategy",
+    date: new Date('2025-09-30T00:00:00Z'),
+    timelineHighlight: "Amman Layover",
+    tags: ["layover", "jordan", "work", "lounge", "travel strategy", "savings"],
+    snippet: "Strategic 10.5-hour layover in Amman on the way to Chicago! Royal Jordanian's nice lounge provides the perfect spot to get work done, catch some sleep, shower, and recharge before the final leg. Saved $300 with this smart routing vs direct flight.",
+    fullLink: "#",
+    location: { lat: 31.9454, lng: 35.9284, name: "Amman, Jordan" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "chicago-2025-10-01",
     title: "Family Reunion & Wedding in Chicago",
     date: new Date('2025-10-01T00:00:00Z'),
     timelineHighlight: "Chicago Family",
     tags: ["city", "culture", "family", "wedding"],
-    snippet: "Will attend my step-dad Mike's daughter's wedding (Oct 3-5) and have an emotional reunion with my dad after 16 years apart - we recently reconnected over the phone and he's excited to meet my brother and I in person. Flying in from Istanbul on Wednesday.",
+    snippet: "Will attend my step-dad Mike's daughter's wedding (Oct 3-5) and have an emotional reunion with my dad after 16 years apart - we recently reconnected over the phone and he's excited to meet my brother and I in person. Flying in from Amman via Royal Jordanian after the strategic layover.",
     fullLink: "#",
     location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
     stayDuration: 5,
