@@ -103,7 +103,7 @@ window.App = () => {
         zoomCallback(moment); // Trigger zoom to the moment's location
       }
       // Normalize and update the URL only if it doesn't already match
-      const intendedPath = `/moments/${moment.id}`;
+      const intendedPath = moment.fullLink.startsWith('/') ? moment.fullLink : `/moments/${moment.fullLink}`;
       const currentPath = window.location.pathname;
       if (currentPath !== intendedPath) {
         window.history.pushState({ momentId: moment.id }, '', intendedPath);
@@ -236,8 +236,10 @@ window.App = () => {
 
     const match = path.match(/^\/moments\/(.+)/);
     if (match) {
-      const momentId = match[1];
-      const moment = window.momentsInTime.find(m => m.id === momentId);
+      const pathSegment = match[1];
+      // First try to find by fullLink (checking both full path and path segment), then fall back to id for backward compatibility
+      const moment = window.momentsInTime.find(m => m.fullLink === path || m.fullLink === `/moments/${pathSegment}`) || 
+                    window.momentsInTime.find(m => m.id === pathSegment);
       if (moment) {
         updateOverlayMessage(`Exploring ${moment.title}`); // Set moment-specific message upfront
         handleMomentSelection(moment); // Use the unified logic to select and zoom
