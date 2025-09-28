@@ -44,6 +44,13 @@ window.EpisodeNavigation = {
       date: '2025-09-11', 
       link: '/moments/bangkok/2025-09-11/',
       description: 'A day of balance between coding grind and human connection'
+    },
+    {
+      id: 'urban-runner-episode-20-2025-09-16',
+      title: 'Episode 20: Comic Book Edition',
+      date: '2025-09-16',
+      link: '/moments/bangkok/2025-09-16/',
+      description: 'Revolutionary comic book-style storytelling with page-flipping technology'
     }
   ],
 

@@ -144,12 +144,15 @@ window.App = () => {
     }
     
     // Check if drawer is currently open
-    const isDrawerOpen = window.isBlogDrawerOpen || document.querySelector('.blog-post-drawer');
+    const isDrawerOpen = window.isBlogDrawerOpen || 
+                        document.querySelector('.blog-post-drawer') ||
+                        document.querySelector('.comic-episode-container');
     
     if (isDrawerOpen) {
       // Smooth transition: keep drawer open, just change content
       const currentContent = document.querySelector('.blog-post-drawer-content') || 
-                            document.querySelector('.interactive-episode-body');
+                            document.querySelector('.interactive-episode-body') ||
+                            document.querySelector('.comic-episode-container');
       if (currentContent) {
         currentContent.classList.add('transitioning');
       }
