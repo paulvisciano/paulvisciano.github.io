@@ -174,7 +174,7 @@ window.App = () => {
       
       // Start the transition sequence
       setTimeout(() => {
-        // Just call handleOpenBlogPost directly - it will handle moment selection internally
+        // Keep drawer open and load new content
         if (window.handleOpenBlogPost) {
           window.handleOpenBlogPost(nextMoment.id);
         } else {
@@ -182,13 +182,9 @@ window.App = () => {
         }
       }, 800); // Longer delay to show loading indicator
     } else {
-      // Drawer is closed, use normal flow
-      handleMomentSelection(nextMoment);
-      setTimeout(() => {
-        if (window.handleOpenBlogPost) {
-          window.handleOpenBlogPost(nextMoment.id);
-        }
-      }, 100);
+      // Drawer is closed, navigate to the new canonical URL
+      const intendedPath = nextMoment.fullLink.startsWith('/') ? nextMoment.fullLink : `/moments/${nextMoment.fullLink}`;
+      window.location.href = intendedPath;
     }
   };
 
