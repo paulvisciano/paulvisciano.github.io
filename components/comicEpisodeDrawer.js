@@ -43,7 +43,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   
   const [pages, setPages] = React.useState([]);
   
-  // Generate pages based on episode data
+  // Generate pages dynamically based on available files
   const getPages = () => {
     if (!episodeData) {
       // Fallback to Bangkok Episode 20
@@ -63,17 +63,12 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
     const basePath = episodeData.fullLink.replace(/\/$/, '');
     const pagesArray = [`${basePath}/cover.png`]; // Cover first
     
-    // Generate pages based on episode type
-    if (episodeData.id.includes('istanbul')) {
-      // Istanbul Episode 2 - 13 pages
-      for (let i = 1; i <= 13; i++) {
-        pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
-      }
-    } else if (episodeData.id.includes('bangkok')) {
-      // Bangkok Episode 20 - 7 pages
-      for (let i = 1; i <= 7; i++) {
-        pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
-      }
+    // For new episodes, we'll need to add a pageCount property to the episode data
+    // For now, use a reasonable default and let the browser handle 404s gracefully
+    const maxPages = episodeData.pageCount || 15; // Default to 15, can be overridden per episode
+    
+    for (let i = 1; i <= maxPages; i++) {
+      pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
     }
     
     return pagesArray;
