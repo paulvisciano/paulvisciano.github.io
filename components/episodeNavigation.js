@@ -7,7 +7,7 @@ window.EpisodeNavigation = {
       id: 'urban-runner-episode-4-2025-08-31',
       title: 'Episode 4: Bangkok Hustle',
       date: '2025-08-31',
-      link: '2025/08-31-episode4-bangkok-hustle.html',
+      link: '/moments/bangkok/2025-08-31/',
       description: 'The Bangkok Hustle scam becomes Urban Runner\'s first major side quest'
     },
     {

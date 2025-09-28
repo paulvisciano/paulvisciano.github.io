@@ -659,10 +659,11 @@ window.momentsInTime = [
     timelineHighlight: "Urban Runner Episode 4",
     tags: ["urban runner", "bangkok hustle", "scam", "wealth redistribution", "volleyball", "bangkok", "gamification"],
     snippet: "Part 1 of the Bangkok Hustle saga - the infamous scam encounter that became Urban Runner's defining moment. A 12-mile journey through Bangkok featuring wealth redistribution (441 THB given back) and the 6,500 THB loss that set up the dramatic confrontation in Episode 5.",
-    image: "attachment://2025/08-31-episode4-bangkok-hustle.png",
+    image: "attachment:///moments/bangkok/2025-08-31/cover.png",
     imageAlt: "Urban Runner Episode 4: Bangkok Hustle I",
     caption: "Bangkok Hustle I - The Setup",
-    fullLink: "2025/08-31-episode4-bangkok-hustle.html",
+    fullLink: "/moments/bangkok/2025-08-31/",
+    contentFile: "/moments/bangkok/2025-08-31/content.html",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
