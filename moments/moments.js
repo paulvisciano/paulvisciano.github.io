@@ -740,14 +740,15 @@ window.momentsInTime = [
     timelineHighlight: "Urban Runner Episode 15",
     tags: ["urban runner", "dinner date", "bangkok", "rooftop", "tichuca", "bts", "nann", "ava brasserie", "interactive cards"],
     snippet: "Episode 15: Dinner Date - A day of balance between coding grind and human connection. From publishing Episode 13 in the new card-swipe format to rooftop meditation, work sync calls, dinner with Nann at AVA Brasserie, and finally experiencing Bangkok's BTS train system for the first time.",
-    image: "attachment://2025/episode-15/cover.png",
+    image: "attachment:///moments/bangkok/2025-09-11/cover.png",
     imageAlt: "Urban Runner Episode 15: Dinner Date",
     caption: "Dinner Date - Interactive Card Adventure",
-    fullLink: "../components/interactive-episode.html?data=../moments/2025/episode-15/data.json",
+    fullLink: "/moments/bangkok/2025-09-11/",
+    contentFile: "/moments/bangkok/2025-09-11/data.json",
+    isInteractive: true,
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 1,
-    formattedDuration: formatDuration(1),
-    isInteractive: true
+    formattedDuration: formatDuration(1)
   },
   {
     id: "urban-runner-episode-20-2025-09-16",
