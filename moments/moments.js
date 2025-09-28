@@ -674,10 +674,11 @@ window.momentsInTime = [
     timelineHighlight: "Urban Runner Episode 5",
     tags: ["urban runner", "meta gaming", "qr codes", "street justice", "hookah", "cannabis", "work", "gamification"],
     snippet: "A meta gaming masterpiece in Bangkok's Sukhumvit district - 6.5 hours working on Urban Runner while living Urban Runner at Marouch Hookah Lounge, successful QR code test at Thai Cannabis Club, and dramatic confrontation with Episode 4 scammers.",
-    image: "attachment://2025/09-01-episode5-bangkok-hustle-ii.png",
+    image: "attachment:///moments/bangkok/2025-09-01/cover.png",
     imageAlt: "Urban Runner Episode 5: Bangkok Hustle II",
     caption: "Bangkok Hustle II - Side Quest Day",
-    fullLink: "2025/09-01-episode5-bangkok-hustle-ii.html",
+    fullLink: "/moments/bangkok/2025-09-01/",
+    contentFile: "/moments/bangkok/2025-09-01/content.html",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
