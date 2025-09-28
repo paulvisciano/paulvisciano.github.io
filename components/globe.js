@@ -579,7 +579,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           return;
         }
         
-        let htmlFile = post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`;
+        let htmlFile = post.contentFile || (post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`);
         
         // Add cache-busting parameter for interactive episodes only
         if (isInteractiveEpisode(postId, post.title)) {

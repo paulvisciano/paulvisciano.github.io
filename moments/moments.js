@@ -704,10 +704,11 @@ window.momentsInTime = [
     timelineHighlight: "Urban Runner Episode 7",
     tags: ["urban runner", "pura vida", "k-fit", "volleyball", "spa reset", "market detour", "bangkok", "recovery"],
     snippet: "Episode 7: Pura Vida - A journey through Bangkok featuring K-FIT power-ups, market detours with Havana flashbacks, volleyball victories at Pura Vida, and complete recovery at Let's Relax Spa. Blended athletic victories, cultural immersion, and personal recovery while carrying the K-FIT vision forward.",
-    image: "attachment://2025/09-03-episode7-pura-vida-0.png",
+      image: "attachment:///moments/bangkok/2025-09-03/cover.png",
     imageAlt: "Urban Runner Episode 7: Pura Vida",
     caption: "Pura Vida Victory - K-FIT Vision Forward",
-    fullLink: "2025/09-03-episode7-pura-vida.html",
+    fullLink: "/moments/bangkok/2025-09-03/",
+    contentFile: "/moments/bangkok/2025-09-03/content.html",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
