@@ -757,14 +757,14 @@ window.momentsInTime = [
     timelineHighlight: "Urban Runner Episode 20",
     tags: ["urban runner", "comic book", "bangkok", "digital storytelling", "innovation", "turn.js", "flipbook"],
     snippet: "Episode 20: Comic Book Edition - A revolutionary shift in Urban Runner storytelling, breaking the boundaries between digital and physical worlds. Experience the first comic book-style episode with realistic page-flipping using Turn.js technology.",
-    image: "attachment://2025/episode-20/cover.png",
+    image: "attachment:///moments/bangkok/2025-09-16/cover.png",
     imageAlt: "Urban Runner Episode 20: Comic Book Edition",
     caption: "Comic Book Edition - Breaking Digital Boundaries",
-    fullLink: "#",
+    fullLink: "/moments/bangkok/2025-09-16/",
+    isComic: true,
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 1,
-    formattedDuration: formatDuration(1),
-    isComic: true
+    formattedDuration: formatDuration(1)
   },
   {
     id: "istanbul-2025-09-24",

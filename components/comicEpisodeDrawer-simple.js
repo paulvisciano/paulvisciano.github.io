@@ -15,13 +15,13 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   // Comic pages (add blank page at start for proper double-page layout)
   const pages = [
     '', // Blank first page for proper double-page alignment
-    'ep-20-page-1.png',
-    'ep-20-page-2.png',
-    'ep-20-page-3.png',
-    'ep-20-page-4.png',
-    'ep-20-page-5.png',
-    'ep-20-page-6.png',
-    'ep-20-page-7.png'
+    '/moments/bangkok/2025-09-16/page-01.png',
+    '/moments/bangkok/2025-09-16/page-02.png',
+    '/moments/bangkok/2025-09-16/page-03.png',
+    '/moments/bangkok/2025-09-16/page-04.png',
+    '/moments/bangkok/2025-09-16/page-05.png',
+    '/moments/bangkok/2025-09-16/page-06.png',
+    '/moments/bangkok/2025-09-16/page-07.png'
   ];
 
   React.useEffect(() => {
@@ -93,7 +93,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
           pageDiv.innerHTML = `<div style="width: 100%; height: 100%; background: transparent;"></div>`;
         } else {
           const img = document.createElement('img');
-          img.src = `/moments/2025/episode-20/${pages[i]}`;
+          img.src = pages[i];
           img.alt = `Page ${i + 1}`;
           img.style.width = '100%';
           img.style.height = '100%';
@@ -599,7 +599,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
         
         React.createElement('img', {
           key: 'cover',
-          src: `/moments/2025/episode-20/cover.png`,
+          src: '/moments/bangkok/2025-09-16/cover.png',
           alt: 'Episode 20 Cover',
           style: {
             width: window.innerWidth < 768 ? '80vw' : '400px', // Slightly smaller width
