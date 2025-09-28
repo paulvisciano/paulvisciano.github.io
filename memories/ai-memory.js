@@ -71,6 +71,43 @@ window.aiMemory = {
         user_feedback: "much cleaner file naming convention"
       },
       tags: ["architecture", "url-structure", "episode-migration", "file-organization", "deep-linking"]
+    },
+    {
+      id: "2025-01-28-episode-migration-series",
+      timestamp: "2025-01-28T06:30:00Z",
+      type: "content_migration",
+      summary: "Migrated Episodes 4-7 and 13 to canonical URL structure with smooth navigation",
+      files_modified: [
+        "moments/bangkok/2025-08-31/index.html",
+        "moments/bangkok/2025-08-31/content.html",
+        "moments/bangkok/2025-09-01/index.html", 
+        "moments/bangkok/2025-09-01/content.html",
+        "moments/bangkok/2025-09-02/index.html",
+        "moments/bangkok/2025-09-02/content.html",
+        "moments/bangkok/2025-09-09/index.html",
+        "moments/bangkok/2025-09-09/data.json",
+        "moments/moments.js",
+        "components/app.js",
+        "components/globe.js",
+        "components/episodeNavigation.js"
+      ],
+      key_changes: [
+        "Migrated Episodes 4-7 (traditional HTML episodes) to canonical URL structure",
+        "Migrated Episode 13 (interactive episode) with special data.json handling",
+        "Implemented smooth drawer transitions for episode navigation",
+        "Fixed URL generation to use fullLink property instead of ID-based URLs",
+        "Updated episodeNavigation.js with canonical URLs for all migrated episodes",
+        "Added isInteractive flag for Episode 13 to trigger special loading logic",
+        "Fixed cache-busting bug in globe.js for interactive episodes",
+        "Removed all old episode files from moments/2025/ directory",
+        "Standardized image naming to page-XX.png convention across all episodes"
+      ],
+      context: {
+        project_focus: "complete episode migration to new URL structure",
+        technical_improvement: "smooth navigation and interactive episode support",
+        user_feedback: "transitions are super smooth, can navigate between different episode types"
+      },
+      tags: ["episode-migration", "navigation", "interactive-episodes", "url-structure", "smooth-transitions"]
     }
   ],
 
@@ -93,13 +130,23 @@ window.aiMemory = {
         canonical_pattern: "/moments/<city-slug>/<YYYY-MM-DD>/",
         deep_linking: "supports #page-<n> anchors for individual comic pages",
         redirect_system: "direct URL access redirects to main app with path query parameter",
-        file_naming: "cover.png, page-01.png, page-02.png, page-<special>.png convention"
+        file_naming: "cover.png, page-01.png, page-02.png, page-<special>.png convention",
+        episode_types: {
+          traditional: "HTML content files with content.html for episode content",
+          interactive: "JSON data files with /components/interactive-episode.html component"
+        },
+        navigation: "smooth drawer transitions between episodes, no full page reloads"
       },
       urban_runner_integration: {
         status: "fully integrated",
         globe_pins: "running routes, checkpoints, spending patterns, episode maps",
         asset_management: "Git LFS optimized for image storage",
-        episode_images: "9 high-quality PNG assets from Episode 4"
+        episode_images: "9 high-quality PNG assets from Episode 4",
+        migrated_episodes: ["Episode 4", "Episode 5", "Episode 6", "Episode 7", "Episode 13"],
+        episode_migration_pattern: {
+          traditional_episodes: "Copy HTML → content.html, update image paths, create redirect index.html",
+          interactive_episodes: "Copy data.json, update image paths, create redirect index.html, set isInteractive flag"
+        }
       }
     },
     urban_runner_project: {
