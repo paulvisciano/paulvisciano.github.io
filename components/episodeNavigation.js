@@ -14,22 +14,22 @@ window.EpisodeNavigation = {
       id: 'urban-runner-episode-5-2025-09-01', 
       title: 'Episode 5: Bangkok Hustle II',
       date: '2025-09-01',
-      link: '2025/09-01-episode5-bangkok-hustle-ii.html',
+      link: '/moments/bangkok/2025-09-01/',
       description: 'Meta gaming and QR code validation in the Urban Runner universe'
     },
     {
       id: 'urban-runner-episode-6-2025-09-02',
       title: 'Episode 6: Amsterdam Café Cutscene', 
       date: '2025-09-02',
-      link: '2025/09-02-episode6-amsterdam-cafe-cutscene.html',
+      link: '/moments/bangkok/2025-09-02/',
       description: 'Sewer City Hustle and late-night Bangkok adventures'
     },
     {
       id: 'urban-runner-episode-7-2025-09-03',
-      title: 'Episode 7: Spa Reset',
+      title: 'Episode 7: Pura Vida',
       date: '2025-09-03', 
-      link: '2025/09-03-episode7-spa-reset.html',
-      description: 'Recovery & resilience - volleyball victory and spa healing'
+      link: '/moments/bangkok/2025-09-03/',
+      description: 'K-FIT power-ups, volleyball victories, and holistic recovery'
     },
     {
       id: 'urban-runner-episode-13-2025-09-09',
