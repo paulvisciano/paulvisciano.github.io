@@ -414,7 +414,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                     React.createElement(
                       'div',
                       { className: 'timeline-highlight' },
-                      moment.timelineHighlight
+                      moment.timelineHighlight || moment.title
                     ),
                     React.createElement(
                       'div',
