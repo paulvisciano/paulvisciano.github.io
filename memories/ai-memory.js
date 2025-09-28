@@ -108,6 +108,39 @@ window.aiMemory = {
         user_feedback: "transitions are super smooth, can navigate between different episode types"
       },
       tags: ["episode-migration", "navigation", "interactive-episodes", "url-structure", "smooth-transitions"]
+    },
+    {
+      id: "2025-01-28-comic-episode-migration",
+      timestamp: "2025-01-28T07:15:00Z",
+      type: "content_migration",
+      summary: "Migrated Episode 20 to comic book format and unified navigation across all episode types",
+      files_modified: [
+        "moments/bangkok/2025-09-16/cover.png",
+        "moments/bangkok/2025-09-16/page-01.png through page-07.png",
+        "moments/moments.js",
+        "components/comicEpisodeDrawer.js",
+        "components/comicEpisodeDrawer-simple.js",
+        "components/episodeNavigation.js",
+        "components/interactive-episode.html",
+        "components/app.js"
+      ],
+      key_changes: [
+        "Migrated Episode 20 to canonical URL structure with comic book rendering",
+        "Renamed all images to page-XX.png convention (cover.png, page-01.png through page-07.png)",
+        "Updated ComicEpisodeDrawer components with correct image paths",
+        "Added Episode 20 to episodeNavigation.js for traditional episode navigation",
+        "Added Episode 20 to interactive-episode.html hardcoded arrays for interactive episode navigation",
+        "Updated smoothEpisodeTransition to detect comic episodes as 'drawer open' state",
+        "Enabled seamless navigation between traditional, interactive, and comic episodes",
+        "Removed unnecessary content.html and index.html for comic episodes (use 404.html redirect)",
+        "Comic episodes now fully integrated into universal navigation system"
+      ],
+      context: {
+        project_focus: "unified episode navigation system supporting all content types",
+        technical_improvement: "comic book episode support with universal navigation",
+        user_feedback: "can now nav between all kinds of episodes no issues whatsoever, no 404s"
+      },
+      tags: ["comic-episodes", "universal-navigation", "episode-types", "turn-js", "page-flipping"]
     }
   ],
 
@@ -133,7 +166,8 @@ window.aiMemory = {
         file_naming: "cover.png, page-01.png, page-02.png, page-<special>.png convention",
         episode_types: {
           traditional: "HTML content files with content.html for episode content",
-          interactive: "JSON data files with /components/interactive-episode.html component"
+          interactive: "JSON data files with /components/interactive-episode.html component",
+          comic: "Image files only with ComicEpisodeDrawer component and Turn.js page-flipping"
         },
         navigation: "smooth drawer transitions between episodes, no full page reloads"
       },
@@ -142,10 +176,16 @@ window.aiMemory = {
         globe_pins: "running routes, checkpoints, spending patterns, episode maps",
         asset_management: "Git LFS optimized for image storage",
         episode_images: "9 high-quality PNG assets from Episode 4",
-        migrated_episodes: ["Episode 4", "Episode 5", "Episode 6", "Episode 7", "Episode 13"],
+        migrated_episodes: ["Episode 4", "Episode 5", "Episode 6", "Episode 7", "Episode 13", "Episode 15", "Episode 20"],
         episode_migration_pattern: {
           traditional_episodes: "Copy HTML → content.html, update image paths, create redirect index.html",
-          interactive_episodes: "Copy data.json, update image paths, create redirect index.html, set isInteractive flag"
+          interactive_episodes: "Copy data.json, update image paths, create redirect index.html, set isInteractive flag",
+          comic_episodes: "Copy images, rename to page-XX.png, update ComicEpisodeDrawer paths, set isComic flag, no content files needed"
+        },
+        universal_navigation: {
+          status: "fully implemented",
+          supports: "seamless transitions between traditional, interactive, and comic episodes",
+          systems: ["episodeNavigation.js for traditional", "interactive-episode.html arrays for interactive", "smoothEpisodeTransition for all types"]
         }
       }
     },
