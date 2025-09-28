@@ -42,7 +42,7 @@ window.EpisodeNavigation = {
       id: 'urban-runner-episode-15-2025-09-11',
       title: 'Episode 15: Dinner Date',
       date: '2025-09-11', 
-      link: '2025/09-11-episode15-dinner-date.html',
+      link: '/moments/bangkok/2025-09-11/',
       description: 'A day of balance between coding grind and human connection'
     }
   ],
