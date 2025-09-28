@@ -750,22 +750,23 @@ window.momentsInTime = [
     stayDuration: 1,
     formattedDuration: formatDuration(1)
   },
-  {
-    id: "urban-runner-episode-20-2025-09-16",
-    title: "Urban Runner Episode 20: Comic Book Edition",
-    date: new Date('2025-09-16T00:00:00Z'),
-    timelineHighlight: "Bangkok Ep 20",
-    tags: ["urban runner", "comic book", "bangkok", "digital storytelling", "innovation", "turn.js", "flipbook"],
-    snippet: "Episode 20: Comic Book Edition - A revolutionary shift in Urban Runner storytelling, breaking the boundaries between digital and physical worlds. Experience the first comic book-style episode with realistic page-flipping using Turn.js technology.",
-    image: "attachment:///moments/bangkok/2025-09-16/cover.png",
-    imageAlt: "Urban Runner Episode 20: Comic Book Edition",
-    caption: "Comic Book Edition - Breaking Digital Boundaries",
-    fullLink: "/moments/bangkok/2025-09-16/",
-    isComic: true,
-    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
-    stayDuration: 1,
-    formattedDuration: formatDuration(1)
-  },
+    {
+      id: "urban-runner-episode-20-2025-09-16",
+      title: "Urban Runner Episode 20: Comic Book Edition",
+      date: new Date('2025-09-16T00:00:00Z'),
+      timelineHighlight: "Bangkok Ep 20",
+      tags: ["urban runner", "comic book", "bangkok", "digital storytelling", "innovation", "turn.js", "flipbook"],
+      snippet: "Episode 20: Comic Book Edition - A revolutionary shift in Urban Runner storytelling, breaking the boundaries between digital and physical worlds. Experience the first comic book-style episode with realistic page-flipping using Turn.js technology.",
+      image: "attachment:///moments/bangkok/2025-09-16/cover.png",
+      imageAlt: "Urban Runner Episode 20: Comic Book Edition",
+      caption: "Comic Book Edition - Breaking Digital Boundaries",
+      fullLink: "/moments/bangkok/2025-09-16/",
+      isComic: true,
+      pageCount: 7, // Bangkok Episode 20 has 7 pages
+      location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+      stayDuration: 1,
+      formattedDuration: formatDuration(1)
+    },
   {
     id: "istanbul-2025-09-24",
     title: "Istanbul Adventure",
@@ -778,22 +779,23 @@ window.momentsInTime = [
     stayDuration: 7,
     formattedDuration: formatDuration(7)
   },
-  {
-    id: "istanbul-episode-2-2025-09-25",
-    title: "Istanbul Episode 2: Crossroads of Cultures",
-    date: new Date('2025-09-25T00:00:00Z'),
-    timelineHighlight: "Istanbul Ep 2",
-    tags: ["istanbul", "comic book", "turkey", "culture", "history", "bosphorus", "hagia sophia", "grand bazaar"],
-    snippet: "Episode 2: Crossroads of Cultures - A comic book journey through Istanbul's most iconic landmarks. From the majestic Hagia Sophia to the bustling Grand Bazaar, experience the city where East meets West in this immersive visual storytelling adventure.",
-    image: "attachment:///moments/istanbul/2025-09-25/cover.png",
-    imageAlt: "Istanbul Episode 2: Crossroads of Cultures",
-    caption: "Crossroads of Cultures - Where East Meets West",
-    fullLink: "/moments/istanbul/2025-09-25/",
-    isComic: true,
-    location: { lat: 41.0082, lng: 28.9784, name: "Istanbul, Turkey" },
-    stayDuration: 1,
-    formattedDuration: formatDuration(1)
-  },
+    {
+      id: "istanbul-episode-2-2025-09-25",
+      title: "Istanbul Episode 2: Crossroads of Cultures",
+      date: new Date('2025-09-25T00:00:00Z'),
+      timelineHighlight: "Istanbul Ep 2",
+      tags: ["istanbul", "comic book", "turkey", "culture", "history", "bosphorus", "hagia sophia", "grand bazaar"],
+      snippet: "Episode 2: Crossroads of Cultures - A comic book journey through Istanbul's most iconic landmarks. From the majestic Hagia Sophia to the bustling Grand Bazaar, experience the city where East meets West in this immersive visual storytelling adventure.",
+      image: "attachment:///moments/istanbul/2025-09-25/cover.png",
+      imageAlt: "Istanbul Episode 2: Crossroads of Cultures",
+      caption: "Crossroads of Cultures - Where East Meets West",
+      fullLink: "/moments/istanbul/2025-09-25/",
+      isComic: true,
+      pageCount: 16, // Istanbul Episode 2 has 16 pages (1-16)
+      location: { lat: 41.0082, lng: 28.9784, name: "Istanbul, Turkey" },
+      stayDuration: 1,
+      formattedDuration: formatDuration(1)
+    },
   {
     id: "amman-2025-09-30",
     title: "Amman Layover - Smart Travel Strategy",
