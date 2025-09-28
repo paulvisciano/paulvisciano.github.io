@@ -12,14 +12,14 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   const flipbookRef = React.useRef(null);
   const coverRef = React.useRef(null);
   const pages = [
-    'cover.png', // Cover
-    'ep-20-page-1.png',
-    'ep-20-page-2.png',
-    'ep-20-page-3.png',
-    'ep-20-page-4.png',
-    'ep-20-page-5.png',
-    'ep-20-page-6.png',
-    'ep-20-page-7.png'
+    '/moments/bangkok/2025-09-16/cover.png', // Cover
+    '/moments/bangkok/2025-09-16/page-01.png',
+    '/moments/bangkok/2025-09-16/page-02.png',
+    '/moments/bangkok/2025-09-16/page-03.png',
+    '/moments/bangkok/2025-09-16/page-04.png',
+    '/moments/bangkok/2025-09-16/page-05.png',
+    '/moments/bangkok/2025-09-16/page-06.png',
+    '/moments/bangkok/2025-09-16/page-07.png'
   ];
 
   React.useEffect(() => {
@@ -83,7 +83,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       
       // Preload cover image with boot messages
       const coverImg = new Image();
-      coverImg.src = '/moments/2025/episode-20/cover.png';
+      coverImg.src = '/moments/bangkok/2025-09-16/cover.png';
       
       addBootMessage('🎨 Loading cover artwork...', 200);
       
@@ -226,7 +226,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
         pageDiv.className = i === 0 || i === pages.length - 1 ? 'hard' : 'page';
         
         const img = document.createElement('img');
-        img.src = `/moments/2025/episode-20/${pages[i]}`;
+        img.src = pages[i];
         img.alt = `Page ${i + 1}`;
         img.style.width = '100%';
         img.style.height = '100%';
@@ -569,7 +569,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       }, [
         React.createElement('img', {
           key: 'cover-img',
-          src: `/moments/2025/episode-20/cover.png`,
+          src: '/moments/bangkok/2025-09-16/cover.png',
           alt: 'Episode 20 Cover',
           style: coverImageStyle
         }),
