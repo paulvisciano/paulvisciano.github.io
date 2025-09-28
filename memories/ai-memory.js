@@ -42,6 +42,35 @@ window.aiMemory = {
         technical_improvement: "Git LFS implementation"
       },
       tags: ["technical", "git-lfs", "optimization", "urban-runner"]
+    },
+    {
+      id: "2025-01-28-canonical-url-implementation",
+      timestamp: "2025-01-28T04:45:00Z",
+      type: "architecture_improvement",
+      summary: "Implemented canonical URL pattern for moments with Episode 7 migration",
+      files_modified: [
+        "moments/bangkok/2025-09-03/index.html",
+        "moments/bangkok/2025-09-03/content.html", 
+        "moments/moments.js",
+        "components/app.js",
+        "components/globe.js"
+      ],
+      key_changes: [
+        "Created new canonical URL structure: /moments/<city-slug>/<YYYY-MM-DD>/",
+        "Migrated Episode 7 to /moments/bangkok/2025-09-03/ with clean file naming",
+        "Implemented redirect system for direct URL navigation to globe interface",
+        "Added support for deep linking with #page-<n> anchors",
+        "Renamed files to cleaner convention: cover.png, page-01.png, page-02.png, etc.",
+        "Updated moments.js and app.js routing to handle new URL patterns",
+        "Preserved original horizontal scroll layout and K-FIT sections",
+        "Removed old Episode 7 files from moments/2025/ directory"
+      ],
+      context: {
+        project_focus: "URL structure optimization and episode migration",
+        technical_improvement: "canonical URL implementation",
+        user_feedback: "much cleaner file naming convention"
+      },
+      tags: ["architecture", "url-structure", "episode-migration", "file-organization", "deep-linking"]
     }
   ],
 
@@ -56,8 +85,16 @@ window.aiMemory = {
       preferences: [
         "Prefer editing existing files over creating new ones",
         "No manual npm scripts needed - commit hooks handle publishing",
-        "Detailed snippets with rich context for travel moments"
+        "Detailed snippets with rich context for travel moments",
+        "Use node http-server to serve files locally instead of python3 -m http.server",
+        "Always add Open Graph and Twitter Card meta tags for future episodes or blogs"
       ],
+      url_structure: {
+        canonical_pattern: "/moments/<city-slug>/<YYYY-MM-DD>/",
+        deep_linking: "supports #page-<n> anchors for individual comic pages",
+        redirect_system: "direct URL access redirects to main app with path query parameter",
+        file_naming: "cover.png, page-01.png, page-02.png, page-<special>.png convention"
+      },
       urban_runner_integration: {
         status: "fully integrated",
         globe_pins: "running routes, checkpoints, spending patterns, episode maps",
