@@ -579,7 +579,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           return;
         }
         
-        let htmlFile = post.contentFile || (post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`);
+        let htmlFile;
+        if (isInteractiveEpisode(postId, post.title)) {
+          // For interactive episodes, load the interactive-episode.html component
+          htmlFile = '/components/interactive-episode.html';
+        } else {
+          htmlFile = post.contentFile || (post.fullLink && post.fullLink !== "#" ? post.fullLink : `${post.id}.html`);
+        }
         
         // Add cache-busting parameter for interactive episodes only
         if (isInteractiveEpisode(postId, post.title)) {
@@ -600,16 +606,8 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         // Special handling for interactive episodes (cards with JavaScript)
         let bodyContent;
         if (isInteractiveEpisode(postId, post.title)) {
-          // Extract data path from fullLink URL parameters
-          let dataPath = 'data.json'; // default
-          if (post.fullLink && post.fullLink.includes('?data=')) {
-            try {
-              const url = new URL(post.fullLink, window.location.origin);
-              dataPath = url.searchParams.get('data') || 'data.json';
-            } catch (e) {
-              console.log('Could not parse fullLink URL');
-            }
-          }
+          // Use contentFile for data path, fallback to data.json
+          let dataPath = post.contentFile || 'data.json';
           
           // Inject the data path into the HTML content
           let htmlWithDataPath = htmlContent.replace(

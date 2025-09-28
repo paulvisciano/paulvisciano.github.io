@@ -35,7 +35,7 @@ window.EpisodeNavigation = {
       id: 'urban-runner-episode-13-2025-09-09',
       title: 'Episode 13: Bangkok Green Lung & City Cross',
       date: '2025-09-09', 
-      link: '2025/09-09-episode13-bangkok-green-lung.html',
+      link: '/moments/bangkok/2025-09-09/',
       description: 'Interactive Tinder-style card journey through Bangkok\'s Green Lung'
     },
     {
