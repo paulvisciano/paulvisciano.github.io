@@ -779,6 +779,22 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
   {
+    id: "istanbul-episode-2-2025-09-25",
+    title: "Istanbul Episode 2: Crossroads of Cultures",
+    date: new Date('2025-09-25T00:00:00Z'),
+    timelineHighlight: "Istanbul Ep 2",
+    tags: ["istanbul", "comic book", "turkey", "culture", "history", "bosphorus", "hagia sophia", "grand bazaar"],
+    snippet: "Episode 2: Crossroads of Cultures - A comic book journey through Istanbul's most iconic landmarks. From the majestic Hagia Sophia to the bustling Grand Bazaar, experience the city where East meets West in this immersive visual storytelling adventure.",
+    image: "attachment:///moments/istanbul/2025-09-25/cover.png",
+    imageAlt: "Istanbul Episode 2: Crossroads of Cultures",
+    caption: "Crossroads of Cultures - Where East Meets West",
+    fullLink: "/moments/istanbul/2025-09-25/",
+    isComic: true,
+    location: { lat: 41.0082, lng: 28.9784, name: "Istanbul, Turkey" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "amman-2025-09-30",
     title: "Amman Layover - Smart Travel Strategy",
     date: new Date('2025-09-30T00:00:00Z'),

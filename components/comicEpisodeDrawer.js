@@ -9,18 +9,82 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
   const [showCover, setShowCover] = React.useState(true);
   const [flipbookReady, setFlipbookReady] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
+  const [episodeData, setEpisodeData] = React.useState(null);
   const flipbookRef = React.useRef(null);
   const coverRef = React.useRef(null);
-  const pages = [
-    '/moments/bangkok/2025-09-16/cover.png', // Cover
-    '/moments/bangkok/2025-09-16/page-01.png',
-    '/moments/bangkok/2025-09-16/page-02.png',
-    '/moments/bangkok/2025-09-16/page-03.png',
-    '/moments/bangkok/2025-09-16/page-04.png',
-    '/moments/bangkok/2025-09-16/page-05.png',
-    '/moments/bangkok/2025-09-16/page-06.png',
-    '/moments/bangkok/2025-09-16/page-07.png'
-  ];
+  
+  // Get episode data from momentsInTime
+  React.useEffect(() => {
+    if (window.momentsInTime) {
+      // Find the current comic episode by checking the URL path
+      const currentPath = window.location.pathname;
+      
+      const currentMoment = window.momentsInTime.find(m => {
+        if (!m.isComic) return false;
+        const episodePath = m.fullLink.replace(/\/$/, ''); // Remove trailing slash
+        return currentPath.includes(episodePath);
+      });
+      
+      if (currentMoment) {
+        setEpisodeData(currentMoment);
+      } else {
+        // Set a fallback episode data for Bangkok Episode 20
+        const fallbackEpisode = {
+          id: 'urban-runner-episode-20-2025-09-16',
+          title: 'Urban Runner Episode 20: Comic Book Edition',
+          fullLink: '/moments/bangkok/2025-09-16/',
+          location: { name: 'Bangkok, Thailand' },
+          date: new Date('2025-09-16T00:00:00Z')
+        };
+        setEpisodeData(fallbackEpisode);
+      }
+    }
+  }, []);
+  
+  const [pages, setPages] = React.useState([]);
+  
+  // Generate pages based on episode data
+  const getPages = () => {
+    if (!episodeData) {
+      // Fallback to Bangkok Episode 20
+      return [
+        '/moments/bangkok/2025-09-16/cover.png', // Cover
+        '/moments/bangkok/2025-09-16/page-01.png',
+        '/moments/bangkok/2025-09-16/page-02.png',
+        '/moments/bangkok/2025-09-16/page-03.png',
+        '/moments/bangkok/2025-09-16/page-04.png',
+        '/moments/bangkok/2025-09-16/page-05.png',
+        '/moments/bangkok/2025-09-16/page-06.png',
+        '/moments/bangkok/2025-09-16/page-07.png'
+      ];
+    }
+    
+    // Extract base path from fullLink
+    const basePath = episodeData.fullLink.replace(/\/$/, '');
+    const pagesArray = [`${basePath}/cover.png`]; // Cover first
+    
+    // Generate pages based on episode type
+    if (episodeData.id.includes('istanbul')) {
+      // Istanbul Episode 2 - 13 pages
+      for (let i = 1; i <= 13; i++) {
+        pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
+      }
+    } else if (episodeData.id.includes('bangkok')) {
+      // Bangkok Episode 20 - 7 pages
+      for (let i = 1; i <= 7; i++) {
+        pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
+      }
+    }
+    
+    return pagesArray;
+  };
+  
+  // Update pages when episode data changes
+  React.useEffect(() => {
+    const newPages = getPages();
+    setPages(newPages);
+    setTotalPages(newPages.length);
+  }, [episodeData]);
 
   React.useEffect(() => {
     const handleEscape = (e) => {
@@ -55,7 +119,9 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
 
   // Memory boot sequence
   React.useEffect(() => {
-    setTotalPages(pages.length);
+    if (pages && pages.length) {
+      setTotalPages(pages.length);
+    }
     
     const addBootMessage = (message, delay = 0) => {
       setTimeout(() => {
@@ -65,14 +131,17 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
 
     // Phase 1: System Initialization
     addBootMessage('🧠 Initializing Paul\'s Memory System...', 100);
-    addBootMessage('📡 Connecting to Bangkok Memory Bank...', 300);
-    addBootMessage('🔐 Authenticating Episode 20 Access...', 500);
+    const episodeTitle = episodeData ? episodeData.title : 'Bangkok Episode 20';
+    const episodeDate = episodeData ? episodeData.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'September 16, 2025';
+    const episodeNumber = episodeData ? episodeData.id.match(/episode-(\d+)/)?.[1] || '20' : '20';
+    addBootMessage(`📡 Connecting to ${episodeData ? episodeData.location.name : 'Bangkok'} Memory Bank...`, 300);
+    addBootMessage(`🔐 Authenticating Episode ${episodeNumber} Access...`, 500);
     
     setTimeout(() => {
       setBootPhase('scanning');
-      addBootMessage('🔍 Scanning for Bangkok memories...', 0);
-      addBootMessage('📅 Located: September 16, 2025', 200);
-      addBootMessage('🏃‍♂️ Found: Urban Runner Episode 20', 400);
+      addBootMessage(`🔍 Scanning for ${episodeData ? episodeData.location.name : 'Bangkok'} memories...`, 0);
+      addBootMessage(`📅 Located: ${episodeDate}`, 200);
+      addBootMessage(`🏃‍♂️ Found: ${episodeTitle}`, 400);
       addBootMessage('📖 Memory type: Comic Book Format', 600);
     }, 800);
 
@@ -83,7 +152,7 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       
       // Preload cover image with boot messages
       const coverImg = new Image();
-      coverImg.src = '/moments/bangkok/2025-09-16/cover.png';
+      coverImg.src = episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png';
       
       addBootMessage('🎨 Loading cover artwork...', 200);
       
@@ -126,7 +195,9 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       
     }, 1500);
   }, []);
-    
+  
+  // Initialize flipbook and handle navigation
+  React.useEffect(() => {
     // Check if URL has a specific page - if so, skip cover after zoom
     const initialPage = getInitialPage();
     if (initialPage > 1) {
@@ -286,23 +357,19 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
                 updatePageUrl(page);
               },
               start: (event, pageObject, corner) => {
-                console.log('Page turn started from corner:', corner);
               },
               end: (event, pageObject, corner) => {
-                console.log('Page turn ended');
               }
             }
           });
         
         // Enable mouse and touch events for page dragging
         window.$(flipbookElement).bind('start', function(event, pageObject, corner) {
-          console.log('Turn.js start event triggered, corner:', corner);
           // Ensure dragging is enabled
           window.$(this).css('cursor', 'grabbing');
         });
         
         window.$(flipbookElement).bind('end', function(event, pageObject, corner) {
-          console.log('Turn.js end event triggered');
           window.$(this).css('cursor', 'grab');
         });
         
@@ -569,8 +636,8 @@ window.ComicEpisodeDrawer = ({ content, onClose }) => {
       }, [
         React.createElement('img', {
           key: 'cover-img',
-          src: '/moments/bangkok/2025-09-16/cover.png',
-          alt: 'Episode 20 Cover',
+          src: episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png',
+          alt: episodeData ? `${episodeData.title} Cover` : 'Episode 20 Cover',
           style: coverImageStyle
         }),
         React.createElement('div', {

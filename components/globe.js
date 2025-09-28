@@ -916,7 +916,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }),
     isBlogDrawerOpen && blogPostContent && (
       isComicEpisode(blogPostContent.postId || '', blogPostContent.title)
-        ? React.createElement(window.ComicEpisodeDrawer, {
+        ? React.createElement(window.ComicEpisodeDrawerSimple, {
             content: blogPostContent,
             onClose: () => setIsBlogDrawerOpen(false)
           })
