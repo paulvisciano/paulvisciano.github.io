@@ -1,8 +1,26 @@
 // Comic Reader Component
+
+// Global state manager to prevent flipbook state from being wiped
+window.ComicReaderState = window.ComicReaderState || {
+  flipbookCreated: false,
+  episodeData: null,
+  currentPage: 1,
+  totalPages: 0,
+  flipbookReady: false,
+  isVisible: false,
+  isLoading: true
+};
+
+// Function to update global state
+const updateGlobalState = (updates) => {
+  Object.assign(window.ComicReaderState, updates);
+};
+
+// Function to get global state
+const getGlobalState = () => window.ComicReaderState;
+
 window.ComicReader = ({ content, onClose }) => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [bootPhase, setBootPhase] = React.useState('initializing'); // 'initializing' -> 'scanning' -> 'loading' -> 'complete'
-  const [bootMessages, setBootMessages] = React.useState([]);
   const [error, setError] = React.useState(null);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(0);
@@ -13,6 +31,7 @@ window.ComicReader = ({ content, onClose }) => {
   const [isInitialized, setIsInitialized] = React.useState(false);
   const isInitializedRef = React.useRef(false);
   const flipbookRef = React.useRef(null);
+  const flipbookCreatedRef = React.useRef(false);
   const coverRef = React.useRef(null);
   const currentPageRef = React.useRef(1);
   
@@ -21,34 +40,19 @@ window.ComicReader = ({ content, onClose }) => {
     currentPageRef.current = currentPage;
   }, [currentPage]);
   
-  // Function to update URL hash when page changes
-  const updateUrlHash = (page) => {
-    if (isInitializedRef.current && page > 1) {
-      const newHash = `#page-${page}`;
-      if (window.location.hash !== newHash) {
-        window.history.pushState(null, '', window.location.pathname + newHash);
-      }
-    } else if (isInitializedRef.current && page === 1) {
-      // Remove hash for page 1
-      if (window.location.hash) {
-        window.history.pushState(null, '', window.location.pathname);
-      }
-    }
-  };
+  
 
-  // Function to get initial page from URL hash
-  const getInitialPageFromHash = () => {
-    const hash = window.location.hash;
-    if (hash && hash.startsWith('#page-')) {
-      const pageNum = parseInt(hash.substring(6));
-      return isNaN(pageNum) ? 1 : Math.max(1, pageNum);
-    }
-    return 1;
-  };
-
-  // Get episode data from momentsInTime
+  // Get episode data from momentsInTime - use global state if available
   React.useEffect(() => {
-    if (window.momentsInTime) {
+    const globalState = getGlobalState();
+    
+    // If we already have episode data in global state, use it
+    if (globalState.episodeData && !episodeData) {
+      setEpisodeData(globalState.episodeData);
+      return;
+    }
+    
+    if (window.momentsInTime && !episodeData) {
       // Find the current comic episode by checking the URL path
       const currentPath = window.location.pathname;
       
@@ -60,6 +64,7 @@ window.ComicReader = ({ content, onClose }) => {
       
       if (currentMoment) {
         setEpisodeData(currentMoment);
+        updateGlobalState({ episodeData: currentMoment });
       } else {
         // Set a fallback episode data for Bangkok Episode 20
         const fallbackEpisode = {
@@ -70,25 +75,22 @@ window.ComicReader = ({ content, onClose }) => {
           date: new Date('2025-09-16T00:00:00Z')
         };
         setEpisodeData(fallbackEpisode);
+        updateGlobalState({ episodeData: fallbackEpisode });
       }
     }
-  }, []);
+  }, [episodeData]);
+
+  // Prevent episode data from being reset once it's set
+  React.useEffect(() => {
+    // Episode data is set and should not be reset
+  }, [episodeData]);
   
   const [pages, setPages] = React.useState([]);
   
   // Generate pages dynamically based on available files
   const getPages = () => {
     if (!episodeData) {
-      // Fallback to Bangkok Episode 20
-      return [
-        '/moments/bangkok/2025-09-16/page-01.png',
-        '/moments/bangkok/2025-09-16/page-02.png',
-        '/moments/bangkok/2025-09-16/page-03.png',
-        '/moments/bangkok/2025-09-16/page-04.png',
-        '/moments/bangkok/2025-09-16/page-05.png',
-        '/moments/bangkok/2025-09-16/page-06.png',
-        '/moments/bangkok/2025-09-16/page-07.png'
-      ];
+      return [];
     }
     
     // Extract base path from fullLink
@@ -111,6 +113,7 @@ window.ComicReader = ({ content, onClose }) => {
     const newPages = getPages();
     setPages(newPages);
     setTotalPages(newPages.length);
+    updateGlobalState({ totalPages: newPages.length });
   }, [episodeData]);
 
   React.useEffect(() => {
@@ -146,243 +149,80 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Handle initial page loading after component is mounted
   React.useEffect(() => {
-    console.log('Episode data useEffect triggered - episodeData:', !!episodeData);
     if (!episodeData) {
-      console.log('No episode data yet, waiting...');
       return; // Wait for episode data to load
     }
     
-    const initialPage = getInitialPage();
-    console.log('Initial page from hash:', initialPage);
-    
-    if (initialPage === 'cover') {
-      // Show cover page
-      console.log('Showing cover page');
-      setShowCover(true);
-      setFlipbookReady(false);
-      updatePageUrl('cover');
-    } else if (initialPage >= 1) {
-      // Show flipbook and go to specific page (including page 1)
-      console.log('Showing flipbook, going to page:', initialPage);
-      setShowCover(false);
-      setFlipbookReady(true);
-    } else if (initialPage === null) {
-      // No hash in URL - show cover by default for comic episodes
-      console.log('No hash in URL - showing cover by default');
-      setShowCover(true);
-      setFlipbookReady(false);
-      updatePageUrl('cover');
-    }
+    // Always show cover page first for comic episodes
+    setShowCover(true);
+    setFlipbookReady(false);
   }, [episodeData]);
 
   // Handle flipbook creation when flipbookReady becomes true
   React.useEffect(() => {
-    console.log('Flipbook useEffect triggered - flipbookReady:', flipbookReady, 'flipbookRef.current:', !!flipbookRef.current);
-    if (flipbookReady && flipbookRef.current) {
-      const initialPage = getInitialPage();
-      console.log('Creating flipbook for page:', initialPage);
-      createFlipbook(initialPage);
-      
-      // Update URL to page 1 after flipbook is created
-      setTimeout(() => {
-        console.log('Updating URL to page 1 after flipbook creation');
-        updatePageUrl(1);
-      }, 500); // Give time for flipbook to initialize
-    } else if (flipbookReady && !flipbookRef.current) {
-      console.log('flipbookReady is true but flipbookRef.current is null - retrying in 200ms');
-      setTimeout(() => {
-        if (flipbookRef.current) {
-          const initialPage = getInitialPage();
-          console.log('Creating flipbook for page (retry):', initialPage);
-          createFlipbook(initialPage);
-          setTimeout(() => {
-            console.log('Updating URL to page 1 after flipbook creation (retry)');
-            updatePageUrl(1);
-          }, 500);
-        } else {
-          console.error('flipbookRef still null after retry');
-        }
-      }, 200);
+    // Don't create flipbook if no episode data
+    if (!episodeData) {
+      return;
     }
-  }, [flipbookReady, flipbookRef.current]);
+    
+    // Check global state to prevent multiple creations
+    const globalState = getGlobalState();
+    if (globalState.flipbookCreated) {
+      return;
+    }
+    
+    // Only create flipbook once when we have all required data
+    if (flipbookReady && flipbookRef.current && episodeData && !flipbookCreatedRef.current) {
+      createFlipbook(1); // Always start at page 1
+      flipbookCreatedRef.current = true; // Mark as created
+      updateGlobalState({ flipbookCreated: true }); // Update global state
+      
+      // Set loading to false since flipbook is created
+      setTimeout(() => {
+        setIsLoading(false);
+        setIsVisible(true);
+        updateGlobalState({ isLoading: false, isVisible: true });
+      }, 500); // Give time for flipbook to initialize
+    }
+  }, [flipbookReady, episodeData]);
 
-  // Memory boot sequence
+  // Simple loading sequence
   React.useEffect(() => {
     if (pages && pages.length) {
       setTotalPages(pages.length);
     }
     
-    const addBootMessage = (message, delay = 0) => {
-      setTimeout(() => {
-        setBootMessages(prev => [...prev, message]);
-      }, delay);
-    };
-
-    // Phase 1: System Initialization
-    addBootMessage('🧠 Initializing Paul\'s Memory System...', 100);
-    const episodeTitle = episodeData ? episodeData.title : 'Bangkok Episode 20';
-    const episodeDate = episodeData ? episodeData.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'September 16, 2025';
-    const episodeNumber = episodeData ? episodeData.id.match(/episode-(\d+)/)?.[1] || '20' : '20';
-    addBootMessage(`📡 Connecting to ${episodeData ? episodeData.location.name : 'Bangkok'} Memory Bank...`, 300);
-    addBootMessage(`🔐 Authenticating Episode ${episodeNumber} Access...`, 500);
-    
+    // Simple loading without the memory system screen
     setTimeout(() => {
-      setBootPhase('scanning');
-      addBootMessage(`🔍 Scanning for ${episodeData ? episodeData.location.name : 'Bangkok'} memories...`, 0);
-      addBootMessage(`📅 Located: ${episodeDate}`, 200);
-      addBootMessage(`🏃‍♂️ Found: ${episodeTitle}`, 400);
-      addBootMessage('📖 Memory type: Comic Book Format', 600);
-    }, 800);
-
-    // Phase 2: Asset Loading
-    setTimeout(() => {
-      setBootPhase('loading');
-      addBootMessage('⬇️  Loading memory fragments...', 0);
-      
-      // Preload cover image with boot messages
-      const coverImg = new Image();
-      coverImg.src = episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png';
-      
-      addBootMessage('🎨 Loading cover artwork...', 200);
-      
-      coverImg.onload = () => {
-        addBootMessage('✅ Cover loaded successfully', 100);
-        addBootMessage('📚 Preparing page assets...', 300);
-        
-        // Simulate loading other assets
-        setTimeout(() => {
-          addBootMessage('🔧 Initializing Turn.js engine...', 0);
-          addBootMessage('📄 Compiling 7 comic pages...', 200);
-          addBootMessage('🎯 Optimizing for flip animations...', 400);
-          
-          setTimeout(() => {
-            setBootPhase('complete');
-            addBootMessage('🚀 Memory boot sequence complete!', 0);
-            addBootMessage('💭 Paul\'s Bangkok adventure ready...', 200);
-            addBootMessage('🔓 ACCESS GRANTED - Welcome to Episode 20', 400);
-            
-            setTimeout(() => {
-              setIsVisible(true);
-              setIsLoading(false);
-            }, 800);
-          }, 800);
-        }, 500);
-      };
-      
-      // Fallback in case image doesn't load
-      setTimeout(() => {
-        if (bootPhase !== 'complete') {
-          addBootMessage('⚠️  Cover load timeout, using cached version', 0);
-          setBootPhase('complete');
-          addBootMessage('🚀 Memory boot sequence complete!', 200);
-          setTimeout(() => {
-            setIsVisible(true);
-            setIsLoading(false);
-          }, 600);
-        }
-      }, 3000);
-      
-    }, 1500);
+      // Only set loading to false if flipbook hasn't been created yet
+      if (!flipbookCreatedRef.current) {
+        setIsVisible(true);
+        setIsLoading(false);
+        updateGlobalState({ isVisible: true, isLoading: false });
+      }
+    }, 500);
   }, []);
   
-  // Initialize flipbook and handle navigation
-  React.useEffect(() => {
-    // Check if URL has a specific page - if so, skip cover after zoom
-    const initialPage = getInitialPage();
-    if (initialPage > 1) {
-      setTimeout(() => {
-        setShowCover(false);
-        setIsLoading(true);
-        // Initialize flipbook directly
-        setTimeout(() => {
-              if (flipbookRef.current && window.$ && window.$.fn.turn) {
-                createFlipbook(initialPage);
-              } else {
-                setError('The comic book pages are being a bit stubborn today... 🤔');
-                setIsLoading(false);
-              }
-        }, 200);
-      }, 1500); // Delay to allow fade-in to complete
-    }
-    
-    // Handle browser back/forward navigation
-    const handlePopState = (event) => {
-      if (event.state && event.state.page && flipbookRef.current && window.$ && window.$.fn.turn) {
-        const targetPage = event.state.page;
-        window.$(flipbookRef.current).turn('page', targetPage);
-        setCurrentPage(targetPage);
-      }
-    };
-    
-    window.addEventListener('popstate', handlePopState);
-    
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-      // Cleanup Turn.js instance
-      if (flipbookRef.current && window.$ && window.$.fn.turn) {
-        try {
-          window.$(flipbookRef.current).turn('destroy');
-        } catch (e) {
-          // Ignore cleanup errors
-        }
-      }
-    };
-  }, []);
 
   // Function to transition from cover to flipbook
   const openComicBook = () => {
-    console.log('openComicBook called - transitioning to cover');
     setShowCover(false);
     setIsLoading(true);
-    
-    // Update URL to show we're on the cover immediately
-    updatePageUrl('cover');
     
     // Set flipbook ready to trigger the flipbook creation
     setFlipbookReady(true);
   };
 
-  // Function to update URL with current page
-  const updatePageUrl = (pageNumber) => {
-    console.log(`updatePageUrl called: page=${pageNumber}, isInitialized=${isInitializedRef.current}`);
-    
-    if (pageNumber === 'cover') {
-      const newHash = '#cover';
-      if (window.location.hash !== newHash) {
-        console.log(`Updating URL hash to: ${newHash}`);
-        window.history.pushState(null, '', window.location.pathname + newHash);
-      }
-    } else if (pageNumber === 1) {
-      const newHash = '#page-1';
-      if (window.location.hash !== newHash) {
-        console.log(`Updating URL hash to: ${newHash}`);
-        window.history.pushState(null, '', window.location.pathname + newHash);
-      }
-    } else if (isInitializedRef.current && pageNumber > 1) {
-      const newHash = `#page-${pageNumber}`;
-      if (window.location.hash !== newHash) {
-        console.log(`Updating URL hash to: ${newHash}`);
-        window.history.pushState(null, '', window.location.pathname + newHash);
-      }
-    } else {
-      console.log(`Skipping URL update: isInitialized=${isInitializedRef.current}, page=${pageNumber}`);
-    }
-  };
 
-  // Function to get initial page from URL hash
-  const getInitialPage = () => {
-    const hash = window.location.hash;
-    if (hash === '#cover') {
-      return 'cover';
-    } else if (hash && hash.startsWith('#page-')) {
-      const pageNum = parseInt(hash.substring(6));
-      return isNaN(pageNum) ? 1 : Math.max(1, pageNum);
-    }
-    return null; // No hash - will trigger cover display
-  };
 
   const createFlipbook = (startPage = 1) => {
-    if (!flipbookRef.current) return;
+    if (!flipbookRef.current) {
+      return;
+    }
+    
+    if (!episodeData) {
+      return;
+    }
     
     try {
       const flipbookElement = flipbookRef.current;
@@ -390,7 +230,13 @@ window.ComicReader = ({ content, onClose }) => {
       // Clear existing content
       flipbookElement.innerHTML = '';
       
-      console.log('Creating simple flipbook with', pages.length, 'pages, startPage:', startPage);
+      // Get current pages directly instead of using state
+      const currentPages = getPages();
+      
+      // Don't create flipbook if no pages available
+      if (currentPages.length === 0) {
+        return;
+      }
       
       // Create a simple two-page spread container
       const spreadContainer = document.createElement('div');
@@ -438,9 +284,11 @@ window.ComicReader = ({ content, onClose }) => {
       spreadContainer.appendChild(rightPage);
       flipbookElement.appendChild(spreadContainer);
       
-      // Set initial page state
+      // Set initial page state - use the actual startPage from URL
       const initialPage = startPage === 'cover' ? 1 : (startPage || 1);
       setCurrentPage(initialPage);
+      currentPageRef.current = initialPage;
+      updateGlobalState({ currentPage: initialPage });
       
       // Set initial pages
       updateSpreadPages(initialPage);
@@ -449,15 +297,17 @@ window.ComicReader = ({ content, onClose }) => {
       leftPage.addEventListener('click', () => previousPage());
       rightPage.addEventListener('click', () => nextPage());
       
-      console.log('Simple flipbook created successfully with initial page:', initialPage);
-      
       setIsLoading(false);
       setFlipbookReady(true);
       setIsInitialized(true);
       isInitializedRef.current = true;
+      updateGlobalState({ 
+        isLoading: false, 
+        flipbookReady: true, 
+        isInitialized: true 
+      });
       
     } catch (error) {
-      console.error('Error creating simple flipbook:', error);
       setError('Paul\'s Bangkok adventure is taking a coffee break... ☕');
       setIsLoading(false);
     }
@@ -471,25 +321,22 @@ window.ComicReader = ({ content, onClose }) => {
     
     if (!leftPage || !rightPage) return;
     
-    console.log('updateSpreadPages called with pageNumber:', pageNumber, 'pages.length:', pages.length);
+    // Get current pages directly instead of using state
+    const currentPages = getPages();
     
     // Calculate which pages to show (1-based page numbers)
     // For a two-page spread, if we're on page N, we show pages N and N+1
     const leftPageIndex = pageNumber - 1; // 0-based index for left page
     const rightPageIndex = pageNumber; // 0-based index for right page
     
-    console.log('Calculated indices - leftPageIndex:', leftPageIndex, 'rightPageIndex:', rightPageIndex);
-    console.log('Left page URL:', leftPageIndex >= 0 && leftPageIndex < pages.length ? pages[leftPageIndex] : 'OUT OF BOUNDS');
-    console.log('Right page URL:', rightPageIndex >= 0 && rightPageIndex < pages.length ? pages[rightPageIndex] : 'OUT OF BOUNDS');
-    
     // Clear existing content
     leftPage.innerHTML = '';
     rightPage.innerHTML = '';
     
     // Add left page image
-    if (leftPageIndex >= 0 && leftPageIndex < pages.length) {
+    if (leftPageIndex >= 0 && leftPageIndex < currentPages.length) {
       const leftImg = document.createElement('img');
-      leftImg.src = pages[leftPageIndex];
+      leftImg.src = currentPages[leftPageIndex];
       leftImg.alt = `Page ${leftPageIndex + 1}`;
       leftImg.style.cssText = `
         width: 100%;
@@ -497,17 +344,17 @@ window.ComicReader = ({ content, onClose }) => {
         object-fit: contain;
         display: block;
       `;
-      leftImg.onerror = () => console.warn(`Failed to load image: ${pages[leftPageIndex]}`);
+      leftImg.onerror = () => {};
       leftPage.appendChild(leftImg);
-      console.log('Added left page image:', pages[leftPageIndex]);
     } else {
-      console.log('Left page index out of bounds:', leftPageIndex);
+      // Add a placeholder for out of bounds
+      leftPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${leftPageIndex + 1}</div>`;
     }
     
     // Add right page image
-    if (rightPageIndex >= 0 && rightPageIndex < pages.length) {
+    if (rightPageIndex >= 0 && rightPageIndex < currentPages.length) {
       const rightImg = document.createElement('img');
-      rightImg.src = pages[rightPageIndex];
+      rightImg.src = currentPages[rightPageIndex];
       rightImg.alt = `Page ${rightPageIndex + 1}`;
       rightImg.style.cssText = `
         width: 100%;
@@ -515,24 +362,16 @@ window.ComicReader = ({ content, onClose }) => {
         object-fit: contain;
         display: block;
       `;
-      rightImg.onload = () => {
-        console.log('Right page image loaded successfully:', pages[rightPageIndex]);
-      };
+      rightImg.onload = () => {};
       rightImg.onerror = (error) => {
-        console.error(`Failed to load right page image: ${pages[rightPageIndex]}`, error);
         // Add a placeholder to show something
         rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">Page ${rightPageIndex + 1} - Image failed to load</div>`;
       };
       rightPage.appendChild(rightImg);
-      console.log('Added right page image:', pages[rightPageIndex]);
-      console.log('Right page children after adding image:', rightPage.children.length);
     } else {
-      console.log('Right page index out of bounds:', rightPageIndex, 'pages.length:', pages.length);
       // Add a placeholder for out of bounds
       rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${rightPageIndex + 1}</div>`;
     }
-    
-    console.log(`Updated spread: left page ${leftPageIndex + 1}, right page ${rightPageIndex + 1}`);
   };
   
   // Turn.js removed - using simple custom implementation
@@ -541,19 +380,17 @@ window.ComicReader = ({ content, onClose }) => {
     try {
       // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
-      console.log('previousPage called - currentPage:', currentPageValue, 'totalPages:', totalPages);
       
       // For two-page spreads, we need to decrement by 2 to show the previous spread
       const prevSpreadPage = currentPageValue - 2;
       if (prevSpreadPage >= 1) {
         setCurrentPage(prevSpreadPage);
         currentPageRef.current = prevSpreadPage;
+        updateGlobalState({ currentPage: prevSpreadPage });
         updateSpreadPages(prevSpreadPage);
-        updatePageUrl(prevSpreadPage);
-        console.log('Navigated to previous spread:', prevSpreadPage);
       }
     } catch (error) {
-      console.warn('Error navigating to previous page:', error);
+      // Silent error handling
     }
   };
 
@@ -561,25 +398,32 @@ window.ComicReader = ({ content, onClose }) => {
     try {
       // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
-      console.log('nextPage called - currentPage:', currentPageValue, 'totalPages:', totalPages);
       
       // For two-page spreads, we need to increment by 2 to show the next spread
       const nextSpreadPage = currentPageValue + 2;
       if (nextSpreadPage <= totalPages) {
         setCurrentPage(nextSpreadPage);
         currentPageRef.current = nextSpreadPage;
+        updateGlobalState({ currentPage: nextSpreadPage });
         updateSpreadPages(nextSpreadPage);
-        updatePageUrl(nextSpreadPage);
-        console.log('Navigated to next spread:', nextSpreadPage);
-      } else {
-        console.log('Cannot go to next page - already at last spread');
       }
     } catch (error) {
-      console.error('Error navigating to next page:', error);
+      // Silent error handling
     }
   };
 
   const handleClose = () => {
+    // Reset global state when closing
+    updateGlobalState({
+      flipbookCreated: false,
+      episodeData: null,
+      currentPage: 1,
+      totalPages: 0,
+      flipbookReady: false,
+      isVisible: false,
+      isLoading: true
+    });
+    
     // Show overlay again when closing comic
     const overlay = document.getElementById('overlay');
     if (overlay) {
@@ -842,70 +686,8 @@ window.ComicReader = ({ content, onClose }) => {
             fontSize: '16px',
             fontWeight: 'bold'
           }
-        }, '🧠 PAUL\'S MEMORY SYSTEM v2.0'),
+        }, 'Loading comic...'),
         
-        React.createElement('div', {
-          key: 'boot-phase',
-          style: {
-            fontFamily: 'monospace',
-            textAlign: 'center',
-            marginBottom: '15px',
-            fontSize: '12px',
-            opacity: 0.8,
-            textTransform: 'uppercase',
-            letterSpacing: '1px'
-          }
-        }, `Phase: ${bootPhase}`),
-        
-        React.createElement('div', {
-          key: 'boot-terminal',
-          style: {
-            fontFamily: 'monospace',
-            background: 'rgba(0, 20, 0, 0.8)',
-            border: '1px solid #00ff00',
-            borderRadius: '8px',
-            padding: '15px',
-            minHeight: '200px',
-            maxHeight: '300px',
-            overflowY: 'auto',
-            color: '#00ff00',
-            maxWidth: '500px',
-            margin: '0 auto'
-          }
-        }, bootMessages.map((message, index) => 
-          React.createElement('div', {
-            key: index,
-            className: index === bootMessages.length - 1 && bootPhase !== 'complete' ? 'terminal-cursor' : '',
-            style: {
-              marginBottom: '4px',
-              animation: 'fadeIn 0.3s ease-in',
-              opacity: 1
-            }
-          }, `> ${message}`)
-        )),
-        
-        React.createElement('div', {
-          key: 'boot-progress',
-          style: {
-            marginTop: '15px',
-            background: 'rgba(255, 255, 255, 0.1)',
-            height: '4px',
-            borderRadius: '2px',
-            overflow: 'hidden',
-            maxWidth: '500px',
-            margin: '15px auto 0'
-          }
-        }, React.createElement('div', {
-          style: {
-            background: '#00ff00',
-            height: '100%',
-            width: bootPhase === 'initializing' ? '25%' : 
-                   bootPhase === 'scanning' ? '50%' : 
-                   bootPhase === 'loading' ? '75%' : '100%',
-            transition: 'width 0.5s ease-out',
-            boxShadow: '0 0 10px #00ff00'
-          }
-        }))
       ]),
       
       error && React.createElement('div', {

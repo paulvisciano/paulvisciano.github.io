@@ -44,10 +44,6 @@
       navigator.serviceWorker.addEventListener('message', event => {
         if (event.data.type === 'SW_UPDATED') {
           console.log('Service Worker updated to version:', event.data.version);
-        if (event.data.emergency > 0) {
-          console.log('Emergency cache bust detected, but NOT auto-clearing to prevent loops');
-          // Don't automatically clear - just log for now
-        }
         }
       });
 
@@ -87,26 +83,10 @@
     window.addEventListener('unhandledrejection', event => {
       console.error('Unhandled promise rejection:', event.reason);
       if (event.reason && event.reason.message && event.reason.message.includes('cache')) {
-        console.warn('Cache-related error detected, may need emergency clear');
+        console.warn('Cache-related error detected');
       }
     });
 
-    // Triple-click to show debug panel
-    let clickCount = 0;
-    let clickTimer = null;
-    document.addEventListener('click', () => {
-      clickCount++;
-      if (clickCount === 1) {
-        clickTimer = setTimeout(() => {
-          clickCount = 0;
-        }, 1000);
-      } else if (clickCount === 3) {
-        clearTimeout(clickTimer);
-        clickCount = 0;
-        console.log('Triple-click detected, showing debug panel');
-        document.getElementById('debug-panel').style.display = 'block';
-      }
-    });
   </script>
 </head>
 <body>

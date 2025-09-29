@@ -124,93 +124,36 @@ self.addEventListener('fetch', event => {
               if (cachedResponse) {
                 return cachedResponse;
               }
-              // Last resort: return basic HTML to prevent black screen
+              // Last resort: return simple fallback
               return new Response(`
                 <!DOCTYPE html>
                 <html>
                 <head>
-                  <title>Paul's Memory System - Emergency Boot</title>
+                  <title>Loading...</title>
                   <meta charset="utf-8">
                   <style>
                     body { 
-                      font-family: monospace; 
-                      background: #000; 
-                      color: #00ff00; 
-                      padding: 20px;
+                      font-family: system-ui, sans-serif; 
+                      background: #f0f0f0; 
+                      color: #333; 
+                      padding: 40px;
                       margin: 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      min-height: 100vh;
+                      text-align: center;
                     }
-                    .terminal { 
-                      border: 1px solid #00ff00; 
-                      border-radius: 8px; 
-                      padding: 20px; 
-                      background: rgba(0, 20, 0, 0.8);
-                      max-width: 600px;
-                      margin: 50px auto;
-                    }
-                    .blink { animation: blink 1s infinite; }
-                    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
-                    button { 
-                      background: #00ff00; 
-                      color: #000; 
-                      border: none; 
-                      padding: 10px 20px; 
-                      margin: 10px; 
-                      cursor: pointer; 
-                      font-family: monospace;
-                      border-radius: 4px;
+                    .loading { 
+                      font-size: 18px;
+                      color: #666;
                     }
                   </style>
                 </head>
                 <body>
-                  <div class="terminal">
-                    <div>🧠 PAUL'S MEMORY SYSTEM v2.0 - EMERGENCY MODE</div>
-                    <br>
-                    <div>> System Status: OFFLINE</div>
-                    <div>> Memory Bank: DISCONNECTED</div>
-                    <div>> Cache: CORRUPTED</div>
-                    <div>> Initiating emergency protocols...</div>
-                    <br>
-                    <div class="blink">> Attempting memory recovery...</div>
-                    <br>
-                    <div>Emergency Actions:</div>
-                    <button onclick="location.reload(true)">🔄 Force Refresh</button>
-                    <button onclick="clearAllCachesAndReload()">🗑️ Clear Cache</button>
-                    <button onclick="window.location.href = '/?nocache=' + Date.now()">🚀 Fresh Start</button>
-                    <script>
-                      async function clearAllCachesAndReload() {
-                        try {
-                          console.log('Emergency: Clearing all caches...');
-                          if ('caches' in window) {
-                            const cacheNames = await caches.keys();
-                            await Promise.all(cacheNames.map(name => caches.delete(name)));
-                            console.log('All caches cleared');
-                          }
-                          if ('serviceWorker' in navigator) {
-                            const registrations = await navigator.serviceWorker.getRegistrations();
-                            await Promise.all(registrations.map(reg => reg.unregister()));
-                            console.log('All service workers unregistered');
-                          }
-                          // Force reload with cache bypass
-                          window.location.reload(true);
-                        } catch (error) {
-                          console.error('Emergency clear failed:', error);
-                          // Last resort - redirect to fresh URL
-                          window.location.href = '/?emergency=' + Date.now();
-                        }
-                      }
-                    </script>
-                  </div>
+                  <div class="loading">Loading...</div>
                   <script>
-                    let attempts = 0;
-                    const maxAttempts = 3;
-                    const retry = () => {
-                      attempts++;
-                      if (attempts <= maxAttempts) {
-                        console.log('Emergency recovery attempt', attempts);
-                        setTimeout(() => location.reload(true), 2000);
-                      }
-                    };
-                    retry();
+                    setTimeout(() => window.location.reload(), 1000);
                   </script>
                 </body>
                 </html>
