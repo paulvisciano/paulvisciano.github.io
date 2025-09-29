@@ -394,6 +394,7 @@ window.ComicReader = ({ content, onClose }) => {
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        height: calc(100vh - 60px); /* Account for bottom navigation height */
       `;
       
       if (pageIndex >= 0 && pageIndex < currentPages.length) {
@@ -416,7 +417,7 @@ window.ComicReader = ({ content, onClose }) => {
       const bottomNav = document.createElement('div');
       bottomNav.style.cssText = `
         height: 60px;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.9);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -425,6 +426,7 @@ window.ComicReader = ({ content, onClose }) => {
         bottom: 0;
         left: 0;
         right: 0;
+        z-index: 10;
       `;
       
       // Previous button
