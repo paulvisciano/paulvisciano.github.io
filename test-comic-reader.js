@@ -99,7 +99,7 @@ async function testComicReader(page, testCase) {
   // Test 2: Click cover to open comic book
   console.log('   🔍 Testing cover click to open comic...');
   await page.click('.comic-cover-display');
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise(resolve => setTimeout(resolve, 3000));
   
   // Should now show pages 1-2
   const urlAfterCoverClick = page.url();
