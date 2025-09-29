@@ -35,8 +35,18 @@ window.ComicReader = ({ content, onClose }) => {
   const coverRef = React.useRef(null);
   const currentPageRef = React.useRef(1);
   
-  // Check if mobile device
-  const isMobile = window.innerWidth <= 768;
+  // Check if mobile device - use state to make it reactive
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  
+  // Update mobile state on window resize
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   // Keep ref in sync with state
   React.useEffect(() => {
@@ -298,7 +308,7 @@ window.ComicReader = ({ content, onClose }) => {
         top: 0;
         left: 0;
         width: ${isMobile ? '100%' : '50%'};
-        height: ${isMobile ? '100vh' : '100%'};
+        height: ${isMobile ? 'calc(100vh - 60px)' : '100%'};
         overflow: hidden;
         background: #000;
         display: flex;
@@ -394,7 +404,7 @@ window.ComicReader = ({ content, onClose }) => {
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        height: calc(100vh - 60px); /* Account for bottom navigation height */
+        height: 100%; /* Use full height of parent container */
       `;
       
       if (pageIndex >= 0 && pageIndex < currentPages.length) {
@@ -413,87 +423,8 @@ window.ComicReader = ({ content, onClose }) => {
         pageContent.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${pageNumber}</div>`;
       }
       
-      // Create bottom navigation
-      const bottomNav = document.createElement('div');
-      bottomNav.style.cssText = `
-        height: 60px;
-        background: rgba(0, 0, 0, 0.9);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 20px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 10;
-      `;
-      
-      // Previous button
-      const prevBtn = document.createElement('button');
-      prevBtn.innerHTML = '←';
-      prevBtn.style.cssText = `
-        background: #ff4757;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        pointer-events: auto;
-      `;
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        previousPage();
-      });
-      
-      // Page indicator
-      const pageIndicator = document.createElement('div');
-      pageIndicator.style.cssText = `
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-      `;
-      pageIndicator.textContent = `${pageNumber} / ${currentPages.length}`;
-      
-      // Next button
-      const nextBtn = document.createElement('button');
-      const hasNextPage = pageNumber < currentPages.length;
-      const hasNextEpisode = getNextEpisode() !== null;
-      const canNavigate = hasNextPage || hasNextEpisode;
-      
-      nextBtn.innerHTML = hasNextPage ? '→' : (hasNextEpisode ? '⏭' : '→');
-      nextBtn.style.cssText = `
-        background: #ff4757;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: ${canNavigate ? '1' : '0.5'};
-        pointer-events: ${canNavigate ? 'auto' : 'none'};
-      `;
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextPage();
-      });
-      
-      bottomNav.appendChild(prevBtn);
-      bottomNav.appendChild(pageIndicator);
-      bottomNav.appendChild(nextBtn);
-      
+      // Mobile navigation is now handled at the overlay level
       pageContainer.appendChild(pageContent);
-      pageContainer.appendChild(bottomNav);
       leftPage.appendChild(pageContainer);
     } else {
       // Desktop: show two-page spread
@@ -692,7 +623,8 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const comicContainerStyle = {
-    position: 'relative',
+    position: 'absolute',
+    top: 0,
     background: '#000',
     borderRadius: isMobile ? '0' : '15px',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
@@ -729,7 +661,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   const flipbookStyle = {
     width: isMobile ? '100vw' : '1200px',
-    height: isMobile ? '100vh' : '900px',
+    height: isMobile ? 'calc(100vh - 60px)' : '900px',
     margin: isMobile ? '0' : '0 auto',
     display: showCover || isLoading ? 'none' : 'flex',
     background: '#000',
@@ -973,7 +905,8 @@ window.ComicReader = ({ content, onClose }) => {
         className: 'flipbook'
       }),
       
-      !error && !isLoading && flipbookReady && !showCover && React.createElement('div', {
+      // Desktop controls (hidden on mobile)
+      !error && !isLoading && flipbookReady && !showCover && !isMobile && React.createElement('div', {
         key: 'controls',
         style: controlsStyle,
         className: 'comic-controls'
@@ -1003,6 +936,78 @@ window.ComicReader = ({ content, onClose }) => {
           disabled: currentPage === totalPages && !getNextEpisode(),
           title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
         }, currentPage === totalPages && getNextEpisode() ? '⏭' : '›')
+      ]),
+      
+      // Mobile navigation (only on mobile)
+      !error && !isLoading && flipbookReady && !showCover && isMobile && React.createElement('div', {
+        key: 'mobile-nav',
+        style: {
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '60px',
+          background: 'rgba(0, 0, 0, 0.9)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 10px',
+          zIndex: 10001,
+          width: '100vw',
+          marginBottom: '10px'
+        },
+        className: 'mobile-comic-nav'
+      }, [
+        React.createElement('button', {
+          key: 'mobile-prev',
+          style: {
+            background: '#ff4757',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            fontSize: '18px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: 1,
+            pointerEvents: 'auto',
+            marginLeft: '10px'
+          },
+          onClick: previousPage,
+          title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
+        }, '←'),
+        React.createElement('div', {
+          key: 'mobile-indicator',
+          style: {
+            color: 'white',
+            fontSize: '14px',
+            fontWeight: 'bold'
+          }
+        }, `${currentPage} / ${totalPages}`),
+        React.createElement('button', {
+          key: 'mobile-next',
+          style: {
+            background: '#ff4757',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            fontSize: '18px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: 1,
+            pointerEvents: 'auto',
+            marginRight: '25px'
+          },
+          onClick: nextPage,
+          title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
+        }, currentPage === totalPages && getNextEpisode() ? '⏭' : '→')
       ])
     ])
   ]);
