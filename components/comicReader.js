@@ -35,6 +35,9 @@ window.ComicReader = ({ content, onClose }) => {
   const coverRef = React.useRef(null);
   const currentPageRef = React.useRef(1);
   
+  // Check if mobile device
+  const isMobile = window.innerWidth <= 768;
+  
   // Keep ref in sync with state
   React.useEffect(() => {
     currentPageRef.current = currentPage;
@@ -255,8 +258,8 @@ window.ComicReader = ({ content, onClose }) => {
         position: absolute;
         top: 0;
         left: 0;
-        width: 50%;
-        height: 100%;
+        width: ${isMobile ? '100%' : '50%'};
+        height: ${isMobile ? '100vh' : '100%'};
         overflow: hidden;
         background: #000;
         display: flex;
@@ -264,7 +267,7 @@ window.ComicReader = ({ content, onClose }) => {
         justify-content: center;
       `;
       
-      // Create right page
+      // Create right page (only show on desktop)
       const rightPage = document.createElement('div');
       rightPage.className = 'simple-flipbook-page right-page';
       rightPage.style.cssText = `
@@ -275,7 +278,7 @@ window.ComicReader = ({ content, onClose }) => {
         height: 100%;
         overflow: hidden;
         background: #000;
-        display: flex;
+        display: ${isMobile ? 'none' : 'flex'};
         align-items: center;
         justify-content: center;
       `;
@@ -319,59 +322,182 @@ window.ComicReader = ({ content, onClose }) => {
     const leftPage = flipbookRef.current.querySelector('.left-page');
     const rightPage = flipbookRef.current.querySelector('.right-page');
     
-    if (!leftPage || !rightPage) return;
+    if (!leftPage) return;
     
     // Get current pages directly instead of using state
     const currentPages = getPages();
     
-    // Calculate which pages to show (1-based page numbers)
-    // For a two-page spread, if we're on page N, we show pages N and N+1
-    const leftPageIndex = pageNumber - 1; // 0-based index for left page
-    const rightPageIndex = pageNumber; // 0-based index for right page
-    
     // Clear existing content
     leftPage.innerHTML = '';
-    rightPage.innerHTML = '';
+    if (rightPage) rightPage.innerHTML = '';
     
-    // Add left page image
-    if (leftPageIndex >= 0 && leftPageIndex < currentPages.length) {
-      const leftImg = document.createElement('img');
-      leftImg.src = currentPages[leftPageIndex];
-      leftImg.alt = `Page ${leftPageIndex + 1}`;
-      leftImg.style.cssText = `
+    if (isMobile) {
+      // Mobile: show only one page at a time with bottom navigation
+      const pageIndex = pageNumber - 1; // 0-based index
+      
+      // Create container for page and navigation
+      const pageContainer = document.createElement('div');
+      pageContainer.style.cssText = `
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        display: block;
+        position: relative;
+        display: flex;
+        flex-direction: column;
       `;
-      leftImg.onerror = () => {};
-      leftPage.appendChild(leftImg);
+      
+      // Create page content area
+      const pageContent = document.createElement('div');
+      pageContent.style.cssText = `
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      `;
+      
+      if (pageIndex >= 0 && pageIndex < currentPages.length) {
+        const img = document.createElement('img');
+        img.src = currentPages[pageIndex];
+        img.alt = `Page ${pageNumber}`;
+        img.style.cssText = `
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        `;
+        img.onerror = () => {};
+        pageContent.appendChild(img);
+      } else {
+        pageContent.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${pageNumber}</div>`;
+      }
+      
+      // Create bottom navigation
+      const bottomNav = document.createElement('div');
+      bottomNav.style.cssText = `
+        height: 60px;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      `;
+      
+      // Previous button
+      const prevBtn = document.createElement('button');
+      prevBtn.innerHTML = '←';
+      prevBtn.style.cssText = `
+        background: #ff4757;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: ${pageNumber > 1 ? '1' : '0.5'};
+        pointer-events: ${pageNumber > 1 ? 'auto' : 'none'};
+      `;
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        previousPage();
+      });
+      
+      // Page indicator
+      const pageIndicator = document.createElement('div');
+      pageIndicator.style.cssText = `
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+      `;
+      pageIndicator.textContent = `${pageNumber} / ${currentPages.length}`;
+      
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.innerHTML = '→';
+      nextBtn.style.cssText = `
+        background: #ff4757;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: ${pageNumber < currentPages.length ? '1' : '0.5'};
+        pointer-events: ${pageNumber < currentPages.length ? 'auto' : 'none'};
+      `;
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextPage();
+      });
+      
+      bottomNav.appendChild(prevBtn);
+      bottomNav.appendChild(pageIndicator);
+      bottomNav.appendChild(nextBtn);
+      
+      pageContainer.appendChild(pageContent);
+      pageContainer.appendChild(bottomNav);
+      leftPage.appendChild(pageContainer);
     } else {
-      // Add a placeholder for out of bounds
-      leftPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${leftPageIndex + 1}</div>`;
+      // Desktop: show two-page spread
+      const leftPageIndex = pageNumber - 1; // 0-based index for left page
+      const rightPageIndex = pageNumber; // 0-based index for right page
+      
+      // Add left page image
+      if (leftPageIndex >= 0 && leftPageIndex < currentPages.length) {
+        const leftImg = document.createElement('img');
+        leftImg.src = currentPages[leftPageIndex];
+        leftImg.alt = `Page ${leftPageIndex + 1}`;
+        leftImg.style.cssText = `
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        `;
+        leftImg.onerror = () => {};
+        leftPage.appendChild(leftImg);
+      } else {
+        leftPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${leftPageIndex + 1}</div>`;
+      }
+      
+      // Add right page image
+      if (rightPage && rightPageIndex >= 0 && rightPageIndex < currentPages.length) {
+        const rightImg = document.createElement('img');
+        rightImg.src = currentPages[rightPageIndex];
+        rightImg.alt = `Page ${rightPageIndex + 1}`;
+        rightImg.style.cssText = `
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        `;
+        rightImg.onload = () => {};
+        rightImg.onerror = (error) => {
+          rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">Page ${rightPageIndex + 1} - Image failed to load</div>`;
+        };
+        rightPage.appendChild(rightImg);
+      } else if (rightPage) {
+        rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${rightPageIndex + 1}</div>`;
+      }
     }
     
-    // Add right page image
-    if (rightPageIndex >= 0 && rightPageIndex < currentPages.length) {
-      const rightImg = document.createElement('img');
-      rightImg.src = currentPages[rightPageIndex];
-      rightImg.alt = `Page ${rightPageIndex + 1}`;
-      rightImg.style.cssText = `
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-      `;
-      rightImg.onload = () => {};
-      rightImg.onerror = (error) => {
-        // Add a placeholder to show something
-        rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">Page ${rightPageIndex + 1} - Image failed to load</div>`;
-      };
-      rightPage.appendChild(rightImg);
-    } else {
-      // Add a placeholder for out of bounds
-      rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${rightPageIndex + 1}</div>`;
+    // Re-add click handlers after updating content
+    if (!isMobile) {
+      // Desktop: left page goes back, right page goes forward
+      leftPage.addEventListener('click', () => previousPage());
+      if (rightPage) rightPage.addEventListener('click', () => nextPage());
     }
+    // Mobile navigation is handled by the bottom navigation buttons
   };
   
   // Turn.js removed - using simple custom implementation
@@ -381,13 +507,24 @@ window.ComicReader = ({ content, onClose }) => {
       // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
       
-      // For two-page spreads, we need to decrement by 2 to show the previous spread
-      const prevSpreadPage = currentPageValue - 2;
-      if (prevSpreadPage >= 1) {
-        setCurrentPage(prevSpreadPage);
-        currentPageRef.current = prevSpreadPage;
-        updateGlobalState({ currentPage: prevSpreadPage });
-        updateSpreadPages(prevSpreadPage);
+      if (isMobile) {
+        // Mobile: go to previous single page
+        const prevPage = currentPageValue - 1;
+        if (prevPage >= 1) {
+          setCurrentPage(prevPage);
+          currentPageRef.current = prevPage;
+          updateGlobalState({ currentPage: prevPage });
+          updateSpreadPages(prevPage);
+        }
+      } else {
+        // Desktop: For two-page spreads, we need to decrement by 2 to show the previous spread
+        const prevSpreadPage = currentPageValue - 2;
+        if (prevSpreadPage >= 1) {
+          setCurrentPage(prevSpreadPage);
+          currentPageRef.current = prevSpreadPage;
+          updateGlobalState({ currentPage: prevSpreadPage });
+          updateSpreadPages(prevSpreadPage);
+        }
       }
     } catch (error) {
       // Silent error handling
@@ -399,13 +536,24 @@ window.ComicReader = ({ content, onClose }) => {
       // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
       
-      // For two-page spreads, we need to increment by 2 to show the next spread
-      const nextSpreadPage = currentPageValue + 2;
-      if (nextSpreadPage <= totalPages) {
-        setCurrentPage(nextSpreadPage);
-        currentPageRef.current = nextSpreadPage;
-        updateGlobalState({ currentPage: nextSpreadPage });
-        updateSpreadPages(nextSpreadPage);
+      if (isMobile) {
+        // Mobile: go to next single page
+        const nextPage = currentPageValue + 1;
+        if (nextPage <= totalPages) {
+          setCurrentPage(nextPage);
+          currentPageRef.current = nextPage;
+          updateGlobalState({ currentPage: nextPage });
+          updateSpreadPages(nextPage);
+        }
+      } else {
+        // Desktop: For two-page spreads, we need to increment by 2 to show the next spread
+        const nextSpreadPage = currentPageValue + 2;
+        if (nextSpreadPage <= totalPages) {
+          setCurrentPage(nextSpreadPage);
+          currentPageRef.current = nextSpreadPage;
+          updateGlobalState({ currentPage: nextSpreadPage });
+          updateSpreadPages(nextSpreadPage);
+        }
       }
     } catch (error) {
       // Silent error handling
@@ -455,27 +603,27 @@ window.ComicReader = ({ content, onClose }) => {
   const comicContainerStyle = {
     position: 'relative',
     background: '#000',
-    borderRadius: '15px',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    borderRadius: isMobile ? '0' : '15px',
+    boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     overflow: 'hidden',
-    maxWidth: '90vw',
-    maxHeight: '90vh'
+    maxWidth: isMobile ? '100vw' : '90vw',
+    maxHeight: isMobile ? '100vh' : '90vh'
   };
 
   const coverDisplayStyle = {
-    width: '500px',
-    height: '667px',
+    width: isMobile ? '100vw' : '500px',
+    height: isMobile ? '100vh' : '667px',
     margin: '0 auto',
     display: showCover ? 'flex' : 'none',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: isVisible ? 'pointer' : 'default',
-    borderRadius: '15px',
+    borderRadius: isMobile ? '0' : '15px',
     overflow: 'hidden',
     background: '#000',
     opacity: isVisible ? 1 : 0,
     transition: 'opacity 1s ease-out',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     willChange: 'opacity',
     pointerEvents: isVisible ? 'auto' : 'none'
   };
@@ -483,18 +631,18 @@ window.ComicReader = ({ content, onClose }) => {
   const coverImageStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: isMobile ? 'contain' : 'cover',
     transition: 'transform 0.2s ease',
     willChange: 'transform'
   };
 
   const flipbookStyle = {
-    width: '1200px',
-    height: '900px',
-    margin: '0 auto',
+    width: isMobile ? '100vw' : '1200px',
+    height: isMobile ? '100vh' : '900px',
+    margin: isMobile ? '0' : '0 auto',
     display: showCover || isLoading ? 'none' : 'flex',
     background: '#000',
-    borderRadius: '10px',
+    borderRadius: isMobile ? '0' : '10px',
     overflow: 'hidden',
     position: 'relative'
   };
@@ -655,18 +803,20 @@ window.ComicReader = ({ content, onClose }) => {
           key: 'cover-overlay',
           style: {
             position: 'absolute',
-            bottom: '20px',
+            bottom: isMobile ? '40px' : '20px',
             left: '50%',
             transform: 'translateX(-50%)',
             background: 'rgba(0, 0, 0, 0.8)',
             color: 'white',
-            padding: '10px 20px',
-            borderRadius: '25px',
-            fontSize: '14px',
+            padding: isMobile ? '15px 30px' : '10px 20px',
+            borderRadius: isMobile ? '15px' : '25px',
+            fontSize: isMobile ? '16px' : '14px',
             fontWeight: 'bold',
-            opacity: 0.9
+            opacity: 0.9,
+            textAlign: 'center',
+            minWidth: isMobile ? '200px' : 'auto'
           }
-        }, '🖱️ Click to open comic book')
+        }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
       ]),
 
       isLoading && !showCover && React.createElement('div', {
@@ -965,38 +1115,7 @@ if (!document.querySelector('#comic-episode-styles')) {
       cursor: grabbing !important;
     }
     
-    @media (max-width: 1100px) {
-      .flipbook {
-        width: 800px !important;
-        height: 600px !important;
-      }
-      .flipbook .page {
-        width: 400px !important;
-        height: 600px !important;
-      }
-    }
-    
-    @media (max-width: 900px) {
-      .flipbook {
-        width: 600px !important;
-        height: 450px !important;
-      }
-      .flipbook .page {
-        width: 300px !important;
-        height: 450px !important;
-      }
-    }
-    
-    @media (max-width: 700px) {
-      .flipbook {
-        width: 400px !important;
-        height: 300px !important;
-      }
-      .flipbook .page {
-        width: 200px !important;
-        height: 300px !important;
-      }
-    }
   `;
   document.head.appendChild(style);
 }
+
