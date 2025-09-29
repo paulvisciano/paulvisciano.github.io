@@ -110,6 +110,28 @@ window.ComicReader = ({ content, onClose }) => {
     
     return pagesArray;
   };
+
+  // Function to find the next episode in the series
+  const getNextEpisode = () => {
+    if (!episodeData || !window.momentsInTime) {
+      return null;
+    }
+
+    const currentEpisodeId = episodeData.id;
+    const currentDate = episodeData.date;
+    
+    // Find episodes that are comics and come after the current episode
+    const futureComics = window.momentsInTime
+      .filter(moment => 
+        moment.isComic && 
+        moment.date > currentDate &&
+        moment.id !== currentEpisodeId
+      )
+      .sort((a, b) => a.date - b.date);
+
+    // Return the next comic episode, if any
+    return futureComics.length > 0 ? futureComics[0] : null;
+  };
   
   // Update pages when episode data changes
   React.useEffect(() => {
@@ -204,7 +226,7 @@ window.ComicReader = ({ content, onClose }) => {
         updateGlobalState({ isVisible: true, isLoading: false });
       }
     }, 500);
-  }, []);
+  }, [episodeData]); // Add episodeData as dependency so it runs when episode changes
   
 
   // Function to transition from cover to flipbook
@@ -420,7 +442,11 @@ window.ComicReader = ({ content, onClose }) => {
       
       // Next button
       const nextBtn = document.createElement('button');
-      nextBtn.innerHTML = '→';
+      const hasNextPage = pageNumber < currentPages.length;
+      const hasNextEpisode = getNextEpisode() !== null;
+      const canNavigate = hasNextPage || hasNextEpisode;
+      
+      nextBtn.innerHTML = hasNextPage ? '→' : (hasNextEpisode ? '⏭' : '→');
       nextBtn.style.cssText = `
         background: #ff4757;
         color: white;
@@ -433,8 +459,8 @@ window.ComicReader = ({ content, onClose }) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: ${pageNumber < currentPages.length ? '1' : '0.5'};
-        pointer-events: ${pageNumber < currentPages.length ? 'auto' : 'none'};
+        opacity: ${canNavigate ? '1' : '0.5'};
+        pointer-events: ${canNavigate ? 'auto' : 'none'};
       `;
       nextBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -544,6 +570,9 @@ window.ComicReader = ({ content, onClose }) => {
           currentPageRef.current = nextPage;
           updateGlobalState({ currentPage: nextPage });
           updateSpreadPages(nextPage);
+        } else {
+          // Reached end of current episode, try to load next episode
+          loadNextEpisode();
         }
       } else {
         // Desktop: For two-page spreads, we need to increment by 2 to show the next spread
@@ -553,10 +582,45 @@ window.ComicReader = ({ content, onClose }) => {
           currentPageRef.current = nextSpreadPage;
           updateGlobalState({ currentPage: nextSpreadPage });
           updateSpreadPages(nextSpreadPage);
+        } else {
+          // Reached end of current episode, try to load next episode
+          loadNextEpisode();
         }
       }
     } catch (error) {
       // Silent error handling
+    }
+  };
+
+  // Function to load the next episode in the series
+  const loadNextEpisode = () => {
+    const nextEpisode = getNextEpisode();
+    if (nextEpisode) {
+      // Reset state for new episode
+      setCurrentPage(1);
+      currentPageRef.current = 1;
+      setShowCover(true);
+      setIsVisible(false);
+      setFlipbookReady(false);
+      flipbookCreatedRef.current = false;
+      
+      // Update episode data - this will trigger the loading sequence
+      setEpisodeData(nextEpisode);
+      updateGlobalState({
+        episodeData: nextEpisode,
+        currentPage: 1,
+        flipbookCreated: false,
+        flipbookReady: false,
+        isVisible: false,
+        isLoading: true
+      });
+      
+      // Update URL to new episode
+      window.history.pushState({}, '', nextEpisode.fullLink);
+      
+      // Trigger the loading sequence by setting loading to true
+      // The existing useEffect will handle the rest
+      setIsLoading(true);
     }
   };
 
@@ -906,13 +970,13 @@ window.ComicReader = ({ content, onClose }) => {
           key: 'next',
           style: {
             ...controlBtnStyle,
-            opacity: currentPage === totalPages ? 0.5 : 1,
-            cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'
+            opacity: (currentPage === totalPages && !getNextEpisode()) ? 0.5 : 1,
+            cursor: (currentPage === totalPages && !getNextEpisode()) ? 'not-allowed' : 'pointer'
           },
           onClick: nextPage,
-          disabled: currentPage === totalPages,
-          title: 'Next Page'
-        }, '›')
+          disabled: currentPage === totalPages && !getNextEpisode(),
+          title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
+        }, currentPage === totalPages && getNextEpisode() ? '⏭' : '›')
       ])
     ])
   ]);
