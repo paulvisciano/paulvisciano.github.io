@@ -780,16 +780,16 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
     {
-      id: "istanbul-episode-2-2025-09-25",
+      id: "istanbul-episode-2-2025-09-24",
       title: "Istanbul Episode 2: Crossroads of Cultures",
-      date: new Date('2025-09-25T00:00:00Z'),
+      date: new Date('2025-09-24T00:00:00Z'),
       timelineHighlight: "Istanbul Ep 2",
       tags: ["istanbul", "comic book", "turkey", "culture", "history", "bosphorus", "hagia sophia", "grand bazaar"],
       snippet: "Episode 2: Crossroads of Cultures - A comic book journey through Istanbul's most iconic landmarks. From the majestic Hagia Sophia to the bustling Grand Bazaar, experience the city where East meets West in this immersive visual storytelling adventure.",
-      image: "attachment:///moments/istanbul/2025-09-25/cover.png",
+      image: "attachment:///moments/istanbul/2025-09-24/cover.png",
       imageAlt: "Istanbul Episode 2: Crossroads of Cultures",
       caption: "Crossroads of Cultures - Where East Meets West",
-      fullLink: "/moments/istanbul/2025-09-25/",
+      fullLink: "/moments/istanbul/2025-09-24/",
       isComic: true,
       pageCount: 16, // Istanbul Episode 2 has 16 pages (1-16)
       location: { lat: 41.0082, lng: 28.9784, name: "Istanbul, Turkey" },
