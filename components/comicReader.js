@@ -308,7 +308,7 @@ window.ComicReader = ({ content, onClose }) => {
         top: 0;
         left: 0;
         width: ${isMobile ? '100%' : '50%'};
-        height: ${isMobile ? 'calc(100vh - 60px)' : '100%'};
+        height: ${isMobile ? '100%' : '100%'};
         overflow: hidden;
         background: #000;
         display: flex;
@@ -613,7 +613,7 @@ window.ComicReader = ({ content, onClose }) => {
     top: 0,
     left: 0,
     width: '100vw',
-    height: '100vh',
+    height: '100%',
     background: 'rgba(0, 0, 0, 0.4)', // Better balance
     display: 'flex',
     alignItems: 'center',
@@ -630,12 +630,16 @@ window.ComicReader = ({ content, onClose }) => {
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     overflow: 'hidden',
     maxWidth: isMobile ? '100vw' : '90vw',
-    maxHeight: isMobile ? '100vh' : '90vh'
+    maxHeight: isMobile ? '100%' : '90vh',
+    height: '100%',
+    minHeight: '400px',
+    display: 'flex',
+    flexDirection: 'column'
   };
 
   const coverDisplayStyle = {
     width: isMobile ? '100vw' : '500px',
-    height: isMobile ? '100vh' : '667px',
+    height: isMobile ? '100%' : '667px',
     margin: '0 auto',
     display: showCover ? 'flex' : 'none',
     alignItems: 'center',
@@ -661,7 +665,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   const flipbookStyle = {
     width: isMobile ? '100vw' : '1200px',
-    height: isMobile ? 'calc(100vh - 60px)' : '900px',
+    height: isMobile ? 'calc(100% - 60px)' : '900px',
     margin: isMobile ? '0' : '0 auto',
     display: showCover || isLoading ? 'none' : 'flex',
     background: '#000',
@@ -726,11 +730,15 @@ window.ComicReader = ({ content, onClose }) => {
 
   const loadingStyle = {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     color: 'white',
     fontSize: '18px',
-    padding: '60px'
+    padding: '60px',
+    width: '100%',
+    height: '100%',
+    minHeight: '400px'
   };
 
   const coverLoadingStyle = {
@@ -842,6 +850,7 @@ window.ComicReader = ({ content, onClose }) => {
         }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
       ]),
 
+      // Loading state (inside container)
       isLoading && !showCover && React.createElement('div', {
         key: 'loading',
         style: loadingStyle
@@ -859,8 +868,7 @@ window.ComicReader = ({ content, onClose }) => {
             fontSize: '16px',
             fontWeight: 'bold'
           }
-        }, 'Loading comic...'),
-        
+        }, 'Loading comic...')
       ]),
       
       error && React.createElement('div', {
