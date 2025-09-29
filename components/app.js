@@ -103,10 +103,47 @@ window.App = () => {
         zoomCallback(moment); // Trigger zoom to the moment's location
       }
       // Normalize and update the URL only if it doesn't already match
-      const intendedPath = moment.fullLink.startsWith('/') ? moment.fullLink : `/moments/${moment.fullLink}`;
+      let intendedPath;
+      if (moment.fullLink === '#') {
+        // For moments with no specific page, generate a proper URL based on location and date
+        // Extract city name from moment title (look for patterns like "in Chicago", "at Miami", etc.)
+        let locationSlug;
+        const title = moment.title.toLowerCase();
+        
+        // Try to extract city name from common patterns
+        const cityMatch = title.match(/(?:in|at|to|from)\s+([a-z\s]+?)(?:\s|$|,|\.|!|\?)/);
+        if (cityMatch) {
+          locationSlug = cityMatch[1].trim()
+            .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+            .replace(/\s+/g, '-') // Replace spaces with hyphens
+            .replace(/-+/g, '-') // Replace multiple hyphens with single
+            .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+        } else {
+          // Fallback to using the full title if no city pattern found
+          locationSlug = moment.title.toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+            .replace(/\s+/g, '-') // Replace spaces with hyphens
+            .replace(/-+/g, '-') // Replace multiple hyphens with single
+            .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+        }
+        
+        const date = new Date(moment.date);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        
+        intendedPath = `/moments/${locationSlug}/${year}-${month}-${day}/`;
+      } else if (moment.fullLink.startsWith('/')) {
+        intendedPath = moment.fullLink;
+      } else {
+        intendedPath = `/moments/${moment.fullLink}`;
+      }
+      
       const currentPath = window.location.pathname;
       if (currentPath !== intendedPath) {
-        window.history.pushState({ momentId: moment.id }, '', intendedPath);
+        // For comic moments, preserve the hash; for non-comic moments, don't add hash
+        const fullUrl = isComicEpisode(moment) ? intendedPath + window.location.hash : intendedPath;
+        window.history.pushState({ momentId: moment.id }, '', fullUrl);
       }
     } else {
       updateOverlayMessage('Looking for Paul'); // Default message
@@ -230,15 +267,38 @@ window.App = () => {
     if (pathFromQuery) {
       path = pathFromQuery;
       // Clean up the URL to remove the query parameter and set the correct path
-      window.history.replaceState({}, '', path);
+      // Preserve the hash if it exists
+      const fullPath = path + window.location.hash;
+      window.history.replaceState({}, '', fullPath);
     }
 
     const match = path.match(/^\/moments\/(.+)/);
     if (match) {
       const pathSegment = match[1];
-      // First try to find by fullLink (checking both full path and path segment), then fall back to id for backward compatibility
-      const moment = window.momentsInTime.find(m => m.fullLink === path || m.fullLink === `/moments/${pathSegment}`) || 
-                    window.momentsInTime.find(m => m.id === pathSegment);
+      
+      // Strip hash from pathSegment for moment lookup
+      const pathSegmentWithoutHash = pathSegment.split('#')[0];
+      
+      // First try to find by exact fullLink match
+      let moment = window.momentsInTime.find(m => m.fullLink === path);
+      
+      // If no exact match, try to find by base path (for comic moments with hash)
+      if (!moment) {
+        moment = window.momentsInTime.find(m => {
+          if (m.fullLink && m.fullLink.includes('#')) {
+            const basePath = m.fullLink.split('#')[0];
+            return basePath === `/moments/${pathSegmentWithoutHash}`;
+          }
+          return false;
+        });
+      }
+      
+      // If still no match, try by path segment
+      if (!moment) {
+        moment = window.momentsInTime.find(m => m.fullLink === `/moments/${pathSegmentWithoutHash}`) || 
+                window.momentsInTime.find(m => m.id === pathSegmentWithoutHash);
+      }
+      
       if (moment) {
         updateOverlayMessage(`Exploring ${moment.title}`); // Set moment-specific message upfront
         handleMomentSelection(moment); // Use the unified logic to select and zoom
@@ -258,8 +318,18 @@ window.App = () => {
       });
 
       if (currentMoment) {
-        updateOverlayMessage(`Exploring ${currentMoment.title}`); // Set moment-specific message upfront
-        handleMomentSelection(currentMoment); // Use the unified logic to select and zoom
+        // Simulate clicking on the timeline element for this moment
+        const timelineElement = document.querySelector(`[data-id="${currentMoment.id}"]`);
+        if (timelineElement) {
+          // Add a small delay to ensure event handlers are attached
+          setTimeout(() => {
+            timelineElement.click();
+          }, 100);
+        } else {
+          // Fallback to direct selection if timeline element not found
+          updateOverlayMessage(`Exploring ${currentMoment.title}`);
+          handleMomentSelection(currentMoment);
+        }
       } else {
         updateOverlayMessage('Looking for Paul'); // Default message
       }

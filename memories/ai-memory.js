@@ -118,8 +118,7 @@ window.aiMemory = {
         "moments/bangkok/2025-09-16/cover.png",
         "moments/bangkok/2025-09-16/page-01.png through page-07.png",
         "moments/moments.js",
-        "components/comicEpisodeDrawer.js",
-        "components/comicEpisodeDrawer-simple.js",
+        "components/comicReader.js",
         "components/episodeNavigation.js",
         "components/interactive-episode.html",
         "components/app.js"

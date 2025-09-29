@@ -405,7 +405,18 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
           globeInstance.current.controls().autoRotate = false;
 
           // Sort points by date (descending) and select the most recent
-          const sortedPoints = hex.points.sort((a, b) => new Date(b.date) - new Date(a.date));
+          // If multiple points have the same date, prefer comic moments
+          const sortedPoints = hex.points.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            if (dateA.getTime() === dateB.getTime()) {
+              // Same date - prefer comic moments
+              const aIsComic = window.momentsInTime.find(m => m.id === a.id)?.isComic || false;
+              const bIsComic = window.momentsInTime.find(m => m.id === b.id)?.isComic || false;
+              return bIsComic - aIsComic; // Comic moments first
+            }
+            return dateB - dateA; // Most recent first
+          });
           const post = sortedPoints[0];
           if (post && post.id) {
             setSelectedId(post.id);
@@ -916,10 +927,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }),
     isBlogDrawerOpen && blogPostContent && (
       isComicEpisode(blogPostContent.postId || '', blogPostContent.title)
-        ? React.createElement(window.ComicEpisodeDrawerSimple, {
-            content: blogPostContent,
-            onClose: () => setIsBlogDrawerOpen(false)
-          })
+        ? React.createElement(
+            window.ComicReader, 
+            {
+              content: blogPostContent,
+              onClose: () => setIsBlogDrawerOpen(false)
+            }
+          )
         : isInteractiveEpisode(blogPostContent.postId || '', blogPostContent.title) 
           ? React.createElement(window.InteractiveEpisodeDrawer, {
               content: blogPostContent,
