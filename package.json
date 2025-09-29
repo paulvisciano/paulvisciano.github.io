@@ -1,8 +1,10 @@
 {
   "dependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "puppeteer": "^24.22.3"
   },
   "scripts": {
-    "remember": "node memories/remember.js"
+    "remember": "node memories/remember.js",
+    "test:comic": "node test-comic-reader.js"
   }
 }

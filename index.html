@@ -35,36 +35,8 @@
   <link rel="stylesheet" href="components/footer.css">
   <link rel="stylesheet" href="components/globe.css">
 
-  <!-- Service Worker Registration with Emergency Cache Clearing -->
+  <!-- Service Worker Registration -->
   <script>
-    // Emergency cache clear function
-    window.emergencyCacheClear = async () => {
-      console.log('Emergency cache clear initiated...');
-      if ('caches' in window) {
-        const cacheNames = await caches.keys();
-        await Promise.all(cacheNames.map(name => caches.delete(name)));
-        console.log('All caches cleared');
-      }
-      if ('serviceWorker' in navigator) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        await Promise.all(registrations.map(reg => reg.unregister()));
-        console.log('All service workers unregistered');
-      }
-      window.location.reload(true);
-    };
-
-    // Check for black screen and auto-recover (DISABLED to prevent loops)
-    let blackScreenTimer = setTimeout(() => {
-      if (!document.body || document.body.children.length === 0) {
-        console.warn('Potential black screen detected, but NOT auto-clearing to prevent loops');
-        // Just log for now - user can manually use triple-click debug panel
-      }
-    }, 5000);
-
-    // Clear timer when content loads
-    window.addEventListener('DOMContentLoaded', () => {
-      clearTimeout(blackScreenTimer);
-    });
 
     // Temporarily disable service worker to prevent issues
     if (false && 'serviceWorker' in navigator) {
@@ -142,13 +114,6 @@
     <div class="overlay-message" id="overlay-message"></div>
   </div>
   
-  <!-- Emergency Debug Panel (hidden by default) -->
-  <div id="debug-panel" style="display: none; position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.9); color: white; padding: 15px; border-radius: 8px; z-index: 10001; font-family: monospace; font-size: 12px;">
-    <div style="margin-bottom: 10px; font-weight: bold;">🚨 Emergency Debug Panel</div>
-    <button onclick="window.emergencyCacheClear()" style="background: #ff4757; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px;">Clear All Caches</button>
-    <button onclick="document.getElementById('debug-panel').style.display='none'" style="background: #666; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Close</button>
-    <div style="margin-top: 8px; font-size: 10px; opacity: 0.7;">Use this if you're stuck on a black screen</div>
-  </div>
   <div id="root"></div>
   <!-- Globe Div at Root Level -->
   <div id="globeViz"></div>
@@ -179,8 +144,7 @@
   <script type="text/babel" defer src="components/globe.js"></script>
   <script type="text/babel" defer src="components/blogPostDrawer.js"></script>
   <script type="text/babel" defer src="components/interactiveEpisodeDrawer.js"></script>
-  <script type="text/babel" defer src="components/comicEpisodeDrawer.js"></script>
-  <script type="text/babel" defer src="components/comicEpisodeDrawer-simple.js"></script>
+  <script type="text/babel" defer src="components/comicReader.js"></script>
   <script type="text/babel" defer src="components/footer.js"></script>
   <script type="text/babel" defer src="components/app.js"></script>
   <script defer src="components/episodeNavigation.js"></script>
