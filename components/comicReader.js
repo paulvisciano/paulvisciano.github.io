@@ -238,6 +238,23 @@ window.ComicReader = ({ content, onClose }) => {
     setFlipbookReady(true);
   };
 
+  // Function to go back to cover from first page
+  const goBackToCover = () => {
+    setShowCover(true);
+    setFlipbookReady(false);
+    setIsLoading(false);
+    setCurrentPage(1);
+    currentPageRef.current = 1;
+    flipbookCreatedRef.current = false; // Reset flipbook creation flag
+    updateGlobalState({ 
+      showCover: true, 
+      flipbookReady: false, 
+      isLoading: false, 
+      currentPage: 1,
+      flipbookCreated: false // Reset global flipbook creation flag
+    });
+  };
+
 
 
   const createFlipbook = (startPage = 1) => {
@@ -318,9 +335,11 @@ window.ComicReader = ({ content, onClose }) => {
       // Set initial pages
       updateSpreadPages(initialPage);
       
-      // Add click handlers for navigation
-      leftPage.addEventListener('click', () => previousPage());
-      rightPage.addEventListener('click', () => nextPage());
+      // Add click handlers for navigation (desktop only)
+      if (!isMobile) {
+        leftPage.addEventListener('click', () => previousPage());
+        rightPage.addEventListener('click', () => nextPage());
+      }
       
       setIsLoading(false);
       setFlipbookReady(true);
@@ -423,8 +442,8 @@ window.ComicReader = ({ content, onClose }) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: ${pageNumber > 1 ? '1' : '0.5'};
-        pointer-events: ${pageNumber > 1 ? 'auto' : 'none'};
+        opacity: 1;
+        pointer-events: auto;
       `;
       prevBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -541,6 +560,9 @@ window.ComicReader = ({ content, onClose }) => {
           currentPageRef.current = prevPage;
           updateGlobalState({ currentPage: prevPage });
           updateSpreadPages(prevPage);
+        } else if (currentPageValue === 1) {
+          // If on first page, go back to cover
+          goBackToCover();
         }
       } else {
         // Desktop: For two-page spreads, we need to decrement by 2 to show the previous spread
@@ -550,6 +572,9 @@ window.ComicReader = ({ content, onClose }) => {
           currentPageRef.current = prevSpreadPage;
           updateGlobalState({ currentPage: prevSpreadPage });
           updateSpreadPages(prevSpreadPage);
+        } else if (currentPageValue === 1) {
+          // If on first page, go back to cover
+          goBackToCover();
         }
       }
     } catch (error) {
@@ -955,12 +980,11 @@ window.ComicReader = ({ content, onClose }) => {
           key: 'prev',
           style: {
             ...controlBtnStyle,
-            opacity: currentPage === 1 ? 0.5 : 1,
-            cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
+            opacity: 1,
+            cursor: 'pointer'
           },
           onClick: previousPage,
-          disabled: currentPage === 1,
-          title: 'Previous Page'
+          title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
         }, '‹'),
         React.createElement('div', {
           key: 'indicator',
