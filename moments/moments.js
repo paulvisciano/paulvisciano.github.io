@@ -796,6 +796,23 @@ window.momentsInTime = [
       stayDuration: 1,
       formattedDuration: formatDuration(1)
     },
+    {
+      id: "istanbul-episode-3-2025-09-25",
+      title: "Istanbul Episode 3: Layover in the Crossfire",
+      date: new Date('2025-09-25T00:00:00Z'),
+      timelineHighlight: "Istanbul Ep 3",
+      tags: ["istanbul", "comic book", "turkey", "travel", "culture", "layover", "amman", "royal jordanian"],
+      snippet: "Episode 3: Layover in the Crossfire - A comic book journey where saving $300 meant booking a risky route through Amman. From flight deals and car rentals to gym sessions, hookah cafés, Thai massages, and cultural reflections, this Istanbul day captured both hustle and recovery.",
+      image: "attachment:///moments/istanbul/2025-09-25/cover.png",
+      imageAlt: "Istanbul Episode 3: Layover in the Crossfire",
+      caption: "Saving $300 meant an Amman layover in a war zone",
+      fullLink: "/moments/istanbul/2025-09-25/",
+      isComic: true,
+      pageCount: 10, // Istanbul Episode 3 has 10 pages (1-10)
+      location: { lat: 41.0082, lng: 28.9784, name: "Istanbul, Turkey" },
+      stayDuration: 1,
+      formattedDuration: formatDuration(1)
+    },
   {
     id: "amman-2025-09-30",
     title: "Amman Layover - Smart Travel Strategy",
