@@ -36,12 +36,23 @@ window.ComicReader = ({ content, onClose }) => {
   const currentPageRef = React.useRef(1);
   
   // Check if mobile device - use state to make it reactive
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = React.useState(() => {
+    // More robust mobile detection
+    const width = window.innerWidth;
+    const userAgent = navigator.userAgent;
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    const isMobileWidth = width <= 768;
+    return isMobileUA || isMobileWidth;
+  });
   
   // Update mobile state on window resize
   React.useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const width = window.innerWidth;
+      const userAgent = navigator.userAgent;
+      const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+      const isMobileWidth = width <= 768;
+      setIsMobile(isMobileUA || isMobileWidth);
     };
     
     window.addEventListener('resize', handleResize);
@@ -52,6 +63,38 @@ window.ComicReader = ({ content, onClose }) => {
   React.useEffect(() => {
     currentPageRef.current = currentPage;
   }, [currentPage]);
+
+  // Touch/swipe gesture handling for mobile
+  const [touchStart, setTouchStart] = React.useState(null);
+  const [touchEnd, setTouchEnd] = React.useState(null);
+
+  // Minimum swipe distance (in pixels)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null); // Reset touch end
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      // Swipe left = next page
+      nextPage();
+    } else if (isRightSwipe) {
+      // Swipe right = previous page
+      previousPage();
+    }
+  };
   
   
 
@@ -773,7 +816,10 @@ window.ComicReader = ({ content, onClose }) => {
     React.createElement('div', {
       key: 'container',
       style: comicContainerStyle,
-      className: 'comic-episode-container'
+      className: 'comic-episode-container',
+      onTouchStart: isMobile ? onTouchStart : undefined,
+      onTouchMove: isMobile ? onTouchMove : undefined,
+      onTouchEnd: isMobile ? onTouchEnd : undefined
     }, [
       React.createElement('button', {
         key: 'close',
@@ -975,18 +1021,21 @@ window.ComicReader = ({ content, onClose }) => {
             borderRadius: '50%',
             width: '40px',
             height: '40px',
-            fontSize: '18px',
+            fontSize: '20px',
+            fontWeight: 'bold',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             opacity: 1,
             pointerEvents: 'auto',
-            marginLeft: '10px'
+            marginLeft: '10px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+            transition: 'all 0.2s ease'
           },
           onClick: previousPage,
           title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
-        }, '←'),
+        }, '◀'),
         React.createElement('div', {
           key: 'mobile-indicator',
           style: {
@@ -1004,18 +1053,21 @@ window.ComicReader = ({ content, onClose }) => {
             borderRadius: '50%',
             width: '40px',
             height: '40px',
-            fontSize: '18px',
+            fontSize: '20px',
+            fontWeight: 'bold',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             opacity: 1,
             pointerEvents: 'auto',
-            marginRight: '25px'
+            marginRight: '25px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+            transition: 'all 0.2s ease'
           },
           onClick: nextPage,
           title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
-        }, currentPage === totalPages && getNextEpisode() ? '⏭' : '→')
+        }, currentPage === totalPages && getNextEpisode() ? '⏭' : '▶')
       ])
     ])
   ]);
