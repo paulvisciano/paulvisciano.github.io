@@ -255,27 +255,40 @@ window.ComicReader = ({ content, onClose }) => {
       flipbookCreatedRef.current = true; // Mark as created
       updateGlobalState({ flipbookCreated: true }); // Update global state
       
-      // Set loading to false since flipbook is created
+      // Set loading to false since flipbook is created - balanced timing
+      const flipbookDelay = isMobile ? 400 : 500;
       setTimeout(() => {
         setIsLoading(false);
         setIsVisible(true);
         updateGlobalState({ isLoading: false, isVisible: true });
-      }, 500); // Give time for flipbook to initialize
+      }, flipbookDelay);
     }
   }, [flipbookReady, episodeData]);
 
-  // Simple loading sequence
+  // Optimized loading sequence for mobile
   React.useEffect(() => {
-    // Simple loading without the memory system screen
+    if (!episodeData) return;
+    
+    // Show visible state immediately on mobile to prevent flash
+    if (isMobile) {
+      setIsVisible(true);
+      updateGlobalState({ isVisible: true });
+    }
+    
+    const loadingDelay = isMobile ? 300 : 500;
+    
     setTimeout(() => {
       // Only set loading to false if flipbook hasn't been created yet
       if (!flipbookCreatedRef.current) {
-        setIsVisible(true);
+        if (!isMobile) {
+          setIsVisible(true);
+          updateGlobalState({ isVisible: true });
+        }
         setIsLoading(false);
-        updateGlobalState({ isVisible: true, isLoading: false });
+        updateGlobalState({ isLoading: false });
       }
-    }, 500);
-  }, [episodeData]); // Add episodeData as dependency so it runs when episode changes
+    }, loadingDelay);
+  }, [episodeData, isMobile]); // Add isMobile dependency
   
 
   // Function to transition from cover to flipbook
@@ -283,8 +296,11 @@ window.ComicReader = ({ content, onClose }) => {
     setShowCover(false);
     setIsLoading(true);
     
-    // Set flipbook ready to trigger the flipbook creation
-    setFlipbookReady(true);
+    // Show loading immediately, then create flipbook
+    setTimeout(() => {
+      // Set flipbook ready to trigger the flipbook creation
+      setFlipbookReady(true);
+    }, 50); // Minimal delay to ensure loading state is visible
   };
 
   // Function to go back to cover from first page
@@ -677,15 +693,18 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const comicContainerStyle = {
-    position: 'absolute',
+    position: isMobile ? 'fixed' : 'absolute',
     top: 0,
+    left: isMobile ? 0 : 'auto',
+    right: isMobile ? 0 : 'auto',
+    width: isMobile ? '100vw' : 'auto',
+    height: isMobile ? '100vh' : '100%',
     background: '#000',
     borderRadius: isMobile ? '0' : '15px',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     overflow: 'hidden',
     maxWidth: isMobile ? '100vw' : '90vw',
-    maxHeight: isMobile ? '100%' : '90vh',
-    height: '100%',
+    maxHeight: isMobile ? '100vh' : '90vh',
     minHeight: '400px',
     display: 'flex',
     flexDirection: 'column'
@@ -703,7 +722,7 @@ window.ComicReader = ({ content, onClose }) => {
     overflow: 'hidden',
     background: '#000',
     opacity: isVisible ? 1 : 0,
-    transition: 'opacity 1s ease-out',
+    transition: isMobile ? 'opacity 0.5s ease-out' : 'opacity 1s ease-out',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     willChange: 'opacity',
     pointerEvents: isVisible ? 'auto' : 'none'
@@ -788,11 +807,11 @@ window.ComicReader = ({ content, onClose }) => {
     alignItems: 'center',
     justifyContent: 'center',
     color: 'white',
-    fontSize: '18px',
-    padding: '60px',
+    fontSize: isMobile ? '16px' : '18px',
+    padding: isMobile ? '40px 20px' : '60px',
     width: '100%',
     height: '100%',
-    minHeight: '400px'
+    minHeight: isMobile ? '300px' : '400px'
   };
 
   const coverLoadingStyle = {
@@ -800,23 +819,23 @@ window.ComicReader = ({ content, onClose }) => {
     alignItems: 'center',
     justifyContent: 'center',
     color: 'white',
-    fontSize: '18px',
-    padding: '60px',
+    fontSize: isMobile ? '16px' : '18px',
+    padding: isMobile ? '40px 20px' : '60px',
     background: 'rgba(0, 0, 0, 0.02)', // Almost completely transparent
-    borderRadius: '15px',
+    borderRadius: isMobile ? '0' : '15px',
     backdropFilter: 'none', // Remove blur completely
     border: '1px solid rgba(255, 255, 255, 0.1)',
     textShadow: '0 0 15px rgba(0, 0, 0, 1), 0 0 25px rgba(0, 0, 0, 0.8)' // Stronger text shadow for visibility
   };
 
   const loadingSpinnerStyle = {
-    width: '40px',
-    height: '40px',
+    width: isMobile ? '30px' : '40px',
+    height: isMobile ? '30px' : '40px',
     border: '3px solid rgba(255, 255, 255, 0.3)',
     borderTop: '3px solid white',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
-    marginRight: '15px'
+    marginRight: isMobile ? '10px' : '15px'
   };
 
   return React.createElement('div', {
@@ -860,10 +879,10 @@ window.ComicReader = ({ content, onClose }) => {
           style: {
             fontFamily: 'monospace',
             textAlign: 'center',
-            fontSize: '16px',
+            fontSize: isMobile ? '14px' : '16px',
             fontWeight: 'bold'
           }
-        }, 'Loading comic book...')
+        }, isMobile ? 'Loading...' : 'Loading comic book...')
       ]),
 
       showCover && !error && isVisible && React.createElement('div', {
@@ -922,10 +941,10 @@ window.ComicReader = ({ content, onClose }) => {
             fontFamily: 'monospace',
             textAlign: 'center',
             marginBottom: '20px',
-            fontSize: '16px',
+            fontSize: isMobile ? '14px' : '16px',
             fontWeight: 'bold'
           }
-        }, 'Loading comic...')
+        }, isMobile ? 'Loading...' : 'Loading comic...')
       ]),
       
       error && React.createElement('div', {
