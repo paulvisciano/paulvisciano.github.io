@@ -732,8 +732,7 @@ window.ComicReader = ({ content, onClose }) => {
     width: '100%',
     height: '100%',
     objectFit: isMobile ? 'contain' : 'cover',
-    transition: 'transform 0.2s ease',
-    willChange: 'transform'
+    transition: 'transform 0.3s ease'
   };
 
   const flipbookStyle = {
@@ -911,17 +910,19 @@ window.ComicReader = ({ content, onClose }) => {
           style: {
             position: 'absolute',
             bottom: isMobile ? '40px' : '20px',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            left: 0,
+            right: 0,
             background: 'rgba(0, 0, 0, 0.8)',
             color: 'white',
-            padding: isMobile ? '15px 30px' : '10px 20px',
+            padding: isMobile ? '15px 20px' : '10px 20px',
             borderRadius: isMobile ? '15px' : '25px',
             fontSize: isMobile ? '16px' : '14px',
             fontWeight: 'bold',
             opacity: 0.9,
             textAlign: 'center',
-            minWidth: isMobile ? '200px' : 'auto'
+            whiteSpace: 'nowrap',
+            animation: isVisible ? 'textPulse 2s ease-in-out infinite' : 'none',
+            willChange: 'transform, opacity'
           }
         }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
       ]),
@@ -1111,6 +1112,17 @@ if (!document.querySelector('#comic-episode-styles')) {
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes textPulse {
+      0%, 100% { 
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      50% { 
+        transform: scale(1.05);
+        opacity: 1;
+      }
     }
     
     .comic-episode-overlay {
