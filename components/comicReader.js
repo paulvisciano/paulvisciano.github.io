@@ -1073,13 +1073,18 @@ window.ComicReader = ({ content, onClose }) => {
             transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
+            WebkitTapHighlightColor: 'transparent',
+            outline: 'none',
+            userSelect: 'none',
+            WebkitUserSelect: 'none',
             ':hover': {
               background: 'rgba(255, 255, 255, 1)',
               transform: 'scale(1.05)',
               boxShadow: '0 4px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12)'
             },
             ':active': {
-              transform: 'scale(0.98)',
+              transform: 'scale(0.92)',
+              background: 'rgba(255, 255, 255, 0.8)',
               transition: 'all 0.1s ease'
             }
           },
@@ -1123,13 +1128,18 @@ window.ComicReader = ({ content, onClose }) => {
             transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
+            WebkitTapHighlightColor: 'transparent',
+            outline: 'none',
+            userSelect: 'none',
+            WebkitUserSelect: 'none',
             ':hover': {
               background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 1)',
               transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(1.05)',
               boxShadow: (currentPage === totalPages && !getNextEpisode()) ? '0 1px 8px rgba(0, 0, 0, 0.06)' : '0 4px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12)'
             },
             ':active': {
-              transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(0.98)',
+              transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(0.92)',
+              background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.8)',
               transition: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'all 0.1s ease'
             }
           },
