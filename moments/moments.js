@@ -813,6 +813,23 @@ window.momentsInTime = [
       stayDuration: 1,
       formattedDuration: formatDuration(1)
     },
+    {
+      id: "istanbul-episode-7-2025-09-30",
+      title: "Istanbul Episode 7: Crossing the Bosphorus",
+      date: new Date('2025-09-30T00:00:00Z'),
+      timelineHighlight: "Istanbul Ep 7",
+      tags: ["istanbul", "comic book", "turkey", "bosphorus", "hamam", "airport", "run", "galata tower"],
+      snippet: "Episode 7: Crossing the Bosphorus - The ultimate Istanbul send-off. From laundry and morning rituals to a daring run across the bridge, a visit to the hamam, and a race through the mega-airport to catch the flight to Amman.",
+      image: "attachment:///moments/istanbul/2025-09-30/cover.png",
+      imageAlt: "Istanbul Episode 7: Crossing the Bosphorus",
+      caption: "Crossing the Bosphorus - Istanbul Send-Off",
+      fullLink: "/moments/istanbul/2025-09-30/",
+      isComic: true,
+      pageCount: 23, // Istanbul Episode 7 has 23 pages (1-23)
+      location: { lat: 41.0082, lng: 28.9784, name: "Istanbul, Turkey" },
+      stayDuration: 1,
+      formattedDuration: formatDuration(1)
+    },
   {
     id: "amman-2025-09-30",
     title: "Amman Layover - Smart Travel Strategy",

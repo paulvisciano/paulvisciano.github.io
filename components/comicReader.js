@@ -155,7 +155,7 @@ window.ComicReader = ({ content, onClose }) => {
     
     // For new episodes, we'll need to add a pageCount property to the episode data
     // For now, use a reasonable default and let the browser handle 404s gracefully
-    const maxPages = episodeData.pageCount || 15; // Default to 15, can be overridden per episode
+    const maxPages = episodeData.pageCount || 50; // Default to 50, can be overridden per episode
     
     for (let i = 1; i <= maxPages; i++) {
       pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
@@ -266,10 +266,6 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Simple loading sequence
   React.useEffect(() => {
-    if (pages && pages.length) {
-      setTotalPages(pages.length);
-    }
-    
     // Simple loading without the memory system screen
     setTimeout(() => {
       // Only set loading to false if flipbook hasn't been created yet
