@@ -612,8 +612,13 @@ window.ComicReader = ({ content, onClose }) => {
         isLoading: true
       });
       
-      // Update URL to new episode
-      window.history.pushState({}, '', nextEpisode.fullLink);
+      // Update URL and timeline selection for new episode
+      window.history.pushState({ momentId: nextEpisode.id }, '', nextEpisode.fullLink);
+      
+      // Update timeline selection and trigger globe transition
+      if (window.handleTimelineClick) {
+        window.handleTimelineClick(nextEpisode);
+      }
       
       // Trigger the loading sequence by setting loading to true
       // The existing useEffect will handle the rest
@@ -632,6 +637,16 @@ window.ComicReader = ({ content, onClose }) => {
       isVisible: false,
       isLoading: true
     });
+    
+    // Force timeline re-render to ensure highlight is visible
+    if (episodeData && window.setSelectedId) {
+      // Temporarily clear and reset the selection to force a re-render
+      const currentEpisodeId = episodeData.id;
+      window.setSelectedId(null);
+      setTimeout(() => {
+        window.setSelectedId(currentEpisodeId);
+      }, 10);
+    }
     
     // Show overlay again when closing comic
     const overlay = document.getElementById('overlay');

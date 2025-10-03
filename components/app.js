@@ -4,6 +4,24 @@ window.App = () => {
   const [selectedYear, setSelectedYear] = React.useState("All");
   const [zoomCallback, setZoomCallback] = React.useState(null);
   const [overlayMessage, setOverlayMessage] = React.useState(null); // Initialize as null
+  
+  // Expose setSelectedId, handleTimelineClick, and zoomCallback globally so comic reader can update timeline selection and trigger globe transitions
+  React.useEffect(() => {
+    window.setSelectedId = setSelectedId;
+    window.handleTimelineClick = handleMomentSelection;
+    return () => {
+      delete window.setSelectedId;
+      delete window.handleTimelineClick;
+    };
+  }, []);
+  
+  // Expose zoomCallback separately since it changes
+  React.useEffect(() => {
+    window.zoomCallback = zoomCallback;
+    return () => {
+      delete window.zoomCallback;
+    };
+  }, [zoomCallback]);
 
   // Function to update overlay message
   const updateOverlayMessage = (message, isComicClickable = false, momentId = null) => {
