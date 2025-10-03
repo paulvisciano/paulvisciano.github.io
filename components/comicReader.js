@@ -698,13 +698,13 @@ window.ComicReader = ({ content, onClose }) => {
     left: isMobile ? 0 : 'auto',
     right: isMobile ? 0 : 'auto',
     width: isMobile ? '100vw' : 'auto',
-    height: isMobile ? '100vh' : '100%',
+    height: isMobile ? '100dvh' : '100%', // Use dvh for better mobile viewport handling
     background: '#000',
     borderRadius: isMobile ? '0' : '15px',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     overflow: 'hidden',
     maxWidth: isMobile ? '100vw' : '90vw',
-    maxHeight: isMobile ? '100vh' : '90vh',
+    maxHeight: isMobile ? '100dvh' : '90vh', // Use dvh for mobile
     minHeight: '400px',
     display: 'flex',
     flexDirection: 'column'
@@ -712,7 +712,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   const coverDisplayStyle = {
     width: isMobile ? '100vw' : '500px',
-    height: isMobile ? '100%' : '667px',
+    height: isMobile ? '100dvh' : '667px', // Use dvh for mobile viewport
     margin: '0 auto',
     display: showCover ? 'flex' : 'none',
     alignItems: 'center',
@@ -725,7 +725,8 @@ window.ComicReader = ({ content, onClose }) => {
     transition: isMobile ? 'opacity 0.5s ease-out' : 'opacity 1s ease-out',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     willChange: 'opacity',
-    pointerEvents: isVisible ? 'auto' : 'none'
+    pointerEvents: isVisible ? 'auto' : 'none',
+    position: isMobile ? 'relative' : 'static' // Ensure proper positioning on mobile
   };
 
   const coverImageStyle = {
@@ -909,7 +910,7 @@ window.ComicReader = ({ content, onClose }) => {
           key: 'cover-overlay',
           style: {
             position: 'absolute',
-            bottom: isMobile ? '40px' : '20px',
+            bottom: isMobile ? 'max(40px, env(safe-area-inset-bottom))' : '20px',
             left: 0,
             right: 0,
             background: 'rgba(0, 0, 0, 0.8)',
@@ -922,7 +923,8 @@ window.ComicReader = ({ content, onClose }) => {
             textAlign: 'center',
             whiteSpace: 'nowrap',
             animation: isVisible ? 'textPulse 2s ease-in-out infinite' : 'none',
-            willChange: 'transform, opacity'
+            willChange: 'transform, opacity',
+            margin: isMobile ? '0 20px' : '0' // Add horizontal margin on mobile for better spacing
           }
         }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
       ]),
