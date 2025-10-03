@@ -748,23 +748,29 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const closeButtonStyle = {
-    position: 'absolute',
-    top: '15px',
-    right: '15px',
-    background: '#ff4757',
+    position: 'fixed',
+    top: isMobile ? '20px' : '15px',
+    right: isMobile ? '20px' : '15px',
+    background: 'rgba(255, 71, 87, 0.9)',
     color: 'white',
     border: 'none',
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
+    borderRadius: isMobile ? '12px' : '50%',
+    width: isMobile ? '48px' : '40px',
+    height: isMobile ? '48px' : '40px',
     cursor: 'pointer',
-    fontSize: '20px',
+    fontSize: isMobile ? '18px' : '20px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10001,
+    zIndex: 10002,
     transition: 'all 0.3s ease',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    ':hover': {
+      background: 'rgba(255, 71, 87, 1)',
+      transform: 'scale(1.05)'
+    }
   };
 
   const controlsStyle = {
@@ -1048,23 +1054,34 @@ window.ComicReader = ({ content, onClose }) => {
         React.createElement('button', {
           key: 'mobile-prev',
           style: {
-            background: '#ff4757',
-            color: 'white',
+            background: 'rgba(255, 255, 255, 0.95)',
+            color: '#1d1d1f',
             border: 'none',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
+            borderRadius: '20px',
+            width: '56px',
+            height: '56px',
             fontSize: '20px',
-            fontWeight: 'bold',
+            fontWeight: '600',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             opacity: 1,
             pointerEvents: 'auto',
-            marginLeft: '10px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
-            transition: 'all 0.2s ease'
+            marginLeft: '20px',
+            boxShadow: '0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08)',
+            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            ':hover': {
+              background: 'rgba(255, 255, 255, 1)',
+              transform: 'scale(1.05)',
+              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12)'
+            },
+            ':active': {
+              transform: 'scale(0.98)',
+              transition: 'all 0.1s ease'
+            }
           },
           onClick: previousPage,
           title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
@@ -1072,31 +1089,49 @@ window.ComicReader = ({ content, onClose }) => {
         React.createElement('div', {
           key: 'mobile-indicator',
           style: {
-            color: 'white',
-            fontSize: '14px',
-            fontWeight: 'bold'
+            color: 'rgba(255, 255, 255, 0.9)',
+            fontSize: '15px',
+            fontWeight: '500',
+            background: 'rgba(255, 255, 255, 0.08)',
+            padding: '10px 20px',
+            borderRadius: '22px',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '0.5px solid rgba(255, 255, 255, 0.15)',
+            letterSpacing: '0.5px'
           }
         }, `${currentPage} / ${totalPages}`),
         React.createElement('button', {
           key: 'mobile-next',
           style: {
-            background: '#ff4757',
-            color: 'white',
+            background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.95)',
+            color: (currentPage === totalPages && !getNextEpisode()) ? '#8e8e93' : '#1d1d1f',
             border: 'none',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
+            borderRadius: '20px',
+            width: '56px',
+            height: '56px',
             fontSize: '20px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
+            fontWeight: '600',
+            cursor: (currentPage === totalPages && !getNextEpisode()) ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             opacity: 1,
             pointerEvents: 'auto',
-            marginRight: '25px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
-            transition: 'all 0.2s ease'
+            marginRight: '20px',
+            boxShadow: (currentPage === totalPages && !getNextEpisode()) ? '0 1px 8px rgba(0, 0, 0, 0.06)' : '0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08)',
+            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            ':hover': {
+              background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 1)',
+              transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(1.05)',
+              boxShadow: (currentPage === totalPages && !getNextEpisode()) ? '0 1px 8px rgba(0, 0, 0, 0.06)' : '0 4px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12)'
+            },
+            ':active': {
+              transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(0.98)',
+              transition: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'all 0.1s ease'
+            }
           },
           onClick: nextPage,
           title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
