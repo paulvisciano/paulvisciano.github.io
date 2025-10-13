@@ -867,6 +867,23 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
   {
+    id: "miami-episode-1-2025-10-06",
+    title: "Miami Episode 1",
+    date: new Date('2025-10-06T00:00:00Z'),
+    timelineHighlight: "Miami Ep 1",
+    tags: ["miami", "comic book", "urban runner", "florida", "beach", "culture"],
+    snippet: "Episode 1: Miami — The first full day back in South Beach. From sunrise workouts at Muscle Beach and smoothie runs to raking rituals, volleyball wins, and spontaneous laughter with friends — a perfect Miami reboot.",
+    image: "attachment:///moments/miami/2025-10-06/cover.png",
+    imageAlt: "Miami Episode 1",
+    caption: "Miami Episode 1 — South Beach Energy",
+    fullLink: "/moments/miami/2025-10-06/",
+    isComic: true,
+    pageCount: 15, // Miami Episode 1 has 15 pages
+    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "st-petersburg-2025-10-20",
     title: "St. Petersburg Mega Reunion",
     date: new Date('2025-10-20T00:00:00Z'),
