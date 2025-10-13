@@ -903,6 +903,51 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "miami-episode-3-2025-10-08",
+    title: "Miami Episode 3 — Espresso & Endorphins",
+    date: new Date("2025-10-08T00:00:00Z"),
+    timelineHighlight: "Miami Ep 3",
+    tags: [
+      "miami",
+      "comic book",
+      "urban runner",
+      "wellness",
+      "language",
+      "volleyball",
+      "nightlife",
+      "reflection"
+    ],
+    snippet:
+      "From morning espresso to late-night reflections — a full Miami chapter. Began the day clean-cut and focused, hit Muscle Beach, navigated Wi-Fi chaos, sealed a perfume deal in Spanish at El Patio, and ended with rooftop luxury, deep talks, and a 5 a.m. Tootsie’s finale. A journey through energy, indulgence, and meaning.",
+    image: "attachment:///moments/miami/2025-10-08/cover.png",
+    imageAlt: "Episode cover: Miami morning reflection with red sunglasses.",
+    caption: "Miami Episode 3 — Espresso & Endorphins",
+    fullLink: "/moments/miami/2025-10-08/",
+    isComic: true,
+    pageCount: 11,
+    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
+    id: "miami-episode-4-2025-10-09",
+    title: "Miami Episode 4 — Side Out",
+    date: new Date("2025-10-09T00:00:00Z"),
+    timelineHighlight: "Miami Ep 4",
+    tags: ["miami", "comic book", "volleyball", "south beach", "fitness", "recovery", "urban runner"],
+    snippet:
+      "A recovery day turned into one of the best volleyball sessions yet. Slept in after a 5 a.m. night, grabbed espresso, hit an open gym, fueled up with Miami Hack #3 — La Playa Market’s $20 feast, then dominated Side Out and 2v2 games through sunset. Ended the day showered, focused, and back at the desk getting work done.",
+    image: "attachment:///moments/miami/2025-10-09/cover.png",
+    imageAlt: "Episode cover: South Beach volleyball under a storm-to-sun sky.",
+    caption: "Miami Episode 4 — Side Out",
+    fullLink: "/moments/miami/2025-10-09/",
+    isComic: true,
+    pageCount: 4,
+    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "miami-episode-7-2025-10-12",
     title: "Miami Episode 7: The Final Morning",
     date: new Date('2025-10-12T00:00:00Z'),
