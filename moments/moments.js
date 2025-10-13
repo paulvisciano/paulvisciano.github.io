@@ -866,6 +866,7 @@ window.momentsInTime = [
     stayDuration: 7,
     formattedDuration: formatDuration(7)
   },
+  
   {
     id: "miami-episode-1-2025-10-06",
     title: "Miami Episode 1",
@@ -880,6 +881,41 @@ window.momentsInTime = [
     isComic: true,
     pageCount: 15, // Miami Episode 1 has 15 pages
     location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
+    id: "miami-episode-2-2025-10-07",
+    title: "Miami Episode 2 — Wynwood Ride, Tacos & Tests",
+    date: new Date("2025-10-07T00:00:00Z"),
+    timelineHighlight: "Miami Ep 2",
+    tags: ["miami", "comic book", "wynwood", "bikeshare", "food", "volleyball", "health"],
+    snippet:
+      "Citi Bike over the Venetian, Wynwood walls, cheap-and-perfect tacos, award-winning gelato + espresso, a clean and confident clinic run (results in 5 days), a top-court beach volleyball win with Ash, and a laid-back dinner catch-up with Cat.",
+    image: "attachment:///moments/miami/2025-10-07/cover.png",
+    imageAlt: "Episode cover: biking to Wynwood with murals, tacos, gelato, and volleyball highlights.",
+    caption: "Miami Episode 2 — Wynwood Ride, Tacos & Tests",
+    fullLink: "/moments/miami/2025-10-07/",
+    isComic: true,
+    pageCount: 13,
+    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
+    id: "miami-episode-7-2025-10-12",
+    title: "Miami Episode 7: The Final Morning",
+    date: new Date('2025-10-12T00:00:00Z'),
+    timelineHighlight: "Miami Ep 7",
+    tags: ["miami", "comic book", "urban runner", "travel day", "airport", "volleyball", "friendship"],
+    snippet: "Episode 7: The Final Morning — From one last coffee with Cat to errands, bike rides, and Muscle Beach energy before flying out. A calm, reflective close to the Miami chapter, capped with a Turkish Lounge shower before Lisbon.",
+    image: "attachment:///moments/miami/2025-10-12/cover.png",
+    imageAlt: "Miami Episode 7 Cover",
+    caption: "Miami Episode 7 — The Final Morning",
+    fullLink: "/moments/miami/2025-10-12/",
+    isComic: true,
+    pageCount: 6,
+    location: { lat: 25.7959, lng: -80.2870, name: "Miami International Airport" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
   },
