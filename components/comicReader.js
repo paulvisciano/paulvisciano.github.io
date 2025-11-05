@@ -693,18 +693,18 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const comicContainerStyle = {
-    position: isMobile ? 'fixed' : 'absolute',
-    top: 0,
+    position: isMobile ? 'fixed' : 'relative',
+    top: isMobile ? 0 : 'auto',
     left: isMobile ? 0 : 'auto',
     right: isMobile ? 0 : 'auto',
     width: isMobile ? '100vw' : 'auto',
-    height: isMobile ? '100dvh' : '100%', // Use dvh for better mobile viewport handling
+    height: isMobile ? '100dvh' : 'auto',
     background: '#000',
     borderRadius: isMobile ? '0' : '15px',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
     overflow: 'hidden',
     maxWidth: isMobile ? '100vw' : '90vw',
-    maxHeight: isMobile ? '100dvh' : '90vh', // Use dvh for mobile
+    maxHeight: isMobile ? '100dvh' : '90vh',
     minHeight: '400px',
     display: 'flex',
     flexDirection: 'column'
@@ -714,19 +714,16 @@ window.ComicReader = ({ content, onClose }) => {
     width: isMobile ? '100vw' : '500px',
     ...(isMobile && { height: '100dvh' }), // Only set height for mobile
     margin: '0 auto',
-    display: showCover ? 'flex' : 'none',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     cursor: isVisible ? 'pointer' : 'default',
     borderRadius: isMobile ? '0' : '15px',
     overflow: 'hidden',
     background: '#000',
-    opacity: isVisible ? 1 : 0,
-    transition: isMobile ? 'opacity 0.5s ease-out' : 'opacity 1s ease-out',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
-    willChange: 'opacity',
     pointerEvents: isVisible ? 'auto' : 'none',
-    position: isMobile ? 'relative' : 'static' // Ensure proper positioning on mobile
+    position: 'relative' // Needed for absolute positioning of loading overlay
   };
 
   const coverImageStyle = {
@@ -748,9 +745,9 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const closeButtonStyle = {
-    position: 'fixed',
-    top: isMobile ? '20px' : '15px',
-    right: isMobile ? '20px' : '15px',
+    position: isMobile ? 'fixed' : 'absolute',
+    top: isMobile ? '20px' : '5px',
+    right: isMobile ? '20px' : '5px',
     background: 'rgba(255, 71, 87, 0.9)',
     color: 'white',
     border: 'none',
@@ -820,20 +817,6 @@ window.ComicReader = ({ content, onClose }) => {
     minHeight: isMobile ? '300px' : '400px'
   };
 
-  const coverLoadingStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    fontSize: isMobile ? '16px' : '18px',
-    padding: isMobile ? '40px 20px' : '60px',
-    background: 'rgba(0, 0, 0, 0.02)', // Almost completely transparent
-    borderRadius: isMobile ? '0' : '15px',
-    backdropFilter: 'none', // Remove blur completely
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    textShadow: '0 0 15px rgba(0, 0, 0, 1), 0 0 25px rgba(0, 0, 0, 0.8)' // Stronger text shadow for visibility
-  };
-
   const loadingSpinnerStyle = {
     width: isMobile ? '30px' : '40px',
     height: isMobile ? '30px' : '40px',
@@ -841,7 +824,7 @@ window.ComicReader = ({ content, onClose }) => {
     borderTop: '3px solid white',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
-    marginRight: isMobile ? '10px' : '15px'
+    marginBottom: isMobile ? '10px' : '15px'
   };
 
   return React.createElement('div', {
@@ -872,47 +855,64 @@ window.ComicReader = ({ content, onClose }) => {
         }
       }, '×'),
       
-      showCover && !error && !isVisible && React.createElement('div', {
-        key: 'loading-cover',
-        style: coverLoadingStyle
-      }, [
-        React.createElement('div', {
-          key: 'spinner',
-          style: loadingSpinnerStyle
-        }),
-        React.createElement('div', {
-          key: 'loading-text',
-          style: {
-            fontFamily: 'monospace',
-            textAlign: 'center',
-            fontSize: isMobile ? '14px' : '16px',
-            fontWeight: 'bold'
-          }
-        }, isMobile ? 'Loading...' : 'Loading comic book...')
-      ]),
-
-      showCover && !error && isVisible && React.createElement('div', {
+      showCover && !error && React.createElement('div', {
         key: 'cover',
         ref: coverRef,
         style: coverDisplayStyle,
         className: 'comic-cover-display',
-        onClick: openComicBook,
-        onMouseEnter: (e) => {
+        onClick: isVisible ? openComicBook : undefined,
+        onMouseEnter: isVisible ? (e) => {
           const img = e.target.querySelector('img');
           if (img) img.style.transform = 'scale(1.02)';
-        },
-        onMouseLeave: (e) => {
+        } : undefined,
+        onMouseLeave: isVisible ? (e) => {
           const img = e.target.querySelector('img');
           if (img) img.style.transform = 'scale(1)';
-        }
+        } : undefined
       }, [
+        !isVisible && React.createElement('div', {
+          key: 'loading-overlay',
+          style: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: isMobile ? '16px' : '18px',
+            zIndex: 1,
+            background: '#000'
+          }
+        }, [
+          React.createElement('div', {
+            key: 'spinner',
+            style: loadingSpinnerStyle
+          }),
+          React.createElement('div', {
+            key: 'loading-text',
+            style: {
+              fontFamily: 'monospace',
+              textAlign: 'center',
+              fontSize: isMobile ? '14px' : '16px',
+              fontWeight: 'bold'
+            }
+          }, isMobile ? 'Loading...' : 'Loading comic book...')
+        ]),
         React.createElement('img', {
           key: 'cover-img',
           src: episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png',
           alt: episodeData ? `${episodeData.title} Cover` : 'Episode 20 Cover',
-          style: coverImageStyle
+          style: {
+            ...coverImageStyle,
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 0.3s ease'
+          }
         }),
-        React.createElement('div', {
+        isVisible && React.createElement('div', {
           key: 'cover-overlay',
           style: {
             position: 'absolute',

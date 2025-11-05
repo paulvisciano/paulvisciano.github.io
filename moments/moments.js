@@ -855,6 +855,24 @@ window.momentsInTime = [
     formattedDuration: formatDuration(4)
   },
   {
+    id: "chicago-episode-1-2025-10-01",
+    title: "Chicago Episode 1: Full Throttle",
+    date: new Date("2025-10-01T00:00:00Z"),
+    timelineHighlight: "Chicago Ep 1",
+    tags: ["chicago", "comic book", "travel", "volleyball", "urban runner", "nightlife", "wellness"],
+    snippet:
+      "Chicago Episode 1: Full Throttle — a nonstop 24-hour comic journey from Amman to Chicago. From lounges and long-haul flights to volleyball at Foster Beach, Korean BBQ with friends, XSport resets, and rooftop house beats at Celeste — this episode captures a full-throttle return to the Windy City.",
+    image: "attachment:///moments/chicago/2025-10-01/cover.png",
+    imageAlt: "Chicago Episode 1: Full Throttle",
+    caption: "Chicago Episode 1 — Full Throttle",
+    fullLink: "/moments/chicago/2025-10-01/",
+    isComic: true,
+    pageCount: 12,
+    location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "miami-2025-10-05",
     title: "Miami Beach & Culture",
     date: new Date('2025-10-05T00:00:00Z'),
