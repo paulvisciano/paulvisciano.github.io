@@ -545,7 +545,8 @@ window.momentsInTime = [
     timelineHighlight: "Coffee & Music in Boulder",
     tags: ["coffee", "live music", "wellness"],
     snippet: "Soaking up Boulder's chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center.",
-    fullLink: "2025/05-17-boulder.html",
+    fullLink: "/moments/boulder/2025-05-17",
+    contentFile: "/moments/boulder/2025-05-17/content.html",
     location: { lat: 40.0150, lng: -105.2705, name: "Boulder, Colorado" },
     stayDuration: 7,
     formattedDuration: formatDuration(7)
@@ -557,7 +558,8 @@ window.momentsInTime = [
     timelineHighlight: "San Diego Line Dancing",
     tags: ["yoga", "friends", "line dancing", "food"],
     snippet: "Landed in San Diego, picked up by Wouter for hot yoga at Indie Yoga, regional pad Thai at Pad Thai Stand, and country line dancing at Moonshine Beach with Wouter and Ray dancing rebelliously in the middle—Ray's punctuality ensured a smooth airport send-off.",
-    fullLink: "2025/05-20-san-diego.html",
+    fullLink: "/moments/san-diego/2025-05-20",
+    contentFile: "/moments/san-diego/2025-05-20/content.html",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
@@ -569,7 +571,8 @@ window.momentsInTime = [
     timelineHighlight: "Fort Lauderdale Volleyball",
     tags: ["beach", "beach volleyball", "friends"],
     snippet: "Arrived in Fort Lauderdale after a Denver layover, staying with Bartek for work, beach volleyball in Deerfield, and a relaxing massage together.",
-    fullLink: "2025/05-21-fort-lauderdale.html",
+    fullLink: "/moments/fort-lauderdale/2025-05-21",
+    contentFile: "/moments/fort-lauderdale/2025-05-21/content.html",
     location: { lat: 26.1224, lng: -80.1373, name: "Fort Lauderdale, Florida" },
     stayDuration: 2,
     formattedDuration: formatDuration(2)
@@ -581,7 +584,8 @@ window.momentsInTime = [
     timelineHighlight: "South Beach Adventures",
     tags: ["beach", "beach volleyball", "nightlife", "friends", "bachata"],
     snippet: "Played high-energy volleyball, danced bachata at Alain's, and drove to St. Pete.",
-    fullLink: "2025/05-23-miami-beach.html",
+    fullLink: "/moments/miami/2025-05-23",
+    contentFile: "/moments/miami/2025-05-23/content.html",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
     stayDuration: 7,
     formattedDuration: formatDuration(7)
