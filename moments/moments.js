@@ -593,10 +593,11 @@ window.momentsInTime = [
     timelineHighlight: "Tampa Bay Vibes",
     tags: ["travel", "yoga", "food", "friends", "relocation"],
     snippet: "Cruised from Miami to St. Pete, feasted at a Brazilian steakhouse, flowed through yoga in St. Petersburg, and recovered in Clearwater while prepping for Hawaii.",
-    image: "attachment://2025/05-30-tampa.jpg",
+    image: "attachment:///moments/tampa/2025-05-30/image.jpg",
     imageAlt: "Post yoga smoothie",
     caption: "Leigha, Leo & Paul enjoying a smoothie after Yoga",
-    fullLink: "2025/05-30-tampa.html",
+    fullLink: "/moments/tampa/2025-05-30",
+    contentFile: "/moments/tampa/2025-05-30/content.html",
     location: { lat: 27.9506, lng: -82.4572, name: "Tampa, Florida" },
     stayDuration: 3,
     formattedDuration: formatDuration(3)
