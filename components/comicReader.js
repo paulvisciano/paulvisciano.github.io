@@ -29,11 +29,14 @@ window.ComicReader = ({ content, onClose }) => {
   const [isVisible, setIsVisible] = React.useState(false);
   const [episodeData, setEpisodeData] = React.useState(null);
   const [isInitialized, setIsInitialized] = React.useState(false);
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
+  const [showControls, setShowControls] = React.useState(false);
   const isInitializedRef = React.useRef(false);
   const flipbookRef = React.useRef(null);
   const flipbookCreatedRef = React.useRef(false);
   const coverRef = React.useRef(null);
   const currentPageRef = React.useRef(1);
+  const overlayRef = React.useRef(null);
   
   // Check if mobile device - use state to make it reactive
   const [isMobile, setIsMobile] = React.useState(() => {
@@ -194,13 +197,34 @@ window.ComicReader = ({ content, onClose }) => {
     updateGlobalState({ totalPages: newPages.length });
   }, [episodeData]);
 
-  React.useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
+  // Fullscreen toggle function
+  const toggleFullscreen = () => {
+    if (!overlayRef.current) return;
+    
+    if (!document.fullscreenElement) {
+      overlayRef.current.requestFullscreen().then(() => {
+        setIsFullscreen(true);
+      }).catch(err => {
+        console.log('Error attempting to enable fullscreen:', err);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullscreen(false);
+      });
+    }
+  };
 
+  // Listen for fullscreen changes (when user presses Esc)
+  React.useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  React.useEffect(() => {
     // Handle keyboard navigation
     const handleKeyDown = (e) => {
       switch(e.key) {
@@ -215,15 +239,27 @@ window.ComicReader = ({ content, onClose }) => {
           e.preventDefault(); // Prevent space bar scrolling
           nextPage();
           break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          toggleFullscreen();
+          break;
         case 'Escape':
-          handleClose();
+          e.preventDefault();
+          // If in fullscreen, exit fullscreen first (browser will handle it)
+          // If not in fullscreen, close the comic
+          if (!isFullscreen) {
+            handleClose();
+          }
+          // Note: if in fullscreen, browser's Esc handler will exit fullscreen
+          // and our fullscreenchange listener will update the state
           break;
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [onClose, isFullscreen]);
 
   // Handle initial page loading after component is mounted
   React.useEffect(() => {
@@ -679,7 +715,8 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
+    // Don't close if in fullscreen mode - only Escape should exit
+    if (e.target === e.currentTarget && !isFullscreen) {
       handleClose();
     }
   };
@@ -776,6 +813,30 @@ window.ComicReader = ({ content, onClose }) => {
     }
   };
 
+  const fullscreenButtonStyle = {
+    position: isMobile ? 'fixed' : 'absolute',
+    top: isMobile ? '20px' : '5px',
+    right: isMobile ? '80px' : '50px',
+    background: 'rgba(52, 152, 219, 0.9)',
+    color: 'white',
+    border: 'none',
+    borderRadius: isMobile ? '12px' : '50%',
+    width: isMobile ? '48px' : '40px',
+    height: isMobile ? '48px' : '40px',
+    cursor: 'pointer',
+    fontSize: isMobile ? '18px' : '20px',
+    display: isMobile ? 'none' : 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10002,
+    transition: 'all 0.3s ease',
+    fontWeight: 'bold',
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    opacity: showControls ? 1 : 0,
+    pointerEvents: showControls ? 'auto' : 'none'
+  };
+
   const controlsStyle = {
     position: 'absolute',
     bottom: '-60px',
@@ -834,6 +895,7 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   return React.createElement('div', {
+    ref: overlayRef,
     style: comicOverlayStyle,
     onClick: handleOverlayClick,
     className: 'comic-episode-overlay'
@@ -842,6 +904,8 @@ window.ComicReader = ({ content, onClose }) => {
       key: 'container',
       style: comicContainerStyle,
       className: 'comic-episode-container',
+      onMouseEnter: () => setShowControls(true),
+      onMouseLeave: () => setShowControls(false),
       onTouchStart: isMobile ? onTouchStart : undefined,
       onTouchMove: isMobile ? onTouchMove : undefined,
       onTouchEnd: isMobile ? onTouchEnd : undefined
@@ -860,6 +924,21 @@ window.ComicReader = ({ content, onClose }) => {
           e.target.style.transform = 'scale(1)';
         }
       }, '×'),
+      
+      React.createElement('button', {
+        key: 'fullscreen',
+        style: fullscreenButtonStyle,
+        onClick: toggleFullscreen,
+        title: isFullscreen ? 'Exit Fullscreen (F)' : 'Fullscreen (F)',
+        onMouseEnter: (e) => {
+          e.target.style.background = 'rgba(52, 152, 219, 1)';
+          e.target.style.transform = 'scale(1.1)';
+        },
+        onMouseLeave: (e) => {
+          e.target.style.background = 'rgba(52, 152, 219, 0.9)';
+          e.target.style.transform = 'scale(1)';
+        }
+      }, isFullscreen ? '⊗' : '⛶'),
       
       showCover && !error && React.createElement('div', {
         key: 'cover',
