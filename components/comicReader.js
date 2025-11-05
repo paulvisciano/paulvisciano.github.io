@@ -377,7 +377,7 @@ window.ComicReader = ({ content, onClose }) => {
       rightPage.style.cssText = `
         position: absolute;
         top: 0;
-        right: 0;
+        left: 50%;
         width: 50%;
         height: 100%;
         overflow: hidden;
@@ -469,7 +469,7 @@ window.ComicReader = ({ content, onClose }) => {
         img.style.cssText = `
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: cover;
           display: block;
         `;
         img.onerror = () => {};
@@ -734,8 +734,8 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const flipbookStyle = {
-    width: isMobile ? '100vw' : '1200px',
-    height: isMobile ? 'calc(100% - 60px)' : '900px',
+    width: isMobile ? '100vw' : '1000px',
+    height: isMobile ? 'calc(100% - 60px)' : '750px',
     margin: isMobile ? '0' : '0 auto',
     display: showCover || isLoading ? 'none' : 'flex',
     background: '#000',
