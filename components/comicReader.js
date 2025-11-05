@@ -385,6 +385,7 @@ window.ComicReader = ({ content, onClose }) => {
         display: ${isMobile ? 'none' : 'flex'};
         align-items: center;
         justify-content: center;
+        ${isMobile ? '' : 'border-left: 2px solid #333;'}
       `;
       
       spreadContainer.appendChild(leftPage);
