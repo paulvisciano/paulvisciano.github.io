@@ -712,7 +712,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   const coverDisplayStyle = {
     width: isMobile ? '100vw' : '500px',
-    height: isMobile ? '100dvh' : '667px', // Use dvh for mobile viewport
+    ...(isMobile && { height: '100dvh' }), // Only set height for mobile
     margin: '0 auto',
     display: showCover ? 'flex' : 'none',
     alignItems: 'center',
