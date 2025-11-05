@@ -398,14 +398,8 @@ window.ComicReader = ({ content, onClose }) => {
       currentPageRef.current = initialPage;
       updateGlobalState({ currentPage: initialPage });
       
-      // Set initial pages
+      // Set initial pages (this will also set up click handlers)
       updateSpreadPages(initialPage);
-      
-      // Add click handlers for navigation (desktop only)
-      if (!isMobile) {
-        leftPage.addEventListener('click', () => previousPage());
-        rightPage.addEventListener('click', () => nextPage());
-      }
       
       setIsLoading(false);
       setFlipbookReady(true);
@@ -528,8 +522,17 @@ window.ComicReader = ({ content, onClose }) => {
     // Re-add click handlers after updating content
     if (!isMobile) {
       // Desktop: left page goes back, right page goes forward
-      leftPage.addEventListener('click', () => previousPage());
-      if (rightPage) rightPage.addEventListener('click', () => nextPage());
+      // Using onclick instead of addEventListener prevents multiple handlers
+      leftPage.onclick = (e) => {
+        e.stopPropagation();
+        previousPage();
+      };
+      if (rightPage) {
+        rightPage.onclick = (e) => {
+          e.stopPropagation();
+          nextPage();
+        };
+      }
     }
     // Mobile navigation is handled by the bottom navigation buttons
   };
@@ -561,8 +564,8 @@ window.ComicReader = ({ content, onClose }) => {
           currentPageRef.current = prevSpreadPage;
           updateGlobalState({ currentPage: prevSpreadPage });
           updateSpreadPages(prevSpreadPage);
-        } else if (currentPageValue === 1) {
-          // If on first page, go back to cover
+        } else if (currentPageValue === 1 || currentPageValue === 2) {
+          // If on first or second page, go back to cover
           goBackToCover();
         }
       }
@@ -575,11 +578,13 @@ window.ComicReader = ({ content, onClose }) => {
     try {
       // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
+      const currentPages = getPages();
+      const actualTotalPages = currentPages.length;
       
       if (isMobile) {
         // Mobile: go to next single page
         const nextPage = currentPageValue + 1;
-        if (nextPage <= totalPages) {
+        if (nextPage <= actualTotalPages) {
           setCurrentPage(nextPage);
           currentPageRef.current = nextPage;
           updateGlobalState({ currentPage: nextPage });
@@ -591,7 +596,7 @@ window.ComicReader = ({ content, onClose }) => {
       } else {
         // Desktop: For two-page spreads, we need to increment by 2 to show the next spread
         const nextSpreadPage = currentPageValue + 2;
-        if (nextSpreadPage <= totalPages) {
+        if (nextSpreadPage <= actualTotalPages) {
           setCurrentPage(nextSpreadPage);
           currentPageRef.current = nextSpreadPage;
           updateGlobalState({ currentPage: nextSpreadPage });
