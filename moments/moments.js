@@ -608,10 +608,11 @@ window.momentsInTime = [
     timelineHighlight: "San Diego Life",
     tags: ["beach volleyball", "remote work", "coffee", "culture", "wellness", "friends", "hookah"],
     snippet: "Two weeks of balanced living in San Diego, combining European team meetings, beach volleyball at South Mission, and exploring local gems - all while embracing the city's famous June Gloom.",
-    image: "attachment://2025/06-01-san-diego.jpg",
+    image: "attachment:///moments/san-diego/2025-06-01/image.jpg",
     imageAlt: "Whale watching in San Diego",
     caption: "Taking a break from the routine for some ocean adventures!",
-    fullLink: "2025/06-01-san-diego.html",
+    fullLink: "/moments/san-diego/2025-06-01",
+    contentFile: "/moments/san-diego/2025-06-01/content.html",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
     stayDuration: 12,
     formattedDuration: formatDuration(12)
