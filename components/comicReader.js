@@ -1,30 +1,15 @@
 // Comic Reader Component
-// Note: Device detection and styles are loaded from separate files:
-// - components/comicReader/deviceDetection.js
-// - components/comicReader/styles.js
+// Note: Core logic and utilities are loaded from separate files:
+// - components/comicReader/core.js (shared utilities, global state)
+// - components/comicReader/deviceDetection.js (device detection)
+// - components/comicReader/styles.js (device-specific styles)
+// - components/comicReader/flipbook.js (device-specific flipbook creation)
+// - components/comicReader/navigation.js (device-specific navigation)
 
-// ============================================================================
-// Global State Management
-// ============================================================================
-
-// Global state manager to prevent flipbook state from being wiped
-window.ComicReaderState = window.ComicReaderState || {
-  flipbookCreated: false,
-  episodeData: null,
-  currentPage: 1,
-  totalPages: 0,
-  flipbookReady: false,
-  isVisible: false,
-  isLoading: true
-};
-
-// Function to update global state
-const updateGlobalState = (updates) => {
-  Object.assign(window.ComicReaderState, updates);
-};
-
-// Function to get global state
-const getGlobalState = () => window.ComicReaderState;
+// Get utilities from loaded modules
+const { updateGlobalState, getGlobalState, getPages: coreGetPages, getNextEpisode: coreGetNextEpisode, findCurrentEpisode } = window.ComicReaderCore || {};
+const { createFlipbook: createFlipbookUtil, updatePages: updatePagesUtil } = window.ComicReaderFlipbook || {};
+const { getNextPageNumber, getPreviousPageNumber, shouldGoBackToCover, createSwipeHandlers } = window.ComicReaderNavigation || {};
 
 window.ComicReader = ({ content, onClose }) => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -61,36 +46,7 @@ window.ComicReader = ({ content, onClose }) => {
   }, [currentPage]);
 
   // Touch/swipe gesture handling for mobile and tablets
-  const [touchStart, setTouchStart] = React.useState(null);
-  const [touchEnd, setTouchEnd] = React.useState(null);
-
-  // Minimum swipe distance (in pixels)
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e) => {
-    setTouchEnd(null); // Reset touch end
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe) {
-      // Swipe left = next page
-      nextPage();
-    } else if (isRightSwipe) {
-      // Swipe right = previous page
-      previousPage();
-    }
-  };
+  // Will be created after nextPage/previousPage are defined
   
   
 
@@ -104,30 +60,11 @@ window.ComicReader = ({ content, onClose }) => {
       return;
     }
     
-    if (window.momentsInTime && !episodeData) {
-      // Find the current comic episode by checking the URL path
-      const currentPath = window.location.pathname;
-      
-      const currentMoment = window.momentsInTime.find(m => {
-        if (!m.isComic) return false;
-        const episodePath = m.fullLink.replace(/\/$/, ''); // Remove trailing slash
-        return currentPath.includes(episodePath);
-      });
-      
+    if (window.momentsInTime && !episodeData && findCurrentEpisode) {
+      const currentMoment = findCurrentEpisode();
       if (currentMoment) {
         setEpisodeData(currentMoment);
         updateGlobalState({ episodeData: currentMoment });
-      } else {
-        // Set a fallback episode data for Bangkok Episode 20
-        const fallbackEpisode = {
-          id: 'urban-runner-episode-20-2025-09-16',
-          title: 'Urban Runner Episode 20: Comic Book Edition',
-          fullLink: '/moments/bangkok/2025-09-16/',
-          location: { name: 'Bangkok, Thailand' },
-          date: new Date('2025-09-16T00:00:00Z')
-        };
-        setEpisodeData(fallbackEpisode);
-        updateGlobalState({ episodeData: fallbackEpisode });
       }
     }
   }, [episodeData]);
@@ -139,56 +76,26 @@ window.ComicReader = ({ content, onClose }) => {
   
   const [pages, setPages] = React.useState([]);
   
-  // Generate pages dynamically based on available files
-  const getPages = () => {
-    if (!episodeData) {
-      return [];
-    }
-    
-    // Extract base path from fullLink
-    const basePath = episodeData.fullLink.replace(/\/$/, '');
-    const pagesArray = []; // Don't include cover - it's handled separately
-    
-    // For new episodes, we'll need to add a pageCount property to the episode data
-    // For now, use a reasonable default and let the browser handle 404s gracefully
-    const maxPages = episodeData.pageCount || 50; // Default to 50, can be overridden per episode
-    
-    for (let i = 1; i <= maxPages; i++) {
-      pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
-    }
-    
-    return pagesArray;
-  };
-
-  // Function to find the next episode in the series
-  const getNextEpisode = () => {
-    if (!episodeData || !window.momentsInTime) {
-      return null;
-    }
-
-    const currentEpisodeId = episodeData.id;
-    const currentDate = episodeData.date;
-    
-    // Find episodes that are comics and come after the current episode
-    const futureComics = window.momentsInTime
-      .filter(moment => 
-        moment.isComic && 
-        moment.date > currentDate &&
-        moment.id !== currentEpisodeId
-      )
-      .sort((a, b) => a.date - b.date);
-
-    // Return the next comic episode, if any
-    return futureComics.length > 0 ? futureComics[0] : null;
-  };
-  
   // Update pages when episode data changes
   React.useEffect(() => {
-    const newPages = getPages();
+    if (!coreGetPages || !episodeData) return;
+    const newPages = coreGetPages(episodeData);
     setPages(newPages);
     setTotalPages(newPages.length);
     updateGlobalState({ totalPages: newPages.length });
   }, [episodeData]);
+  
+  // Helper to get pages (for use in functions)
+  const getPages = () => {
+    if (!coreGetPages || !episodeData) return [];
+    return coreGetPages(episodeData);
+  };
+  
+  // Helper to get next episode
+  const getNextEpisode = () => {
+    if (!coreGetNextEpisode || !episodeData) return null;
+    return coreGetNextEpisode(episodeData);
+  };
 
   // Fullscreen toggle function
   const toggleFullscreen = () => {
@@ -352,82 +259,33 @@ window.ComicReader = ({ content, onClose }) => {
 
 
   const createFlipbook = (startPage = 1) => {
-    if (!flipbookRef.current) {
-      return;
-    }
-    
-    if (!episodeData) {
+    if (!flipbookRef.current || !episodeData || !createFlipbookUtil) {
       return;
     }
     
     try {
       const flipbookElement = flipbookRef.current;
-      
-      // Clear existing content
       flipbookElement.innerHTML = '';
       
-      // Get current pages directly instead of using state
       const currentPages = getPages();
-      
-      // Don't create flipbook if no pages available
       if (currentPages.length === 0) {
         return;
       }
       
-      // Create a simple two-page spread container
-      const spreadContainer = document.createElement('div');
-      spreadContainer.className = 'simple-flipbook-spread';
-      spreadContainer.style.cssText = `
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transition: transform 0.3s ease;
-      `;
+      // Use utility to create flipbook structure
+      const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, currentPages);
       
-      // Create left page
-      const leftPage = document.createElement('div');
-      leftPage.className = 'simple-flipbook-page left-page';
-      leftPage.style.cssText = `
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: ${isMobile ? '100%' : '50%'};
-        height: ${isMobile ? '100%' : '100%'};
-        overflow: hidden;
-        background: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      `;
+      // Store page references for updates
+      flipbookRef.current._leftPage = leftPage;
+      flipbookRef.current._rightPage = rightPage;
       
-      // Create right page (only show on desktop)
-      const rightPage = document.createElement('div');
-      rightPage.className = 'simple-flipbook-page right-page';
-      rightPage.style.cssText = `
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-        background: #000;
-        display: ${isMobile ? 'none' : 'flex'};
-        align-items: center;
-        justify-content: center;
-        ${isMobile ? '' : 'border-left: 2px solid #333;'}
-      `;
-      
-      spreadContainer.appendChild(leftPage);
-      spreadContainer.appendChild(rightPage);
-      flipbookElement.appendChild(spreadContainer);
-      
-      // Set initial page state - use the actual startPage from URL
+      // Set initial page state
       const initialPage = startPage === 'cover' ? 1 : (startPage || 1);
       setCurrentPage(initialPage);
       currentPageRef.current = initialPage;
       updateGlobalState({ currentPage: initialPage });
       
-      // Set initial pages (this will also set up click handlers)
+      // Set initial pages
       updateSpreadPages(initialPage);
       
       setIsLoading(false);
@@ -447,156 +305,50 @@ window.ComicReader = ({ content, onClose }) => {
   };
   
   const updateSpreadPages = (pageNumber) => {
-    if (!flipbookRef.current) return;
+    if (!flipbookRef.current || !updatePagesUtil) return;
     
-    const leftPage = flipbookRef.current.querySelector('.left-page');
-    const rightPage = flipbookRef.current.querySelector('.right-page');
+    const leftPage = flipbookRef.current._leftPage || flipbookRef.current.querySelector('.left-page');
+    const rightPage = flipbookRef.current._rightPage || flipbookRef.current.querySelector('.right-page');
     
     if (!leftPage) return;
     
-    // Get current pages directly instead of using state
     const currentPages = getPages();
     
-    // Clear existing content
-    leftPage.innerHTML = '';
-    if (rightPage) rightPage.innerHTML = '';
-    
-    if (isMobile) {
-      // Mobile: show only one page at a time with bottom navigation
-      const pageIndex = pageNumber - 1; // 0-based index
-      
-      // Create container for page and navigation
-      const pageContainer = document.createElement('div');
-      pageContainer.style.cssText = `
-        width: 100%;
-        height: 100%;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-      `;
-      
-      // Create page content area
-      const pageContent = document.createElement('div');
-      pageContent.style.cssText = `
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        height: 100%; /* Use full height of parent container */
-      `;
-      
-      if (pageIndex >= 0 && pageIndex < currentPages.length) {
-        const img = document.createElement('img');
-        img.src = currentPages[pageIndex];
-        img.alt = `Page ${pageNumber}`;
-        img.style.cssText = `
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-        `;
-        img.onerror = () => {};
-        pageContent.appendChild(img);
-      } else {
-        pageContent.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${pageNumber}</div>`;
-      }
-      
-      // Mobile navigation is now handled at the overlay level
-      pageContainer.appendChild(pageContent);
-      leftPage.appendChild(pageContainer);
-    } else {
-      // Desktop: show two-page spread
-      const leftPageIndex = pageNumber - 1; // 0-based index for left page
-      const rightPageIndex = pageNumber; // 0-based index for right page
-      
-      // Add left page image
-      if (leftPageIndex >= 0 && leftPageIndex < currentPages.length) {
-        const leftImg = document.createElement('img');
-        leftImg.src = currentPages[leftPageIndex];
-        leftImg.alt = `Page ${leftPageIndex + 1}`;
-        leftImg.style.cssText = `
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          display: block;
-        `;
-        leftImg.onerror = () => {};
-        leftPage.appendChild(leftImg);
-      } else {
-        leftPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${leftPageIndex + 1}</div>`;
-      }
-      
-      // Add right page image
-      if (rightPage && rightPageIndex >= 0 && rightPageIndex < currentPages.length) {
-        const rightImg = document.createElement('img');
-        rightImg.src = currentPages[rightPageIndex];
-        rightImg.alt = `Page ${rightPageIndex + 1}`;
-        rightImg.style.cssText = `
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          display: block;
-        `;
-        rightImg.onload = () => {};
-        rightImg.onerror = (error) => {
-          rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">Page ${rightPageIndex + 1} - Image failed to load</div>`;
-        };
-        rightPage.appendChild(rightImg);
-      } else if (rightPage) {
-        rightPage.innerHTML = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 18px;">No page ${rightPageIndex + 1}</div>`;
-      }
-    }
-    
-    // Re-add click handlers after updating content
-    if (!isMobile) {
-      // Desktop: left page goes back, right page goes forward
-      // Using onclick instead of addEventListener prevents multiple handlers
-      leftPage.onclick = (e) => {
-        e.stopPropagation();
-        previousPage();
-      };
-      if (rightPage) {
-        rightPage.onclick = (e) => {
-          e.stopPropagation();
-          nextPage();
-        };
-      }
-    }
-    // Mobile navigation is handled by the bottom navigation buttons
+    // Use utility to update pages
+    updatePagesUtil(deviceType, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage);
   };
   
   // Turn.js removed - using simple custom implementation
 
   const previousPage = () => {
     try {
-      // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
       
-      if (isMobile) {
-        // Mobile: go to previous single page
-        const prevPage = currentPageValue - 1;
+      if (!getPreviousPageNumber || !shouldGoBackToCover) {
+        // Fallback if utilities not loaded
+        const prevPage = isMobile ? currentPageValue - 1 : currentPageValue - 2;
         if (prevPage >= 1) {
           setCurrentPage(prevPage);
           currentPageRef.current = prevPage;
           updateGlobalState({ currentPage: prevPage });
           updateSpreadPages(prevPage);
-        } else if (currentPageValue === 1) {
-          // If on first page, go back to cover
+        } else if (shouldGoBackToCover?.(currentPageValue, deviceType) || currentPageValue === 1) {
           goBackToCover();
         }
-      } else {
-        // Desktop: For two-page spreads, we need to decrement by 2 to show the previous spread
-        const prevSpreadPage = currentPageValue - 2;
-        if (prevSpreadPage >= 1) {
-          setCurrentPage(prevSpreadPage);
-          currentPageRef.current = prevSpreadPage;
-          updateGlobalState({ currentPage: prevSpreadPage });
-          updateSpreadPages(prevSpreadPage);
-        } else if (currentPageValue === 1 || currentPageValue === 2) {
-          // If on first or second page, go back to cover
-          goBackToCover();
-        }
+        return;
+      }
+      
+      if (shouldGoBackToCover(currentPageValue, deviceType)) {
+        goBackToCover();
+        return;
+      }
+      
+      const prevPage = getPreviousPageNumber(currentPageValue, deviceType);
+      if (prevPage >= 1) {
+        setCurrentPage(prevPage);
+        currentPageRef.current = prevPage;
+        updateGlobalState({ currentPage: prevPage });
+        updateSpreadPages(prevPage);
       }
     } catch (error) {
       // Silent error handling
@@ -605,40 +357,66 @@ window.ComicReader = ({ content, onClose }) => {
 
   const nextPage = () => {
     try {
-      // Get the current page from ref to avoid stale closure
       const currentPageValue = currentPageRef.current;
       const currentPages = getPages();
       const actualTotalPages = currentPages.length;
       
-      if (isMobile) {
-        // Mobile: go to next single page
-        const nextPage = currentPageValue + 1;
-        if (nextPage <= actualTotalPages) {
-          setCurrentPage(nextPage);
-          currentPageRef.current = nextPage;
-          updateGlobalState({ currentPage: nextPage });
-          updateSpreadPages(nextPage);
+      if (!getNextPageNumber) {
+        // Fallback if utilities not loaded
+        const nextPageNum = isMobile ? currentPageValue + 1 : currentPageValue + 2;
+        if (nextPageNum <= actualTotalPages) {
+          setCurrentPage(nextPageNum);
+          currentPageRef.current = nextPageNum;
+          updateGlobalState({ currentPage: nextPageNum });
+          updateSpreadPages(nextPageNum);
         } else {
-          // Reached end of current episode, try to load next episode
           loadNextEpisode();
         }
+        return;
+      }
+      
+      const nextPageNum = getNextPageNumber(currentPageValue, deviceType);
+      if (nextPageNum <= actualTotalPages) {
+        setCurrentPage(nextPageNum);
+        currentPageRef.current = nextPageNum;
+        updateGlobalState({ currentPage: nextPageNum });
+        updateSpreadPages(nextPageNum);
       } else {
-        // Desktop: For two-page spreads, we need to increment by 2 to show the next spread
-        const nextSpreadPage = currentPageValue + 2;
-        if (nextSpreadPage <= actualTotalPages) {
-          setCurrentPage(nextSpreadPage);
-          currentPageRef.current = nextSpreadPage;
-          updateGlobalState({ currentPage: nextSpreadPage });
-          updateSpreadPages(nextSpreadPage);
-        } else {
-          // Reached end of current episode, try to load next episode
-          loadNextEpisode();
-        }
+        loadNextEpisode();
       }
     } catch (error) {
       // Silent error handling
     }
   };
+
+  // Create swipe handlers now that nextPage/previousPage are defined
+  const swipeHandlers = (isMobile || isTablet) && createSwipeHandlers 
+    ? createSwipeHandlers(nextPage, previousPage)
+    : null;
+  
+  // Fallback touch handlers if utility not loaded
+  const [touchStart, setTouchStart] = React.useState(null);
+  const [touchEnd, setTouchEnd] = React.useState(null);
+  
+  const onTouchStart = swipeHandlers?.onTouchStart || ((e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  });
+  
+  const onTouchMove = swipeHandlers?.onTouchMove || ((e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  });
+  
+  const onTouchEnd = swipeHandlers?.onTouchEnd || (() => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 50;
+    if (distance > minSwipeDistance) {
+      nextPage();
+    } else if (distance < -minSwipeDistance) {
+      previousPage();
+    }
+  });
 
   // Function to load the next episode in the series
   const loadNextEpisode = () => {
