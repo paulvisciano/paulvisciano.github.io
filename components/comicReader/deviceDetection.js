@@ -32,6 +32,13 @@ const detectDeviceType = () => {
 };
 
 /**
+ * Detects if device is in portrait or landscape orientation
+ */
+const detectOrientation = () => {
+  return window.innerWidth < window.innerHeight ? 'portrait' : 'landscape';
+};
+
+/**
  * Hook to get and track device type with resize handling
  */
 const useDeviceType = () => {
@@ -49,9 +56,41 @@ const useDeviceType = () => {
   return deviceType;
 };
 
+/**
+ * Hook to get and track orientation with change detection
+ */
+const useOrientation = () => {
+  const [orientation, setOrientation] = React.useState(detectOrientation);
+  
+  React.useEffect(() => {
+    const handleResize = () => {
+      setOrientation(detectOrientation());
+    };
+    
+    const handleOrientationChange = () => {
+      // Small delay to ensure dimensions are updated
+      setTimeout(() => {
+        setOrientation(detectOrientation());
+      }, 100);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleOrientationChange);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleOrientationChange);
+    };
+  }, []);
+  
+  return orientation;
+};
+
 // Export for use in other files
 window.ComicReaderDeviceDetection = {
   detectDeviceType,
-  useDeviceType
+  useDeviceType,
+  detectOrientation,
+  useOrientation
 };
 

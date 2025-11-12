@@ -168,15 +168,18 @@ const updateDesktopPages = (leftPage, rightPage, pageNumber, currentPages, previ
 };
 
 /**
- * Create flipbook based on device type
+ * Create flipbook based on device type and orientation
  */
-const createFlipbook = (flipbookElement, deviceType, currentPages, styles) => {
+const createFlipbook = (flipbookElement, deviceType, orientation, currentPages, styles) => {
   if (!styles) {
     console.error('ComicReaderFlipbook: styles object is required');
     return { leftPage: null, rightPage: null };
   }
   
-  if (deviceType === 'mobile') {
+  // Portrait = single page, Landscape = two-page spread
+  const useSinglePage = orientation === 'portrait';
+  
+  if (useSinglePage) {
     return createMobileFlipbook(flipbookElement, currentPages, styles);
   } else {
     return createDesktopFlipbook(flipbookElement, currentPages, styles);
@@ -184,15 +187,18 @@ const createFlipbook = (flipbookElement, deviceType, currentPages, styles) => {
 };
 
 /**
- * Update pages based on device type
+ * Update pages based on device type and orientation
  */
-const updatePages = (deviceType, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, styles) => {
+const updatePages = (deviceType, orientation, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, styles) => {
   if (!styles) {
     console.error('ComicReaderFlipbook: styles object is required');
     return;
   }
   
-  if (deviceType === 'mobile') {
+  // Portrait = single page, Landscape = two-page spread
+  const useSinglePage = orientation === 'portrait';
+  
+  if (useSinglePage) {
     updateMobilePages(leftPage, pageNumber, currentPages, previousPage, nextPage, styles);
   } else {
     updateDesktopPages(leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, styles);

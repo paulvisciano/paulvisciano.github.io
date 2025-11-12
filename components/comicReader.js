@@ -46,10 +46,18 @@ window.ComicReader = ({ content, onClose }) => {
     ? window.ComicReaderDeviceDetection.useDeviceType() 
     : 'desktop'; // Fallback to desktop if not loaded
   
+  // Use orientation detection hook
+  const orientation = window.ComicReaderDeviceDetection?.useOrientation 
+    ? window.ComicReaderDeviceDetection.useOrientation() 
+    : 'landscape'; // Fallback to landscape if not loaded
+  
   // Derived device flags for convenience
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
+  
+  // Determine view mode based on orientation (portrait = single page, landscape = two-page)
+  const useSinglePage = orientation === 'portrait';
   
   // Keep ref in sync with state
   React.useEffect(() => {
@@ -183,16 +191,24 @@ window.ComicReader = ({ content, onClose }) => {
     setFlipbookReady(false);
   }, [episodeData]);
 
-  // Handle flipbook creation when flipbookReady becomes true
+  // Handle flipbook creation when flipbookReady becomes true or orientation changes
   React.useEffect(() => {
     // Don't create flipbook if no episode data
     if (!episodeData) {
       return;
     }
     
+    // Recreate flipbook when orientation changes (if already created)
+    if (flipbookCreatedRef.current && flipbookRef.current && !showCover) {
+      const currentPageValue = currentPageRef.current;
+      createFlipbook(currentPageValue);
+      updateSpreadPages(currentPageValue);
+      return;
+    }
+    
     // Check global state to prevent multiple creations
     const globalState = getGlobalState();
-    if (globalState.flipbookCreated) {
+    if (globalState.flipbookCreated && !showCover) {
       return;
     }
     
@@ -203,14 +219,14 @@ window.ComicReader = ({ content, onClose }) => {
       updateGlobalState({ flipbookCreated: true }); // Update global state
       
       // Set loading to false since flipbook is created - balanced timing
-      const flipbookDelay = isMobile ? 400 : 500;
+      const flipbookDelay = useSinglePage ? 400 : 500;
       setTimeout(() => {
         setIsLoading(false);
         setIsVisible(true);
         updateGlobalState({ isLoading: false, isVisible: true });
       }, flipbookDelay);
     }
-  }, [flipbookReady, episodeData]);
+  }, [flipbookReady, episodeData, orientation, showCover]);
 
   // Optimized loading sequence for mobile
   React.useEffect(() => {
@@ -288,10 +304,10 @@ window.ComicReader = ({ content, onClose }) => {
         console.error('ComicReader: styles not loaded');
         return;
       }
-      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading });
+      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation });
       
       // Use utility to create flipbook structure
-      const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, currentPages, currentStyles);
+      const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, orientation, currentPages, currentStyles);
       
       // Store page references for updates
       flipbookRef.current._leftPage = leftPage;
@@ -340,7 +356,7 @@ window.ComicReader = ({ content, onClose }) => {
     const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading });
     
     // Use utility to update pages
-    updatePagesUtil(deviceType, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
+    updatePagesUtil(deviceType, orientation, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
   };
   
   // Turn.js removed - using simple custom implementation
@@ -351,24 +367,24 @@ window.ComicReader = ({ content, onClose }) => {
       
       if (!getPreviousPageNumber || !shouldGoBackToCover) {
         // Fallback if utilities not loaded
-        const prevPage = isMobile ? currentPageValue - 1 : currentPageValue - 2;
+        const prevPage = useSinglePage ? currentPageValue - 1 : currentPageValue - 2;
         if (prevPage >= 1) {
           setCurrentPage(prevPage);
           currentPageRef.current = prevPage;
           updateGlobalState({ currentPage: prevPage });
           updateSpreadPages(prevPage);
-        } else if (shouldGoBackToCover?.(currentPageValue, deviceType) || currentPageValue === 1) {
+        } else if (shouldGoBackToCover?.(currentPageValue, orientation) || currentPageValue === 1) {
           goBackToCover();
         }
         return;
       }
       
-      if (shouldGoBackToCover(currentPageValue, deviceType)) {
+      if (shouldGoBackToCover(currentPageValue, orientation)) {
         goBackToCover();
         return;
       }
       
-      const prevPage = getPreviousPageNumber(currentPageValue, deviceType);
+      const prevPage = getPreviousPageNumber(currentPageValue, orientation);
       if (prevPage >= 1) {
         setCurrentPage(prevPage);
         currentPageRef.current = prevPage;
@@ -388,7 +404,7 @@ window.ComicReader = ({ content, onClose }) => {
       
       if (!getNextPageNumber) {
         // Fallback if utilities not loaded
-        const nextPageNum = isMobile ? currentPageValue + 1 : currentPageValue + 2;
+        const nextPageNum = useSinglePage ? currentPageValue + 1 : currentPageValue + 2;
         if (nextPageNum <= actualTotalPages) {
           setCurrentPage(nextPageNum);
           currentPageRef.current = nextPageNum;
@@ -400,7 +416,7 @@ window.ComicReader = ({ content, onClose }) => {
         return;
       }
       
-      const nextPageNum = getNextPageNumber(currentPageValue, deviceType);
+      const nextPageNum = getNextPageNumber(currentPageValue, orientation);
       if (nextPageNum <= actualTotalPages) {
         setCurrentPage(nextPageNum);
         currentPageRef.current = nextPageNum;
@@ -519,7 +535,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Get device-specific styles
   const styles = window.ComicReaderStyles?.getDeviceStyles 
-    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading })
+    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation })
     : {}; // Fallback empty object if styles not loaded
 
   // All styles are now loaded from styles.js via getDeviceStyles()
@@ -567,8 +583,8 @@ window.ComicReader = ({ content, onClose }) => {
     containerChildren.push(renderFlipbook(styles, { flipbookRef }));
   }
   
-  // Desktop controls
-  if (!error && !isLoading && flipbookReady && !showCover && !isMobile && renderDesktopControls) {
+  // Desktop controls (landscape mode - two-page spread)
+  if (!error && !isLoading && flipbookReady && !showCover && !useSinglePage && renderDesktopControls) {
     containerChildren.push(renderDesktopControls(styles, {
       currentPage,
       totalPages,
@@ -578,8 +594,8 @@ window.ComicReader = ({ content, onClose }) => {
     }));
   }
   
-  // Mobile navigation
-  if (!error && !isLoading && flipbookReady && !showCover && isMobile && renderMobileNavigation) {
+  // Mobile navigation (portrait mode - single page)
+  if (!error && !isLoading && flipbookReady && !showCover && useSinglePage && renderMobileNavigation) {
     containerChildren.push(renderMobileNavigation(styles, {
       currentPage,
       totalPages,

@@ -3,32 +3,32 @@
 // ============================================================================
 
 /**
- * Calculate next page number based on device type
- * Mobile: increments by 1
- * Tablet/Desktop: increments by 2 (2-page spreads)
+ * Calculate next page number based on orientation
+ * Portrait (single page): increments by 1
+ * Landscape (two-page spread): increments by 2
  */
-const getNextPageNumber = (currentPage, deviceType) => {
-  const increment = deviceType === 'mobile' ? 1 : 2;
+const getNextPageNumber = (currentPage, orientation) => {
+  const increment = orientation === 'portrait' ? 1 : 2;
   return currentPage + increment;
 };
 
 /**
- * Calculate previous page number based on device type
- * Mobile: decrements by 1
- * Tablet/Desktop: decrements by 2 (2-page spreads)
+ * Calculate previous page number based on orientation
+ * Portrait (single page): decrements by 1
+ * Landscape (two-page spread): decrements by 2
  */
-const getPreviousPageNumber = (currentPage, deviceType) => {
-  const increment = deviceType === 'mobile' ? 1 : 2;
+const getPreviousPageNumber = (currentPage, orientation) => {
+  const increment = orientation === 'portrait' ? 1 : 2;
   return currentPage - increment;
 };
 
 /**
  * Check if we should go back to cover
- * Mobile: if on page 1
- * Tablet/Desktop: if on page 1 or 2
+ * Portrait (single page): if on page 1
+ * Landscape (two-page spread): if on page 1 or 2
  */
-const shouldGoBackToCover = (currentPage, deviceType) => {
-  if (deviceType === 'mobile') {
+const shouldGoBackToCover = (currentPage, orientation) => {
+  if (orientation === 'portrait') {
     return currentPage === 1;
   } else {
     return currentPage === 1 || currentPage === 2;
