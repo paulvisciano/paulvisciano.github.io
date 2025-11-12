@@ -79,6 +79,18 @@ const getDeviceStyles = (deviceType, state = {}) => {
     pointerEvents: isVisible ? 'auto' : 'none',
     position: 'relative',
     padding: 0
+  } : isDesktop ? {
+    width: '400px',
+    minHeight: '600px',
+    margin: '0 auto',
+    display: 'block',
+    cursor: isVisible ? 'pointer' : 'default',
+    overflow: 'hidden',
+    background: '#000',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    pointerEvents: isVisible ? 'auto' : 'none',
+    position: 'relative',
+    padding: 0
   } : {
     width: '500px',
     minHeight: '750px',
@@ -114,6 +126,15 @@ const getDeviceStyles = (deviceType, state = {}) => {
     display: showCover || isLoading ? 'none' : 'flex',
     background: '#000',
     borderRadius: '0',
+    overflow: 'hidden',
+    position: 'relative'
+  } : isDesktop ? {
+    width: '800px',
+    height: '600px',
+    margin: '0 auto',
+    display: showCover || isLoading ? 'none' : 'flex',
+    background: '#000',
+    borderRadius: '10px',
     overflow: 'hidden',
     position: 'relative'
   } : {
