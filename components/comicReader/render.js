@@ -49,6 +49,14 @@ const renderCover = (deviceType, styles, {
   coverRef 
 }) => {
   const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  
+  // Handle touch events on tablet to open immediately on first tap
+  const handleTouchStart = isTablet && isVisible ? (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openComicBook();
+  } : undefined;
   
   return React.createElement('div', {
     key: 'cover',
@@ -56,6 +64,7 @@ const renderCover = (deviceType, styles, {
     style: styles.coverDisplayStyle || {},
     className: 'comic-cover-display',
     onClick: isVisible ? openComicBook : undefined,
+    onTouchStart: handleTouchStart,
     onMouseEnter: isVisible ? (e) => {
       const img = e.target.querySelector('img');
       if (img) img.style.transform = 'scale(1.02)';
