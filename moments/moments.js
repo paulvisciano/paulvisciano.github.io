@@ -721,16 +721,16 @@ window.momentsInTime = [
     formattedDuration: formatDuration(12)
   },
   {
-    id: "honolulu-2025-07-13",
+    id: "honolulu-2025-06-13",
     title: "Island Life in Honolulu",
-    date: new Date('2025-07-13T00:00:00Z'),
+    date: new Date('2025-06-13T00:00:00Z'),
     timelineHighlight: "Honolulu Beaches",
     tags: ["beach", "nature"],
-    snippet: "Embraced island life in Honolulu with stunning beaches and lush hikes.",
+    snippet: "Flew from San Diego to Hawaii on June 13th. Embraced island life in Honolulu with stunning beaches and lush hikes.",
     fullLink: "#",
     location: { lat: 21.3069, lng: -157.8583, name: "Honolulu, Hawaii" },
-    stayDuration: 31,
-    formattedDuration: formatDuration(31)
+    stayDuration: 61,
+    formattedDuration: formatDuration(61)
   },
   {
     id: "pasay-2025-08-13",
@@ -738,23 +738,23 @@ window.momentsInTime = [
     date: new Date('2025-08-13T00:00:00Z'),
     timelineHighlight: "Pasay",
     tags: ["city", "culture"],
-    snippet: "Explored Pasay, a vibrant city in Metro Manila, discovering its neighborhoods and local culture before continuing to other parts of the Philippines.",
+    snippet: "Explored Pasay, a vibrant city in Metro Manila, discovering its neighborhoods and local culture before flying to Davao on Aug 15th.",
     fullLink: "#",
     location: { lat: 14.5378, lng: 120.9969, name: "Pasay, Philippines" },
     stayDuration: 3,
     formattedDuration: formatDuration(3)
   },
   {
-    id: "davao-2025-08-20",
-    title: "Quick Stop in Davao",
-    date: new Date('2025-08-20T00:00:00Z'),
-    timelineHighlight: "Davao Quick Stop",
+    id: "davao-2025-08-15",
+    title: "Davao Adventure",
+    date: new Date('2025-08-15T00:00:00Z'),
+    timelineHighlight: "Davao",
     tags: ["city", "culture"],
-    snippet: "Quick stop in Davao before continuing to other parts of the Philippines.",
+    snippet: "Flew from Manila to Davao on August 15th. Explored Davao before flying back to Manila on August 21st.",
     fullLink: "#",
     location: { lat: 7.1907, lng: 125.4553, name: "Davao, Philippines" },
-    stayDuration: 2,
-    formattedDuration: formatDuration(2)
+    stayDuration: 7,
+    formattedDuration: formatDuration(7)
   },
   {
     id: "taguig-2025-08-21",
@@ -762,7 +762,7 @@ window.momentsInTime = [
     date: new Date('2025-08-21T00:00:00Z'),
     timelineHighlight: "Taguig",
     tags: ["city", "culture"],
-    snippet: "Explored Taguig, a modern city in Metro Manila, before heading to Bangkok.",
+    snippet: "Flew back to Manila from Davao on August 21st. Explored Taguig, a modern city in Metro Manila, before heading to Bangkok.",
     fullLink: "#",
     location: { lat: 14.5176, lng: 121.0509, name: "Taguig, Philippines" },
     stayDuration: 4,
@@ -976,11 +976,11 @@ window.momentsInTime = [
     date: new Date('2025-10-01T00:00:00Z'),
     timelineHighlight: "Chicago Family",
     tags: ["city", "culture", "family", "wedding", "urban runner"],
-    snippet: "Will attend my step-dad Mike's daughter's wedding (Oct 3-5) and have an emotional reunion with my dad after 16 years apart - we recently reconnected over the phone and he's excited to meet my brother and I in person. Flying in from Amman via Royal Jordanian after the strategic layover. Continuing Urban Runner daily engagement throughout the Chicago stay.",
+    snippet: "Flew to Chicago on Oct 1st from Amman via Royal Jordanian after the strategic layover. Attended my step-dad Mike's daughter's wedding (Oct 3-5) and had an emotional reunion with my dad after 16 years apart - we recently reconnected over the phone and he was excited to meet my brother and I in person. Stayed until Oct 5th when I flew to Miami. Continuing Urban Runner daily engagement throughout the Chicago stay.",
     fullLink: "#",
     location: { lat: 41.8781, lng: -87.6298, name: "Chicago, Illinois" },
-    stayDuration: 4,
-    formattedDuration: formatDuration(4)
+    stayDuration: 5,
+    formattedDuration: formatDuration(5)
   },
   {
     id: "chicago-episode-1-2025-10-01",
@@ -1006,11 +1006,11 @@ window.momentsInTime = [
     date: new Date('2025-10-05T00:00:00Z'),
     timelineHighlight: "Miami Beach Vibes",
     tags: ["beach volleyball", "friends", "miami", "florida", "training", "crew", "urban runner", "beach", "nightlife"],
-    snippet: "Post-wedding Miami Beach reunion with the volleyball crew! Flying in from Chicago on Sunday to catch up with the team, training on South Beach, and soaking up the vibrant energy with the squad before flying to Lisbon for the work retreat. Returned to Miami Beach after Lisbon for a quick stay before heading to St. Petersburg. Continuing Urban Runner daily engagement throughout the Miami Beach stays.",
+    snippet: "Post-wedding Miami Beach reunion with the volleyball crew! Flying in from Chicago on Sunday to catch up with the team, training on South Beach, and soaking up the vibrant energy with the squad before flying to Lisbon on Oct 12 for the work retreat. Continuing Urban Runner daily engagement throughout the Miami Beach stay.",
     fullLink: "#",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
-    stayDuration: 9,
-    formattedDuration: formatDuration(9)
+    stayDuration: 7,
+    formattedDuration: formatDuration(7)
   },
   
   {
@@ -1111,16 +1111,16 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
-    id: "st-petersburg-2025-10-20",
+    id: "st-petersburg-2025-10-19",
     title: "St. Petersburg Mega Reunion",
-    date: new Date('2025-10-20T00:00:00Z'),
+    date: new Date('2025-10-19T00:00:00Z'),
     timelineHighlight: "St. Pete Mega Reunion",
     tags: ["family", "friends", "st petersburg", "florida", "relaxation", "reunion", "zacharias", "volleyball planning", "welli", "leo", "mo", "mom", "mike", "urban runner"],
-    snippet: "Epic St. Pete reunion week! Catching up with Welli, Zacharias, Leo, Mo, Mom & Mike, and even more friends after the intense Lisbon work trip. Quality time with the whole crew, exploring familiar spots, and planning the Mexico tournament strategy with Zacharias before flying to Mexico on Sunday the 26th. Continuing Urban Runner daily engagement throughout the St. Pete stay.",
+    snippet: "Drove from Miami to St. Pete on Oct 19th after the Lisbon work trip. Epic St. Pete reunion week! Stayed with Welli, catching up with Zacharias, Leo, Mo, Mom & Mike, and even more friends. Quality time with the whole crew, exploring familiar spots, and planning the Mexico tournament strategy with Zacharias before flying to Playa del Carmen on Oct 29th. Continuing Urban Runner daily engagement throughout the St. Pete stay.",
     fullLink: "#",
     location: { lat: 27.7676, lng: -82.6403, name: "St. Petersburg, Florida" },
-    stayDuration: 6,
-    formattedDuration: formatDuration(6)
+    stayDuration: 10,
+    formattedDuration: formatDuration(10)
   },
   {
     id: "lisbon-2025-10-12",
@@ -1180,11 +1180,11 @@ window.momentsInTime = [
       "urban runner"
     ],
     snippet:
-      "Arrived in Ubud on November 7th and reconnected with Hallie and Leigha from the retreat circle. Spent the week immersed in yoga, Pilates, massages, and café hangs at Yoga Barn and Eden. Met new friends like KJ, shared dinners and deep conversations, and balanced recovery from Bali Belly with remote work and passion projects. The final Bali days (Nov 14–16) focused on packing, laundry, and flight prep before heading to Singapore. Continuing Urban Runner daily engagement throughout the Ubud stay.",
+      "Arrived in Ubud on November 7th and reconnected with Hallie and Leigha from the retreat circle. Spent the week immersed in yoga, Pilates, massages, and café hangs at Yoga Barn and Eden. Met new friends like KJ, shared dinners and deep conversations, and balanced recovery from Bali Belly with remote work and passion projects. The final Bali days (Nov 14–15) focused on packing, laundry, and flight prep before flying to Singapore on Nov 16th. Continuing Urban Runner daily engagement throughout the Ubud stay.",
     fullLink: "#",
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
-    stayDuration: 10, // Nov 7–16 inclusive
-    formattedDuration: formatDuration(10),
+    stayDuration: 9, // Nov 7–15 inclusive
+    formattedDuration: formatDuration(9),
   },
   {
     id: "singapore-2025-11-16",
