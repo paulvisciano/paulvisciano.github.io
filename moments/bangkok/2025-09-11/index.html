@@ -3,16 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urban Runner Episode 15: Dinner Date - Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=/?path=/moments/bangkok/2025-09-11/">
-  <link rel="canonical" href="https://paulvisciano.github.io/moments/bangkok/2025-09-11/">
+  <title>Redirecting...</title>
   <script>
-    // Immediate redirect for JavaScript-enabled browsers
-    window.location.replace('/?path=/moments/bangkok/2025-09-11/' + window.location.hash);
+    // Extract the current path dynamically from the URL
+    const currentPath = window.location.pathname;
+    
+    // Set canonical link for SEO
+    const canonicalLink = document.createElement('link');
+    canonicalLink.rel = 'canonical';
+    canonicalLink.href = currentPath;
+    document.head.appendChild(canonicalLink);
+    
+    // Immediate redirect to the main app with the moment URL (preserve hash)
+    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
+    window.location.replace(redirectUrl);
   </script>
+  <!-- Fallback for browsers with JavaScript disabled -->
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/">
+  </noscript>
 </head>
 <body>
-  <p>Redirecting to the new URL structure...</p>
-  <p>If you are not redirected automatically, <a href="/?path=/moments/bangkok/2025-09-11/">click here</a>.</p>
+  <p>Redirecting...</p>
+  <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
 </body>
 </html>
