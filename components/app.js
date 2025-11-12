@@ -124,25 +124,30 @@ window.App = () => {
       let intendedPath;
       if (moment.fullLink === '#') {
         // For moments with no specific page, generate a proper URL based on location and date
-        // Extract city name from moment title (look for patterns like "in Chicago", "at Miami", etc.)
+        // Extract city name from location.name (e.g., "Lisbon, Portugal" -> "lisbon")
         let locationSlug;
-        const title = moment.title.toLowerCase();
+        if (moment.location && moment.location.name) {
+          // Extract city name from location.name (format: "City, Country" or "City, State")
+          const locationName = moment.location.name;
+          const cityMatch = locationName.match(/^([^,]+)/);
+          if (cityMatch) {
+            locationSlug = cityMatch[1].trim()
+              .toLowerCase()
+              .normalize('NFD') // Decompose characters (e.g., í -> i + ́)
+              .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+              .replace(/[^a-z0-9\s-]/g, '') // Remove remaining special characters
+              .replace(/\s+/g, '-') // Replace spaces with hyphens
+              .replace(/-+/g, '-') // Replace multiple hyphens with single
+              .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+          }
+        }
         
-        // Try to extract city name from common patterns
-        const cityMatch = title.match(/(?:in|at|to|from)\s+([a-z\s]+?)(?:\s|$|,|\.|!|\?|:)/);
-        if (cityMatch) {
-          locationSlug = cityMatch[1].trim()
-            .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
-            .replace(/\s+/g, '-') // Replace spaces with hyphens
-            .replace(/-+/g, '-') // Replace multiple hyphens with single
-            .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
-        } else {
-          // Fallback to using the full title if no city pattern found
-          locationSlug = moment.title.toLowerCase()
-            .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
-            .replace(/\s+/g, '-') // Replace spaces with hyphens
-            .replace(/-+/g, '-') // Replace multiple hyphens with single
-            .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+        // Fallback to using id if location extraction fails
+        if (!locationSlug && moment.id) {
+          const idMatch = moment.id.match(/^([^-]+)/);
+          if (idMatch) {
+            locationSlug = idMatch[1];
+          }
         }
         
         const date = new Date(moment.date);
@@ -311,10 +316,46 @@ window.App = () => {
         });
       }
       
-      // If still no match, try by path segment
+      // If still no match, try by path segment or id
       if (!moment) {
         moment = window.momentsInTime.find(m => m.fullLink === `/moments/${pathSegmentWithoutHash}`) || 
                 window.momentsInTime.find(m => m.id === pathSegmentWithoutHash);
+      }
+      
+      // If still no match, try to find by generated URL from location.name (for moments with fullLink: "#")
+      if (!moment) {
+        // Parse the path to extract city and date
+        const pathMatch = pathSegmentWithoutHash.match(/^([^\/]+)\/(\d{4}-\d{2}-\d{2})/);
+        if (pathMatch) {
+          const [, citySlug, dateStr] = pathMatch;
+          moment = window.momentsInTime.find(m => {
+            if (m.fullLink === '#' && m.location && m.location.name) {
+              // Generate city slug from location.name
+              const locationName = m.location.name;
+              const cityMatch = locationName.match(/^([^,]+)/);
+              if (cityMatch) {
+                const generatedCitySlug = cityMatch[1].trim()
+                  .toLowerCase()
+                  .normalize('NFD') // Decompose characters (e.g., í -> i + ́)
+                  .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+                  .replace(/[^a-z0-9\s-]/g, '')
+                  .replace(/\s+/g, '-')
+                  .replace(/-+/g, '-')
+                  .replace(/^-|-$/g, '');
+                
+                // Generate date string
+                const mDate = new Date(m.date);
+                const mYear = mDate.getFullYear();
+                const mMonth = String(mDate.getMonth() + 1).padStart(2, '0');
+                const mDay = String(mDate.getDate()).padStart(2, '0');
+                const mDateStr = `${mYear}-${mMonth}-${mDay}`;
+                
+                return generatedCitySlug === citySlug && mDateStr === dateStr;
+              }
+            }
+            return false;
+          });
+        }
       }
       
       if (moment) {
