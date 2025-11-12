@@ -1041,7 +1041,7 @@ window.momentsInTime = [
   },
   {
     id: "ubud-2025-11-07",
-    title: "Ubud Reset: Yoga, Friends & Creative Flow",
+    title: "Reset in Ubud: Yoga, Friends & Creative Flow",
     date: new Date("2025-11-07T00:00:00Z"),
     timelineHighlight: "Ubud Chapter",
     tags: [
@@ -1090,7 +1090,7 @@ window.momentsInTime = [
   },
   {
     id: "davao-2025-11-21",
-    title: "Davao Arrival: Birthday Energy & Reconnection",
+    title: "Arrival in Davao: Birthday Energy & Reconnection",
     date: new Date("2025-11-21T00:00:00Z"),
     timelineHighlight: "Birthday in Davao",
     tags: [
