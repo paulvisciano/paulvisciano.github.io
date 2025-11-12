@@ -4,7 +4,7 @@
     "puppeteer": "^24.22.3"
   },
   "scripts": {
-    "remember": "node memories/remember.js",
-    "test:comic": "node test-comic-reader.js"
+    "remember": "node .ai/memories/remember.js",
+    "test:comic": "node .ai/test-cases/test-comic-reader.js"
   }
 }

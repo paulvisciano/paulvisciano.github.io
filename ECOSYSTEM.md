@@ -19,8 +19,18 @@ paulvisciano.github.io/              # 🏠 Main unified ecosystem
 │   ├── musical-cubes/               # 🎵 Music revolution (established)
 │   ├── urban-runner/                # 🏃‍♂️ Wealth redistribution + AR
 │   └── project-template/            # 📋 Standardized structure
-├── memories/                         # 🧠 AI memory system
+├── .ai/                              # 🤖 AI-assisted development
+│   ├── memories/                     # 🧠 AI memory system
+│   │   ├── contexts/                 # Context knowledge
+│   │   ├── relationships/            # People & places tracking
+│   │   └── sessions/                 # Session history
+│   └── test-cases/                   # 🧪 Test documentation & automation
+│       ├── test-comic-reader.js      # Automated comic reader tests
+│       └── browser-automation-tests.js # Manual test definitions
 ├── components/                       # 🧩 Shared components
+├── scripts/                          # 🔧 Utility scripts
+│   ├── create-moment-folders.js      # Generate moment folder structure
+│   └── update-moment-index-files.js  # Update moment redirects
 └── globe/                            # 🌍 Interactive 3D visualization
 ```
 
@@ -51,11 +61,21 @@ The 3D globe serves as a **unified visualization** of:
 
 ## AI Memory System
 
-A **centralized learning system** that:
+A **centralized learning system** located in `.ai/memories/` that:
 - **Tracks development** across all projects
 - **Learns patterns** from your work and travel
 - **Provides context** for future AI assistance
 - **Shares insights** between projects
+- **Stores relationships** with people and places
+- **Maintains session history** for continuous learning
+
+## Testing Infrastructure
+
+Comprehensive test suite in `.ai/test-cases/` that includes:
+- **Manual test cases** for core site functionality
+- **Automated tests** for comic reader functionality
+- **Browser automation** tests using Puppeteer
+- **Test documentation** and validation procedures
 
 ## Impact Tracking
 
@@ -76,9 +96,10 @@ A **centralized learning system** that:
 
 1. **Work on projects** (Urban Runner, Musical Cubes)
 2. **Create globe pins** for significant activities
-3. **Update AI memory** with learnings and decisions
-4. **Commit and push** to main repo
-5. **AI learns** from all changes and provides better assistance
+3. **Update AI memory** in `.ai/memories/` with learnings and decisions
+4. **Run tests** using `.ai/test-cases/` to validate functionality
+5. **Commit and push** to main repo
+6. **AI learns** from all changes and provides better assistance
 
 ## Future Projects
 
@@ -90,11 +111,13 @@ The ecosystem is designed to **scale infinitely**:
 
 ## Getting Started
 
-1. **Explore existing projects** in the projects/ directory
+1. **Explore existing projects** in the `projects/` directory
 2. **Understand globe integration** for each project
-3. **Contribute to AI memory** system
-4. **Create new projects** using the template
-5. **Connect everything** through the unified globe
+3. **Review test cases** in `.ai/test-cases/` to understand functionality
+4. **Contribute to AI memory** system in `.ai/memories/`
+5. **Create new projects** using the template
+6. **Connect everything** through the unified globe
+7. **Run tests** to validate changes: `npm run test:comic`
 
 ## The Big Picture
 
