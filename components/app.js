@@ -129,7 +129,7 @@ window.App = () => {
         const title = moment.title.toLowerCase();
         
         // Try to extract city name from common patterns
-        const cityMatch = title.match(/(?:in|at|to|from)\s+([a-z\s]+?)(?:\s|$|,|\.|!|\?)/);
+        const cityMatch = title.match(/(?:in|at|to|from)\s+([a-z\s]+?)(?:\s|$|,|\.|!|\?|:)/);
         if (cityMatch) {
           locationSlug = cityMatch[1].trim()
             .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
