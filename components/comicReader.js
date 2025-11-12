@@ -604,10 +604,26 @@ window.ComicReader = ({ content, onClose }) => {
         className: 'comic-episode-container'
       }, containerChildren);
   
+  // Prevent touch events from reaching elements underneath (like the globe)
+  const handleOverlayTouchStart = (e) => {
+    e.stopPropagation();
+  };
+  
+  const handleOverlayTouchMove = (e) => {
+    e.stopPropagation();
+  };
+  
+  const handleOverlayTouchEnd = (e) => {
+    e.stopPropagation();
+  };
+
   return React.createElement('div', {
     ref: overlayRef,
     style: styles.comicOverlayStyle || {},
     onClick: handleOverlayClick,
+    onTouchStart: handleOverlayTouchStart,
+    onTouchMove: handleOverlayTouchMove,
+    onTouchEnd: handleOverlayTouchEnd,
     className: 'comic-episode-overlay'
   }, [containerElement]);
 };

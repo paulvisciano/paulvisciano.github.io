@@ -20,13 +20,15 @@ const getDeviceStyles = (deviceType, state = {}) => {
     top: 0,
     left: 0,
     width: '100vw',
-    height: '100%',
+    height: '100vh',
     background: 'rgba(0, 0, 0, 0.4)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10000,
-    backdropFilter: 'blur(2px)'
+    backdropFilter: 'blur(2px)',
+    touchAction: 'none',
+    pointerEvents: 'auto'
   };
 
   // Container styles
@@ -46,7 +48,9 @@ const getDeviceStyles = (deviceType, state = {}) => {
     maxHeight: '100dvh',
     minHeight: '400px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    touchAction: 'pan-y pinch-zoom',
+    pointerEvents: 'auto'
   } : {
     position: 'relative',
     top: 'auto',
@@ -63,7 +67,9 @@ const getDeviceStyles = (deviceType, state = {}) => {
     maxHeight: '90vh',
     minHeight: '400px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    touchAction: 'pan-y pinch-zoom',
+    pointerEvents: 'auto'
   };
 
   // Cover display styles
