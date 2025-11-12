@@ -1027,15 +1027,93 @@ window.momentsInTime = [
     formattedDuration: formatDuration(8)
   },
   {
-    id: "canggu-2025-11-03",
-    title: "Yoga Retreat in Canggu",
-    date: new Date('2025-11-03T00:00:00Z'),
-    timelineHighlight: "Canggu Yoga",
-    tags: ["yoga", "beach", "wellness", "friends"],
-    snippet: "Will join Leigha, Hallie, and Leo for a rejuvenating yoga retreat amid Canggu's rice fields and beaches.",
-    fullLink: "#",
-    location: { lat: -8.6596, lng: 115.1326, name: "Canggu, Indonesia" },
-    stayDuration: 21,
-    formattedDuration: formatDuration(21)
-  }
+    id: "canggu-2025-11-04",
+    title: "Villa Transition in Canggu",
+    date: new Date("2025-11-04T00:00:00Z"),
+    timelineHighlight: "Canggu Chapter",
+    tags: ["canggu", "bali", "villa", "leo", "gym", "transition"],
+    snippet:
+      "Arrived in Bali on November 4th and headed straight to a villa in Canggu. Shared one full day with Leo — we went to the gym, grabbed lunch, and caught up before he flew to the Philippines that night. Spent the next day solo at the villa, grounding and preparing to head up to Ubud.",
+    fullLink: "/moments/canggu/2025-11-04",
+    contentFile: "/moments/canggu/2025-11-04/content.html",
+    location: { lat: -8.6596, lng: 115.1326, name: "Canggu, Bali" },
+    stayDuration: 3, // Nov 4–6
+    formattedDuration: formatDuration(3),
+  },
+  {
+    id: "ubud-2025-11-07",
+    title: "Ubud Reset: Yoga, Friends & Creative Flow",
+    date: new Date("2025-11-07T00:00:00Z"),
+    timelineHighlight: "Ubud Chapter",
+    tags: [
+      "ubud",
+      "bali",
+      "wellness",
+      "yoga",
+      "self-care",
+      "friends",
+      "hallie",
+      "leigha",
+      "kj",
+      "digital nomad",
+      "healing",
+      "creative work"
+    ],
+    snippet:
+      "Arrived in Ubud on November 7th and reconnected with Hallie and Leigha from the retreat circle. Spent the week immersed in yoga, Pilates, massages, and café hangs at Yoga Barn and Eden. Met new friends like KJ, shared dinners and deep conversations, and balanced recovery from Bali Belly with remote work and passion projects. The final Bali days (Nov 14–16) focused on packing, laundry, and flight prep before heading to Singapore.",
+    fullLink: "/moments/ubud/2025-11-07",
+    contentFile: "/moments/ubud/2025-11-07/content.html",
+    location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
+    stayDuration: 10, // Nov 7–16 inclusive
+    formattedDuration: formatDuration(10),
+  },
+  {
+    id: "singapore-2025-11-16",
+    title: "City Flow in Singapore: Efficiency & Exploration",
+    date: new Date("2025-11-16T00:00:00Z"),
+    timelineHighlight: "Singapore Stopover",
+    tags: [
+      "singapore",
+      "city",
+      "running",
+      "digital nomad",
+      "airport lounge",
+      "venture x",
+      "urban contrast",
+      "efficiency",
+      "wellness"
+    ],
+    snippet:
+      "Flew out of Ubud on November 16th and landed in Singapore for a 5-day reset. Explored Marina Bay, Gardens by the Bay, and East Coast Park runs. Balanced city structure with creativity — clean air, modern design, and fast rhythm were a sharp contrast to Bali’s jungle calm. Booked flights using Venture X miles, stayed near Changi for the 2 AM Scoot flight to Davao, and spent the last day spa-hopping and optimizing travel flow like a true nomad.",
+    fullLink: "/moments/singapore/2025-11-16",
+    contentFile: "/moments/singapore/2025-11-16/content.html",
+    location: { lat: 1.3521, lng: 103.8198, name: "Singapore" },
+    stayDuration: 5, // Nov 16–21
+    formattedDuration: formatDuration(5),
+  },
+  {
+    id: "davao-2025-11-21",
+    title: "Davao Arrival: Birthday Energy & Reconnection",
+    date: new Date("2025-11-21T00:00:00Z"),
+    timelineHighlight: "Birthday in Davao",
+    tags: [
+      "davao",
+      "philippines",
+      "birthday",
+      "friends",
+      "leo",
+      "beach",
+      "wellness",
+      "gratitude",
+      "travel"
+    ],
+    snippet:
+      "Landed in Davao early morning on November 21st after the 2 AM Scoot flight from Singapore. Reunited with Leo and dove straight into beach workouts, sunshine, and the easy rhythm of island life. Celebrated birthday week (Nov 24) with gratitude, reflection, and flow — the perfect blend of friendship, fitness, and freedom to close out November.",
+    fullLink: "/moments/davao/2025-11-21",
+    contentFile: "/moments/davao/2025-11-21/content.html",
+    location: { lat: 7.1907, lng: 125.4553, name: "Davao, Philippines" },
+    stayDuration: 10, // Approx for now
+    formattedDuration: formatDuration(10),
+  }        
+  
 ].sort((a, b) => a.date - b.date);
