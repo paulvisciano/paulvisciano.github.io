@@ -4,14 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
-  <link rel="canonical" href="/moments/hermosa-beach/2024-08-15/">
-  <meta http-equiv="refresh" content="0; url=/moments/hermosa-beach/2024-08-15/">
   <script>
-    // Redirect to the main app with the moment URL
-    window.location.replace("/?path=/moments/hermosa-beach/2024-08-15/" + window.location.hash);
+    // Extract the current path dynamically from the URL
+    const currentPath = window.location.pathname;
+    
+    // Set canonical link for SEO
+    const canonicalLink = document.createElement('link');
+    canonicalLink.rel = 'canonical';
+    canonicalLink.href = currentPath;
+    document.head.appendChild(canonicalLink);
+    
+    // Immediate redirect to the main app with the moment URL (preserve hash)
+    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
+    window.location.replace(redirectUrl);
   </script>
+  <!-- Fallback for browsers with JavaScript disabled -->
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/">
+  </noscript>
 </head>
 <body>
-  <p>If you are not redirected automatically, follow this <a href="/?path=/moments/hermosa-beach/2024-08-15/">link to the main app</a>.</p>
+  <p>Redirecting...</p>
+  <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
 </body>
 </html>
