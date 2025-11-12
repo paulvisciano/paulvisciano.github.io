@@ -1,0 +1,84 @@
+{
+  "testSuite": {
+    "name": "Moments Site Test Suite",
+    "version": "1.0.0",
+    "lastUpdated": "2025-01-XX",
+    "tests": [
+      {
+        "id": "test-1",
+        "name": "Root Navigation",
+        "description": "Navigate to root URL should show current moment",
+        "type": "navigation",
+        "url": "/",
+        "expectedBehavior": [
+          "Page loads and shows timeline",
+          "Displays the current moment based on today's date",
+          "Currently: Ubud (Nov 7-15, 2025)"
+        ],
+        "status": "passing",
+        "verifiedOn": ["localhost", "production"]
+      },
+      {
+        "id": "test-2",
+        "name": "Timeline Click Updates URL",
+        "description": "Clicking on a timeline entry should update the URL correctly",
+        "type": "interaction",
+        "example": {
+          "action": "Click on 'Lisbon Work Trip'",
+          "expectedUrl": "/moments/lisbon/2025-10-12/"
+        },
+        "expectedBehavior": [
+          "URL updates to the correct format: /moments/{city}/{YYYY-MM-DD}/",
+          "Moment is displayed in the overlay/map",
+          "Timeline entry is highlighted"
+        ],
+        "status": "passing",
+        "verifiedOn": ["localhost", "production"]
+      },
+      {
+        "id": "test-3",
+        "name": "Direct URL Navigation",
+        "description": "Navigating directly to a moment URL should land on that moment",
+        "type": "navigation",
+        "example": {
+          "url": "https://paulvisciano.github.io/moments/lisbon/2025-10-12/",
+          "expectedRedirect": "/?path=/moments/lisbon/2025-10-12/"
+        },
+        "expectedBehavior": [
+          "URL redirects correctly",
+          "Moment is correctly identified and displayed",
+          "Timeline scrolls to and highlights the correct moment",
+          "Map zooms to the correct location"
+        ],
+        "status": "passing",
+        "verifiedOn": ["localhost", "production"]
+      },
+      {
+        "id": "test-4",
+        "name": "Comic Book Cover and First Pages",
+        "description": "Navigating to a comic book URL should show cover, clicking opens first 2 pages",
+        "type": "comic",
+        "example": {
+          "url": "https://paulvisciano.github.io/moments/miami/2025-10-06/",
+          "coverText": "🖱️ Click to open comic book (desktop) or 📖 Tap to start reading (mobile)"
+        },
+        "expectedBehavior": [
+          "Direct navigation shows the comic book cover first",
+          "Cover is clickable with appropriate text",
+          "Clicking cover opens pages 1 and 2 (two-page spread on desktop)",
+          "Navigation controls are available",
+          "Page indicator shows current page (e.g., '1 / 15')",
+          "Can navigate back to cover from first page"
+        ],
+        "status": "passing",
+        "verifiedOn": ["localhost", "production"],
+        "notes": [
+          "Cover should be displayed first (not auto-opening)",
+          "Desktop shows two-page spread",
+          "Mobile shows single page at a time"
+        ]
+      }
+    ]
+  }
+}
+
