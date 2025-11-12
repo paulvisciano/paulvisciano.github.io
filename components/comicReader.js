@@ -52,6 +52,16 @@ window.ComicReader = ({ content, onClose }) => {
     return (isPhoneUA || isMobileWidth) && !isiPad; // Explicitly exclude iPad
   });
   
+  // Check if tablet device (for enabling swipe gestures)
+  const [isTablet, setIsTablet] = React.useState(() => {
+    const userAgent = navigator.userAgent;
+    // Check for iPad specifically
+    const isiPad = /iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    // Check for Android tablets (not phones)
+    const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent) && navigator.maxTouchPoints > 1;
+    return isiPad || isAndroidTablet;
+  });
+  
   // Update mobile state on window resize
   React.useEffect(() => {
     const handleResize = () => {
@@ -63,6 +73,10 @@ window.ComicReader = ({ content, onClose }) => {
       const isPhoneUA = /iPhone|iPod|Android.*Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
       const isMobileWidth = width <= 768 && !isiPad; // Don't treat iPad as mobile even if narrow
       setIsMobile((isPhoneUA || isMobileWidth) && !isiPad); // Explicitly exclude iPad
+      
+      // Update tablet detection
+      const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent) && navigator.maxTouchPoints > 1;
+      setIsTablet(isiPad || isAndroidTablet);
     };
     
     window.addEventListener('resize', handleResize);
@@ -74,7 +88,7 @@ window.ComicReader = ({ content, onClose }) => {
     currentPageRef.current = currentPage;
   }, [currentPage]);
 
-  // Touch/swipe gesture handling for mobile
+  // Touch/swipe gesture handling for mobile and tablets
   const [touchStart, setTouchStart] = React.useState(null);
   const [touchEnd, setTouchEnd] = React.useState(null);
 
@@ -913,9 +927,9 @@ window.ComicReader = ({ content, onClose }) => {
       className: 'comic-episode-container',
       onMouseEnter: () => setShowControls(true),
       onMouseLeave: () => setShowControls(false),
-      onTouchStart: isMobile ? onTouchStart : undefined,
-      onTouchMove: isMobile ? onTouchMove : undefined,
-      onTouchEnd: isMobile ? onTouchEnd : undefined
+      onTouchStart: (isMobile || isTablet) ? onTouchStart : undefined,
+      onTouchMove: (isMobile || isTablet) ? onTouchMove : undefined,
+      onTouchEnd: (isMobile || isTablet) ? onTouchEnd : undefined
     }, [
       React.createElement('button', {
         key: 'close',
