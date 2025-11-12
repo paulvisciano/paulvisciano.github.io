@@ -76,9 +76,48 @@ These tests can be run manually in the browser:
 3. **Test 3**: Navigate directly to `https://paulvisciano.github.io/moments/lisbon/2025-10-12/`
 4. **Test 4**: Navigate to `https://paulvisciano.github.io/moments/miami/2025-10-06/` and click the cover
 
+## Automated Testing
+
+### Comic Reader Automated Tests
+
+For comprehensive automated testing of comic reader functionality, use the Puppeteer test suite:
+
+**Run:** `npm run test:comic`
+
+The `test-comic-reader.js` file contains automated tests that validate:
+- Cover display on initial load
+- Cover click to open comic
+- Forward/backward navigation through all spreads
+- Correct images load for each spread
+- URL routing works correctly
+- Edge cases (beyond last page, etc.)
+- Two-page spread navigation (1-2, 3-4, 5-6 pattern)
+
+**Prerequisites:**
+1. Start the local server: `npx http-server -p 8080`
+2. Ensure comic episodes are accessible
+
+**Adding New Comics:**
+Add test cases to `test-comic-reader.js` in the `testCases` array with expected pages and spreads.
+
+## Architecture Notes
+
+### Comic Reader Implementation
+- Custom flipbook implementation (replaced Turn.js)
+- More reliable and stable for two-page spreads
+- Better error handling and loading states
+- Single component (`comicReader.js`) handles all comic reading functionality
+
+### Known Issues
+- Direct URL navigation (`#page-X`) redirects to root URL instead of opening comic
+  - This is a URL routing issue, not a comic reader issue
+  - Comic reader functionality works perfectly when accessed via timeline
+  - Issue is in `app.js` URL lookup logic for direct navigation
+
 ## Test History
 
 - **2025-01-XX**: Initial test suite created
   - All tests passing on live site
   - Tests verified on localhost and production
+  - Automated comic reader tests moved to `.ai/test-cases/`
 
