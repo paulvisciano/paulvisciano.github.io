@@ -1,4 +1,11 @@
 // Comic Reader Component
+// Note: Device detection and styles are loaded from separate files:
+// - components/comicReader/deviceDetection.js
+// - components/comicReader/styles.js
+
+// ============================================================================
+// Global State Management
+// ============================================================================
 
 // Global state manager to prevent flipbook state from being wiped
 window.ComicReaderState = window.ComicReaderState || {
@@ -38,50 +45,15 @@ window.ComicReader = ({ content, onClose }) => {
   const currentPageRef = React.useRef(1);
   const overlayRef = React.useRef(null);
   
-  // Check if mobile device - use state to make it reactive
-  // iPad should show 2-page spreads like desktop, not single pages
-  const [isMobile, setIsMobile] = React.useState(() => {
-    // More robust mobile detection - exclude iPad from mobile detection
-    const width = window.innerWidth;
-    const userAgent = navigator.userAgent;
-    // Check for iPad specifically and exclude it from mobile detection
-    const isiPad = /iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    // Only treat phones and small screens as mobile (not tablets/iPads)
-    const isPhoneUA = /iPhone|iPod|Android.*Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-    const isMobileWidth = width <= 768 && !isiPad; // Don't treat iPad as mobile even if narrow
-    return (isPhoneUA || isMobileWidth) && !isiPad; // Explicitly exclude iPad
-  });
+  // Use device detection hook
+  const deviceType = window.ComicReaderDeviceDetection?.useDeviceType 
+    ? window.ComicReaderDeviceDetection.useDeviceType() 
+    : 'desktop'; // Fallback to desktop if not loaded
   
-  // Check if tablet device (for enabling swipe gestures)
-  const [isTablet, setIsTablet] = React.useState(() => {
-    const userAgent = navigator.userAgent;
-    // Check for iPad specifically
-    const isiPad = /iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    // Check for Android tablets (not phones)
-    const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent) && navigator.maxTouchPoints > 1;
-    return isiPad || isAndroidTablet;
-  });
-  
-  // Update mobile state on window resize
-  React.useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const userAgent = navigator.userAgent;
-      // Check for iPad specifically and exclude it from mobile detection
-      const isiPad = /iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      // Only treat phones and small screens as mobile (not tablets/iPads)
-      const isPhoneUA = /iPhone|iPod|Android.*Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-      const isMobileWidth = width <= 768 && !isiPad; // Don't treat iPad as mobile even if narrow
-      setIsMobile((isPhoneUA || isMobileWidth) && !isiPad); // Explicitly exclude iPad
-      
-      // Update tablet detection
-      const isAndroidTablet = /Android/i.test(userAgent) && !/Mobile/i.test(userAgent) && navigator.maxTouchPoints > 1;
-      setIsTablet(isiPad || isAndroidTablet);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Derived device flags for convenience
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  const isDesktop = deviceType === 'desktop';
   
   // Keep ref in sync with state
   React.useEffect(() => {
@@ -742,195 +714,23 @@ window.ComicReader = ({ content, onClose }) => {
     }
   };
 
-  const comicOverlayStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.4)', // Better balance
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10000,
-    backdropFilter: 'blur(2px)' // Lighter blur
-  };
+  // Get device-specific styles
+  const styles = window.ComicReaderStyles?.getDeviceStyles 
+    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading })
+    : {}; // Fallback empty object if styles not loaded
 
-  const comicContainerStyle = {
-    position: isMobile ? 'fixed' : 'relative',
-    top: isMobile ? 0 : 'auto',
-    left: isMobile ? 0 : 'auto',
-    right: isMobile ? 0 : 'auto',
-    width: isMobile ? '100vw' : 'auto',
-    height: isMobile ? '100dvh' : 'auto',
-    background: '#000',
-    borderRadius: isMobile ? '0' : '15px',
-    boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
-    border: isMobile ? 'none' : '4px solid #d4c5a9',
-    overflow: 'hidden',
-    maxWidth: isMobile ? '100vw' : '90vw',
-    maxHeight: isMobile ? '100dvh' : '90vh',
-    minHeight: '400px',
-    display: 'flex',
-    flexDirection: 'column'
-  };
-
-  const coverDisplayStyle = {
-    width: isMobile ? '100vw' : '500px',
-    ...(isMobile && { height: '100dvh' }), // Only set height for mobile
-    ...(!isMobile && { minHeight: '750px' }), // Set min-height on desktop for proper image filling
-    margin: '0 auto',
-    display: 'block',
-    cursor: isVisible ? 'pointer' : 'default',
-    // No border-radius - parent container handles it
-    overflow: 'hidden',
-    background: '#000',
-    boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
-    // No border - parent container handles it
-    pointerEvents: isVisible ? 'auto' : 'none',
-    position: 'relative', // Needed for absolute positioning of loading overlay
-    padding: 0
-  };
-
-  const coverImageStyle = {
-    width: '100%',
-    height: '100%', // Fill container height completely
-    objectFit: isMobile ? 'contain' : 'cover',
-    objectPosition: 'center',
-    display: 'block',
-    margin: 0,
-    padding: 0,
-    transition: 'transform 0.3s ease',
-    verticalAlign: 'top' // Remove any default image spacing
-  };
-
-  const flipbookStyle = {
-    width: isMobile ? '100vw' : '1000px',
-    height: isMobile ? 'calc(100% - 60px)' : '750px',
-    margin: isMobile ? '0' : '0 auto',
-    display: showCover || isLoading ? 'none' : 'flex',
-    background: '#000',
-    borderRadius: isMobile ? '0' : '10px',
-    overflow: 'hidden',
-    position: 'relative'
-  };
-
-  const closeButtonStyle = {
-    position: isMobile ? 'fixed' : 'absolute',
-    top: isMobile ? '20px' : '5px',
-    right: isMobile ? '20px' : '5px',
-    background: 'rgba(255, 71, 87, 0.9)',
-    color: 'white',
-    border: 'none',
-    borderRadius: isMobile ? '12px' : '50%',
-    width: isMobile ? '48px' : '40px',
-    height: isMobile ? '48px' : '40px',
-    cursor: 'pointer',
-    fontSize: isMobile ? '18px' : '20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10002,
-    transition: 'all 0.3s ease',
-    fontWeight: 'bold',
-    backdropFilter: 'blur(10px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    ':hover': {
-      background: 'rgba(255, 71, 87, 1)',
-      transform: 'scale(1.05)'
-    }
-  };
-
-  const fullscreenButtonStyle = {
-    position: isMobile ? 'fixed' : 'absolute',
-    top: isMobile ? '20px' : '5px',
-    right: isMobile ? '80px' : '50px',
-    background: 'rgba(52, 152, 219, 0.9)',
-    color: 'white',
-    border: 'none',
-    borderRadius: isMobile ? '12px' : '50%',
-    width: isMobile ? '48px' : '40px',
-    height: isMobile ? '48px' : '40px',
-    cursor: 'pointer',
-    fontSize: isMobile ? '18px' : '20px',
-    display: isMobile ? 'none' : 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10002,
-    transition: 'all 0.3s ease',
-    fontWeight: 'bold',
-    backdropFilter: 'blur(10px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    opacity: showControls ? 1 : 0,
-    pointerEvents: showControls ? 'auto' : 'none'
-  };
-
-  const controlsStyle = {
-    position: 'absolute',
-    bottom: '-60px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    display: 'flex',
-    gap: '15px',
-    alignItems: 'center'
-  };
-
-  const controlBtnStyle = {
-    background: 'rgba(255, 255, 255, 0.9)',
-    border: 'none',
-    borderRadius: '25px',
-    width: '50px',
-    height: '50px',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '18px',
-    transition: 'all 0.3s ease',
-    color: '#333'
-  };
-
-  const pageIndicatorStyle = {
-    background: 'rgba(255, 255, 255, 0.9)',
-    padding: '8px 16px',
-    borderRadius: '20px',
-    fontSize: '14px',
-    color: '#333',
-    fontWeight: 'bold'
-  };
-
-  const loadingStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    fontSize: isMobile ? '16px' : '18px',
-    padding: isMobile ? '40px 20px' : '60px',
-    width: '100%',
-    height: '100%',
-    minHeight: isMobile ? '300px' : '400px'
-  };
-
-  const loadingSpinnerStyle = {
-    width: isMobile ? '30px' : '40px',
-    height: isMobile ? '30px' : '40px',
-    border: '3px solid rgba(255, 255, 255, 0.3)',
-    borderTop: '3px solid white',
-    borderRadius: '50%',
-    animation: 'spin 1s linear infinite',
-    marginBottom: isMobile ? '10px' : '15px'
-  };
+  // All styles are now loaded from styles.js via getDeviceStyles()
+  // Access via: styles.coverDisplayStyle, styles.coverImageStyle, etc.
 
   return React.createElement('div', {
     ref: overlayRef,
-    style: comicOverlayStyle,
+    style: styles.comicOverlayStyle || {},
     onClick: handleOverlayClick,
     className: 'comic-episode-overlay'
   }, [
     React.createElement('div', {
       key: 'container',
-      style: comicContainerStyle,
+      style: styles.comicContainerStyle || {},
       className: 'comic-episode-container',
       onMouseEnter: () => setShowControls(true),
       onMouseLeave: () => setShowControls(false),
@@ -940,7 +740,7 @@ window.ComicReader = ({ content, onClose }) => {
     }, [
       React.createElement('button', {
         key: 'close',
-        style: closeButtonStyle,
+        style: styles.closeButtonStyle || {},
         onClick: handleClose,
         title: 'Close Comic',
         onMouseEnter: (e) => {
@@ -955,7 +755,7 @@ window.ComicReader = ({ content, onClose }) => {
       
       React.createElement('button', {
         key: 'fullscreen',
-        style: fullscreenButtonStyle,
+        style: styles.fullscreenButtonStyle || {},
         onClick: toggleFullscreen,
         title: isFullscreen ? 'Exit Fullscreen (F)' : 'Fullscreen (F)',
         onMouseEnter: (e) => {
@@ -971,7 +771,7 @@ window.ComicReader = ({ content, onClose }) => {
       showCover && !error && React.createElement('div', {
         key: 'cover',
         ref: coverRef,
-        style: coverDisplayStyle,
+        style: styles.coverDisplayStyle || {},
         className: 'comic-cover-display',
         onClick: isVisible ? openComicBook : undefined,
         onMouseEnter: isVisible ? (e) => {
@@ -1003,7 +803,7 @@ window.ComicReader = ({ content, onClose }) => {
         }, [
           React.createElement('div', {
             key: 'spinner',
-            style: loadingSpinnerStyle
+            style: styles.loadingSpinnerStyle || {}
           }),
           React.createElement('div', {
             key: 'loading-text',
@@ -1020,41 +820,25 @@ window.ComicReader = ({ content, onClose }) => {
           src: episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png',
           alt: episodeData ? `${episodeData.title} Cover` : 'Episode 20 Cover',
           style: {
-            ...coverImageStyle,
+            ...(styles.coverImageStyle || {}),
             opacity: isVisible ? 1 : 0,
             transition: 'opacity 0.3s ease'
           }
         }),
         isVisible && React.createElement('div', {
           key: 'cover-overlay',
-          style: {
-            position: 'absolute',
-            bottom: isMobile ? 'max(40px, env(safe-area-inset-bottom))' : '20px',
-            left: isMobile ? '20px' : '20px',
-            right: isMobile ? '20px' : '20px',
-            background: 'rgba(0, 0, 0, 0.8)',
-            color: 'white',
-            padding: isMobile ? '12px 16px' : '8px 16px',
-            borderRadius: isMobile ? '15px' : '20px',
-            fontSize: isMobile ? '14px' : '12px',
-            fontWeight: 'bold',
-            opacity: 0.9,
-            textAlign: 'center',
-            whiteSpace: 'nowrap',
-            animation: isVisible ? 'textPulse 2s ease-in-out infinite' : 'none',
-            willChange: 'transform, opacity'
-          }
+          style: styles.coverOverlayStyle || {}
         }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
       ]),
 
       // Loading state (inside container)
       isLoading && !showCover && React.createElement('div', {
         key: 'loading',
-        style: loadingStyle
+        style: styles.loadingStyle || {}
       }, [
         React.createElement('div', {
           key: 'spinner',
-          style: loadingSpinnerStyle
+          style: styles.loadingSpinnerStyle || {}
         }),
         React.createElement('div', {
           key: 'boot-header',
@@ -1071,7 +855,7 @@ window.ComicReader = ({ content, onClose }) => {
       error && React.createElement('div', {
         key: 'error',
         style: {
-          ...loadingStyle,
+          ...(styles.loadingStyle || {}),
           color: '#ff4757',
           flexDirection: 'column'
         }
@@ -1106,20 +890,20 @@ window.ComicReader = ({ content, onClose }) => {
       !error && !showCover && React.createElement('div', {
         key: 'flipbook',
         ref: flipbookRef,
-        style: flipbookStyle,
+        style: styles.flipbookStyle || {},
         className: 'flipbook'
       }),
       
       // Desktop controls (hidden on mobile)
       !error && !isLoading && flipbookReady && !showCover && !isMobile && React.createElement('div', {
         key: 'controls',
-        style: controlsStyle,
+        style: styles.controlsStyle || {},
         className: 'comic-controls'
       }, [
         React.createElement('button', {
           key: 'prev',
           style: {
-            ...controlBtnStyle,
+            ...(styles.controlBtnStyle || {}),
             opacity: 1,
             cursor: 'pointer'
           },
@@ -1128,12 +912,12 @@ window.ComicReader = ({ content, onClose }) => {
         }, '‹'),
         React.createElement('div', {
           key: 'indicator',
-          style: pageIndicatorStyle
+          style: styles.pageIndicatorStyle || {}
         }, `${currentPage} / ${totalPages}`),
         React.createElement('button', {
           key: 'next',
           style: {
-            ...controlBtnStyle,
+            ...(styles.controlBtnStyle || {}),
             opacity: (currentPage === totalPages && !getNextEpisode()) ? 0.5 : 1,
             cursor: (currentPage === totalPages && !getNextEpisode()) ? 'not-allowed' : 'pointer'
           },
@@ -1146,21 +930,7 @@ window.ComicReader = ({ content, onClose }) => {
       // Mobile navigation (only on mobile)
       !error && !isLoading && flipbookReady && !showCover && isMobile && React.createElement('div', {
         key: 'mobile-nav',
-        style: {
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '60px',
-          background: 'rgba(0, 0, 0, 0.9)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 10px',
-          zIndex: 10001,
-          width: '100vw',
-          marginBottom: '10px'
-        },
+        style: styles.mobileNavStyle || {},
         className: 'mobile-comic-nav'
       }, [
         React.createElement('button', {
