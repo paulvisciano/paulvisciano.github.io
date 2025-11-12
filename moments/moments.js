@@ -276,16 +276,40 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
   {
-    id: "san-diego-2024-08-22",
+    id: "lawndale-2024-08-16",
+    title: "Cozy Stay in Lawndale",
+    date: new Date('2024-08-16T00:00:00Z'),
+    timelineHighlight: "Lawndale",
+    tags: ["city"],
+    snippet: "Enjoyed a cozy stay in Lawndale, exploring the local area before heading to San Diego.",
+    fullLink: "#",
+    location: { lat: 33.8872, lng: -118.3526, name: "Lawndale, California" },
+    stayDuration: 4,
+    formattedDuration: formatDuration(4)
+  },
+  {
+    id: "san-diego-2024-08-19",
     title: "Surf and Sun in San Diego",
-    date: new Date('2024-08-22T00:00:00Z'),
+    date: new Date('2024-08-19T00:00:00Z'),
     timelineHighlight: "San Diego Surfing",
     tags: ["beach", "surfing"],
     snippet: "Caught waves and soaked up the sun on San Diego's beautiful beaches.",
     fullLink: "#",
     location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
-    stayDuration: 9,
-    formattedDuration: formatDuration(9)
+    stayDuration: 8,
+    formattedDuration: formatDuration(8)
+  },
+  {
+    id: "san-diego-2024-08-26",
+    title: "More San Diego Adventures",
+    date: new Date('2024-08-26T00:00:00Z'),
+    timelineHighlight: "San Diego Life",
+    tags: ["beach", "surfing"],
+    snippet: "Continued exploring San Diego's beaches and vibrant coastal culture.",
+    fullLink: "#",
+    location: { lat: 32.7157, lng: -117.1611, name: "San Diego, California" },
+    stayDuration: 7,
+    formattedDuration: formatDuration(7)
   },
   {
     id: "honolulu-2024-09-01",
@@ -336,16 +360,40 @@ window.momentsInTime = [
     formattedDuration: formatDuration(8)
   },
   {
-    id: "playa-del-carmen-2024-11-01",
+    id: "miami-beach-2024-10-30",
+    title: "Miami Beach Fall Escape",
+    date: new Date('2024-10-30T00:00:00Z'),
+    timelineHighlight: "Miami Beach Fall",
+    tags: ["beach", "nightlife"],
+    snippet: "Enjoyed fall sunshine and vibrant nights in Miami Beach before heading to Mexico.",
+    fullLink: "#",
+    location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
+    stayDuration: 7,
+    formattedDuration: formatDuration(7)
+  },
+  {
+    id: "cancun-2024-11-05",
+    title: "Quick Stop in Cancún",
+    date: new Date('2024-11-05T00:00:00Z'),
+    timelineHighlight: "Cancún",
+    tags: ["beach", "travel"],
+    snippet: "Quick stop in Cancún before continuing to Playa del Carmen.",
+    fullLink: "#",
+    location: { lat: 21.1619, lng: -86.8515, name: "Cancún, Mexico" },
+    stayDuration: 2,
+    formattedDuration: formatDuration(2)
+  },
+  {
+    id: "playa-del-carmen-2024-11-05",
     title: "Mayan Riviera Magic in Playa del Carmen",
-    date: new Date('2024-11-01T00:00:00Z'),
+    date: new Date('2024-11-05T00:00:00Z'),
     timelineHighlight: "Playa del Carmen Beaches",
     tags: ["beach", "culture"],
-    snippet: "Relaxed on Playa del Carmen's beaches and explored nearby Mayan ruins.",
+    snippet: "Relaxed on Playa del Carmen's beautiful beaches, explored the vibrant town, and visited nearby Mayan ruins.",
     fullLink: "#",
     location: { lat: 20.6296, lng: -87.0739, name: "Playa del Carmen, Mexico" },
-    stayDuration: 14,
-    formattedDuration: formatDuration(14)
+    stayDuration: 11,
+    formattedDuration: formatDuration(11)
   },
   {
     id: "clearwater-2024-11-16",
@@ -389,24 +437,60 @@ window.momentsInTime = [
     date: new Date('2024-12-01T00:00:00Z'),
     timelineHighlight: "Breckenridge Slopes",
     tags: ["skiing", "mountains"],
-    snippet: "Hit the snowy slopes of Breckenridge for an epic skiing adventure.",
+    snippet: "Hit the snowy slopes of Breckenridge for an epic skiing adventure. Originally planned to stay the full month but left early for Salt Lake City.",
     fullLink: "#",
     location: { lat: 39.4817, lng: -106.0384, name: "Breckenridge, Colorado" },
-    stayDuration: 30,
-    formattedDuration: formatDuration(30)
+    stayDuration: 14,
+    formattedDuration: formatDuration(14)
   },
   {
-    id: "miami-beach-2024-12-30",
+    id: "salt-lake-city-2024-12-15",
+    title: "Mountain Views in Salt Lake City",
+    date: new Date('2024-12-15T00:00:00Z'),
+    timelineHighlight: "Salt Lake City",
+    tags: ["city", "mountains"],
+    snippet: "Enjoyed stunning mountain views and explored Salt Lake City's vibrant downtown.",
+    fullLink: "#",
+    location: { lat: 40.7608, lng: -111.8910, name: "Salt Lake City, Utah" },
+    stayDuration: 9,
+    formattedDuration: formatDuration(9)
+  },
+  {
+    id: "denver-2024-12-24",
+    title: "Denver Christmas Eve",
+    date: new Date('2024-12-24T00:00:00Z'),
+    timelineHighlight: "Denver Christmas",
+    tags: ["city", "travel"],
+    snippet: "Quick stop in Denver on Christmas Eve before flying to Tampa to spend the holidays with family.",
+    fullLink: "#",
+    location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
+    id: "clearwater-2024-12-25",
+    title: "Christmas with Family in Clearwater",
+    date: new Date('2024-12-25T00:00:00Z'),
+    timelineHighlight: "Clearwater Family",
+    tags: ["family", "friends", "holiday"],
+    snippet: "Flew into Tampa on Christmas Day but spent the holidays in Clearwater where mom lives. Enjoyed time with family before driving to Miami on Dec 29th.",
+    fullLink: "#",
+    location: { lat: 27.9659, lng: -82.8001, name: "Clearwater, Florida" },
+    stayDuration: 5,
+    formattedDuration: formatDuration(5)
+  },
+  {
+    id: "miami-beach-2024-12-29",
     title: "Miami Beach Winter Escape",
-    date: new Date('2024-12-30T00:00:00Z'),
+    date: new Date('2024-12-29T00:00:00Z'),
     timelineHighlight: "Miami Beach Winter",
     tags: ["beach", "nightlife"],
-    snippet: "Escaped winter with sunny days and vibrant nights in Miami Beach.",
+    snippet: "Drove from Clearwater to Miami Beach on Dec 29th to escape winter with sunny days and vibrant nights. Started the new year in Miami Beach.",
     fullLink: "/moments/miami/2024-12-30",
     contentFile: "/moments/miami/2024-12-30/content.html",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
-    stayDuration: 34,
-    formattedDuration: formatDuration(34)
+    stayDuration: 35,
+    formattedDuration: formatDuration(35)
   },
   {
     id: "st-petersburg-2025-02-02",
@@ -426,7 +510,7 @@ window.momentsInTime = [
     date: new Date('2025-02-07T00:00:00Z'),
     timelineHighlight: "São Paulo Culture",
     tags: ["city", "culture"],
-    snippet: "Immersed in São Paulo's bustling streets, street art, and vibrant food scene.",
+    snippet: "Immersed in São Paulo's bustling streets, street art, and vibrant food scene. Stayed in Vila Nova Conceição, one of the city's vibrant neighborhoods.",
     fullLink: "#",
     location: { lat: -23.5505, lng: -46.6333, name: "São Paulo, Brazil" },
     stayDuration: 9,
@@ -541,6 +625,18 @@ window.momentsInTime = [
     formattedDuration: formatDuration(10)
   },
   {
+    id: "denver-2025-05-12",
+    title: "Denver Layover",
+    date: new Date('2025-05-12T00:00:00Z'),
+    timelineHighlight: "Denver Layover",
+    tags: ["city", "travel"],
+    snippet: "Quick stop in Denver on the way to Boulder.",
+    fullLink: "#",
+    location: { lat: 39.7392, lng: -104.9903, name: "Denver, Colorado" },
+    stayDuration: 2,
+    formattedDuration: formatDuration(2)
+  },
+  {
     id: "boulder-2025-05-13",
     title: "Chasing Vibes in Boulder",
     date: new Date('2025-05-13T00:00:00Z'),
@@ -589,8 +685,8 @@ window.momentsInTime = [
     fullLink: "/moments/miami/2025-05-23",
     contentFile: "/moments/miami/2025-05-23/content.html",
     location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
-    stayDuration: 7,
-    formattedDuration: formatDuration(7)
+    stayDuration: 10,
+    formattedDuration: formatDuration(10)
   },
   {
     id: "tampa-2025-05-30",
@@ -625,28 +721,52 @@ window.momentsInTime = [
     formattedDuration: formatDuration(12)
   },
   {
-    id: "oahu-2025-06-13",
-    title: "New Beginnings in Oahu",
-    date: new Date('2025-06-13T00:00:00Z'),
-    timelineHighlight: "Oahu New Home",
-    tags: ["beach", "nature", "relocation"],
-    snippet: "Will launch a new chapter in Oahu, settling into island life with beaches and volcanic trails.",
+    id: "honolulu-2025-07-13",
+    title: "Island Life in Honolulu",
+    date: new Date('2025-07-13T00:00:00Z'),
+    timelineHighlight: "Honolulu Beaches",
+    tags: ["beach", "nature"],
+    snippet: "Embraced island life in Honolulu with stunning beaches and lush hikes.",
     fullLink: "#",
-    location: { lat: 21.4389, lng: -158.0001, name: "Oahu, Hawaii" },
-    stayDuration: 60,
-    formattedDuration: formatDuration(60)
+    location: { lat: 21.3069, lng: -157.8583, name: "Honolulu, Hawaii" },
+    stayDuration: 31,
+    formattedDuration: formatDuration(31)
   },
   {
-    id: "philippines-2025-08-12",
-    title: "Reconnecting with Leo & Wellness Center Vision in the Philippines",
-    date: new Date('2025-08-12T00:00:00Z'),
-    timelineHighlight: "Philippines with Leo",
-    tags: ["beach", "culture", "islands", "friends", "wellness", "business"],
-    snippet: "Will meet up with Leo in his hometown north of Manila, then head to Siargao to scout potential land for a wellness center featuring beach volleyball, yoga, smoothies, and recovery options like cold plunge, sauna, and steam room.",
+    id: "pasay-2025-08-13",
+    title: "Exploring Pasay",
+    date: new Date('2025-08-13T00:00:00Z'),
+    timelineHighlight: "Pasay",
+    tags: ["city", "culture"],
+    snippet: "Explored Pasay, a vibrant city in Metro Manila, discovering its neighborhoods and local culture before continuing to other parts of the Philippines.",
     fullLink: "#",
-    location: { lat: 12.8797, lng: 121.7740, name: "Philippines" },
-    stayDuration: 12,
-    formattedDuration: formatDuration(12)
+    location: { lat: 14.5378, lng: 120.9969, name: "Pasay, Philippines" },
+    stayDuration: 3,
+    formattedDuration: formatDuration(3)
+  },
+  {
+    id: "davao-2025-08-20",
+    title: "Quick Stop in Davao",
+    date: new Date('2025-08-20T00:00:00Z'),
+    timelineHighlight: "Davao Quick Stop",
+    tags: ["city", "culture"],
+    snippet: "Quick stop in Davao before continuing to other parts of the Philippines.",
+    fullLink: "#",
+    location: { lat: 7.1907, lng: 125.4553, name: "Davao, Philippines" },
+    stayDuration: 2,
+    formattedDuration: formatDuration(2)
+  },
+  {
+    id: "taguig-2025-08-21",
+    title: "Exploring Taguig",
+    date: new Date('2025-08-21T00:00:00Z'),
+    timelineHighlight: "Taguig",
+    tags: ["city", "culture"],
+    snippet: "Explored Taguig, a modern city in Metro Manila, before heading to Bangkok.",
+    fullLink: "#",
+    location: { lat: 14.5176, lng: 121.0509, name: "Taguig, Philippines" },
+    stayDuration: 4,
+    formattedDuration: formatDuration(4)
   },
   {
     id: "bangkok-2025-08-24",
@@ -881,16 +1001,16 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
-    id: "miami-2025-10-05",
+    id: "miami-beach-2025-10-05",
     title: "Miami Beach & Culture",
     date: new Date('2025-10-05T00:00:00Z'),
-    timelineHighlight: "Miami Vibes",
-    tags: ["beach volleyball", "friends", "miami", "florida", "training", "crew", "urban runner"],
-    snippet: "Post-wedding Miami reunion with the volleyball crew! Flying in from Chicago on Sunday to catch up with the team, training on South Beach, and soaking up the vibrant energy with the squad before flying to Lisbon for the work retreat. Continuing Urban Runner daily engagement throughout the Miami stay.",
+    timelineHighlight: "Miami Beach Vibes",
+    tags: ["beach volleyball", "friends", "miami", "florida", "training", "crew", "urban runner", "beach", "nightlife"],
+    snippet: "Post-wedding Miami Beach reunion with the volleyball crew! Flying in from Chicago on Sunday to catch up with the team, training on South Beach, and soaking up the vibrant energy with the squad before flying to Lisbon for the work retreat. Returned to Miami Beach after Lisbon for a quick stay before heading to St. Petersburg. Continuing Urban Runner daily engagement throughout the Miami Beach stays.",
     fullLink: "#",
-    location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
-    stayDuration: 7,
-    formattedDuration: formatDuration(7)
+    location: { lat: 25.7907, lng: -80.1300, name: "Miami Beach, Florida" },
+    stayDuration: 9,
+    formattedDuration: formatDuration(9)
   },
   
   {
@@ -1015,16 +1135,16 @@ window.momentsInTime = [
     formattedDuration: formatDuration(7)
   },
   {
-    id: "playa-del-carmen-2025-10-26",
+    id: "playa-del-carmen-2025-10-29",
     title: "Beach Volleyball Tournament in Playa del Carmen",
-    date: new Date('2025-10-26T00:00:00Z'),
+    date: new Date('2025-10-29T00:00:00Z'),
     timelineHighlight: "Playa Volleyball",
     tags: ["beach volleyball", "beach", "friends", "tournament", "urban runner"],
     snippet: "After missing the Fuds volleyball tournament due to the Lisbon work trip, finally teaming up with Zacharias for our Mexico beach volleyball tournament! Flying from St. Pete on Sunday Oct 26th, giving us a full week in Mexico to prep, train, and enjoy Playa before the tournament (Fri Oct 31 - Sun Nov 2). This one was non-negotiable. Continuing Urban Runner daily engagement throughout the Mexico stay.",
     fullLink: "#",
     location: { lat: 20.6296, lng: -87.0739, name: "Playa del Carmen, Mexico" },
-    stayDuration: 8,
-    formattedDuration: formatDuration(8)
+    stayDuration: 6,
+    formattedDuration: formatDuration(6)
   },
   {
     id: "canggu-2025-11-04",
