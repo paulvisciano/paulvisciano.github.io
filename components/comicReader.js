@@ -766,6 +766,7 @@ window.ComicReader = ({ content, onClose }) => {
     background: '#000',
     borderRadius: isMobile ? '0' : '15px',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
+    border: isMobile ? 'none' : '4px solid #d4c5a9',
     overflow: 'hidden',
     maxWidth: isMobile ? '100vw' : '90vw',
     maxHeight: isMobile ? '100dvh' : '90vh',
@@ -777,24 +778,30 @@ window.ComicReader = ({ content, onClose }) => {
   const coverDisplayStyle = {
     width: isMobile ? '100vw' : '500px',
     ...(isMobile && { height: '100dvh' }), // Only set height for mobile
+    ...(!isMobile && { minHeight: '750px' }), // Set min-height on desktop for proper image filling
     margin: '0 auto',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: 'block',
     cursor: isVisible ? 'pointer' : 'default',
-    borderRadius: isMobile ? '0' : '15px',
+    // No border-radius - parent container handles it
     overflow: 'hidden',
     background: '#000',
     boxShadow: isMobile ? 'none' : '0 25px 80px rgba(0, 0, 0, 0.9)',
+    // No border - parent container handles it
     pointerEvents: isVisible ? 'auto' : 'none',
-    position: 'relative' // Needed for absolute positioning of loading overlay
+    position: 'relative', // Needed for absolute positioning of loading overlay
+    padding: 0
   };
 
   const coverImageStyle = {
     width: '100%',
-    height: '100%',
+    height: '100%', // Fill container height completely
     objectFit: isMobile ? 'contain' : 'cover',
-    transition: 'transform 0.3s ease'
+    objectPosition: 'center',
+    display: 'block',
+    margin: 0,
+    padding: 0,
+    transition: 'transform 0.3s ease',
+    verticalAlign: 'top' // Remove any default image spacing
   };
 
   const flipbookStyle = {
@@ -1023,20 +1030,19 @@ window.ComicReader = ({ content, onClose }) => {
           style: {
             position: 'absolute',
             bottom: isMobile ? 'max(40px, env(safe-area-inset-bottom))' : '20px',
-            left: 0,
-            right: 0,
+            left: isMobile ? '20px' : '20px',
+            right: isMobile ? '20px' : '20px',
             background: 'rgba(0, 0, 0, 0.8)',
             color: 'white',
-            padding: isMobile ? '15px 20px' : '10px 20px',
-            borderRadius: isMobile ? '15px' : '25px',
-            fontSize: isMobile ? '16px' : '14px',
+            padding: isMobile ? '12px 16px' : '8px 16px',
+            borderRadius: isMobile ? '15px' : '20px',
+            fontSize: isMobile ? '14px' : '12px',
             fontWeight: 'bold',
             opacity: 0.9,
             textAlign: 'center',
             whiteSpace: 'nowrap',
             animation: isVisible ? 'textPulse 2s ease-in-out infinite' : 'none',
-            willChange: 'transform, opacity',
-            margin: isMobile ? '0 20px' : '0' // Add horizontal margin on mobile for better spacing
+            willChange: 'transform, opacity'
           }
         }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
       ]),
