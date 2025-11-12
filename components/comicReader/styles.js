@@ -328,6 +328,212 @@ const getDeviceStyles = (deviceType, state = {}) => {
     marginBottom: '10px'
   };
 
+  // Flipbook-specific styles
+  const spreadContainerStyle = {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    transition: 'transform 0.3s ease'
+  };
+
+  const mobileLeftPageStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    background: '#000',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+
+  const desktopLeftPageStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '50%',
+    height: '100%',
+    overflow: 'hidden',
+    background: '#000',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+
+  const desktopRightPageStyle = {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    width: '50%',
+    height: '100%',
+    overflow: 'hidden',
+    background: '#000',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderLeft: '2px solid #333'
+  };
+
+  const mobilePageContainerStyle = {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column'
+  };
+
+  const mobilePageContentStyle = {
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    height: '100%'
+  };
+
+  const mobilePageImageStyle = {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    display: 'block'
+  };
+
+  const desktopPageImageStyle = {
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain',
+    display: 'block'
+  };
+
+  const errorMessageStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    color: 'white',
+    fontSize: '18px'
+  };
+
+  // Cover loading overlay styles
+  const coverLoadingOverlayStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    fontSize: isMobile ? '16px' : '18px',
+    zIndex: 1,
+    background: '#000'
+  };
+
+  const loadingTextStyle = {
+    fontFamily: 'monospace',
+    textAlign: 'center',
+    fontSize: isMobile ? '14px' : '16px',
+    fontWeight: 'bold'
+  };
+
+  const coverImageWithOpacityStyle = (isVisible) => ({
+    ...coverImageStyle,
+    opacity: isVisible ? 1 : 0,
+    transition: 'opacity 0.3s ease'
+  });
+
+  // Error styles
+  const errorContainerStyle = {
+    ...loadingStyle,
+    color: '#ff4757',
+    flexDirection: 'column'
+  };
+
+  const errorIconStyle = {
+    fontSize: '24px',
+    marginBottom: '10px'
+  };
+
+  const retryButtonStyle = {
+    marginTop: '15px',
+    padding: '8px 16px',
+    background: '#ff4757',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer'
+  };
+
+  // Desktop control button styles
+  const desktopControlButtonStyle = {
+    ...controlBtnStyle,
+    opacity: 1,
+    cursor: 'pointer'
+  };
+
+  const desktopControlButtonDisabledStyle = (isDisabled) => ({
+    ...controlBtnStyle,
+    opacity: isDisabled ? 0.5 : 1,
+    cursor: isDisabled ? 'not-allowed' : 'pointer'
+  });
+
+  // Mobile navigation button styles
+  const mobileNavButtonBaseStyle = {
+    border: 'none',
+    borderRadius: '20px',
+    width: '56px',
+    height: '56px',
+    fontSize: '20px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    opacity: 1,
+    pointerEvents: 'auto',
+    boxShadow: '0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08)',
+    transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    WebkitTapHighlightColor: 'transparent',
+    outline: 'none',
+    userSelect: 'none',
+    WebkitUserSelect: 'none'
+  };
+
+  const mobileNavButtonPrevStyle = {
+    ...mobileNavButtonBaseStyle,
+    background: 'rgba(255, 255, 255, 0.95)',
+    color: '#1d1d1f',
+    marginLeft: '20px'
+  };
+
+  const mobileNavButtonNextStyle = (isDisabled) => ({
+    ...mobileNavButtonBaseStyle,
+    background: isDisabled ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.95)',
+    color: isDisabled ? '#8e8e93' : '#1d1d1f',
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
+    marginRight: '20px',
+    boxShadow: isDisabled ? '0 1px 8px rgba(0, 0, 0, 0.06)' : '0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08)'
+  });
+
+  const mobileNavIndicatorStyle = {
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: '15px',
+    fontWeight: '500',
+    background: 'rgba(255, 255, 255, 0.08)',
+    padding: '10px 20px',
+    borderRadius: '22px',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    border: '0.5px solid rgba(255, 255, 255, 0.15)',
+    letterSpacing: '0.5px'
+  };
+
   return {
     comicOverlayStyle,
     comicContainerStyle,
@@ -342,7 +548,29 @@ const getDeviceStyles = (deviceType, state = {}) => {
     loadingStyle,
     loadingSpinnerStyle,
     coverOverlayStyle,
-    mobileNavStyle
+    mobileNavStyle,
+    // Flipbook-specific styles
+    spreadContainerStyle,
+    mobileLeftPageStyle,
+    desktopLeftPageStyle,
+    desktopRightPageStyle,
+    mobilePageContainerStyle,
+    mobilePageContentStyle,
+    mobilePageImageStyle,
+    desktopPageImageStyle,
+    errorMessageStyle,
+    // Additional component styles
+    coverLoadingOverlayStyle,
+    loadingTextStyle,
+    coverImageWithOpacityStyle,
+    errorContainerStyle,
+    errorIconStyle,
+    retryButtonStyle,
+    desktopControlButtonStyle,
+    desktopControlButtonDisabledStyle,
+    mobileNavButtonPrevStyle,
+    mobileNavButtonNextStyle,
+    mobileNavIndicatorStyle
   };
 };
 

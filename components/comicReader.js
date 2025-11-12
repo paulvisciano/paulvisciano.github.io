@@ -272,8 +272,15 @@ window.ComicReader = ({ content, onClose }) => {
         return;
       }
       
+      // Get styles when called - required, no fallback
+      if (!window.ComicReaderStyles?.getDeviceStyles) {
+        console.error('ComicReader: styles not loaded');
+        return;
+      }
+      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading });
+      
       // Use utility to create flipbook structure
-      const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, currentPages);
+      const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, currentPages, currentStyles);
       
       // Store page references for updates
       flipbookRef.current._leftPage = leftPage;
@@ -314,8 +321,15 @@ window.ComicReader = ({ content, onClose }) => {
     
     const currentPages = getPages();
     
+    // Get styles when called - required, no fallback
+    if (!window.ComicReaderStyles?.getDeviceStyles) {
+      console.error('ComicReader: styles not loaded');
+      return;
+    }
+    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading });
+    
     // Use utility to update pages
-    updatePagesUtil(deviceType, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage);
+    updatePagesUtil(deviceType, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
   };
   
   // Turn.js removed - using simple custom implementation
@@ -563,21 +577,7 @@ window.ComicReader = ({ content, onClose }) => {
       }, [
         !isVisible && React.createElement('div', {
           key: 'loading-overlay',
-          style: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontSize: isMobile ? '16px' : '18px',
-            zIndex: 1,
-            background: '#000'
-          }
+          style: styles.coverLoadingOverlayStyle || {}
         }, [
           React.createElement('div', {
             key: 'spinner',
@@ -585,23 +585,14 @@ window.ComicReader = ({ content, onClose }) => {
           }),
           React.createElement('div', {
             key: 'loading-text',
-            style: {
-              fontFamily: 'monospace',
-              textAlign: 'center',
-              fontSize: isMobile ? '14px' : '16px',
-              fontWeight: 'bold'
-            }
+            style: styles.loadingTextStyle || {}
           }, isMobile ? 'Loading...' : 'Loading comic book...')
         ]),
         React.createElement('img', {
           key: 'cover-img',
           src: episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png',
           alt: episodeData ? `${episodeData.title} Cover` : 'Episode 20 Cover',
-          style: {
-            ...(styles.coverImageStyle || {}),
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 0.3s ease'
-          }
+          style: styles.coverImageWithOpacityStyle ? styles.coverImageWithOpacityStyle(isVisible) : (styles.coverImageStyle || {})
         }),
         isVisible && React.createElement('div', {
           key: 'cover-overlay',
@@ -621,26 +612,19 @@ window.ComicReader = ({ content, onClose }) => {
         React.createElement('div', {
           key: 'boot-header',
           style: {
-            fontFamily: 'monospace',
-            textAlign: 'center',
-            marginBottom: '20px',
-            fontSize: isMobile ? '14px' : '16px',
-            fontWeight: 'bold'
+            ...(styles.loadingTextStyle || {}),
+            marginBottom: '20px'
           }
         }, isMobile ? 'Loading...' : 'Loading comic...')
       ]),
       
       error && React.createElement('div', {
         key: 'error',
-        style: {
-          ...(styles.loadingStyle || {}),
-          color: '#ff4757',
-          flexDirection: 'column'
-        }
+        style: styles.errorContainerStyle || {}
       }, [
         React.createElement('div', {
           key: 'error-icon',
-          style: { fontSize: '24px', marginBottom: '10px' }
+          style: styles.errorIconStyle || {}
         }, '⚠️'),
         React.createElement('div', { key: 'error-msg' }, error),
         React.createElement('button', {
@@ -653,15 +637,7 @@ window.ComicReader = ({ content, onClose }) => {
               createFlipbook(1);
             }, 100);
           },
-          style: {
-            marginTop: '15px',
-            padding: '8px 16px',
-            background: '#ff4757',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }
+          style: styles.retryButtonStyle || {}
         }, 'Give Paul Another Shot 🚀')
       ]),
       
@@ -680,11 +656,7 @@ window.ComicReader = ({ content, onClose }) => {
       }, [
         React.createElement('button', {
           key: 'prev',
-          style: {
-            ...(styles.controlBtnStyle || {}),
-            opacity: 1,
-            cursor: 'pointer'
-          },
+          style: styles.desktopControlButtonStyle || {},
           onClick: previousPage,
           title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
         }, '‹'),
@@ -694,11 +666,9 @@ window.ComicReader = ({ content, onClose }) => {
         }, `${currentPage} / ${totalPages}`),
         React.createElement('button', {
           key: 'next',
-          style: {
-            ...(styles.controlBtnStyle || {}),
-            opacity: (currentPage === totalPages && !getNextEpisode()) ? 0.5 : 1,
-            cursor: (currentPage === totalPages && !getNextEpisode()) ? 'not-allowed' : 'pointer'
-          },
+          style: styles.desktopControlButtonDisabledStyle 
+            ? styles.desktopControlButtonDisabledStyle(currentPage === totalPages && !getNextEpisode())
+            : {},
           onClick: nextPage,
           disabled: currentPage === totalPages && !getNextEpisode(),
           title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
@@ -713,96 +683,19 @@ window.ComicReader = ({ content, onClose }) => {
       }, [
         React.createElement('button', {
           key: 'mobile-prev',
-          style: {
-            background: 'rgba(255, 255, 255, 0.95)',
-            color: '#1d1d1f',
-            border: 'none',
-            borderRadius: '20px',
-            width: '56px',
-            height: '56px',
-            fontSize: '20px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            opacity: 1,
-            pointerEvents: 'auto',
-            marginLeft: '20px',
-            boxShadow: '0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08)',
-            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            WebkitTapHighlightColor: 'transparent',
-            outline: 'none',
-            userSelect: 'none',
-            WebkitUserSelect: 'none',
-            ':hover': {
-              background: 'rgba(255, 255, 255, 1)',
-              transform: 'scale(1.05)',
-              boxShadow: '0 4px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12)'
-            },
-            ':active': {
-              transform: 'scale(0.92)',
-              background: 'rgba(255, 255, 255, 0.8)',
-              transition: 'all 0.1s ease'
-            }
-          },
+          style: styles.mobileNavButtonPrevStyle || {},
           onClick: previousPage,
           title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
         }, '◀'),
         React.createElement('div', {
           key: 'mobile-indicator',
-          style: {
-            color: 'rgba(255, 255, 255, 0.9)',
-            fontSize: '15px',
-            fontWeight: '500',
-            background: 'rgba(255, 255, 255, 0.08)',
-            padding: '10px 20px',
-            borderRadius: '22px',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '0.5px solid rgba(255, 255, 255, 0.15)',
-            letterSpacing: '0.5px'
-          }
+          style: styles.mobileNavIndicatorStyle || {}
         }, `${currentPage} / ${totalPages}`),
         React.createElement('button', {
           key: 'mobile-next',
-          style: {
-            background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.95)',
-            color: (currentPage === totalPages && !getNextEpisode()) ? '#8e8e93' : '#1d1d1f',
-            border: 'none',
-            borderRadius: '20px',
-            width: '56px',
-            height: '56px',
-            fontSize: '20px',
-            fontWeight: '600',
-            cursor: (currentPage === totalPages && !getNextEpisode()) ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            opacity: 1,
-            pointerEvents: 'auto',
-            marginRight: '20px',
-            boxShadow: (currentPage === totalPages && !getNextEpisode()) ? '0 1px 8px rgba(0, 0, 0, 0.06)' : '0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.08)',
-            transition: 'all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            WebkitTapHighlightColor: 'transparent',
-            outline: 'none',
-            userSelect: 'none',
-            WebkitUserSelect: 'none',
-            ':hover': {
-              background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 1)',
-              transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(1.05)',
-              boxShadow: (currentPage === totalPages && !getNextEpisode()) ? '0 1px 8px rgba(0, 0, 0, 0.06)' : '0 4px 24px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.12)'
-            },
-            ':active': {
-              transform: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'scale(0.92)',
-              background: (currentPage === totalPages && !getNextEpisode()) ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.8)',
-              transition: (currentPage === totalPages && !getNextEpisode()) ? 'none' : 'all 0.1s ease'
-            }
-          },
+          style: styles.mobileNavButtonNextStyle 
+            ? styles.mobileNavButtonNextStyle(currentPage === totalPages && !getNextEpisode())
+            : {},
           onClick: nextPage,
           title: currentPage === totalPages && getNextEpisode() ? 'Next Episode' : 'Next Page'
         }, currentPage === totalPages && getNextEpisode() ? '⏭' : '▶')
