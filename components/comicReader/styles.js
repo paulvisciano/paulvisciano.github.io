@@ -3,16 +3,17 @@
 // ============================================================================
 
 /**
- * Get styles for a specific device type
+ * Get styles for a specific device type and orientation
  * @param {string} deviceType - 'mobile', 'tablet', or 'desktop'
- * @param {object} state - Component state (isVisible, showControls, showCover, isLoading, etc.)
+ * @param {object} state - Component state (isVisible, showControls, showCover, isLoading, orientation, etc.)
  * @returns {object} Style objects for the device type
  */
 const getDeviceStyles = (deviceType, state = {}) => {
-  const { isVisible = false, showControls = false, showCover = true, isLoading = false } = state;
+  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape' } = state;
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
+  const isPortrait = orientation === 'portrait';
   
   // Shared overlay style (same for all devices)
   const comicOverlayStyle = {
@@ -31,8 +32,8 @@ const getDeviceStyles = (deviceType, state = {}) => {
     pointerEvents: 'auto'
   };
 
-  // Container styles
-  const comicContainerStyle = isMobile ? {
+  // Container styles - based on orientation (portrait = fullscreen for mobile, centered for tablet; landscape = centered)
+  const comicContainerStyle = isPortrait && isMobile ? {
     position: 'fixed',
     top: 0,
     left: 0,
@@ -48,8 +49,25 @@ const getDeviceStyles = (deviceType, state = {}) => {
     maxHeight: '100dvh',
     minHeight: '400px',
     display: 'flex',
+    flexDirection: 'column'
+  } : isPortrait && isTablet ? {
+    position: 'relative',
+    top: 'auto',
+    left: 'auto',
+    right: 'auto',
+    width: 'auto',
+    height: 'auto',
+    background: '#000',
+    borderRadius: '15px',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    border: '4px solid #d4c5a9',
+    overflow: 'hidden',
+    maxWidth: '90vw',
+    maxHeight: '90vh',
+    minHeight: '400px',
+    display: 'flex',
     flexDirection: 'column',
-    touchAction: 'pan-y pinch-zoom',
+    touchAction: isTablet ? 'pan-x pan-y pinch-zoom' : 'auto',
     pointerEvents: 'auto'
   } : {
     position: 'relative',
@@ -68,11 +86,11 @@ const getDeviceStyles = (deviceType, state = {}) => {
     minHeight: '400px',
     display: 'flex',
     flexDirection: 'column',
-    touchAction: 'pan-y pinch-zoom',
+    touchAction: isTablet ? 'pan-x pan-y pinch-zoom' : 'auto',
     pointerEvents: 'auto'
   };
 
-  // Cover display styles
+  // Cover display styles - based on device type and orientation
   const coverDisplayStyle = isMobile ? {
     width: '100vw',
     height: '100dvh',
@@ -88,6 +106,18 @@ const getDeviceStyles = (deviceType, state = {}) => {
   } : isDesktop ? {
     width: '400px',
     minHeight: '600px',
+    margin: '0 auto',
+    display: 'block',
+    cursor: isVisible ? 'pointer' : 'default',
+    overflow: 'hidden',
+    background: '#000',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    pointerEvents: isVisible ? 'auto' : 'none',
+    position: 'relative',
+    padding: 0
+  } : isTablet && isPortrait ? {
+    width: '500px',
+    minHeight: '750px',
     margin: '0 auto',
     display: 'block',
     cursor: isVisible ? 'pointer' : 'default',
@@ -124,14 +154,23 @@ const getDeviceStyles = (deviceType, state = {}) => {
     verticalAlign: 'top'
   };
 
-  // Flipbook styles
-  const flipbookStyle = isMobile ? {
+  // Flipbook styles - based on orientation (portrait = single page, landscape = two-page)
+  const flipbookStyle = isPortrait && isMobile ? {
     width: '100vw',
     height: 'calc(100% - 60px)',
     margin: '0',
     display: showCover || isLoading ? 'none' : 'flex',
     background: '#000',
     borderRadius: '0',
+    overflow: 'hidden',
+    position: 'relative'
+  } : isPortrait && isTablet ? {
+    width: '500px',
+    height: '750px',
+    margin: '0 auto',
+    display: showCover || isLoading ? 'none' : 'flex',
+    background: '#000',
+    borderRadius: '10px',
     overflow: 'hidden',
     position: 'relative'
   } : isDesktop ? {
