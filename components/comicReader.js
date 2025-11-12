@@ -39,13 +39,17 @@ window.ComicReader = ({ content, onClose }) => {
   const overlayRef = React.useRef(null);
   
   // Check if mobile device - use state to make it reactive
+  // iPad should show 2-page spreads like desktop, not single pages
   const [isMobile, setIsMobile] = React.useState(() => {
-    // More robust mobile detection
+    // More robust mobile detection - exclude iPad from mobile detection
     const width = window.innerWidth;
     const userAgent = navigator.userAgent;
-    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-    const isMobileWidth = width <= 768;
-    return isMobileUA || isMobileWidth;
+    // Check for iPad specifically and exclude it from mobile detection
+    const isiPad = /iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    // Only treat phones and small screens as mobile (not tablets/iPads)
+    const isPhoneUA = /iPhone|iPod|Android.*Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    const isMobileWidth = width <= 768 && !isiPad; // Don't treat iPad as mobile even if narrow
+    return (isPhoneUA || isMobileWidth) && !isiPad; // Explicitly exclude iPad
   });
   
   // Update mobile state on window resize
@@ -53,9 +57,12 @@ window.ComicReader = ({ content, onClose }) => {
     const handleResize = () => {
       const width = window.innerWidth;
       const userAgent = navigator.userAgent;
-      const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-      const isMobileWidth = width <= 768;
-      setIsMobile(isMobileUA || isMobileWidth);
+      // Check for iPad specifically and exclude it from mobile detection
+      const isiPad = /iPad/i.test(userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      // Only treat phones and small screens as mobile (not tablets/iPads)
+      const isPhoneUA = /iPhone|iPod|Android.*Mobile|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+      const isMobileWidth = width <= 768 && !isiPad; // Don't treat iPad as mobile even if narrow
+      setIsMobile((isPhoneUA || isMobileWidth) && !isiPad); // Explicitly exclude iPad
     };
     
     window.addEventListener('resize', handleResize);
