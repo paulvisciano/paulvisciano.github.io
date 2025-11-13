@@ -326,6 +326,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
     height: '100%',
     background: 'rgba(0, 0, 0, 0.2)',
     display: 'flex',
+    flexDirection: isMobile ? 'column' : 'row',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10000,
