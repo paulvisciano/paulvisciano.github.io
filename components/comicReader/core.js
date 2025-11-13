@@ -70,6 +70,30 @@ const getNextEpisode = (episodeData) => {
 };
 
 /**
+ * Find the previous episode in the series
+ */
+const getPreviousEpisode = (episodeData) => {
+  if (!episodeData || !window.momentsInTime) {
+    return null;
+  }
+
+  const currentEpisodeId = episodeData.id;
+  const currentDate = episodeData.date;
+  
+  // Find episodes that are comics and come before the current episode
+  const pastComics = window.momentsInTime
+    .filter(moment => 
+      moment.isComic && 
+      moment.date < currentDate &&
+      moment.id !== currentEpisodeId
+    )
+    .sort((a, b) => b.date - a.date); // Sort descending to get most recent first
+
+  // Return the previous comic episode, if any
+  return pastComics.length > 0 ? pastComics[0] : null;
+};
+
+/**
  * Find current episode from URL path
  */
 const findCurrentEpisode = () => {
@@ -116,6 +140,7 @@ window.ComicReaderCore = {
   getGlobalState,
   getPages,
   getNextEpisode,
+  getPreviousEpisode,
   findCurrentEpisode,
   getPageIncrement
 };
