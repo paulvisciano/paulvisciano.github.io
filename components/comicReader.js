@@ -19,7 +19,8 @@ const {
   renderFlipbook, 
   renderDesktopControls, 
   renderMobileNavigation, 
-  renderContainer 
+  renderContainer,
+  renderCoverNavigation
 } = window.ComicReaderRender || {};
 
 window.ComicReader = ({ content, onClose }) => {
@@ -38,8 +39,10 @@ window.ComicReader = ({ content, onClose }) => {
   const flipbookRef = React.useRef(null);
   const flipbookCreatedRef = React.useRef(false);
   const coverRef = React.useRef(null);
+  const containerRef = React.useRef(null); // Ref for the comic-episode-container
   const currentPageRef = React.useRef(1);
   const overlayRef = React.useRef(null);
+  const slideDirectionRef = React.useRef(null); // Track slide direction for animation
   
   // Use device detection hook
   const deviceType = window.ComicReaderDeviceDetection?.useDeviceType 
@@ -211,6 +214,33 @@ window.ComicReader = ({ content, onClose }) => {
     // Always show cover page first for comic episodes
     setShowCover(true);
     setFlipbookReady(false);
+    
+    // Apply slide-in animation if we have a slide direction
+    if (slideDirectionRef.current && containerRef.current) {
+      const container = containerRef.current;
+      const direction = slideDirectionRef.current;
+      slideDirectionRef.current = null; // Reset direction
+      
+      // Ensure no conflicting classes or styles are present
+      container.classList.remove('slide-out-left', 'slide-out-right');
+      container.style.transform = '';
+      container.style.opacity = '';
+      
+      // Small delay to ensure DOM is updated, then animate in
+      setTimeout(() => {
+        if (direction === 'left') {
+          container.classList.add('slide-in-left');
+          setTimeout(() => {
+            container.classList.remove('slide-in-left');
+          }, 400);
+        } else if (direction === 'right') {
+          container.classList.add('slide-in-right');
+          setTimeout(() => {
+            container.classList.remove('slide-in-right');
+          }, 400);
+        }
+      }, 10);
+    }
   }, [episodeData]);
 
   // Handle flipbook creation when flipbookReady becomes true or orientation changes
@@ -485,36 +515,59 @@ window.ComicReader = ({ content, onClose }) => {
   const loadNextEpisode = () => {
     const nextEpisode = getNextEpisode();
     if (nextEpisode) {
-      // Reset state for new episode
-      setCurrentPage(1);
-      currentPageRef.current = 1;
-      setShowCover(true);
-      setIsVisible(false);
-      setFlipbookReady(false);
-      flipbookCreatedRef.current = false;
-      
-      // Update episode data - this will trigger the loading sequence
-      setEpisodeData(nextEpisode);
-      updateGlobalState({
-        episodeData: nextEpisode,
-        currentPage: 1,
-        flipbookCreated: false,
-        flipbookReady: false,
-        isVisible: false,
-        isLoading: true
-      });
-      
-      // Update URL and timeline selection for new episode
-      window.history.pushState({ momentId: nextEpisode.id }, '', nextEpisode.fullLink);
-      
-      // Update timeline selection and trigger globe transition
-      if (window.handleTimelineClick) {
-        window.handleTimelineClick(nextEpisode);
+      // Add slide animation class to container
+      const container = containerRef.current;
+      if (container) {
+        container.classList.add('slide-out-left');
       }
       
-      // Trigger the loading sequence by setting loading to true
-      // The existing useEffect will handle the rest
-      setIsLoading(true);
+      // Set slide direction for slide-in animation
+      slideDirectionRef.current = 'right';
+      
+      // After animation, load new episode
+      setTimeout(() => {
+        // Remove slide-out class before updating episode data to prevent styles from persisting
+        if (container) {
+          container.classList.remove('slide-out-left');
+          // Also clear any inline styles that might have been set
+          container.style.transform = '';
+          container.style.opacity = '';
+        }
+        
+        // Reset state for new episode
+        setCurrentPage(1);
+        currentPageRef.current = 1;
+        setShowCover(true);
+        setFlipbookReady(false);
+        flipbookCreatedRef.current = false;
+        
+        // Update episode data - this will trigger the loading sequence and useEffect will handle slide-in
+        setEpisodeData(nextEpisode);
+        updateGlobalState({
+          episodeData: nextEpisode,
+          currentPage: 1,
+          flipbookCreated: false,
+          flipbookReady: false,
+          isLoading: true
+        });
+        
+        // Update URL and timeline selection for new episode (without triggering globe animation)
+        window.history.pushState({ momentId: nextEpisode.id }, '', nextEpisode.fullLink);
+        
+        // Update timeline selection without triggering globe transition
+        if (window.setSelectedId) {
+          window.setSelectedId(nextEpisode.id);
+        }
+        
+        // Set visible to true immediately so cover shows (it will fade in as image loads)
+        // The slide-in animation will handle the visual transition
+        setIsVisible(true);
+        updateGlobalState({ isVisible: true });
+        
+        // Trigger the loading sequence by setting loading to true
+        // The existing useEffect will handle the rest
+        setIsLoading(true);
+      }, 400); // Wait for slide-out animation
     }
   };
 
@@ -522,36 +575,59 @@ window.ComicReader = ({ content, onClose }) => {
   const loadPreviousEpisode = () => {
     const prevEpisode = getPreviousEpisode();
     if (prevEpisode) {
-      // Reset state for new episode
-      setCurrentPage(1);
-      currentPageRef.current = 1;
-      setShowCover(true);
-      setIsVisible(false);
-      setFlipbookReady(false);
-      flipbookCreatedRef.current = false;
-      
-      // Update episode data - this will trigger the loading sequence
-      setEpisodeData(prevEpisode);
-      updateGlobalState({
-        episodeData: prevEpisode,
-        currentPage: 1,
-        flipbookCreated: false,
-        flipbookReady: false,
-        isVisible: false,
-        isLoading: true
-      });
-      
-      // Update URL and timeline selection for new episode
-      window.history.pushState({ momentId: prevEpisode.id }, '', prevEpisode.fullLink);
-      
-      // Update timeline selection and trigger globe transition
-      if (window.handleTimelineClick) {
-        window.handleTimelineClick(prevEpisode);
+      // Add slide animation class to container
+      const container = containerRef.current;
+      if (container) {
+        container.classList.add('slide-out-right');
       }
       
-      // Trigger the loading sequence by setting loading to true
-      // The existing useEffect will handle the rest
-      setIsLoading(true);
+      // Set slide direction for slide-in animation
+      slideDirectionRef.current = 'left';
+      
+      // After animation, load new episode
+      setTimeout(() => {
+        // Remove slide-out class before updating episode data to prevent styles from persisting
+        if (container) {
+          container.classList.remove('slide-out-right');
+          // Also clear any inline styles that might have been set
+          container.style.transform = '';
+          container.style.opacity = '';
+        }
+        
+        // Reset state for new episode
+        setCurrentPage(1);
+        currentPageRef.current = 1;
+        setShowCover(true);
+        setFlipbookReady(false);
+        flipbookCreatedRef.current = false;
+        
+        // Update episode data - this will trigger the loading sequence and useEffect will handle slide-in
+        setEpisodeData(prevEpisode);
+        updateGlobalState({
+          episodeData: prevEpisode,
+          currentPage: 1,
+          flipbookCreated: false,
+          flipbookReady: false,
+          isLoading: true
+        });
+        
+        // Update URL and timeline selection for new episode (without triggering globe animation)
+        window.history.pushState({ momentId: prevEpisode.id }, '', prevEpisode.fullLink);
+        
+        // Update timeline selection without triggering globe transition
+        if (window.setSelectedId) {
+          window.setSelectedId(prevEpisode.id);
+        }
+        
+        // Set visible to true immediately so cover shows (it will fade in as image loads)
+        // The slide-in animation will handle the visual transition
+        setIsVisible(true);
+        updateGlobalState({ isVisible: true });
+        
+        // Trigger the loading sequence by setting loading to true
+        // The existing useEffect will handle the rest
+        setIsLoading(true);
+      }, 400); // Wait for slide-out animation
     }
   };
 
@@ -603,16 +679,7 @@ window.ComicReader = ({ content, onClose }) => {
   // Build container children using render functions
   const containerChildren = [];
   
-  // Header buttons (shared across all devices)
-  if (renderHeaderButtons) {
-    containerChildren.push(...renderHeaderButtons(styles, {
-      handleClose,
-      toggleFullscreen,
-      isFullscreen
-    }));
-  }
-  
-  // Cover display
+  // Cover display (header buttons and cover nav buttons will be outside container)
   if (showCover && !error && renderCover) {
     containerChildren.push(renderCover(deviceType, styles, {
       episodeData,
@@ -671,16 +738,42 @@ window.ComicReader = ({ content, onClose }) => {
         onTouchStart,
         onTouchMove,
         onTouchEnd,
-        children: containerChildren
+        children: containerChildren,
+        containerRef
       })
     : React.createElement('div', {
         key: 'container',
+        ref: containerRef,
         style: styles.comicContainerStyle || {},
         className: 'comic-episode-container'
       }, containerChildren);
   
   // Cover overlay (sibling of comic-episode-container for all devices)
   const overlayChildren = [containerElement];
+  
+  // Header buttons (close and fullscreen) - outside container so they don't slide
+  if (renderHeaderButtons) {
+    const headerButtons = renderHeaderButtons(styles, {
+      handleClose,
+      toggleFullscreen,
+      isFullscreen
+    });
+    overlayChildren.push(...headerButtons);
+  }
+  
+  // Cover navigation buttons - outside container so they don't slide
+  if (showCover && renderCoverNavigation) {
+    const coverNavButtons = renderCoverNavigation(deviceType, styles, {
+      loadPreviousEpisode,
+      loadNextEpisode,
+      getPreviousEpisode,
+      getNextEpisode
+    });
+    if (coverNavButtons) {
+      overlayChildren.push(...coverNavButtons);
+    }
+  }
+  
   if (showCover && isVisible && styles.coverOverlayStyle) {
     overlayChildren.push(React.createElement('div', {
       key: 'cover-overlay',
@@ -920,6 +1013,62 @@ if (!document.querySelector('#comic-episode-styles')) {
       cursor: grabbing !important;
     }
     
+    /* Container slide animations for episode navigation */
+    .comic-episode-container {
+      transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    }
+    
+    .comic-episode-container.slide-out-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    
+    .comic-episode-container.slide-out-right {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    
+    .comic-episode-container.slide-in-left {
+      animation: slideInFromLeft 0.4s ease-in-out;
+    }
+    
+    .comic-episode-container.slide-in-right {
+      animation: slideInFromRight 0.4s ease-in-out;
+    }
+    
+    @keyframes slideInFromLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideInFromRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Cover navigation button hover effects */
+    .cover-nav-button:hover {
+      background: rgba(255, 255, 255, 1) !important;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    
+    .cover-nav-button:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+  
   `;
   document.head.appendChild(style);
 }

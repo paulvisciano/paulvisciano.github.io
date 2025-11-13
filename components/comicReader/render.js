@@ -46,7 +46,7 @@ const renderCover = (deviceType, styles, {
   episodeData, 
   isVisible, 
   openComicBook, 
-  coverRef 
+  coverRef
 }) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
@@ -241,13 +241,15 @@ const renderContainer = (deviceType, styles, {
   onTouchStart, 
   onTouchMove, 
   onTouchEnd, 
-  children 
+  children,
+  containerRef
 }) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   
   return React.createElement('div', {
     key: 'container',
+    ref: containerRef,
     style: styles.comicContainerStyle || {},
     className: 'comic-episode-container',
     onMouseEnter: () => setShowControls(true),
@@ -256,6 +258,59 @@ const renderContainer = (deviceType, styles, {
     onTouchMove: (isMobile || isTablet) ? onTouchMove : undefined,
     onTouchEnd: (isMobile || isTablet) ? onTouchEnd : undefined
   }, children);
+};
+
+/**
+ * Render cover navigation buttons (outside container)
+ */
+const renderCoverNavigation = (deviceType, styles, {
+  loadPreviousEpisode,
+  loadNextEpisode,
+  getPreviousEpisode,
+  getNextEpisode
+}) => {
+  const hasPreviousEpisode = getPreviousEpisode && getPreviousEpisode();
+  const hasNextEpisode = getNextEpisode && getNextEpisode();
+  
+  if (!hasPreviousEpisode && !hasNextEpisode) {
+    return null;
+  }
+  
+  const buttons = [];
+  
+  // Left arrow button for previous episode
+  if (hasPreviousEpisode) {
+    buttons.push(React.createElement('button', {
+      key: 'cover-prev',
+      className: 'cover-nav-button cover-nav-prev',
+      onClick: (e) => {
+        e.stopPropagation();
+        if (loadPreviousEpisode) {
+          loadPreviousEpisode();
+        }
+      },
+      style: styles.coverNavButtonPrevStyle || {},
+      title: 'Previous Episode'
+    }, '‹'));
+  }
+  
+  // Right arrow button for next episode
+  if (hasNextEpisode) {
+    buttons.push(React.createElement('button', {
+      key: 'cover-next',
+      className: 'cover-nav-button cover-nav-next',
+      onClick: (e) => {
+        e.stopPropagation();
+        if (loadNextEpisode) {
+          loadNextEpisode();
+        }
+      },
+      style: styles.coverNavButtonNextStyle || {},
+      title: 'Next Episode'
+    }, '›'));
+  }
+  
+  return buttons;
 };
 
 // Export render functions
@@ -267,6 +322,7 @@ window.ComicReaderRender = {
   renderFlipbook,
   renderDesktopControls,
   renderMobileNavigation,
-  renderContainer
+  renderContainer,
+  renderCoverNavigation
 };
 
