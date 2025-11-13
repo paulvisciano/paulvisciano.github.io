@@ -10,18 +10,18 @@ const STYLE_CONFIG = {
   container: {
     mobile: {
       portrait: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        width: '100vw',
-        height: '100dvh',
-        maxWidth: '100vw',
-        maxHeight: '100dvh',
-        borderRadius: '0',
-        border: 'none',
-        boxShadow: 'none',
-        justifyContent: 'center'
+        cover: {
+          width: '300px',
+          height: '450px',
+          borderRadius: '15px',
+          border: '4px solid #d4c5a9',
+          boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+        },
+        open: {
+          width: '100vw',
+          height: '100dvh'
+        },
+        position: 'relative',
       },
       landscape: {
         cover: {
@@ -33,11 +33,7 @@ const STYLE_CONFIG = {
           height: '300px'
         },
         position: 'relative',
-        top: 'auto',
-        left: 'auto',
-        right: 'auto',
-        maxWidth: '90vw',
-        maxHeight: '90vh',
+       
         borderRadius: '15px',
         border: '4px solid #d4c5a9',
         boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
@@ -51,15 +47,13 @@ const STYLE_CONFIG = {
           height: '600px'
         },
         open: {
-          width: '800px',
-          height: '600px'
+          width: '100vw',
+          height: '100dvh'
         },
         position: 'relative',
         top: 'auto',
         left: 'auto',
         right: 'auto',
-        maxWidth: '90vw',
-        maxHeight: '90vh',
         borderRadius: '15px',
         border: '4px solid #d4c5a9',
         boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
@@ -78,8 +72,6 @@ const STYLE_CONFIG = {
         top: 'auto',
         left: 'auto',
         right: 'auto',
-        maxWidth: '90vw',
-        maxHeight: '90vh',
         borderRadius: '15px',
         border: '4px solid #d4c5a9',
         boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
@@ -100,8 +92,6 @@ const STYLE_CONFIG = {
       top: 'auto',
       left: 'auto',
       right: 'auto',
-      maxWidth: 'none',
-      maxHeight: 'none',
       borderRadius: '15px',
       border: '4px solid #d4c5a9',
       boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
@@ -179,6 +169,15 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
   
   if (isMobile && isPortrait) {
     config = STYLE_CONFIG.container.mobile.portrait;
+    const coverOrOpen = showCover ? 'cover' : 'open';
+    dynamicProps = { ...STYLE_CONFIG.container.mobile.portrait[coverOrOpen] };
+    // For mobile portrait, use relative position for cover (so overlay can center it), fixed for open
+    if (!showCover) {
+      dynamicProps.position = 'fixed';
+      dynamicProps.top = '0';
+      dynamicProps.left = '0';
+      dynamicProps.right = '0';
+    }
   } else if (isMobile && !isPortrait) {
     config = STYLE_CONFIG.container.mobile.landscape;
     const coverOrOpen = showCover ? 'cover' : 'open';
@@ -210,12 +209,11 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     : config;
   
   // Override with 85% width and 90% height when in fullscreen AND comic is open (not showing cover)
+  // Applies to all devices (mobile, tablet, desktop)
   // When showing cover, use static dimensions from cover/open config
   const fullscreenProps = (isFullscreen && !showCover) ? {
     width: '85%',
-    height: '90%',
-    maxWidth: '85%',
-    maxHeight: '90%'
+    height: '90%'
   } : {};
   
   return {
@@ -226,6 +224,7 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: config.justifyContent ? 'center' : undefined,
     touchAction: (isTablet && !isPortrait) ? 'pan-x pan-y pinch-zoom' : 'auto',
     pointerEvents: 'auto',
     ...(config.justifyContent && { justifyContent: config.justifyContent })
@@ -522,7 +521,6 @@ const getDeviceStyles = (deviceType, state = {}) => {
     position: 'relative',
     marginTop: '20px',
     width: 'auto',
-    maxWidth: 'calc(100vw - 40px)',
     background: 'rgba(0, 0, 0, 0.8)',
     color: 'white',
     padding: '12px 16px',
