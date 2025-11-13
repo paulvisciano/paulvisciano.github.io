@@ -1025,7 +1025,7 @@ window.momentsInTime = [
     caption: "Miami Episode 1 — South Beach Energy",
     fullLink: "/moments/miami/2025-10-06/",
     isComic: true,
-    pageCount: 15, // Miami Episode 1 has 15 pages
+    pageCount: 16, // Miami Episode 1 has 15 pages
     location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
