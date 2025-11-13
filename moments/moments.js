@@ -1043,7 +1043,7 @@ window.momentsInTime = [
     caption: "Miami Episode 2 — Wynwood Ride, Tacos & Tests",
     fullLink: "/moments/miami/2025-10-07/",
     isComic: true,
-    pageCount: 13,
+    pageCount: 14,
     location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
