@@ -240,7 +240,8 @@ const renderContainer = (deviceType, styles, {
   setShowControls, 
   onTouchStart, 
   onTouchMove, 
-  onTouchEnd, 
+  onTouchEnd,
+  onClick,
   children,
   containerRef
 }) => {
@@ -256,7 +257,8 @@ const renderContainer = (deviceType, styles, {
     onMouseLeave: () => setShowControls(false),
     onTouchStart: (isMobile || isTablet) ? onTouchStart : undefined,
     onTouchMove: (isMobile || isTablet) ? onTouchMove : undefined,
-    onTouchEnd: (isMobile || isTablet) ? onTouchEnd : undefined
+    onTouchEnd: (isMobile || isTablet) ? onTouchEnd : undefined,
+    onClick: onClick
   }, children);
 };
 

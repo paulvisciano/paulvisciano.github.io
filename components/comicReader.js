@@ -192,9 +192,13 @@ window.ComicReader = ({ content, onClose }) => {
         case 'Escape':
           e.preventDefault();
           // If in fullscreen, exit fullscreen first (browser will handle it)
-          // If not in fullscreen, close the comic
+          // If not in fullscreen, go back to cover if viewing pages, or close if on cover
           if (!isFullscreen) {
-            handleClose();
+            if (showCover) {
+              handleClose();
+            } else {
+              goBackToCover();
+            }
           }
           // Note: if in fullscreen, browser's Esc handler will exit fullscreen
           // and our fullscreenchange listener will update the state
@@ -859,9 +863,20 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const handleOverlayClick = (e) => {
-    // Don't close if in fullscreen mode - only Escape should exit
+    // Disable tap/click outside to dismiss - user must use close button
+    // This prevents accidental dismissals both on cover and when viewing pages
+    // Only prevent clicks directly on the overlay background (not on interactive children)
     if (e.target === e.currentTarget && !isFullscreen) {
-      handleClose();
+      e.preventDefault();
+      e.stopPropagation();
+      // Do nothing - all dismissals must go through the close button
+      return;
+    }
+    // For clicks on children (like container), check if it's empty space
+    // If clicking on the container itself (not flipbook content), prevent action
+    if (!isFullscreen && e.target.classList.contains('comic-episode-container')) {
+      e.stopPropagation();
+      // Do nothing - prevent going back to cover
     }
   };
 
@@ -969,6 +984,15 @@ window.ComicReader = ({ content, onClose }) => {
     }));
   }
   
+  // Handler to prevent clicks on container from bubbling to overlay
+  const handleContainerClick = (e) => {
+    // Stop propagation to prevent overlay click handler from firing
+    // This prevents accidental dismissal when clicking on empty container space
+    if (!showCover) {
+      e.stopPropagation();
+    }
+  };
+  
   // Render container with device-specific handlers
   const containerElement = renderContainer 
     ? renderContainer(deviceType, styles, {
@@ -976,6 +1000,7 @@ window.ComicReader = ({ content, onClose }) => {
         onTouchStart,
         onTouchMove,
         onTouchEnd,
+        onClick: handleContainerClick,
         children: containerChildren,
         containerRef
       })
@@ -983,7 +1008,8 @@ window.ComicReader = ({ content, onClose }) => {
         key: 'container',
         ref: containerRef,
         style: styles.comicContainerStyle || {},
-        className: 'comic-episode-container'
+        className: 'comic-episode-container',
+        onClick: handleContainerClick
       }, containerChildren);
   
   // Cover overlay (sibling of comic-episode-container for all devices)
@@ -991,8 +1017,16 @@ window.ComicReader = ({ content, onClose }) => {
   
   // Header buttons (close and fullscreen) - outside container so they don't slide
   if (renderHeaderButtons) {
+    // Create a close handler that goes back to cover if viewing pages, or closes if on cover
+    const handleCloseOrGoBack = () => {
+      if (showCover) {
+        handleClose();
+      } else {
+        goBackToCover();
+      }
+    };
     const headerButtons = renderHeaderButtons(styles, {
-      handleClose,
+      handleClose: handleCloseOrGoBack,
       toggleFullscreen,
       isFullscreen
     });
