@@ -1105,7 +1105,7 @@ window.momentsInTime = [
     caption: "Miami Episode 7 — The Final Morning",
     fullLink: "/moments/miami/2025-10-12/",
     isComic: true,
-    pageCount: 6,
+    pageCount: 8,
     location: { lat: 25.7959, lng: -80.2870, name: "Miami International Airport" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
