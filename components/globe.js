@@ -240,54 +240,46 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         isZooming.current = true;
         globeInstance.current.controls().autoRotate = false;
 
-        // Initial zoom out to transition
+        // Get current altitude, but use a closer zoom if we're too far out
+        const currentPOV = globeInstance.current.pointOfView();
+        const currentAltitude = currentPOV.altitude;
+        // Use closer altitude (lower = closer) - target 1.2 for a nice close view
+        const targetAltitude = currentAltitude > 1.2 ? 1.2 : currentAltitude;
+
+        // Offset the view slightly to show location better (not perfectly centered)
+        // Offset latitude down and longitude to the left for better perspective
+        const offsetLat = post.location.lat - 15; // Tilt view down more
+        const offsetLng = post.location.lng - 3; // Shift view to the left
+
+        // Rotate to new location with closer zoom and offset
         globeInstance.current.pointOfView({
-          lat: post.location.lat,
-          lng: post.location.lng,
-          altitude: 2.5
+          lat: offsetLat,
+          lng: offsetLng,
+          altitude: targetAltitude
         }, 1000);
 
+        // After the rotation completes
         waitForZoom(1000).then(() => {
-          // Final position with adjusted camera angle
-          const finalLat = post.location.lat;
-          const finalLng = post.location.lng;
+          if (globeInstance.current.controls()) {
+            globeInstance.current.controls().enableDamping = true;
+            globeInstance.current.controls().dampingFactor = 0.2;
+          }
           
-          globeInstance.current.pointOfView({
-            lat: finalLat,
-            lng: finalLng,
-            altitude: 1.8
-          }, 1000);
-
-          // After the main zoom, adjust the camera angle
-          waitForZoom(1000).then(() => {
-            if (globeInstance.current.controls()) {
-              globeInstance.current.controls().enableDamping = true;
-              globeInstance.current.controls().dampingFactor = 0.2;
-              globeInstance.current.pointOfView({
-                lat: finalLat - 15,  // Reduced tilt angle for lower position
-                lng: finalLng,
-                altitude: 1.5
-              }, 800);
-            }
-
-            waitForZoom(800).then(() => {
-              // Skip popover for comic episodes - they open directly
-              if (!isComicEpisode(post.id, post.title)) {
-                setPopoverContent({
-                  title: post.title || "No Title",
-                  snippet: post.snippet || "No Snippet",
-                  fullLink: post.fullLink || "#",
-                  lat: post.lat,
-                  lng: post.lng,
-                  id: post.id,
-                  image: post.image ? post.image.replace('attachment://', '') : null,
-                  imageAlt: post.imageAlt
-                });
-              }
-              setSelectedId(post.id);
-              isZooming.current = false;
+          // Skip popover for comic episodes - they open directly
+          if (!isComicEpisode(post.id, post.title)) {
+            setPopoverContent({
+              title: post.title || "No Title",
+              snippet: post.snippet || "No Snippet",
+              fullLink: post.fullLink || "#",
+              lat: post.lat,
+              lng: post.lng,
+              id: post.id,
+              image: post.image ? post.image.replace('attachment://', '') : null,
+              imageAlt: post.imageAlt
             });
-          });
+          }
+          setSelectedId(post.id);
+          isZooming.current = false;
         });
       } catch (error) {
         isZooming.current = false;
