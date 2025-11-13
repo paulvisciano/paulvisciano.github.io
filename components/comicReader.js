@@ -605,6 +605,14 @@ window.ComicReader = ({ content, onClose }) => {
     }));
   }
   
+  // Cover overlay button (inside container for mobile)
+  if (isMobile && showCover && isVisible && styles.coverOverlayStyle) {
+    containerChildren.push(React.createElement('div', {
+      key: 'cover-overlay',
+      style: styles.coverOverlayStyle || {}
+    }, '📖 Tap to start reading'));
+  }
+  
   // Render container with device-specific handlers
   const containerElement = renderContainer 
     ? renderContainer(deviceType, styles, {
@@ -620,13 +628,13 @@ window.ComicReader = ({ content, onClose }) => {
         className: 'comic-episode-container'
       }, containerChildren);
   
-  // Cover overlay (sibling of comic-episode-container)
+  // Cover overlay (sibling of comic-episode-container for non-mobile)
   const overlayChildren = [containerElement];
-  if (showCover && isVisible && styles.coverOverlayStyle) {
+  if (!isMobile && showCover && isVisible && styles.coverOverlayStyle) {
     overlayChildren.push(React.createElement('div', {
       key: 'cover-overlay',
       style: styles.coverOverlayStyle || {}
-    }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book'));
+    }, '🖱️ Click to open comic book'));
   }
   
   // Prevent touch events from reaching elements underneath (like the globe)

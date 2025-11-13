@@ -506,12 +506,10 @@ const getDeviceStyles = (deviceType, state = {}) => {
 
   // Cover overlay (click to open) styles
   const coverOverlayStyle = isMobile ? {
-    position: 'absolute',
-    top: 'calc(100vh - 120px)',
-    left: '20px',
-    right: '20px',
+    position: 'relative',
+    marginTop: '20px',
     width: 'auto',
-    maxWidth: 'none',
+    maxWidth: 'calc(100vw - 40px)',
     background: 'rgba(0, 0, 0, 0.8)',
     color: 'white',
     padding: '12px 16px',
