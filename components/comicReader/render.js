@@ -269,8 +269,8 @@ const renderCoverNavigation = (deviceType, styles, {
   getPreviousEpisode,
   getNextEpisode
 }) => {
-  const hasPreviousEpisode = getPreviousEpisode && getPreviousEpisode();
-  const hasNextEpisode = getNextEpisode && getNextEpisode();
+  const hasPreviousEpisode = getPreviousEpisode ? getPreviousEpisode() : null;
+  const hasNextEpisode = getNextEpisode ? getNextEpisode() : null;
   
   if (!hasPreviousEpisode && !hasNextEpisode) {
     return null;
