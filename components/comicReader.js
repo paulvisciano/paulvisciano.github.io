@@ -620,6 +620,15 @@ window.ComicReader = ({ content, onClose }) => {
         className: 'comic-episode-container'
       }, containerChildren);
   
+  // Cover overlay (sibling of comic-episode-container)
+  const overlayChildren = [containerElement];
+  if (showCover && isVisible && styles.coverOverlayStyle) {
+    overlayChildren.push(React.createElement('div', {
+      key: 'cover-overlay',
+      style: styles.coverOverlayStyle || {}
+    }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book'));
+  }
+  
   // Prevent touch events from reaching elements underneath (like the globe)
   const handleOverlayTouchStart = (e) => {
     e.stopPropagation();
@@ -641,7 +650,7 @@ window.ComicReader = ({ content, onClose }) => {
     onTouchMove: handleOverlayTouchMove,
     onTouchEnd: handleOverlayTouchEnd,
     className: 'comic-episode-overlay'
-  }, [containerElement]);
+  }, overlayChildren);
 };
 
 // Add CSS for the spinner animation and Turn.js styling

@@ -3,6 +3,275 @@
 // ============================================================================
 
 /**
+ * Style configuration table - all values defined here to prevent drift
+ * See STYLE_SPEC.md for complete documentation
+ */
+const STYLE_CONFIG = {
+  container: {
+    mobile: {
+      portrait: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100vw',
+        height: '100dvh',
+        maxWidth: '100vw',
+        maxHeight: '100dvh',
+        borderRadius: '0',
+        border: 'none',
+        boxShadow: 'none',
+        justifyContent: 'center'
+      },
+      landscape: {
+        cover: {
+          width: '200px',
+          height: '300px'
+        },
+        open: {
+          width: '400px',
+          height: '300px'
+        },
+        position: 'relative',
+        top: 'auto',
+        left: 'auto',
+        right: 'auto',
+        maxWidth: '90vw',
+        maxHeight: '90vh',
+        borderRadius: '15px',
+        border: '4px solid #d4c5a9',
+        boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+        justifyContent: undefined
+      }
+    },
+    tablet: {
+      portrait: {
+        position: 'relative',
+        top: 'auto',
+        left: 'auto',
+        right: 'auto',
+        width: 'auto',
+        height: 'auto',
+        maxWidth: '90vw',
+        maxHeight: '90vh',
+        borderRadius: '15px',
+        border: '4px solid #d4c5a9',
+        boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+        justifyContent: 'center'
+      },
+      landscape: {
+        position: 'relative',
+        top: 'auto',
+        left: 'auto',
+        right: 'auto',
+        width: 'auto',
+        height: 'auto',
+        maxWidth: '90vw',
+        maxHeight: '90vh',
+        borderRadius: '15px',
+        border: '4px solid #d4c5a9',
+        boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+        justifyContent: undefined
+      }
+    },
+    desktop: {
+      // Desktop is always landscape
+      cover: {
+        width: '400px',
+        height: '600px'
+      },
+      open: {
+        width: '800px',
+        height: '600px'
+      },
+      position: 'relative',
+      top: 'auto',
+      left: 'auto',
+      right: 'auto',
+      maxWidth: 'none',
+      maxHeight: 'none',
+      borderRadius: '15px',
+      border: '4px solid #d4c5a9',
+      boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+      justifyContent: undefined
+    }
+  },
+  flipbook: {
+    mobile: {
+      portrait: {
+        width: '100vw',
+        height: 'calc(100% - 60px)',
+        margin: '0',
+        borderRadius: '0'
+      },
+      landscape: {
+        width: '100%',
+        height: '100%',
+        margin: '0',
+        borderRadius: '0'
+      }
+    },
+    tablet: {
+      portrait: {
+        width: '500px',
+        height: '750px',
+        margin: '0 auto',
+        borderRadius: '10px'
+      },
+      landscape: {
+        width: '1000px',
+        height: '750px',
+        margin: '0 auto',
+        borderRadius: '10px'
+      }
+    },
+    desktop: {
+      // Desktop is always landscape
+      // Note: width and height are overridden to 100% in getFlipbookStyle
+      width: '100%',
+      height: '100%',
+      margin: '0',
+      borderRadius: '10px'
+    }
+  },
+  coverImage: {
+    mobile: {
+      objectFit: 'contain'
+    },
+    tablet: {
+      portrait: {
+        objectFit: 'contain'
+      },
+      landscape: {
+        objectFit: 'cover'
+      }
+    },
+    desktop: {
+      // Desktop is always landscape
+      objectFit: 'cover'
+    }
+  }
+};
+
+/**
+ * Get container style based on device, orientation, and showCover state
+ */
+const getContainerStyle = (deviceType, orientation, showCover) => {
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  const isDesktop = deviceType === 'desktop';
+  const isPortrait = orientation === 'portrait';
+  
+  let config;
+  let dynamicProps = {};
+  
+  if (isMobile && isPortrait) {
+    config = STYLE_CONFIG.container.mobile.portrait;
+  } else if (isMobile && !isPortrait) {
+    config = STYLE_CONFIG.container.mobile.landscape;
+    const coverOrOpen = showCover ? 'cover' : 'open';
+    dynamicProps = { ...STYLE_CONFIG.container.mobile.landscape[coverOrOpen] };
+  } else if (isTablet && isPortrait) {
+    config = STYLE_CONFIG.container.tablet.portrait;
+  } else if (isTablet && !isPortrait) {
+    config = STYLE_CONFIG.container.tablet.landscape;
+  } else if (isDesktop) {
+    // Desktop is always landscape
+    config = STYLE_CONFIG.container.desktop;
+    const coverOrOpen = showCover ? 'cover' : 'open';
+    dynamicProps = { ...STYLE_CONFIG.container.desktop[coverOrOpen] };
+  } else {
+    // Fallback (shouldn't reach here)
+    config = STYLE_CONFIG.container.desktop;
+  }
+  
+  return {
+    ...config,
+    ...dynamicProps,
+    background: '#000',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    touchAction: (isTablet && !isPortrait) ? 'pan-x pan-y pinch-zoom' : 'auto',
+    pointerEvents: 'auto',
+    ...(config.justifyContent && { justifyContent: config.justifyContent })
+  };
+};
+
+/**
+ * Get flipbook style based on device and orientation
+ */
+const getFlipbookStyle = (deviceType, orientation, showCover, isLoading) => {
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  const isDesktop = deviceType === 'desktop';
+  const isPortrait = orientation === 'portrait';
+  
+  let config;
+  
+  if (isMobile && isPortrait) {
+    config = STYLE_CONFIG.flipbook.mobile.portrait;
+  } else if (isMobile && !isPortrait) {
+    config = STYLE_CONFIG.flipbook.mobile.landscape;
+  } else if (isTablet && isPortrait) {
+    config = STYLE_CONFIG.flipbook.tablet.portrait;
+  } else if (isTablet && !isPortrait) {
+    config = STYLE_CONFIG.flipbook.tablet.landscape;
+  } else if (isDesktop) {
+    // Desktop is always landscape
+    config = STYLE_CONFIG.flipbook.desktop;
+  } else {
+    // Fallback (shouldn't reach here)
+    config = STYLE_CONFIG.flipbook.desktop;
+  }
+  
+  return {
+    ...config,
+    width: '100%',
+    height: '100%',
+    display: showCover || isLoading ? 'none' : 'flex',
+    background: '#000',
+    overflow: 'hidden',
+    position: 'relative'
+  };
+};
+
+/**
+ * Get cover image style based on device and orientation
+ */
+const getCoverImageStyle = (deviceType, orientation) => {
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  const isDesktop = deviceType === 'desktop';
+  const isPortrait = orientation === 'portrait';
+  
+  let objectFit;
+  
+  if (isMobile) {
+    objectFit = STYLE_CONFIG.coverImage.mobile.objectFit;
+  } else if (isTablet) {
+    objectFit = isPortrait 
+      ? STYLE_CONFIG.coverImage.tablet.portrait.objectFit
+      : STYLE_CONFIG.coverImage.tablet.landscape.objectFit;
+  } else {
+    // Desktop is always landscape
+    objectFit = STYLE_CONFIG.coverImage.desktop.objectFit;
+  }
+  
+  return {
+    width: '100%',
+    height: '100%',
+    objectFit,
+    objectPosition: 'center',
+    display: 'block',
+    margin: 0,
+    padding: 0,
+    transition: 'transform 0.3s ease',
+    verticalAlign: 'top'
+  };
+};
+
+/**
  * Get styles for a specific device type and orientation
  * @param {string} deviceType - 'mobile', 'tablet', or 'desktop'
  * @param {object} state - Component state (isVisible, showControls, showCover, isLoading, orientation, etc.)
@@ -32,166 +301,59 @@ const getDeviceStyles = (deviceType, state = {}) => {
     pointerEvents: 'auto'
   };
 
-  // Container styles - based on orientation (portrait = fullscreen for mobile, centered for tablet; landscape = centered)
-  const comicContainerStyle = isPortrait && isMobile ? {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    width: '100vw',
-    height: '100dvh',
-    background: '#000',
-    borderRadius: '0',
-    boxShadow: 'none',
-    border: 'none',
-    overflow: 'hidden',
-    maxWidth: '100vw',
-    maxHeight: '100dvh',
-    minHeight: '400px',
-    display: 'flex',
-    flexDirection: 'column'
-  } : isPortrait && isTablet ? {
-    position: 'relative',
-    top: 'auto',
-    left: 'auto',
-    right: 'auto',
-    width: 'auto',
-    height: 'auto',
-    background: '#000',
-    borderRadius: '15px',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-    border: '4px solid #d4c5a9',
-    overflow: 'hidden',
-    maxWidth: '90vw',
-    maxHeight: '90vh',
-    minHeight: '400px',
-    display: 'flex',
-    flexDirection: 'column',
-    touchAction: isTablet ? 'pan-x pan-y pinch-zoom' : 'auto',
-    pointerEvents: 'auto'
-  } : {
-    position: 'relative',
-    top: 'auto',
-    left: 'auto',
-    right: 'auto',
-    width: 'auto',
-    height: 'auto',
-    background: '#000',
-    borderRadius: '15px',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-    border: '4px solid #d4c5a9',
-    overflow: 'hidden',
-    maxWidth: '90vw',
-    maxHeight: '90vh',
-    minHeight: '400px',
-    display: 'flex',
-    flexDirection: 'column',
-    touchAction: isTablet ? 'pan-x pan-y pinch-zoom' : 'auto',
-    pointerEvents: 'auto'
-  };
+  // Container styles - using structured config
+  const comicContainerStyle = getContainerStyle(deviceType, orientation, showCover);
 
   // Cover display styles - based on device type and orientation
   const coverDisplayStyle = isMobile ? {
-    width: '100vw',
-    height: '100dvh',
     margin: '0 auto',
     display: 'block',
     cursor: isVisible ? 'pointer' : 'default',
-    overflow: 'hidden',
+    overflow: 'visible',
     background: '#000',
     boxShadow: 'none',
     pointerEvents: isVisible ? 'auto' : 'none',
     position: 'relative',
     padding: 0
   } : isDesktop ? {
-    width: '400px',
-    minHeight: '600px',
     margin: '0 auto',
     display: 'block',
     cursor: isVisible ? 'pointer' : 'default',
-    overflow: 'hidden',
+    overflow: 'visible',
     background: '#000',
     boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
     pointerEvents: isVisible ? 'auto' : 'none',
     position: 'relative',
-    padding: 0
-  } : isTablet && isPortrait ? {
-    width: '500px',
-    minHeight: '750px',
-    margin: '0 auto',
-    display: 'block',
-    cursor: isVisible ? 'pointer' : 'default',
-    overflow: 'hidden',
-    background: '#000',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-    pointerEvents: isVisible ? 'auto' : 'none',
-    position: 'relative',
-    padding: 0
-  } : {
-    width: '500px',
-    minHeight: '750px',
-    margin: '0 auto',
-    display: 'block',
-    cursor: isVisible ? 'pointer' : 'default',
-    overflow: 'hidden',
-    background: '#000',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-    pointerEvents: isVisible ? 'auto' : 'none',
-    position: 'relative',
-    padding: 0
-  };
-
-  // Cover image styles
-  const coverImageStyle = {
-    width: '100%',
-    height: '100%',
-    objectFit: isMobile ? 'contain' : 'cover',
-    objectPosition: 'center',
-    display: 'block',
-    margin: 0,
     padding: 0,
-    transition: 'transform 0.3s ease',
-    verticalAlign: 'top'
+    width: '400px',
+    height: '600px'
+  } : isTablet && isPortrait ? {
+    margin: '0 auto',
+    display: 'block',
+    cursor: isVisible ? 'pointer' : 'default',
+    overflow: 'visible',
+    background: '#000',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    pointerEvents: isVisible ? 'auto' : 'none',
+    position: 'relative',
+    padding: 0
+  } : {
+    margin: '0 auto',
+    display: 'block',
+    cursor: isVisible ? 'pointer' : 'default',
+    overflow: 'visible',
+    background: '#000',
+    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
+    pointerEvents: isVisible ? 'auto' : 'none',
+    position: 'relative',
+    padding: 0
   };
 
-  // Flipbook styles - based on orientation (portrait = single page, landscape = two-page)
-  const flipbookStyle = isPortrait && isMobile ? {
-    width: '100vw',
-    height: 'calc(100% - 60px)',
-    margin: '0',
-    display: showCover || isLoading ? 'none' : 'flex',
-    background: '#000',
-    borderRadius: '0',
-    overflow: 'hidden',
-    position: 'relative'
-  } : isPortrait && isTablet ? {
-    width: '500px',
-    height: '750px',
-    margin: '0 auto',
-    display: showCover || isLoading ? 'none' : 'flex',
-    background: '#000',
-    borderRadius: '10px',
-    overflow: 'hidden',
-    position: 'relative'
-  } : isDesktop ? {
-    width: '800px',
-    height: '600px',
-    margin: '0 auto',
-    display: showCover || isLoading ? 'none' : 'flex',
-    background: '#000',
-    borderRadius: '10px',
-    overflow: 'hidden',
-    position: 'relative'
-  } : {
-    width: '1000px',
-    height: '750px',
-    margin: '0 auto',
-    display: showCover || isLoading ? 'none' : 'flex',
-    background: '#000',
-    borderRadius: '10px',
-    overflow: 'hidden',
-    position: 'relative'
-  };
+  // Cover image styles - using structured config
+  const coverImageStyle = getCoverImageStyle(deviceType, orientation);
+
+  // Flipbook styles - using structured config
+  const flipbookStyle = getFlipbookStyle(deviceType, orientation, showCover, isLoading);
 
   // Close button styles
   const closeButtonStyle = isMobile ? {
@@ -345,14 +507,16 @@ const getDeviceStyles = (deviceType, state = {}) => {
   // Cover overlay (click to open) styles
   const coverOverlayStyle = isMobile ? {
     position: 'absolute',
-    bottom: `max(40px, env(safe-area-inset-bottom))`,
+    top: 'calc(100vh - 120px)',
     left: '20px',
     right: '20px',
+    width: 'auto',
+    maxWidth: 'none',
     background: 'rgba(0, 0, 0, 0.8)',
     color: 'white',
     padding: '12px 16px',
     borderRadius: '15px',
-    fontSize: '14px',
+    fontSize: '16px',
     fontWeight: 'bold',
     opacity: 0.9,
     textAlign: 'center',
@@ -361,14 +525,13 @@ const getDeviceStyles = (deviceType, state = {}) => {
     willChange: 'transform, opacity'
   } : {
     position: 'absolute',
-    bottom: '20px',
-    left: '20px',
-    right: '20px',
+    top: 'calc(50vh + 320px)',
+    width: '400px',
     background: 'rgba(0, 0, 0, 0.8)',
     color: 'white',
     padding: '8px 16px',
     borderRadius: '20px',
-    fontSize: '12px',
+    fontSize: '14px',
     fontWeight: 'bold',
     opacity: 0.9,
     textAlign: 'center',
@@ -644,4 +807,3 @@ const getDeviceStyles = (deviceType, state = {}) => {
 window.ComicReaderStyles = {
   getDeviceStyles
 };
-
