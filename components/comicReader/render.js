@@ -87,10 +87,10 @@ const renderCover = (deviceType, styles, {
         style: styles.loadingTextStyle || {}
       }, isMobile ? 'Loading...' : 'Loading comic book...')
     ]),
-    React.createElement('img', {
+    episodeData && React.createElement('img', {
       key: 'cover-img',
-      src: episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png',
-      alt: episodeData ? `${episodeData.title} Cover` : 'Episode 20 Cover',
+      src: `${episodeData.fullLink.replace(/\/$/, '')}/cover.png`,
+      alt: `${episodeData.title} Cover`,
       style: styles.coverImageWithOpacityStyle ? styles.coverImageWithOpacityStyle(isVisible) : (styles.coverImageStyle || {})
     })
   ]);
