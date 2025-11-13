@@ -4,41 +4,58 @@ This document defines all style values for each device type and orientation comb
 
 ## Container Styles (comic-episode-container)
 
-| Device | Orientation | State | Width | Height | Position | Border Radius | Border | Box Shadow | Justify Content |
-|--------|-------------|-------|-------|--------|----------|---------------|--------|------------|-----------------|
-| Mobile | Portrait | Cover/Open | 100vw | 100dvh | fixed | 0 | none | none | center |
-| Mobile | Landscape | Cover | 200px | 300px | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | - |
-| Mobile | Landscape | Open | 400px | 300px | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | - |
-| Tablet | Portrait | Cover/Open | auto | auto | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | center |
-| Tablet | Landscape | Cover/Open | auto | auto | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | - |
-| Desktop | Portrait | Cover | 400px | 600px | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | center |
-| Desktop | Portrait | Open | auto | auto | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | center |
-| Desktop | Landscape | Cover/Open | auto | auto | relative | 15px | 4px solid #d4c5a9 | 0 25px 80px rgba(0,0,0,0.9) | - |
+### Cover State
+
+| Device | Orientation | Width | Height |
+|--------|-------------|-------|--------|
+| Mobile | Portrait | 200px | 300px |
+| Mobile | Landscape | 200px | 300px |
+| Tablet | Portrait | 400px | 600px |
+| Tablet | Landscape | 400px | 600px |
+| Desktop | Landscape | 400px | 600px |
+
+### Open State
+
+| Device | Orientation | Width | Height |
+|--------|-------------|-------|--------|
+| Mobile | Portrait | 100vw | 100dvh |
+| Mobile | Landscape | 400px | 300px |
+| Tablet | Portrait | 100vw | 100dvh |
+| Tablet | Landscape | 800px | 600px |
+| Desktop | Landscape | 800px | 600px |
+
+**Fullscreen Mode (when comic is open):**
+- Tablet Landscape & Desktop: 85% width, 90% height (overrides open dimensions)
+- Portrait orientations (Mobile & Tablet): Already use 100vw/100dvh by default, no change in fullscreen
+- Cover state: Uses static dimensions (400px x 600px) even in fullscreen
 
 **Common Container Properties:**
 - background: #000
 - overflow: hidden
-- maxWidth: 90vw (except mobile portrait: 100vw)
-- maxHeight: 90vh (except mobile portrait: 100dvh)
+- maxWidth: 90vw (except mobile portrait: 100vw, desktop: none)
+- maxHeight: 90vh (except mobile portrait: 100dvh, desktop: none)
 - display: flex
 - flexDirection: column
 - touchAction: auto (tablet landscape: pan-x pan-y pinch-zoom)
 - pointerEvents: auto
+
+**Note:** Tablet and Desktop share the same dimensions (400px x 600px for cover, 800px x 600px for open) to ensure consistency across larger screens.
 
 ## Cover Display Styles (comic-cover-display)
 
 | Device | Orientation | Margin | Display | Cursor | Box Shadow | Background |
 |--------|-------------|--------|---------|--------|------------|------------|
 | Mobile | All | 0 auto | block | pointer/default | none | #000 |
-| Tablet | Portrait | 0 auto | block | pointer/default | 0 25px 80px rgba(0,0,0,0.9) | #000 |
-| Tablet | Landscape | 0 auto | block | pointer/default | 0 25px 80px rgba(0,0,0,0.9) | #000 |
+| Tablet | All | 0 auto | block | pointer/default | 0 25px 80px rgba(0,0,0,0.9) | #000 |
 | Desktop | All | 0 auto | block | pointer/default | 0 25px 80px rgba(0,0,0,0.9) | #000 |
 
 **Common Cover Display Properties:**
-- overflow: hidden
+- overflow: visible
 - pointerEvents: auto/none (based on isVisible)
 - position: relative
 - padding: 0
+- width: (inherits from parent container)
+- height: (inherits from parent container)
 
 ## Cover Image Styles
 

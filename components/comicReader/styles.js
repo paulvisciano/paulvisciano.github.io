@@ -773,6 +773,43 @@ const getDeviceStyles = (deviceType, state = {}) => {
     letterSpacing: '0.5px'
   };
 
+  // Cover navigation button styles (for episode navigation on cover)
+  // Positioned relative to overlay, centered vertically
+  const coverNavButtonBaseStyle = {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    background: 'rgba(255, 255, 255, 0.9)',
+    border: 'none',
+    borderRadius: '50%',
+    width: isMobile ? '48px' : '56px',
+    height: isMobile ? '48px' : '56px',
+    fontSize: isMobile ? '24px' : '28px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10003, // Higher than container to stay on top
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    color: '#333',
+    userSelect: 'none',
+    WebkitUserSelect: 'none'
+  };
+
+  const coverNavButtonPrevStyle = {
+    ...coverNavButtonBaseStyle,
+    left: isMobile ? '10px' : '20px'
+  };
+
+  const coverNavButtonNextStyle = {
+    ...coverNavButtonBaseStyle,
+    right: isMobile ? '10px' : '20px'
+  };
+
   return {
     comicOverlayStyle,
     comicContainerStyle,
@@ -809,7 +846,9 @@ const getDeviceStyles = (deviceType, state = {}) => {
     desktopControlButtonDisabledStyle,
     mobileNavButtonPrevStyle,
     mobileNavButtonNextStyle,
-    mobileNavIndicatorStyle
+    mobileNavIndicatorStyle,
+    coverNavButtonPrevStyle,
+    coverNavButtonNextStyle
   };
 };
 
