@@ -515,6 +515,15 @@ window.ComicReader = ({ content, onClose }) => {
   const loadNextEpisode = () => {
     const nextEpisode = getNextEpisode();
     if (nextEpisode) {
+      // Trigger globe animation immediately so it starts moving while container slides
+      // Call zoomCallback directly to ensure globe animates, and also update timeline
+      if (window.zoomCallback) {
+        window.zoomCallback(nextEpisode);
+      }
+      if (window.handleTimelineClick) {
+        window.handleTimelineClick(nextEpisode);
+      }
+      
       // Add slide animation class to container
       const container = containerRef.current;
       if (container) {
@@ -551,13 +560,8 @@ window.ComicReader = ({ content, onClose }) => {
           isLoading: true
         });
         
-        // Update URL and timeline selection for new episode (without triggering globe animation)
+        // Update URL and timeline selection for new episode
         window.history.pushState({ momentId: nextEpisode.id }, '', nextEpisode.fullLink);
-        
-        // Update timeline selection without triggering globe transition
-        if (window.setSelectedId) {
-          window.setSelectedId(nextEpisode.id);
-        }
         
         // Set visible to true immediately so cover shows (it will fade in as image loads)
         // The slide-in animation will handle the visual transition
@@ -575,6 +579,15 @@ window.ComicReader = ({ content, onClose }) => {
   const loadPreviousEpisode = () => {
     const prevEpisode = getPreviousEpisode();
     if (prevEpisode) {
+      // Trigger globe animation immediately so it starts moving while container slides
+      // Call zoomCallback directly to ensure globe animates, and also update timeline
+      if (window.zoomCallback) {
+        window.zoomCallback(prevEpisode);
+      }
+      if (window.handleTimelineClick) {
+        window.handleTimelineClick(prevEpisode);
+      }
+      
       // Add slide animation class to container
       const container = containerRef.current;
       if (container) {
@@ -611,13 +624,8 @@ window.ComicReader = ({ content, onClose }) => {
           isLoading: true
         });
         
-        // Update URL and timeline selection for new episode (without triggering globe animation)
+        // Update URL and timeline selection for new episode
         window.history.pushState({ momentId: prevEpisode.id }, '', prevEpisode.fullLink);
-        
-        // Update timeline selection without triggering globe transition
-        if (window.setSelectedId) {
-          window.setSelectedId(prevEpisode.id);
-        }
         
         // Set visible to true immediately so cover shows (it will fade in as image loads)
         // The slide-in animation will handle the visual transition
