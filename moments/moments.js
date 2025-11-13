@@ -1070,7 +1070,7 @@ window.momentsInTime = [
     caption: "Miami Episode 3 — Espresso & Endorphins",
     fullLink: "/moments/miami/2025-10-08/",
     isComic: true,
-    pageCount: 11,
+    pageCount: 12,
     location: { lat: 25.7617, lng: -80.1918, name: "Miami, Florida" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
