@@ -208,13 +208,19 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
       })()
     : config;
   
-  // Override with 85% width and 90% height when in fullscreen AND comic is open (not showing cover)
-  // Applies to all devices (mobile, tablet, desktop)
+  // Override dimensions when in fullscreen AND comic is open (not showing cover)
+  // Desktop: fixed 1000px x 750px
+  // Other devices: 85% width and 90% height
   // When showing cover, use static dimensions from cover/open config
-  const fullscreenProps = (isFullscreen && !showCover) ? {
-    width: '85%',
-    height: '90%'
-  } : {};
+  const fullscreenProps = (isFullscreen && !showCover) ? (
+    isDesktop ? {
+      width: '1000px',
+      height: '750px'
+    } : {
+      width: '85%',
+      height: '90%'
+    }
+  ) : {};
   
   return {
     ...baseConfig,
@@ -366,7 +372,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const coverImageStyle = getCoverImageStyle(deviceType, orientation);
 
   // Flipbook styles - using structured config
-  const flipbookStyle = getFlipbookStyle(deviceType, orientation, showCover, isLoading);
+  const flipbookStyle = getFlipbookStyle(deviceType, orientation, showCover, isLoading, isFullscreen);
 
   // Close button styles
   const closeButtonStyle = isMobile ? {
@@ -454,8 +460,8 @@ const getDeviceStyles = (deviceType, state = {}) => {
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    opacity: showControls ? 1 : 0,
-    pointerEvents: showControls ? 'auto' : 'none'
+    opacity: 1, // Always visible on desktop since it's outside the comic book
+    pointerEvents: 'auto' // Always clickable on desktop
   };
 
   // Desktop controls (only shown on desktop/tablet)
