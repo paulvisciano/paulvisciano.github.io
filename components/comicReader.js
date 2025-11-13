@@ -8,7 +8,7 @@
 // - components/comicReader/render.js (device-specific render functions)
 
 // Get utilities from loaded modules
-const { updateGlobalState, getGlobalState, getPages: coreGetPages, getNextEpisode: coreGetNextEpisode, findCurrentEpisode } = window.ComicReaderCore || {};
+const { updateGlobalState, getGlobalState, getPages: coreGetPages, getNextEpisode: coreGetNextEpisode, getPreviousEpisode: coreGetPreviousEpisode, findCurrentEpisode } = window.ComicReaderCore || {};
 const { createFlipbook: createFlipbookUtil, updatePages: updatePagesUtil } = window.ComicReaderFlipbook || {};
 const { getNextPageNumber, getPreviousPageNumber, shouldGoBackToCover, createSwipeHandlers } = window.ComicReaderNavigation || {};
 const { 
@@ -116,6 +116,11 @@ window.ComicReader = ({ content, onClose }) => {
     return coreGetNextEpisode(episodeData);
   };
 
+  const getPreviousEpisode = () => {
+    if (!coreGetPreviousEpisode || !episodeData) return null;
+    return coreGetPreviousEpisode(episodeData);
+  };
+
   // Fullscreen toggle function
   const toggleFullscreen = () => {
     if (!overlayRef.current) return;
@@ -150,13 +155,30 @@ window.ComicReader = ({ content, onClose }) => {
         case 'ArrowLeft':
         case 'ArrowUp':
           e.preventDefault();
-          previousPage();
+          // If on cover, navigate to previous episode's cover
+          if (showCover) {
+            loadPreviousEpisode();
+          } else {
+            previousPage();
+          }
           break;
         case 'ArrowRight':
         case 'ArrowDown':
         case ' ':
           e.preventDefault(); // Prevent space bar scrolling
-          nextPage();
+          // If on cover, navigate to next episode's cover
+          if (showCover) {
+            loadNextEpisode();
+          } else {
+            nextPage();
+          }
+          break;
+        case 'Enter':
+          e.preventDefault();
+          // If on cover, open the comic (go to first page)
+          if (showCover) {
+            openComicBook();
+          }
           break;
         case 'f':
         case 'F':
@@ -178,7 +200,7 @@ window.ComicReader = ({ content, onClose }) => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onClose, isFullscreen]);
+  }, [onClose, isFullscreen, showCover]);
 
   // Handle initial page loading after component is mounted
   React.useEffect(() => {
@@ -488,6 +510,43 @@ window.ComicReader = ({ content, onClose }) => {
       // Update timeline selection and trigger globe transition
       if (window.handleTimelineClick) {
         window.handleTimelineClick(nextEpisode);
+      }
+      
+      // Trigger the loading sequence by setting loading to true
+      // The existing useEffect will handle the rest
+      setIsLoading(true);
+    }
+  };
+
+  // Function to load the previous episode and show its cover
+  const loadPreviousEpisode = () => {
+    const prevEpisode = getPreviousEpisode();
+    if (prevEpisode) {
+      // Reset state for new episode
+      setCurrentPage(1);
+      currentPageRef.current = 1;
+      setShowCover(true);
+      setIsVisible(false);
+      setFlipbookReady(false);
+      flipbookCreatedRef.current = false;
+      
+      // Update episode data - this will trigger the loading sequence
+      setEpisodeData(prevEpisode);
+      updateGlobalState({
+        episodeData: prevEpisode,
+        currentPage: 1,
+        flipbookCreated: false,
+        flipbookReady: false,
+        isVisible: false,
+        isLoading: true
+      });
+      
+      // Update URL and timeline selection for new episode
+      window.history.pushState({ momentId: prevEpisode.id }, '', prevEpisode.fullLink);
+      
+      // Update timeline selection and trigger globe transition
+      if (window.handleTimelineClick) {
+        window.handleTimelineClick(prevEpisode);
       }
       
       // Trigger the loading sequence by setting loading to true
