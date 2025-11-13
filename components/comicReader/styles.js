@@ -46,12 +46,18 @@ const STYLE_CONFIG = {
     },
     tablet: {
       portrait: {
+        cover: {
+          width: '400px',
+          height: '600px'
+        },
+        open: {
+          width: '800px',
+          height: '600px'
+        },
         position: 'relative',
         top: 'auto',
         left: 'auto',
         right: 'auto',
-        width: 'auto',
-        height: 'auto',
         maxWidth: '90vw',
         maxHeight: '90vh',
         borderRadius: '15px',
@@ -60,12 +66,18 @@ const STYLE_CONFIG = {
         justifyContent: 'center'
       },
       landscape: {
+        cover: {
+          width: '400px',
+          height: '600px'
+        },
+        open: {
+          width: '800px',
+          height: '600px'
+        },
         position: 'relative',
         top: 'auto',
         left: 'auto',
         right: 'auto',
-        width: 'auto',
-        height: 'auto',
         maxWidth: '90vw',
         maxHeight: '90vh',
         borderRadius: '15px',
@@ -154,9 +166,9 @@ const STYLE_CONFIG = {
 };
 
 /**
- * Get container style based on device, orientation, and showCover state
+ * Get container style based on device, orientation, showCover state, and fullscreen
  */
-const getContainerStyle = (deviceType, orientation, showCover) => {
+const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = false) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -173,8 +185,12 @@ const getContainerStyle = (deviceType, orientation, showCover) => {
     dynamicProps = { ...STYLE_CONFIG.container.mobile.landscape[coverOrOpen] };
   } else if (isTablet && isPortrait) {
     config = STYLE_CONFIG.container.tablet.portrait;
+    const coverOrOpen = showCover ? 'cover' : 'open';
+    dynamicProps = { ...STYLE_CONFIG.container.tablet.portrait[coverOrOpen] };
   } else if (isTablet && !isPortrait) {
     config = STYLE_CONFIG.container.tablet.landscape;
+    const coverOrOpen = showCover ? 'cover' : 'open';
+    dynamicProps = { ...STYLE_CONFIG.container.tablet.landscape[coverOrOpen] };
   } else if (isDesktop) {
     // Desktop is always landscape
     config = STYLE_CONFIG.container.desktop;
@@ -185,9 +201,27 @@ const getContainerStyle = (deviceType, orientation, showCover) => {
     config = STYLE_CONFIG.container.desktop;
   }
   
+  // Remove width/height from base config only if dynamicProps provides them
+  const baseConfig = (dynamicProps.width || dynamicProps.height)
+    ? (() => {
+        const { width: _w, height: _h, ...rest } = config;
+        return rest;
+      })()
+    : config;
+  
+  // Override with 85% width and 90% height when in fullscreen AND comic is open (not showing cover)
+  // When showing cover, use static dimensions from cover/open config
+  const fullscreenProps = (isFullscreen && !showCover) ? {
+    width: '85%',
+    height: '90%',
+    maxWidth: '85%',
+    maxHeight: '90%'
+  } : {};
+  
   return {
-    ...config,
+    ...baseConfig,
     ...dynamicProps,
+    ...fullscreenProps,
     background: '#000',
     overflow: 'hidden',
     display: 'flex',
@@ -278,7 +312,7 @@ const getCoverImageStyle = (deviceType, orientation) => {
  * @returns {object} Style objects for the device type
  */
 const getDeviceStyles = (deviceType, state = {}) => {
-  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape' } = state;
+  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false } = state;
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -302,9 +336,10 @@ const getDeviceStyles = (deviceType, state = {}) => {
   };
 
   // Container styles - using structured config
-  const comicContainerStyle = getContainerStyle(deviceType, orientation, showCover);
+  const comicContainerStyle = getContainerStyle(deviceType, orientation, showCover, isFullscreen);
 
   // Cover display styles - based on device type and orientation
+  // No width/height - inherits from parent container
   const coverDisplayStyle = isMobile ? {
     margin: '0 auto',
     display: 'block',
@@ -312,28 +347,6 @@ const getDeviceStyles = (deviceType, state = {}) => {
     overflow: 'visible',
     background: '#000',
     boxShadow: 'none',
-    pointerEvents: isVisible ? 'auto' : 'none',
-    position: 'relative',
-    padding: 0
-  } : isDesktop ? {
-    margin: '0 auto',
-    display: 'block',
-    cursor: isVisible ? 'pointer' : 'default',
-    overflow: 'visible',
-    background: '#000',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-    pointerEvents: isVisible ? 'auto' : 'none',
-    position: 'relative',
-    padding: 0,
-    width: '400px',
-    height: '600px'
-  } : isTablet && isPortrait ? {
-    margin: '0 auto',
-    display: 'block',
-    cursor: isVisible ? 'pointer' : 'default',
-    overflow: 'visible',
-    background: '#000',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
     pointerEvents: isVisible ? 'auto' : 'none',
     position: 'relative',
     padding: 0

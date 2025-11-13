@@ -304,7 +304,7 @@ window.ComicReader = ({ content, onClose }) => {
         console.error('ComicReader: styles not loaded');
         return;
       }
-      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation });
+      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen });
       
       // Use utility to create flipbook structure
       const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, orientation, currentPages, currentStyles);
@@ -353,7 +353,7 @@ window.ComicReader = ({ content, onClose }) => {
       console.error('ComicReader: styles not loaded');
       return;
     }
-    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading });
+    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen });
     
     // Use utility to update pages
     updatePagesUtil(deviceType, orientation, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
@@ -535,7 +535,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Get device-specific styles
   const styles = window.ComicReaderStyles?.getDeviceStyles 
-    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation })
+    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen })
     : {}; // Fallback empty object if styles not loaded
 
   // All styles are now loaded from styles.js via getDeviceStyles()
