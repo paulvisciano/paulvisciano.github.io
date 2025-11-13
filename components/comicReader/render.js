@@ -92,11 +92,7 @@ const renderCover = (deviceType, styles, {
       src: episodeData ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : '/moments/bangkok/2025-09-16/cover.png',
       alt: episodeData ? `${episodeData.title} Cover` : 'Episode 20 Cover',
       style: styles.coverImageWithOpacityStyle ? styles.coverImageWithOpacityStyle(isVisible) : (styles.coverImageStyle || {})
-    }),
-    isVisible && React.createElement('div', {
-      key: 'cover-overlay',
-      style: styles.coverOverlayStyle || {}
-    }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book')
+    })
   ]);
 };
 
