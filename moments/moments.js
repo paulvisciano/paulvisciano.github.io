@@ -1187,6 +1187,23 @@ window.momentsInTime = [
     formattedDuration: formatDuration(9),
   },
   {
+    id: "urban-runner-user-manual-2025-11-13",
+    title: "Urban Runner: User Manual",
+    date: new Date('2025-11-13T00:00:00Z'),
+    timelineHighlight: "User Manual",
+    tags: ["urban runner", "comic book", "user guide", "reader manual", "features", "navigation"],
+    snippet: "The official Urban Runner User Manual — a comic-style guide teaching readers how to navigate episodes, swipe through pages, use keyboard shortcuts, and enjoy the full multi-device reading experience.",
+    image: "attachment:///moments/ubud/2025-11-13/cover.png",
+    imageAlt: "Urban Runner User Manual",
+    caption: "How to Read This Comic",
+    fullLink: "/moments/ubud/2025-11-13/",
+    isComic: true,
+    pageCount: 10, // Cover + Welcome + Feature Pages
+    location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "singapore-2025-11-16",
     title: "City Flow in Singapore: Efficiency & Exploration",
     date: new Date("2025-11-16T00:00:00Z"),
