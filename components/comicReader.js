@@ -1034,12 +1034,20 @@ window.ComicReader = ({ content, onClose }) => {
   }
   
   // Cover navigation buttons - outside container so they don't slide
-  if (showCover && renderCoverNavigation) {
+  // When on cover: navigates between episodes
+  // When pages are open: navigates between pages (desktop/tablet only)
+  if (renderCoverNavigation) {
     const coverNavButtons = renderCoverNavigation(deviceType, styles, {
       loadPreviousEpisode,
       loadNextEpisode,
       getPreviousEpisode: () => getPreviousEpisode(episodeData),
-      getNextEpisode: () => getNextEpisode(episodeData)
+      getNextEpisode: () => getNextEpisode(episodeData),
+      showCover,
+      previousPage,
+      nextPage,
+      currentPage,
+      totalPages,
+      getNextEpisodeForPages: () => getNextEpisode(episodeData)
     });
     if (coverNavButtons) {
       overlayChildren.push(...coverNavButtons);

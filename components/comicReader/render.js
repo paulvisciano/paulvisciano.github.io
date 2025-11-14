@@ -264,21 +264,83 @@ const renderContainer = (deviceType, styles, {
 
 /**
  * Render cover navigation buttons (outside container)
+ * When on cover: navigates between episodes
+ * When pages are open: navigates between pages (desktop/tablet only)
  */
 const renderCoverNavigation = (deviceType, styles, {
   loadPreviousEpisode,
   loadNextEpisode,
   getPreviousEpisode,
-  getNextEpisode
+  getNextEpisode,
+  showCover,
+  previousPage,
+  nextPage,
+  currentPage,
+  totalPages,
+  getNextEpisodeForPages
 }) => {
+  const isMobile = deviceType === 'mobile';
+  const isTablet = deviceType === 'tablet';
+  const isDesktop = deviceType === 'desktop';
+  
+  // Only show on desktop and tablet (mobile has its own controls)
+  if (isMobile) {
+    return null;
+  }
+  
+  const buttons = [];
+  
+  // When pages are open, navigate between pages
+  if (!showCover && previousPage && nextPage) {
+    // Left button for previous page
+    buttons.push(React.createElement('button', {
+      key: 'page-prev',
+      className: 'cover-nav-button cover-nav-prev',
+      onClick: (e) => {
+        e.stopPropagation();
+        if (previousPage) {
+          previousPage();
+        }
+      },
+      style: styles.coverNavButtonPrevStyle || {},
+      title: currentPage === 1 ? 'Back to Cover' : 'Previous Page'
+    }, '‹'));
+    
+    // Right button for next page
+    const hasNextPage = currentPage < totalPages;
+    const hasNextEpisode = getNextEpisodeForPages ? getNextEpisodeForPages() : null;
+    const isDisabled = !hasNextPage && !hasNextEpisode;
+    buttons.push(React.createElement('button', {
+      key: 'page-next',
+      className: 'cover-nav-button cover-nav-next',
+      onClick: (e) => {
+        e.stopPropagation();
+        if (!isDisabled && nextPage) {
+          nextPage();
+        }
+      },
+      style: {
+        ...(styles.coverNavButtonNextStyle || {}),
+        ...(isDisabled ? {
+          opacity: 0.4,
+          cursor: 'not-allowed',
+          pointerEvents: 'none'
+        } : {})
+      },
+      title: hasNextPage ? 'Next Page' : (hasNextEpisode ? 'Next Episode' : 'Last Page'),
+      disabled: isDisabled
+    }, '›'));
+    
+    return buttons;
+  }
+  
+  // When on cover, navigate between episodes
   const hasPreviousEpisode = getPreviousEpisode ? getPreviousEpisode() : null;
   const hasNextEpisode = getNextEpisode ? getNextEpisode() : null;
   
   if (!hasPreviousEpisode && !hasNextEpisode) {
     return null;
   }
-  
-  const buttons = [];
   
   // Left arrow button for previous episode
   if (hasPreviousEpisode) {
