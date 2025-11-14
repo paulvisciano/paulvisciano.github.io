@@ -16,6 +16,42 @@ const styleObjectToCss = (styleObj) => {
 };
 
 /**
+ * Create either an image or video element based on the URL
+ */
+const createMediaElement = (url, alt, style, isVideoFile) => {
+  if (isVideoFile && isVideoFile(url)) {
+    const video = document.createElement('video');
+    video.src = url;
+    video.controls = true;
+    video.autoplay = false;
+    video.loop = false;
+    video.muted = false;
+    video.playsInline = true;
+    // Override objectFit to 'cover' for videos
+    const videoStyle = { ...style, objectFit: 'cover' };
+    video.style.cssText = styleObjectToCss(videoStyle);
+    video.setAttribute('data-page-url', url);
+    // Stop click events from bubbling to page navigation handlers
+    // Use capture phase to catch all clicks including on video controls
+    video.addEventListener('click', (e) => {
+      e.stopPropagation();
+    }, true);
+    video.onerror = () => {
+      // If video fails to load, try to show error or fallback
+      console.warn(`Video failed to load: ${url}`);
+    };
+    return video;
+  } else {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = alt;
+    img.style.cssText = styleObjectToCss(style);
+    img.onerror = () => {};
+    return img;
+  }
+};
+
+/**
  * Create flipbook structure for mobile (single page view)
  */
 const createMobileFlipbook = (flipbookElement, currentPages, styles) => {
@@ -78,6 +114,9 @@ const updateMobilePages = (leftPage, pageNumber, currentPages, previousPage, nex
   leftPage.innerHTML = '';
   const pageIndex = pageNumber - 1; // 0-based index
   
+  // Get isVideoFile function from core
+  const isVideoFile = window.ComicReaderCore?.isVideoFile;
+  
   // Create container for page and navigation
   const pageContainer = document.createElement('div');
   pageContainer.style.cssText = styleObjectToCss(styles.mobilePageContainerStyle);
@@ -87,12 +126,14 @@ const updateMobilePages = (leftPage, pageNumber, currentPages, previousPage, nex
   pageContent.style.cssText = styleObjectToCss(styles.mobilePageContentStyle);
   
   if (pageIndex >= 0 && pageIndex < currentPages.length) {
-    const img = document.createElement('img');
-    img.src = currentPages[pageIndex];
-    img.alt = `Page ${pageNumber}`;
-    img.style.cssText = styleObjectToCss(styles.mobilePageImageStyle);
-    img.onerror = () => {};
-    pageContent.appendChild(img);
+    const pageUrl = currentPages[pageIndex];
+    const mediaElement = createMediaElement(
+      pageUrl,
+      `Page ${pageNumber}`,
+      styles.mobilePageImageStyle,
+      isVideoFile
+    );
+    pageContent.appendChild(mediaElement);
   } else {
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = styleObjectToCss(styles.errorMessageStyle);
@@ -110,6 +151,9 @@ const updateMobilePages = (leftPage, pageNumber, currentPages, previousPage, nex
 const updateDesktopPages = (leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, styles) => {
   if (!leftPage || !styles) return;
   
+  // Get isVideoFile function from core
+  const isVideoFile = window.ComicReaderCore?.isVideoFile;
+  
   // Clear existing content
   leftPage.innerHTML = '';
   if (rightPage) rightPage.innerHTML = '';
@@ -117,14 +161,16 @@ const updateDesktopPages = (leftPage, rightPage, pageNumber, currentPages, previ
   const leftPageIndex = pageNumber - 1; // 0-based index for left page
   const rightPageIndex = pageNumber; // 0-based index for right page
   
-  // Add left page image
+  // Add left page (image or video)
   if (leftPageIndex >= 0 && leftPageIndex < currentPages.length) {
-    const leftImg = document.createElement('img');
-    leftImg.src = currentPages[leftPageIndex];
-    leftImg.alt = `Page ${leftPageIndex + 1}`;
-    leftImg.style.cssText = styleObjectToCss(styles.desktopPageImageStyle);
-    leftImg.onerror = () => {};
-    leftPage.appendChild(leftImg);
+    const leftPageUrl = currentPages[leftPageIndex];
+    const leftMedia = createMediaElement(
+      leftPageUrl,
+      `Page ${leftPageIndex + 1}`,
+      styles.desktopPageImageStyle,
+      isVideoFile
+    );
+    leftPage.appendChild(leftMedia);
   } else {
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = styleObjectToCss(styles.errorMessageStyle);
@@ -132,21 +178,23 @@ const updateDesktopPages = (leftPage, rightPage, pageNumber, currentPages, previ
     leftPage.appendChild(errorDiv);
   }
   
-  // Add right page image
+  // Add right page (image or video)
   if (rightPage && rightPageIndex >= 0 && rightPageIndex < currentPages.length) {
-    const rightImg = document.createElement('img');
-    rightImg.src = currentPages[rightPageIndex];
-    rightImg.alt = `Page ${rightPageIndex + 1}`;
-    rightImg.style.cssText = styleObjectToCss(styles.desktopPageImageStyle);
-    rightImg.onload = () => {};
-    rightImg.onerror = () => {
+    const rightPageUrl = currentPages[rightPageIndex];
+    const rightMedia = createMediaElement(
+      rightPageUrl,
+      `Page ${rightPageIndex + 1}`,
+      styles.desktopPageImageStyle,
+      isVideoFile
+    );
+    rightMedia.onerror = () => {
       const errorDiv = document.createElement('div');
       errorDiv.style.cssText = styleObjectToCss(styles.errorMessageStyle);
-      errorDiv.textContent = `Page ${rightPageIndex + 1} - Image failed to load`;
+      errorDiv.textContent = `Page ${rightPageIndex + 1} - Media failed to load`;
       rightPage.innerHTML = '';
       rightPage.appendChild(errorDiv);
     };
-    rightPage.appendChild(rightImg);
+    rightPage.appendChild(rightMedia);
   } else if (rightPage) {
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = styleObjectToCss(styles.errorMessageStyle);
@@ -155,14 +203,31 @@ const updateDesktopPages = (leftPage, rightPage, pageNumber, currentPages, previ
   }
   
   // Add click handlers for desktop navigation
+  // Don't trigger navigation if clicking on video elements or their controls
   leftPage.onclick = (e) => {
-    e.stopPropagation();
-    previousPage();
+    // Check if click is on a video element or video controls
+    const target = e.target;
+    const isVideoClick = target.tagName === 'VIDEO' || 
+                         target.closest('video') !== null ||
+                         target.closest('.video-controls') !== null;
+    
+    if (!isVideoClick) {
+      e.stopPropagation();
+      previousPage();
+    }
   };
   if (rightPage) {
     rightPage.onclick = (e) => {
-      e.stopPropagation();
-      nextPage();
+      // Check if click is on a video element or video controls
+      const target = e.target;
+      const isVideoClick = target.tagName === 'VIDEO' || 
+                           target.closest('video') !== null ||
+                           target.closest('.video-controls') !== null;
+      
+      if (!isVideoClick) {
+        e.stopPropagation();
+        nextPage();
+      }
     };
   }
 };

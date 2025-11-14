@@ -23,14 +23,41 @@ const updateGlobalState = (updates) => {
 const getGlobalState = () => window.ComicReaderState;
 
 /**
+ * Check if a URL is a video file
+ */
+const isVideoFile = (url) => {
+  if (!url) return false;
+  const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.m4v'];
+  const lowerUrl = url.toLowerCase();
+  return videoExtensions.some(ext => lowerUrl.endsWith(ext));
+};
+
+/**
  * Generate pages dynamically based on available files
+ * Supports both images (PNG) and videos (MP4, WebM, etc.)
+ * 
+ * If episodeData.pages is provided (array of URLs), use that directly.
+ * Otherwise, generate page URLs based on pageCount (defaults to PNG files).
+ * 
+ * To use videos, specify them in the pages array:
+ * pages: [
+ *   '/moments/episode/page-01.png',
+ *   '/moments/episode/page-02.mp4',  // Video page
+ *   '/moments/episode/page-03.png',
+ *   ...
+ * ]
  */
 const getPages = (episodeData) => {
   if (!episodeData) {
     return [];
   }
   
-  // Extract base path from fullLink
+  // If custom pages array is provided, use it directly
+  if (episodeData.pages && Array.isArray(episodeData.pages)) {
+    return episodeData.pages;
+  }
+  
+  // Otherwise, generate pages based on pageCount
   const basePath = episodeData.fullLink.replace(/\/$/, '');
   const pagesArray = []; // Don't include cover - it's handled separately
   
@@ -39,7 +66,10 @@ const getPages = (episodeData) => {
   const maxPages = episodeData.pageCount || 50; // Default to 50, can be overridden per episode
   
   for (let i = 1; i <= maxPages; i++) {
-    pagesArray.push(`${basePath}/page-${i.toString().padStart(2, '0')}.png`);
+    const pageNum = i.toString().padStart(2, '0');
+    // Default to PNG files
+    const pngUrl = `${basePath}/page-${pageNum}.png`;
+    pagesArray.push(pngUrl);
   }
   
   return pagesArray;
@@ -142,6 +172,7 @@ window.ComicReaderCore = {
   getNextEpisode,
   getPreviousEpisode,
   findCurrentEpisode,
-  getPageIncrement
+  getPageIncrement,
+  isVideoFile
 };
 
