@@ -1198,7 +1198,7 @@ window.momentsInTime = [
     caption: "Coding Flow Unleashed at Eden",
     fullLink: "/moments/ubud/2025-11-12/",
     isComic: true,
-    pageCount: 12,
+    pageCount: 14,
     pages: [
       "/moments/ubud/2025-11-12/page-01.png",
       "/moments/ubud/2025-11-12/page-02.png",
@@ -1212,6 +1212,8 @@ window.momentsInTime = [
       "/moments/ubud/2025-11-12/page-10.png",
       "/moments/ubud/2025-11-12/page-11.png",
       "/moments/ubud/2025-11-12/page-12.mp4",
+      "/moments/ubud/2025-11-12/page-13.png",
+      "/moments/ubud/2025-11-12/page-14.png",
     ],
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
     stayDuration: 1,
