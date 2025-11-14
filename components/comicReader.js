@@ -1398,6 +1398,26 @@ if (!document.querySelector('#comic-episode-styles')) {
     .cover-nav-button:active {
       transform: translateY(-50%) scale(0.95);
     }
+    
+    /* Video page styles */
+    .flipbook video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+    
+    .simple-flipbook-page video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+    
+    /* Ensure video controls are visible and styled */
+    .flipbook video::-webkit-media-controls-panel {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
   
   `;
   document.head.appendChild(style);

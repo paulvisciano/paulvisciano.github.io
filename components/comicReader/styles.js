@@ -648,7 +648,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const desktopPageImageStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectFit: 'cover',
     display: 'block'
   };
 
