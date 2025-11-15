@@ -1237,6 +1237,35 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "bali-day-10-2025-11-14",
+    title: "Alchemist Sanctuary & Rishi's Question",
+    date: new Date("2025-11-14T00:00:00Z"),
+    timelineHighlight: "Bali Day 10",
+    tags: [
+      "bali",
+      "ubud",
+      "urban runner",
+      "comic book",
+      "sound healing",
+      "yoga barn",
+      "eden",
+      "barber shop",
+      "connection"
+    ],
+    snippet:
+      "Bali Day 10: Early-morning grind from an Alchemist-themed 11:11 sanctuary, gym session, a multi-instrument sound healing class at The Yoga Barn, hookah and work at Eden, and a surprisingly deep barber shop conversation with Rishi about friendship, fathers, and speaking from the heart.",
+    image: "attachment:///moments/ubud/2025-11-14/cover.png",
+    imageAlt: "Bali Day 10 — Alchemist Sanctuary & Rishi's Question",
+    caption: "Bali Day 10 — From Sound Healing to Barber Shop Wisdom",
+    fullLink: "/moments/ubud/2025-11-14/",
+    isComic: true,
+    pageCount: 8,
+    location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  
+  {
     id: "singapore-2025-11-16",
     title: "City Flow in Singapore: Efficiency & Exploration",
     date: new Date("2025-11-16T00:00:00Z"),
