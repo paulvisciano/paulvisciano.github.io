@@ -54,6 +54,10 @@ const getPages = (episodeData) => {
   
   // If custom pages array is provided, use it directly
   if (episodeData.pages && Array.isArray(episodeData.pages)) {
+    // For character comic book, extract image URLs from pages array
+    if (episodeData.id === 'characters-comic-book') {
+      return episodeData.pages.map(page => page.image || page);
+    }
     return episodeData.pages;
   }
   
@@ -127,11 +131,20 @@ const getPreviousEpisode = (episodeData) => {
  * Find current episode from URL path
  */
 const findCurrentEpisode = () => {
+  // Check if this is a character comic book
+  const currentPath = window.location.pathname;
+  if (currentPath.includes('/characters/comic-book') && window.currentCharacterComicBook) {
+    return window.currentCharacterComicBook;
+  }
+  
+  // Check if we have character comic book in global state
+  if (window.currentCharacterComicBook && window.currentCharacterComicBook.id === 'characters-comic-book') {
+    return window.currentCharacterComicBook;
+  }
+  
   if (!window.momentsInTime) {
     return null;
   }
-  
-  const currentPath = window.location.pathname;
   
   const currentMoment = window.momentsInTime.find(m => {
     if (!m.isComic) return false;

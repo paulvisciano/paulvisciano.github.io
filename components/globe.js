@@ -5,8 +5,64 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
 
   const regularTags = ["All", ...new Set(window.momentsInTime.flatMap(post => post.tags))];
   const yearTags = ["All", ...new Set(window.momentsInTime.map(post => new Date(post.date).getUTCFullYear().toString()))].sort((a, b) => b - a);
+  const [characters, setCharacters] = React.useState(window.characters || []);
+  
+  // Update characters when they become available (polling for async load)
+  React.useEffect(() => {
+    // Check immediately
+    if (window.characters && window.characters.length > 0) {
+      setCharacters(window.characters);
+      return;
+    }
+    
+    // Poll for characters.js to load (in case it loads after component renders)
+    const checkCharacters = setInterval(() => {
+      if (window.characters && window.characters.length > 0) {
+        setCharacters(window.characters);
+        clearInterval(checkCharacters);
+      }
+    }, 100);
+    
+    // Stop polling after 5 seconds
+    setTimeout(() => {
+      clearInterval(checkCharacters);
+    }, 5000);
+    
+    return () => clearInterval(checkCharacters);
+  }, []);
+  
+  // Function to open character comic book
+  const handleOpenCharacterComic = () => {
+    if (window.characterComicBook && window.handleOpenBlogPost) {
+      // Create a pseudo-moment object for the character comic book
+      const characterComicMoment = {
+        id: window.characterComicBook.id,
+        title: window.characterComicBook.title,
+        isComic: true,
+        fullLink: '/characters/comic-book',
+        cover: window.characterComicBook.cover,
+        pages: window.characterComicBook.pages
+      };
+      
+      // Store in a way that comic reader can access
+      window.currentCharacterComicBook = characterComicMoment;
+      
+      // Open the comic book
+      window.handleOpenBlogPost(window.characterComicBook.id);
+      
+      // Close the drawer
+      setIsDrawerOpen(false);
+    }
+  };
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  
+  // Check for characters when drawer opens
+  React.useEffect(() => {
+    if (isDrawerOpen && window.characters && window.characters.length > 0) {
+      setCharacters(window.characters);
+    }
+  }, [isDrawerOpen]);
   const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false);
   const [blogPostContent, setBlogPostContent] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -534,6 +590,58 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   }, [selectedTag, selectedYear, setSelectedId]);
 
   const handleOpenBlogPost = async (postId) => {
+    // Check if this is a character comic book
+    if (postId === 'characters-comic-book' && window.characterComicBook) {
+      console.log('Character comic book detected');
+      
+      // Create a pseudo-moment object for the character comic book
+      const characterComicMoment = {
+        id: window.characterComicBook.id,
+        title: window.characterComicBook.title,
+        isComic: true,
+        fullLink: '/characters/comic-book',
+        cover: window.characterComicBook.cover,
+        pages: window.characterComicBook.pages,
+        pageCount: window.characterComicBook.pages.length
+      };
+      
+      // Update URL
+      const intendedPath = '/characters/comic-book';
+      const currentPath = window.location.pathname;
+      if (currentPath !== intendedPath) {
+        window.history.pushState({ momentId: postId }, '', intendedPath);
+      }
+      
+      setIsLoading(true);
+      setError(null);
+      
+      // Set up character comic book content directly
+      const blogPostContent = {
+        title: characterComicMoment.title || "Character Bible",
+        content: '',
+        snippet: window.characterComicBook.description || "Meet all the characters in Paul's life story",
+        fullLink: characterComicMoment.fullLink,
+        isInteractive: false,
+        isComic: true,
+        postId: postId,
+        pages: characterComicMoment.pages,
+        pageCount: characterComicMoment.pageCount,
+        cover: characterComicMoment.cover
+      };
+      
+      // Store in global state for comic reader
+      window.currentCharacterComicBook = characterComicMoment;
+      
+      setBlogPostContent(blogPostContent);
+      setIsLoading(false);
+      
+      // Only open drawer if it's not already open
+      if (!isBlogDrawerOpen) {
+        setIsBlogDrawerOpen(true);
+      }
+      return;
+    }
+    
     const post = window.momentsInTime.find(p => p.id === postId);
 
     if (post) {
@@ -875,6 +983,81 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
             onClick: () => setIsDrawerOpen(false)
           },
           '×'
+        ),
+        characters.length > 0 && React.createElement(
+          'div',
+          { className: 'characters-container' },
+          React.createElement(
+            'div',
+            { className: 'characters-header' },
+            React.createElement(
+              'h3',
+              { className: 'characters-title' },
+              'Characters'
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'characters-avatars' },
+            characters
+              .filter(character => character.avatar) // Only show characters with avatar paths
+              .map(character =>
+                React.createElement(
+                  'div',
+                  {
+                    key: `character-${character.id}`,
+                    className: 'character-item'
+                  },
+                  React.createElement(
+                    'button',
+                    {
+                      className: 'character-avatar',
+                      title: character.name,
+                      onClick: () => {
+                        // For now, clicking an avatar opens the character comic book
+                        // In the future, this could filter moments by character
+                        handleOpenCharacterComic();
+                      }
+                    },
+                    React.createElement(
+                      'div',
+                      { 
+                        className: 'character-avatar-wrapper'
+                      },
+                      React.createElement(
+                        'img',
+                        {
+                          src: character.avatar,
+                          alt: character.name,
+                          className: 'character-avatar-image',
+                          onError: (e) => {
+                            // If image fails to load, hide the entire character item
+                            const item = e.target.closest('.character-item');
+                            if (item) {
+                              item.style.display = 'none';
+                            }
+                          }
+                        }
+                      )
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'character-name' },
+                    character.name
+                  )
+                )
+              ),
+            React.createElement(
+              'button',
+              {
+                className: 'character-comic-button',
+                onClick: handleOpenCharacterComic,
+                title: 'Open Character Bible Comic Book'
+              },
+              '📚'
+            )
+          )
         ),
         React.createElement(
           'div',

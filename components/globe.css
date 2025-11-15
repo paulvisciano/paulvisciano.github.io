@@ -80,6 +80,9 @@
   visibility: hidden;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .filter-drawer .close-button {
@@ -101,7 +104,7 @@
   font-size: 1rem;
   font-weight: 500;
   padding: 8px 16px;
-  margin: 6px;
+  margin: 0;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
@@ -109,6 +112,8 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   z-index: 10;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .filter-tag.year-tag {
@@ -137,11 +142,192 @@
 
 .year-filter-container,
 .tag-filter-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   padding: 0.5rem;
   border-radius: 1rem;
-  flex-wrap: wrap;
   gap: 8px;
+  justify-content: flex-start;
+  align-content: flex-start;
+  max-height: calc(3 * (2.5rem + 8px) + 1rem); /* Approximately 3 rows: button height (~2.5rem) + gap (8px) + container padding (1rem) */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 165, 0, 0.3) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.year-filter-container::-webkit-scrollbar,
+.tag-filter-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.year-filter-container::-webkit-scrollbar-track,
+.tag-filter-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.year-filter-container::-webkit-scrollbar-thumb,
+.tag-filter-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 165, 0, 0.3);
+  border-radius: 3px;
+}
+
+.year-filter-container::-webkit-scrollbar-thumb:hover,
+.tag-filter-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 165, 0, 0.5);
+}
+
+.characters-container {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.characters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.characters-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.character-comic-button {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  background: rgba(26, 26, 26, 0.8);
+  color: var(--text-light);
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.character-comic-button:hover {
+  background: var(--primary-orange);
+  border-color: var(--primary-orange);
+  color: #ffffff;
+}
+
+.characters-avatars {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 165, 0, 0.3) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.characters-avatars::-webkit-scrollbar {
+  height: 6px;
+}
+
+.characters-avatars::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.characters-avatars::-webkit-scrollbar-thumb {
+  background: rgba(255, 165, 0, 0.3);
+  border-radius: 3px;
+}
+
+.characters-avatars::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 165, 0, 0.5);
+}
+
+.character-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  min-width: 90px;
+}
+
+.character-avatar {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(26, 26, 26, 0.8);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-avatar:hover {
+  border-color: var(--primary-orange);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.character-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.character-avatar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.character-avatar-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: var(--primary-orange);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.character-name {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+  font-weight: 500;
 }
 
 #globeViz {
@@ -317,6 +503,35 @@
   .tag-filter-container {
     padding: 0.25rem;
     gap: 6px;
+  }
+  .characters-container {
+    padding: 0.25rem;
+    margin-top: 0.5rem;
+  }
+  .characters-title {
+    font-size: 0.875rem;
+  }
+  .character-comic-button {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    font-size: 1.25rem;
+    padding: 0;
+  }
+  .character-item {
+    min-width: 80px;
+  }
+  .character-avatar {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+  }
+  .character-name {
+    font-size: 0.65rem;
+    max-width: 80px;
+  }
+  .character-avatar-placeholder {
+    font-size: 1rem;
   }
   .filter-drawer {
     padding: 0.5rem;
