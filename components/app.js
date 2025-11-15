@@ -295,6 +295,24 @@ window.App = () => {
       window.history.replaceState({}, '', fullPath);
     }
 
+    // Check if this is a character comic book route
+    if (path === '/characters/comic-book' || path.startsWith('/characters/comic-book')) {
+      // Open the character comic book
+      if (window.characterComicBook && window.handleOpenBlogPost) {
+        // Wait for handleOpenBlogPost to be available
+        const tryOpenCharacterComic = (attempts = 0) => {
+          if (window.handleOpenBlogPost) {
+            window.handleOpenBlogPost('characters-comic-book');
+            updateOverlayMessage('Opening Character Bible...');
+          } else if (attempts < 10) {
+            setTimeout(() => tryOpenCharacterComic(attempts + 1), 200);
+          }
+        };
+        setTimeout(tryOpenCharacterComic, 100);
+      }
+      return;
+    }
+    
     const match = path.match(/^\/moments\/(.+)/);
     if (match) {
       const pathSegment = match[1];

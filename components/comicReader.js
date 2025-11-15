@@ -73,13 +73,46 @@ window.ComicReader = ({ content, onClose }) => {
   
   
 
-  // Get episode data from momentsInTime - use global state if available
+  // Get episode data from content prop, global state, or momentsInTime
   React.useEffect(() => {
+    // First, check if content prop has character comic book data
+    if (content && content.postId === 'characters-comic-book' && window.currentCharacterComicBook) {
+      setEpisodeData(window.currentCharacterComicBook);
+      updateGlobalState({ episodeData: window.currentCharacterComicBook });
+      return;
+    }
+    
+    // Check if content prop has episode data directly
+    if (content && content.isComic && content.pages && !episodeData) {
+      // Create episode data from content for character comic book
+      if (content.postId === 'characters-comic-book') {
+        const characterComicData = {
+          id: 'characters-comic-book',
+          title: content.title,
+          isComic: true,
+          fullLink: content.fullLink || '/characters/comic-book',
+          cover: content.cover,
+          pages: content.pages,
+          pageCount: content.pageCount || content.pages.length
+        };
+        setEpisodeData(characterComicData);
+        updateGlobalState({ episodeData: characterComicData });
+        return;
+      }
+    }
+    
     const globalState = getGlobalState();
     
     // If we already have episode data in global state, use it
     if (globalState.episodeData && !episodeData) {
       setEpisodeData(globalState.episodeData);
+      return;
+    }
+    
+    // Check for character comic book in global window
+    if (window.currentCharacterComicBook && !episodeData) {
+      setEpisodeData(window.currentCharacterComicBook);
+      updateGlobalState({ episodeData: window.currentCharacterComicBook });
       return;
     }
     
@@ -90,7 +123,7 @@ window.ComicReader = ({ content, onClose }) => {
         updateGlobalState({ episodeData: currentMoment });
       }
     }
-  }, [episodeData]);
+  }, [episodeData, content]);
 
   // Prevent episode data from being reset once it's set
   React.useEffect(() => {
