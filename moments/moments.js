@@ -878,6 +878,23 @@ window.momentsInTime = [
     stayDuration: 1,
     formattedDuration: formatDuration(1)
   },
+  {
+    id: "urban-runner-user-manual-2025-09-15",
+    title: "Urban Runner: User Manual",
+    date: new Date('2025-09-15T00:00:00Z'),
+    timelineHighlight: "User Manual",
+    tags: ["urban runner", "comic book", "user guide", "reader manual", "features", "navigation"],
+    snippet: "The official Urban Runner User Manual — a comic-style guide teaching readers how to navigate episodes, swipe through pages, use keyboard shortcuts, and enjoy the full multi-device reading experience.",
+    image: "attachment:///moments/ubud/2025-11-13/cover.png",
+    imageAlt: "Urban Runner User Manual",
+    caption: "How to Read This Comic",
+    fullLink: "/moments/ubud/2025-11-13/",
+    isComic: true,
+    pageCount: 10,
+    location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
     {
       id: "urban-runner-episode-20-2025-09-16",
       title: "Urban Runner Episode 20: Comic Book Edition",
@@ -1215,23 +1232,6 @@ window.momentsInTime = [
       "/moments/ubud/2025-11-12/page-13.png",
       "/moments/ubud/2025-11-12/page-14.png",
     ],
-    location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
-    stayDuration: 1,
-    formattedDuration: formatDuration(1)
-  },
-  {
-    id: "urban-runner-user-manual-2025-11-13",
-    title: "Urban Runner: User Manual",
-    date: new Date('2025-11-13T00:00:00Z'),
-    timelineHighlight: "User Manual",
-    tags: ["urban runner", "comic book", "user guide", "reader manual", "features", "navigation"],
-    snippet: "The official Urban Runner User Manual — a comic-style guide teaching readers how to navigate episodes, swipe through pages, use keyboard shortcuts, and enjoy the full multi-device reading experience.",
-    image: "attachment:///moments/ubud/2025-11-13/cover.png",
-    imageAlt: "Urban Runner User Manual",
-    caption: "How to Read This Comic",
-    fullLink: "/moments/ubud/2025-11-13/",
-    isComic: true,
-    pageCount: 10, // Cover + Welcome + Feature Pages
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
