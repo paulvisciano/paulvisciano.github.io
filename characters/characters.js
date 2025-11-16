@@ -68,12 +68,10 @@ window.characters = [
     role: "Friend / Competitor",
     description: "Volleyball competitor and brotherhood energy.",
     bio: "Known for discipline and intensity. Part of the weight-loss challenge. Lifelong friend of Wellington.",
-    avatar: "/characters/Zacharias.png",
-    pageImage: "/characters/Zacharias.png",
-    imageAlt: "Zacharias",
     tags: ["friend", "volleyball", "challenge"],
     relationship: "Longtime friend; competitive drive."
   },
+
   {
     id: "hallie",
     name: "Hallie",
@@ -93,9 +91,6 @@ window.characters = [
     role: "Friend",
     description: "Warm, grounded, sociable. Host of the Bali Yoga Retreat.",
     bio: "Yoga teacher, community builder, Bali retreat leader. Part of the Bali friend trio with Hallie.",
-    avatar: "/characters/Leigha.png",
-    pageImage: "/characters/Leigha.png",
-    imageAlt: "Leigha - Friend",
     tags: ["friend", "bali", "yoga"],
     relationship: "Retreat host and close friend."
   },
@@ -105,9 +100,7 @@ window.characters = [
     role: "Remote Collaborator",
     description: "Adventurous, playful remote collaborator.",
     bio: "Remote contributor to Urban Runner. Sends assets from abroad and appears in multiple episodes.",
-    avatar: "/characters/Jamie.png",
-    pageImage: "/characters/Jamie.png",
-    imageAlt: "Jamie - Remote Collaborator",
+    // avatar/pageImage will be added once artwork is ready
     tags: ["collaborator", "remote"],
     relationship: "Remote collaborator expanding the UR world."
   },
@@ -117,9 +110,7 @@ window.characters = [
     role: "Recurring NPC",
     description: "Chill, observant, recurring ambient character at Amsterdam Café.",
     bio: "Chelsea fan. Recognizable recurring NPC in Bangkok. Cool, low-key presence.",
-    avatar: "/characters/Tony.png",
-    pageImage: "/characters/Tony.png",
-    imageAlt: "Tony - Chelsea Fan",
+    // avatar/pageImage will be added once artwork is ready
     tags: ["npc", "recurring"],
     relationship: "Recurring ambient presence in Bangkok episodes."
   },
@@ -129,9 +120,7 @@ window.characters = [
     role: "Romantic Interest",
     description: "Sweet, elegant, quirky (prefers sour mangos).",
     bio: "Romantic, thoughtful, graceful energy. Appears in the Chinatown stroll episode.",
-    avatar: "/characters/Aime.png",
-    pageImage: "/characters/Aime.png",
-    imageAlt: "Aime - Romantic Interest",
+    // avatar/pageImage will be added once artwork is ready
     tags: ["romantic-interest"],
     relationship: "Romantic interest; memorable Chinatown stroll."
   },
@@ -146,6 +135,18 @@ window.characters = [
     imageAlt: "KJ - Friend",
     tags: ["friend", "bali", "dance", "spiritual"],
     relationship: "Electric connection in Ubud. Powerful dance-floor chemistry."
+  },
+  {
+    id: "sandro",
+    name: "Sandro",
+    role: "Friend / Volleyball Brother",
+    description: "High-energy, joyful presence on and off the sand.",
+    bio: "Volleyball brother from the St. Pete crew. Known for big smiles, big swings, and big heart energy when the squad links up.",
+    avatar: "/characters/Sandro.png",
+    pageImage: "/characters/Sandro.png",
+    imageAlt: "Sandro - Volleyball Brother",
+    tags: ["friend", "volleyball", "st-pete"],
+    relationship: "Part of the extended volleyball family that shows up across chapters."
   },
   {
     id: "thai-dragon",
