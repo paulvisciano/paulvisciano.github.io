@@ -915,6 +915,7 @@ window.momentsInTime = [
       "/characters/Welli.png",
       "/characters/Leo.png",
       "/characters/Mo.png",
+      "/characters/Zacharias.png",
       "/characters/Sandro.png",
       "/characters/Hallie.png",
       "/characters/KJ.png",

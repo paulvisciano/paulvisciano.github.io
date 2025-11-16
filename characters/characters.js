@@ -77,13 +77,29 @@ window.characters = [
   {
     id: "zacharias",
     name: "Zacharias",
-    role: "Friend / Competitor",
-    description: "Volleyball competitor and brotherhood energy.",
-    bio: "Known for discipline and intensity. Part of the weight-loss challenge. Lifelong friend of Wellington.",
-    tags: ["friend", "volleyball", "challenge"],
-    relationship: "Longtime friend; competitive drive."
+    role: "Close Friend / Brother-In-Arms",
+    description: "Programmer, volleyball player, charismatic thinker, lifelong friend of Welli.",
+    bio: "Funny, charming, logical, and ambitious. Zacharias is a lifelong friend of Wellington and an essential part of Paul's Florida chapter. Originally from New York, he chose to relocate to St. Pete after falling in love with the community. A talented programmer and explosive volleyball player, he invited Paul to play the Mexico Tournament two years in a row. Known for his sharp humor, strategic mind, and smooth charisma. Currently dating Victoria. Comes from a political lineage and carries that part-politician charm.",
+    avatar: "/characters/Zacharias.png",
+    pageImage: "/characters/Zacharias.png",
+    imageAlt: "Zacharias - Close Friend",
+    origin: "New York, USA",
+    currentHome: "St. Petersburg, Florida",
+    tags: ["friend", "volleyball", "programmer", "thinker", "charming"],
+    relationship: "Close friend of Paul. Volleyball partner for multiple Mexico tournaments; lifelong brotherhood with Wellington."
   },
-
+  {
+    id: "sandro",
+    name: "Sandro",
+    role: "Friend / Volleyball Brother",
+    description: "High-energy, joyful presence on and off the sand.",
+    bio: "Volleyball brother from the St. Pete crew. Known for big smiles, big swings, and big heart energy when the squad links up.",
+    avatar: "/characters/Sandro.png",
+    pageImage: "/characters/Sandro.png",
+    imageAlt: "Sandro - Volleyball Brother",
+    tags: ["friend", "volleyball", "st-pete"],
+    relationship: "Part of the extended volleyball family that shows up across chapters."
+  },
   {
     id: "hallie",
     name: "Hallie",
@@ -147,18 +163,6 @@ window.characters = [
     imageAlt: "KJ - Friend",
     tags: ["friend", "bali", "dance", "spiritual"],
     relationship: "Electric connection in Ubud. Powerful dance-floor chemistry."
-  },
-  {
-    id: "sandro",
-    name: "Sandro",
-    role: "Friend / Volleyball Brother",
-    description: "High-energy, joyful presence on and off the sand.",
-    bio: "Volleyball brother from the St. Pete crew. Known for big smiles, big swings, and big heart energy when the squad links up.",
-    avatar: "/characters/Sandro.png",
-    pageImage: "/characters/Sandro.png",
-    imageAlt: "Sandro - Volleyball Brother",
-    tags: ["friend", "volleyball", "st-pete"],
-    relationship: "Part of the extended volleyball family that shows up across chapters."
   },
   {
     id: "thai-dragon",
