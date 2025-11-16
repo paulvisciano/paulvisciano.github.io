@@ -295,22 +295,25 @@ window.App = () => {
       window.history.replaceState({}, '', fullPath);
     }
 
-    // Check if this is a character comic book route
-    if (path === '/characters/comic-book' || path.startsWith('/characters/comic-book')) {
-      // Open the character comic book
-      if (window.characterComicBook && window.handleOpenBlogPost) {
-        // Wait for handleOpenBlogPost to be available
-        const tryOpenCharacterComic = (attempts = 0) => {
-          if (window.handleOpenBlogPost) {
-            window.handleOpenBlogPost('characters-comic-book');
-            updateOverlayMessage('Opening Character Bible...');
-          } else if (attempts < 10) {
-            setTimeout(() => tryOpenCharacterComic(attempts + 1), 200);
-          }
-        };
-        setTimeout(tryOpenCharacterComic, 100);
+    // Special case: Character Bible route should behave like other comics
+    // (highlight timeline entry and open the comic cover)
+    if (path === '/characters' || path === '/characters/') {
+      if (window.handleOpenBlogPost) {
+        // Highlight the Character Bible moment in the timeline
+        setSelectedId('characters-comic-book-2025-09-15');
+        // Open the Character Bible comic (uses synthetic id internally)
+        window.handleOpenBlogPost('characters-comic-book');
+        return;
       }
-      return;
+    }
+
+    // First, try to find a moment by exact fullLink match (works for routes like '/characters')
+    if (window.momentsInTime && Array.isArray(window.momentsInTime)) {
+      const directMoment = window.momentsInTime.find(m => m.fullLink === path);
+      if (directMoment) {
+        handleMomentSelection(directMoment);
+        return;
+      }
     }
     
     const match = path.match(/^\/moments\/(.+)/);
