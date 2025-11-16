@@ -26,6 +26,18 @@ window.characters = [
     relationship: "The matriarchal anchor in Paul's life. Source of strength, love, and resilience."
   },
   {
+    id: "brother",
+    name: "Brother",
+    role: "Family",
+    description: "Paul’s older brother and one of the most important foundational relationships in his life.",
+    bio: "Steady, grounded, and always supportive. Paul’s older brother has been a constant presence throughout every chapter of life. Protective but chill, logical yet funny, he brings a strong family anchor to Paul’s journey. Shares roots in Bulgaria and Chicago before life paths diverged. Represents the importance of family threads that stay intact across time and distance.",
+    avatar: "/characters/Brother.png",
+    pageImage: "/characters/Brother.png",
+    imageAlt: "Paul’s Brother",
+    tags: ["family", "brother", "roots"],
+    relationship: "Older brother — lifelong anchor, shared childhood, shared history."
+  },
+  {
     id: "wellington",
     name: "Welli",
     role: "Friend / Business Leader",
