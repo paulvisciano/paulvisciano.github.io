@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
+  <title>Miami Beach Winter Escape</title>
+  <link rel="canonical" href="https://paulvisciano.github.io/moments/miami/2024-12-30/">
+  <meta name="description" content="Drove from Clearwater to Miami Beach on Dec 29th to escape winter with sunny days and vibrant nights. Started the new year in Miami Beach.">
+  
+  <!-- Open Graph meta tags for social sharing -->
+  <meta property="og:title" content="Miami Beach Winter Escape">
+  <meta property="og:description" content="Drove from Clearwater to Miami Beach on Dec 29th to escape winter with sunny days and vibrant nights. Started the new year in Miami Beach.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://paulvisciano.github.io/moments/miami/2024-12-30/">
+  <meta property="og:site_name" content="Where is Paul?">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Miami Beach Winter Escape">
+  <meta name="twitter:description" content="Drove from Clearwater to Miami Beach on Dec 29th to escape winter with sunny days and vibrant nights. Started the new year in Miami Beach.">
   <script>
     // Extract the current path dynamically from the URL
     const currentPath = window.location.pathname;
-    
-    // Set canonical link for SEO
-    const canonicalLink = document.createElement('link');
-    canonicalLink.rel = 'canonical';
-    canonicalLink.href = currentPath;
-    document.head.appendChild(canonicalLink);
     
     // Immediate redirect to the main app with the moment URL (preserve hash)
     const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
