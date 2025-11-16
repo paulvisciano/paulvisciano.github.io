@@ -1045,7 +1045,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
                     'div',
                     { className: 'character-name' },
                     character.name
-                  )
+                  ),
+                  character.nickname
+                    ? React.createElement(
+                        'div',
+                        { className: 'character-nickname' },
+                        character.nickname
+                      )
+                    : null
                 )
               ),
             React.createElement(
