@@ -39,7 +39,8 @@ window.characters = [
   },
   {
     id: "leo",
-    name: "Leo aka Responsiblor",
+    name: "Leo",
+    nickname: "Responsiblor",
     role: "Lifelong Friend / Mentor Figure",
     description: "Older, mature, driven, tech-loving friend. Met through volleyball in Chicago.",
     bio: "Filipino. Organizer of the Mafia volleyball group. Splits time between St. Pete and the Philippines. Giving, caring, methodical. Deeply influential in Paul's life.",
@@ -75,7 +76,8 @@ window.characters = [
   },
   {
     id: "hallie",
-    name: "Hallie (Mighty Mouse)",
+    name: "Hallie",
+    nickname: "Mighty Mouse",
     role: "Friend",
     description: "Optimistic, social, warm presence. Fairy energy. Part of the Bali friend trio.",
     bio: "Yoga teacher turned studio manager overseeing 100+ people. Sweet, kind, grounded, recently engaged. Dreams of owning a studio and being a mom.",

@@ -320,14 +320,24 @@
 }
 
 .character-name {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: var(--text-light);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 90px;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+.character-nickname {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
 }
 
 #globeViz {
@@ -527,7 +537,7 @@
     min-width: 70px;
   }
   .character-name {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     max-width: 80px;
   }
   .character-avatar-placeholder {
