@@ -902,7 +902,7 @@ window.momentsInTime = [
     timelineHighlight: "Character Bible",
     tags: ["urban runner", "characters", "comic book", "bible"],
     snippet: "Meet the cast of Urban Runner. A dedicated comic book where each page introduces a character with their avatar and bio.",
-    image: "/characters/comic-book/cover.png",
+    image: "/characters/cover.png",
     imageAlt: "Urban Runner Character Bible",
     caption: "Character Bible — one page per character",
     fullLink: "/characters/comic-book",

@@ -165,7 +165,7 @@ window.characterComicBook = {
   id: "characters-comic-book",
   title: "Character Bible",
   description: "Meet all the characters in Paul's life story",
-  cover: "/characters/comic-book/cover.png",
+  cover: "/characters/cover.png",
   pages: window.characters.map((c, i) => ({
     number: i + 1,
     character: c.id,
