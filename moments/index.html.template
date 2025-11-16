@@ -5,18 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting...</title>
   <script>
-    // Extract the current path dynamically from the URL
-    const currentPath = window.location.pathname;
-    
-    // Set canonical link for SEO
-    const canonicalLink = document.createElement('link');
-    canonicalLink.rel = 'canonical';
-    canonicalLink.href = currentPath;
-    document.head.appendChild(canonicalLink);
-    
-    // Immediate redirect to the main app with the moment URL (preserve hash)
-    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
-    window.location.replace(redirectUrl);
+    (function() {
+      // Extract the current path dynamically from the URL
+      const currentPath = window.location.pathname;
+      const baseUrl = 'https://paulvisciano.github.io';
+      const fullUrl = baseUrl + currentPath;
+      
+      // Set canonical link for SEO
+      const canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      canonicalLink.href = fullUrl;
+      document.head.appendChild(canonicalLink);
+      
+      // Function to convert attachment:// URLs to full URLs
+      function convertImageUrl(imagePath) {
+        if (!imagePath) return null;
+        if (imagePath.startsWith('attachment://')) {
+          return baseUrl + imagePath.replace('attachment://', '');
+        }
+        if (imagePath.startsWith('/')) {
+          return baseUrl + imagePath;
+        }
+        if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+          return imagePath;
+        }
+        // Relative path - construct from current path
+        const pathParts = currentPath.split('/').filter(p => p);
+        pathParts.pop(); // Remove the last part (usually index.html or empty)
+        return baseUrl + '/' + pathParts.join('/') + '/' + imagePath;
+      }
+      
+      // Function to find episode data from moments.js
+      function findEpisodeData(path) {
+        // Normalize path for comparison
+        const normalizedPath = path.endsWith('/') ? path : path + '/';
+        const pathWithoutTrailing = path.endsWith('/') ? path.slice(0, -1) : path;
+        
+        if (!window.momentsInTime || !Array.isArray(window.momentsInTime)) {
+          return null;
+        }
+        
+        // Try to find by fullLink match
+        const episode = window.momentsInTime.find(m => {
+          if (!m.fullLink) return false;
+          const momentPath = m.fullLink.endsWith('/') ? m.fullLink : m.fullLink + '/';
+          return momentPath === normalizedPath || m.fullLink === path || m.fullLink === pathWithoutTrailing;
+        });
+        
+        return episode;
+      }
+      
+      // Function to add meta tags
+      function addMetaTag(property, content) {
+        if (!content) return;
+        const meta = document.createElement('meta');
+        if (property.startsWith('og:') || property.startsWith('twitter:')) {
+          meta.setAttribute('property', property);
+        } else {
+          meta.setAttribute('name', property);
+        }
+        meta.setAttribute('content', content);
+        document.head.appendChild(meta);
+      }
+      
+      // Function to set up Open Graph and Twitter Card meta tags
+      function setupSocialMetaTags(episode) {
+        if (!episode) return;
+        
+        const title = episode.title || 'Where is Paul?';
+        const description = episode.snippet || episode.caption || 'Explore my travel adventures and Urban Runner episodes';
+        const imageUrl = episode.image ? convertImageUrl(episode.image) : null;
+        const siteName = 'Where is Paul?';
+        
+        // Update page title
+        document.title = title;
+        
+        // Basic meta tags
+        addMetaTag('description', description);
+        
+        // Open Graph meta tags
+        addMetaTag('og:title', title);
+        addMetaTag('og:description', description);
+        addMetaTag('og:type', 'article');
+        addMetaTag('og:url', fullUrl);
+        addMetaTag('og:site_name', siteName);
+        addMetaTag('og:locale', 'en_US');
+        
+        if (imageUrl) {
+          addMetaTag('og:image', imageUrl);
+          addMetaTag('og:image:type', 'image/png');
+          // Try to get image dimensions if available (default to common comic dimensions)
+          addMetaTag('og:image:width', '1024');
+          addMetaTag('og:image:height', '1536');
+        }
+        
+        // Twitter Card meta tags
+        addMetaTag('twitter:card', 'summary_large_image');
+        addMetaTag('twitter:title', title);
+        addMetaTag('twitter:description', description);
+        if (imageUrl) {
+          addMetaTag('twitter:image', imageUrl);
+          addMetaTag('twitter:image:alt', episode.imageAlt || title);
+        }
+      }
+      
+      // Try to load moments.js and set up meta tags
+      // Since moments.js is loaded with defer, we need to wait for it or load it synchronously
+      if (window.momentsInTime) {
+        // moments.js already loaded
+        const episode = findEpisodeData(currentPath);
+        setupSocialMetaTags(episode);
+      } else {
+        // Try to load moments.js synchronously for crawlers
+        // This is a fallback - ideally moments.js should be loaded before this script runs
+        const script = document.createElement('script');
+        script.src = '/moments/moments.js';
+        script.async = false;
+        script.onload = function() {
+          const episode = findEpisodeData(currentPath);
+          setupSocialMetaTags(episode);
+        };
+        document.head.appendChild(script);
+      }
+      
+      // Small delay to allow meta tags to be added before redirect
+      // This helps crawlers see the meta tags
+      setTimeout(function() {
+        const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
+        window.location.replace(redirectUrl);
+      }, 100);
+    })();
   </script>
   <!-- Fallback for browsers with JavaScript disabled -->
   <noscript>
