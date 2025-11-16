@@ -295,21 +295,18 @@ window.App = () => {
       window.history.replaceState({}, '', fullPath);
     }
 
-    // Special case: Character Bible route should behave like other comics
-    // (highlight timeline entry and open the comic cover)
-    if (path === '/characters' || path === '/characters/') {
-      if (window.handleOpenBlogPost) {
-        // Highlight the Character Bible moment in the timeline
-        setSelectedId('characters-comic-book-2025-09-15');
-        // Open the Character Bible comic (uses synthetic id internally)
-        window.handleOpenBlogPost('characters-comic-book');
-        return;
-      }
-    }
+    // Normalize path for comparison (handle trailing slash)
+    const normalizedPath = path.endsWith('/') ? path : path + '/';
+    const pathWithoutTrailing = path.endsWith('/') ? path.slice(0, -1) : path;
 
     // First, try to find a moment by exact fullLink match (works for routes like '/characters')
+    // Check both with and without trailing slash
     if (window.momentsInTime && Array.isArray(window.momentsInTime)) {
-      const directMoment = window.momentsInTime.find(m => m.fullLink === path);
+      const directMoment = window.momentsInTime.find(m => {
+        if (!m.fullLink) return false;
+        const momentPath = m.fullLink.endsWith('/') ? m.fullLink : m.fullLink + '/';
+        return momentPath === normalizedPath || m.fullLink === path || m.fullLink === pathWithoutTrailing;
+      });
       if (directMoment) {
         handleMomentSelection(directMoment);
         return;
