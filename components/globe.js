@@ -31,26 +31,10 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     return () => clearInterval(checkCharacters);
   }, []);
   
-  // Function to open character comic book
+  // Function to open character comic book (via its moment id)
   const handleOpenCharacterComic = () => {
-    if (window.characterComicBook && window.handleOpenBlogPost) {
-      // Create a pseudo-moment object for the character comic book
-      const characterComicMoment = {
-        id: window.characterComicBook.id,
-        title: window.characterComicBook.title,
-        isComic: true,
-        fullLink: '/characters/comic-book',
-        cover: window.characterComicBook.cover,
-        pages: window.characterComicBook.pages
-      };
-      
-      // Store in a way that comic reader can access
-      window.currentCharacterComicBook = characterComicMoment;
-      
-      // Open the comic book
-      window.handleOpenBlogPost(window.characterComicBook.id);
-      
-      // Close the drawer
+    if (window.handleOpenBlogPost) {
+      window.handleOpenBlogPost('characters-comic-book-2025-09-15');
       setIsDrawerOpen(false);
     }
   };
@@ -590,58 +574,6 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   }, [selectedTag, selectedYear, setSelectedId]);
 
   const handleOpenBlogPost = async (postId) => {
-    // Check if this is a character comic book
-    if (postId === 'characters-comic-book' && window.characterComicBook) {
-      console.log('Character comic book detected');
-      
-      // Create a pseudo-moment object for the character comic book
-      const characterComicMoment = {
-        id: window.characterComicBook.id,
-        title: window.characterComicBook.title,
-        isComic: true,
-        fullLink: '/characters/comic-book',
-        cover: window.characterComicBook.cover,
-        pages: window.characterComicBook.pages,
-        pageCount: window.characterComicBook.pages.length
-      };
-      
-      // Update URL
-      const intendedPath = '/characters/comic-book';
-      const currentPath = window.location.pathname;
-      if (currentPath !== intendedPath) {
-        window.history.pushState({ momentId: postId }, '', intendedPath);
-      }
-      
-      setIsLoading(true);
-      setError(null);
-      
-      // Set up character comic book content directly
-      const blogPostContent = {
-        title: characterComicMoment.title || "Character Bible",
-        content: '',
-        snippet: window.characterComicBook.description || "Meet all the characters in Paul's life story",
-        fullLink: characterComicMoment.fullLink,
-        isInteractive: false,
-        isComic: true,
-        postId: postId,
-        pages: characterComicMoment.pages,
-        pageCount: characterComicMoment.pageCount,
-        cover: characterComicMoment.cover
-      };
-      
-      // Store in global state for comic reader
-      window.currentCharacterComicBook = characterComicMoment;
-      
-      setBlogPostContent(blogPostContent);
-      setIsLoading(false);
-      
-      // Only open drawer if it's not already open
-      if (!isBlogDrawerOpen) {
-        setIsBlogDrawerOpen(true);
-      }
-      return;
-    }
-    
     const post = window.momentsInTime.find(p => p.id === postId);
 
     if (post) {

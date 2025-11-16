@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    // Use the current path to build a canonical link
+    const currentPath = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname + '/';
+    const canonicalLink = document.createElement('link');
+    canonicalLink.rel = 'canonical';
+    canonicalLink.href = currentPath;
+    document.head.appendChild(canonicalLink);
+
+    // Redirect to the main app and let it open the Character Bible
+    const redirectUrl = `/?path=/characters${window.location.hash}`;
+    window.location.replace(redirectUrl);
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/" />
+  </noscript>
+</head>
+<body>
+  <p>Redirecting to Character Bible…</p>
+  <p>If you are not redirected automatically, <a href="/">click here</a>.</p>
+  <img src="/characters/cover.png" alt="Urban Runner: Character Bible Cover" style="display:none" />
+</body>
+</html>
+

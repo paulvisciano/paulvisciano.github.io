@@ -905,8 +905,12 @@ window.momentsInTime = [
     image: "/characters/cover.png",
     imageAlt: "Urban Runner Character Bible",
     caption: "Character Bible — one page per character",
-    fullLink: "/characters/comic-book",
+    fullLink: "/characters",
     isComic: true,
+    // Provide a pages array; if character data isn't loaded yet, start empty
+    pages: (typeof window !== 'undefined' && window.characterComicBook && Array.isArray(window.characterComicBook.pages))
+      ? window.characterComicBook.pages.map(p => p.image || p)
+      : [],
     pageCount: (typeof window !== 'undefined' && window.characters && Array.isArray(window.characters)) ? window.characters.length : 10,
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
     stayDuration: 1,

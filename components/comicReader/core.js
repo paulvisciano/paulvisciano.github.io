@@ -131,9 +131,9 @@ const getPreviousEpisode = (episodeData) => {
  * Find current episode from URL path
  */
 const findCurrentEpisode = () => {
-  // Check if this is a character comic book
+  // Check if this is the Character Bible route
   const currentPath = window.location.pathname;
-  if (currentPath.includes('/characters/comic-book') && window.currentCharacterComicBook) {
+  if ((currentPath === '/characters' || currentPath.startsWith('/characters/')) && window.currentCharacterComicBook) {
     return window.currentCharacterComicBook;
   }
   
