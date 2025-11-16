@@ -166,7 +166,9 @@ window.characterComicBook = {
   title: "Character Bible",
   description: "Meet all the characters in Paul's life story",
   cover: "/characters/cover.png",
-  pages: window.characters.map((c, i) => ({
+  pages: window.characters
+    .filter(c => !!c.pageImage) // Only include characters with a defined image
+    .map((c, i) => ({
     number: i + 1,
     character: c.id,
     image: c.pageImage,
