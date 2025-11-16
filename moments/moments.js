@@ -911,6 +911,7 @@ window.momentsInTime = [
     pages: [
       "/characters/Paul.png",
       "/characters/Mom.png",
+      "/characters/Brother.png",
       "/characters/Welli.png",
       "/characters/Leo.png",
       "/characters/Mo.png",
@@ -1317,6 +1318,34 @@ window.momentsInTime = [
     location: { lat: 1.3521, lng: 103.8198, name: "Singapore" },
     stayDuration: 5, // Nov 16–21
     formattedDuration: formatDuration(5),
+  },
+  {
+    id: "singapore-day-1-2025-11-16",
+    title: "Arrival, City Energy & The Best Post-Flight Run of My Life",
+    date: new Date("2025-11-16T00:00:00Z"),
+    timelineHighlight: "Singapore Day 1",
+    tags: [
+      "singapore",
+      "urban runner",
+      "city run",
+      "travel",
+      "marina bay sands",
+      "gardens by the bay",
+      "little india",
+      "nightlife",
+      "comic book"
+    ],
+    snippet:
+      "Landed in Singapore, checked into Citadines Rochor, hit the gym, then powered through what instantly became my best post-flight run of all time — weaving through Little India, Marina Bay, the Helix Bridge, and the electric skyline. A full reset day blending movement, discovery, and big-city energy.",
+    image: "attachment:///moments/singapore/2025-11-16/cover.png",
+    imageAlt: "Singapore Day 1 — Arrival & Marina Bay Night Run",
+    caption: "Singapore Day 1 — City Arrival & Skyline Run Reset",
+    fullLink: "/moments/singapore/2025-11-16/",
+    isComic: true,
+    pageCount: 10,
+    location: { lat: 1.2834, lng: 103.8607, name: "Singapore" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
   },
   {
     id: "davao-2025-11-21",
