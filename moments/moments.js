@@ -907,11 +907,19 @@ window.momentsInTime = [
     caption: "Character Bible — one page per character",
     fullLink: "/characters",
     isComic: true,
-    // Provide a pages array; if character data isn't loaded yet, start empty
-    pages: (typeof window !== 'undefined' && window.characterComicBook && Array.isArray(window.characterComicBook.pages))
-      ? window.characterComicBook.pages.map(p => p.image || p)
-      : [],
-    pageCount: (typeof window !== 'undefined' && window.characters && Array.isArray(window.characters)) ? window.characters.length : 10,
+    // Hard-coded pages for the Character Bible (one page per character WITH an image)
+    pages: [
+      "/characters/Paul.png",
+      "/characters/Mom.png",
+      "/characters/Welli.png",
+      "/characters/Leo.png",
+      "/characters/Mo.png",
+      "/characters/Sandro.png",
+      "/characters/Hallie.png",
+      "/characters/KJ.png",
+      "/characters/ThaiDragon.png"
+    ],
+    pageCount: 9,
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)
