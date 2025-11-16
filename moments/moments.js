@@ -905,7 +905,7 @@ window.momentsInTime = [
     image: "/characters/cover.png",
     imageAlt: "Urban Runner Character Bible",
     caption: "Character Bible — one page per character",
-    fullLink: "/characters",
+    fullLink: "/characters/",
     isComic: true,
     // Hard-coded pages for the Character Bible (one page per character WITH an image)
     pages: [
