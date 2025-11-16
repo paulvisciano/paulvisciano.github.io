@@ -895,6 +895,23 @@ window.momentsInTime = [
     stayDuration: 1,
     formattedDuration: formatDuration(1)
   },
+  {
+    id: "characters-comic-book-2025-09-15",
+    title: "Urban Runner: Character Bible",
+    date: new Date('2025-09-15T12:00:00Z'),
+    timelineHighlight: "Character Bible",
+    tags: ["urban runner", "characters", "comic book", "bible"],
+    snippet: "Meet the cast of Urban Runner. A dedicated comic book where each page introduces a character with their avatar and bio.",
+    image: "/characters/comic-book/cover.png",
+    imageAlt: "Urban Runner Character Bible",
+    caption: "Character Bible — one page per character",
+    fullLink: "/characters/comic-book",
+    isComic: true,
+    pageCount: (typeof window !== 'undefined' && window.characters && Array.isArray(window.characters)) ? window.characters.length : 10,
+    location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
     {
       id: "urban-runner-episode-20-2025-09-16",
       title: "Urban Runner Episode 20: Comic Book Edition",
