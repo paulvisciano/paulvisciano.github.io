@@ -18,14 +18,15 @@ footer {
     right: 0;
     background: var(--background-dark); /* Dark background */
     border-top: 1px solid var(--border-dark);
-    z-index: 20;
+    z-index: 10001; /* Higher than comic overlay (10000) to ensure timeline is always accessible */
 }
 
 .timeline-container {
     position: relative;
     overflow-x: auto;
+    overflow-y: visible;
     white-space: nowrap;
-    padding: 32px 0; /* For year clearance */
+    padding: 80px 0 32px 0; /* Increased top padding for thumbnail clearance */
     background: var(--transparent);
     border-radius: 0;
     width: 100%;
@@ -169,6 +170,31 @@ footer {
     transform: scale(1.1);
 }
 
+.comic-thumbnail-indicator {
+    position: absolute;
+    top: -72px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 12;
+    width: 56px;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    background: var(--background-dark);
+}
+
+.timeline-entry:hover .comic-thumbnail-indicator,
+.timeline-entry.selected .comic-thumbnail-indicator {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -221,7 +247,8 @@ footer {
 
 @media (max-width: 640px) {
     .timeline-container {
-        padding: 42px 0;
+        padding: 80px 0 42px 0; /* Increased top padding for thumbnail clearance on mobile */
+        overflow-y: visible;
         touch-action: pan-x pan-y pinch-zoom; /* Enable all touch actions */
         -webkit-overflow-scrolling: touch; /* Ensure momentum scrolling */
         scroll-behavior: smooth; /* Smooth scrolling */

@@ -406,7 +406,16 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                   React.createElement(
                     'div',
                     { className: 'timeline-card' },
-                    moment.fullLink !== '#' && React.createElement(
+                    moment.isComic && moment.fullLink !== '#' && React.createElement(
+                      'img',
+                      { 
+                        className: 'comic-thumbnail-indicator', 
+                        src: `${moment.fullLink.replace(/\/$/, '')}/cover.png`,
+                        alt: `${moment.title} cover`,
+                        title: 'Comic book available'
+                      }
+                    ),
+                    !moment.isComic && moment.fullLink !== '#' && React.createElement(
                       'span',
                       { className: 'full-moment-indicator', title: 'Full blog post available' },
                       '📖'
