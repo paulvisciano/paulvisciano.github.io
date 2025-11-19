@@ -65,54 +65,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     let momentumAnimation = null;
     let isDragging = false;
     let initialAltitude = null;
-    let selectionTimeout = null;
     let lastInteractionTime = Date.now();
-
-    // Function to find and select the entry closest to the center
-    const selectCenterEntry = () => {
-      // Clear any existing selection timeout
-      if (selectionTimeout) {
-        clearTimeout(selectionTimeout);
-      }
-
-      // Only proceed with selection if enough time has passed since last interaction
-      const timeSinceLastInteraction = Date.now() - lastInteractionTime;
-      if (timeSinceLastInteraction < 500) { // If less than 500ms since last interaction, wait
-        selectionTimeout = setTimeout(selectCenterEntry, 500 - timeSinceLastInteraction);
-        return;
-      }
-
-      // Wait for the timeline to settle before selecting
-      selectionTimeout = setTimeout(() => {
-        const containerRect = timelineContainer.getBoundingClientRect();
-        const containerCenter = containerRect.left + (containerRect.width / 2);
-        
-        const entries = Array.from(document.querySelectorAll('.timeline-entry'));
-        let closestEntry = null;
-        let minDistance = Infinity;
-        
-        entries.forEach(entry => {
-          const entryRect = entry.getBoundingClientRect();
-          const entryCenter = entryRect.left + (entryRect.width / 2);
-          const distance = Math.abs(entryCenter - containerCenter);
-          
-          if (distance < minDistance) {
-            minDistance = distance;
-            closestEntry = entry;
-          }
-        });
-        
-        if (closestEntry) {
-          const entryId = closestEntry.getAttribute('data-id');
-          if (entryId) {
-            const moment = window.momentsInTime.find(m => m.id === entryId);
-            if (moment) {
-              handleTimelineClick(moment);
-            }
-          }
-        }
-      }, 300); // Increased delay to 300ms for better settling
-    };
 
     // Handle scroll events to rotate the globe
     const handleScroll = (event) => {
@@ -167,14 +120,10 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
         initialAltitude = window.globeInstance.pointOfView().altitude;
       }
       
-      // Cancel any ongoing momentum animation and selection timeout
+      // Cancel any ongoing momentum animation
       if (momentumAnimation) {
         cancelAnimationFrame(momentumAnimation);
         momentumAnimation = null;
-      }
-      if (selectionTimeout) {
-        clearTimeout(selectionTimeout);
-        selectionTimeout = null;
       }
     };
 
@@ -246,8 +195,6 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
               altitude: initialAltitude
             }, 1000); // Smooth transition back
           }
-          // Select the entry in the center after momentum ends
-          selectCenterEntry();
           return;
         }
 
@@ -316,9 +263,6 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
       }
       if (momentumAnimation) {
         cancelAnimationFrame(momentumAnimation);
-      }
-      if (selectionTimeout) {
-        clearTimeout(selectionTimeout);
       }
     };
   }, [selectedId]);
