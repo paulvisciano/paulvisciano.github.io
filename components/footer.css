@@ -275,7 +275,7 @@ body.comic-is-open footer {
     }
     
     .timeline-container {
-        padding: 60px 0 16px 0; /* Increased top padding to match desktop, reduced bottom padding */
+        padding: 60px 0 20px 0; /* Increased top padding to match desktop, reduced bottom padding */
         overflow-y: visible;
         touch-action: pan-x pan-y pinch-zoom; /* Enable all touch actions */
         -webkit-overflow-scrolling: touch; /* Ensure momentum scrolling */
