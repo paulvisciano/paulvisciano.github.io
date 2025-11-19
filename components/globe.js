@@ -81,6 +81,22 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     return post && post.isComic === true;
   };
 
+  // Update body class when blog drawer is open/closed to hide footer on mobile
+  // Only hide timeline for non-comic blog posts (comic episodes use comic-is-open class)
+  React.useEffect(() => {
+    // Don't add blog-drawer-open for comic episodes - they use comic-is-open class instead
+    const isComic = blogPostContent && isComicEpisode(blogPostContent.postId || '', blogPostContent.title);
+    
+    if (isBlogDrawerOpen && !isComic) {
+      document.body.classList.add('blog-drawer-open');
+    } else {
+      document.body.classList.remove('blog-drawer-open');
+    }
+    return () => {
+      document.body.classList.remove('blog-drawer-open');
+    };
+  }, [isBlogDrawerOpen, blogPostContent]);
+
   // Define linear scales for each duration range for smooth gradients
   const scaleShort = d3.scaleLinear()
     .domain([1, 3])

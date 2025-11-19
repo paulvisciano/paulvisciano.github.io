@@ -267,6 +267,13 @@ body.comic-is-open footer {
 }
 
 @media (max-width: 640px) {
+    /* Hide timeline when blog drawer is open on mobile */
+    body.blog-drawer-open footer {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    
     .timeline-container {
         padding: 60px 0 16px 0; /* Increased top padding to match desktop, reduced bottom padding */
         overflow-y: visible;
