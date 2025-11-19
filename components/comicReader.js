@@ -253,6 +253,36 @@ window.ComicReader = ({ content, onClose }) => {
       .sort((a, b) => a.date - b.date);
   }, []);
 
+  // Function to scroll to a specific episode by ID (exposed globally for timeline clicks)
+  const scrollToEpisode = React.useCallback((episodeId) => {
+    if (!showCover || !splideRef.current) {
+      return false; // Can't scroll if not showing cover or Splide not initialized
+    }
+    
+    const allEpisodes = getAllComicEpisodes();
+    const targetIndex = allEpisodes.findIndex(ep => ep.id === episodeId);
+    
+    if (targetIndex !== -1 && splideRef.current.index !== targetIndex) {
+      isSplideUpdatingRef.current = true;
+      splideRef.current.go(targetIndex);
+      // Reset flag after transition
+      setTimeout(() => {
+        isSplideUpdatingRef.current = false;
+      }, 500);
+      return true;
+    }
+    
+    return false;
+  }, [showCover, getAllComicEpisodes]);
+
+  // Expose scrollToEpisode globally so timeline can trigger it
+  React.useEffect(() => {
+    window.scrollComicToEpisode = scrollToEpisode;
+    return () => {
+      delete window.scrollComicToEpisode;
+    };
+  }, [scrollToEpisode]);
+
   // Track if Splide is being updated internally (to prevent re-init loop)
   const isSplideUpdatingRef = React.useRef(false);
 
@@ -591,6 +621,18 @@ window.ComicReader = ({ content, onClose }) => {
     }, loadingDelay);
   }, [episodeData, isMobile]); // Add isMobile dependency
   
+
+  // Update body class when comic is open/closed to hide footer
+  React.useEffect(() => {
+    if (!showCover) {
+      document.body.classList.add('comic-is-open');
+    } else {
+      document.body.classList.remove('comic-is-open');
+    }
+    return () => {
+      document.body.classList.remove('comic-is-open');
+    };
+  }, [showCover]);
 
   // Function to transition from cover to flipbook
   const openComicBook = () => {
@@ -1087,12 +1129,6 @@ window.ComicReader = ({ content, onClose }) => {
     }
   }
   
-  if (showCover && isVisible && styles.coverOverlayStyle) {
-    overlayChildren.push(React.createElement('div', {
-      key: 'cover-overlay',
-      style: styles.coverOverlayStyle || {}
-    }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book'));
-  }
   
   // Prevent touch events from reaching elements underneath (like the globe)
   const handleOverlayTouchStart = (e) => {
