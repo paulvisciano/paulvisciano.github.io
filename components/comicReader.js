@@ -622,6 +622,18 @@ window.ComicReader = ({ content, onClose }) => {
   }, [episodeData, isMobile]); // Add isMobile dependency
   
 
+  // Update body class when comic is open/closed to hide footer
+  React.useEffect(() => {
+    if (!showCover) {
+      document.body.classList.add('comic-is-open');
+    } else {
+      document.body.classList.remove('comic-is-open');
+    }
+    return () => {
+      document.body.classList.remove('comic-is-open');
+    };
+  }, [showCover]);
+
   // Function to transition from cover to flipbook
   const openComicBook = () => {
     setShowCover(false);
@@ -1117,12 +1129,6 @@ window.ComicReader = ({ content, onClose }) => {
     }
   }
   
-  if (showCover && isVisible && styles.coverOverlayStyle) {
-    overlayChildren.push(React.createElement('div', {
-      key: 'cover-overlay',
-      style: styles.coverOverlayStyle || {}
-    }, isMobile ? '📖 Tap to start reading' : '🖱️ Click to open comic book'));
-  }
   
   // Prevent touch events from reaching elements underneath (like the globe)
   const handleOverlayTouchStart = (e) => {

@@ -81,8 +81,8 @@ const STYLE_CONFIG = {
     desktop: {
       // Desktop is always landscape
       cover: {
-        width: '400px',
-        height: '600px'
+        width: '380px',
+        height: '560px'
       },
       open: {
         width: '800px',
@@ -332,7 +332,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
     left: 0,
     width: '100vw',
     height: showCover ? `calc(100% - ${footerHeight}px)` : '100%',
-    background: 'rgba(0, 0, 0, 0.2)',
+    background: showCover ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.8)', // Darker when comic is open to focus on comic
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     alignItems: 'center',
