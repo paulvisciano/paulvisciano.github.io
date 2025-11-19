@@ -81,8 +81,8 @@ const STYLE_CONFIG = {
     desktop: {
       // Desktop is always landscape
       cover: {
-        width: '400px',
-        height: '600px'
+        width: '380px',
+        height: '560px'
       },
       open: {
         width: '800px',
@@ -324,17 +324,21 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const isPortrait = orientation === 'portrait';
   
   // Shared overlay style (same for all devices)
+  // When showing cover, reduce height to leave space for footer timeline (~150px)
+  const footerHeight = 150; // Approximate footer height to leave space for timeline
   const comicOverlayStyle = {
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100vw',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.2)',
+    height: showCover ? `calc(100% - ${footerHeight}px)` : '100%',
+    background: showCover ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.8)', // Darker when comic is open to focus on comic
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: showCover ? (isMobile ? '20px' : '40px') : '0',
+    paddingBottom: showCover ? '20px' : '0', // Small padding to ensure cover doesn't touch footer area
     zIndex: 10000,
     backdropFilter: 'blur(2px)',
     touchAction: 'none',

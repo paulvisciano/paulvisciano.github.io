@@ -76,6 +76,31 @@ window.App = () => {
     if (moment) {
       setSelectedId(moment.id);
       
+      // Check if comic reader is currently open (showing cover)
+      const isComicReaderOpen = typeof window.scrollComicToEpisode === 'function';
+      
+      // If comic reader is open and clicking a comic episode, scroll to that episode
+      if (isComicReaderOpen && isComicEpisode(moment)) {
+        console.log('Comic reader is open, scrolling to episode:', moment.id);
+        const scrolled = window.scrollComicToEpisode(moment.id);
+        if (scrolled) {
+          // Episode scrolled successfully, trigger zoom
+          if (zoomCallback) {
+            zoomCallback(moment);
+          }
+          return; // Don't proceed with normal opening logic
+        }
+      }
+      
+      // If comic reader is open and clicking a non-comic episode, close the comic reader
+      if (isComicReaderOpen && !isComicEpisode(moment)) {
+        console.log('Comic reader is open, closing to show non-comic episode:', moment.id);
+        if (window.setBlogPostContent) {
+          window.setBlogPostContent(null);
+        }
+        // Continue with normal flow to show the episode
+      }
+      
       // For comic episodes, skip the overlay entirely and go straight to comic
       if (isComicEpisode(moment)) {
         console.log('Comic episode detected - bypassing overlay, opening comic directly');
