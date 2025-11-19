@@ -71,16 +71,47 @@ window.App = () => {
     return moment && moment.isComic === true;
   };
 
+  // Ensure the timeline is visible by closing any open drawers/comics
+  const ensureTimelineVisible = () => {
+    if (typeof document === 'undefined') return;
+    const body = document.body;
+    if (!body) return;
+
+    const bodyHidingTimeline = body.classList.contains('blog-drawer-open') || body.classList.contains('comic-is-open');
+    const drawerOpen = typeof window.isBlogDrawerOpen === 'boolean'
+      ? window.isBlogDrawerOpen
+      : !!document.querySelector('.blog-post-drawer.open');
+    const comicOpen = !!document.querySelector('.comic-episode-container');
+
+    if (!bodyHidingTimeline && !drawerOpen && !comicOpen) {
+      return;
+    }
+
+    if (typeof window.closeContentDrawer === 'function') {
+      window.closeContentDrawer();
+    } else if (typeof window.setBlogPostContent === 'function') {
+      window.setBlogPostContent(null);
+    }
+
+    body.classList.remove('blog-drawer-open');
+    body.classList.remove('comic-is-open');
+  };
+
   // Unified logic for selecting a moment (used for clicks, initial load, and popstate)
   const handleMomentSelection = (moment) => {
     if (moment) {
+      const momentIsComic = isComicEpisode(moment);
+      if (!momentIsComic) {
+        ensureTimelineVisible();
+      }
+
       setSelectedId(moment.id);
       
       // Check if comic reader is currently open (showing cover)
       const isComicReaderOpen = typeof window.scrollComicToEpisode === 'function';
       
       // If comic reader is open and clicking a comic episode, scroll to that episode
-      if (isComicReaderOpen && isComicEpisode(moment)) {
+      if (isComicReaderOpen && momentIsComic) {
         console.log('Comic reader is open, scrolling to episode:', moment.id);
         const scrolled = window.scrollComicToEpisode(moment.id);
         if (scrolled) {
@@ -93,16 +124,13 @@ window.App = () => {
       }
       
       // If comic reader is open and clicking a non-comic episode, close the comic reader
-      if (isComicReaderOpen && !isComicEpisode(moment)) {
+      if (isComicReaderOpen && !momentIsComic) {
         console.log('Comic reader is open, closing to show non-comic episode:', moment.id);
-        if (window.setBlogPostContent) {
-          window.setBlogPostContent(null);
-        }
         // Continue with normal flow to show the episode
       }
       
       // For comic episodes, skip the overlay entirely and go straight to comic
-      if (isComicEpisode(moment)) {
+      if (momentIsComic) {
         console.log('Comic episode detected - bypassing overlay, opening comic directly');
         // Hide the overlay immediately for comics
         updateOverlayMessage(null);
@@ -190,7 +218,7 @@ window.App = () => {
       const currentPath = window.location.pathname;
       if (currentPath !== intendedPath) {
         // For comic moments, preserve the hash; for non-comic moments, don't add hash
-        const fullUrl = isComicEpisode(moment) ? intendedPath + window.location.hash : intendedPath;
+        const fullUrl = momentIsComic ? intendedPath + window.location.hash : intendedPath;
         window.history.pushState({ momentId: moment.id }, '', fullUrl);
       }
     } else {
