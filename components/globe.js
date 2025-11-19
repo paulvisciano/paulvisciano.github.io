@@ -41,14 +41,14 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const [popoverContent, setPopoverContent] = React.useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   
-  // Check for characters when drawer opens
-  React.useEffect(() => {
-    if (isDrawerOpen && window.characters && window.characters.length > 0) {
-      setCharacters(window.characters);
-    }
-  }, [isDrawerOpen]);
-  const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false);
-  const [blogPostContent, setBlogPostContent] = React.useState(null);
+    // Check for characters when drawer opens
+    React.useEffect(() => {
+      if (isDrawerOpen && window.characters && window.characters.length > 0) {
+        setCharacters(window.characters);
+      }
+    }, [isDrawerOpen]);
+    const [isBlogDrawerOpen, setIsBlogDrawerOpen] = React.useState(false);
+    const [blogPostContent, setBlogPostContent] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const globeInstance = React.useRef(null);
@@ -62,6 +62,30 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
   const doubleTapTimeout = React.useRef(null);
   const pinchStartDistance = React.useRef(null);
   const pinchStartAltitude = React.useRef(null);
+
+    // Keep drawer state accessible globally
+    React.useEffect(() => {
+      window.isBlogDrawerOpen = isBlogDrawerOpen;
+      return () => {
+        delete window.isBlogDrawerOpen;
+      };
+    }, [isBlogDrawerOpen]);
+
+    // Provide a global helper to close any open drawer/comic content
+    React.useEffect(() => {
+      window.closeContentDrawer = () => {
+        setIsBlogDrawerOpen(false);
+        setBlogPostContent(null);
+        if (typeof document !== 'undefined' && document.body) {
+          document.body.classList.remove('blog-drawer-open');
+          document.body.classList.remove('comic-is-open');
+        }
+      };
+
+      return () => {
+        delete window.closeContentDrawer;
+      };
+    }, []);
 
   // Expose state setters and refs to window for BlogPostDrawer
   window.setBlogPostContent = setBlogPostContent;
