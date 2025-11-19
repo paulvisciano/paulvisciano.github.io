@@ -930,6 +930,15 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     );
   };
 
+  const activeFilters = [
+    selectedYear && selectedYear !== 'All'
+      ? { type: 'year', label: selectedYear, display: `Year: ${selectedYear}` }
+      : null,
+    selectedTag && selectedTag !== 'All'
+      ? { type: 'tag', label: selectedTag, display: `Tag: ${selectedTag}` }
+      : null
+  ].filter(Boolean);
+
   return React.createElement(
     'div',
     { className: 'container mx-auto main-content' },
@@ -937,13 +946,39 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       'div',
       { className: 'filter-drawer-container', ref: drawerRef },
       React.createElement(
-        'button',
-        {
-          className: `filter-toggle-button ${isDrawerOpen ? 'open' : ''}`,
-          onClick: () => setIsDrawerOpen(!isDrawerOpen)
-        },
-        'Filters',
-        React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
+        'div',
+        { className: 'filter-toggle-wrapper' },
+        React.createElement(
+          'button',
+          {
+            className: `filter-toggle-button ${isDrawerOpen ? 'open' : ''}`,
+            onClick: () => setIsDrawerOpen(!isDrawerOpen)
+          },
+          'Filters',
+          React.createElement('span', { className: 'chevron' }, isDrawerOpen ? '▲' : '▼')
+        ),
+        activeFilters.length > 0 && React.createElement(
+          'div',
+          { className: 'active-filters' },
+          activeFilters.map(filter =>
+            React.createElement(
+              'button',
+              {
+                key: `${filter.type}-${filter.label}`,
+                className: 'filter-pill',
+                onClick: () => {
+                  if (filter.type === 'year') {
+                    setSelectedYear('All');
+                  } else if (filter.type === 'tag') {
+                    setSelectedTag('All');
+                  }
+                }
+              },
+              React.createElement('span', { className: 'filter-pill-label' }, filter.display),
+              React.createElement('span', { className: 'filter-pill-close' }, '×')
+            )
+          )
+        )
       ),
       isDrawerOpen && React.createElement(
         'div',

@@ -37,10 +37,18 @@
   z-index: 30;
 }
 
-.filter-toggle-button {
+.filter-toggle-wrapper {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: calc(100% - 20px);
+}
+
+.filter-toggle-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +76,61 @@
 
 .filter-toggle-button.open .chevron {
   transform: rotate(180deg);
+}
+
+.active-filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(26, 26, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text-light);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-pill:hover {
+  background: rgba(26, 26, 26, 0.95);
+  border-color: rgba(255, 165, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+.filter-pill-label {
+  white-space: nowrap;
+}
+
+.filter-pill-close {
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .filter-toggle-wrapper {
+    right: 0;
+    left: 0;
+    align-items: stretch;
+    padding: 0 10px;
+  }
+
+  .active-filters {
+    justify-content: flex-start;
+  }
+
+  .filter-toggle-button {
+    width: 100%;
+  }
 }
 
 .filter-drawer {
