@@ -897,9 +897,9 @@ window.momentsInTime = [
   },
   {
     id: "characters-comic-book-2025-09-15",
-    title: "Urban Runner: Character Bible",
+    title: "Urban Runner: The People in My Life",
     date: new Date('2025-09-15T12:00:00Z'),
-    timelineHighlight: "Character Bible",
+    timelineHighlight: "Characters",
     tags: ["urban runner", "characters", "comic book", "bible"],
     snippet: "Meet the cast of Urban Runner. A dedicated comic book where each page introduces a character with their avatar and bio.",
     image: "/characters/cover.png",
