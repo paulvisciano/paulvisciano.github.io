@@ -1349,6 +1349,34 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "singapore-day-2-2025-11-17",
+    title: "Biking Through Singapore — Sentosa Beaches, Onsen Reset & City Flow",
+    date: new Date("2025-11-17T00:00:00Z"),
+    timelineHighlight: "Singapore Day 2",
+    tags: [
+      "singapore",
+      "urban runner",
+      "sentosa",
+      "beach day",
+      "biking",
+      "onsen",
+      "travel",
+      "city exploration",
+      "comic book"
+    ],
+    snippet:
+      "A full-city flow day: morning café hunt, Sentosa beach scouting, biking across the island, finding the perfect onsen to reset, then cruising back through Singapore’s urban jungle for evening work sessions. Heat, movement, and discovery packed into one day.",
+    image: "attachment:///moments/singapore/2025-11-17/cover.png",
+    imageAlt: "Singapore Day 2 — Biking Through Singapore & Sentosa",
+    caption: "Singapore Day 2 — Sentosa Beaches & Onsen Reset",
+    fullLink: "/moments/singapore/2025-11-17/",
+    isComic: true,
+    pageCount: 16,
+    location: { lat: 1.2494, lng: 103.8303, name: "Singapore" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "davao-2025-11-21",
     title: "Arrival in Davao: Birthday Energy & Reconnection",
     date: new Date("2025-11-21T00:00:00Z"),
