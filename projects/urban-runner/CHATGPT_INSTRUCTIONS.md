@@ -1,94 +1,57 @@
-Urban Runner Project Instructions (v5.0 – Comic Page Workflow)
 
-Last Updated: September 17, 2025
+# Urban Runner Project Instructions (v6.2 â€“ Sept 27, 2025)
 
-Core Mission
+## Core Mission
+A global movement for wealth redistribution â€” one run at a time.
 
-A global movement for wealth redistribution — one run at a time.
-Now told through comic book pages instead of scattered checkpoint cards.
+## Episode Structure
+- Each episode is structured as a comic book.
+- Cover = Page 0
+- Story Pages = Page 1 â†’ N
+- Final Page = last story page (no separate episode summary anymore).
 
-Episode Structure
+## Page Workflow
+- Pages replace checkpoints: multiple beats per page.
+- Template-driven comic layout (cream background, bold outlines).
+- Maps, drops, fuel-ups, and side quests are integrated naturally into story panels.
+- Narration boxes and dialogue embedded in panels.
 
-Each episode is structured as a comic book.
+## Sequential Numbering
+- Cover = Page 0 (`ep-XX-cover.png`)
+- Story pages = 1..N (`ep-XX-page-Y.png`)
 
-Episode Cover (Page 0) opens the story.
+## Categories (Story Elements)
+- Scenes: encounters, group dynamics, comedic beats.
+- Fuel-Ups / Drops: integrated into panels (food, drinks, donations, tips).
+- Side Quests: appear as half/full page beats.
+- Restaurants & Buildings: featured as story panels/pages when central to the episode.
+- Cutscenes: cinematic-style panels/pages for romance, humor, or drama.
+- Maps: appear as panels or full pages (no separate summary card).
 
-Episode Pages (Page 1 → N) sequentially capture the flow of the adventure.
+## Narrative Style
+- Backstories and narration integrated into yellow narration boxes.
+- No separate text cards.
 
-Final Page = Episode Summary (mission complete recap, maps, totals, etc.).
+## Asset Rules
+- Episode number & page number appear in the filename only (no footer inside artwork).
+- Filenames must follow convention:
+  - `ep-XX-cover.png`
+  - `ep-XX-page-Y.png`
 
-Page Workflow
+## File Naming Convention
+- Cover: `ep-XX-cover.png`
+- Story pages: `ep-XX-page-Y.png`
+- Folder: `YYYY/episode-XX/`
 
-Pages replace checkpoints:
+## Export Rule (v6.2)
+- Exports include **only final images** (cover + pages).  
+- No JSON, markdown, or metadata files are exported.  
+- Only requirement is proper filenames and folder structure.
 
-Instead of many individual cards, each page integrates multiple beats of the story.
+---
 
-A single page can cover what used to be multiple checkpoints (scene, drop, fuel-up, etc.).
-
-Template-driven: every page uses the same comic template (cream background, bold outlines, footer with Ep.XX pg.Y).
-
-Sequential Numbering:
-
-Cover = Page 0
-
-Episode events = Pages 1 → N
-
-Summary = Last page
-
-Categories (Now Story Elements)
-
-Scenes: Encounters, group dynamics, comedic beats.
-
-Fuel-Ups / Drops: Still appear, but folded into pages (e.g., smoothies, tips, donations shown in-panel).
-
-Side Quests: Woven naturally into page flow as full or half-page beats.
-
-Restaurants & Buildings: Appear as feature pages when central to story.
-
-Cutscenes: Cinematic-style pages (romance, humor, drama) using same template.
-
-Maps
-
-Maps still included, but appear as panels or full pages inside the comic (instead of separate cards).
-
-Source: Google Maps GPS timeline.
-
-Show route with totals (distance, time, cash spent/given).
-
-Narrative
-
-Backstories and narration are embedded directly into the panels with yellow narration boxes.
-
-No separate flip-side text cards needed.
-
-Asset Rules
-
-Episode Number & Page Number must appear in the footer of every page (e.g., Ep.20 pg.6).
-
-File Naming Convention:
-
-ep-XX-page-Y.png
-
-Example: ep-20-page-6.png
-
-Folder Structure:
-
-YYYY/episode-XX/ep-XX-page-Y.png
-
-Episode Flow
-
-Page 0 → Episode Cover
-
-Sequential Story Pages → built from template, merging multiple events into natural comic flow.
-
-Final Page → Episode Summary
-
-Export Rule
-
-Export only the comic pages (cover → summary).
-
-No JSON, story markdowns, or backstory text exports needed.
-
-The comic itself is the deliverable.
-
-👉 This streamlined workflow means fewer, higher-quality pages per episode, quicker generation, easier exporting, and simpler site integration.
+## Version History
+- **v6.2 (Sept 27, 2025):** Export Rule Update â€” exports include only final images (cover + story pages), no metadata files.  
+- **v6.1 (Sept 21, 2025):** Last Edit Export Rule â€” only final versions of pages are exported.  
+- **v6.0 (Sept 20, 2025):** Streamlined Comic Page Workflow â€” cover + page templates, peek functionality, memory integration.  
+- **v5.0 (Sept 17, 2025):** Comic Page Workflow â€” replaced checkpoint cards with comic pages, structured format, export included instructions.
