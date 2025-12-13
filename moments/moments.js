@@ -1378,7 +1378,7 @@ window.momentsInTime = [
   },
   {
     id: "davao-2025-11-21",
-    title: "Arrival in Davao: Birthday Energy & Reconnection",
+    title: "Arrival in Davao: Birthday Energy & Property Exploration",
     date: new Date("2025-11-21T00:00:00Z"),
     timelineHighlight: "Birthday in Davao",
     tags: [
@@ -1387,18 +1387,116 @@ window.momentsInTime = [
       "birthday",
       "friends",
       "leo",
+      "boy",
       "beach",
       "wellness",
       "gratitude",
       "travel",
+      "property",
+      "exploration",
+      "samal",
+      "mati",
       "urban runner"
     ],
     snippet:
-      "Landed in Davao early morning on November 21st after the 2 AM Scoot flight from Singapore. Reunited with Leo and dove straight into beach workouts, sunshine, and the easy rhythm of island life. Celebrated birthday week (Nov 24) with gratitude, reflection, and flow — the perfect blend of friendship, fitness, and freedom to close out November. Continuing Urban Runner daily engagement throughout the Davao stay.",
+      "Landed in Davao early morning on November 21st after the 2 AM Scoot flight from Singapore. Leo & Boy met me and we celebrated my birthday together. We went to explore different places to buy property - nearby island Samal (top choice), then the city of Mati 3 hours away by car, more secluded but a little paradise, just really far. They dropped me back off in Davao and headed back to the mountains. Stayed until November 27th before flying to Siargao. Continuing Urban Runner daily engagement throughout the Davao stay.",
     fullLink: "#",
     location: { lat: 7.1907, lng: 125.4553, name: "Davao, Philippines" },
-    stayDuration: 10, // Approx for now
-    formattedDuration: formatDuration(10),
-  }        
+    stayDuration: 6,
+    formattedDuration: formatDuration(6),
+  },
+  {
+    id: "siargao-2025-11-27",
+    title: "Island Life in Siargao with Sean",
+    date: new Date("2025-11-27T00:00:00Z"),
+    timelineHighlight: "Siargao with Sean",
+    tags: [
+      "siargao",
+      "philippines",
+      "island",
+      "friends",
+      "sean",
+      "beach",
+      "surfing",
+      "travel",
+      "urban runner"
+    ],
+    snippet:
+      "Flew from Davao to Siargao on November 27th to meet up with Sean, a friend of Boy and Leo. We had previously met and spent time together in Bangkok & Manila. Sean spends most of his time living on Siargao, so he's deeply familiar with the island. Enjoyed island life and local insights before flying to Manila on December 2nd. Continuing Urban Runner daily engagement throughout the Siargao stay.",
+    fullLink: "#",
+    location: { lat: 9.7853, lng: 126.1603, name: "Siargao, Philippines" },
+    stayDuration: 5,
+    formattedDuration: formatDuration(5),
+  },
+  {
+    id: "manila-2025-12-02",
+    title: "Manila with Bozhi: City Vibes, Dating Scene & Neighborhood Exploration",
+    date: new Date("2025-12-02T00:00:00Z"),
+    timelineHighlight: "Manila City Life",
+    tags: [
+      "manila",
+      "philippines",
+      "city",
+      "dating",
+      "friends",
+      "bozhi",
+      "neighborhoods",
+      "greenbelt",
+      "makati",
+      "rockwell",
+      "urban runner"
+    ],
+    snippet:
+      "Flew to Manila on December 2nd to get a bit of a city vibe and check out the dating scene. Based on what I saw on Bumble, there were a lot of options. My goal was to meet with Bozhi (who flew in from San Diego) and find a city girl to bring back to Siargao. Bozhi and I had an amazing time - he absolutely loved Manila. We explored a bunch of different neighborhoods. Moved between different areas: first in Greenbelt (super nice, upscale, amazing mall nearby, wide sidewalks, parks, greenery everywhere), then to Makati area near Rockwell (completely different vibe - old Manila style meets Japan, cool, trendy spots everywhere). Went out on a few dates and mission accomplished - met Jeandel. On December 14th, flying to Siargao with her for a week. Continuing Urban Runner daily engagement throughout the Manila stay.",
+    fullLink: "#",
+    location: { lat: 14.5995, lng: 120.9842, name: "Manila, Philippines" },
+    stayDuration: 12,
+    formattedDuration: formatDuration(12),
+  },
+  {
+    id: "siargao-2025-12-14",
+    title: "Siargao Return: Island Time with Jeandel",
+    date: new Date("2025-12-14T00:00:00Z"),
+    timelineHighlight: "Siargao with Jeandel",
+    tags: [
+      "siargao",
+      "philippines",
+      "island",
+      "beach",
+      "dating",
+      "jeandel",
+      "travel",
+      "urban runner"
+    ],
+    snippet:
+      "Flew to Siargao on December 14th with Jeandel, who I met in Manila. She'll spend a week with me here. I'll stay for an extra week after she leaves, then heading to Bangkok for NYE to meet up with Bozhi and Tanya. Continuing Urban Runner daily engagement throughout the Siargao stay.",
+    fullLink: "#",
+    location: { lat: 9.7853, lng: 126.1603, name: "Siargao, Philippines" },
+    stayDuration: 14,
+    formattedDuration: formatDuration(14),
+  },
+  {
+    id: "bangkok-2025-12-28",
+    title: "Bangkok NYE: Reunion with Bozhi & Tanya",
+    date: new Date("2025-12-28T00:00:00Z"),
+    timelineHighlight: "Bangkok NYE",
+    tags: [
+      "bangkok",
+      "thailand",
+      "nye",
+      "friends",
+      "bozhi",
+      "tanya",
+      "new year",
+      "celebration",
+      "urban runner"
+    ],
+    snippet:
+      "Flying to Bangkok for New Year's Eve after spending time in Siargao. Meeting up with Bozhi and Tanya in Bangkok to ring in the new year. Continuing Urban Runner daily engagement throughout the Bangkok stay.",
+    fullLink: "#",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 5,
+    formattedDuration: formatDuration(5),
+  }
   
 ].sort((a, b) => a.date - b.date);
