@@ -1377,6 +1377,34 @@ window.momentsInTime = [
     formattedDuration: formatDuration(1)
   },
   {
+    id: "davao-day-1-2025-11-21",
+    title: "Davao Day 1 — Arrival Reset, Feast Mode & Local Night Run",
+    date: new Date("2025-11-21T00:00:00Z"),
+    timelineHighlight: "Davao Day 1",
+    tags: [
+      "davao",
+      "philippines",
+      "urban runner",
+      "arrival day",
+      "buffet",
+      "nightlife",
+      "local culture",
+      "friends",
+      "comic book"
+    ],
+    snippet:
+      "Touchdown in Davao after an early flight from Singapore. Slept hard, reset the system, then went straight into feast mode at Vikings for the first proper meal in a while. Espresso, massage, reflections on city livability, and a late-night run with Boy, Moses, and crew — capped with Burger King and a quiet ride home.",
+    image: "attachment:///moments/davao/2025-11-21/cover.png",
+    imageAlt: "Davao Day 1 — Arrival, Vikings Feast & Night Out",
+    caption: "Davao Day 1 — Arrival Reset & Local Night Run",
+    fullLink: "/moments/davao/2025-11-21/",
+    isComic: true,
+    pageCount: 6,
+    location: { lat: 7.1907, lng: 125.4553, name: "Davao City, Philippines" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1)
+  },
+  {
     id: "davao-2025-11-21",
     title: "Arrival in Davao: Birthday Energy & Property Exploration",
     date: new Date("2025-11-21T00:00:00Z"),
