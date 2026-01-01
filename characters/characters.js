@@ -117,10 +117,21 @@ window.characters = [
     id: "leigha",
     name: "Leigha",
     role: "Friend",
-    description: "Warm, grounded, sociable. Host of the Bali Yoga Retreat.",
-    bio: "Yoga teacher, community builder, Bali retreat leader. Part of the Bali friend trio with Hallie.",
-    tags: ["friend", "bali", "yoga"],
-    relationship: "Retreat host and close friend."
+    description: "Warm, magnetic, and grounded — equal parts nurturer and free spirit.",
+    bio: "Yoga teacher, nurse, photographer, and community builder. Organizer and host of the Bali Yoga Retreat. Deeply rooted in beach-town energy, with a bohemian aesthetic and a natural ability to bring people together.",
+    avatar: "/characters/Leigha.png",
+    pageImage: "/characters/Leigha.png",
+    imageAlt: "Leigha - Friend",
+    tags: ["friend", "bali", "yoga", "boho", "retreats", "beach-town"],
+    relationship: "Retreat host and close friend; part of the Bali friend trio with Hallie.",
+    traits: [
+      "bubbly",
+      "empathetic",
+      "confident",
+      "expressive",
+      "community-oriented"
+    ],
+    archetype: "The Connector"
   },
   {
     id: "jamie",
