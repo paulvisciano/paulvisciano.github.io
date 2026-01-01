@@ -115,6 +115,20 @@ window.characters = [
     relationship: "A brother forged through shared miles. Parallel path, fellow traveler, and part of the core tribe that makes the journey real."
   },
   {
+    id: "boy",
+    name: "Boy",
+    role: "Social Catalyst / Wild Card / Leo's Brother",
+    description: "Raw social momentum — the kind of person who turns any quiet night into a story without ever meaning to.",
+    bio: "Boy is raw social momentum — the kind of person who turns any quiet night into a story without ever meaning to. Leo's brother and a social catalyst who creates momentum just by being present. Outgoing, high-energy, charismatic, and shamelessly social. A natural womanizer in the most effortless way — not calculated, just instinctual. Extremely comfortable talking to anyone, anywhere. Thrives in group settings, nightlife, and spontaneous plans. Bold without being insecure; playful rather than aggressive. Acts first, thinks later — but rarely in a way that causes damage. Loyal to his brother Leo, often pulling him into more chaotic social situations. He's not introspective or philosophical — he's kinetic. Movement, people, noise, energy. When Boy is in a scene, the probability of meeting new people spikes, nights extend longer than planned, and the story shifts from observation to participation. He brings Davao street confidence into every city he appears in. Friendly and open with Paul, instantly familiar. Less about deep talks, more about shared experiences. Pulls Paul out of analysis mode and into action. Represents a version of freedom rooted in social instinct rather than self-optimization. Primary base: Valencia (Davao). Strongest presence in Davao, group travel scenes, and nightlife arcs.",
+    avatar: "/characters/Boy.png",
+    pageImage: "/characters/Boy.png",
+    imageAlt: "Boy - Social Catalyst",
+    origin: "Davao, Philippines",
+    currentHome: "Valencia, Davao",
+    tags: ["friend", "philippines", "family", "brother", "social", "nightlife", "charismatic", "wild-card"],
+    relationship: "Leo's brother and social catalyst. Friendly, open, instantly familiar. Pulls Paul out of analysis mode and into action. Represents freedom rooted in social instinct."
+  },
+  {
     id: "hallie",
     name: "Hallie",
     nickname: "Mighty Mouse",
