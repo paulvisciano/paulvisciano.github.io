@@ -101,6 +101,20 @@ window.characters = [
     relationship: "Part of the extended volleyball family that shows up across chapters."
   },
   {
+    id: "wouter",
+    name: "Wouter",
+    role: "Friend / Brother / Travel Companion",
+    description: "One of those rare friends who feels more like a brother forged through shared miles than time alone.",
+    bio: "Wouter is one of those rare friends who feels more like a brother forged through shared miles than time alone. Athletic, sharp-featured, with piercing blue eyes and a calm confidence, he carries himself with an easy balance of discipline and fun. He's adventurous without being reckless, social without needing the spotlight, and grounded even when life gets chaotic. Wouter and Paul have crossed continents together — from Medellín to Miami, Germany to Cuba, Dubai to Abu Dhabi — collecting stories through late nights, intense conversations, workouts, beaches, and moments that only happen when you travel with someone you fully trust. He has a strong physical presence but an even stronger sense of loyalty. He's the type who shows up, adapts fast, and turns unfamiliar places into home bases. Currently living in Valencia, Spain, Wouter has his eyes set on South Beach, Miami — drawn to the energy, movement, and sun. He represents momentum, brotherhood, and the kind of friendship that evolves alongside personal growth. In the Urban Runner universe, Wouter is not a side character — he's a parallel path, a fellow traveler, and part of the core tribe that makes the journey real.",
+    avatar: "/characters/Wouter.png",
+    pageImage: "/characters/Wouter.png",
+    imageAlt: "Wouter - Friend",
+    origin: "Netherlands",
+    currentHome: "Valencia, Spain",
+    tags: ["friend", "brother", "travel", "volleyball", "yoga", "valencia", "miami", "brotherhood", "athletic"],
+    relationship: "A brother forged through shared miles. Parallel path, fellow traveler, and part of the core tribe that makes the journey real."
+  },
+  {
     id: "hallie",
     name: "Hallie",
     nickname: "Mighty Mouse",
