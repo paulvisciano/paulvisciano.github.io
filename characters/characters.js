@@ -192,18 +192,6 @@ window.characters = [
     relationship: "Romantic interest; memorable Chinatown stroll."
   },
   {
-    id: "kj",
-    name: "KJ",
-    role: "Friend / Dance Partner",
-    description: "Kind, confident, spiritually attuned. Magnetic dancer with bold energy.",
-    bio: "Born in Houston, raised in Austin. Works in Ayurvedic retreats. Spiritual, artistic, expressive. Known for the 'twerk moment' in Ubud.",
-    avatar: "/characters/KJ.png",
-    pageImage: "/characters/KJ.png",
-    imageAlt: "KJ - Friend",
-    tags: ["friend", "bali", "dance", "spiritual"],
-    relationship: "Electric connection in Ubud. Powerful dance-floor chemistry."
-  },
-  {
     id: "jeandel",
     name: "Jeandel",
     role: "Short-Term Companion / Romantic Interest",
@@ -215,6 +203,31 @@ window.characters = [
     origin: "Manila, Philippines",
     tags: ["romantic-interest", "manila", "siargao", "short-term", "companion", "philippines"],
     relationship: "Short-term companion from Manila who joined Paul in Siargao. Brought youthful energy, genuine connection, and helped clarify relationship boundaries. Mission companion for the Manila → Siargao arc."
+  },
+  {
+    id: "maria",
+    name: "Maria",
+    role: "Local Friend / Musical Muse",
+    description: "Incredibly talented singer with a soulful presence. A musical muse who adds artistic and cultural richness to the Siargao arc.",
+    bio: "Maria is an incredibly talented singer with a soulful presence, perhaps the best singer Paul has ever met. Warm, welcoming, and comfortable in intimate settings. A mix of creative energy and laid-back island lifestyle. Not just a local guide; she's a musical soul who brings a special artistic dimension to the Siargao chapter. Loves to perform in cozy, intimate settings. Spent a lot of time with Paul both at his place and her apartment, sharing music, smoking marijuana together, and enjoying the creative flow. Serves as a musical muse who adds a layer of artistic and cultural richness to the Siargao arc. A character who deepens the sense of community and creativity on the island, making it more than just a scenic getaway. Shows that island life can be both laid-back and creatively vibrant. Met through Sean. The connection with Maria is rooted in shared artistic moments and mutual enjoyment of music. She's a friend and creative partner, someone who enriches time on the island through her talent and easygoing friendship. The bond is more about shared creativity and relaxation than romance. Primary arc: Siargao.",
+    avatar: "/characters/Maria.png",
+    pageImage: "/characters/Maria.png",
+    imageAlt: "Maria - Musical Muse",
+    origin: "Siargao, Philippines",
+    tags: ["friend", "siargao", "music", "singer", "creative", "local", "philippines"],
+    relationship: "Local friend and musical muse from Siargao. Met through Sean. Friend and creative partner who enriches the island experience through shared music and artistic moments. The bond is about shared creativity and relaxation."
+  },
+  {
+    id: "kj",
+    name: "KJ",
+    role: "Friend / Dance Partner",
+    description: "Kind, confident, spiritually attuned. Magnetic dancer with bold energy.",
+    bio: "Born in Houston, raised in Austin. Works in Ayurvedic retreats. Spiritual, artistic, expressive. Known for the 'twerk moment' in Ubud.",
+    avatar: "/characters/KJ.png",
+    pageImage: "/characters/KJ.png",
+    imageAlt: "KJ - Friend",
+    tags: ["friend", "bali", "dance", "spiritual"],
+    relationship: "Electric connection in Ubud. Powerful dance-floor chemistry."
   },
   {
     id: "thai-dragon",
