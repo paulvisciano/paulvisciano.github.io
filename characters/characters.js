@@ -218,6 +218,20 @@ window.characters = [
     relationship: "Local friend and musical muse from Siargao. Met through Sean. Friend and creative partner who enriches the island experience through shared music and artistic moments. The bond is about shared creativity and relaxation."
   },
   {
+    id: "august",
+    name: "August",
+    nickname: "The Fairy",
+    role: "Supporting Character / Whimsical Companion",
+    description: "August (The Fairy) is the island's touch of whimsy — a free-spirited friend who turns ordinary days into something a bit more magical.",
+    bio: "August (The Fairy) is the island's touch of whimsy — a free-spirited friend who turns ordinary days into something a bit more magical. August earned the nickname 'The Fairy' because of her almost otherworldly, carefree vibe. Ethereal, free-spirited energy. Light-hearted and whimsical, with a natural charm that feels almost magical. Someone who brings a touch of playfulness and otherworldliness to everyday moments. Effortlessly enchanting and has a way of making ordinary experiences feel a bit magical. Laid-back and brings a sense of fun and lightness wherever she goes. Serves as a free-spirited companion who adds a whimsical layer to the Siargao arc. Someone who makes even simple moments feel a bit more magical and carefree. A character who encourages embracing a more playful, lighthearted side of island life. August is a friend who adds a layer of whimsy and relaxation to the Siargao experience. Her presence is more about shared fun and light-hearted moments than deep conversations. She's someone who helps unwind and enjoy the more carefree side of island life. Eligible for: Light-hearted scenes, beach gatherings, and any moments that call for a bit of fairy-like magic and playfulness. Primary arc: Siargao.",
+    avatar: "/characters/Fairy.png",
+    pageImage: "/characters/Fairy.png",
+    imageAlt: "August - The Fairy",
+    origin: "Siargao, Philippines",
+    tags: ["friend", "siargao", "free-spirit", "whimsical", "companion", "philippines", "supporting"],
+    relationship: "Free-spirited companion from Siargao. Adds whimsy and relaxation to the island experience. Helps embrace the playful, lighthearted side of island life through shared fun and carefree moments."
+  },
+  {
     id: "kj",
     name: "KJ",
     role: "Friend / Dance Partner",
