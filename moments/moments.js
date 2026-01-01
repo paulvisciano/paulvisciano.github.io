@@ -919,6 +919,7 @@ window.momentsInTime = [
       "/characters/Sandro.png",
       "/characters/Wouter.png",
       "/characters/Boy.png",
+      "/characters/Sean.png",
       "/characters/Hallie.png",
       "/characters/Leigha.png",
       "/characters/Jeandel.png",
@@ -927,7 +928,7 @@ window.momentsInTime = [
       "/characters/KJ.png",
       "/characters/ThaiDragon.png"
     ],
-    pageCount: 17,
+    pageCount: 18,
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
     stayDuration: 1,
     formattedDuration: formatDuration(1)

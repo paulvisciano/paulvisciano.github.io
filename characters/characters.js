@@ -129,6 +129,19 @@ window.characters = [
     relationship: "Leo's brother and social catalyst. Friendly, open, instantly familiar. Pulls Paul out of analysis mode and into action. Represents freedom rooted in social instinct."
   },
   {
+    id: "sean",
+    name: "Sean",
+    role: "Friend / Siargao Local",
+    description: "Friend of Boy and Leo who lives on Siargao. Deeply familiar with the island and part of the Philippines crew.",
+    bio: "Friend of Boy and Leo who lives on Siargao most of the time, making him deeply familiar with the island. Met Paul in Bangkok and Manila before their Siargao reunion. Part of the Philippines crew and the extended friend group. Sean's local knowledge and island familiarity made him an ideal guide for exploring Siargao. He introduced Paul to Maria, connecting the musical muse to the Siargao experience. Represents the local connections and deep island knowledge that make travel experiences richer. Part of the group adventures in Bangkok with Boy and the crew from Chicago and Atlanta. Primary arc: Siargao.",
+    avatar: "/characters/Sean.png",
+    pageImage: "/characters/Sean.png",
+    imageAlt: "Sean - Siargao Local",
+    origin: "Siargao, Philippines",
+    tags: ["friend", "siargao", "philippines", "local", "crew"],
+    relationship: "Friend of Boy and Leo. Lives on Siargao and deeply familiar with the island. Introduced Paul to Maria and provided local insights during the Siargao stay."
+  },
+  {
     id: "hallie",
     name: "Hallie",
     nickname: "Mighty Mouse",
