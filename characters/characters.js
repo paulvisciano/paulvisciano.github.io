@@ -204,6 +204,19 @@ window.characters = [
     relationship: "Electric connection in Ubud. Powerful dance-floor chemistry."
   },
   {
+    id: "jeandel",
+    name: "Jeandel",
+    role: "Short-Term Companion / Romantic Interest",
+    description: "The city girl who took the leap to island life, bringing a mix of youthful energy, drama, and genuine connection into a short but memorable chapter of the Urban Runner story.",
+    bio: "Jeandel is the city girl who took the leap to island life, bringing a mix of youthful energy, drama, and genuine connection into a short but memorable chapter of the Urban Runner story. Warm, easygoing, and playful. Emotionally present, but young and still navigating her own boundaries. Open to new experiences, but can bring a bit of drama due to her age and life stage. Met in Manila through Bumble, where she quickly became a consistent part of daily life: coffee runs, downtime, and a slower, more lived-in rhythm. She agreed to come to Siargao, which turned the Manila mission into a successful crossover from city to island life. In Siargao, she brought a mix of joy and challenge. Paul stepped into a provider role, which felt rewarding but also a bit draining at times. Her youthful energy (around 23) added emotional intensity to the experience. Serves as the emotional and narrative payoff of the Manila mission, proving that finding someone genuine wasn't just a fantasy. A character who transitions from one environment to another, adding depth and relational complexity. A short-term companion who brought both enjoyable moments and challenges, ultimately helping clarify what Paul does and doesn't want in a longer-term partner. Primary arc: Manila transitioning into Siargao.",
+    avatar: "/characters/Jeandel.png",
+    pageImage: "/characters/Jeandel.png",
+    imageAlt: "Jeandel - Short-Term Companion",
+    origin: "Manila, Philippines",
+    tags: ["romantic-interest", "manila", "siargao", "short-term", "companion", "philippines"],
+    relationship: "Short-term companion from Manila who joined Paul in Siargao. Brought youthful energy, genuine connection, and helped clarify relationship boundaries. Mission companion for the Manila → Siargao arc."
+  },
+  {
     id: "thai-dragon",
     name: "Thai Dragon",
     role: "Friend / Thailand Arc Character",
