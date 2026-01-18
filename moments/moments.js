@@ -1516,7 +1516,10 @@ window.momentsInTime = [
       "/moments/siargao/2025-12-14/day-2-page-1.png",
       "/moments/siargao/2025-12-14/day-2-page-2.png",
       "/moments/siargao/2025-12-14/day-2-page-3.png",
-      "/moments/siargao/2025-12-14/day-2-page-4.png",
+      "/moments/siargao/2025-12-14/day-2-page-4.mp4",
+      "/moments/siargao/2025-12-14/day-2-page-5.png",
+      "/moments/siargao/2025-12-14/day-2-page-6.png",
+      "/moments/siargao/2025-12-14/day-2-page-7.png",
       "/moments/siargao/2025-12-14/day-3-cover.png",
       "/moments/siargao/2025-12-14/day-3-page-1.png",
       "/moments/siargao/2025-12-14/day-3-page-2.png",
@@ -1543,10 +1546,7 @@ window.momentsInTime = [
       "/moments/siargao/2025-12-14/day-14-page-2.png",
       "/moments/siargao/2025-12-14/day-14-page-3.png"
     ],
-    pageCount: 32,
-    centerpiecePages: [
-      "/moments/siargao/2025-12-14/day-14-page-2.png"
-    ],
+    pageCount: 35,
     location: { lat: 9.7853, lng: 126.1603, name: "Siargao, Philippines" },
     stayDuration: 14,
     formattedDuration: formatDuration(14),
