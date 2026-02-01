@@ -1559,7 +1559,7 @@ window.momentsInTime = [
   },
   {
     id: "bangkok-2025-12-28",
-    title: "Bangkok NYE: Reunion with Bozhi & Tanya",
+    title: "Bangkok NYE: Tanya, Familiar Ground, and a Quiet Reset",
     date: new Date("2025-12-28T00:00:00Z"),
     timelineHighlight: "Bangkok NYE",
     tags: [
@@ -1567,18 +1567,172 @@ window.momentsInTime = [
       "thailand",
       "nye",
       "friends",
-      "bozhi",
       "tanya",
       "new year",
-      "celebration",
+      "reset",
       "urban runner"
     ],
     snippet:
-      "Flying to Bangkok for New Year's Eve after spending time in Siargao. Meeting up with Bozhi and Tanya in Bangkok to ring in the new year. Continuing Urban Runner daily engagement throughout the Bangkok stay.",
+      "Flew to Bangkok for New Year's Eve after spending time in Siargao. Rang in the new year with Tanya, then stayed through early January — settling into familiar ground, movement, and recalibration before flying out on January 4th.",
     fullLink: "#",
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
-    stayDuration: 5,
-    formattedDuration: formatDuration(5),
+    stayDuration: 8, // Dec 28 → Jan 4
+    formattedDuration: formatDuration(8),
+  },
+  {
+    id: "phuket-2026-01-04",
+    title: "Phuket: Rhythm, Rituals, and Regrounding",
+    date: new Date("2026-01-04T00:00:00Z"),
+    timelineHighlight: "Phuket",
+    tags: [
+      "phuket",
+      "thailand",
+      "reset",
+      "rituals",
+      "movement",
+      "urban runner"
+    ],
+    snippet:
+      "Flew to Phuket on January 4th and stayed through the 10th. Re-established rhythm through movement, waterfront rituals, recovery, and quiet consistency — a grounded start to the year.",
+    fullLink: "#",
+    location: { lat: 7.8804, lng: 98.3923, name: "Phuket, Thailand" },
+    stayDuration: 6,
+    formattedDuration: formatDuration(6),
+  },
+  {
+    id: "bangkok-2026-01-10-transit",
+    title: "Bangkok: Overnight Transit",
+    date: new Date("2026-01-10T00:00:00Z"),
+    timelineHighlight: "Bangkok",
+    tags: [
+      "bangkok",
+      "thailand",
+      "transit",
+      "overnight",
+      "urban runner"
+    ],
+    snippet:
+      "Brief overnight stop in Bangkok en route out of Thailand — reset, pack, and prepare for the Philippines leg.",
+    fullLink: "#",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+  },
+  {
+    id: "manila-2026-01-11",
+    title: "Manila: Entry Point to the Philippines",
+    date: new Date("2026-01-11T00:00:00Z"),
+    timelineHighlight: "Manila",
+    tags: [
+      "manila",
+      "philippines",
+      "arrival",
+      "transit",
+      "urban runner"
+    ],
+    snippet:
+      "Arrived in Manila on January 11th — quick turnaround before continuing deeper into the Philippines.",
+    fullLink: "#",
+    location: { lat: 14.5995, lng: 120.9842, name: "Manila, Philippines" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+  },
+  {
+    id: "boracay-2026-01-12",
+    title: "Boracay: Volleyball, Brotherhood, and New Friends",
+    date: new Date("2026-01-12T00:00:00Z"),
+    timelineHighlight: "Boracay",
+    tags: [
+      "boracay",
+      "philippines",
+      "volleyball",
+      "friends",
+      "wouter",
+      "community",
+      "urban runner"
+    ],
+    snippet:
+      "Spent a full week in Boracay with Wouter. Daily volleyball, hookah sessions, and meeting new friends through the courts — community forming naturally through movement and shared time.",
+    fullLink: "#",
+    location: { lat: 11.9674, lng: 121.9248, name: "Boracay, Philippines" },
+    stayDuration: 7,
+    formattedDuration: formatDuration(7),
+  },
+  {
+    id: "cebu-2026-01-19",
+    title: "Cebu: Quick Transit South",
+    date: new Date("2026-01-19T00:00:00Z"),
+    timelineHighlight: "Cebu",
+    tags: [
+      "cebu",
+      "philippines",
+      "transit",
+      "urban runner"
+    ],
+    snippet:
+      "Flew from Boracay to Cebu on January 19th — a short transition before heading onward to Siargao.",
+    fullLink: "#",
+    location: { lat: 10.3157, lng: 123.8854, name: "Cebu, Philippines" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+  },
+  {
+    id: "siargao-2026-01-19",
+    title: "Siargao: Deep Routine, Connection, and Closure",
+    date: new Date("2026-01-19T00:00:00Z"),
+    timelineHighlight: "Siargao Arc",
+    tags: [
+      "siargao",
+      "philippines",
+      "routine",
+      "connection",
+      "arc",
+      "urban runner"
+    ],
+    snippet:
+      "Stayed in Siargao from January 19th through the 29th. Daily routines, meaningful connections, creative flow, and emotional closure — one of the deeper arcs of the journey.",
+    fullLink: "#",
+    location: { lat: 9.7843, lng: 126.1592, name: "Siargao (General Luna), Philippines" },
+    stayDuration: 10,
+    formattedDuration: formatDuration(10),
+  },
+  {
+    id: "manila-2026-01-29",
+    title: "Manila: Overnight Exit",
+    date: new Date("2026-01-29T00:00:00Z"),
+    timelineHighlight: "Manila",
+    tags: [
+      "manila",
+      "philippines",
+      "overnight",
+      "departure",
+      "urban runner"
+    ],
+    snippet:
+      "Returned to Manila on January 29th for an overnight stay — packing, reflecting, and preparing for the next country.",
+    fullLink: "#",
+    location: { lat: 14.5995, lng: 120.9842, name: "Manila, Philippines" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+  },
+  {
+    id: "danang-2026-01-30",
+    title: "Da Nang: Vietnam Chapter Begins",
+    date: new Date("2026-01-30T00:00:00Z"),
+    timelineHighlight: "Da Nang",
+    tags: [
+      "da nang",
+      "vietnam",
+      "arrival",
+      "new chapter",
+      "urban runner"
+    ],
+    snippet:
+      "Flew from Manila to Da Nang on January 30th. Staying through at least February 15th — new country, new rhythm, and the start of the Vietnam chapter.",
+    fullLink: "#",
+    location: { lat: 16.0544, lng: 108.2022, name: "Da Nang, Vietnam" },
+    stayDuration: 17, // Jan 30 → Feb 15
+    formattedDuration: formatDuration(17),
   }
-  
+
 ].sort((a, b) => a.date - b.date);
