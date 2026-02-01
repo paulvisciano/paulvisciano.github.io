@@ -1517,7 +1517,7 @@ window.momentsInTime = [
       "/moments/siargao/2025-12-14/day-2-page-1.png",
       "/moments/siargao/2025-12-14/day-2-page-2.png",
       "/moments/siargao/2025-12-14/day-2-page-3.png",
-      "/moments/siargao/2025-12-14/day-2-page-4.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/siargao/2025-12-14/day-2-page-4.mp4",
       "/moments/siargao/2025-12-14/day-2-page-5.png",
       "/moments/siargao/2025-12-14/day-2-page-6.png",
       "/moments/siargao/2025-12-14/day-2-page-7.png",
