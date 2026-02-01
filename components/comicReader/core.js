@@ -176,6 +176,23 @@ const getPageIncrement = (deviceType) => {
 };
 
 /**
+ * Preload the next 2 pages (by index). Used for:
+ * - Cover: fromIndex 0 → preload first 2 pages (indices 0, 1).
+ * - Viewing page N (1-based): fromIndex N → preload next 2 pages (indices N, N+1).
+ * Skips video URLs.
+ */
+const preloadNextTwoPages = (pages, fromIndex, isVideoFile) => {
+  if (!pages || !pages.length) return;
+  [fromIndex, fromIndex + 1].forEach((i) => {
+    if (i < 0 || i >= pages.length) return;
+    const url = pages[i];
+    if (isVideoFile && isVideoFile(url)) return;
+    const img = new Image();
+    img.src = url;
+  });
+};
+
+/**
  * Export core utilities
  */
 window.ComicReaderCore = {
@@ -186,6 +203,7 @@ window.ComicReaderCore = {
   getPreviousEpisode,
   findCurrentEpisode,
   getPageIncrement,
-  isVideoFile
+  isVideoFile,
+  preloadNextTwoPages
 };
 

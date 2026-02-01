@@ -140,7 +140,15 @@ window.ComicReader = ({ content, onClose }) => {
     setTotalPages(newPages.length);
     updateGlobalState({ totalPages: newPages.length });
   }, [episodeData]);
-  
+
+  // When cover is shown, preload the first 2 pages so they're ready when the user opens the book
+  React.useEffect(() => {
+    if (!showCover || !pages.length) return;
+    const preload = window.ComicReaderCore?.preloadNextTwoPages;
+    const isVideoFile = window.ComicReaderCore?.isVideoFile;
+    if (preload && isVideoFile) preload(pages, 0, isVideoFile);
+  }, [showCover, pages]);
+
   // Helper to get pages (for use in functions)
   const getPages = () => {
     if (!coreGetPages || !episodeData) return [];

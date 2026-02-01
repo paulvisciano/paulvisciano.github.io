@@ -89,7 +89,7 @@ const renderCover = (deviceType, styles, {
     ]),
     episodeData && React.createElement('img', {
       key: 'cover-img',
-      src: `${episodeData.fullLink.replace(/\/$/, '')}/cover.png`,
+      src: episodeData.cover || `${episodeData.fullLink.replace(/\/$/, '')}/cover.png`,
       alt: `${episodeData.title} Cover`,
       style: styles.coverImageWithOpacityStyle ? styles.coverImageWithOpacityStyle(isVisible) : (styles.coverImageStyle || {})
     })

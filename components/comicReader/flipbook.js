@@ -16,7 +16,7 @@ const styleObjectToCss = (styleObj) => {
 };
 
 /**
- * Create either an image or video element based on the URL
+ * Create either an image or video element based on the URL.
  */
 const createMediaElement = (url, alt, style, isVideoFile) => {
   if (isVideoFile && isVideoFile(url)) {
@@ -45,6 +45,8 @@ const createMediaElement = (url, alt, style, isVideoFile) => {
     const img = document.createElement('img');
     img.src = url;
     img.alt = alt;
+    img.loading = 'lazy';
+    img.decoding = 'async';
     img.style.cssText = styleObjectToCss(style);
     img.onerror = () => {};
     return img;
@@ -143,6 +145,9 @@ const updateMobilePages = (leftPage, pageNumber, currentPages, previousPage, nex
   
   pageContainer.appendChild(pageContent);
   leftPage.appendChild(pageContainer);
+
+  const preload = window.ComicReaderCore?.preloadNextTwoPages;
+  if (preload) preload(currentPages, pageNumber, isVideoFile);
 };
 
 /**
@@ -230,6 +235,9 @@ const updateDesktopPages = (leftPage, rightPage, pageNumber, currentPages, previ
       }
     };
   }
+
+  const preload = window.ComicReaderCore?.preloadNextTwoPages;
+  if (preload) preload(currentPages, pageNumber, isVideoFile);
 };
 
 /**
@@ -262,7 +270,7 @@ const updatePages = (deviceType, orientation, leftPage, rightPage, pageNumber, c
   
   // Portrait = single page, Landscape = two-page spread
   const useSinglePage = orientation === 'portrait';
-  
+
   if (useSinglePage) {
     updateMobilePages(leftPage, pageNumber, currentPages, previousPage, nextPage, styles);
   } else {
