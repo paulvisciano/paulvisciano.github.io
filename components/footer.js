@@ -352,7 +352,7 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
                     'img',
                     { 
                       className: 'comic-thumbnail-indicator', 
-                      src: `${moment.fullLink.replace(/\/$/, '')}/cover.png`,
+                      src: moment.cover || `${moment.fullLink.replace(/\/$/, '')}/cover.png`,
                       alt: `${moment.title} cover`,
                       title: 'Comic book available'
                     }
