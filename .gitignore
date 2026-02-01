@@ -30,6 +30,7 @@ Thumbs.db
 # Environment files
 .env
 .env.local
+mcp-r2-upload/.env
 .env.development.local
 .env.test.local
 .env.production.local
