@@ -1504,13 +1504,14 @@ window.momentsInTime = [
       "urban runner"
     ],
     snippet: "14 days · Island reset chapter — The complete Siargao arc from December 14–27, 2025. From arrival and settling in, through workouts and scooter loops, to domestic life, intimacy, and late-night work sessions. A single comic capturing the entire island sequence.",
-    image: "attachment:///moments/siargao/2025-12-14/cover.png",
+    image: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/siargao/2025-12-14/cover.png",
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/siargao/2025-12-14/cover.png",
     imageAlt: "Siargao Arc Cover",
     caption: "Siargao Arc — December 14–27, 2025",
     fullLink: "/moments/siargao/2025-12-14/",
     isComic: true,
     pages: [
-      "/moments/siargao/2025-12-14/day-1-page-1.png",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/siargao/2025-12-14/day-1-page-1.png",
       "/moments/siargao/2025-12-14/day-1-page-2.png",
       "/moments/siargao/2025-12-14/day-2-cover.png",
       "/moments/siargao/2025-12-14/day-2-page-1.png",

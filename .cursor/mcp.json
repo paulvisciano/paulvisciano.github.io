@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "r2-upload": {
+      "command": "node",
+      "args": ["${workspaceFolder}/mcp-r2-upload/index.js"],
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      },
+      "envFile": "${workspaceFolder}/mcp-r2-upload/.env"
+    }
+  }
+}
