@@ -46,7 +46,8 @@ const renderCover = (deviceType, styles, {
   episodeData, 
   isVisible, 
   openComicBook, 
-  coverRef
+  coverRef,
+  isWideCover = false
 }) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
@@ -58,11 +59,12 @@ const renderCover = (deviceType, styles, {
     openComicBook();
   } : undefined;
   
+  const coverClassName = 'comic-cover-display' + (isWideCover ? ' comic-cover-display--wide' : '');
   return React.createElement('div', {
     key: 'cover',
     ref: coverRef,
     style: styles.coverDisplayStyle || {},
-    className: 'comic-cover-display',
+    className: coverClassName,
     onClick: isVisible ? openComicBook : undefined,
     onTouchStart: handleTouchStart,
     onMouseEnter: isVisible ? (e) => {
@@ -243,16 +245,18 @@ const renderContainer = (deviceType, styles, {
   onTouchEnd,
   onClick,
   children,
-  containerRef
+  containerRef,
+  containerClassName = ''
 }) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
+  const className = 'comic-episode-container' + (containerClassName ? ' ' + containerClassName.trim() : '');
   
   return React.createElement('div', {
     key: 'container',
     ref: containerRef,
     style: styles.comicContainerStyle || {},
-    className: 'comic-episode-container',
+    className,
     onMouseEnter: () => setShowControls(true),
     onMouseLeave: () => setShowControls(false),
     onTouchStart: (isMobile || isTablet) ? onTouchStart : undefined,
@@ -369,6 +373,19 @@ const renderCoverNavigation = (deviceType, styles, {
   return buttons;
 };
 
+/**
+ * Render Comic Reader 4.0 immersive layout (cover + pages + orientation-aware video).
+ * Used when episodeData.comicReaderVersion === 4 or episodeData.immersiveComic === true.
+ */
+const renderImmersiveV4 = (episodeData, styles, navState = {}) => {
+  if (typeof window.ComicReaderImmersiveV4 !== 'function') return null;
+  return React.createElement(window.ComicReaderImmersiveV4, {
+    episodeData,
+    styles: styles || {},
+    navState: navState || {}
+  });
+};
+
 // Export render functions
 window.ComicReaderRender = {
   renderHeaderButtons,
@@ -379,6 +396,7 @@ window.ComicReaderRender = {
   renderDesktopControls,
   renderMobileNavigation,
   renderContainer,
-  renderCoverNavigation
+  renderCoverNavigation,
+  renderImmersiveV4
 };
 

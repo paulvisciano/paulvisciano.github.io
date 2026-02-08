@@ -156,9 +156,9 @@ const STYLE_CONFIG = {
 };
 
 /**
- * Get container style based on device, orientation, showCover state, and fullscreen
+ * Get container style based on device, orientation, showCover state, fullscreen, and optional wide cover (v4)
  */
-const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = false) => {
+const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = false, isV4Cover = false) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -200,6 +200,8 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     config = STYLE_CONFIG.container.desktop;
   }
   
+  // V4 cover stays portrait like other comics; landscape/wide layout starts when comic is opened (immersiveV4)
+  
   // Remove width/height from base config only if dynamicProps provides them
   const baseConfig = (dynamicProps.width || dynamicProps.height)
     ? (() => {
@@ -209,10 +211,16 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     : config;
   
   // Override dimensions when in fullscreen AND comic is open (not showing cover)
-  // Desktop: fixed 1000px x 750px
-  // Other devices: 85% width and 90% height
-  // When showing cover, use static dimensions from cover/open config
-  const fullscreenProps = (isFullscreen && !showCover) ? (
+  // V4 open: desktop 1000x700; mobile/tablet fill viewport
+  // Otherwise desktop: 1000x750, other: 85% x 90%
+  const fullscreenProps = (!showCover && isV4Cover) ? (
+    isDesktop ? { width: '1000px', height: '700px' } : {
+      width: '100%',
+      height: '100%',
+      maxWidth: 'none',
+      maxHeight: 'none'
+    }
+  ) : (isFullscreen && !showCover) ? (
     isDesktop ? {
       width: '1000px',
       height: '750px'
@@ -317,7 +325,7 @@ const getCoverImageStyle = (deviceType, orientation) => {
  * @returns {object} Style objects for the device type
  */
 const getDeviceStyles = (deviceType, state = {}) => {
-  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false } = state;
+  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false, isV4Cover = false } = state;
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -325,28 +333,31 @@ const getDeviceStyles = (deviceType, state = {}) => {
   
   // Shared overlay style (same for all devices)
   // When showing cover, reduce height to leave space for footer timeline (~150px)
-  const footerHeight = 150; // Approximate footer height to leave space for timeline
+  // When v4 comic is open on mobile/tablet, stretch container to edges; on desktop center the 1000x700 box
+  const footerHeight = 150;
+  const v4Open = !showCover && isV4Cover;
+  const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: fixed 1000x700
   const comicOverlayStyle = {
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100vw',
     height: showCover ? `calc(100% - ${footerHeight}px)` : '100%',
-    background: showCover ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.8)', // Darker when comic is open to focus on comic
+    background: showCover ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.8)',
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: v4FillViewport ? 'stretch' : 'center',
+    justifyContent: v4FillViewport ? 'stretch' : 'center',
     paddingTop: showCover ? (isMobile ? '20px' : '40px') : '0',
-    paddingBottom: showCover ? '20px' : '0', // Small padding to ensure cover doesn't touch footer area
+    paddingBottom: showCover ? '20px' : '0',
     zIndex: 10000,
     backdropFilter: 'blur(2px)',
     touchAction: 'none',
     pointerEvents: 'auto'
   };
 
-  // Container styles - using structured config
-  const comicContainerStyle = getContainerStyle(deviceType, orientation, showCover, isFullscreen);
+  // Container styles - when v4 open, container fills viewport for edge-to-edge content
+  const comicContainerStyle = getContainerStyle(deviceType, orientation, showCover, isFullscreen, isV4Cover);
 
   // Cover display styles - based on device type and orientation
   // No width/height - inherits from parent container

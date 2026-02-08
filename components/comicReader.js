@@ -20,7 +20,8 @@ const {
   renderDesktopControls, 
   renderMobileNavigation, 
   renderContainer,
-  renderCoverNavigation
+  renderCoverNavigation,
+  renderImmersiveV4
 } = window.ComicReaderRender || {};
 
 window.ComicReader = ({ content, onClose }) => {
@@ -29,6 +30,7 @@ window.ComicReader = ({ content, onClose }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(0);
   const [showCover, setShowCover] = React.useState(true);
+  const [isCoverExiting, setIsCoverExiting] = React.useState(false);
   const [flipbookReady, setFlipbookReady] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const [episodeData, setEpisodeData] = React.useState(null);
@@ -62,6 +64,9 @@ window.ComicReader = ({ content, onClose }) => {
   
   // Determine view mode based on orientation (portrait = single page, landscape = two-page)
   const useSinglePage = orientation === 'portrait';
+
+  // Comic Reader 4.0: immersive mode (cover + pages + video) instead of flipbook
+  const isV4Episode = episodeData && (episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true);
   
   // Keep ref in sync with state
   React.useEffect(() => {
@@ -569,11 +574,9 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Handle flipbook creation when flipbookReady becomes true or orientation changes
   React.useEffect(() => {
-    // Don't create flipbook if no episode data
-    if (!episodeData) {
-      return;
-    }
-    
+    if (!episodeData) return;
+    if (episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true) return;
+
     // Recreate flipbook when orientation changes (if already created)
     if (flipbookCreatedRef.current && flipbookRef.current && !showCover) {
       const currentPageValue = currentPageRef.current;
@@ -642,16 +645,29 @@ window.ComicReader = ({ content, onClose }) => {
     };
   }, [showCover]);
 
-  // Function to transition from cover to flipbook
+  // Function to transition from cover to flipbook (or v4 immersive view)
   const openComicBook = () => {
+    if (isV4Episode) {
+      const TRANSITION_MS = 400;
+      setIsCoverExiting(true);
+      setTimeout(() => {
+        const pages = episodeData?.pages && Array.isArray(episodeData.pages) ? episodeData.pages : [];
+        const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
+        setShowCover(false);
+        setIsCoverExiting(false);
+        setTotalPages(pages.length + (hasVideo ? 1 : 0));
+        setCurrentPage(1);
+        currentPageRef.current = 1;
+        setIsLoading(false);
+        setFlipbookReady(true);
+      }, TRANSITION_MS);
+      return;
+    }
     setShowCover(false);
     setIsLoading(true);
-    
-    // Show loading immediately, then create flipbook
     setTimeout(() => {
-      // Set flipbook ready to trigger the flipbook creation
       setFlipbookReady(true);
-    }, 50); // Minimal delay to ensure loading state is visible
+    }, 50);
   };
 
   // Function to go back to cover from first page
@@ -692,7 +708,7 @@ window.ComicReader = ({ content, onClose }) => {
         console.error('ComicReader: styles not loaded');
         return;
       }
-      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen });
+      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode });
       
       // Use utility to create flipbook structure
       const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, orientation, currentPages, currentStyles);
@@ -741,7 +757,7 @@ window.ComicReader = ({ content, onClose }) => {
       console.error('ComicReader: styles not loaded');
       return;
     }
-    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen });
+    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen, orientation, isV4Cover: isV4Episode });
     
     // Use utility to update pages
     updatePagesUtil(deviceType, orientation, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
@@ -752,7 +768,20 @@ window.ComicReader = ({ content, onClose }) => {
   const previousPage = () => {
     try {
       const currentPageValue = currentPageRef.current;
-      
+
+      // V4 immersive: one view per "page" (spread or video), flip to previous or back to cover
+      if (isV4Episode) {
+        if (currentPageValue <= 1) {
+          goBackToCover();
+          return;
+        }
+        const prevPage = currentPageValue - 1;
+        setCurrentPage(prevPage);
+        currentPageRef.current = prevPage;
+        updateGlobalState({ currentPage: prevPage });
+        return;
+      }
+
       if (!getPreviousPageNumber || !shouldGoBackToCover) {
         // Fallback if utilities not loaded
         const prevPage = useSinglePage ? currentPageValue - 1 : currentPageValue - 2;
@@ -766,12 +795,12 @@ window.ComicReader = ({ content, onClose }) => {
         }
         return;
       }
-      
+
       if (shouldGoBackToCover(currentPageValue, orientation)) {
         goBackToCover();
         return;
       }
-      
+
       const prevPage = getPreviousPageNumber(currentPageValue, orientation);
       if (prevPage >= 1) {
         setCurrentPage(prevPage);
@@ -787,9 +816,24 @@ window.ComicReader = ({ content, onClose }) => {
   const nextPage = () => {
     try {
       const currentPageValue = currentPageRef.current;
+
+      // V4 immersive: one view per "page" (spread or video), flip to next or load next episode
+      if (isV4Episode) {
+        const actualTotalPages = totalPages;
+        const nextPageNum = currentPageValue + 1;
+        if (nextPageNum <= actualTotalPages) {
+          setCurrentPage(nextPageNum);
+          currentPageRef.current = nextPageNum;
+          updateGlobalState({ currentPage: nextPageNum });
+        } else {
+          loadNextEpisode();
+        }
+        return;
+      }
+
       const currentPages = getPages();
       const actualTotalPages = currentPages.length;
-      
+
       if (!getNextPageNumber) {
         // Fallback if utilities not loaded
         const nextPageNum = useSinglePage ? currentPageValue + 1 : currentPageValue + 2;
@@ -803,7 +847,7 @@ window.ComicReader = ({ content, onClose }) => {
         }
         return;
       }
-      
+
       const nextPageNum = getNextPageNumber(currentPageValue, orientation);
       if (nextPageNum <= actualTotalPages) {
         setCurrentPage(nextPageNum);
@@ -965,7 +1009,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Get device-specific styles
   const styles = window.ComicReaderStyles?.getDeviceStyles 
-    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen })
+    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode })
     : {}; // Fallback empty object if styles not loaded
 
   // All styles are now loaded from styles.js via getDeviceStyles()
@@ -977,8 +1021,8 @@ window.ComicReader = ({ content, onClose }) => {
   // Build container children using render functions
   const containerChildren = [];
   
-  // If showing cover, create Splide carousel with all episodes
-  if (showCover && !error && renderCover && allEpisodes.length > 0) {
+  // If showing cover (or cover is exiting overlay), create Splide carousel with all episodes
+  if ((showCover || isCoverExiting) && !error && renderCover && allEpisodes.length > 0) {
     // Create Splide structure: splide > splide__track > splide__list > splide__slide (for each episode)
     const splideSlides = allEpisodes.map((episode, index) => {
       const isCurrentEpisode = episode.id === episodeData?.id;
@@ -989,7 +1033,8 @@ window.ComicReader = ({ content, onClose }) => {
         episodeData: episode,
         isVisible: isCurrentEpisode ? isVisible : true, // Only animate current episode
         openComicBook: isCurrentEpisode ? openComicBook : () => {}, // Only allow opening current episode
-        coverRef: isCurrentEpisode ? coverRef : null
+        coverRef: isCurrentEpisode ? coverRef : null,
+        isWideCover: episode.comicReaderVersion === 4 || episode.immersiveComic === true
       }));
     });
 
@@ -1006,22 +1051,24 @@ window.ComicReader = ({ content, onClose }) => {
     const splideContainer = React.createElement('div', {
       key: 'splide-container',
       ref: splideContainerRef,
-      className: 'splide comic-episode-splide',
+      className: 'splide comic-episode-splide' + (isCoverExiting ? ' comic-cover-exiting' : ''),
       style: {
         ...styles.comicContainerStyle,
         width: '100%',
-        height: '100%'
+        height: '100%',
+        ...(isCoverExiting && { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 })
       }
     }, splideTrack);
 
     containerChildren.push(splideContainer);
-  } else if (showCover && !error && renderCover) {
+  } else if ((showCover || isCoverExiting) && !error && renderCover) {
     // Fallback: single cover if no episodes or Splide not available
     containerChildren.push(renderCover(deviceType, styles, {
       episodeData,
       isVisible,
       openComicBook,
-      coverRef
+      coverRef,
+      isWideCover: isV4Episode
     }));
   }
   
@@ -1039,14 +1086,23 @@ window.ComicReader = ({ content, onClose }) => {
       setIsLoading
     }));
   }
+
+  // Comic Reader 4.0: vertical fullscreen feed (swipe up/down between slides)
+  // Render during cover-exit overlap so first page fades in as cover fades out
+  if (!error && (!showCover || isCoverExiting) && isV4Episode && renderImmersiveV4) {
+    const v4Content = renderImmersiveV4(episodeData, styles, { onBackToCover: goBackToCover });
+    containerChildren.push(isCoverExiting
+      ? React.createElement('div', { key: 'v4-entering', className: 'comic-content-entering' }, v4Content)
+      : v4Content);
+  }
   
-  // Flipbook container
-  if (!error && !showCover && renderFlipbook) {
+  // Flipbook container (classic mode only)
+  if (!error && !showCover && !isV4Episode && renderFlipbook) {
     containerChildren.push(renderFlipbook(styles, { flipbookRef }));
   }
   
-  // Desktop controls (landscape mode - two-page spread)
-  if (!error && !isLoading && flipbookReady && !showCover && !useSinglePage && renderDesktopControls) {
+  // Desktop controls (landscape): arrow buttons for flipbook only (v4 uses swipe feed)
+  if (!error && !isLoading && flipbookReady && !showCover && !isV4Episode && !useSinglePage && renderDesktopControls) {
     containerChildren.push(renderDesktopControls(styles, {
       currentPage,
       totalPages,
@@ -1056,8 +1112,8 @@ window.ComicReader = ({ content, onClose }) => {
     }));
   }
   
-  // Mobile navigation (portrait mode - single page)
-  if (!error && !isLoading && flipbookReady && !showCover && useSinglePage && renderMobileNavigation) {
+  // Mobile navigation (portrait): arrow buttons for flipbook only (v4 uses swipe feed)
+  if (!error && !isLoading && flipbookReady && !showCover && !isV4Episode && useSinglePage && renderMobileNavigation) {
     containerChildren.push(renderMobileNavigation(styles, {
       currentPage,
       totalPages,
@@ -1076,6 +1132,9 @@ window.ComicReader = ({ content, onClose }) => {
     }
   };
   
+  // Transition class: container needs position relative when cover overlays content
+  const transitionClass = isCoverExiting ? 'comic-transition-overlay' : '';
+
   // Render container with device-specific handlers
   const containerElement = renderContainer 
     ? renderContainer(deviceType, styles, {
@@ -1085,13 +1144,14 @@ window.ComicReader = ({ content, onClose }) => {
         onTouchEnd,
         onClick: handleContainerClick,
         children: containerChildren,
-        containerRef
+        containerRef,
+        containerClassName: transitionClass
       })
     : React.createElement('div', {
         key: 'container',
         ref: containerRef,
         style: styles.comicContainerStyle || {},
-        className: 'comic-episode-container',
+        className: 'comic-episode-container' + (transitionClass ? ' ' + transitionClass : ''),
         onClick: handleContainerClick
       }, containerChildren);
   
@@ -1189,6 +1249,28 @@ if (!document.querySelector('#comic-episode-styles')) {
     
     .comic-episode-container {
       animation: scaleIn 0.3s ease-out;
+    }
+    
+    /* During transition: container needs position relative for overlay */
+    .comic-episode-container.comic-transition-overlay {
+      position: relative;
+    }
+    
+    /* Cover expands and fades out (on .comic-episode-splide.comic-cover-exiting) */
+    .comic-episode-splide.comic-cover-exiting {
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: scale(1.06);
+      opacity: 0;
+    }
+    
+    /* First page fades in (runs alongside cover fade) */
+    .comic-content-entering {
+      animation: comicContentEnter 0.4s ease-out forwards;
+    }
+    @keyframes comicContentEnter {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     
     /* Disable scaleIn animation for Splide slides */
@@ -1494,6 +1576,20 @@ if (!document.querySelector('#comic-episode-styles')) {
     /* Ensure video controls are visible and styled */
     .flipbook video::-webkit-media-controls-panel {
       background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Comic Reader 4.0 immersive layout */
+    .comic-immersive-v4 {
+      -webkit-overflow-scrolling: touch;
+    }
+    /* Vertical feed: one fullscreen slide per swipe */
+    .comic-immersive-v4-feed {
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+    }
+    .comic-immersive-v4-slide {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
   
   `;

@@ -1733,6 +1733,51 @@ window.momentsInTime = [
     location: { lat: 16.0544, lng: 108.2022, name: "Da Nang, Vietnam" },
     stayDuration: 17, // Jan 30 → Feb 15
     formattedDuration: formatDuration(17),
+  },
+  {
+    id: "heaven-on-earth-2026-02-07",
+    title: "Heaven on Earth",
+    date: new Date("2026-02-07T00:00:00Z"),
+    timelineHighlight: "Heaven on Earth",
+    tags: [
+      "meditation",
+      "clouds",
+      "mountains",
+      "castle",
+      "Mei-Ian",
+      "sound-healing"
+    ],
+    snippet:
+      "A castle in the sky, floating on a cloud—paired with a Mei-Ian meditation track.",
+    fullLink: "/moments/da-nang/2026-02-07/heaven-on-earth/",
+    isComic: true,
+    comicReaderVersion: 4,
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/cover.png",
+    // Landscape: desktop always; mobile/tablet in landscape.
+    pages: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-1-landscape.png",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-2-landscape.png"
+    ],
+    pagesLandscape: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-1-landscape.png",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-2-landscape.png"
+    ],
+    // Portrait: mobile/tablet in portrait only.
+    pagesPortrait: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-1-portrait.png",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-2-portrait.png"
+    ],
+    videoPortraitUrl: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/video-portrait.mp4",
+    videoLandscapeUrl: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/video-landscape.mp4",
+    videoSection: {
+      cta: "Press Play. Breathe. Watch the clouds move.",
+      artist: "Mei-Ian",
+      trackTitle: "",
+      caption: "I used to meditate to this track to feel airy… her voice is celestial… perfect for this setting."
+    },
+    location: { lat: 16.0544, lng: 108.2022, name: "Da Nang, Vietnam" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
   }
 
 ].sort((a, b) => a.date - b.date);
