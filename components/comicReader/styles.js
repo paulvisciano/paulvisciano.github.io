@@ -25,19 +25,18 @@ const STYLE_CONFIG = {
       },
       landscape: {
         cover: {
-          width: '200px',
-          height: '300px'
+          width: '240px',
+          height: '360px'
         },
         open: {
-          width: '400px',
-          height: '300px'
+          width: '70vw',
+          height: '90dvh'
         },
         position: 'relative',
-       
         borderRadius: '15px',
         border: '4px solid #d4c5a9',
         boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-        justifyContent: undefined
+        justifyContent: 'center'
       }
     },
     tablet: {
@@ -65,8 +64,10 @@ const STYLE_CONFIG = {
           height: '600px'
         },
         open: {
-          width: '800px',
-          height: '600px'
+          width: 'calc(100vw - 120px)',
+          height: 'calc(100vh - 80px)',
+          maxWidth: '1200px',
+          maxHeight: '800px'
         },
         position: 'relative',
         top: 'auto',
@@ -75,7 +76,7 @@ const STYLE_CONFIG = {
         borderRadius: '15px',
         border: '4px solid #d4c5a9',
         boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-        justifyContent: undefined
+        justifyContent: 'center'
       }
     },
     desktop: {
@@ -85,8 +86,10 @@ const STYLE_CONFIG = {
         height: '560px'
       },
       open: {
-        width: '800px',
-        height: '600px'
+        width: 'calc(100vw - 120px)',
+        height: 'calc(100vh - 80px)',
+        maxWidth: '1400px',
+        maxHeight: '900px'
       },
       position: 'relative',
       top: 'auto',
@@ -95,7 +98,7 @@ const STYLE_CONFIG = {
       borderRadius: '15px',
       border: '4px solid #d4c5a9',
       boxShadow: '0 25px 80px rgba(0, 0, 0, 0.9)',
-      justifyContent: undefined
+      justifyContent: 'center'
     }
   },
   flipbook: {
@@ -240,8 +243,8 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     }
   ) : {};
 
-  // Mobile landscape with comic open: no border, radius, or shadow (edge-to-edge)
-  const mobileLandscapeOpenNoDecor = (isMobile && !isPortrait && !showCover) ? {
+  // Mobile landscape with V4 immersive open only: no border, radius, or shadow (edge-to-edge)
+  const mobileLandscapeOpenNoDecor = (isMobile && !isPortrait && !showCover && isV4Cover) ? {
     borderRadius: 0,
     border: 'none',
     boxShadow: 'none'
@@ -352,33 +355,32 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const isPortrait = orientation === 'portrait';
   
   // Shared overlay style (same for all devices)
-  // When showing cover, reduce height to leave space for footer timeline (~150px)
-  // When v4 comic is open on mobile/tablet, stretch container to edges; on desktop center the 1000x700 box
-  const footerHeight = 150;
+  // When showing cover: full height so blur extends over timeline (no hard cutoff).
+  // pointerEvents: 'none' so clicks on the bottom (timeline area) pass through; children stay clickable.
+  const footerHeight = showCover && !isPortrait ? 120 : 150;
   const v4Open = !showCover && isV4Cover;
   const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: fixed 1000x700
-  // showCover: pan-x for horizontal cover carousel
-  // v4 immersive: pan-y for vertical slide swiper
-  // flipbook: 'none' to prevent page scroll
   const overlayTouchAction = showCover ? 'pan-x' : (isV4Cover ? 'pan-y' : 'none');
+  const overlayPaddingTop = showCover && isPortrait ? (isMobile ? '20px' : '40px') : '0';
+  const overlayPaddingBottom = showCover && isPortrait ? '20px' : '0';
   const comicOverlayStyle = {
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100vw',
-    height: showCover ? `calc(100dvh - ${footerHeight}px)` : '100dvh',
-    minHeight: showCover ? `calc(100vh - ${footerHeight}px)` : '100vh',
+    height: '100dvh',
+    minHeight: '100vh',
     background: showCover ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.8)',
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',
     alignItems: v4FillViewport ? 'stretch' : 'center',
     justifyContent: v4FillViewport ? 'stretch' : 'center',
-    paddingTop: showCover ? (isMobile ? '20px' : '40px') : '0',
-    paddingBottom: showCover ? '20px' : '0',
-    zIndex: 10000,
+    paddingTop: overlayPaddingTop,
+    paddingBottom: overlayPaddingBottom,
+    zIndex: 10002,
     backdropFilter: 'blur(2px)',
     touchAction: overlayTouchAction,
-    pointerEvents: 'auto'
+    pointerEvents: showCover ? 'none' : 'auto'
   };
 
   // Container styles - when v4 open, container fills viewport for edge-to-edge content
@@ -414,7 +416,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   // Flipbook styles - using structured config
   const flipbookStyle = getFlipbookStyle(deviceType, orientation, showCover, isLoading, isFullscreen);
 
-  // Close button styles
+  // Close button styles (high z-index and pointer-events so it's clickable above filter when overlay has pointer-events: none)
   const closeButtonStyle = isMobile ? {
     position: 'fixed',
     top: '20px',
@@ -430,7 +432,8 @@ const getDeviceStyles = (deviceType, state = {}) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10002,
+    zIndex: 10005,
+    pointerEvents: 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
@@ -450,7 +453,8 @@ const getDeviceStyles = (deviceType, state = {}) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10002,
+    zIndex: 10005,
+    pointerEvents: 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
@@ -473,7 +477,8 @@ const getDeviceStyles = (deviceType, state = {}) => {
     display: 'none', // Hidden on mobile
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10002,
+    zIndex: 10005,
+    pointerEvents: 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
@@ -495,13 +500,13 @@ const getDeviceStyles = (deviceType, state = {}) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10002,
+    zIndex: 10005,
+    pointerEvents: 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    opacity: 1, // Always visible on desktop since it's outside the comic book
-    pointerEvents: 'auto' // Always clickable on desktop
+    opacity: 1
   };
 
   // Desktop controls (only shown on desktop/tablet)
@@ -681,14 +686,14 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const mobilePageImageStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectFit: 'fill',
     display: 'block'
   };
 
   const desktopPageImageStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'fill',
     display: 'block'
   };
 
@@ -819,13 +824,13 @@ const getDeviceStyles = (deviceType, state = {}) => {
     letterSpacing: '0.5px'
   };
 
-  // Cover navigation button styles (for episode navigation on cover)
-  // Positioned relative to overlay, centered vertically
+  // Cover navigation button styles (for episode navigation on cover, and page nav when open)
+  // Positioned relative to overlay, centered vertically; always on top and clickable
   const coverNavButtonBaseStyle = {
-    position: 'absolute',
+    position: 'fixed',
     top: '50%',
     transform: 'translateY(-50%)',
-    background: 'rgba(255, 255, 255, 0.9)',
+    background: 'rgba(255, 255, 255, 0.95)',
     border: 'none',
     borderRadius: '50%',
     width: isMobile ? '48px' : '56px',
@@ -836,9 +841,10 @@ const getDeviceStyles = (deviceType, state = {}) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 10003, // Higher than container to stay on top
+    zIndex: 10004,
+    pointerEvents: 'auto',
     transition: 'all 0.3s ease',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.4)',
     backdropFilter: 'blur(10px)',
     WebkitBackdropFilter: 'blur(10px)',
     color: '#333',
@@ -848,12 +854,12 @@ const getDeviceStyles = (deviceType, state = {}) => {
 
   const coverNavButtonPrevStyle = {
     ...coverNavButtonBaseStyle,
-    left: isMobile ? '10px' : '20px'
+    left: isMobile ? '12px' : '24px'
   };
 
   const coverNavButtonNextStyle = {
     ...coverNavButtonBaseStyle,
-    right: isMobile ? '10px' : '20px'
+    right: isMobile ? '12px' : '24px'
   };
 
   return {

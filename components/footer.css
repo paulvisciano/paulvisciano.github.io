@@ -18,7 +18,7 @@ footer {
     right: 0;
     background: transparent; /* Transparent background for floating effect */
     border-top: none; /* Remove border */
-    z-index: 10001; /* Higher than comic overlay (10000) to ensure timeline is always accessible */
+    z-index: 10001; /* Below comic overlay (10002) so cover draws on top when overlay is open */
     overflow: visible; /* Allow thumbnails to float above */
     clip-path: none; /* Prevent clipping */
     contain: none; /* Prevent containment */
