@@ -138,7 +138,8 @@ const STYLE_CONFIG = {
   },
   coverImage: {
     mobile: {
-      objectFit: 'contain'
+      portrait: { objectFit: 'contain' },
+      landscape: { objectFit: 'cover' }
     },
     tablet: {
       portrait: {
@@ -238,11 +239,19 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
       height: '90%'
     }
   ) : {};
+
+  // Mobile landscape with comic open: no border, radius, or shadow (edge-to-edge)
+  const mobileLandscapeOpenNoDecor = (isMobile && !isPortrait && !showCover) ? {
+    borderRadius: 0,
+    border: 'none',
+    boxShadow: 'none'
+  } : {};
   
   return {
     ...baseConfig,
     ...dynamicProps,
     ...fullscreenProps,
+    ...mobileLandscapeOpenNoDecor,
     background: '#000',
     overflow: 'hidden',
     display: 'flex',
@@ -304,7 +313,9 @@ const getCoverImageStyle = (deviceType, orientation) => {
   let objectFit;
   
   if (isMobile) {
-    objectFit = STYLE_CONFIG.coverImage.mobile.objectFit;
+    objectFit = isPortrait
+      ? STYLE_CONFIG.coverImage.mobile.portrait.objectFit
+      : STYLE_CONFIG.coverImage.mobile.landscape.objectFit;
   } else if (isTablet) {
     objectFit = isPortrait 
       ? STYLE_CONFIG.coverImage.tablet.portrait.objectFit
