@@ -71,8 +71,9 @@ body.comic-is-open footer {
     top: 58px; /* Centered in the dots */
     left: 16px;
     height: 2px;
+    min-width: 100px; /* Ensure line is visible even before JS sets width */
     background: var(--primary-orange);
-    opacity: 0.5;
+    opacity: 0.85;
     z-index: 10;
 }
 

@@ -547,6 +547,45 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }
   }, []);
 
+  // Resize globe canvas and re-run zoom logic when viewport/orientation changes.
+  // Update camera aspect ratio so the globe doesn't stretch; then setSize and render.
+  React.useEffect(() => {
+    const resizeGlobe = () => {
+      const el = document.getElementById('globeViz');
+      if (!globeInstance.current || !el) return;
+      const w = el.clientWidth;
+      const h = el.clientHeight;
+      if (w <= 0 || h <= 0) return;
+      try {
+        const g = globeInstance.current;
+        const camera = typeof g.camera === 'function' ? g.camera() : g.camera;
+        if (camera && typeof camera.updateProjectionMatrix === 'function') {
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+        }
+        const renderer = g.renderer && g.renderer();
+        if (renderer && typeof renderer.setSize === 'function') {
+          renderer.setSize(w, h);
+        }
+        if (typeof g.render === 'function') {
+          g.render();
+        }
+      } catch (err) {}
+      onZoomHandler();
+    };
+    const onOrientationChange = () => {
+      resizeGlobe();
+      setTimeout(resizeGlobe, 100);
+      setTimeout(resizeGlobe, 400);
+    };
+    window.addEventListener('resize', resizeGlobe);
+    window.addEventListener('orientationchange', onOrientationChange);
+    return () => {
+      window.removeEventListener('resize', resizeGlobe);
+      window.removeEventListener('orientationchange', onOrientationChange);
+    };
+  }, []);
+
   // Apply highlight to selected hex and update rings
   React.useEffect(() => {
     if (globeInstance.current) {

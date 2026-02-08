@@ -409,6 +409,7 @@
   left: 0;
   right: 0;
   height: 100vh;
+  height: 100dvh; /* dynamic viewport: corrects after orientation/keyboard */
   width: 100%;
   z-index: 1;
 }
@@ -562,6 +563,7 @@
 @media (max-width: 640px) {
   #globeViz {
     height: 100vh;
+    height: 100dvh;
   }
   .filter-tag {
     font-size: 0.875rem;
@@ -626,7 +628,31 @@
     width: 90%;
     max-width: 300px;
   }
+}
 
+/* Orientation: ensure layout responds when rotating device (e.g. portrait ↔ landscape) */
+@media (orientation: portrait) {
+  #globeViz {
+    height: 100vh;
+    height: 100dvh;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 640px) {
+  /* Narrow landscape (e.g. phone rotated): keep popover usable */
+  .popover-static {
+    right: 10px;
+    transform: translateY(-50%);
+    width: 90%;
+    max-width: 280px;
+  }
+  .popover-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  /* .popover-static for portrait is in the block above; landscape narrow uses (orientation: landscape) block */
   .popover-content {
     width: 100%;
     padding: 10px;

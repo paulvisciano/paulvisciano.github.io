@@ -374,6 +374,36 @@ window.ComicReader = ({ content, onClose }) => {
     };
   }, [episodeData, showCover, getAllComicEpisodes]);
 
+  // When orientation or device type changes, recalc cover Swiper dimensions and stay on current comic
+  React.useEffect(() => {
+    if (!showCover || !swiperRef.current) return;
+    const swiper = swiperRef.current;
+    const allEpisodes = getAllComicEpisodes();
+    if (allEpisodes.length === 0) return;
+    // Use the slide that's currently visible so we don't switch comics when orientation changes
+    const currentIndex = Math.min(swiper.activeIndex, allEpisodes.length - 1);
+    const indexToKeep = currentIndex >= 0 ? currentIndex : 0;
+    const episodeToKeep = allEpisodes[indexToKeep];
+
+    if (typeof swiper.update === 'function') {
+      swiper.update();
+    }
+    // Keep the same comic visible after resize (Swiper can jump to another slide on update)
+    if (swiper.activeIndex !== indexToKeep) {
+      isSwiperUpdatingRef.current = true;
+      swiper.slideTo(indexToKeep, 0);
+      setTimeout(() => { isSwiperUpdatingRef.current = false; }, 100);
+    }
+    // Keep episodeData in sync with the visible slide (e.g. if state was overwritten on re-render)
+    if (episodeData?.id !== episodeToKeep?.id) {
+      setEpisodeData(episodeToKeep);
+      updateGlobalState({ episodeData: episodeToKeep });
+      if (window.handleTimelineClick) window.handleTimelineClick(episodeToKeep);
+      if (window.zoomCallback) window.zoomCallback(episodeToKeep);
+      if (episodeToKeep?.fullLink) window.history.replaceState({ momentId: episodeToKeep.id }, '', episodeToKeep.fullLink);
+    }
+  }, [orientation, deviceType, showCover, getAllComicEpisodes]);
+
   // Handle initial page loading after component is mounted
   React.useEffect(() => {
     if (!episodeData) {

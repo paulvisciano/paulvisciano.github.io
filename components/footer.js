@@ -44,19 +44,48 @@ window.Footer = ({ handleTimelineClick, selectedId, setSelectedId, selectedTag, 
     return acc;
   }, {});
 
+  // Update timeline line width to span all entries (runs on layout change and resize/orientation)
+  const updateTimelineLineWidth = React.useCallback(() => {
+    const timelineLine = document.querySelector('.timeline-line');
+    const entries = document.querySelectorAll('.timeline-entry, .timeline-year-entry');
+    if (timelineLine && entries.length > 0) {
+      const totalWidth = Array.from(entries).reduce((acc, entry) => {
+        return acc + entry.offsetWidth + 32; // Include margin-right (32px)
+      }, 0) + 32; // Extra padding
+      timelineLine.style.width = `${Math.max(100, totalWidth)}px`;
+    }
+  }, []);
+
   // UseEffect to dynamically set timeline-line width and scroll to selected moment
   React.useEffect(() => {
     const timeline = document.querySelector('.timeline');
     const timelineLine = document.querySelector('.timeline-line');
     const timelineContainer = document.querySelector('.timeline-container');
-    
+
+    const runUpdateLine = () => {
+      updateTimelineLineWidth();
+    };
+
     if (timeline && timelineLine) {
-      const entries = document.querySelectorAll('.timeline-entry, .timeline-year-entry');
-      const totalWidth = Array.from(entries).reduce((acc, entry) => {
-        return acc + entry.offsetWidth + 32; // Include margin-right (32px)
-      }, 0) + 32; // Extra padding
-      timelineLine.style.width = `${totalWidth}px`;
+      runUpdateLine();
+      requestAnimationFrame(runUpdateLine);
+      const t = setTimeout(runUpdateLine, 150);
+      const onOrientationChange = () => {
+        setTimeout(runUpdateLine, 100);
+        setTimeout(runUpdateLine, 400);
+      };
+      window.addEventListener('resize', runUpdateLine);
+      window.addEventListener('orientationchange', onOrientationChange);
+      return () => {
+        clearTimeout(t);
+        window.removeEventListener('resize', runUpdateLine);
+        window.removeEventListener('orientationchange', onOrientationChange);
+      };
     }
+  }, [updateTimelineLineWidth, filteredMoments.length, years.length]);
+
+  React.useEffect(() => {
+    const timelineContainer = document.querySelector('.timeline-container');
 
     let touchStartX = null;
     let lastTouchX = null;

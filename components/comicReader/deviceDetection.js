@@ -57,21 +57,26 @@ const useDeviceType = () => {
 };
 
 /**
- * Hook to get and track orientation with change detection
+ * Hook to get and track orientation with change detection.
+ * On orientationchange we update immediately and again after delays so layout
+ * has time to settle (browsers often report new orientation before dimensions update).
  */
 const useOrientation = () => {
   const [orientation, setOrientation] = React.useState(detectOrientation);
   
   React.useEffect(() => {
+    const update = () => setOrientation(detectOrientation());
+    
     const handleResize = () => {
-      setOrientation(detectOrientation());
+      update();
     };
     
+    let orientationTimeouts = [];
     const handleOrientationChange = () => {
-      // Small delay to ensure dimensions are updated
-      setTimeout(() => {
-        setOrientation(detectOrientation());
-      }, 100);
+      update();
+      // Re-check after layout has settled (iOS/some browsers delay dimension updates)
+      orientationTimeouts.push(setTimeout(update, 100));
+      orientationTimeouts.push(setTimeout(update, 400));
     };
     
     window.addEventListener('resize', handleResize);
@@ -80,6 +85,7 @@ const useOrientation = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('orientationchange', handleOrientationChange);
+      orientationTimeouts.forEach(t => clearTimeout(t));
     };
   }, []);
   

@@ -176,6 +176,14 @@
       };
     }, [pages.length, hasVideo, videoSlideIndex, usePortraitAssets]);
 
+    // When viewport or orientation changes, tell Swiper to recalculate dimensions
+    React.useEffect(() => {
+      const swiper = swiperInstanceRef.current;
+      if (swiper && typeof swiper.update === 'function') {
+        swiper.update();
+      }
+    }, [viewportHeight, isPortrait, isNarrowScreen]);
+
     // Arrow keys: intercept ArrowUp on first slide for back-to-cover; Swiper handles rest
     React.useEffect(() => {
       const swiper = swiperInstanceRef.current;
