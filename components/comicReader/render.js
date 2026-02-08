@@ -50,14 +50,6 @@ const renderCover = (deviceType, styles, {
   isWideCover = false
 }) => {
   const isMobile = deviceType === 'mobile';
-  const isTablet = deviceType === 'tablet';
-  
-  // Handle touch events on tablet to open immediately on first tap
-  const handleTouchStart = isTablet && isVisible ? (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openComicBook();
-  } : undefined;
   
   const coverClassName = 'comic-cover-display' + (isWideCover ? ' comic-cover-display--wide' : '');
   return React.createElement('div', {
@@ -66,7 +58,6 @@ const renderCover = (deviceType, styles, {
     style: styles.coverDisplayStyle || {},
     className: coverClassName,
     onClick: isVisible ? openComicBook : undefined,
-    onTouchStart: handleTouchStart,
     onMouseEnter: isVisible ? (e) => {
       const img = e.target.querySelector('img');
       if (img) img.style.transform = 'scale(1.02)';
@@ -246,10 +237,14 @@ const renderContainer = (deviceType, styles, {
   onClick,
   children,
   containerRef,
-  containerClassName = ''
+  containerClassName = '',
+  isV4Episode = false,
+  showCover = true
 }) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
+  // Only attach touch handlers for flipbook pages - not on cover (Swiper handles cover carousel) or v4 (uses its own Swiper)
+  const attachTouchHandlers = (isMobile || isTablet) && !isV4Episode && !showCover;
   const className = 'comic-episode-container' + (containerClassName ? ' ' + containerClassName.trim() : '');
   
   return React.createElement('div', {
@@ -259,9 +254,9 @@ const renderContainer = (deviceType, styles, {
     className,
     onMouseEnter: () => setShowControls(true),
     onMouseLeave: () => setShowControls(false),
-    onTouchStart: (isMobile || isTablet) ? onTouchStart : undefined,
-    onTouchMove: (isMobile || isTablet) ? onTouchMove : undefined,
-    onTouchEnd: (isMobile || isTablet) ? onTouchEnd : undefined,
+    onTouchStart: attachTouchHandlers ? onTouchStart : undefined,
+    onTouchMove: attachTouchHandlers ? onTouchMove : undefined,
+    onTouchEnd: attachTouchHandlers ? onTouchEnd : undefined,
     onClick: onClick
   }, children);
 };

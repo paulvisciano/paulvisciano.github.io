@@ -326,6 +326,9 @@ window.ComicReader = ({ content, onClose }) => {
       const swiper = new window.Swiper(swiperContainerRef.current, {
         freeMode: { enabled: true, sticky: true },
         grabCursor: true,
+        allowTouchMove: true,
+        simulateTouch: true,
+        touchRatio: 1,
         slidesPerView: 1,
         spaceBetween: 0,
         speed: 400,
@@ -862,6 +865,7 @@ window.ComicReader = ({ content, onClose }) => {
         height: '100%',
         overflow: 'hidden',
         background: '#000',
+        touchAction: 'pan-x',
         ...(isCoverExiting && { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 })
       }
     }, swiperWrapper);
@@ -951,7 +955,9 @@ window.ComicReader = ({ content, onClose }) => {
         onClick: handleContainerClick,
         children: containerChildren,
         containerRef,
-        containerClassName: transitionClass
+        containerClassName: transitionClass,
+        isV4Episode,
+        showCover
       })
     : React.createElement('div', {
         key: 'container',
@@ -1006,26 +1012,10 @@ window.ComicReader = ({ content, onClose }) => {
   }
   
   
-  // Prevent touch events from reaching elements underneath (like the globe)
-  const handleOverlayTouchStart = (e) => {
-    e.stopPropagation();
-  };
-  
-  const handleOverlayTouchMove = (e) => {
-    e.stopPropagation();
-  };
-  
-  const handleOverlayTouchEnd = (e) => {
-    e.stopPropagation();
-  };
-
   return React.createElement('div', {
     ref: overlayRef,
     style: styles.comicOverlayStyle || {},
     onClick: handleOverlayClick,
-    onTouchStart: handleOverlayTouchStart,
-    onTouchMove: handleOverlayTouchMove,
-    onTouchEnd: handleOverlayTouchEnd,
     className: 'comic-episode-overlay'
   }, overlayChildren);
 };

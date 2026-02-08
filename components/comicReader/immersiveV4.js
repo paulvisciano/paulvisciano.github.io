@@ -26,7 +26,6 @@
   };
 
   const AUTO_PLAY_DELAY_MS = 2000;
-  const PULL_DOWN_BACK_THRESHOLD = 80;
 
   window.ComicReaderImmersiveV4 = function ImmersiveV4Content({ episodeData, styles, navState = {} }) {
     const { onBackToCover } = navState;
@@ -36,7 +35,6 @@
     const onBackToCoverRef = React.useRef(onBackToCover);
     const videoRef = React.useRef(null);
     const pendingRestoreRef = React.useRef(null);
-    const touchStartRef = React.useRef({ y: 0 });
     const autoPlayTimerRef = React.useRef(null);
     const [isPortrait, setIsPortrait] = React.useState(
       () => typeof window !== 'undefined' && window.matchMedia('(orientation: portrait)').matches
@@ -109,6 +107,10 @@
         spaceBetween: 0,
         speed: 300,
         grabCursor: true,
+        allowTouchMove: true,
+        simulateTouch: true,
+        touchRatio: 1,
+        threshold: 5,
         keyboard: { enabled: true },
         mousewheel: {
           forceToAxis: true,
@@ -117,7 +119,6 @@
           thresholdTime: 200
         },
         touchReleaseOnEdges: true,
-        threshold: 10,
         preventInteractionOnTransition: true,
         focusableElements: 'input, select, option, textarea, button, label',
         pagination: {
@@ -125,11 +126,6 @@
           clickable: true
         },
         on: {
-          touchStart(sw, event) {
-            if (event && event.touches && event.touches[0]) {
-              touchStartRef.current = { y: event.touches[0].clientY };
-            }
-          },
           slideChange(sw) {
             const videoEl = videoRef.current;
             if (!videoEl || !hasVideo) return;
@@ -144,19 +140,6 @@
               }, AUTO_PLAY_DELAY_MS);
             } else {
               videoEl.pause();
-            }
-          },
-          touchEnd(sw, event) {
-            const cb = onBackToCoverRef.current;
-            if (typeof cb !== 'function') return;
-            if (sw.activeIndex !== 0) return;
-            const start = touchStartRef.current;
-            const endY = event && event.changedTouches && event.changedTouches[0]
-              ? event.changedTouches[0].clientY
-              : start.y;
-            const deltaY = endY - start.y;
-            if (deltaY > PULL_DOWN_BACK_THRESHOLD) {
-              cb();
             }
           }
         }
@@ -237,11 +220,11 @@
 
     return React.createElement('div', {
       className: 'comic-immersive-v4',
-      style: { width: '100%', height: '100%', background: '#000' }
+      style: { width: '100%', height: '100%', background: '#000', touchAction: 'pan-y' }
     }, React.createElement('div', {
       ref: swiperRef,
       className: 'swiper comic-immersive-v4-swiper',
-      style: { width: '100%', height: '100%' }
+      style: { width: '100%', height: '100%', touchAction: 'pan-y' }
     }, React.createElement('div', {
       className: 'swiper-wrapper'
     }, swiperSlides), React.createElement('div', {
