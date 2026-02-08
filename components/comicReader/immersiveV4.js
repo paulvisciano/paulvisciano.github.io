@@ -1,5 +1,6 @@
 // ============================================================================
-// Comic Reader 4.0 — Vertical fullscreen feed (swipe up/down between slides)
+// Comic Reader 4.0 — Vertical fullscreen feed via Swiper.js (swipe up/down)
+// https://swiperjs.com/demos#vertical
 // ============================================================================
 
 (function() {
@@ -25,14 +26,17 @@
   };
 
   const AUTO_PLAY_DELAY_MS = 2000;
+  const PULL_DOWN_BACK_THRESHOLD = 80;
 
   window.ComicReaderImmersiveV4 = function ImmersiveV4Content({ episodeData, styles, navState = {} }) {
     const { onBackToCover } = navState;
-    const scrollRef = React.useRef(null);
+    const swiperRef = React.useRef(null);
+    const swiperInstanceRef = React.useRef(null);
+    const activeSlideRef = React.useRef(0);
+    const onBackToCoverRef = React.useRef(onBackToCover);
     const videoRef = React.useRef(null);
-    const videoSlideRef = React.useRef(null);
     const pendingRestoreRef = React.useRef(null);
-    const touchStartRef = React.useRef({ y: 0, scrollTop: 0 });
+    const touchStartRef = React.useRef({ y: 0 });
     const autoPlayTimerRef = React.useRef(null);
     const [isPortrait, setIsPortrait] = React.useState(
       () => typeof window !== 'undefined' && window.matchMedia('(orientation: portrait)').matches
@@ -56,18 +60,19 @@
     const pages = getPagesForOrientation(episodeData, usePortraitAssets);
     const videoSrc = getVideoSrcForOrientation(episodeData, usePortraitAssets);
     const hasVideo = !!(episodeData && (episodeData.videoPortraitUrl || episodeData.videoLandscapeUrl));
+    const videoSlideIndex = pages.length;
 
     React.useEffect(() => {
       const mqPortrait = window.matchMedia('(orientation: portrait)');
       const mqNarrow = window.matchMedia('(max-width: 1023px)');
-      const onPortraitChange = (e) => {
+      const onPortraitChange = () => {
         const el = videoRef.current;
         if (el && episodeData && (episodeData.videoPortraitUrl || episodeData.videoLandscapeUrl)) {
           pendingRestoreRef.current = { time: el.currentTime, play: !el.paused };
         }
-        setIsPortrait(e.matches);
+        setIsPortrait(mqPortrait.matches);
       };
-      const onNarrowChange = (e) => setIsNarrowScreen(e.matches);
+      const onNarrowChange = () => setIsNarrowScreen(mqNarrow.matches);
       mqPortrait.addEventListener('change', onPortraitChange);
       mqNarrow.addEventListener('change', onNarrowChange);
       return () => {
@@ -75,6 +80,8 @@
         mqNarrow.removeEventListener('change', onNarrowChange);
       };
     }, [episodeData]);
+
+    onBackToCoverRef.current = onBackToCover;
 
     const handleVideoCanPlay = () => {
       const pending = pendingRestoreRef.current;
@@ -86,112 +93,123 @@
       pendingRestoreRef.current = null;
     };
 
-    // Auto-play video when video slide is in view for AUTO_PLAY_DELAY_MS; pause when scrolled away
+    // Initialize Swiper
     React.useEffect(() => {
-      if (!hasVideo) return;
-      const scrollEl = scrollRef.current;
-      const videoEl = videoRef.current;
-      const slideEl = videoSlideRef.current;
-      if (!scrollEl || !videoEl || !slideEl) return;
-      const io = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          if (!entry) return;
-          if (autoPlayTimerRef.current) {
-            clearTimeout(autoPlayTimerRef.current);
-            autoPlayTimerRef.current = null;
-          }
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            autoPlayTimerRef.current = setTimeout(() => {
-              videoEl.play().catch(function() {});
-              autoPlayTimerRef.current = null;
-            }, AUTO_PLAY_DELAY_MS);
-          } else {
-            videoEl.pause();
-          }
-        },
-        { threshold: [0.5], root: scrollEl }
-      );
-      io.observe(slideEl);
-      return () => {
-        io.disconnect();
-        if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
-      };
-    }, [hasVideo]);
+      const container = swiperRef.current;
+      if (!container || typeof window.Swiper === 'undefined') return;
 
-    // Arrow keys: scroll feed up/down by one viewport; at top + up = back to cover
-    React.useEffect(() => {
-      const el = scrollRef.current;
-      if (!el) return;
-      const handleKeyDown = (e) => {
-        if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-        e.preventDefault();
-        const vh = viewportHeight;
-        const current = el.scrollTop;
-        const threshold = vh * 0.3;
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-          el.scrollTo({ top: current + vh, behavior: 'smooth' });
-        } else {
-          if (current < threshold && typeof onBackToCover === 'function') {
-            onBackToCover();
-          } else {
-            el.scrollTo({ top: Math.max(0, current - vh), behavior: 'smooth' });
+      const totalSlides = pages.length + (hasVideo ? 1 : 0);
+      const initialSlide = Math.min(activeSlideRef.current, Math.max(0, totalSlides - 1));
+
+      const swiper = new window.Swiper(container, {
+        direction: 'vertical',
+        initialSlide,
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 0,
+        speed: 300,
+        grabCursor: true,
+        keyboard: { enabled: true },
+        mousewheel: {
+          forceToAxis: true,
+          sensitivity: 0.6,
+          thresholdDelta: 30,
+          thresholdTime: 200
+        },
+        touchReleaseOnEdges: true,
+        threshold: 10,
+        preventInteractionOnTransition: true,
+        focusableElements: 'input, select, option, textarea, button, label',
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        on: {
+          touchStart(sw, event) {
+            if (event && event.touches && event.touches[0]) {
+              touchStartRef.current = { y: event.touches[0].clientY };
+            }
+          },
+          slideChange(sw) {
+            const videoEl = videoRef.current;
+            if (!videoEl || !hasVideo) return;
+            if (autoPlayTimerRef.current) {
+              clearTimeout(autoPlayTimerRef.current);
+              autoPlayTimerRef.current = null;
+            }
+            if (sw.activeIndex === videoSlideIndex) {
+              autoPlayTimerRef.current = setTimeout(() => {
+                videoEl.play().catch(function() {});
+                autoPlayTimerRef.current = null;
+              }, AUTO_PLAY_DELAY_MS);
+            } else {
+              videoEl.pause();
+            }
+          },
+          touchEnd(sw, event) {
+            const cb = onBackToCoverRef.current;
+            if (typeof cb !== 'function') return;
+            if (sw.activeIndex !== 0) return;
+            const start = touchStartRef.current;
+            const endY = event && event.changedTouches && event.changedTouches[0]
+              ? event.changedTouches[0].clientY
+              : start.y;
+            const deltaY = endY - start.y;
+            if (deltaY > PULL_DOWN_BACK_THRESHOLD) {
+              cb();
+            }
           }
         }
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [onBackToCover, viewportHeight]);
+      });
 
-    // Touch: swipe down from top to go back to cover
-    const handleTouchStart = (e) => {
-      const el = scrollRef.current;
-      if (!el) return;
-      touchStartRef.current = { y: e.touches[0].clientY, scrollTop: el.scrollTop };
-    };
-    const handleTouchEnd = (e) => {
-      const el = scrollRef.current;
-      if (!el || typeof onBackToCover !== 'function') return;
-      const start = touchStartRef.current;
-      const endY = e.changedTouches[0].clientY;
-      const deltaY = endY - start.y;
-      const pullDownThreshold = 80;
-      if (start.scrollTop <= 10 && deltaY > pullDownThreshold) {
-        onBackToCover();
-      }
-    };
+      swiperInstanceRef.current = swiper;
+
+      return () => {
+        activeSlideRef.current = swiper.activeIndex;
+        swiper.destroy(true, true);
+        swiperInstanceRef.current = null;
+        if (autoPlayTimerRef.current) {
+          clearTimeout(autoPlayTimerRef.current);
+          autoPlayTimerRef.current = null;
+        }
+      };
+    }, [pages.length, hasVideo, videoSlideIndex]);
+
+    // Arrow keys: intercept ArrowUp on first slide for back-to-cover; Swiper handles rest
+    React.useEffect(() => {
+      const swiper = swiperInstanceRef.current;
+      if (!swiper) return;
+      const handleKeyDown = (e) => {
+        if (e.key !== 'ArrowUp' && e.key !== 'ArrowLeft') return;
+        if (swiper.activeIndex !== 0) return;
+        const cb = onBackToCoverRef.current;
+        if (typeof cb !== 'function') return;
+        e.preventDefault();
+        e.stopPropagation();
+        cb();
+      };
+      window.addEventListener('keydown', handleKeyDown, true); // capture: run before Swiper
+      return () => window.removeEventListener('keydown', handleKeyDown, true);
+    }, []);
 
     if (!episodeData) return null;
 
-    const slideHeightPx = viewportHeight + 'px';
     const slideStyle = {
       width: '100%',
-      height: slideHeightPx,
-      minHeight: slideHeightPx,
-      flexShrink: 0,
-      scrollSnapAlign: 'start',
-      scrollSnapStop: 'always',
-      overflow: 'hidden',
-      background: '#000'
-    };
-
-    const scrollContainerStyle = {
-      width: '100%',
       height: '100%',
-      overflowY: 'auto',
-      overflowX: 'hidden',
-      scrollSnapType: 'y mandatory',
-      scrollBehavior: 'smooth',
-      WebkitOverflowScrolling: 'touch',
-      background: '#000'
+      overflow: 'hidden',
+      background: '#000',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     };
 
-    const children = [];
+    const swiperSlides = [];
 
     pages.forEach((url, i) => {
-      children.push(React.createElement('div', {
+      swiperSlides.push(React.createElement('div', {
         key: 'spread-' + i,
-        className: 'comic-immersive-v4-slide',
+        className: 'swiper-slide',
         style: slideStyle
       }, React.createElement('img', {
         src: url,
@@ -201,10 +219,9 @@
     });
 
     if (hasVideo) {
-      children.push(React.createElement('div', {
+      swiperSlides.push(React.createElement('div', {
         key: 'video-slide',
-        ref: videoSlideRef,
-        className: 'comic-immersive-v4-slide',
+        className: 'swiper-slide',
         style: slideStyle
       }, React.createElement('video', {
         ref: videoRef,
@@ -214,7 +231,7 @@
         muted: false,
         onLoadedMetadata: function(e) { e.target.volume = 0.2; },
         onCanPlay: handleVideoCanPlay,
-        style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill' }
+        style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y' }
       })));
     }
 
@@ -222,12 +239,14 @@
       className: 'comic-immersive-v4',
       style: { width: '100%', height: '100%', background: '#000' }
     }, React.createElement('div', {
-      ref: scrollRef,
-      className: 'comic-immersive-v4-feed',
-      style: scrollContainerStyle,
-      onTouchStart: handleTouchStart,
-      onTouchEnd: handleTouchEnd
-    }, children));
+      ref: swiperRef,
+      className: 'swiper comic-immersive-v4-swiper',
+      style: { width: '100%', height: '100%' }
+    }, React.createElement('div', {
+      className: 'swiper-wrapper'
+    }, swiperSlides), React.createElement('div', {
+      className: 'swiper-pagination'
+    })));
   };
 
   window.ComicReaderCore = window.ComicReaderCore || {};

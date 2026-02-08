@@ -1190,7 +1190,9 @@ window.ComicReader = ({ content, onClose }) => {
       nextPage,
       currentPage,
       totalPages,
-      getNextEpisodeForPages: () => getNextEpisode(episodeData)
+      getNextEpisodeForPages: () => getNextEpisode(episodeData),
+      isFullscreen,
+      isV4Episode
     });
     if (coverNavButtons) {
       overlayChildren.push(...coverNavButtons);
@@ -1578,18 +1580,31 @@ if (!document.querySelector('#comic-episode-styles')) {
       background-color: rgba(0, 0, 0, 0.7);
     }
 
-    /* Comic Reader 4.0 immersive layout */
+    /* Comic Reader 4.0 immersive layout (Swiper vertical) */
     .comic-immersive-v4 {
       -webkit-overflow-scrolling: touch;
     }
-    /* Vertical feed: one fullscreen slide per swipe */
-    .comic-immersive-v4-feed {
-      touch-action: pan-y;
-      -webkit-overflow-scrolling: touch;
+    .comic-immersive-v4-swiper {
+      width: 100%;
+      height: 100%;
     }
-    .comic-immersive-v4-slide {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
+    .comic-immersive-v4-swiper .swiper-wrapper {
+      height: 100%;
+    }
+    .comic-immersive-v4-swiper .swiper-slide {
+      height: 100%;
+      min-height: 100%;
+    }
+    .comic-immersive-v4-swiper .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.6);
+      opacity: 1;
+      box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+    .comic-immersive-v4-swiper .swiper-pagination-bullet-active {
+      background: rgba(255,255,255,1);
+      box-shadow: 0 0 8px rgba(255,255,255,0.6);
     }
   
   `;

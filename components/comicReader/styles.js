@@ -211,9 +211,18 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     : config;
   
   // Override dimensions when in fullscreen AND comic is open (not showing cover)
-  // V4 open: desktop 1000x700; mobile/tablet fill viewport
+  // V4 + fullscreen: 100% x 100% for all devices (fully immersive)
+  // V4 open (not fullscreen): desktop 1000x700; mobile/tablet fill viewport
   // Otherwise desktop: 1000x750, other: 85% x 90%
-  const fullscreenProps = (!showCover && isV4Cover) ? (
+  const fullscreenProps = (isFullscreen && !showCover && isV4Cover) ? {
+    width: '100%',
+    height: '100%',
+    maxWidth: 'none',
+    maxHeight: 'none',
+    borderRadius: 0,
+    border: 'none',
+    boxShadow: 'none'
+  } : (!showCover && isV4Cover) ? (
     isDesktop ? { width: '1000px', height: '700px' } : {
       width: '100%',
       height: '100%',
