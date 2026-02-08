@@ -1762,10 +1762,10 @@ window.momentsInTime = [
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-1.mp4",
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-2.mp4"
     ],
-    // Portrait: mobile/tablet in portrait only. Same animated videos.
+    // Portrait: mobile/tablet in portrait only. Portrait-oriented videos.
     pagesPortrait: [
-      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-1.mp4",
-      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-2.mp4"
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-1-portrait.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/page-2-portrait.mp4"
     ],
     videoPortraitUrl: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/video-portrait.mp4",
     videoLandscapeUrl: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/video-landscape.mp4",

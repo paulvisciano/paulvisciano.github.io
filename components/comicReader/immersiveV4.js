@@ -174,7 +174,7 @@
           autoPlayTimerRef.current = null;
         }
       };
-    }, [pages.length, hasVideo, videoSlideIndex]);
+    }, [pages.length, hasVideo, videoSlideIndex, usePortraitAssets]);
 
     // Arrow keys: intercept ArrowUp on first slide for back-to-cover; Swiper handles rest
     React.useEffect(() => {
