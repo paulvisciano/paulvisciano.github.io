@@ -32,7 +32,7 @@ isProject: false
 **In moments.js:** The Heaven on Earth entry should provide **explicit R2 URLs** for the reader to use, e.g.:
 
 - **cover:** `"https://pub-xxx.r2.dev/moments/da-nang/2026-02-07/heaven-on-earth/cover.png"`
-- **pages:** array of 4 URLs for page-1 … page-4 (or a **baseUrl** if the reader supports building paths from it for v4).
+- **pages** (fallback), **pagesLandscape**, **pagesPortrait:** arrays of page URLs; v4 uses landscape on desktop and in landscape orientation, portrait when narrow screen + portrait orientation.
 - **videoPortraitUrl** / **videoLandscapeUrl:** full R2 URLs for the two videos (so the v4 reader can switch by orientation).
 
 **Repo (URL routing only):** The canonical URL remains `/moments/da-nang/2026-02-07/heaven-on-earth/`. To support direct links and 404 redirect, add **only** a redirect in the repo: [moments/da-nang/2026-02-07/heaven-on-earth/index.html](moments/da-nang/2026-02-07/heaven-on-earth/index.html) that redirects to `/?path=/moments/da-nang/2026-02-07/heaven-on-earth/`. No cover, page, or video files need to be committed; they are served from R2.
@@ -67,7 +67,7 @@ The experience uses the **same comic reader** as other episodes: same overlay on
   - **Back:** “Back to Da Nang” (or “Back to Feb 7, 2026”) linking to the parent date/city on the main site, e.g. `/?path=/moments/da-nang/2026-02-07/` or `https://paulvisciano.github.io/?path=/moments/da-nang/2026-02-07/`.  
   - **Next/Prev:** Only if you want them; can link to adjacent moments via fullLink (e.g. next/prev moment in [moments.js](moments/moments.js)) or omit for v1.
 
-**Tech:** Extend the existing [components/comicReader.js](components/comicReader.js) and [components/comicReader/](components/comicReader/) (e.g. add a v4 render path in render.js or a dedicated immersive view module). Orientation logic for video with `orientationchange` and `matchMedia('(orientation: portrait)')`. No new top-level component; no new heavy deps. **Asset URLs:** For v4 episodes, use URLs from the episode data (R2 links for cover, pages, videoPortraitUrl, videoLandscapeUrl)—not derived from fullLink. Future v4 episodes: set `comicReaderVersion: 4` and provide R2 (or absolute) URLs for assets in moments.js.
+**Tech:** Extend the existing [components/comicReader.js](components/comicReader.js) and [components/comicReader/](components/comicReader/). V4 render path is a dedicated [immersiveV4.js](components/comicReader/immersiveV4.js) module; render.js conditionally renders it when episode has `comicReaderVersion: 4`. Orientation logic with `matchMedia('(orientation: portrait)')` and `matchMedia('(max-width: 1023px)')`. No new top-level component; no new heavy deps. **Asset URLs:** For v4 episodes, use URLs from the episode data (R2 links for cover, pagesLandscape, pagesPortrait, videoPortraitUrl, videoLandscapeUrl)—not derived from fullLink. Future v4 episodes: set `comicReaderVersion: 4` and provide R2 (or absolute) URLs for assets in moments.js.
 
 ---
 
@@ -89,7 +89,7 @@ Add one new entry to `window.momentsInTime` (e.g. after the existing “Da Nang:
 - **formattedDuration:** `formatDuration(1)`
 - **isComic: true** so it opens in the comic reader and participates in next/prev episode navigation like other comics.
 - **comicReaderVersion: 4** (or **immersiveComic: true**) so the reader renders in v4 immersive mode.
-- **R2 (or absolute) URLs for assets:** **cover**, **pages** (array of 4 image URLs), **videoPortraitUrl**, **videoLandscapeUrl** pointing to the Cloudflare bucket (same pattern as Siargao in moments.js). Optional: **theme** or **videoSection** for styling/captions.
+- **R2 (or absolute) URLs for assets:** **cover**, **pages** (fallback), **pagesLandscape**, **pagesPortrait**, **videoPortraitUrl**, **videoLandscapeUrl** pointing to the Cloudflare bucket. Optional: **videoSection** (cta, artist, trackTitle, caption) for styling/captions.
 
 **Linking and navigation:** When the user clicks "Heaven on Earth" on the timeline, the app opens the comic reader (same as any other comic). Next/Prev from another comic can land on Heaven on Earth and vice versa; the same controls apply. Deep link `/moments/da-nang/2026-02-07/heaven-on-earth/` should be matched on load and open the reader with this episode.
 
@@ -108,10 +108,23 @@ If you want `/moments/da-nang/2026-02-07/` to list or redirect to this experienc
 
 | Action     | Path / change                                                                                                                                                                                                                                                                    |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Create** | `moments/da-nang/2026-02-07/heaven-on-earth/index.html` (redirect); v4 immersive render path inside [components/comicReader/](components/comicReader/)                                                                                                                           |
-| **Upload** | Upload cover, page-1…page-4, video-portrait.mp4, video-landscape.mp4 to the **existing Cloudflare R2 bucket** (path e.g. `moments/da-nang/2026-02-07/heaven-on-earth/`). No asset files in repo.                                                                                 |
-| **Edit**   | [moments/moments.js](moments/moments.js) — add one moment entry with `isComic: true`, `comicReaderVersion: 4`, fullLink, and **R2 URLs** for cover, pages, videoPortraitUrl, videoLandscapeUrl                                                                                   |
-| **Edit**   | [components/comicReader.js](components/comicReader.js) and [components/comicReader/](components/comicReader/) — add v4 mode: detect comicReaderVersion 4, render immersive layout using **episode R2 URLs** (cover, pages, video) with same chrome (close, next/prev, cover nav) |
+| **Create** | `moments/da-nang/2026-02-07/heaven-on-earth/index.html` (redirect); [components/comicReader/immersiveV4.js](components/comicReader/immersiveV4.js) — dedicated v4 module                                                                                                         |
+| **Upload** | Upload cover, page-1…page-N (portrait + landscape variants), video-portrait.mp4, video-landscape.mp4 to the **existing Cloudflare R2 bucket** (path e.g. `moments/da-nang/2026-02-07/heaven-on-earth/`). No asset files in repo.                                                    |
+| **Edit**   | [moments/moments.js](moments/moments.js) — add one moment entry with `isComic: true`, `comicReaderVersion: 4`, fullLink, **pagesLandscape**, **pagesPortrait**, **videoPortraitUrl**, **videoLandscapeUrl**, **videoSection** (cta, artist, trackTitle, caption)                     |
+| **Edit**   | [components/comicReader.js](components/comicReader.js) — pass `isV4Cover: isV4Episode` to getDeviceStyles (not `showCover && isV4Episode`) so v4 dimensions apply when comic is open                                                                                               |
+| **Edit**   | [components/comicReader/styles.js](components/comicReader/styles.js) — v4 desktop container 1000×700; overlay `v4FillViewport` = v4 open on mobile/tablet only → stretch; desktop v4 open → center (fixed 1000×700 box)                                                             |
+| **Edit**   | [index.html](index.html) — add script tag for [components/comicReader/immersiveV4.js](components/comicReader/immersiveV4.js)                                                                                                                                                      |
 
+---
+
+## 6. Implementation notes (as built)
+
+**immersiveV4.js:** Dedicated module for v4 rendering. Vertical fullscreen feed with scroll-snap slides; spreads (page-1 + page-2) plus video slide; swipe up/down and arrow-key navigation; orientation-aware assets: `pagesLandscape`, `pagesPortrait` (fallback to `pages`), `videoPortraitUrl`, `videoLandscapeUrl`. Portrait assets used when `isNarrowScreen && isPortrait` (max-width 1023px). Video auto-play after 2s, default volume 20%. Cover transition: cover and first page render together; cover expands and fades out while first page fades in.
+
+**Container dimensions:** V4 open on desktop uses 1000×700; mobile/tablet use 100% width/height (fills viewport).
+
+**Overlay centering:** When v4 is open on desktop, overlay uses `alignItems: center` and `justifyContent: center` to center the 1000×700 container. On mobile/tablet, overlay uses `stretch` so the full-viewport container fills the overlay.
+
+**Asset structure:** Heaven on Earth uses 2 spreads. Episode data: `pages`, `pagesLandscape`, `pagesPortrait`, `videoPortraitUrl`, `videoLandscapeUrl`, `videoSection` (cta, artist, trackTitle, caption).
 
 Comic reader is extended (v4 mode); no separate viewer component. No new heavy dependencies. Everything stays static and GitHub-Pages friendly.
