@@ -25,6 +25,11 @@
     return usePortraitAssets ? portrait : landscape;
   };
 
+  const isVideoUrl = (url) => /\.(mp4|webm|ogg)(\?|$)/i.test(url || '');
+
+  const PLAY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>';
+  const PAUSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>';
+
   const AUTO_PLAY_DELAY_MS = 2000;
 
   window.ComicReaderImmersiveV4 = function ImmersiveV4Content({ episodeData, styles, navState = {} }) {
@@ -34,6 +39,7 @@
     const activeSlideRef = React.useRef(0);
     const onBackToCoverRef = React.useRef(onBackToCover);
     const videoRef = React.useRef(null);
+    const videoRefsByIndex = React.useRef({});
     const pendingRestoreRef = React.useRef(null);
     const autoPlayTimerRef = React.useRef(null);
     const [isPortrait, setIsPortrait] = React.useState(
@@ -45,6 +51,7 @@
     const [viewportHeight, setViewportHeight] = React.useState(
       () => (typeof window !== 'undefined' ? window.innerHeight : 100)
     );
+    const [videoPlayState, setVideoPlayState] = React.useState({});
     React.useEffect(() => {
       const update = () => setViewportHeight(window.innerHeight);
       window.addEventListener('resize', update);
@@ -127,19 +134,21 @@
         },
         on: {
           slideChange(sw) {
-            const videoEl = videoRef.current;
-            if (!videoEl || !hasVideo) return;
+            const refs = videoRefsByIndex.current;
             if (autoPlayTimerRef.current) {
               clearTimeout(autoPlayTimerRef.current);
               autoPlayTimerRef.current = null;
             }
-            if (sw.activeIndex === videoSlideIndex) {
+            Object.keys(refs).forEach((idx) => {
+              const el = refs[idx];
+              if (el) el.pause();
+            });
+            const activeEl = refs[sw.activeIndex];
+            if (activeEl) {
               autoPlayTimerRef.current = setTimeout(() => {
-                videoEl.play().catch(function() {});
+                activeEl.play().catch(function() {});
                 autoPlayTimerRef.current = null;
               }, AUTO_PLAY_DELAY_MS);
-            } else {
-              videoEl.pause();
             }
           }
         }
@@ -147,10 +156,19 @@
 
       swiperInstanceRef.current = swiper;
 
+      const activeVideo = videoRefsByIndex.current[initialSlide];
+      if (activeVideo) {
+        autoPlayTimerRef.current = setTimeout(() => {
+          activeVideo.play().catch(function() {});
+          autoPlayTimerRef.current = null;
+        }, AUTO_PLAY_DELAY_MS);
+      }
+
       return () => {
         activeSlideRef.current = swiper.activeIndex;
         swiper.destroy(true, true);
         swiperInstanceRef.current = null;
+        videoRefsByIndex.current = {};
         if (autoPlayTimerRef.current) {
           clearTimeout(autoPlayTimerRef.current);
           autoPlayTimerRef.current = null;
@@ -184,38 +202,97 @@
       background: '#000',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      position: 'relative'
+    };
+
+    const videoHintOverlayStyle = {
+      position: 'absolute',
+      bottom: 16,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: 36,
+      height: 36,
+      borderRadius: '50%',
+      background: 'rgba(0,0,0,0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: 'none'
+    };
+
+    const toggleVideoAt = (index, e) => {
+      e.stopPropagation();
+      const el = videoRefsByIndex.current[index];
+      if (!el) return;
+      if (el.paused) el.play().catch(function() {});
+      else el.pause();
     };
 
     const swiperSlides = [];
 
     pages.forEach((url, i) => {
+      const isVideo = isVideoUrl(url);
+      const isPlaying = videoPlayState[i] === 'playing';
+      const content = isVideo
+        ? React.createElement(React.Fragment, null,
+            React.createElement('video', {
+              ref: (el) => { if (el) videoRefsByIndex.current[i] = el; },
+              src: url,
+              autoPlay: false,
+              playsInline: true,
+              muted: false,
+              loop: true,
+              onPlay: () => setVideoPlayState((s) => ({ ...s, [i]: 'playing' })),
+              onPause: () => setVideoPlayState((s) => ({ ...s, [i]: 'paused' })),
+              style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
+            }),
+            React.createElement('div', {
+              style: videoHintOverlayStyle,
+              dangerouslySetInnerHTML: { __html: isPlaying ? PAUSE_ICON : PLAY_ICON }
+            })
+          )
+        : React.createElement('img', {
+            src: url,
+            alt: `Spread ${i + 1}`,
+            style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill' }
+          });
       swiperSlides.push(React.createElement('div', {
         key: 'spread-' + i,
         className: 'swiper-slide',
-        style: slideStyle
-      }, React.createElement('img', {
-        src: url,
-        alt: `Spread ${i + 1}`,
-        style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill' }
-      })));
+        style: slideStyle,
+        onClick: isVideo ? (e) => toggleVideoAt(i, e) : undefined
+      }, content));
     });
 
     if (hasVideo) {
+      const registerVideoRef = (el) => {
+        videoRef.current = el;
+        if (el) videoRefsByIndex.current[videoSlideIndex] = el;
+      };
+      const isPlaying = videoPlayState[videoSlideIndex] === 'playing';
       swiperSlides.push(React.createElement('div', {
         key: 'video-slide',
         className: 'swiper-slide',
-        style: slideStyle
-      }, React.createElement('video', {
-        ref: videoRef,
-        src: videoSrc,
-        controls: true,
-        playsInline: true,
-        muted: false,
-        onLoadedMetadata: function(e) { e.target.volume = 0.2; },
-        onCanPlay: handleVideoCanPlay,
-        style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y' }
-      })));
+        style: slideStyle,
+        onClick: (e) => toggleVideoAt(videoSlideIndex, e)
+      }, React.createElement(React.Fragment, null,
+        React.createElement('video', {
+          ref: registerVideoRef,
+          src: videoSrc,
+          playsInline: true,
+          muted: false,
+          onPlay: () => setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'playing' })),
+          onPause: () => setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'paused' })),
+          onLoadedMetadata: function(e) { e.target.volume = 0.2; },
+          onCanPlay: handleVideoCanPlay,
+          style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
+        }),
+        React.createElement('div', {
+          style: videoHintOverlayStyle,
+          dangerouslySetInnerHTML: { __html: isPlaying ? PAUSE_ICON : PLAY_ICON }
+        })
+      )));
     }
 
     return React.createElement('div', {
