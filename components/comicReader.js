@@ -42,8 +42,8 @@ window.ComicReader = ({ content, onClose }) => {
   const flipbookCreatedRef = React.useRef(false);
   const coverRef = React.useRef(null);
   const containerRef = React.useRef(null); // Ref for the comic-episode-container
-  const splideRef = React.useRef(null); // Ref for Splide instance
-  const splideContainerRef = React.useRef(null); // Ref for Splide container element
+  const swiperRef = React.useRef(null); // Ref for Swiper instance (comic cover carousel)
+  const swiperContainerRef = React.useRef(null); // Ref for Swiper container element
   const currentPageRef = React.useRef(1);
   const overlayRef = React.useRef(null);
   
@@ -268,23 +268,15 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Function to scroll to a specific episode by ID (exposed globally for timeline clicks)
   const scrollToEpisode = React.useCallback((episodeId) => {
-    if (!showCover || !splideRef.current) {
-      return false; // Can't scroll if not showing cover or Splide not initialized
-    }
-    
+    if (!showCover || !swiperRef.current) return false;
     const allEpisodes = getAllComicEpisodes();
     const targetIndex = allEpisodes.findIndex(ep => ep.id === episodeId);
-    
-    if (targetIndex !== -1 && splideRef.current.index !== targetIndex) {
-      isSplideUpdatingRef.current = true;
-      splideRef.current.go(targetIndex);
-      // Reset flag after transition
-      setTimeout(() => {
-        isSplideUpdatingRef.current = false;
-      }, 500);
+    if (targetIndex !== -1 && swiperRef.current.activeIndex !== targetIndex) {
+      isSwiperUpdatingRef.current = true;
+      swiperRef.current.slideTo(targetIndex, 400);
+      setTimeout(() => { isSwiperUpdatingRef.current = false; }, 500);
       return true;
     }
-    
     return false;
   }, [showCover, getAllComicEpisodes]);
 
@@ -296,267 +288,85 @@ window.ComicReader = ({ content, onClose }) => {
     };
   }, [scrollToEpisode]);
 
-  // Track if Splide is being updated internally (to prevent re-init loop)
-  const isSplideUpdatingRef = React.useRef(false);
+  const isSwiperUpdatingRef = React.useRef(false);
 
-  // Initialize Splide carousel when episode data is available
+  // Initialize Swiper carousel (freemode + grab cursor) for comic covers
+  // https://swiperjs.com/demos#freemode https://swiperjs.com/demos#grab-cursor
   React.useEffect(() => {
-    if (!episodeData || !showCover) {
-      return;
-    }
+    if (!episodeData || !showCover) return;
+    if (typeof window.Swiper === 'undefined') return;
 
-    // Check if Splide is available
-    if (typeof window.Splide === 'undefined') {
-      return;
-    }
-
-    // If Splide already exists and we're just updating the index, skip re-init
-    if (splideRef.current && !isSplideUpdatingRef.current) {
+    if (swiperRef.current && !isSwiperUpdatingRef.current) {
       const allEpisodes = getAllComicEpisodes();
       const currentIndex = allEpisodes.findIndex(ep => ep.id === episodeData.id);
-      if (currentIndex !== -1 && splideRef.current.index !== currentIndex) {
-        // Update to correct index without re-initializing
-        splideRef.current.go(currentIndex);
+      if (currentIndex !== -1 && swiperRef.current.activeIndex !== currentIndex) {
+        swiperRef.current.slideTo(currentIndex, 400);
       }
       return;
     }
 
-    // Wait for DOM to be ready
-    const initSplide = () => {
-      if (!splideContainerRef.current) {
-        return;
+    const initSwiper = () => {
+      if (!swiperContainerRef.current) return;
+      if (swiperRef.current) {
+        swiperRef.current.destroy(true, true);
+        swiperRef.current = null;
       }
 
-      // Destroy existing Splide instance if it exists
-      if (splideRef.current) {
-        splideRef.current.destroy();
-        splideRef.current = null;
-      }
-
-      // Get all comic episodes
       const allEpisodes = getAllComicEpisodes();
-      if (allEpisodes.length === 0) {
-        return;
-      }
-
-      // Find current episode index
+      if (allEpisodes.length === 0) return;
       const currentIndex = allEpisodes.findIndex(ep => ep.id === episodeData.id);
-      if (currentIndex === -1) {
-        return;
-      }
+      if (currentIndex === -1) return;
 
-      // Verify that slides are actually in the DOM before initializing
-      const slides = splideContainerRef.current.querySelectorAll('.splide__slide');
+      const slides = swiperContainerRef.current.querySelectorAll('.swiper-slide');
       if (slides.length !== allEpisodes.length) {
-        // Slides not ready yet, retry after a short delay
-        setTimeout(initSplide, 50);
+        setTimeout(initSwiper, 50);
         return;
       }
 
-      // Initialize Splide - let it calculate width automatically but ensure perPage is 1
-      const splide = new window.Splide(splideContainerRef.current, {
-        type: 'slide',
-        rewind: false,
-        perPage: 1,
-        perMove: 1,
-        gap: 0,
-        speed: 800,
-        easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-        pagination: false,
-        arrows: false,
-        keyboard: false, // We'll handle keyboard navigation ourselves
-        drag: true,
-        swipe: true,
-        start: 0, // Start at 0, then jump to correct index
-        focus: 0, // Focus on first visible slide (index 0)
-        trimSpace: false,
-        updateOnMove: true,
-        waitForTransition: false, // Don't wait for transition on initial mount
-        cloneStatus: false, // Disable cloning to prevent positioning issues
-        breakpoints: {
-          640: {
-            perPage: 1
-          },
-          768: {
-            perPage: 1
-          },
-          1024: {
-            perPage: 1
+      const swiper = new window.Swiper(swiperContainerRef.current, {
+        freeMode: { enabled: true, sticky: true },
+        grabCursor: true,
+        slidesPerView: 1,
+        spaceBetween: 0,
+        speed: 400,
+        initialSlide: currentIndex,
+        keyboard: { enabled: false },
+        on: {
+          slideChangeTransitionEnd: function() {
+            const idx = this.activeIndex;
+            const newEpisode = allEpisodes[idx];
+            if (!newEpisode || newEpisode.id === episodeData?.id) return;
+            isSwiperUpdatingRef.current = true;
+            if (window.zoomCallback) window.zoomCallback(newEpisode);
+            if (window.handleTimelineClick) window.handleTimelineClick(newEpisode);
+            setCurrentPage(1);
+            currentPageRef.current = 1;
+            setShowCover(true);
+            setFlipbookReady(false);
+            flipbookCreatedRef.current = false;
+            setEpisodeData(newEpisode);
+            updateGlobalState({
+              episodeData: newEpisode,
+              currentPage: 1,
+              flipbookCreated: false,
+              flipbookReady: false,
+              isLoading: false,
+              isVisible: true
+            });
+            setIsVisible(true);
+            window.history.pushState({ momentId: newEpisode.id }, '', newEpisode.fullLink);
+            setTimeout(() => { isSwiperUpdatingRef.current = false; }, 100);
           }
         }
       });
-
-      // Track if we're doing initial positioning
-      let isInitialPositioning = true;
-      
-      // Listen for slide changes
-      splide.on('moved', (newIndex) => {
-        // Ignore moved events during initial positioning
-        if (isInitialPositioning) {
-          return;
-        }
-        
-        const newEpisode = allEpisodes[newIndex];
-        if (newEpisode && newEpisode.id !== episodeData.id) {
-          isSplideUpdatingRef.current = true;
-          
-          // Trigger globe animation
-          if (window.zoomCallback) {
-            window.zoomCallback(newEpisode);
-          }
-          if (window.handleTimelineClick) {
-            window.handleTimelineClick(newEpisode);
-          }
-
-          // Update episode data
-          setCurrentPage(1);
-          currentPageRef.current = 1;
-          setShowCover(true);
-          setFlipbookReady(false);
-          flipbookCreatedRef.current = false;
-          setEpisodeData(newEpisode);
-          updateGlobalState({
-            episodeData: newEpisode,
-            currentPage: 1,
-            flipbookCreated: false,
-            flipbookReady: false,
-            isLoading: false,
-            isVisible: true
-          });
-          setIsVisible(true);
-
-          // Update URL
-          window.history.pushState({ momentId: newEpisode.id }, '', newEpisode.fullLink);
-          
-          // Reset flag after state update
-          setTimeout(() => {
-            isSplideUpdatingRef.current = false;
-          }, 100);
-        }
-      });
-      
-      // Hide the first slide (index 0) when it's not active to prevent flash
-      splide.on('move', () => {
-        const slides = splideContainerRef.current.querySelectorAll('.splide__slide');
-        const currentIndex = splideRef.current?.index ?? -1;
-        slides.forEach((slide, idx) => {
-          // Hide slide 0 unless it's the current one
-          if (idx === 0 && currentIndex !== 0) {
-            slide.style.visibility = 'hidden';
-          } else {
-            slide.style.visibility = 'visible';
-          }
-        });
-      });
-      
-      // Show slides properly after transition
-      splide.on('moved', () => {
-        const slides = splideContainerRef.current.querySelectorAll('.splide__slide');
-        const currentIndex = splideRef.current?.index ?? -1;
-        slides.forEach((slide, idx) => {
-          if (idx === currentIndex) {
-            slide.style.visibility = 'visible';
-          } else if (idx === 0 && currentIndex !== 0) {
-            // Keep first slide hidden if not active
-            slide.style.visibility = 'hidden';
-          } else {
-            slide.style.visibility = 'visible';
-          }
-        });
-      });
-      
-      // Don't interfere with Splide's natural slide animation
-      // Let it handle transitions naturally
-
-      splide.mount();
-      splideRef.current = splide;
-      
-      // Refresh Splide to ensure it recalculates dimensions
-      requestAnimationFrame(() => {
-        if (splideRef.current) {
-          splideRef.current.refresh();
-        }
-      });
-      
-      // Wait for Splide to fully initialize and calculate layout
-      // Then jump to the correct index without animation
-      const jumpToCorrectIndex = () => {
-        if (!splideRef.current || currentIndex === -1) {
-          return;
-        }
-        
-        // Get the list element to manually verify positioning
-        const listElement = splideContainerRef.current.querySelector('.splide__list');
-        if (!listElement) {
-          // Retry if list not ready
-          setTimeout(jumpToCorrectIndex, 50);
-          return;
-        }
-        
-        // Mark as initialized
-        listElement.classList.add('is-initialized');
-        
-        // Refresh again to ensure proper width calculation
-        if (splideRef.current) {
-          splideRef.current.refresh();
-        }
-        
-        // Ensure all slides are visible (Splide will handle positioning)
-        const slides = splideContainerRef.current.querySelectorAll('.splide__slide');
-        slides.forEach(slide => {
-          slide.style.opacity = '1';
-        });
-        
-        // Force jump to correct index without animation
-        // Use go() with false to skip animation
-        isSplideUpdatingRef.current = true;
-        splideRef.current.go(currentIndex, false);
-        
-        // Verify the position is correct
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            if (splideRef.current && splideRef.current.index !== currentIndex) {
-              // If still wrong, refresh and try again
-              splideRef.current.refresh();
-              splideRef.current.go(currentIndex, false);
-            }
-            
-            // Double-check after a brief delay to ensure images are loaded
-            setTimeout(() => {
-              if (splideRef.current) {
-                // Final refresh to ensure everything is correct
-                splideRef.current.refresh();
-                if (splideRef.current.index !== currentIndex) {
-                  splideRef.current.go(currentIndex, false);
-                }
-              }
-              // Mark initial positioning as complete
-              isInitialPositioning = false;
-              isSplideUpdatingRef.current = false;
-            }, 150);
-          });
-        });
-      };
-      
-      // Wait for Splide to be ready, then jump
-      // Use multiple requestAnimationFrame calls to ensure layout is calculated
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(jumpToCorrectIndex);
-        });
-      });
+      swiperRef.current = swiper;
     };
 
-    // Use requestAnimationFrame to ensure DOM is ready
-    requestAnimationFrame(() => {
-      requestAnimationFrame(initSplide);
-    });
-
-    // Cleanup
+    requestAnimationFrame(() => requestAnimationFrame(initSwiper));
     return () => {
-      if (splideRef.current && !isSplideUpdatingRef.current) {
-        splideRef.current.destroy();
-        splideRef.current = null;
+      if (swiperRef.current && !isSwiperUpdatingRef.current) {
+        swiperRef.current.destroy(true, true);
+        swiperRef.current = null;
       }
     };
   }, [episodeData, showCover, getAllComicEpisodes]);
@@ -893,10 +703,10 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Function to load the next episode in the series
   const loadNextEpisode = () => {
-    if (splideRef.current) {
-      splideRef.current.go('+1');
+    if (swiperRef.current) {
+      swiperRef.current.slideNext();
     } else {
-      // Fallback if Splide not initialized
+      // Fallback if Swiper not initialized
       const nextEpisode = getNextEpisode(episodeData);
       if (nextEpisode) {
         setCurrentPage(1);
@@ -927,10 +737,10 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Function to load the previous episode and show its cover
   const loadPreviousEpisode = () => {
-    if (splideRef.current) {
-      splideRef.current.go('-1');
+    if (swiperRef.current) {
+      swiperRef.current.slidePrev();
     } else {
-      // Fallback if Splide not initialized
+      // Fallback if Swiper not initialized
       const prevEpisode = getPreviousEpisode(episodeData);
       if (prevEpisode) {
         setCurrentPage(1);
@@ -1015,54 +825,50 @@ window.ComicReader = ({ content, onClose }) => {
   // All styles are now loaded from styles.js via getDeviceStyles()
   // Access via: styles.coverDisplayStyle, styles.coverImageStyle, etc.
 
-  // Get all comic episodes for Splide carousel
+  // Get all comic episodes for Swiper carousel
   const allEpisodes = getAllComicEpisodes();
   
   // Build container children using render functions
   const containerChildren = [];
   
-  // If showing cover (or cover is exiting overlay), create Splide carousel with all episodes
+  // If showing cover (or cover is exiting overlay), create Swiper carousel with all episodes
   if ((showCover || isCoverExiting) && !error && renderCover && allEpisodes.length > 0) {
-    // Create Splide structure: splide > splide__track > splide__list > splide__slide (for each episode)
-    const splideSlides = allEpisodes.map((episode, index) => {
+    // Swiper structure: swiper > swiper-wrapper > swiper-slide (for each episode)
+    const swiperSlides = allEpisodes.map((episode) => {
       const isCurrentEpisode = episode.id === episodeData?.id;
-      return React.createElement('li', {
+      return React.createElement('div', {
         key: `episode-${episode.id}`,
-        className: 'splide__slide'
+        className: 'swiper-slide'
       }, renderCover(deviceType, styles, {
         episodeData: episode,
-        isVisible: isCurrentEpisode ? isVisible : true, // Only animate current episode
-        openComicBook: isCurrentEpisode ? openComicBook : () => {}, // Only allow opening current episode
+        isVisible: isCurrentEpisode ? isVisible : true,
+        openComicBook: isCurrentEpisode ? openComicBook : () => {},
         coverRef: isCurrentEpisode ? coverRef : null,
         isWideCover: episode.comicReaderVersion === 4 || episode.immersiveComic === true
       }));
     });
 
-    const splideList = React.createElement('ul', {
-      key: 'splide-list',
-      className: 'splide__list'
-    }, splideSlides);
+    const swiperWrapper = React.createElement('div', {
+      key: 'swiper-wrapper',
+      className: 'swiper-wrapper'
+    }, swiperSlides);
 
-    const splideTrack = React.createElement('div', {
-      key: 'splide-track',
-      className: 'splide__track'
-    }, splideList);
-
-    const splideContainer = React.createElement('div', {
-      key: 'splide-container',
-      ref: splideContainerRef,
-      className: 'splide comic-episode-splide' + (isCoverExiting ? ' comic-cover-exiting' : ''),
+    const swiperContainer = React.createElement('div', {
+      key: 'swiper-container',
+      ref: swiperContainerRef,
+      className: 'swiper comic-episode-swiper' + (isCoverExiting ? ' comic-cover-exiting' : ''),
       style: {
-        ...styles.comicContainerStyle,
         width: '100%',
         height: '100%',
+        overflow: 'hidden',
+        background: '#000',
         ...(isCoverExiting && { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 })
       }
-    }, splideTrack);
+    }, swiperWrapper);
 
-    containerChildren.push(splideContainer);
+    containerChildren.push(swiperContainer);
   } else if ((showCover || isCoverExiting) && !error && renderCover) {
-    // Fallback: single cover if no episodes or Splide not available
+    // Fallback: single cover if no episodes or Swiper not available
     containerChildren.push(renderCover(deviceType, styles, {
       episodeData,
       isVisible,
@@ -1258,8 +1064,8 @@ if (!document.querySelector('#comic-episode-styles')) {
       position: relative;
     }
     
-    /* Cover expands and fades out (on .comic-episode-splide.comic-cover-exiting) */
-    .comic-episode-splide.comic-cover-exiting {
+    /* Cover expands and fades out (on .comic-episode-swiper.comic-cover-exiting) */
+    .comic-episode-swiper.comic-cover-exiting {
       transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                   opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transform: scale(1.06);
@@ -1275,8 +1081,8 @@ if (!document.querySelector('#comic-episode-styles')) {
       to { opacity: 1; }
     }
     
-    /* Disable scaleIn animation for Splide slides */
-    .comic-episode-container .splide__slide {
+    /* Disable scaleIn animation for Swiper slides */
+    .comic-episode-container .swiper-slide {
       animation: none;
     }
     
@@ -1459,8 +1265,8 @@ if (!document.querySelector('#comic-episode-styles')) {
       cursor: grabbing !important;
     }
     
-    /* Splide customization for comic covers */
-    .comic-episode-splide {
+    /* Swiper customization for comic covers (freemode + grab cursor) */
+    .comic-episode-swiper {
       position: relative;
       width: 100%;
       height: 100%;
@@ -1468,41 +1274,26 @@ if (!document.querySelector('#comic-episode-styles')) {
       background: #000;
     }
     
-    .comic-episode-splide .splide__track {
-      width: 100% !important;
-      height: 100% !important;
-      overflow: hidden !important;
-      background: #000;
-    }
-    
-    .comic-episode-splide .splide__list {
-      display: flex;
+    .comic-episode-swiper .swiper-wrapper {
       align-items: stretch;
       height: 100%;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      will-change: transform;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    .comic-episode-splide .splide__slide {
+    .comic-episode-swiper .swiper-slide {
       display: flex;
       align-items: stretch;
       justify-content: center;
       width: 100% !important;
       min-width: 100% !important;
-      max-width: 100% !important;
       height: 100% !important;
       flex-shrink: 0 !important;
-      flex-grow: 0 !important;
       position: relative;
       box-sizing: border-box;
       overflow: hidden;
       background: #000;
     }
     
-    .comic-episode-splide .splide__slide > * {
+    .comic-episode-swiper .swiper-slide > * {
       width: 100%;
       height: 100%;
       flex-shrink: 0;
@@ -1512,41 +1303,17 @@ if (!document.querySelector('#comic-episode-styles')) {
       padding: 0;
     }
     
-    /* Ensure cover display fills the slide */
-    .comic-episode-splide .splide__slide .comic-cover-display {
+    .comic-episode-swiper .swiper-slide .comic-cover-display {
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
     }
     
-    .comic-episode-splide .splide__slide .comic-cover-display img {
+    .comic-episode-swiper .swiper-slide .comic-cover-display img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-    }
-    
-    /* Force track to be exactly container width - no more, no less */
-    .comic-episode-splide .splide__track {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 100% !important;
-    }
-    
-    /* Ensure proper initial positioning - prevent stuck between slides */
-    .comic-episode-splide .splide__list:not(.is-initialized) {
-      transform: translateX(0) !important;
-    }
-    
-    /* Ensure all slides are visible for smooth transitions */
-    .comic-episode-splide .splide__slide {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    /* Only hide slides that are completely off-screen to prevent flash */
-    .comic-episode-splide .splide__slide {
-      will-change: transform;
     }
     
     /* Cover navigation button hover effects */
