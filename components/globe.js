@@ -161,13 +161,13 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       if (isDrawerOpen && drawerRef.current && !drawerRef.current.contains(event.target) && !event.target.closest('.filter-toggle-button')) {
         setIsDrawerOpen(false);
       }
-      if (isBlogDrawerOpen && blogDrawerRef.current && !blogDrawerRef.current.contains(event.target) && !event.target.closest('.blog-post-drawer')) {
+      if (isBlogDrawerOpen && blogDrawerRef.current && !blogDrawerRef.current.contains(event.target) && !event.target.closest('.blog-post-drawer') && !event.target.closest('.comic-episode-overlay')) {
         setIsBlogDrawerOpen(false);
       }
     };
 
     const handleTouchStart = (event) => {
-      if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer')) {
+      if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer') || event.target.closest('.comic-episode-overlay')) {
         return;
       }
       if (event.touches.length === 1) {
@@ -227,7 +227,7 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     };
 
     const handleTouchMove = (event) => {
-      if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer')) {
+      if (event.target.closest('.overlay') || event.target.closest('.popover') || event.target.closest('.filter-drawer') || event.target.closest('.blog-post-drawer') || event.target.closest('.comic-episode-overlay')) {
         return;
       }
       if (event.touches.length === 1 && popoverContent && touchStartX.current !== null && touchStartY.current !== null) {

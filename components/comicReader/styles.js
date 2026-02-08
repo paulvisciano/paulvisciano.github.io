@@ -346,6 +346,10 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const footerHeight = 150;
   const v4Open = !showCover && isV4Cover;
   const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: fixed 1000x700
+  // showCover: pan-x for horizontal cover carousel
+  // v4 immersive: pan-y for vertical slide swiper
+  // flipbook: 'none' to prevent page scroll
+  const overlayTouchAction = showCover ? 'pan-x' : (isV4Cover ? 'pan-y' : 'none');
   const comicOverlayStyle = {
     position: 'fixed',
     top: 0,
@@ -361,7 +365,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
     paddingBottom: showCover ? '20px' : '0',
     zIndex: 10000,
     backdropFilter: 'blur(2px)',
-    touchAction: 'none',
+    touchAction: overlayTouchAction,
     pointerEvents: 'auto'
   };
 
