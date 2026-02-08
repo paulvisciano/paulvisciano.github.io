@@ -284,8 +284,8 @@ const renderCoverNavigation = (deviceType, styles, {
   const buttons = [];
   
   // When pages are open, navigate between pages (desktop/tablet only)
-  // Hide nav arrows in fullscreen for V4 immersive mode
-  if (!isMobile && !showCover && previousPage && nextPage && !(isFullscreen && isV4Episode)) {
+  // Hide nav arrows for V4 immersive mode (uses vertical swipe, not left/right)
+  if (!isMobile && !showCover && previousPage && nextPage && !isV4Episode) {
     // Left button for previous page
     buttons.push(React.createElement('button', {
       key: 'page-prev',
