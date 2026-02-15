@@ -18,28 +18,30 @@ This document defines all style values for each device type and orientation comb
 
 | Device | Orientation | Width | Height |
 |--------|-------------|-------|--------|
-| Mobile | Portrait | 100vw | 100dvh |
-| Mobile | Landscape | 400px | 300px |
-| Tablet | Portrait | 100vw | 100dvh |
+| Mobile | Portrait | 100vw | 100svh |
+| Mobile | Landscape | 70vw | 90svh |
+| Tablet | Portrait | 100vw | 100svh |
 | Tablet | Landscape | 800px | 600px |
 | Desktop | Landscape | 800px | 600px |
 
 **Fullscreen Mode (when comic is open):**
 - Tablet Landscape & Desktop: 85% width, 90% height (overrides open dimensions)
-- Portrait orientations (Mobile & Tablet): Already use 100vw/100dvh by default, no change in fullscreen
+- Portrait orientations (Mobile & Tablet): Already use 100vw/100svh by default, no change in fullscreen
 - Cover state: Uses static dimensions (400px x 600px) even in fullscreen
 
 **Common Container Properties:**
 - background: #000
 - overflow: hidden
 - maxWidth: 90vw (except mobile portrait: 100vw, desktop: none)
-- maxHeight: 90vh (except mobile portrait: 100dvh, desktop: none)
+- maxHeight: 90vh (except mobile portrait: 100svh, desktop: none)
 - display: flex
 - flexDirection: column
 - touchAction: auto (tablet landscape: pan-x pan-y pinch-zoom)
 - pointerEvents: auto
 
 **Note:** Tablet and Desktop share the same dimensions (400px x 600px for cover, 800px x 600px for open) to ensure consistency across larger screens.
+
+**Viewport units:** Mobile and tablet portrait use `100svh` (small viewport height) so content fits within the visible area when the browser URL bar is showing on physical devices. See `MOBILE_VIEWPORT_TESTING.md` for simulation tips.
 
 ## Cover Display Styles (comic-cover-display)
 

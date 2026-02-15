@@ -19,9 +19,11 @@ const STYLE_CONFIG = {
         },
         open: {
           width: '100vw',
-          height: '100dvh'
+          // 100svh = small viewport (URL bar visible) - prevents shift on physical devices
+          height: '100svh'
         },
         position: 'relative',
+        justifyContent: 'center'
       },
       landscape: {
         cover: {
@@ -30,7 +32,7 @@ const STYLE_CONFIG = {
         },
         open: {
           width: '70vw',
-          height: '90dvh'
+          height: '90svh'
         },
         position: 'relative',
         borderRadius: '15px',
@@ -47,7 +49,7 @@ const STYLE_CONFIG = {
         },
         open: {
           width: '100vw',
-          height: '100dvh'
+          height: '100svh'
         },
         position: 'relative',
         top: 'auto',
@@ -361,15 +363,18 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const v4Open = !showCover && isV4Cover;
   const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: fixed 1000x700
   const overlayTouchAction = showCover ? 'pan-x' : (isV4Cover ? 'pan-y' : 'none');
-  const overlayPaddingTop = showCover && isPortrait ? (isMobile ? '20px' : '40px') : '0';
-  const overlayPaddingBottom = showCover && isPortrait ? '20px' : '0';
+  const overlayPaddingTop = showCover && isPortrait ? '0' : '0';
+  const overlayPaddingBottom = showCover && isPortrait ? '0' : '0';
+  // Mobile/tablet portrait: use 100svh so overlay fits when URL bar is visible on physical devices
+  const overlayHeight = (isMobile || (isTablet && isPortrait)) ? '100svh' : '100dvh';
+  const overlayMinHeight = (isMobile || (isTablet && isPortrait)) ? '100svh' : '100vh';
   const comicOverlayStyle = {
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100vw',
-    height: '100dvh',
-    minHeight: '100vh',
+    height: overlayHeight,
+    minHeight: overlayMinHeight,
     background: showCover ? 'rgba(0, 0, 0, 0.2)' : 'rgba(0, 0, 0, 0.8)',
     display: 'flex',
     flexDirection: isMobile ? 'column' : 'row',

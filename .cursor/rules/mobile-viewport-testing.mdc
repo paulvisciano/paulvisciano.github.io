@@ -1,0 +1,21 @@
+---
+description: Mobile viewport testing - simulate physical device in DevTools
+globs: components/comicReader/**/*, components/**/*.css
+alwaysApply: false
+---
+
+# Mobile Viewport Testing
+
+When making changes to comic reader or mobile layouts, the browser simulator shows the **full viewport** (no URL bar). On physical devices, the browser chrome takes ~50–100px, causing content to shift or be cut off.
+
+## Simulate Physical Device in DevTools
+
+1. **Custom device**: DevTools → Dimensions → Edit → Add custom device
+   - Use reduced height (e.g. iPhone 14 Pro: 393×700 instead of 393×844)
+2. **Responsive mode**: Set height manually ~100px less than device height
+3. See `components/comicReader/MOBILE_VIEWPORT_TESTING.md` for full guide
+
+## Viewport Units
+
+- Use `100svh` (not `100dvh`) for full-height mobile layouts so content fits when URL bar is visible
+- `100svh` = small viewport (browser UI visible) = what users see on load
