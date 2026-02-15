@@ -23,6 +23,33 @@ const updateGlobalState = (updates) => {
 const getGlobalState = () => window.ComicReaderState;
 
 /**
+ * Parse slide index from URL hash (#slide-N, 1-based).
+ * Returns 1-based slide number or null if invalid/absent.
+ */
+const parseSlideFromHash = () => {
+  if (typeof window === 'undefined') return null;
+  const hash = window.location.hash;
+  const m = hash && hash.match(/^#slide-(\d+)$/);
+  return m ? parseInt(m[1], 10) : null;
+};
+
+/**
+ * Update URL to reflect current slide (uses replaceState to avoid history pollution).
+ * @param {string} basePath - e.g. /moments/miami/2025-10-06/
+ * @param {number} slideIndex - 0-based slide index
+ */
+const updateUrlForSlide = (basePath, slideIndex) => {
+  if (typeof window === 'undefined') return;
+  const newHash = `#slide-${slideIndex + 1}`; // 1-based for readability
+  const newUrl = basePath.replace(/#.*$/, '') + newHash;
+  window.history.replaceState(
+    { ...(window.history.state || {}), slideIndex: slideIndex + 1 },
+    '',
+    newUrl
+  );
+};
+
+/**
  * Check if a URL is a video file
  */
 const isVideoFile = (url) => {
@@ -204,6 +231,8 @@ window.ComicReaderCore = {
   findCurrentEpisode,
   getPageIncrement,
   isVideoFile,
-  preloadNextTwoPages
+  preloadNextTwoPages,
+  parseSlideFromHash,
+  updateUrlForSlide
 };
 

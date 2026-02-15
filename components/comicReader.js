@@ -8,7 +8,7 @@
 // - components/comicReader/render.js (device-specific render functions)
 
 // Get utilities from loaded modules
-const { updateGlobalState, getGlobalState, getPages: coreGetPages, getNextEpisode: coreGetNextEpisode, getPreviousEpisode: coreGetPreviousEpisode, findCurrentEpisode } = window.ComicReaderCore || {};
+const { updateGlobalState, getGlobalState, getPages: coreGetPages, getNextEpisode: coreGetNextEpisode, getPreviousEpisode: coreGetPreviousEpisode, findCurrentEpisode, parseSlideFromHash, updateUrlForSlide } = window.ComicReaderCore || {};
 const { createFlipbook: createFlipbookUtil, updatePages: updatePagesUtil } = window.ComicReaderFlipbook || {};
 const { getNextPageNumber, getPreviousPageNumber, shouldGoBackToCover, createSwipeHandlers } = window.ComicReaderNavigation || {};
 const { 
@@ -39,6 +39,7 @@ window.ComicReader = ({ content, onClose }) => {
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
   const [isSlidesSwitching, setIsSlidesSwitching] = React.useState(false);
   const [showMobileControls, setShowMobileControls] = React.useState(false);
+  const [initialSlideIndex, setInitialSlideIndex] = React.useState(null);
   const isInitializedRef = React.useRef(false);
   const flipbookRef = React.useRef(null);
   const flipbookCreatedRef = React.useRef(false);
@@ -415,12 +416,34 @@ window.ComicReader = ({ content, onClose }) => {
   }, [orientation, deviceType, showCover, getAllComicEpisodes]);
 
   // Handle initial page loading after component is mounted
+  // For V4 episodes with #slide-N in URL: open directly to that slide (deep link)
   React.useEffect(() => {
     if (!episodeData) {
       return; // Wait for episode data to load
     }
     
-    // Always show cover page first for comic episodes
+    const isV4 = episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true;
+    const slideFromHash = parseSlideFromHash && parseSlideFromHash();
+    
+    if (isV4 && slideFromHash != null && slideFromHash >= 1) {
+      const pages = coreGetPages ? coreGetPages(episodeData) : [];
+      const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
+      const totalSlides = pages.length + (hasVideo ? 1 : 0);
+      const slideIndex = Math.min(slideFromHash, totalSlides);
+      if (slideIndex >= 1) {
+        setInitialSlideIndex(slideIndex - 1); // 0-based for Swiper
+        setShowCover(false);
+        setFlipbookReady(true);
+        setTotalPages(totalSlides);
+        setCurrentPage(slideIndex);
+        currentPageRef.current = slideIndex;
+        setIsLoading(false);
+        return;
+      }
+    }
+    
+    // Default: show cover first
+    setInitialSlideIndex(null);
     setShowCover(true);
     setFlipbookReady(false);
   }, [episodeData]);
@@ -529,6 +552,7 @@ window.ComicReader = ({ content, onClose }) => {
     setCurrentPage(1);
     currentPageRef.current = 1;
     flipbookCreatedRef.current = false; // Reset flipbook creation flag
+    setInitialSlideIndex(null); // Reset so re-open starts at slide 1
     updateGlobalState({ 
       showCover: true, 
       flipbookReady: false, 
@@ -536,6 +560,11 @@ window.ComicReader = ({ content, onClose }) => {
       currentPage: 1,
       flipbookCreated: false // Reset global flipbook creation flag
     });
+    // Clear #slide-N from URL so re-opening starts at slide 1
+    const basePath = (episodeData?.fullLink || '').replace(/#.*$/, '');
+    if (basePath && window.location.hash) {
+      window.history.replaceState({}, '', basePath);
+    }
   };
 
 
@@ -811,6 +840,11 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   const handleClose = () => {
+    // Clear #slide-N from URL so re-opening starts at slide 1
+    const basePath = (episodeData?.fullLink || '').replace(/#.*$/, '');
+    if (basePath && window.location.hash) {
+      window.history.replaceState({}, '', basePath);
+    }
     // Reset global state when closing
     updateGlobalState({
       flipbookCreated: false,
@@ -936,10 +970,13 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Comic Reader 4.0: vertical fullscreen feed (swipe up/down between slides)
   if (!error && !showCover && isV4Episode && renderImmersiveV4) {
+    const basePath = (episodeData?.fullLink || '').replace(/\/$/, '') + '/';
     containerChildren.push(renderImmersiveV4(episodeData, styles, {
       onBackToCover: goBackToCover,
       onVideoPlayStateChange: setIsVideoPlaying,
-      onSlidesSwitchingChange: setIsSlidesSwitching
+      onSlidesSwitchingChange: setIsSlidesSwitching,
+      initialSlideIndex: initialSlideIndex ?? 0,
+      onSlideChange: updateUrlForSlide ? (slideIndex0) => updateUrlForSlide(basePath, slideIndex0) : undefined
     }));
   }
   

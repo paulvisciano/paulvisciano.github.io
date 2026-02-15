@@ -29,10 +29,10 @@
 
   const PLAY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>';
   const PAUSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>';
-  const AUTO_PLAY_DELAY_MS = 2000;
+  const AUTO_PLAY_DELAY_MS = 150; // Brief delay for slide to settle; videos auto-play when landing on a video slide
 
   window.ComicReaderImmersiveV4 = function ImmersiveV4Content({ episodeData, styles, navState = {} }) {
-    const { onBackToCover, onVideoPlayStateChange, onSlidesSwitchingChange } = navState;
+    const { onBackToCover, onVideoPlayStateChange, onSlidesSwitchingChange, initialSlideIndex = 0, onSlideChange } = navState;
     const swiperRef = React.useRef(null);
     const swiperInstanceRef = React.useRef(null);
     const activeSlideRef = React.useRef(0);
@@ -109,13 +109,23 @@
       pendingRestoreRef.current = null;
     };
 
+    // When initial slide is a video, ensure play() is called once it can play (autoplay attr can be unreliable)
+    const tryPlayInitialVideo = (el, index) => {
+      if (!el || index !== initialSlideIndex) return;
+      el.muted = true; // Must be muted for programmatic play without user gesture
+      el.play().catch(function() {});
+    };
+
     // Initialize Swiper
     React.useEffect(() => {
       const container = swiperRef.current;
       if (!container || typeof window.Swiper === 'undefined') return;
 
       const totalSlides = pages.length + (hasVideo ? 1 : 0);
-      const initialSlide = Math.min(activeSlideRef.current, Math.max(0, totalSlides - 1));
+      const initialSlide = Math.min(
+        typeof initialSlideIndex === 'number' ? initialSlideIndex : activeSlideRef.current,
+        Math.max(0, totalSlides - 1)
+      );
 
       const swiper = new window.Swiper(container, {
         direction: 'vertical',
@@ -151,6 +161,7 @@
               if (!newSlideIsVideo) onSlidesSwitchingChange?.(false);
             }
             setActiveSlideIndex(sw.activeIndex);
+            onSlideChange?.(sw.activeIndex);
             const refs = videoRefsByIndex.current;
             // Preload next slide's video so it can start immediately when user swipes
             const nextIdx = sw.activeIndex + 1;
@@ -167,6 +178,7 @@
             const activeEl = refs[sw.activeIndex];
             if (activeEl) {
               autoPlayTimerRef.current = setTimeout(() => {
+                activeEl.muted = false; // User swiped = interaction, unmuted allowed
                 activeEl.play().catch(function() {});
                 autoPlayTimerRef.current = null;
               }, AUTO_PLAY_DELAY_MS);
@@ -177,6 +189,7 @@
 
       swiperInstanceRef.current = swiper;
       setActiveSlideIndex(initialSlide);
+      onSlideChange?.(initialSlide); // Update URL with initial slide (e.g. #slide-1 when opening from cover)
 
       // Preload next slide's video for instant playback on swipe
       const nextVideo = videoRefsByIndex.current[initialSlide + 1];
@@ -200,7 +213,7 @@
           autoPlayTimerRef.current = null;
         }
       };
-    }, [pages.length, hasVideo, videoSlideIndex, usePortraitAssets]);
+    }, [pages.length, hasVideo, videoSlideIndex, usePortraitAssets, initialSlideIndex]);
 
     // When viewport or orientation changes, tell Swiper to recalculate dimensions
     React.useEffect(() => {
@@ -259,8 +272,10 @@
       e.stopPropagation();
       const el = videoRefsByIndex.current[index];
       if (!el) return;
-      if (el.paused) el.play().catch(function() {});
-      else el.pause();
+      if (el.paused) {
+        el.muted = false; // Unmute on user tap (autoplay starts muted for browser policy)
+        el.play().catch(function() {});
+      } else el.pause();
     };
 
     const handleVideoEnded = () => {
@@ -283,9 +298,9 @@
               ref: (el) => { if (el) videoRefsByIndex.current[i] = el; },
               src: url,
               preload: 'auto',
-              autoPlay: false,
+              autoPlay: initialSlideIndex === i,
               playsInline: true,
-              muted: false,
+              muted: initialSlideIndex === i, // Muted required for autoplay on direct navigation (no user gesture)
               loop: false,
               onPlay: () => {
                 setVideoPlayState((s) => ({ ...s, [i]: 'playing' }));
@@ -293,6 +308,7 @@
               },
               onPause: () => setVideoPlayState((s) => ({ ...s, [i]: 'paused' })),
               onEnded: handleVideoEnded,
+              onCanPlay: (e) => tryPlayInitialVideo(e.target, i),
               style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
             }),
             React.createElement('div', {
@@ -329,8 +345,9 @@
           ref: registerVideoRef,
           src: videoSrc,
           preload: 'auto',
+          autoPlay: initialSlideIndex === videoSlideIndex,
           playsInline: true,
-          muted: false,
+          muted: initialSlideIndex === videoSlideIndex, // Muted required for autoplay on direct navigation (no user gesture)
           onPlay: () => {
             setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'playing' }));
             onSlidesSwitchingChange?.(false);
@@ -338,7 +355,10 @@
           onPause: () => setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'paused' })),
           onEnded: handleVideoEnded,
           onLoadedMetadata: function(e) { e.target.volume = 0.2; },
-          onCanPlay: handleVideoCanPlay,
+          onCanPlay: (e) => {
+            handleVideoCanPlay();
+            tryPlayInitialVideo(e.target, videoSlideIndex);
+          },
           style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
         }),
         React.createElement('div', {

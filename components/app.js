@@ -334,26 +334,18 @@ window.App = () => {
 
   // Check URL on initial load to set selectedId and zoom to location
   React.useEffect(() => {
-    // Check for a 'path' query parameter (GitHub Pages 404 redirect)
     const params = new URLSearchParams(window.location.search);
     const pathFromQuery = params.get('path');
     let path = window.location.pathname;
 
-    // If there's a 'path' query parameter, use it as the initial path
     if (pathFromQuery) {
       path = pathFromQuery;
-      // Clean up the URL to remove the query parameter and set the correct path
-      // Preserve the hash if it exists
-      const fullPath = path + window.location.hash;
-      window.history.replaceState({}, '', fullPath);
+      window.history.replaceState({}, '', path + (window.location.hash || ''));
     }
 
-    // Normalize path for comparison (handle trailing slash)
     const normalizedPath = path.endsWith('/') ? path : path + '/';
     const pathWithoutTrailing = path.endsWith('/') ? path.slice(0, -1) : path;
 
-    // First, try to find a moment by exact fullLink match (works for routes like '/characters')
-    // Check both with and without trailing slash
     if (window.momentsInTime && Array.isArray(window.momentsInTime)) {
       const directMoment = window.momentsInTime.find(m => {
         if (!m.fullLink) return false;
@@ -365,32 +357,29 @@ window.App = () => {
         return;
       }
     }
-    
+
     const match = path.match(/^\/moments\/(.+)/);
     if (match) {
       const pathSegment = match[1];
-      
-      // Strip hash from pathSegment for moment lookup
       const pathSegmentWithoutHash = pathSegment.split('#')[0];
-      
-      // First try to find by exact fullLink match
+      const pathWithSlash = pathSegmentWithoutHash.endsWith('/') ? pathSegmentWithoutHash : pathSegmentWithoutHash + '/';
+      const pathNoSlash = pathSegmentWithoutHash.replace(/\/$/, '');
+      const fullPathWithSlash = `/moments/${pathWithSlash}`;
+      const fullPathNoSlash = `/moments/${pathNoSlash}`;
+
       let moment = window.momentsInTime.find(m => m.fullLink === path);
-      
-      // If no exact match, try to find by base path (for comic moments with hash)
       if (!moment) {
         moment = window.momentsInTime.find(m => {
           if (m.fullLink && m.fullLink.includes('#')) {
             const basePath = m.fullLink.split('#')[0];
-            return basePath === `/moments/${pathSegmentWithoutHash}`;
+            return basePath === fullPathWithSlash || basePath === fullPathNoSlash;
           }
           return false;
         });
       }
-      
-      // If still no match, try by path segment or id
       if (!moment) {
-        moment = window.momentsInTime.find(m => m.fullLink === `/moments/${pathSegmentWithoutHash}`) || 
-                window.momentsInTime.find(m => m.id === pathSegmentWithoutHash);
+        moment = window.momentsInTime.find(m => m.fullLink === fullPathWithSlash || m.fullLink === fullPathNoSlash) ||
+          window.momentsInTime.find(m => m.id === pathSegmentWithoutHash);
       }
       
       // If still no match, try to find by generated URL from location.name (for moments with fullLink: "#")
@@ -433,7 +422,6 @@ window.App = () => {
         updateOverlayMessage(`Exploring ${moment.title}`); // Set moment-specific message upfront
         handleMomentSelection(moment); // Use the unified logic to select and zoom
       } else {
-        // If moment ID is invalid, redirect to root
         window.history.replaceState({}, '', '/');
         updateOverlayMessage('Looking for Paul');
       }

@@ -659,10 +659,10 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
       // Update moment selection (URL and globe zoom) if not already selected
       if (selectedId !== postId) {
         setSelectedId(postId);
-        // Update URL using fullLink
         const intendedPath = post.fullLink && post.fullLink !== "#" ? post.fullLink : `/moments/${postId}`;
-        const currentPath = window.location.pathname;
-        if (currentPath !== intendedPath) {
+        const currentBase = (window.location.pathname || '').replace(/\/$/, '');
+        const intendedBase = (intendedPath || '').replace(/\/$/, '');
+        if (currentBase !== intendedBase) {
           window.history.pushState({ momentId: postId }, '', intendedPath);
         }
         // Globe zoom will be handled automatically by React state change
