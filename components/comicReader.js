@@ -38,6 +38,7 @@ window.ComicReader = ({ content, onClose }) => {
   const [showControls, setShowControls] = React.useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
   const [isSlidesSwitching, setIsSlidesSwitching] = React.useState(false);
+  const [showMobileControls, setShowMobileControls] = React.useState(false);
   const isInitializedRef = React.useRef(false);
   const flipbookRef = React.useRef(null);
   const flipbookCreatedRef = React.useRef(false);
@@ -75,6 +76,11 @@ window.ComicReader = ({ content, onClose }) => {
       setIsSlidesSwitching(false);
     }
   }, [isV4Episode]);
+
+  // Reset mobile controls visibility when returning to cover
+  React.useEffect(() => {
+    if (showCover) setShowMobileControls(false);
+  }, [showCover]);
   
   // Keep ref in sync with state
   React.useEffect(() => {
@@ -553,7 +559,7 @@ window.ComicReader = ({ content, onClose }) => {
         console.error('ComicReader: styles not loaded');
         return;
       }
-      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching });
+      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching, showMobileControls });
       
       // Use utility to create flipbook structure
       const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, orientation, currentPages, currentStyles);
@@ -602,7 +608,7 @@ window.ComicReader = ({ content, onClose }) => {
       console.error('ComicReader: styles not loaded');
       return;
     }
-    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen, orientation, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching });
+    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen, orientation, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching, showMobileControls });
     
     // Use utility to update pages
     updatePagesUtil(deviceType, orientation, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
@@ -854,7 +860,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Get device-specific styles
   const styles = window.ComicReaderStyles?.getDeviceStyles 
-    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching })
+    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching, showMobileControls })
     : {}; // Fallback empty object if styles not loaded
 
   // All styles are now loaded from styles.js via getDeviceStyles()
@@ -965,11 +971,14 @@ window.ComicReader = ({ content, onClose }) => {
   }
   
   // Handler to prevent clicks on container from bubbling to overlay
+  // On mobile flipbook: tap page to toggle bottom nav visibility
   const handleContainerClick = (e) => {
-    // Stop propagation to prevent overlay click handler from firing
-    // This prevents accidental dismissal when clicking on empty container space
     if (!showCover) {
       e.stopPropagation();
+      // Toggle mobile nav when tapping page (not when tapping nav buttons)
+      if (isMobile && !isV4Episode && useSinglePage && !e.target.closest('.mobile-comic-nav')) {
+        setShowMobileControls((prev) => !prev);
+      }
     }
   };
   

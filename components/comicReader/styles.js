@@ -31,8 +31,8 @@ const STYLE_CONFIG = {
           height: '360px'
         },
         open: {
-          width: '70vw',
-          height: '90svh'
+          width: '100vw',
+          height: '100svh'
         },
         position: 'relative',
         borderRadius: '15px',
@@ -66,10 +66,10 @@ const STYLE_CONFIG = {
           height: '600px'
         },
         open: {
-          width: 'calc(100vw - 120px)',
-          height: 'calc(100vh - 80px)',
-          maxWidth: '1200px',
-          maxHeight: '800px'
+          width: '100vw',
+          height: '100dvh',
+          maxWidth: 'none',
+          maxHeight: 'none'
         },
         position: 'relative',
         top: 'auto',
@@ -88,10 +88,10 @@ const STYLE_CONFIG = {
         height: '560px'
       },
       open: {
-        width: 'calc(100vw - 120px)',
-        height: 'calc(100vh - 80px)',
-        maxWidth: '1400px',
-        maxHeight: '900px'
+        width: '100vw',
+        height: '100dvh',
+        maxWidth: 'none',
+        maxHeight: 'none'
       },
       position: 'relative',
       top: 'auto',
@@ -241,15 +241,15 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
       maxWidth: 'none',
       maxHeight: 'none'
     }
-  ) : (isFullscreen && !showCover) ? (
-    isDesktop ? {
-      width: '1000px',
-      height: '750px'
-    } : {
-      width: '85%',
-      height: '90%'
-    }
-  ) : {};
+  ) : (isFullscreen && !showCover) ? {
+    width: '100%',
+    height: '100%',
+    maxWidth: 'none',
+    maxHeight: 'none',
+    borderRadius: 0,
+    border: 'none',
+    boxShadow: 'none'
+  } : {};
 
   // Mobile landscape with V4 immersive open only: no border, radius, or shadow (edge-to-edge)
   const mobileLandscapeOpenNoDecor = (isMobile && !isPortrait && !showCover && isV4Cover) ? {
@@ -356,7 +356,7 @@ const getCoverImageStyle = (deviceType, orientation) => {
  * @returns {object} Style objects for the device type
  */
 const getDeviceStyles = (deviceType, state = {}) => {
-  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false, isV4Cover = false, isVideoPlaying = false, isSlidesSwitching = false } = state;
+  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false, isV4Cover = false, isVideoPlaying = false, isSlidesSwitching = false, showMobileControls = false } = state;
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -428,6 +428,8 @@ const getDeviceStyles = (deviceType, state = {}) => {
   const flipbookStyle = getFlipbookStyle(deviceType, orientation, showCover, isLoading, isFullscreen);
 
   const hideButtons = isVideoPlaying || isSlidesSwitching;
+  // On mobile flipbook: hide close with nav until user taps page
+  const hideMobileHeader = isMobile && !showCover && !showMobileControls;
   // Close button styles (high z-index and pointer-events so it's clickable above filter when overlay has pointer-events: none)
   const closeButtonStyle = isMobile ? {
     position: 'fixed',
@@ -445,13 +447,13 @@ const getDeviceStyles = (deviceType, state = {}) => {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10005,
-    pointerEvents: hideButtons ? 'none' : 'auto',
-    transition: 'all 0.3s ease',
+    pointerEvents: (hideButtons || hideMobileHeader) ? 'none' : 'auto',
+    transition: 'all 0.2s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    opacity: hideButtons ? 0 : 1,
-    visibility: hideButtons ? 'hidden' : 'visible'
+    opacity: (hideButtons || hideMobileHeader) ? 0 : 1,
+    visibility: (hideButtons || hideMobileHeader) ? 'hidden' : 'visible'
   } : {
     position: 'absolute',
     top: '5px',
@@ -620,6 +622,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   };
 
   // Mobile navigation styles (only for mobile)
+  // Hidden by default; tap page to toggle visibility
   const mobileNavStyle = {
     position: 'fixed',
     bottom: 0,
@@ -633,7 +636,10 @@ const getDeviceStyles = (deviceType, state = {}) => {
     padding: '0 10px',
     zIndex: 10001,
     width: '100vw',
-    marginBottom: '10px'
+    marginBottom: '10px',
+    opacity: showMobileControls ? 1 : 0,
+    pointerEvents: showMobileControls ? 'auto' : 'none',
+    transition: 'opacity 0.2s ease'
   };
 
   // Flipbook-specific styles
