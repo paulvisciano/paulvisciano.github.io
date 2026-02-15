@@ -152,6 +152,10 @@
             }
             setActiveSlideIndex(sw.activeIndex);
             const refs = videoRefsByIndex.current;
+            // Preload next slide's video so it can start immediately when user swipes
+            const nextIdx = sw.activeIndex + 1;
+            const nextVideo = refs[nextIdx];
+            if (nextVideo && typeof nextVideo.load === 'function') nextVideo.load();
             if (autoPlayTimerRef.current) {
               clearTimeout(autoPlayTimerRef.current);
               autoPlayTimerRef.current = null;
@@ -173,6 +177,10 @@
 
       swiperInstanceRef.current = swiper;
       setActiveSlideIndex(initialSlide);
+
+      // Preload next slide's video for instant playback on swipe
+      const nextVideo = videoRefsByIndex.current[initialSlide + 1];
+      if (nextVideo && typeof nextVideo.load === 'function') nextVideo.load();
 
       const activeVideo = videoRefsByIndex.current[initialSlide];
       if (activeVideo) {
@@ -274,6 +282,7 @@
             React.createElement('video', {
               ref: (el) => { if (el) videoRefsByIndex.current[i] = el; },
               src: url,
+              preload: 'auto',
               autoPlay: false,
               playsInline: true,
               muted: false,
@@ -319,6 +328,7 @@
         React.createElement('video', {
           ref: registerVideoRef,
           src: videoSrc,
+          preload: 'auto',
           playsInline: true,
           muted: false,
           onPlay: () => {
