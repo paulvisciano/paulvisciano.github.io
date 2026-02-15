@@ -184,6 +184,12 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
       dynamicProps.left = '0';
       dynamicProps.right = '0';
     }
+    // Shrink cover on narrow viewports so nav buttons (48px + 12px inset + 8px gap) don't overlap
+    if (showCover) {
+      const minSideSpace = 68; // 48px button + 12px from edge + 8px gap per side
+      dynamicProps.width = `min(300px, calc(100vw - ${minSideSpace * 2}px))`;
+      dynamicProps.height = `min(450px, calc((100vw - ${minSideSpace * 2}px) * 1.5))`;
+    }
   } else if (isMobile && !isPortrait) {
     config = STYLE_CONFIG.container.mobile.landscape;
     const coverOrOpen = showCover ? 'cover' : 'open';

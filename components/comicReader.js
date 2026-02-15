@@ -30,7 +30,6 @@ window.ComicReader = ({ content, onClose }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(0);
   const [showCover, setShowCover] = React.useState(true);
-  const [isCoverExiting, setIsCoverExiting] = React.useState(false);
   const [flipbookReady, setFlipbookReady] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(false);
   const [episodeData, setEpisodeData] = React.useState(null);
@@ -499,19 +498,14 @@ window.ComicReader = ({ content, onClose }) => {
       overlayRef.current.requestFullscreen({ navigationUI: 'hide' }).then(() => setIsFullscreen(true)).catch(() => {});
     }
     if (isV4Episode) {
-      const TRANSITION_MS = 400;
-      setIsCoverExiting(true);
-      setTimeout(() => {
-        const pages = episodeData?.pages && Array.isArray(episodeData.pages) ? episodeData.pages : [];
-        const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
-        setShowCover(false);
-        setIsCoverExiting(false);
-        setTotalPages(pages.length + (hasVideo ? 1 : 0));
-        setCurrentPage(1);
-        currentPageRef.current = 1;
-        setIsLoading(false);
-        setFlipbookReady(true);
-      }, TRANSITION_MS);
+      const pages = episodeData?.pages && Array.isArray(episodeData.pages) ? episodeData.pages : [];
+      const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
+      setShowCover(false);
+      setTotalPages(pages.length + (hasVideo ? 1 : 0));
+      setCurrentPage(1);
+      currentPageRef.current = 1;
+      setIsLoading(false);
+      setFlipbookReady(true);
       return;
     }
     setShowCover(false);
@@ -872,8 +866,8 @@ window.ComicReader = ({ content, onClose }) => {
   // Build container children using render functions
   const containerChildren = [];
   
-  // If showing cover (or cover is exiting overlay), create Swiper carousel with all episodes
-  if ((showCover || isCoverExiting) && !error && renderCover && allEpisodes.length > 0) {
+  // If showing cover, create Swiper carousel with all episodes
+  if (showCover && !error && renderCover && allEpisodes.length > 0) {
     // Swiper structure: swiper > swiper-wrapper > swiper-slide (for each episode)
     const swiperSlides = allEpisodes.map((episode) => {
       const isCurrentEpisode = episode.id === episodeData?.id;
@@ -897,19 +891,18 @@ window.ComicReader = ({ content, onClose }) => {
     const swiperContainer = React.createElement('div', {
       key: 'swiper-container',
       ref: swiperContainerRef,
-      className: 'swiper comic-episode-swiper' + (isCoverExiting ? ' comic-cover-exiting' : ''),
+      className: 'swiper comic-episode-swiper',
       style: {
         width: '100%',
         height: '100%',
         overflow: 'hidden',
         background: '#000',
-        touchAction: 'pan-x',
-        ...(isCoverExiting && { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 })
+        touchAction: 'pan-x'
       }
     }, swiperWrapper);
 
     containerChildren.push(swiperContainer);
-  } else if ((showCover || isCoverExiting) && !error && renderCover) {
+  } else if (showCover && !error && renderCover) {
     // Fallback: single cover if no episodes or Swiper not available
     containerChildren.push(renderCover(deviceType, styles, {
       episodeData,
@@ -936,16 +929,12 @@ window.ComicReader = ({ content, onClose }) => {
   }
 
   // Comic Reader 4.0: vertical fullscreen feed (swipe up/down between slides)
-  // Render during cover-exit overlap so first page fades in as cover fades out
-  if (!error && (!showCover || isCoverExiting) && isV4Episode && renderImmersiveV4) {
-    const v4Content = renderImmersiveV4(episodeData, styles, {
+  if (!error && !showCover && isV4Episode && renderImmersiveV4) {
+    containerChildren.push(renderImmersiveV4(episodeData, styles, {
       onBackToCover: goBackToCover,
       onVideoPlayStateChange: setIsVideoPlaying,
       onSlidesSwitchingChange: setIsSlidesSwitching
-    });
-    containerChildren.push(isCoverExiting
-      ? React.createElement('div', { key: 'v4-entering', className: 'comic-content-entering' }, v4Content)
-      : v4Content);
+    }));
   }
   
   // Flipbook container (classic mode only)
@@ -984,9 +973,6 @@ window.ComicReader = ({ content, onClose }) => {
     }
   };
   
-  // Transition class: container needs position relative when cover overlays content
-  const transitionClass = isCoverExiting ? 'comic-transition-overlay' : '';
-
   // Render container with device-specific handlers
   const containerElement = renderContainer 
     ? renderContainer(deviceType, styles, {
@@ -997,7 +983,7 @@ window.ComicReader = ({ content, onClose }) => {
         onClick: handleContainerClick,
         children: containerChildren,
         containerRef,
-        containerClassName: transitionClass,
+        containerClassName: '',
         isV4Episode,
         showCover
       })
@@ -1005,7 +991,7 @@ window.ComicReader = ({ content, onClose }) => {
         key: 'container',
         ref: containerRef,
         style: styles.comicContainerStyle || {},
-        className: 'comic-episode-container' + (transitionClass ? ' ' + transitionClass : ''),
+        className: 'comic-episode-container',
         onClick: handleContainerClick
       }, containerChildren);
   
@@ -1088,68 +1074,6 @@ if (!document.querySelector('#comic-episode-styles')) {
       }
     }
     
-    .comic-episode-overlay {
-      animation: fadeIn 0.2s ease-out;
-    }
-    
-    .comic-episode-container {
-      animation: scaleIn 0.3s ease-out;
-    }
-    
-    /* During transition: container needs position relative for overlay */
-    .comic-episode-container.comic-transition-overlay {
-      position: relative;
-    }
-    
-    /* Cover expands and fades out (on .comic-episode-swiper.comic-cover-exiting) */
-    .comic-episode-swiper.comic-cover-exiting {
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                  opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transform: scale(1.06);
-      opacity: 0;
-    }
-    
-    /* First page fades in (runs alongside cover fade) */
-    .comic-content-entering {
-      animation: comicContentEnter 0.4s ease-out forwards;
-    }
-    @keyframes comicContentEnter {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    /* Disable scaleIn animation for Swiper slides */
-    .comic-episode-container .swiper-slide {
-      animation: none;
-    }
-    
-    /* Optimized cover display */
-    .comic-cover-display {
-      will-change: transform, opacity;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      perspective: 1000px;
-    }
-    
-    .comic-cover-display:hover img {
-      transform: scale(1.01);
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes scaleIn {
-      from { 
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to { 
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
     
     /* Turn.js specific styles */
     .flipbook {
