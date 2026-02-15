@@ -37,6 +37,8 @@ window.ComicReader = ({ content, onClose }) => {
   const [isInitialized, setIsInitialized] = React.useState(false);
   const [isFullscreen, setIsFullscreen] = React.useState(false);
   const [showControls, setShowControls] = React.useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
+  const [isSlidesSwitching, setIsSlidesSwitching] = React.useState(false);
   const isInitializedRef = React.useRef(false);
   const flipbookRef = React.useRef(null);
   const flipbookCreatedRef = React.useRef(false);
@@ -67,6 +69,13 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Comic Reader 4.0: immersive mode (cover + pages + video) instead of flipbook
   const isV4Episode = episodeData && (episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true);
+  
+  React.useEffect(() => {
+    if (!isV4Episode) {
+      setIsVideoPlaying(false);
+      setIsSlidesSwitching(false);
+    }
+  }, [isV4Episode]);
   
   // Keep ref in sync with state
   React.useEffect(() => {
@@ -172,19 +181,15 @@ window.ComicReader = ({ content, onClose }) => {
   };
 
   // Fullscreen toggle function
+  // Fullscreens the overlay (entire comic reader) so slides/swiper stay visible and swipeable
   const toggleFullscreen = () => {
     if (!overlayRef.current) return;
-    
     if (!document.fullscreenElement) {
-      overlayRef.current.requestFullscreen().then(() => {
-        setIsFullscreen(true);
-      }).catch(err => {
+      overlayRef.current.requestFullscreen({ navigationUI: 'hide' }).then(() => setIsFullscreen(true)).catch(err => {
         console.log('Error attempting to enable fullscreen:', err);
       });
     } else {
-      document.exitFullscreen().then(() => {
-        setIsFullscreen(false);
-      });
+      document.exitFullscreen().then(() => setIsFullscreen(false));
     }
   };
 
@@ -490,6 +495,9 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Function to transition from cover to flipbook (or v4 immersive view)
   const openComicBook = () => {
+    if (!document.fullscreenElement && overlayRef.current) {
+      overlayRef.current.requestFullscreen({ navigationUI: 'hide' }).then(() => setIsFullscreen(true)).catch(() => {});
+    }
     if (isV4Episode) {
       const TRANSITION_MS = 400;
       setIsCoverExiting(true);
@@ -551,7 +559,7 @@ window.ComicReader = ({ content, onClose }) => {
         console.error('ComicReader: styles not loaded');
         return;
       }
-      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode });
+      const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching });
       
       // Use utility to create flipbook structure
       const { leftPage, rightPage } = createFlipbookUtil(flipbookElement, deviceType, orientation, currentPages, currentStyles);
@@ -600,7 +608,7 @@ window.ComicReader = ({ content, onClose }) => {
       console.error('ComicReader: styles not loaded');
       return;
     }
-    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen, orientation, isV4Cover: isV4Episode });
+    const currentStyles = window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, isFullscreen, orientation, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching });
     
     // Use utility to update pages
     updatePagesUtil(deviceType, orientation, leftPage, rightPage, pageNumber, currentPages, previousPage, nextPage, currentStyles);
@@ -852,7 +860,7 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Get device-specific styles
   const styles = window.ComicReaderStyles?.getDeviceStyles 
-    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode })
+    ? window.ComicReaderStyles.getDeviceStyles(deviceType, { isVisible, showControls, showCover, isLoading, orientation, isFullscreen, isV4Cover: isV4Episode, isVideoPlaying, isSlidesSwitching })
     : {}; // Fallback empty object if styles not loaded
 
   // All styles are now loaded from styles.js via getDeviceStyles()
@@ -930,7 +938,11 @@ window.ComicReader = ({ content, onClose }) => {
   // Comic Reader 4.0: vertical fullscreen feed (swipe up/down between slides)
   // Render during cover-exit overlap so first page fades in as cover fades out
   if (!error && (!showCover || isCoverExiting) && isV4Episode && renderImmersiveV4) {
-    const v4Content = renderImmersiveV4(episodeData, styles, { onBackToCover: goBackToCover });
+    const v4Content = renderImmersiveV4(episodeData, styles, {
+      onBackToCover: goBackToCover,
+      onVideoPlayStateChange: setIsVideoPlaying,
+      onSlidesSwitchingChange: setIsSlidesSwitching
+    });
     containerChildren.push(isCoverExiting
       ? React.createElement('div', { key: 'v4-entering', className: 'comic-content-entering' }, v4Content)
       : v4Content);
@@ -1002,12 +1014,17 @@ window.ComicReader = ({ content, onClose }) => {
   
   // Header buttons (close and fullscreen) - outside container so they don't slide
   if (renderHeaderButtons) {
-    // Create a close handler that goes back to cover if viewing pages, or closes if on cover
+    // Create a close handler that exits fullscreen first, then goes back to cover or closes
     const handleCloseOrGoBack = () => {
-      if (showCover) {
-        handleClose();
+      if (document.fullscreenElement) {
+        document.exitFullscreen().then(() => {
+          setIsFullscreen(false);
+          if (showCover) handleClose();
+          else goBackToCover();
+        });
       } else {
-        goBackToCover();
+        if (showCover) handleClose();
+        else goBackToCover();
       }
     };
     const headerButtons = renderHeaderButtons(styles, {

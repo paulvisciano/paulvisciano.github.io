@@ -350,7 +350,7 @@ const getCoverImageStyle = (deviceType, orientation) => {
  * @returns {object} Style objects for the device type
  */
 const getDeviceStyles = (deviceType, state = {}) => {
-  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false, isV4Cover = false } = state;
+  const { isVisible = false, showControls = false, showCover = true, isLoading = false, orientation = 'landscape', isFullscreen = false, isV4Cover = false, isVideoPlaying = false, isSlidesSwitching = false } = state;
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
   const isDesktop = deviceType === 'desktop';
@@ -421,6 +421,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   // Flipbook styles - using structured config
   const flipbookStyle = getFlipbookStyle(deviceType, orientation, showCover, isLoading, isFullscreen);
 
+  const hideButtons = isVideoPlaying || isSlidesSwitching;
   // Close button styles (high z-index and pointer-events so it's clickable above filter when overlay has pointer-events: none)
   const closeButtonStyle = isMobile ? {
     position: 'fixed',
@@ -438,11 +439,13 @@ const getDeviceStyles = (deviceType, state = {}) => {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10005,
-    pointerEvents: 'auto',
+    pointerEvents: hideButtons ? 'none' : 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    opacity: hideButtons ? 0 : 1,
+    visibility: hideButtons ? 'hidden' : 'visible'
   } : {
     position: 'absolute',
     top: '5px',
@@ -459,14 +462,16 @@ const getDeviceStyles = (deviceType, state = {}) => {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10005,
-    pointerEvents: 'auto',
+    pointerEvents: hideButtons ? 'none' : 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)'
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+    opacity: hideButtons ? 0 : 1,
+    visibility: hideButtons ? 'hidden' : 'visible'
   };
 
-  // Fullscreen button styles
+  // Fullscreen button styles (hidden on mobile)
   const fullscreenButtonStyle = isMobile ? {
     position: 'fixed',
     top: '20px',
@@ -479,7 +484,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
     height: '48px',
     cursor: 'pointer',
     fontSize: '18px',
-    display: 'none', // Hidden on mobile
+    display: 'none',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10005,
@@ -488,8 +493,9 @@ const getDeviceStyles = (deviceType, state = {}) => {
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    opacity: showControls ? 1 : 0,
-    pointerEvents: showControls ? 'auto' : 'none'
+    opacity: (showControls && !hideButtons) ? 1 : 0,
+    pointerEvents: (showControls && !hideButtons) ? 'auto' : 'none',
+    visibility: hideButtons ? 'hidden' : 'visible'
   } : {
     position: 'absolute',
     top: '5px',
@@ -506,12 +512,13 @@ const getDeviceStyles = (deviceType, state = {}) => {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 10005,
-    pointerEvents: 'auto',
+    pointerEvents: hideButtons ? 'none' : 'auto',
     transition: 'all 0.3s ease',
     fontWeight: 'bold',
     backdropFilter: 'blur(10px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-    opacity: 1
+    opacity: hideButtons ? 0 : 1,
+    visibility: hideButtons ? 'hidden' : 'visible'
   };
 
   // Desktop controls (only shown on desktop/tablet)

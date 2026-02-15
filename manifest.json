@@ -4,7 +4,7 @@
   "description": "Personal blog with coding tips, volleyball updates, travel adventures, and more!",
   "start_url": "/",
   "scope": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#000000",

@@ -29,11 +29,10 @@
 
   const PLAY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>';
   const PAUSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>';
-
   const AUTO_PLAY_DELAY_MS = 2000;
 
   window.ComicReaderImmersiveV4 = function ImmersiveV4Content({ episodeData, styles, navState = {} }) {
-    const { onBackToCover } = navState;
+    const { onBackToCover, onVideoPlayStateChange, onSlidesSwitchingChange } = navState;
     const swiperRef = React.useRef(null);
     const swiperInstanceRef = React.useRef(null);
     const activeSlideRef = React.useRef(0);
@@ -42,6 +41,7 @@
     const videoRefsByIndex = React.useRef({});
     const pendingRestoreRef = React.useRef(null);
     const autoPlayTimerRef = React.useRef(null);
+    const programmaticSlideRef = React.useRef(false);
     const [isPortrait, setIsPortrait] = React.useState(
       () => typeof window !== 'undefined' && window.matchMedia('(orientation: portrait)').matches
     );
@@ -52,6 +52,7 @@
       () => (typeof window !== 'undefined' ? window.innerHeight : 100)
     );
     const [videoPlayState, setVideoPlayState] = React.useState({});
+    const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
     React.useEffect(() => {
       const update = () => setViewportHeight(window.innerHeight);
       window.addEventListener('resize', update);
@@ -87,6 +88,16 @@
     }, [episodeData]);
 
     onBackToCoverRef.current = onBackToCover;
+
+    const isVideoSlide = (idx) => (idx < pages.length && isVideoUrl(pages[idx])) || idx === videoSlideIndex;
+    React.useEffect(() => {
+      if (typeof onVideoPlayStateChange !== 'function') return;
+      const playing = isVideoSlide(activeSlideIndex) && videoPlayState[activeSlideIndex] === 'playing';
+      onVideoPlayStateChange(playing);
+      return () => onVideoPlayStateChange(false);
+    }, [activeSlideIndex, videoPlayState, onVideoPlayStateChange, pages, videoSlideIndex]);
+
+    React.useEffect(() => () => onSlidesSwitchingChange?.(false), [onSlidesSwitchingChange]);
 
     const handleVideoCanPlay = () => {
       const pending = pendingRestoreRef.current;
@@ -134,6 +145,12 @@
         },
         on: {
           slideChange(sw) {
+            if (programmaticSlideRef.current) {
+              programmaticSlideRef.current = false;
+              const newSlideIsVideo = (sw.activeIndex < pages.length && isVideoUrl(pages[sw.activeIndex])) || sw.activeIndex === videoSlideIndex;
+              if (!newSlideIsVideo) onSlidesSwitchingChange?.(false);
+            }
+            setActiveSlideIndex(sw.activeIndex);
             const refs = videoRefsByIndex.current;
             if (autoPlayTimerRef.current) {
               clearTimeout(autoPlayTimerRef.current);
@@ -155,6 +172,7 @@
       });
 
       swiperInstanceRef.current = swiper;
+      setActiveSlideIndex(initialSlide);
 
       const activeVideo = videoRefsByIndex.current[initialSlide];
       if (activeVideo) {
@@ -237,6 +255,15 @@
       else el.pause();
     };
 
+    const handleVideoEnded = () => {
+      const swiper = swiperInstanceRef.current;
+      if (swiper && swiper.activeIndex < swiper.slides.length - 1) {
+        programmaticSlideRef.current = true;
+        onSlidesSwitchingChange?.(true);
+        swiper.slideNext();
+      }
+    };
+
     const swiperSlides = [];
 
     pages.forEach((url, i) => {
@@ -250,9 +277,13 @@
               autoPlay: false,
               playsInline: true,
               muted: false,
-              loop: true,
-              onPlay: () => setVideoPlayState((s) => ({ ...s, [i]: 'playing' })),
+              loop: false,
+              onPlay: () => {
+                setVideoPlayState((s) => ({ ...s, [i]: 'playing' }));
+                onSlidesSwitchingChange?.(false);
+              },
               onPause: () => setVideoPlayState((s) => ({ ...s, [i]: 'paused' })),
+              onEnded: handleVideoEnded,
               style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
             }),
             React.createElement('div', {
@@ -290,8 +321,12 @@
           src: videoSrc,
           playsInline: true,
           muted: false,
-          onPlay: () => setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'playing' })),
+          onPlay: () => {
+            setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'playing' }));
+            onSlidesSwitchingChange?.(false);
+          },
           onPause: () => setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'paused' })),
+          onEnded: handleVideoEnded,
           onLoadedMetadata: function(e) { e.target.volume = 0.2; },
           onCanPlay: handleVideoCanPlay,
           style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
