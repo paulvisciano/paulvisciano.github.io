@@ -676,6 +676,11 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
         if (isComicEpisode(postId, post.title)) {
           console.log('Comic episode detected, skipping HTML fetch');
           
+          // For character comic book, ensure currentCharacterComicBook is set for ComicReader
+          if (postId === 'characters-comic-book-2025-09-15' && window.characterComicBook) {
+            window.currentCharacterComicBook = window.characterComicBook;
+          }
+          
           // Set up comic episode content directly
           const blogPostContent = {
             title: post.title || "No Title",

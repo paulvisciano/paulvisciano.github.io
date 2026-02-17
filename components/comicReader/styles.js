@@ -364,7 +364,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   
   // Shared overlay style (same for all devices)
   // When showing cover: full height so blur extends over timeline (no hard cutoff).
-  // pointerEvents: 'none' so clicks on the bottom (timeline area) pass through; children stay clickable.
+  // pointerEvents: 'auto' when showCover so the cover is clickable to open the book.
   const footerHeight = showCover && !isPortrait ? 120 : 150;
   const v4Open = !showCover && isV4Cover;
   const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: fixed 1000x700
@@ -391,7 +391,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
     zIndex: 10002,
     backdropFilter: 'blur(2px)',
     touchAction: overlayTouchAction,
-    pointerEvents: showCover ? 'none' : 'auto'
+    pointerEvents: 'auto'
   };
 
   // Container styles - when v4 open, container fills viewport for edge-to-edge content

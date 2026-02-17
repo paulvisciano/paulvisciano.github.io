@@ -106,14 +106,15 @@ If you want `/moments/da-nang/2026-02-07/` to list or redirect to this experienc
 ## 5. Summary of file and code changes
 
 
-| Action     | Path / change                                                                                                                                                                                                                                                                    |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Create** | `moments/da-nang/2026-02-07/heaven-on-earth/index.html` (redirect); [components/comicReader/immersiveV4.js](components/comicReader/immersiveV4.js) — dedicated v4 module                                                                                                         |
-| **Upload** | Upload cover, page-1…page-N (portrait + landscape variants), video-portrait.mp4, video-landscape.mp4 to the **existing Cloudflare R2 bucket** (path e.g. `moments/da-nang/2026-02-07/heaven-on-earth/`). No asset files in repo.                                                    |
-| **Edit**   | [moments/moments.js](moments/moments.js) — add one moment entry with `isComic: true`, `comicReaderVersion: 4`, fullLink, **pagesLandscape**, **pagesPortrait**, **videoPortraitUrl**, **videoLandscapeUrl**, **videoSection** (cta, artist, trackTitle, caption)                     |
-| **Edit**   | [components/comicReader.js](components/comicReader.js) — pass `isV4Cover: isV4Episode` to getDeviceStyles (not `showCover && isV4Episode`) so v4 dimensions apply when comic is open                                                                                               |
-| **Edit**   | [components/comicReader/styles.js](components/comicReader/styles.js) — v4 desktop container 1000×700; overlay `v4FillViewport` = v4 open on mobile/tablet only → stretch; desktop v4 open → center (fixed 1000×700 box)                                                             |
-| **Edit**   | [index.html](index.html) — add script tag for [components/comicReader/immersiveV4.js](components/comicReader/immersiveV4.js)                                                                                                                                                      |
+| Action     | Path / change                                                                                                                                                                                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Create** | `moments/da-nang/2026-02-07/heaven-on-earth/index.html` (redirect); [components/comicReader/immersiveV4.js](components/comicReader/immersiveV4.js) — dedicated v4 module                                                                                         |
+| **Upload** | Upload cover, page-1…page-N (portrait + landscape variants), video-portrait.mp4, video-landscape.mp4 to the **existing Cloudflare R2 bucket** (path e.g. `moments/da-nang/2026-02-07/heaven-on-earth/`). No asset files in repo.                                 |
+| **Edit**   | [moments/moments.js](moments/moments.js) — add one moment entry with `isComic: true`, `comicReaderVersion: 4`, fullLink, **pagesLandscape**, **pagesPortrait**, **videoPortraitUrl**, **videoLandscapeUrl**, **videoSection** (cta, artist, trackTitle, caption) |
+| **Edit**   | [components/comicReader.js](components/comicReader.js) — pass `isV4Cover: isV4Episode` to getDeviceStyles (not `showCover && isV4Episode`) so v4 dimensions apply when comic is open                                                                             |
+| **Edit**   | [components/comicReader/styles.js](components/comicReader/styles.js) — v4 desktop container 1000×700; overlay `v4FillViewport` = v4 open on mobile/tablet only → stretch; desktop v4 open → center (fixed 1000×700 box)                                          |
+| **Edit**   | [index.html](index.html) — add script tag for [components/comicReader/immersiveV4.js](components/comicReader/immersiveV4.js)                                                                                                                                     |
+
 
 ---
 

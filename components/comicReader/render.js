@@ -384,6 +384,20 @@ const renderImmersiveV4 = (episodeData, styles, navState = {}) => {
   });
 };
 
+/**
+ * Render Character Slide Viewer for "The People in My Life" comic book.
+ * Desktop: two characters side-by-side; mobile: one character per slide.
+ * Each character has vertically scrollable image, video, and narrative sections.
+ */
+const renderCharacterSlideViewer = (episodeData, styles, navState = {}) => {
+  if (typeof window.ComicReaderCharacterSlideViewer !== 'function') return null;
+  return React.createElement(window.ComicReaderCharacterSlideViewer, {
+    episodeData,
+    styles: styles || {},
+    navState: navState || {}
+  });
+};
+
 // Export render functions
 window.ComicReaderRender = {
   renderHeaderButtons,
@@ -395,6 +409,7 @@ window.ComicReaderRender = {
   renderMobileNavigation,
   renderContainer,
   renderCoverNavigation,
-  renderImmersiveV4
+  renderImmersiveV4,
+  renderCharacterSlideViewer
 };
 
