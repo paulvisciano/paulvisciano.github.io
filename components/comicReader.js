@@ -182,7 +182,11 @@ window.ComicReader = ({ content, onClose }) => {
     const preload = window.ComicReaderCore?.preloadNextTwoPages;
     const isVideoFile = window.ComicReaderCore?.isVideoFile;
     if (preload && isVideoFile) preload(pages, 0, isVideoFile);
-  }, [showCover, pages]);
+    if (episodeData?.id === 'characters-comic-book') {
+      const preloadVideos = window.ComicReaderCore?.preloadCharacterVideos;
+      if (preloadVideos) preloadVideos(pages, 0);
+    }
+  }, [showCover, pages, episodeData]);
 
   // Helper to get pages (for use in functions)
   const getPages = () => {
@@ -567,6 +571,15 @@ window.ComicReader = ({ content, onClose }) => {
     if (!isCharacterComicBook || showCover || !updateUrlForSlide || !episodeData) return;
     const basePath = (episodeData.fullLink || '').replace(/\/$/, '') + '/';
     updateUrlForSlide(basePath, currentPage - 1);
+  }, [isCharacterComicBook, showCover, currentPage, episodeData]);
+
+  // Preload next 2 pages' videos in character comic so they're ready when user navigates
+  React.useEffect(() => {
+    if (!isCharacterComicBook || showCover || !episodeData) return;
+    const pages = coreGetPages ? coreGetPages(episodeData) : [];
+    if (!pages.length) return;
+    const preload = window.ComicReaderCore?.preloadCharacterVideos;
+    if (preload) preload(pages, currentPage);
   }, [isCharacterComicBook, showCover, currentPage, episodeData]);
 
   // Sync currentPage from URL hash when navigating to #slide-1, #slide-2, etc. (character comic)

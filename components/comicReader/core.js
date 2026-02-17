@@ -232,6 +232,27 @@ const preloadNextTwoPages = (pages, fromIndex, isVideoFile) => {
 };
 
 /**
+ * Preload videos for the next 2 character comic pages (by index).
+ * Creates hidden video elements with preload="auto" to start downloading.
+ */
+const preloadCharacterVideos = (pages, fromIndex) => {
+  if (!pages || !pages.length) return;
+  [fromIndex, fromIndex + 1].forEach((i) => {
+    if (i < 0 || i >= pages.length) return;
+    const page = pages[i];
+    const url = page && page.video;
+    if (!url || typeof url !== 'string') return;
+    const video = document.createElement('video');
+    video.preload = 'auto';
+    video.src = url;
+    video.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;';
+    document.body.appendChild(video);
+    video.load();
+    setTimeout(() => { if (video.parentNode) video.parentNode.removeChild(video); }, 30000);
+  });
+};
+
+/**
  * Export core utilities
  */
 window.ComicReaderCore = {
@@ -244,6 +265,7 @@ window.ComicReaderCore = {
   getPageIncrement,
   isVideoFile,
   preloadNextTwoPages,
+  preloadCharacterVideos,
   parseSlideFromHash,
   updateUrlForSlide
 };
