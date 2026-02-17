@@ -99,8 +99,9 @@ window.ComicReader = ({ content, onClose }) => {
   // Get episode data from content prop, global state, or momentsInTime
   React.useEffect(() => {
     const isCharacterComicPost = content && (content.postId === 'characters-comic-book' || content.postId === 'characters-comic-book-2025-09-15');
-    // First, check if content prop has character comic book data
-    if (isCharacterComicPost && window.currentCharacterComicBook) {
+    // First, check if content prop has character comic book data (only on initial load or when already on character comic; don't overwrite when user navigated to another episode via Swiper)
+    const isOnCharacterComic = episodeData && (episodeData.id === 'characters-comic-book' || episodeData.id === 'characters-comic-book-2025-09-15');
+    if (isCharacterComicPost && window.currentCharacterComicBook && (!episodeData || isOnCharacterComic)) {
       setEpisodeData(window.currentCharacterComicBook);
       updateGlobalState({ episodeData: window.currentCharacterComicBook });
       return;
@@ -125,8 +126,8 @@ window.ComicReader = ({ content, onClose }) => {
       }
     }
     
-    // When content has postId for a different comic, look up the moment and use it (don't use stale currentCharacterComicBook)
-    if (content && content.postId && !isCharacterComicPost && window.momentsInTime) {
+    // When content has postId for a different comic, look up the moment and use it (initial load only; don't overwrite when user has switched covers in Swiper)
+    if (content && content.postId && !isCharacterComicPost && !episodeData && window.momentsInTime) {
       const moment = window.momentsInTime.find(m => m.id === content.postId);
       if (moment && moment.isComic) {
         setEpisodeData(moment);
