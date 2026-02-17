@@ -279,6 +279,23 @@ window.characters = [
     imageAlt: "Thai Dragon",
     tags: ["friend", "thailand", "dragon"],
     relationship: "Symbolic character of the Thailand arc."
+  },
+  {
+    id: "khanh",
+    name: "Khanh",
+    role: "Friend / Travel Companion / Mirror",
+    description: "Chicago volleyball crew member who spent 5+ years in Hawaii, now traveling through Southeast Asia with Paul.",
+    bio: "Long-time friend from Paul's Chicago volleyball days who helped him move to Florida before diverging paths. After 5-6 years establishing his own rhythm in Hawaii, Khanh reconnected with Paul for an Asia adventure before a job opportunity in California. Health-conscious, boundary-aware, and endlessly social, Khanh transforms through the journey: from dependent (visa issues, sickness) to independent (agency, self-care) to autonomous (making his own path). His role in Urban Runner is as The Mirror — teaching Paul about accepting difference, respecting autonomy within friendship, and grounding through genuine connection. Athletic, thoughtful, and deeply loyal.",
+    avatar: "/characters/Khanh.png",
+    pageImage: "/characters/Khanh.png",
+    imageAlt: "Khanh - Travel Companion",
+    origin: "Chicago, USA",
+    baseLocations: ["Hawaii (5-6 years)", "Vietnam (Da Nang, Ho Chi Minh)", "Thailand (Bangkok)"],
+    tags: ["friend", "volleyball", "travel", "chicago", "hawaii", "vietnam", "thailand", "brother"],
+    relationship: "Chicago crew member, Hawaii years, Asia travel buddy. Teaches Paul about acceptance, boundaries, and autonomous friendship. The Mirror of the Vietnam arc.",
+    keyScenes: ["The Arrival (Saigon reunion)", "The Pamper Day (self-care)", "The Raid (gaming life)", "The Boundary (different rhythms accepted)"],
+    episodes: ["Heaven on Earth (Feb 7)", "The Arrival (unpublished)", "The Pamper Day (unpublished)", "The Raid (unpublished)"],
+    characterArc: "Dependent (visa issues, sickness) → Independent (agency, self-care) → Autonomous (own path toward California)"
   }
 ];
 
