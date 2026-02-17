@@ -53,7 +53,7 @@ const updateUrlForSlide = (basePath, slideIndex) => {
  * Check if a URL is a video file
  */
 const isVideoFile = (url) => {
-  if (!url) return false;
+  if (!url || typeof url !== 'string') return false;
   const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.m4v'];
   const lowerUrl = url.toLowerCase();
   return videoExtensions.some(ext => lowerUrl.endsWith(ext));
@@ -81,9 +81,9 @@ const getPages = (episodeData) => {
   
   // If custom pages array is provided, use it directly
   if (episodeData.pages && Array.isArray(episodeData.pages)) {
-    // For character comic book, extract image URLs from pages array
+    // For character comic book, return full page objects (image, video, bio, etc.) for CharacterSlideViewer
     if (episodeData.id === 'characters-comic-book') {
-      return episodeData.pages.map(page => page.image || page);
+      return episodeData.pages;
     }
     return episodeData.pages;
   }
@@ -107,26 +107,37 @@ const getPages = (episodeData) => {
 };
 
 /**
+ * Resolve episode for prev/next lookup. Character comic uses id "characters-comic-book"
+ * but the moment in momentsInTime has "characters-comic-book-2025-09-15" with date.
+ */
+const resolveEpisodeForNav = (episodeData) => {
+  if (!episodeData || !window.momentsInTime) return null;
+  if (episodeData.id === 'characters-comic-book') {
+    const moment = window.momentsInTime.find(m => m.id === 'characters-comic-book-2025-09-15');
+    return moment || episodeData;
+  }
+  return episodeData;
+};
+
+/**
  * Find the next episode in the series
  */
 const getNextEpisode = (episodeData) => {
-  if (!episodeData || !window.momentsInTime) {
-    return null;
-  }
+  const resolved = resolveEpisodeForNav(episodeData);
+  if (!resolved || !window.momentsInTime) return null;
 
-  const currentEpisodeId = episodeData.id;
-  const currentDate = episodeData.date;
-  
-  // Find episodes that are comics and come after the current episode
+  const currentEpisodeId = resolved.id;
+  const currentDate = resolved.date;
+  if (currentDate == null) return null;
+
   const futureComics = window.momentsInTime
-    .filter(moment => 
-      moment.isComic && 
+    .filter(moment =>
+      moment.isComic &&
       moment.date > currentDate &&
       moment.id !== currentEpisodeId
     )
     .sort((a, b) => a.date - b.date);
 
-  // Return the next comic episode, if any
   return futureComics.length > 0 ? futureComics[0] : null;
 };
 
@@ -134,23 +145,21 @@ const getNextEpisode = (episodeData) => {
  * Find the previous episode in the series
  */
 const getPreviousEpisode = (episodeData) => {
-  if (!episodeData || !window.momentsInTime) {
-    return null;
-  }
+  const resolved = resolveEpisodeForNav(episodeData);
+  if (!resolved || !window.momentsInTime) return null;
 
-  const currentEpisodeId = episodeData.id;
-  const currentDate = episodeData.date;
-  
-  // Find episodes that are comics and come before the current episode
+  const currentEpisodeId = resolved.id;
+  const currentDate = resolved.date;
+  if (currentDate == null) return null;
+
   const pastComics = window.momentsInTime
-    .filter(moment => 
-      moment.isComic && 
+    .filter(moment =>
+      moment.isComic &&
       moment.date < currentDate &&
       moment.id !== currentEpisodeId
     )
-    .sort((a, b) => b.date - a.date); // Sort descending to get most recent first
+    .sort((a, b) => b.date - a.date);
 
-  // Return the previous comic episode, if any
   return pastComics.length > 0 ? pastComics[0] : null;
 };
 
@@ -207,12 +216,15 @@ const getPageIncrement = (deviceType) => {
  * - Cover: fromIndex 0 → preload first 2 pages (indices 0, 1).
  * - Viewing page N (1-based): fromIndex N → preload next 2 pages (indices N, N+1).
  * Skips video URLs.
+ * Handles both URL strings and page objects (e.g. character comic: { image, video, ... }).
  */
 const preloadNextTwoPages = (pages, fromIndex, isVideoFile) => {
   if (!pages || !pages.length) return;
   [fromIndex, fromIndex + 1].forEach((i) => {
     if (i < 0 || i >= pages.length) return;
-    const url = pages[i];
+    const page = pages[i];
+    const url = typeof page === 'string' ? page : (page && page.image);
+    if (!url || typeof url !== 'string') return;
     if (isVideoFile && isVideoFile(url)) return;
     const img = new Image();
     img.src = url;

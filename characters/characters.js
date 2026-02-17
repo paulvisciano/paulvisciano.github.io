@@ -21,6 +21,7 @@ window.characters = [
     bio: "Born in 1956. Has endured immense hardship yet remains a shining light. Stylish, strong, nurturing, endlessly supportive. Lives in Clearwater, FL.",
     avatar: "/characters/Mom.png",
     pageImage: "/characters/Mom.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Mom.mp4",
     imageAlt: "Greta - Mom",
     tags: ["family", "mother", "anchor"],
     relationship: "The matriarchal anchor in Paul's life. Source of strength, love, and resilience."
@@ -33,6 +34,7 @@ window.characters = [
     bio: "Steady, grounded, and always supportive. Paul’s older brother has been a constant presence throughout every chapter of life. Protective but chill, logical yet funny, he brings a strong family anchor to Paul’s journey. Shares roots in Bulgaria and Chicago before life paths diverged. Represents the importance of family threads that stay intact across time and distance.",
     avatar: "/characters/Brother.png",
     pageImage: "/characters/Brother.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Brother.mp4",
     imageAlt: "Paul’s Brother",
     tags: ["family", "brother", "roots"],
     relationship: "Older brother — lifelong anchor, shared childhood, shared history."
@@ -45,6 +47,7 @@ window.characters = [
     bio: "Multi-business owner in St. Pete. Rose from Ubering to operating multiple venues. Dog dad to Duke. Direct, sharp eye for detail, inspiring growth.",
     avatar: "/characters/Welli.png",
     pageImage: "/characters/Welli.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Welli.mp4",
     imageAlt: "Welli",
     tags: ["friend", "entrepreneur", "volleyball"],
     relationship: "Lifelong friend; part of the brotherhood with Zacharias."
@@ -58,6 +61,7 @@ window.characters = [
     bio: "Filipino. Organizer of the Mafia volleyball group. Splits time between St. Pete and the Philippines. Giving, caring, methodical. Deeply influential in Paul's life.",
     avatar: "/characters/Leo.png",
     pageImage: "/characters/Leo.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Leo.mp4",
     imageAlt: "Leo - Responsiblor",
     tags: ["friend", "volleyball", "mentor", "philippines"],
     relationship: "Lifelong friend who helped shape Paul's adult years."
@@ -70,6 +74,7 @@ window.characters = [
     bio: "Born in Pakistan. Ex-professional rugby player. Calm, grounded aesthetic. Kind, forgiving, patient. Devoted father of two. Represents loyalty, brotherhood, and depth.",
     avatar: "/characters/Mo.png",
     pageImage: "/characters/Mo.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Mo.mp4",
     imageAlt: "Mo - Close Friend",
     tags: ["friend", "volleyball", "father", "loyalty"],
     relationship: "Recurring anchor across cities and life chapters."
@@ -82,6 +87,7 @@ window.characters = [
     bio: "Funny, charming, logical, and ambitious. Zacharias is a lifelong friend of Wellington and an essential part of Paul's Florida chapter. Originally from New York, he chose to relocate to St. Pete after falling in love with the community. A talented programmer and explosive volleyball player, he invited Paul to play the Mexico Tournament two years in a row. Known for his sharp humor, strategic mind, and smooth charisma. Currently dating Victoria. Comes from a political lineage and carries that part-politician charm.",
     avatar: "/characters/Zacharias.png",
     pageImage: "/characters/Zacharias.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Zacharias.mp4",
     imageAlt: "Zacharias - Close Friend",
     origin: "New York, USA",
     currentHome: "St. Petersburg, Florida",
@@ -96,6 +102,7 @@ window.characters = [
     bio: "Volleyball brother from the St. Pete crew. Known for big smiles, big swings, and big heart energy when the squad links up.",
     avatar: "/characters/Sandro.png",
     pageImage: "/characters/Sandro.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Sandro.mp4",
     imageAlt: "Sandro - Volleyball Brother",
     tags: ["friend", "volleyball", "st-pete"],
     relationship: "Part of the extended volleyball family that shows up across chapters."
@@ -122,6 +129,7 @@ window.characters = [
     bio: "Boy is raw social momentum — the kind of person who turns any quiet night into a story without ever meaning to. Leo's brother and a social catalyst who creates momentum just by being present. Outgoing, high-energy, charismatic, and shamelessly social. A natural womanizer in the most effortless way — not calculated, just instinctual. Extremely comfortable talking to anyone, anywhere. Thrives in group settings, nightlife, and spontaneous plans. Bold without being insecure; playful rather than aggressive. Acts first, thinks later — but rarely in a way that causes damage. Loyal to his brother Leo, often pulling him into more chaotic social situations. He's not introspective or philosophical — he's kinetic. Movement, people, noise, energy. When Boy is in a scene, the probability of meeting new people spikes, nights extend longer than planned, and the story shifts from observation to participation. He brings Davao street confidence into every city he appears in. Friendly and open with Paul, instantly familiar. Less about deep talks, more about shared experiences. Pulls Paul out of analysis mode and into action. Represents a version of freedom rooted in social instinct rather than self-optimization. Primary base: Valencia (Davao). Strongest presence in Davao, group travel scenes, and nightlife arcs.",
     avatar: "/characters/Boy.png",
     pageImage: "/characters/Boy.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Boy.mp4",
     imageAlt: "Boy - Social Catalyst",
     origin: "Davao, Philippines",
     currentHome: "Valencia, Davao",
@@ -136,6 +144,7 @@ window.characters = [
     bio: "Friend of Boy and Leo who lives on Siargao most of the time, making him deeply familiar with the island. Met Paul in Bangkok and Manila before their Siargao reunion. Part of the Philippines crew and the extended friend group. Sean's local knowledge and island familiarity made him an ideal guide for exploring Siargao. He introduced Paul to Maria, connecting the musical muse to the Siargao experience. Represents the local connections and deep island knowledge that make travel experiences richer. Part of the group adventures in Bangkok with Boy and the crew from Chicago and Atlanta. Primary arc: Siargao.",
     avatar: "/characters/Sean.png",
     pageImage: "/characters/Sean.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Sean.mp4",
     imageAlt: "Sean - Siargao Local",
     origin: "Siargao, Philippines",
     tags: ["friend", "siargao", "philippines", "local", "crew"],
@@ -150,6 +159,7 @@ window.characters = [
     bio: "Yoga teacher turned studio manager overseeing 100+ people. Sweet, kind, grounded, recently engaged. Dreams of owning a studio and being a mom.",
     avatar: "/characters/Hallie.png",
     pageImage: "/characters/Hallie.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Hallie.mp4",
     imageAlt: "Hallie - Mighty Mouse",
     tags: ["friend", "bali", "yoga"],
     relationship: "Supportive and joyful friend; Bali reunion during Leigha's retreat."
@@ -252,6 +262,7 @@ window.characters = [
     bio: "Born in Houston, raised in Austin. Works in Ayurvedic retreats. Spiritual, artistic, expressive. Known for the 'twerk moment' in Ubud.",
     avatar: "/characters/KJ.png",
     pageImage: "/characters/KJ.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/KJ.mp4",
     imageAlt: "KJ - Friend",
     tags: ["friend", "bali", "dance", "spiritual"],
     relationship: "Electric connection in Ubud. Powerful dance-floor chemistry."
@@ -264,6 +275,7 @@ window.characters = [
     bio: "Follower of the Urban Runner comic. Sleek look, confident energy, iconic black dress and gold pendant. Requested her own comic entry.",
     avatar: "/characters/ThaiDragon.png",
     pageImage: "/characters/ThaiDragon.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/ThaiDragon.mp4",
     imageAlt: "Thai Dragon",
     tags: ["friend", "thailand", "dragon"],
     relationship: "Symbolic character of the Thailand arc."
@@ -275,13 +287,19 @@ window.characterComicBook = {
   title: "Character Bible",
   description: "Meet all the characters in Paul's life story",
   cover: "/characters/cover.png",
+  fullLink: "/characters/",
   pages: window.characters
     .filter(c => !!c.pageImage) // Only include characters with a defined image
     .map((c, i) => ({
     number: i + 1,
     character: c.id,
     image: c.pageImage,
-    alt: c.name
+    video: c.pageVideo || null,
+    alt: c.name,
+    bio: c.bio,
+    description: c.description,
+    name: c.name,
+    role: c.role
   })),
   isComic: true
 };

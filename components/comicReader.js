@@ -21,7 +21,8 @@ const {
   renderMobileNavigation, 
   renderContainer,
   renderCoverNavigation,
-  renderImmersiveV4
+  renderImmersiveV4,
+  renderCharacterSlideViewer
 } = window.ComicReaderRender || {};
 
 window.ComicReader = ({ content, onClose }) => {
@@ -70,13 +71,15 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Comic Reader 4.0: immersive mode (cover + pages + video) instead of flipbook
   const isV4Episode = episodeData && (episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true);
+  // Character comic book: "The People in My Life" with slide viewer (image, video, narrative per character)
+  const isCharacterComicBook = episodeData && episodeData.id === 'characters-comic-book';
   
   React.useEffect(() => {
-    if (!isV4Episode) {
+    if (!isV4Episode && !isCharacterComicBook) {
       setIsVideoPlaying(false);
       setIsSlidesSwitching(false);
     }
-  }, [isV4Episode]);
+  }, [isV4Episode, isCharacterComicBook]);
 
   // Reset mobile controls visibility when returning to cover
   React.useEffect(() => {
@@ -95,8 +98,9 @@ window.ComicReader = ({ content, onClose }) => {
 
   // Get episode data from content prop, global state, or momentsInTime
   React.useEffect(() => {
+    const isCharacterComicPost = content && (content.postId === 'characters-comic-book' || content.postId === 'characters-comic-book-2025-09-15');
     // First, check if content prop has character comic book data
-    if (content && content.postId === 'characters-comic-book' && window.currentCharacterComicBook) {
+    if (isCharacterComicPost && window.currentCharacterComicBook) {
       setEpisodeData(window.currentCharacterComicBook);
       updateGlobalState({ episodeData: window.currentCharacterComicBook });
       return;
@@ -105,7 +109,7 @@ window.ComicReader = ({ content, onClose }) => {
     // Check if content prop has episode data directly
     if (content && content.isComic && content.pages && !episodeData) {
       // Create episode data from content for character comic book
-      if (content.postId === 'characters-comic-book') {
+      if (content && (content.postId === 'characters-comic-book' || content.postId === 'characters-comic-book-2025-09-15')) {
         const characterComicData = {
           id: 'characters-comic-book',
           title: content.title,
@@ -307,9 +311,19 @@ window.ComicReader = ({ content, onClose }) => {
     if (!episodeData || !showCover) return;
     if (typeof window.Swiper === 'undefined') return;
 
+    // Resolve episode index: character comic uses id "characters-comic-book" but moment has "characters-comic-book-2025-09-15"
+    const getCurrentEpisodeIndex = () => {
+      const all = getAllComicEpisodes();
+      let idx = all.findIndex(ep => ep.id === episodeData.id);
+      if (idx === -1 && episodeData.id === 'characters-comic-book') {
+        idx = all.findIndex(ep => ep.id === 'characters-comic-book-2025-09-15');
+      }
+      return idx;
+    };
+
     if (swiperRef.current && !isSwiperUpdatingRef.current) {
       const allEpisodes = getAllComicEpisodes();
-      const currentIndex = allEpisodes.findIndex(ep => ep.id === episodeData.id);
+      const currentIndex = getCurrentEpisodeIndex();
       if (currentIndex !== -1 && swiperRef.current.activeIndex !== currentIndex) {
         swiperRef.current.slideTo(currentIndex, 400);
       }
@@ -325,7 +339,7 @@ window.ComicReader = ({ content, onClose }) => {
 
       const allEpisodes = getAllComicEpisodes();
       if (allEpisodes.length === 0) return;
-      const currentIndex = allEpisodes.findIndex(ep => ep.id === episodeData.id);
+      const currentIndex = getCurrentEpisodeIndex();
       if (currentIndex === -1) return;
 
       const slides = swiperContainerRef.current.querySelectorAll('.swiper-slide');
@@ -340,6 +354,8 @@ window.ComicReader = ({ content, onClose }) => {
         allowTouchMove: true,
         simulateTouch: true,
         touchRatio: 1,
+        preventClicks: false,
+        preventClicksPropagation: false,
         slidesPerView: 1,
         spaceBetween: 0,
         speed: 400,
@@ -349,7 +365,10 @@ window.ComicReader = ({ content, onClose }) => {
           slideChangeTransitionEnd: function() {
             const idx = this.activeIndex;
             const newEpisode = allEpisodes[idx];
-            if (!newEpisode || newEpisode.id === episodeData?.id) return;
+            const currentId = episodeData?.id;
+            const newId = newEpisode?.id;
+            if (!newEpisode || newId === currentId) return;
+            if (newId === 'characters-comic-book-2025-09-15' && currentId === 'characters-comic-book') return;
             isSwiperUpdatingRef.current = true;
             if (window.zoomCallback) window.zoomCallback(newEpisode);
             if (window.handleTimelineClick) window.handleTimelineClick(newEpisode);
@@ -358,7 +377,10 @@ window.ComicReader = ({ content, onClose }) => {
             setShowCover(true);
             setFlipbookReady(false);
             flipbookCreatedRef.current = false;
-            setEpisodeData(newEpisode);
+            const episodeToSet = (newId === 'characters-comic-book-2025-09-15' && window.currentCharacterComicBook)
+              ? window.currentCharacterComicBook
+              : newEpisode;
+            setEpisodeData(episodeToSet);
             updateGlobalState({
               episodeData: newEpisode,
               currentPage: 1,
@@ -406,12 +428,17 @@ window.ComicReader = ({ content, onClose }) => {
       setTimeout(() => { isSwiperUpdatingRef.current = false; }, 100);
     }
     // Keep episodeData in sync with the visible slide (e.g. if state was overwritten on re-render)
-    if (episodeData?.id !== episodeToKeep?.id) {
-      setEpisodeData(episodeToKeep);
-      updateGlobalState({ episodeData: episodeToKeep });
+    const effectiveEpisode = (episodeToKeep?.id === 'characters-comic-book-2025-09-15' && window.currentCharacterComicBook)
+      ? window.currentCharacterComicBook
+      : episodeToKeep;
+    const isSameEpisode = episodeData?.id === episodeToKeep?.id ||
+      (episodeData?.id === 'characters-comic-book' && episodeToKeep?.id === 'characters-comic-book-2025-09-15');
+    if (!isSameEpisode) {
+      setEpisodeData(effectiveEpisode);
+      updateGlobalState({ episodeData: effectiveEpisode });
       if (window.handleTimelineClick) window.handleTimelineClick(episodeToKeep);
       if (window.zoomCallback) window.zoomCallback(episodeToKeep);
-      if (episodeToKeep?.fullLink) window.history.replaceState({ momentId: episodeToKeep.id }, '', episodeToKeep.fullLink);
+      if (effectiveEpisode?.fullLink) window.history.replaceState({ momentId: episodeToKeep.id }, '', effectiveEpisode.fullLink);
     }
   }, [orientation, deviceType, showCover, getAllComicEpisodes]);
 
@@ -423,12 +450,13 @@ window.ComicReader = ({ content, onClose }) => {
     }
     
     const isV4 = episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true;
+    const isCharBook = episodeData.id === 'characters-comic-book';
     const slideFromHash = parseSlideFromHash && parseSlideFromHash();
     
-    if (isV4 && slideFromHash != null && slideFromHash >= 1) {
+    if ((isV4 || isCharBook) && slideFromHash != null && slideFromHash >= 1) {
       const pages = coreGetPages ? coreGetPages(episodeData) : [];
-      const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
-      const totalSlides = pages.length + (hasVideo ? 1 : 0);
+      const hasVideo = isV4 && !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
+      const totalSlides = isCharBook ? pages.length : (pages.length + (hasVideo ? 1 : 0));
       const slideIndex = Math.min(slideFromHash, totalSlides);
       if (slideIndex >= 1) {
         setInitialSlideIndex(slideIndex - 1); // 0-based for Swiper
@@ -452,6 +480,7 @@ window.ComicReader = ({ content, onClose }) => {
   React.useEffect(() => {
     if (!episodeData) return;
     if (episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true) return;
+    if (episodeData.id === 'characters-comic-book') return;
 
     // Recreate flipbook when orientation changes (if already created)
     if (flipbookCreatedRef.current && flipbookRef.current && !showCover) {
@@ -487,8 +516,9 @@ window.ComicReader = ({ content, onClose }) => {
   React.useEffect(() => {
     if (!episodeData) return;
     
-    // Show visible state immediately on mobile to prevent flash
-    if (isMobile) {
+    // Show visible state immediately on mobile, or for V4/character comic (no flipbook to wait for)
+    const isV4OrCharacter = episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true || episodeData.id === 'characters-comic-book';
+    if (isMobile || isV4OrCharacter) {
       setIsVisible(true);
       updateGlobalState({ isVisible: true });
     }
@@ -521,7 +551,34 @@ window.ComicReader = ({ content, onClose }) => {
     };
   }, [showCover]);
 
-  // Function to transition from cover to flipbook (or v4 immersive view)
+  // Update URL hash when character comic page changes
+  React.useEffect(() => {
+    if (!isCharacterComicBook || showCover || !updateUrlForSlide || !episodeData) return;
+    const basePath = (episodeData.fullLink || '').replace(/\/$/, '') + '/';
+    updateUrlForSlide(basePath, currentPage - 1);
+  }, [isCharacterComicBook, showCover, currentPage, episodeData]);
+
+  // Sync currentPage from URL hash when navigating to #slide-1, #slide-2, etc. (character comic)
+  React.useEffect(() => {
+    if (!isCharacterComicBook || showCover || !episodeData || !parseSlideFromHash) return;
+    const syncFromHash = () => {
+      const slideFromHash = parseSlideFromHash();
+      if (slideFromHash != null && slideFromHash >= 1) {
+        const pages = coreGetPages ? coreGetPages(episodeData) : [];
+        const slideIndex = Math.min(slideFromHash, pages.length);
+        if (slideIndex >= 1 && slideIndex !== currentPageRef.current) {
+          setCurrentPage(slideIndex);
+          currentPageRef.current = slideIndex;
+          updateGlobalState({ currentPage: slideIndex });
+        }
+      }
+    };
+    syncFromHash();
+    window.addEventListener('hashchange', syncFromHash);
+    return () => window.removeEventListener('hashchange', syncFromHash);
+  }, [isCharacterComicBook, showCover, episodeData]);
+
+  // Function to transition from cover to flipbook (or v4 immersive view or character slide viewer)
   const openComicBook = () => {
     if (!document.fullscreenElement && overlayRef.current) {
       overlayRef.current.requestFullscreen({ navigationUI: 'hide' }).then(() => setIsFullscreen(true)).catch(() => {});
@@ -531,6 +588,16 @@ window.ComicReader = ({ content, onClose }) => {
       const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
       setShowCover(false);
       setTotalPages(pages.length + (hasVideo ? 1 : 0));
+      setCurrentPage(1);
+      currentPageRef.current = 1;
+      setIsLoading(false);
+      setFlipbookReady(true);
+      return;
+    }
+    if (isCharacterComicBook) {
+      const pages = episodeData?.pages && Array.isArray(episodeData.pages) ? episodeData.pages : [];
+      setShowCover(false);
+      setTotalPages(pages.length);
       setCurrentPage(1);
       currentPageRef.current = 1;
       setIsLoading(false);
@@ -662,6 +729,21 @@ window.ComicReader = ({ content, onClose }) => {
         return;
       }
 
+      // Character comic: one character per page, button nav (no horizontal slides)
+      if (isCharacterComicBook) {
+        if (currentPageValue <= 1) {
+          goBackToCover();
+          return;
+        }
+        // Two-up mode: advance by 2 so each spread shows a new pair (no overlap)
+        const isTwoUp = isDesktop && episodeData?.pages?.length > 1;
+        const prevPage = isTwoUp ? currentPageValue - 2 : currentPageValue - 1;
+        setCurrentPage(Math.max(1, prevPage));
+        currentPageRef.current = Math.max(1, prevPage);
+        updateGlobalState({ currentPage: Math.max(1, prevPage) });
+        return;
+      }
+
       if (!getPreviousPageNumber || !shouldGoBackToCover) {
         // Fallback if utilities not loaded
         const prevPage = useSinglePage ? currentPageValue - 1 : currentPageValue - 2;
@@ -701,6 +783,23 @@ window.ComicReader = ({ content, onClose }) => {
       if (isV4Episode) {
         const actualTotalPages = totalPages;
         const nextPageNum = currentPageValue + 1;
+        if (nextPageNum <= actualTotalPages) {
+          setCurrentPage(nextPageNum);
+          currentPageRef.current = nextPageNum;
+          updateGlobalState({ currentPage: nextPageNum });
+        } else {
+          loadNextEpisode();
+        }
+        return;
+      }
+
+      // Character comic: one character per page, button nav (no horizontal slides)
+      if (isCharacterComicBook) {
+        const isTwoUp = isDesktop && episodeData?.pages?.length > 1;
+        const actualTotalPages = isTwoUp
+          ? 2 * Math.floor((totalPages - 1) / 2) + 1
+          : totalPages;
+        const nextPageNum = isTwoUp ? currentPageValue + 2 : currentPageValue + 1;
         if (nextPageNum <= actualTotalPages) {
           setCurrentPage(nextPageNum);
           currentPageRef.current = nextPageNum;
@@ -910,7 +1009,11 @@ window.ComicReader = ({ content, onClose }) => {
   if (showCover && !error && renderCover && allEpisodes.length > 0) {
     // Swiper structure: swiper > swiper-wrapper > swiper-slide (for each episode)
     const swiperSlides = allEpisodes.map((episode) => {
-      const isCurrentEpisode = episode.id === episodeData?.id;
+      const currId = episodeData?.id;
+      const epId = episode.id;
+      const isCurrentEpisode = epId === currId ||
+        (epId === 'characters-comic-book-2025-09-15' && currId === 'characters-comic-book') ||
+        (epId === 'characters-comic-book' && currId === 'characters-comic-book-2025-09-15');
       return React.createElement('div', {
         key: `episode-${episode.id}`,
         className: 'swiper-slide'
@@ -979,14 +1082,23 @@ window.ComicReader = ({ content, onClose }) => {
       onSlideChange: updateUrlForSlide ? (slideIndex0) => updateUrlForSlide(basePath, slideIndex0) : undefined
     }));
   }
+
+  // Character comic book: slide viewer with image, video, narrative per character (button nav, no horizontal slides)
+  if (!error && !showCover && isCharacterComicBook && renderCharacterSlideViewer) {
+    containerChildren.push(renderCharacterSlideViewer(episodeData, styles, {
+      onBackToCover: goBackToCover,
+      previousPage,
+      currentPage
+    }));
+  }
   
   // Flipbook container (classic mode only)
-  if (!error && !showCover && !isV4Episode && renderFlipbook) {
+  if (!error && !showCover && !isV4Episode && !isCharacterComicBook && renderFlipbook) {
     containerChildren.push(renderFlipbook(styles, { flipbookRef }));
   }
   
-  // Desktop controls (landscape): arrow buttons for flipbook only (v4 uses swipe feed)
-  if (!error && !isLoading && flipbookReady && !showCover && !isV4Episode && !useSinglePage && renderDesktopControls) {
+  // Desktop controls (landscape): arrow buttons for flipbook only (v4 and character viewer use swipe)
+  if (!error && !isLoading && flipbookReady && !showCover && !isV4Episode && !isCharacterComicBook && !useSinglePage && renderDesktopControls) {
     containerChildren.push(renderDesktopControls(styles, {
       currentPage,
       totalPages,
@@ -996,8 +1108,8 @@ window.ComicReader = ({ content, onClose }) => {
     }));
   }
   
-  // Mobile navigation (portrait): arrow buttons for flipbook only (v4 uses swipe feed)
-  if (!error && !isLoading && flipbookReady && !showCover && !isV4Episode && useSinglePage && renderMobileNavigation) {
+  // Mobile navigation (portrait): arrow buttons for flipbook only (v4 and character viewer use swipe)
+  if (!error && !isLoading && flipbookReady && !showCover && !isV4Episode && !isCharacterComicBook && useSinglePage && renderMobileNavigation) {
     containerChildren.push(renderMobileNavigation(styles, {
       currentPage,
       totalPages,
@@ -1013,7 +1125,7 @@ window.ComicReader = ({ content, onClose }) => {
     if (!showCover) {
       e.stopPropagation();
       // Toggle mobile nav when tapping page (not when tapping nav buttons)
-      if (isMobile && !isV4Episode && useSinglePage && !e.target.closest('.mobile-comic-nav')) {
+      if (isMobile && !isV4Episode && !isCharacterComicBook && useSinglePage && !e.target.closest('.mobile-comic-nav')) {
         setShowMobileControls((prev) => !prev);
       }
     }
@@ -1030,7 +1142,7 @@ window.ComicReader = ({ content, onClose }) => {
         children: containerChildren,
         containerRef,
         containerClassName: '',
-        isV4Episode,
+        isV4Episode: isV4Episode || isCharacterComicBook,
         showCover
       })
     : React.createElement('div', {
@@ -1071,6 +1183,9 @@ window.ComicReader = ({ content, onClose }) => {
   // When on cover: navigates between episodes
   // When pages are open: navigates between pages (desktop/tablet only)
   if (renderCoverNavigation) {
+    const effectiveTotalPages = isCharacterComicBook && isDesktop && episodeData?.pages?.length > 1
+      ? 2 * Math.floor((totalPages - 1) / 2) + 1
+      : totalPages;
     const coverNavButtons = renderCoverNavigation(deviceType, styles, {
       loadPreviousEpisode,
       loadNextEpisode,
@@ -1080,10 +1195,10 @@ window.ComicReader = ({ content, onClose }) => {
       previousPage,
       nextPage,
       currentPage,
-      totalPages,
+      totalPages: effectiveTotalPages,
       getNextEpisodeForPages: () => getNextEpisode(episodeData),
       isFullscreen,
-      isV4Episode
+      isV4Episode: isV4Episode
     });
     if (coverNavButtons) {
       overlayChildren.push(...coverNavButtons);
@@ -1379,6 +1494,79 @@ if (!document.querySelector('#comic-episode-styles')) {
     .comic-immersive-v4-swiper .swiper-pagination-bullet-active {
       background: rgba(255,255,255,1);
       box-shadow: 0 0 8px rgba(255,255,255,0.6);
+    }
+
+    /* Character slide viewer */
+    .comic-character-slide-viewer {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      background: #000;
+    }
+    .comic-character-immersive-column {
+      width: 100%;
+      height: 100%;
+    }
+    .comic-immersive-column {
+      width: 100%;
+      height: 100%;
+    }
+    .comic-character-swiper {
+      width: 100%;
+      height: 100%;
+    }
+    .comic-character-swiper .swiper-wrapper {
+      height: 100%;
+    }
+    .comic-character-swiper .swiper-slide {
+      height: 100%;
+      min-height: 100%;
+    }
+    .comic-character-swiper .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      background: rgba(255,255,255,0.6);
+      opacity: 1;
+    }
+    .comic-character-swiper .swiper-pagination-bullet-active {
+      background: rgba(255,255,255,1);
+    }
+    .character-slide-column {
+      height: 100%;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+    }
+    .comic-character-vertical-swiper {
+      width: 100%;
+      height: 100%;
+    }
+    .comic-character-vertical-swiper .swiper-wrapper {
+      height: 100%;
+    }
+    .comic-character-vertical-swiper .swiper-slide {
+      height: 100vh;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    @media (max-width: 1023px) {
+      .comic-character-vertical-swiper .swiper-slide {
+        height: 100svh;
+        min-height: 100svh;
+      }
+    }
+    .comic-character-vertical-swiper .swiper-pagination {
+      right: 12px;
+      left: auto;
+    }
+    .comic-character-vertical-swiper .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      background: rgba(255,255,255,0.6);
+      opacity: 1;
+    }
+    .comic-character-vertical-swiper .swiper-pagination-bullet-active {
+      background: rgba(255,255,255,1);
     }
   
   `;
