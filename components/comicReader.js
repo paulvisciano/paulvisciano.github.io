@@ -590,10 +590,8 @@ window.ComicReader = ({ content, onClose }) => {
   }, [isCharacterComicBook, showCover, episodeData]);
 
   // Function to transition from cover to flipbook (or v4 immersive view or character slide viewer)
+  // Desktop: opens to medium view; user can expand to fullscreen via ⛶ button
   const openComicBook = () => {
-    if (!document.fullscreenElement && overlayRef.current) {
-      overlayRef.current.requestFullscreen({ navigationUI: 'hide' }).then(() => setIsFullscreen(true)).catch(() => {});
-    }
     if (isV4Episode) {
       const pages = episodeData?.pages && Array.isArray(episodeData.pages) ? episodeData.pages : [];
       const hasVideo = !!(episodeData?.videoPortraitUrl || episodeData?.videoLandscapeUrl);
@@ -1507,16 +1505,19 @@ if (!document.querySelector('#comic-episode-styles')) {
       box-shadow: 0 0 8px rgba(255,255,255,0.6);
     }
 
-    /* Character slide viewer */
+    /* Character slide viewer - constrain to parent comic-episode-container */
     .comic-character-slide-viewer {
       width: 100%;
       height: 100%;
-      min-height: 100vh;
+      min-height: 0;
+      overflow: hidden;
       background: #000;
     }
     .comic-character-immersive-column {
-      width: 100%;
+      flex: 1 1 0;
+      min-width: 0;
       height: 100%;
+      overflow: hidden;
     }
     .comic-immersive-column {
       width: 100%;

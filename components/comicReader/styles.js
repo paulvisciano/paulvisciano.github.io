@@ -222,11 +222,10 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
       })()
     : config;
   
-  // Override dimensions when in fullscreen AND comic is open (not showing cover)
-  // V4 + fullscreen: 100% x 100% for all devices (fully immersive)
-  // V4 open (not fullscreen): desktop 1000x700; mobile/tablet fill viewport
-  // Otherwise desktop: 1000x750, other: 85% x 90%
-  const fullscreenProps = (isFullscreen && !showCover && isV4Cover) ? {
+  // Desktop: cover → medium (700px) → fullscreen (optional). Mobile/tablet: cover → full viewport.
+  // Override dimensions when comic is open (not showing cover)
+  const fullscreenProps = (isFullscreen && !showCover) ? {
+    // Fullscreen: fill viewport for all comic types
     width: '100%',
     height: '100%',
     maxWidth: 'none',
@@ -234,21 +233,18 @@ const getContainerStyle = (deviceType, orientation, showCover, isFullscreen = fa
     borderRadius: 0,
     border: 'none',
     boxShadow: 'none'
-  } : (!showCover && isV4Cover) ? (
-    isDesktop ? { width: '1000px', height: '700px' } : {
-      width: '100%',
-      height: '100%',
-      maxWidth: 'none',
-      maxHeight: 'none'
-    }
-  ) : (isFullscreen && !showCover) ? {
+  } : (isDesktop && !showCover) ? {
+    // Desktop medium view: 100% width, 700px height (user-preferred size); fullscreen expands from here
+    width: '100%',
+    height: '700px',
+    maxWidth: '1200px',
+    maxHeight: 'none'
+  } : (!showCover && isV4Cover && !isDesktop) ? {
+    // Mobile/tablet V4 open: fill viewport
     width: '100%',
     height: '100%',
     maxWidth: 'none',
-    maxHeight: 'none',
-    borderRadius: 0,
-    border: 'none',
-    boxShadow: 'none'
+    maxHeight: 'none'
   } : {};
 
   // Mobile landscape with V4 immersive open only: no border, radius, or shadow (edge-to-edge)
@@ -367,7 +363,7 @@ const getDeviceStyles = (deviceType, state = {}) => {
   // pointerEvents: 'auto' when showCover so the cover is clickable to open the book.
   const footerHeight = showCover && !isPortrait ? 120 : 150;
   const v4Open = !showCover && isV4Cover;
-  const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: fixed 1000x700
+  const v4FillViewport = v4Open && !isDesktop; // mobile/tablet: container fills; desktop: medium 700px
   const overlayTouchAction = showCover ? 'pan-x' : (isV4Cover ? 'pan-y' : 'none');
   const overlayPaddingTop = showCover && isPortrait ? '0' : '0';
   const overlayPaddingBottom = showCover && isPortrait ? '0' : '0';

@@ -22,12 +22,15 @@ This document defines all style values for each device type and orientation comb
 | Mobile | Landscape | 70vw | 90svh |
 | Tablet | Portrait | 100vw | 100svh |
 | Tablet | Landscape | 800px | 600px |
-| Desktop | Landscape | 800px | 600px |
+| Desktop | Landscape | 100% (max 1200px) | 700px (medium view) |
+
+**Desktop progression:** Cover → Medium (700px height) → Fullscreen (optional via ⛶ button)
 
 **Fullscreen Mode (when comic is open):**
-- Tablet Landscape & Desktop: 85% width, 90% height (overrides open dimensions)
+- Desktop: 100% × 100% (expands from medium view)
+- Tablet Landscape: 85% width, 90% height (overrides open dimensions)
 - Portrait orientations (Mobile & Tablet): Already use 100vw/100svh by default, no change in fullscreen
-- Cover state: Uses static dimensions (400px x 600px) even in fullscreen
+- Cover state: Uses static dimensions even in fullscreen
 
 **Common Container Properties:**
 - background: #000
