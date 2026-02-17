@@ -1728,11 +1728,11 @@ window.momentsInTime = [
       "urban runner"
     ],
     snippet:
-      "Flew from Manila to Da Nang on January 30th. Staying through at least February 15th — new country, new rhythm, and the start of the Vietnam chapter.",
+      "Flew from Manila to Da Nang on January 30th. Stayed through February 9th — exploring the mountains, meditating on misty peaks, then heading to Ho Chi Minh early.",
     fullLink: "#",
     location: { lat: 16.0544, lng: 108.2022, name: "Da Nang, Vietnam" },
-    stayDuration: 17, // Jan 30 → Feb 15
-    formattedDuration: formatDuration(17),
+    stayDuration: 10, // Jan 30 → Feb 9
+    formattedDuration: formatDuration(10),
   },
   {
     id: "heaven-on-earth-2026-02-07",
@@ -1778,6 +1778,44 @@ window.momentsInTime = [
     location: { lat: 16.0544, lng: 108.2022, name: "Da Nang, Vietnam" },
     stayDuration: 1,
     formattedDuration: formatDuration(1),
+  },
+  {
+    id: "hochiminh-2026-02-09",
+    title: "Ho Chi Minh: Urban Hustle Continues",
+    date: new Date("2026-02-09T00:00:00Z"),
+    timelineHighlight: "Ho Chi Minh",
+    tags: [
+      "ho chi minh",
+      "vietnam",
+      "city",
+      "urban runner",
+      "crew"
+    ],
+    snippet:
+      "Flew from Da Nang to Ho Chi Minh on February 9th with Khan. Extended stay through Thursday, Feb 19 at The Opera in the heart of the city — back to the urban rhythm after mountain meditation.",
+    fullLink: "#",
+    location: { lat: 10.7769, lng: 106.7009, name: "Ho Chi Minh City, Vietnam" },
+    stayDuration: 10, // Feb 9 → Feb 19
+    formattedDuration: formatDuration(10),
+  },
+  {
+    id: "bangkok-2026-02-19",
+    title: "Bangkok: Boy & Crew Reunion",
+    date: new Date("2026-02-19T00:00:00Z"),
+    timelineHighlight: "Bangkok",
+    tags: [
+      "bangkok",
+      "thailand",
+      "crew",
+      "urban runner",
+      "extended stay"
+    ],
+    snippet:
+      "Flying to Bangkok on February 19th. Originally planned to meet Leo, Sean, and crew, but Khan decided to head back to Chicago. Now it's just me and Boy — staying through end of February.",
+    fullLink: "#",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 9, // Feb 19 → Feb 28
+    formattedDuration: formatDuration(9),
   }
 
 ].sort((a, b) => a.date - b.date);
