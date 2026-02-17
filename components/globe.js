@@ -31,10 +31,16 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     return () => clearInterval(checkCharacters);
   }, []);
   
-  // Function to open character comic book (via its moment id)
-  const handleOpenCharacterComic = () => {
+  // Function to open character comic book (via its moment id).
+  // If characterId is provided and that character has a page in the comic, navigates to that slide.
+  const handleOpenCharacterComic = (characterId) => {
     if (window.handleOpenBlogPost) {
-      window.handleOpenBlogPost('characters-comic-book-2025-09-15');
+      let initialSlide = null;
+      if (characterId && window.characterComicBook?.pages) {
+        const idx = window.characterComicBook.pages.findIndex(p => p.character === characterId);
+        if (idx >= 0) initialSlide = idx + 1; // 1-based page number
+      }
+      window.handleOpenBlogPost('characters-comic-book-2025-09-15', { initialSlide });
       setIsDrawerOpen(false);
     }
   };
@@ -652,20 +658,28 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
     }
   }, [selectedTag, selectedYear, setSelectedId]);
 
-  const handleOpenBlogPost = async (postId) => {
+  const handleOpenBlogPost = async (postId, options = {}) => {
     const post = window.momentsInTime.find(p => p.id === postId);
 
     if (post) {
       // Update moment selection (URL and globe zoom) if not already selected
+      let intendedPath = post.fullLink && post.fullLink !== "#" ? post.fullLink : `/moments/${postId}`;
+      // For character comic, append #slide-N when opening to a specific character's slide
+      if (postId === 'characters-comic-book-2025-09-15' && options.initialSlide) {
+        intendedPath = intendedPath.replace(/#.*$/, '') + '#slide-' + options.initialSlide;
+      }
       if (selectedId !== postId) {
         setSelectedId(postId);
-        const intendedPath = post.fullLink && post.fullLink !== "#" ? post.fullLink : `/moments/${postId}`;
         const currentBase = (window.location.pathname || '').replace(/\/$/, '');
-        const intendedBase = (intendedPath || '').replace(/\/$/, '');
-        if (currentBase !== intendedBase) {
+        const intendedBase = (intendedPath || '').replace(/#.*$/, '').replace(/\/$/, '');
+        // Push when navigating to a different base path, or when setting/updating slide hash for character comic
+        if (currentBase !== intendedBase || options.initialSlide) {
           window.history.pushState({ momentId: postId }, '', intendedPath);
         }
         // Globe zoom will be handled automatically by React state change
+      } else if (options.initialSlide) {
+        // Already on this moment; still push URL with slide hash so ComicReader opens to correct slide
+        window.history.pushState({ momentId: postId }, '', intendedPath);
       }
       
       setIsLoading(true);
@@ -1064,10 +1078,9 @@ window.GlobeComponent = ({ handleTimelineClick, selectedId, setSelectedId, selec
                     {
                       className: 'character-avatar',
                       title: character.name,
-                      onClick: () => {
-                        // For now, clicking an avatar opens the character comic book
-                        // In the future, this could filter moments by character
-                        handleOpenCharacterComic();
+                        onClick: () => {
+                        // Open character comic book and navigate to this character's slide
+                        handleOpenCharacterComic(character.id);
                       }
                     },
                     React.createElement(

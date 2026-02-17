@@ -125,6 +125,16 @@ window.ComicReader = ({ content, onClose }) => {
       }
     }
     
+    // When content has postId for a different comic, look up the moment and use it (don't use stale currentCharacterComicBook)
+    if (content && content.postId && !isCharacterComicPost && window.momentsInTime) {
+      const moment = window.momentsInTime.find(m => m.id === content.postId);
+      if (moment && moment.isComic) {
+        setEpisodeData(moment);
+        updateGlobalState({ episodeData: moment });
+        return;
+      }
+    }
+    
     const globalState = getGlobalState();
     
     // If we already have episode data in global state, use it
@@ -133,8 +143,8 @@ window.ComicReader = ({ content, onClose }) => {
       return;
     }
     
-    // Check for character comic book in global window
-    if (window.currentCharacterComicBook && !episodeData) {
+    // Check for character comic book in global window (only when we're not opening a different comic)
+    if (window.currentCharacterComicBook && !episodeData && (!content || isCharacterComicPost)) {
       setEpisodeData(window.currentCharacterComicBook);
       updateGlobalState({ episodeData: window.currentCharacterComicBook });
       return;
