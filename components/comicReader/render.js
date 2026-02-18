@@ -40,6 +40,15 @@ const renderHeaderButtons = (styles, { handleClose, toggleFullscreen, isFullscre
 };
 
 /**
+ * Resolve image URL - convert attachment:// to loadable path (e.g. /moments/...)
+ */
+const resolveImageUrl = (url) => {
+  if (!url || typeof url !== 'string') return url;
+  if (url.startsWith('attachment://')) return url.replace('attachment://', '');
+  return url;
+};
+
+/**
  * Render cover display - device-specific text but similar structure
  */
 const renderCover = (deviceType, styles, { 
@@ -50,6 +59,7 @@ const renderCover = (deviceType, styles, {
   isWideCover = false
 }) => {
   const isMobile = deviceType === 'mobile';
+  const coverSrc = resolveImageUrl(episodeData?.cover || episodeData?.image) || (episodeData?.fullLink ? `${episodeData.fullLink.replace(/\/$/, '')}/cover.png` : null);
   
   const coverClassName = 'comic-cover-display' + (isWideCover ? ' comic-cover-display--wide' : '');
   return React.createElement('div', {
@@ -80,9 +90,9 @@ const renderCover = (deviceType, styles, {
         style: styles.loadingTextStyle || {}
       }, isMobile ? 'Loading...' : 'Loading comic book...')
     ]),
-    episodeData && React.createElement('img', {
+    episodeData && coverSrc && React.createElement('img', {
       key: 'cover-img',
-      src: episodeData.cover || `${episodeData.fullLink.replace(/\/$/, '')}/cover.png`,
+      src: coverSrc,
       alt: `${episodeData.title} Cover`,
       style: styles.coverImageWithOpacityStyle ? styles.coverImageWithOpacityStyle(isVisible) : (styles.coverImageStyle || {})
     })

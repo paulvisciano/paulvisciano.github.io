@@ -110,16 +110,36 @@ window.characters = [
   {
     id: "wouter",
     name: "Wouter",
-    role: "Friend / Brother / Travel Companion",
+    role: "Friend / Brother / Travel Companion / Philosophical Anchor",
     description: "One of those rare friends who feels more like a brother forged through shared miles than time alone.",
-    bio: "Wouter is one of those rare friends who feels more like a brother forged through shared miles than time alone. Athletic, sharp-featured, with piercing blue eyes and a calm confidence, he carries himself with an easy balance of discipline and fun. He's adventurous without being reckless, social without needing the spotlight, and grounded even when life gets chaotic. Wouter and Paul have crossed continents together — from Medellín to Miami, Germany to Cuba, Dubai to Abu Dhabi — collecting stories through late nights, intense conversations, workouts, beaches, and moments that only happen when you travel with someone you fully trust. He has a strong physical presence but an even stronger sense of loyalty. He's the type who shows up, adapts fast, and turns unfamiliar places into home bases. Currently living in Valencia, Spain, Wouter has his eyes set on South Beach, Miami — drawn to the energy, movement, and sun. He represents momentum, brotherhood, and the kind of friendship that evolves alongside personal growth. In the Urban Runner universe, Wouter is not a side character — he's a parallel path, a fellow traveler, and part of the core tribe that makes the journey real.",
+    bio: "Wouter is one of those rare friends who feels more like a brother forged through shared miles than time alone. Athletic, sharp-featured, with piercing blue eyes and a calm confidence, he carries himself with an easy balance of discipline and fun. He's adventurous without being reckless, social without needing the spotlight, and grounded even when life gets chaotic. Wouter and Paul have crossed continents together — from Medellín to Miami, Germany to Cuba, Dubai to Abu Dhabi — collecting stories through late nights, intense conversations, workouts, beaches, and moments that only happen when you travel with someone you fully trust. He has a strong physical presence but an even stronger sense of loyalty. He's the type who shows up, adapts fast, and turns unfamiliar places into home bases. Beyond the surface energy, Wouter serves as an essential grounding force and philosophical anchor for Paul. He brings clarity to confusion, stillness to chaos, and wisdom without preachiness. A deep thinking partner who understands Paul's meta-gaming philosophy and helps navigate the tension between ambition and presence. He's the co-creator energy that turns vision into lived experience. Currently living in Valencia, Spain, Wouter has his eyes set on South Beach, Miami — drawn to the energy, movement, and sun. He represents momentum, brotherhood, and the kind of friendship that evolves alongside personal growth. In the Urban Runner universe, Wouter is not a side character — he's a parallel path, a fellow traveler, and part of the core tribe that makes the journey real.",
     avatar: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Wouter.png",
     pageImage: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Wouter.png",
     imageAlt: "Wouter - Friend",
     origin: "Netherlands",
     currentHome: "Valencia, Spain",
-    tags: ["friend", "brother", "travel", "volleyball", "yoga", "valencia", "miami", "brotherhood", "athletic"],
-    relationship: "A brother forged through shared miles. Parallel path, fellow traveler, and part of the core tribe that makes the journey real."
+    tags: ["friend", "brother", "travel", "volleyball", "yoga", "valencia", "miami", "brotherhood", "athletic", "philosopher", "anchor"],
+    relationship: "A brother forged through shared miles. Parallel path, fellow traveler, and part of the core tribe that makes the journey real. Essential grounding force and philosophical anchor.",
+    keyThemes: ["Hammer Reunion", "The Conquest Pose", "co-creation", "presence-vs-ambition", "stillness-in-chaos"],
+    charactersArc: "Co-creator → Essential grounding force → Philosophical anchor across continents"
+  },
+  {
+    id: "khanh",
+    name: "Khanh",
+    role: "Friend / Travel Companion / Mirror",
+    description: "Chicago volleyball crew member who spent 5+ years in Hawaii, now traveling through Southeast Asia with Paul.",
+    bio: "Born and raised in Vietnam until age 7, then immigrated to California with his parents before eventually settling in Chicago. Long-time friend from Paul's Chicago volleyball days who helped him move to Florida before their paths diverged. After establishing himself in Hawaii for 5-6 years, Khanh became an amazing host when Paul visited multiple times—showing him around Oahu, introducing him to Queens Beach volleyball, and most importantly, getting Paul back into working out as his trainer. That fitness partnership reignited Paul's discipline and energy. Now reconnected for an Asia adventure before Khanh's next chapter in California. Health-conscious, boundary-aware, and endlessly social, Khanh transforms through the journey: from dependent (visa issues, sickness) to independent (agency, self-care) to autonomous (making his own path). His role in Urban Runner is as The Mirror — teaching Paul about accepting difference, respecting autonomy within friendship, and grounding through genuine connection. Athletic, thoughtful, deeply loyal, and the kind of friend who shows up fully.",
+    avatar: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Khanh.png",
+    pageImage: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Khanh.png",
+    pageVideo: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Khanh.mp4",
+    imageAlt: "Khanh - Travel Companion",
+    origin: "Vietnam (age 0-7) → California (age 7+) → Chicago",
+    baseLocations: ["Hawaii (5-6 years)", "Vietnam (Da Nang, Ho Chi Minh)", "Thailand (Bangkok)", "California (childhood)", "Chicago (adult years)"],
+    tags: ["friend", "volleyball", "travel", "chicago", "hawaii", "vietnam", "california", "thailand", "brother", "vietnamese"],
+    relationship: "Chicago crew member, Hawaii years, Asia travel buddy. Vietnamese-American bridge. Teaches Paul about acceptance, boundaries, and autonomous friendship. The Mirror of the Vietnam arc.",
+    keyScenes: ["The Arrival (Saigon reunion)", "The Pamper Day (self-care)", "The Raid (gaming life)", "The Boundary (different rhythms accepted)"],
+    episodes: ["Heaven on Earth (Feb 7)", "The Arrival (unpublished)", "The Pamper Day (unpublished)", "The Raid (unpublished)"],
+    characterArc: "Dependent (visa issues, sickness) → Independent (agency, self-care) → Autonomous (own path toward California)"
   },
   {
     id: "boy",
@@ -279,23 +299,6 @@ window.characters = [
     imageAlt: "Thai Dragon",
     tags: ["friend", "thailand", "dragon"],
     relationship: "Symbolic character of the Thailand arc."
-  },
-  {
-    id: "khanh",
-    name: "Khanh",
-    role: "Friend / Travel Companion / Mirror",
-    description: "Chicago volleyball crew member who spent 5+ years in Hawaii, now traveling through Southeast Asia with Paul.",
-    bio: "Born and raised in Vietnam until age 7, then immigrated to California with his parents before eventually settling in Chicago. Long-time friend from Paul's Chicago volleyball days who helped him move to Florida before their paths diverged. After establishing himself in Hawaii for 5-6 years, Khanh became an amazing host when Paul visited multiple times—showing him around Oahu, introducing him to Queens Beach volleyball, and most importantly, getting Paul back into working out as his trainer. That fitness partnership reignited Paul's discipline and energy. Now reconnected for an Asia adventure before Khanh's next chapter in California. Health-conscious, boundary-aware, and endlessly social, Khanh transforms through the journey: from dependent (visa issues, sickness) to independent (agency, self-care) to autonomous (making his own path). His role in Urban Runner is as The Mirror — teaching Paul about accepting difference, respecting autonomy within friendship, and grounding through genuine connection. Athletic, thoughtful, deeply loyal, and the kind of friend who shows up fully.",
-    avatar: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Khanh.png",
-    pageImage: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/Khanh.png",
-    imageAlt: "Khanh - Travel Companion",
-    origin: "Vietnam (age 0-7) → California (age 7+) → Chicago",
-    baseLocations: ["Hawaii (5-6 years)", "Vietnam (Da Nang, Ho Chi Minh)", "Thailand (Bangkok)", "California (childhood)", "Chicago (adult years)"],
-    tags: ["friend", "volleyball", "travel", "chicago", "hawaii", "vietnam", "california", "thailand", "brother", "vietnamese"],
-    relationship: "Chicago crew member, Hawaii years, Asia travel buddy. Vietnamese-American bridge. Teaches Paul about acceptance, boundaries, and autonomous friendship. The Mirror of the Vietnam arc.",
-    keyScenes: ["The Arrival (Saigon reunion)", "The Pamper Day (self-care)", "The Raid (gaming life)", "The Boundary (different rhythms accepted)"],
-    episodes: ["Heaven on Earth (Feb 7)", "The Arrival (unpublished)", "The Pamper Day (unpublished)", "The Raid (unpublished)"],
-    characterArc: "Dependent (visa issues, sickness) → Independent (agency, self-care) → Autonomous (own path toward California)"
   }
 ];
 
