@@ -249,12 +249,14 @@ const renderContainer = (deviceType, styles, {
   containerRef,
   containerClassName = '',
   isV4Episode = false,
+  isCharacterComicBook = false,
   showCover = true
 }) => {
   const isMobile = deviceType === 'mobile';
   const isTablet = deviceType === 'tablet';
-  // Only attach touch handlers for flipbook pages - not on cover (Swiper handles cover carousel) or v4 (uses its own Swiper)
-  const attachTouchHandlers = (isMobile || isTablet) && !isV4Episode && !showCover;
+  // Attach touch handlers for: flipbook (horizontal swipe between pages), character comic (horizontal swipe between characters)
+  // Not for: cover (Swiper handles carousel), v4 (vertical Swiper handles slides)
+  const attachTouchHandlers = (isMobile || isTablet) && !showCover && (isCharacterComicBook || !isV4Episode);
   const className = 'comic-episode-container' + (containerClassName ? ' ' + containerClassName.trim() : '');
   
   return React.createElement('div', {

@@ -53,7 +53,7 @@
   }
 
   window.ComicReaderCharacterSlideViewer = function CharacterSlideViewerContent({ episodeData, styles, navState = {} }) {
-    const { onBackToCover, previousPage, currentPage = 1 } = navState;
+    const { onBackToCover, previousPage, currentPage = 1, onVideoPlayStateChange, onTapToShowControls } = navState;
     const [isDesktop, setIsDesktop] = React.useState(
       () => typeof window !== 'undefined' && window.innerWidth >= BREAKPOINT_DESKTOP
     );
@@ -93,7 +93,9 @@
         key: 'immersive-' + columnKey,
         contentKey,
         slides: characterPageToSlides(p),
-        onBackToCover: onFirstSlideBack
+        onBackToCover: onFirstSlideBack,
+        onVideoPlayStateChange,
+        onTapToShowControls
       }));
     });
 

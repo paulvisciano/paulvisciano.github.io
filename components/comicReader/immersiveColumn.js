@@ -4,7 +4,7 @@
 // ============================================================================
 
 (function() {
-  const VideoSlide = ({ slide, index, videoRefsByIndex, onToggle }) => {
+  const VideoSlide = ({ slide, index, videoRefsByIndex, onToggle, onPlayStateChange }) => {
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [isPlaying, setIsPlaying] = React.useState(false);
 
@@ -13,6 +13,15 @@
         videoRefsByIndex.current[index] = el;
         if (el.readyState >= 2) setIsLoaded(true);
       }
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+      onPlayStateChange?.(true);
+    };
+    const handlePause = () => {
+      setIsPlaying(false);
+      onPlayStateChange?.(false);
     };
 
     return React.createElement('div', {
@@ -29,8 +38,8 @@
         loop: false,
         onLoadedData: () => setIsLoaded(true),
         onCanPlay: () => setIsLoaded(true),
-        onPlay: () => setIsPlaying(true),
-        onPause: () => setIsPlaying(false),
+        onPlay: handlePlay,
+        onPause: handlePause,
         style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y' }
       }),
       isLoaded && React.createElement('div', {
@@ -96,21 +105,29 @@
     position: 'relative'
   };
 
-  window.ComicReaderImmersiveColumn = function ImmersiveColumn({ slides, initialSlideIndex = 0, onBackToCover, onSlideChange, contentKey }) {
+  window.ComicReaderImmersiveColumn = function ImmersiveColumn({ slides, initialSlideIndex = 0, onBackToCover, onSlideChange, contentKey, onVideoPlayStateChange, onTapToShowControls }) {
     const slidesSignature = slides.map(s => s.src || (s.children ? 'custom' : '')).join('|');
     const swiperRef = React.useRef(null);
     const swiperInstanceRef = React.useRef(null);
     const videoRefsByIndex = React.useRef({});
     const onBackToCoverRef = React.useRef(onBackToCover);
-
     onBackToCoverRef.current = onBackToCover;
 
     const toggleVideoAt = (index, e) => {
       e.stopPropagation();
       const el = videoRefsByIndex.current[index];
       if (!el) return;
-      if (el.paused) el.play().catch(function() {});
-      else el.pause();
+      const wasPlaying = !el.paused;
+      if (el.paused) {
+        el.play().catch(function() {});
+      } else {
+        el.pause();
+        if (wasPlaying && typeof onTapToShowControls === 'function') onTapToShowControls();
+      }
+    };
+
+    const handleVideoPlayStateChange = (playing) => {
+      if (typeof onVideoPlayStateChange === 'function') onVideoPlayStateChange(playing);
     };
 
     const swiperSlides = slides.map((slide, i) => {
@@ -127,7 +144,8 @@
               slide,
               index: i,
               videoRefsByIndex,
-              onToggle: toggleVideoAt
+              onToggle: toggleVideoAt,
+              onPlayStateChange: handleVideoPlayStateChange
             })
           : slide.children;
 
@@ -152,6 +170,7 @@
           slideChange(sw) {
             onSlideChange?.(sw.activeIndex);
             Object.values(videoRefsByIndex.current).forEach((el) => { if (el) el.pause(); });
+            if (typeof onVideoPlayStateChange === 'function') onVideoPlayStateChange(false);
           }
         }
       });

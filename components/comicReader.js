@@ -1110,7 +1110,9 @@ window.ComicReader = ({ content, onClose }) => {
     containerChildren.push(renderCharacterSlideViewer(episodeData, styles, {
       onBackToCover: goBackToCover,
       previousPage,
-      currentPage
+      currentPage,
+      onVideoPlayStateChange: setIsVideoPlaying,
+      onTapToShowControls: () => setShowMobileControls(true)
     }));
   }
   
@@ -1142,12 +1144,12 @@ window.ComicReader = ({ content, onClose }) => {
   }
   
   // Handler to prevent clicks on container from bubbling to overlay
-  // On mobile flipbook: tap page to toggle bottom nav visibility
+  // On mobile: tap page to toggle header (close button) and nav visibility
   const handleContainerClick = (e) => {
     if (!showCover) {
       e.stopPropagation();
-      // Toggle mobile nav when tapping page (not when tapping nav buttons)
-      if (isMobile && !isV4Episode && !isCharacterComicBook && useSinglePage && !e.target.closest('.mobile-comic-nav')) {
+      // Toggle mobile controls when tapping content (flipbook, V4, or character comic)
+      if (isMobile && !e.target.closest('.mobile-comic-nav') && !e.target.closest('.video-controls')) {
         setShowMobileControls((prev) => !prev);
       }
     }
@@ -1165,6 +1167,7 @@ window.ComicReader = ({ content, onClose }) => {
         containerRef,
         containerClassName: '',
         isV4Episode: isV4Episode || isCharacterComicBook,
+        isCharacterComicBook,
         showCover
       })
     : React.createElement('div', {
