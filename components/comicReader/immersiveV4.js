@@ -26,13 +26,55 @@
   };
 
   const isVideoUrl = (url) => /\.(mp4|webm|ogg)(\?|$)/i.test(url || '');
+  const isPageVideo = (page) => typeof page === 'string' ? isVideoUrl(page) : (page && page.type === 'video');
+  const isPageCustom = (page) => page && typeof page === 'object' && page.type === 'custom';
+  const getPageSrc = (page) => typeof page === 'string' ? page : (page && page.src);
+  const getPagePoster = (page) => page && page.poster;
 
-  const PLAY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>';
-  const PAUSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>';
+  // Shared play/pause overlay style
+  const VIDEO_PLAY_OVERLAY_STYLE = {
+    position: 'absolute',
+    bottom: 24,
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: 64,
+    height: 64,
+    borderRadius: '50%',
+    background: 'rgba(0,0,0,0.6)',
+    border: '2px solid rgba(255,255,255,0.9)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none',
+    transition: 'opacity 0.2s'
+  };
+  const PLAY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>';
+  const PAUSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>';
   const AUTO_PLAY_DELAY_MS = 150; // Brief delay for slide to settle; videos auto-play when landing on a video slide
 
+  const videoLoadingOverlayStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0,0,0,0.7)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none'
+  };
+  const loadingSpinnerStyle = {
+    width: 48,
+    height: 48,
+    border: '4px solid rgba(255,255,255,0.3)',
+    borderTopColor: '#fff',
+    borderRadius: '50%',
+    animation: 'comic-video-spin 0.8s linear infinite'
+  };
+
   window.ComicReaderImmersiveV4 = function ImmersiveV4Content({ episodeData, styles, navState = {} }) {
-    const { onBackToCover, onVideoPlayStateChange, onSlidesSwitchingChange, initialSlideIndex = 0, onSlideChange } = navState;
+    const { onBackToCover, onVideoPlayStateChange, onSlidesSwitchingChange, onTapToShowControls, initialSlideIndex = 0, onSlideChange, noAutoplay = false } = navState;
     const swiperRef = React.useRef(null);
     const swiperInstanceRef = React.useRef(null);
     const activeSlideRef = React.useRef(0);
@@ -52,6 +94,7 @@
       () => (typeof window !== 'undefined' ? window.innerHeight : 100)
     );
     const [videoPlayState, setVideoPlayState] = React.useState({});
+    const [videoLoadingState, setVideoLoadingState] = React.useState({});
     const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
     React.useEffect(() => {
       const update = () => setViewportHeight(window.innerHeight);
@@ -89,7 +132,7 @@
 
     onBackToCoverRef.current = onBackToCover;
 
-    const isVideoSlide = (idx) => (idx < pages.length && isVideoUrl(pages[idx])) || idx === videoSlideIndex;
+    const isVideoSlide = (idx) => (idx < pages.length && isPageVideo(pages[idx])) || idx === videoSlideIndex;
     React.useEffect(() => {
       if (typeof onVideoPlayStateChange !== 'function') return;
       const playing = isVideoSlide(activeSlideIndex) && videoPlayState[activeSlideIndex] === 'playing';
@@ -111,7 +154,7 @@
 
     // When initial slide is a video, ensure play() is called once it can play (autoplay attr can be unreliable)
     const tryPlayInitialVideo = (el, index) => {
-      if (!el || index !== initialSlideIndex) return;
+      if (noAutoplay || !el || index !== initialSlideIndex) return;
       el.muted = true; // Must be muted for programmatic play without user gesture
       el.play().catch(function() {});
     };
@@ -157,7 +200,7 @@
           slideChange(sw) {
             if (programmaticSlideRef.current) {
               programmaticSlideRef.current = false;
-              const newSlideIsVideo = (sw.activeIndex < pages.length && isVideoUrl(pages[sw.activeIndex])) || sw.activeIndex === videoSlideIndex;
+              const newSlideIsVideo = (sw.activeIndex < pages.length && isPageVideo(pages[sw.activeIndex])) || sw.activeIndex === videoSlideIndex;
               if (!newSlideIsVideo) onSlidesSwitchingChange?.(false);
             }
             setActiveSlideIndex(sw.activeIndex);
@@ -176,7 +219,7 @@
               if (el) el.pause();
             });
             const activeEl = refs[sw.activeIndex];
-            if (activeEl) {
+            if (activeEl && !noAutoplay) {
               autoPlayTimerRef.current = setTimeout(() => {
                 activeEl.muted = false; // User swiped = interaction, unmuted allowed
                 activeEl.play().catch(function() {});
@@ -196,7 +239,7 @@
       if (nextVideo && typeof nextVideo.load === 'function') nextVideo.load();
 
       const activeVideo = videoRefsByIndex.current[initialSlide];
-      if (activeVideo) {
+      if (activeVideo && !noAutoplay) {
         autoPlayTimerRef.current = setTimeout(() => {
           activeVideo.play().catch(function() {});
           autoPlayTimerRef.current = null;
@@ -253,29 +296,20 @@
       position: 'relative'
     };
 
-    const videoHintOverlayStyle = {
-      position: 'absolute',
-      bottom: 16,
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: 36,
-      height: 36,
-      borderRadius: '50%',
-      background: 'rgba(0,0,0,0.5)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      pointerEvents: 'none'
-    };
+    const videoHintOverlayStyle = VIDEO_PLAY_OVERLAY_STYLE;
 
     const toggleVideoAt = (index, e) => {
       e.stopPropagation();
       const el = videoRefsByIndex.current[index];
       if (!el) return;
+      const wasPlaying = !el.paused;
       if (el.paused) {
         el.muted = false; // Unmute on user tap (autoplay starts muted for browser policy)
         el.play().catch(function() {});
-      } else el.pause();
+      } else {
+        el.pause();
+        if (wasPlaying && typeof onTapToShowControls === 'function') onTapToShowControls();
+      }
     };
 
     const handleVideoEnded = () => {
@@ -289,36 +323,56 @@
 
     const swiperSlides = [];
 
-    pages.forEach((url, i) => {
-      const isVideo = isVideoUrl(url);
+    pages.forEach((page, i) => {
+      if (isPageCustom(page)) {
+        swiperSlides.push(React.createElement('div', {
+          key: 'slide-' + i,
+          className: 'swiper-slide',
+          style: { ...slideStyle, ...(page.style || {}) }
+        }, page.children));
+        return;
+      }
+      const isVideo = isPageVideo(page);
+      const src = getPageSrc(page);
+      const poster = getPagePoster(page);
       const isPlaying = videoPlayState[i] === 'playing';
+      const isLoading = videoLoadingState[i] !== false;
       const content = isVideo
         ? React.createElement(React.Fragment, null,
             React.createElement('video', {
               ref: (el) => { if (el) videoRefsByIndex.current[i] = el; },
-              src: url,
+              src,
+              poster: poster || undefined,
               preload: 'auto',
-              autoPlay: initialSlideIndex === i,
+              autoPlay: !noAutoplay && initialSlideIndex === i,
               playsInline: true,
               muted: initialSlideIndex === i, // Muted required for autoplay on direct navigation (no user gesture)
               loop: false,
               onPlay: () => {
                 setVideoPlayState((s) => ({ ...s, [i]: 'playing' }));
+                setVideoLoadingState((s) => ({ ...s, [i]: false }));
                 onSlidesSwitchingChange?.(false);
               },
               onPause: () => setVideoPlayState((s) => ({ ...s, [i]: 'paused' })),
               onEnded: handleVideoEnded,
-              onCanPlay: (e) => tryPlayInitialVideo(e.target, i),
+              onCanPlay: (e) => {
+                setVideoLoadingState((s) => ({ ...s, [i]: false }));
+                tryPlayInitialVideo(e.target, i);
+              },
+              onLoadedData: () => setVideoLoadingState((s) => ({ ...s, [i]: false })),
               style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
             }),
-            React.createElement('div', {
+            isLoading && React.createElement('div', { key: 'loading', style: videoLoadingOverlayStyle },
+              React.createElement('div', { style: loadingSpinnerStyle })
+            ),
+            !isPlaying && !isLoading && React.createElement('div', {
               style: videoHintOverlayStyle,
-              dangerouslySetInnerHTML: { __html: isPlaying ? PAUSE_ICON : PLAY_ICON }
+              dangerouslySetInnerHTML: { __html: PLAY_ICON }
             })
           )
         : React.createElement('img', {
-            src: url,
-            alt: `Spread ${i + 1}`,
+            src: src || (typeof page === 'string' ? page : ''),
+            alt: (page && page.alt) || `Spread ${i + 1}`,
             style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill' }
           });
       swiperSlides.push(React.createElement('div', {
@@ -335,6 +389,7 @@
         if (el) videoRefsByIndex.current[videoSlideIndex] = el;
       };
       const isPlaying = videoPlayState[videoSlideIndex] === 'playing';
+      const videoLoading = videoLoadingState[videoSlideIndex] !== false;
       swiperSlides.push(React.createElement('div', {
         key: 'video-slide',
         className: 'swiper-slide',
@@ -345,25 +400,31 @@
           ref: registerVideoRef,
           src: videoSrc,
           preload: 'auto',
-          autoPlay: initialSlideIndex === videoSlideIndex,
+          autoPlay: !noAutoplay && initialSlideIndex === videoSlideIndex,
           playsInline: true,
           muted: initialSlideIndex === videoSlideIndex, // Muted required for autoplay on direct navigation (no user gesture)
           onPlay: () => {
             setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'playing' }));
+            setVideoLoadingState((s) => ({ ...s, [videoSlideIndex]: false }));
             onSlidesSwitchingChange?.(false);
           },
           onPause: () => setVideoPlayState((s) => ({ ...s, [videoSlideIndex]: 'paused' })),
           onEnded: handleVideoEnded,
           onLoadedMetadata: function(e) { e.target.volume = 0.2; },
           onCanPlay: (e) => {
+            setVideoLoadingState((s) => ({ ...s, [videoSlideIndex]: false }));
             handleVideoCanPlay();
             tryPlayInitialVideo(e.target, videoSlideIndex);
           },
+          onLoadedData: () => setVideoLoadingState((s) => ({ ...s, [videoSlideIndex]: false })),
           style: { width: '100%', height: '100%', display: 'block', objectFit: 'fill', touchAction: 'pan-y', cursor: 'pointer' }
         }),
-        React.createElement('div', {
+        videoLoading && React.createElement('div', { key: 'loading', style: videoLoadingOverlayStyle },
+          React.createElement('div', { style: loadingSpinnerStyle })
+        ),
+        !isPlaying && !videoLoading && React.createElement('div', {
           style: videoHintOverlayStyle,
-          dangerouslySetInnerHTML: { __html: isPlaying ? PAUSE_ICON : PLAY_ICON }
+          dangerouslySetInnerHTML: { __html: PLAY_ICON }
         })
       )));
     }

@@ -1,12 +1,12 @@
 // ============================================================================
-// Character Slide Viewer — 2 ImmersiveColumn readers side by side (desktop)
-// or 1 ImmersiveColumn (mobile). Same UX as immersiveV4, easier to maintain.
+// Character Slide Viewer — 2 ImmersiveV4 readers side by side (desktop)
+// or 1 ImmersiveV4 (mobile). Reuses ImmersiveV4 for identical UX.
 // ============================================================================
 
 (function() {
   const BREAKPOINT_DESKTOP = 1024;
 
-  function characterPageToSlides(page) {
+  function characterPageToEpisodeData(page) {
     const { image, video, alt, name, role, bio, description } = page;
     const narrative = bio || description || '';
 
@@ -40,20 +40,21 @@
       }, narrative)
     ]);
 
+    const pages = [];
     if (video) {
-      return [
-        { type: 'video', src: video, poster: image },
-        { type: 'custom', children: narrativeContent, style: { justifyContent: 'flex-start' } }
-      ];
+      pages.push({ type: 'video', src: video, poster: image });
+    } else {
+      pages.push(image);
     }
-    return [
-      { type: 'image', src: image, alt: alt || name },
-      { type: 'custom', children: narrativeContent, style: { justifyContent: 'flex-start' } }
-    ];
+    if (narrative) {
+      pages.push({ type: 'custom', children: narrativeContent, style: { justifyContent: 'flex-start' } });
+    }
+
+    return { pages, fullLink: '/characters/' };
   }
 
   window.ComicReaderCharacterSlideViewer = function CharacterSlideViewerContent({ episodeData, styles, navState = {} }) {
-    const { onBackToCover, previousPage, currentPage = 1, onVideoPlayStateChange, onTapToShowControls } = navState;
+    const { onBackToCover, previousPage, currentPage = 1, onVideoPlayStateChange, onSlidesSwitchingChange, onTapToShowControls } = navState;
     const [isDesktop, setIsDesktop] = React.useState(
       () => typeof window !== 'undefined' && window.innerWidth >= BREAKPOINT_DESKTOP
     );
@@ -81,7 +82,7 @@
     const columns = displayPages.map((p, i) => {
       const charIndex = pageIndex + i;
       const columnKey = 'col-' + charIndex;
-      const contentKey = charIndex + '-' + (p.image || '') + '-' + (p.video || '');
+      const v4EpisodeData = characterPageToEpisodeData(p);
       const onFirstSlideBack = i === 0 && (typeof onBackToCover === 'function' || typeof previousPage === 'function')
         ? () => (currentPage <= 1 ? onBackToCover?.() : previousPage?.())
         : undefined;
@@ -89,13 +90,19 @@
         key: columnKey,
         className: 'comic-character-immersive-column',
         style: { flex: '1 1 0', minWidth: 0, height: '100%' }
-      }, React.createElement(window.ComicReaderImmersiveColumn, {
+      }, React.createElement(window.ComicReaderImmersiveV4, {
         key: 'immersive-' + columnKey,
-        contentKey,
-        slides: characterPageToSlides(p),
-        onBackToCover: onFirstSlideBack,
-        onVideoPlayStateChange,
-        onTapToShowControls
+        episodeData: v4EpisodeData,
+        styles,
+        navState: {
+          onBackToCover: onFirstSlideBack,
+          onVideoPlayStateChange,
+          onSlidesSwitchingChange: onSlidesSwitchingChange || (() => {}),
+          onTapToShowControls,
+          noAutoplay: true,
+          initialSlideIndex: 0,
+          onSlideChange: undefined
+        }
       }));
     });
 

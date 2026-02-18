@@ -1100,6 +1100,7 @@ window.ComicReader = ({ content, onClose }) => {
       onBackToCover: goBackToCover,
       onVideoPlayStateChange: setIsVideoPlaying,
       onSlidesSwitchingChange: setIsSlidesSwitching,
+      onTapToShowControls: () => setShowMobileControls(true),
       initialSlideIndex: initialSlideIndex ?? 0,
       onSlideChange: updateUrlForSlide ? (slideIndex0) => updateUrlForSlide(basePath, slideIndex0) : undefined
     }));
@@ -1112,6 +1113,7 @@ window.ComicReader = ({ content, onClose }) => {
       previousPage,
       currentPage,
       onVideoPlayStateChange: setIsVideoPlaying,
+      onSlidesSwitchingChange: setIsSlidesSwitching,
       onTapToShowControls: () => setShowMobileControls(true)
     }));
   }
@@ -1245,6 +1247,10 @@ if (!document.querySelector('#comic-episode-styles')) {
   style.id = 'comic-episode-styles';
   style.textContent = `
     @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes comic-video-spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
