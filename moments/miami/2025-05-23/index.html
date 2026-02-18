@@ -19,14 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="South Beach Volleyball, Bachata, and a Drive to St. Pete">
   <meta name="twitter:description" content="Played high-energy volleyball, danced bachata at Alain&#039;s, and drove to St. Pete.">
-  <script>
-    // Extract the current path dynamically from the URL
-    const currentPath = window.location.pathname;
-    
-    // Immediate redirect to the main app with the moment URL (preserve hash)
-    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
-    window.location.replace(redirectUrl);
-  </script>
+  <script src="/lib/crawler-redirect.js"></script>
   <!-- Fallback for browsers with JavaScript disabled -->
   <noscript>
     <meta http-equiv="refresh" content="0; url=/">

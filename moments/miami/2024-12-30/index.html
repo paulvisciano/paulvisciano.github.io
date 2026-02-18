@@ -19,14 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Miami Beach Winter Escape">
   <meta name="twitter:description" content="Drove from Clearwater to Miami Beach on Dec 29th to escape winter with sunny days and vibrant nights. Started the new year in Miami Beach.">
-  <script>
-    // Extract the current path dynamically from the URL
-    const currentPath = window.location.pathname;
-    
-    // Immediate redirect to the main app with the moment URL (preserve hash)
-    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
-    window.location.replace(redirectUrl);
-  </script>
+  <script src="/lib/crawler-redirect.js"></script>
   <!-- Fallback for browsers with JavaScript disabled -->
   <noscript>
     <meta http-equiv="refresh" content="0; url=/">

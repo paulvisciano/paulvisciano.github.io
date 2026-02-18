@@ -19,14 +19,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chasing Vibes in Boulder">
   <meta name="twitter:description" content="Soaking up Boulder&#039;s chill vibes with live music at Trident, unique tonics at Tonic Alchemy Lounge, and daily recovery at the Rec Center.">
-  <script>
-    // Extract the current path dynamically from the URL
-    const currentPath = window.location.pathname;
-    
-    // Immediate redirect to the main app with the moment URL (preserve hash)
-    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
-    window.location.replace(redirectUrl);
-  </script>
+  <script src="/lib/crawler-redirect.js"></script>
   <!-- Fallback for browsers with JavaScript disabled -->
   <noscript>
     <meta http-equiv="refresh" content="0; url=/">

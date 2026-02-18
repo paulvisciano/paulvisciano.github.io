@@ -25,14 +25,7 @@
   <meta name="twitter:description" content="The official Urban Runner User Manual — a comic-style guide teaching readers how to navigate episodes, swipe through pages, use keyboard shortcuts, and enjoy the full multi-device reading experience.">
   <meta name="twitter:image" content="https://paulvisciano.github.io/moments/ubud/2025-11-13/cover.png">
   <meta name="twitter:image:alt" content="Urban Runner User Manual">
-  <script>
-    // Extract the current path dynamically from the URL
-    const currentPath = window.location.pathname;
-    
-    // Immediate redirect to the main app with the moment URL (preserve hash)
-    const redirectUrl = `/?path=${currentPath}${window.location.hash}`;
-    window.location.replace(redirectUrl);
-  </script>
+  <script src="/lib/crawler-redirect.js"></script>
   <!-- Fallback for browsers with JavaScript disabled -->
   <noscript>
     <meta http-equiv="refresh" content="0; url=/">

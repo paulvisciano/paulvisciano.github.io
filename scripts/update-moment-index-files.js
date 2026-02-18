@@ -42,7 +42,9 @@ function convertImageUrl(imagePath, currentPath) {
 function generateEpisodeHtml(episode, momentPath) {
   const title = episode ? (episode.title || 'Where is Paul?') : 'Where is Paul?';
   const description = episode ? (episode.snippet || episode.caption || 'Explore my travel adventures and Urban Runner episodes') : 'Explore my travel adventures and Urban Runner episodes';
-  const imageUrl = episode && episode.image ? convertImageUrl(episode.image, momentPath) : null;
+  // Prefer cover (comic) over image for og:image
+  const imageSource = episode && (episode.cover || episode.image) ? (episode.cover || episode.image) : null;
+  const imageUrl = imageSource ? convertImageUrl(imageSource, momentPath) : null;
   const siteName = 'Where is Paul?';
   const fullUrl = baseUrl + momentPath;
 
@@ -87,14 +89,7 @@ function generateEpisodeHtml(episode, momentPath) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(title)}</title>
   <link rel="canonical" href="${fullUrl}">${metaTags}
-  <script>
-    // Extract the current path dynamically from the URL
-    const currentPath = window.location.pathname;
-    
-    // Immediate redirect to the main app with the moment URL (preserve hash)
-    const redirectUrl = \`/?path=\${currentPath}\${window.location.hash}\`;
-    window.location.replace(redirectUrl);
-  </script>
+  <script src="/lib/crawler-redirect.js"></script>
   <!-- Fallback for browsers with JavaScript disabled -->
   <noscript>
     <meta http-equiv="refresh" content="0; url=/">
