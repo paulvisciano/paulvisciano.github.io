@@ -614,6 +614,10 @@ window.ComicReader = ({ content, onClose }) => {
       currentPageRef.current = 1;
       setIsLoading(false);
       setFlipbookReady(true);
+      // Mobile/tablet: auto fullscreen so video and pages take up entire screen
+      if ((isMobile || isTablet) && overlayRef.current && !document.fullscreenElement) {
+        overlayRef.current.requestFullscreen({ navigationUI: 'hide' }).then(() => setIsFullscreen(true)).catch(() => {});
+      }
       return;
     }
     if (isCharacterComicBook) {
@@ -1182,6 +1186,52 @@ window.ComicReader = ({ content, onClose }) => {
   
   // Cover overlay (sibling of comic-episode-container for all devices)
   const overlayChildren = [containerElement];
+
+  // V4 comics: force landscape on mobile/tablet portrait — show overlay after user opens comic (pages view)
+  const showRotateOverlay = (isMobile || isTablet) && orientation === 'portrait' && isV4Episode && !showCover;
+  if (showRotateOverlay) {
+    overlayChildren.push(React.createElement('div', {
+      key: 'rotate-to-landscape',
+      style: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(0,0,0,0.95)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '24px',
+        padding: '24px',
+        zIndex: 100,
+        pointerEvents: 'auto'
+      }
+    }, [
+      React.createElement('div', {
+        key: 'icon',
+        style: {
+          width: 64,
+          height: 64,
+          opacity: 0.9
+        },
+        dangerouslySetInnerHTML: {
+          __html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 12h20"/><path d="M12 4v16"/></svg>'
+        }
+      }),
+      React.createElement('div', {
+        key: 'text',
+        style: {
+          color: '#fff',
+          fontSize: '1.1rem',
+          textAlign: 'center',
+          lineHeight: 1.5,
+          maxWidth: 280
+        }
+      }, 'Rotate your device to landscape for the best experience')
+    ]));
+  }
   
   // Header buttons (close and fullscreen) - outside container so they don't slide
   if (renderHeaderButtons) {
