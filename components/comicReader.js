@@ -660,7 +660,33 @@ window.ComicReader = ({ content, onClose }) => {
     }
   };
 
-
+  // Android back button: same behavior as Escape/exit - fullscreen→exit, pages→cover, cover→close
+  const backButtonStateRef = React.useRef({ showCover, episodeData, goBackToCover, handleClose: onClose });
+  backButtonStateRef.current = { showCover, episodeData, goBackToCover, handleClose: onClose };
+  React.useEffect(() => {
+    if (!isMobile && !isTablet) return; // Back button only on mobile/tablet (Android)
+    const handlePopState = () => {
+      if (!overlayRef.current) return;
+      const { showCover: showCoverVal, episodeData: episodeDataVal, goBackToCover: goBack, handleClose: close } = backButtonStateRef.current;
+      if (document.fullscreenElement) {
+        window.comicConsumedBack = true;
+        const url = (episodeDataVal?.fullLink || window.location.pathname || '/') + (window.location.hash || '');
+        const state = episodeDataVal ? { momentId: episodeDataVal.id } : {};
+        window.history.pushState(state, '', url);
+        document.exitFullscreen().then(() => setIsFullscreen(false));
+      } else if (!showCoverVal) {
+        window.comicConsumedBack = true;
+        const url = (episodeDataVal?.fullLink || window.location.pathname || '/') + (window.location.hash || '');
+        const state = episodeDataVal ? { momentId: episodeDataVal.id } : {};
+        window.history.pushState(state, '', url);
+        if (goBack) goBack();
+      } else {
+        if (close) close();
+      }
+    };
+    window.addEventListener('popstate', handlePopState, true);
+    return () => window.removeEventListener('popstate', handlePopState, true);
+  }, [isMobile, isTablet]);
 
   const createFlipbook = (startPage = 1) => {
     if (!flipbookRef.current || !episodeData || !createFlipbookUtil) {

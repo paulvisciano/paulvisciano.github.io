@@ -457,6 +457,11 @@ window.App = () => {
   // Listen for popstate events (back/forward navigation)
   React.useEffect(() => {
     const handlePopState = (event) => {
+      // Comic reader consumed back (exit fullscreen or go back to cover on Android)
+      if (window.comicConsumedBack) {
+        window.comicConsumedBack = false;
+        return;
+      }
       const state = event.state || {};
       const momentId = state.momentId;
       const moment = momentId ? window.momentsInTime.find(m => m.id === momentId) : null;
