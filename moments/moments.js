@@ -1726,11 +1726,43 @@ window.momentsInTime = [
       "vietnam",
       "arrival",
       "new chapter",
-      "urban runner"
+      "urban runner",
+      "episode"
     ],
     snippet:
       "Flew from Manila to Da Nang on January 30th. Stayed through February 9th — exploring the mountains, meditating on misty peaks, then heading to Ho Chi Minh early.",
-    fullLink: "#",
+    fullLink: "/moments/da-nang/2026-01-30/",
+    isComic: true,
+    comicReaderVersion: 4,
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/cover.png",
+    // R2 video pages (7 pages total)
+    pages: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/1.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/2.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/3.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/4.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/5.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/6.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/7.mp4"
+    ],
+    pagesLandscape: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/1.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/2.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/3.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/4.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/5.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/6.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/7.mp4"
+    ],
+    pagesPortrait: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/1.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/2.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/3.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/4.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/5.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/6.mp4",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/da-nang/2026-01-30/7.mp4"
+    ],
     location: { lat: 16.0544, lng: 108.2022, name: "Da Nang, Vietnam" },
     stayDuration: 10, // Jan 30 → Feb 9
     formattedDuration: formatDuration(10),

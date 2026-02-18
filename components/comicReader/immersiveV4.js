@@ -50,7 +50,7 @@
   };
   const PLAY_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><path fill="white" d="M8 5v14l11-7z"/></svg>';
   const PAUSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>';
-  const AUTO_PLAY_DELAY_MS = 150; // Brief delay for slide to settle; videos auto-play when landing on a video slide
+  const AUTO_PLAY_DELAY_MS = 3000; // Pause a few seconds so user can read the page before video plays
 
   const videoLoadingOverlayStyle = {
     position: 'absolute',
