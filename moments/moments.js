@@ -929,6 +929,7 @@ window.momentsInTime = [
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/KJ.png",
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/ThaiDragon.png"
     ],
+    pageSlugs: ["paul", "greta", "brother", "wellington", "leo", "mo", "zacharias", "sandro", "wouter", "boy", "sean", "hallie", "leigha", "jeandel", "maria", "august", "kj", "thai-dragon"],
     pageCount: 18,
     location: { lat: -8.5069, lng: 115.2625, name: "Ubud, Bali" },
     stayDuration: 1,
@@ -1912,7 +1913,7 @@ window.momentsInTime = [
     ],
     snippet:
       "Flying to Bangkok on February 19th. Originally planned to meet Leo, Sean, and crew, but Khan decided to head back to Chicago. Now it's just me and Boy — staying through end of February. Territory Reclaimed: The booking mistake forced a month in Bangkok (Feb 20 → Mar 28). Mission: ankle recovery + back-to-back volleyball.",
-    fullLink: "/projects/urban-runner/memories/bangkok/2026-02-20/",
+    fullLink: "/moments/bangkok/2026-02-20/",
     isComic: true,
     comicReaderVersion: 4,
     cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/00-cover.jpg",
@@ -1921,6 +1922,7 @@ window.momentsInTime = [
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/02-touchdown.jpg",
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/03-ankle-rebuild.jpg"
     ],
+    pageSlugs: ["the-bangkok-mistake", "touchdown", "ankle-rebuild"],
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
     stayDuration: 37, // Feb 19 → Mar 28 (updated to full stay)
     formattedDuration: formatDuration(37),

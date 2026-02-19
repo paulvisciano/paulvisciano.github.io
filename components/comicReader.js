@@ -466,7 +466,7 @@ window.ComicReader = ({ content, onClose }) => {
     
     const isV4 = episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true;
     const isCharBook = episodeData.id === 'characters-comic-book';
-    const slideFromHash = parseSlideFromHash && parseSlideFromHash();
+    const slideFromHash = parseSlideFromHash && parseSlideFromHash(episodeData);
     
     if ((isV4 || isCharBook) && slideFromHash != null && slideFromHash >= 1) {
       const pages = coreGetPages ? coreGetPages(episodeData) : [];
@@ -566,11 +566,13 @@ window.ComicReader = ({ content, onClose }) => {
     };
   }, [showCover]);
 
-  // Update URL hash when character comic page changes
+  // Update URL hash when page changes (character comic or V4 with pageSlugs)
   React.useEffect(() => {
-    if (!isCharacterComicBook || showCover || !updateUrlForSlide || !episodeData) return;
+    if (showCover || !updateUrlForSlide || !episodeData) return;
+    const isV4 = episodeData.comicReaderVersion === 4 || episodeData.immersiveComic === true;
+    if (!isCharacterComicBook && !isV4) return;
     const basePath = (episodeData.fullLink || '').replace(/\/$/, '') + '/';
-    updateUrlForSlide(basePath, currentPage - 1);
+    updateUrlForSlide(basePath, currentPage - 1, episodeData);
   }, [isCharacterComicBook, showCover, currentPage, episodeData]);
 
   // Preload next 2 pages' videos in character comic so they're ready when user navigates
@@ -582,11 +584,11 @@ window.ComicReader = ({ content, onClose }) => {
     if (preload) preload(pages, currentPage);
   }, [isCharacterComicBook, showCover, currentPage, episodeData]);
 
-  // Sync currentPage from URL hash when navigating to #slide-1, #slide-2, etc. (character comic)
+  // Sync currentPage from URL hash when navigating to #slug, #slide-N, #page-N (character comic / V4)
   React.useEffect(() => {
     if (!isCharacterComicBook || showCover || !episodeData || !parseSlideFromHash) return;
     const syncFromHash = () => {
-      const slideFromHash = parseSlideFromHash();
+      const slideFromHash = parseSlideFromHash(episodeData);
       if (slideFromHash != null && slideFromHash >= 1) {
         const pages = coreGetPages ? coreGetPages(episodeData) : [];
         const slideIndex = Math.min(slideFromHash, pages.length);
@@ -1132,7 +1134,7 @@ window.ComicReader = ({ content, onClose }) => {
       onSlidesSwitchingChange: setIsSlidesSwitching,
       onTapToShowControls: () => setShowMobileControls(true),
       initialSlideIndex: initialSlideIndex ?? 0,
-      onSlideChange: updateUrlForSlide ? (slideIndex0) => updateUrlForSlide(basePath, slideIndex0) : undefined
+      onSlideChange: updateUrlForSlide ? (slideIndex0) => updateUrlForSlide(basePath, slideIndex0, episodeData) : undefined
     }));
   }
 

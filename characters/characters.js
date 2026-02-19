@@ -302,15 +302,14 @@ window.characters = [
   }
 ];
 
+const charactersWithPages = window.characters.filter(c => !!c.pageImage);
 window.characterComicBook = {
   id: "characters-comic-book",
   title: "Character Bible",
   description: "Meet all the characters in Paul's life story",
   cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/characters/cover.png",
   fullLink: "/characters/",
-  pages: window.characters
-    .filter(c => !!c.pageImage) // Only include characters with a defined image
-    .map((c, i) => ({
+  pages: charactersWithPages.map((c, i) => ({
     number: i + 1,
     character: c.id,
     image: c.pageImage,
@@ -321,5 +320,6 @@ window.characterComicBook = {
     name: c.name,
     role: c.role
   })),
+  pageSlugs: charactersWithPages.map(c => c.id),
   isComic: true
 };

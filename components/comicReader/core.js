@@ -23,24 +23,39 @@ const updateGlobalState = (updates) => {
 const getGlobalState = () => window.ComicReaderState;
 
 /**
- * Parse slide index from URL hash (#slide-N, 1-based).
+ * Parse slide index from URL hash.
+ * Supports: #slug (when episodeData.pageSlugs is set), #slide-N, #page-N (1-based).
  * Returns 1-based slide number or null if invalid/absent.
+ * @param {object} [episodeData] - optional; if pageSlugs array present, hash is treated as slug
  */
-const parseSlideFromHash = () => {
+const parseSlideFromHash = (episodeData) => {
   if (typeof window === 'undefined') return null;
   const hash = window.location.hash;
-  const m = hash && hash.match(/^#slide-(\d+)$/);
+  if (!hash || hash === '#') return null;
+  const slug = hash.slice(1); // without #
+  if (episodeData?.pageSlugs && Array.isArray(episodeData.pageSlugs)) {
+    const idx = episodeData.pageSlugs.indexOf(slug);
+    if (idx >= 0) return idx + 1; // 1-based
+  }
+  const m = hash.match(/^#(?:slide|page)-(\d+)$/);
   return m ? parseInt(m[1], 10) : null;
 };
 
 /**
  * Update URL to reflect current slide (uses replaceState to avoid history pollution).
+ * Uses #slug when episodeData.pageSlugs is set, else #page-N.
  * @param {string} basePath - e.g. /moments/miami/2025-10-06/
  * @param {number} slideIndex - 0-based slide index
+ * @param {object} [episodeData] - optional; if pageSlugs array present, hash is set to slug
  */
-const updateUrlForSlide = (basePath, slideIndex) => {
+const updateUrlForSlide = (basePath, slideIndex, episodeData) => {
   if (typeof window === 'undefined') return;
-  const newHash = `#slide-${slideIndex + 1}`; // 1-based for readability
+  let newHash;
+  if (episodeData?.pageSlugs && Array.isArray(episodeData.pageSlugs) && slideIndex >= 0 && slideIndex < episodeData.pageSlugs.length) {
+    newHash = '#' + episodeData.pageSlugs[slideIndex];
+  } else {
+    newHash = '#page-' + (slideIndex + 1); // 1-based fallback
+  }
   const newUrl = basePath.replace(/#.*$/, '') + newHash;
   window.history.replaceState(
     { ...(window.history.state || {}), slideIndex: slideIndex + 1 },
