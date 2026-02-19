@@ -1904,14 +1904,27 @@ window.momentsInTime = [
       "thailand",
       "crew",
       "urban runner",
-      "extended stay"
+      "extended stay",
+      "comic",
+      "recovery",
+      "volleyball",
+      "ankle-rebuild"
     ],
     snippet:
-      "Flying to Bangkok on February 19th. Originally planned to meet Leo, Sean, and crew, but Khan decided to head back to Chicago. Now it's just me and Boy — staying through end of February.",
-    fullLink: "#",
+      "Flying to Bangkok on February 19th. Originally planned to meet Leo, Sean, and crew, but Khan decided to head back to Chicago. Now it's just me and Boy — staying through end of February. Territory Reclaimed: The booking mistake forced a month in Bangkok (Feb 20 → Mar 28). Mission: ankle recovery + back-to-back volleyball.",
+    fullLink: "/projects/urban-runner/memories/bangkok/2026-02-20/",
+    isComic: true,
+    comicReaderVersion: 4,
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/00-cover.jpg",
+    pages: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/01-the-bangkok-mistake.jpg",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/02-touchdown.jpg",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/projects/urban-runner/memories/bangkok/2026-02-20/images/03-ankle-rebuild.jpg"
+    ],
     location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
-    stayDuration: 9, // Feb 19 → Feb 28
-    formattedDuration: formatDuration(9),
+    stayDuration: 37, // Feb 19 → Mar 28 (updated to full stay)
+    formattedDuration: formatDuration(37),
+    pageCount: 3,
   }
 
 ].sort((a, b) => a.date - b.date);
