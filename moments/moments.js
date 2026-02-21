@@ -1949,6 +1949,26 @@ window.momentsInTime = [
     stayDuration: 1,
     formattedDuration: formatDuration(1),
     pageCount: 4,
+  },
+  {
+    id: "bangkok-2026-02-21-part-2",
+    title: "Return to Bangkok — Part 2 (Reset & Ritual)",
+    date: new Date("2026-02-21T18:00:00Z"),
+    timelineHighlight: "Sunset Reflection",
+    tags: ["urban runner", "bangkok", "sunset", "reflection", "ritual", "boy", "friendship", "memories mapped"],
+    snippet: "Brain worked all morning. Body explored all day. Now—reset. Different paths. Same frequency. Mapped in the morning. Shared at sunset. Lived at night.",
+    fullLink: "/moments/bangkok/2026-02-21-part-2/",
+    isComic: true,
+    comicReaderVersion: 4,
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-21-part-2/01-reset.jpg",
+    pages: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-21-part-2/01-reset.jpg"
+    ],
+    pageSlugs: ["reset"],
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+    pageCount: 1,
   }
 
 ].sort((a, b) => a.date - b.date);
