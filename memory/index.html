@@ -12,6 +12,7 @@
         }
         canvas { 
             display: block; 
+            margin-left: 240px;
             background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
             filter: brightness(1.1);
         }
@@ -27,6 +28,7 @@
             font-size: 11px; 
             overflow-y: auto;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+            z-index: 10;
         }
         h3 { 
             margin: 18px 0 10px 0; 
@@ -77,14 +79,29 @@
         <button onclick="walk()" style="margin-top: 20px;">⚡ Random Pulse</button>
         <button onclick="reset()">↻ Reset Mind</button>
         
-        <h3 style="margin-top: 25px;">Memory Clusters</h3>
-        <p style="font-size: 10px; line-height: 1.8;">
-            <span style="color: #00ffff;">● Activities</span><br>
-            <span style="color: #ff00aa;">● Connections</span><br>
-            <span style="color: #00ff88;">● Locations</span><br>
-            <span style="color: #ffaa00;">● Moments</span><br>
-            <span style="color: #aa00ff;">● Feelings</span>
-        </p>
+        <h3 style="margin-top: 25px;">Legend</h3>
+        <div style="font-size: 10px; line-height: 2.2; margin-top: 12px;">
+            <div style="display: flex; align-items: center; margin: 6px 0;">
+                <div style="width: 12px; height: 12px; background: #00ffff; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #00ffff;"></div>
+                <span style="color: #00ffff;">Activities</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 6px 0;">
+                <div style="width: 12px; height: 12px; background: #ff00aa; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #ff00aa;"></div>
+                <span style="color: #ff00aa;">People</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 6px 0;">
+                <div style="width: 12px; height: 12px; background: #00ff88; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #00ff88;"></div>
+                <span style="color: #00ff88;">Locations</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 6px 0;">
+                <div style="width: 12px; height: 12px; background: #ffaa00; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #ffaa00;"></div>
+                <span style="color: #ffaa00;">Temporal</span>
+            </div>
+            <div style="display: flex; align-items: center; margin: 6px 0;">
+                <div style="width: 12px; height: 12px; background: #aa00ff; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #aa00ff;"></div>
+                <span style="color: #aa00ff;">Emotions</span>
+            </div>
+        </div>
     </div>
     <canvas id="canvas"></canvas>
 
@@ -149,43 +166,11 @@
         }
 
         function step() {
-            for (let i = 0; i < nodes.length; i++) {
-                nodes[i].vx *= 0.95;
-                nodes[i].vy *= 0.95;
-                nodes[i].vz *= 0.95;
-
-                for (let j = i+1; j < nodes.length; j++) {
-                    const dx = nodes[j].x - nodes[i].x;
-                    const dy = nodes[j].y - nodes[i].y;
-                    const dz = nodes[j].z - nodes[i].z;
-                    const d = Math.sqrt(dx*dx + dy*dy + dz*dz) + 1;
-                    const f = 50 / (d * d);
-                    nodes[i].vx -= f * dx / d;
-                    nodes[i].vy -= f * dy / d;
-                    nodes[i].vz -= f * dz / d;
-                    nodes[j].vx += f * dx / d;
-                    nodes[j].vy += f * dy / d;
-                    nodes[j].vz += f * dz / d;
-                }
-            }
-
-            edges.forEach(e => {
-                const n1 = nodes[e.from];
-                const n2 = nodes[e.to];
-                const dx = n2.x - n1.x;
-                const dy = n2.y - n1.y;
-                const dz = n2.z - n1.z;
-                const d = Math.sqrt(dx*dx + dy*dy + dz*dz) || 1;
-                const f = 0.014 * e.weight;
-                n1.vx += f * dx / d;
-                n1.vy += f * dy / d;
-                n1.vz += f * dz / d;
-            });
-
+            // Kill all movement - nodes stay in place
             nodes.forEach(n => {
-                n.x += n.vx;
-                n.y += n.vy;
-                n.z += n.vz;
+                n.vx = 0;
+                n.vy = 0;
+                n.vz = 0;
             });
         }
 
@@ -336,8 +321,8 @@
 
         canvas.addEventListener('wheel', e => {
             e.preventDefault();
-            camera.dist += e.deltaY * 0.3;
-            camera.dist = Math.max(150, Math.min(950, camera.dist));
+            camera.dist += e.deltaY * 2.5;
+            camera.dist = Math.max(80, Math.min(1500, camera.dist));
         });
 
         let drag = null;
