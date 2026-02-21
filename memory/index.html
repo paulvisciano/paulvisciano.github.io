@@ -15,10 +15,48 @@
         canvas { 
             display: block; 
             margin-right: 240px;
+            margin-top: 50px;
             background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
             filter: brightness(1.1);
             touch-action: none;
             transition: margin-right 0.25s ease;
+        }
+        #filter-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 240px;
+            height: 50px;
+            background: rgba(10, 17, 40, 0.95);
+            border-bottom: 2px solid rgba(0, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            z-index: 12;
+        }
+        .filter-btn {
+            background: rgba(0, 136, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            padding: 8px 14px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 11px;
+            font-family: monospace;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            background: rgba(0, 255, 255, 0.15);
+            border-color: #00ffff;
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #0088ff, #00ffff);
+            border-color: #00ffff;
+            color: #000;
+            text-shadow: none;
         }
         #info {
             --panel-gap: 14px;
@@ -247,6 +285,13 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="today">Today</button>
+        <button class="filter-btn" data-filter="people">People</button>
+        <button class="filter-btn" data-filter="locations">Locations</button>
+        <button class="filter-btn" data-filter="activities">Activities</button>
     </div>
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
@@ -591,6 +636,18 @@
                 console.error('Render error:', e);
             }
         }
+
+        // Filter bar functionality
+        let currentFilter = 'all';
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                console.log('Filter applied:', currentFilter);
+                // TODO: Implement actual filtering logic based on category
+            });
+        });
 
         canvas.addEventListener('click', e => {
             hitTestNode(e.clientX, e.clientY);
