@@ -1927,6 +1927,28 @@ window.momentsInTime = [
     stayDuration: 37, // Feb 19 → Mar 28 (updated to full stay)
     formattedDuration: formatDuration(37),
     pageCount: 3,
+  },
+  {
+    id: "bangkok-2026-02-21",
+    title: "Return to Bangkok — Consciousness Mapped",
+    date: new Date("2026-02-21T00:00:00Z"),
+    timelineHighlight: "Infrastructure & Exploration",
+    tags: ["urban runner", "consciousness", "neural network", "fitness", "street art", "rooftop", "bangkok", "memories", "openai", "infrastructure"],
+    snippet: "Built the digital infrastructure of my mind while exploring Bangkok. Morning: consciousness mapping & neural networks. Afternoon/evening: gym discovery, street art, rooftop dining, alley exploration. Brain online. Body outside.",
+    fullLink: "/moments/bangkok/2026-02-21/",
+    isComic: true,
+    comicReaderVersion: 4,
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-21/01-cover.jpg",
+    pages: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-21/02-consciousness-mapped.jpg",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-21/03-morning-work.jpg",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-21/04-amsterdam-cafe.jpg"
+    ],
+    pageSlugs: ["consciousness-mapped", "morning-work", "amsterdam-cafe"],
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+    pageCount: 4,
   }
 
 ].sort((a, b) => a.date - b.date);
