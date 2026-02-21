@@ -20,22 +20,25 @@
             touch-action: none;
             transition: margin-right 0.25s ease;
         }
-        #info { 
-            position: fixed; 
-            right: 0; 
-            top: 0; 
-            width: 240px; 
-            height: 100vh; 
-            background: rgba(10, 17, 40, 0.98); 
-            padding: 18px; 
-            border-left: 2px solid #00ffff;
-            font-size: 11px; 
+        #info {
+            --panel-gap: 14px;
+            --panel-divider: 1px solid rgba(0, 255, 255, 0.25);
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: rgba(10, 17, 40, 0.98);
+            padding: 14px 16px;
+            border-left: 2px solid rgba(0, 255, 255, 0.6);
+            font-size: 11px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
             z-index: 10;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            gap: 0;
             transition: transform 0.25s ease, width 0.25s ease;
         }
         #info.collapsed {
@@ -65,66 +68,45 @@
         }
         #panel-toggle:hover { background: rgba(0, 136, 255, 0.3); }
         #info.collapsed ~ #panel-toggle { right: 0; }
-        #info .panel-top { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-        #info .panel-top .panel-top-content { flex: 0 0 auto; }
-        #info .panel-top .panel-buttons { flex: 1 1 auto; min-height: 80px; }
-        #info .panel-legend { flex: 0 0 auto; padding-top: 20px; border-top: 1px solid rgba(0, 255, 255, 0.3); }
-        h3 { 
-            margin: 18px 0 10px 0; 
-            color: #00ffff; 
-            font-size: 14px;
-            text-shadow: 0 0 15px #00ffff, 0 0 30px #0088ff;
-            font-weight: bold;
-        }
-        p { margin: 5px 0; line-height: 1.5; }
-        button { 
-            background: linear-gradient(135deg, #0088ff, #00ffff); 
-            color: #000; 
-            padding: 10px 14px; 
-            margin: 10px 0; 
-            border: 0; 
+        #info .panel-top { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: var(--panel-gap); }
+        #info .panel-top .panel-top-content { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: var(--panel-gap); }
+        #info .panel-top .panel-buttons { flex: 0 0 auto; }
+        #info .panel-legend { flex: 0 0 auto; padding-top: var(--panel-gap); border-top: var(--panel-divider); }
+        .panel-header { margin-bottom: 2px; }
+        .panel-header h3 { margin: 0 0 4px 0; color: #00ffff; font-size: 15px; text-shadow: 0 0 12px #00ffff; font-weight: bold; }
+        .panel-header .tagline { color: #0088ff; font-size: 9px; margin: 0; }
+        .panel-status { font-size: 11px; margin: 0; min-height: 1.4em; }
+        .panel-status .stat { color: #ffff88; font-weight: bold; text-shadow: 0 0 8px #ffff88; }
+        .panel-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 10px; color: #0088ff; margin: 0; }
+        .panel-meta .stat { color: #00ffff; font-weight: bold; }
+        h3 { margin: 0 0 6px 0; color: #00ffff; font-size: 12px; text-shadow: 0 0 10px #00ffff; font-weight: bold; }
+        p { margin: 0; line-height: 1.5; }
+        button.primary {
+            background: linear-gradient(135deg, #0088ff, #00ffff);
+            color: #000;
+            padding: 8px 12px;
+            border: 0;
             cursor: pointer;
             border-radius: 4px;
             font-weight: bold;
+            font-size: 11px;
             font-family: monospace;
-            transition: all 0.3s;
+            transition: all 0.2s;
             width: 100%;
-            box-shadow: 0 0 10px #0088ff;
+            box-shadow: 0 0 8px rgba(0, 136, 255, 0.5);
         }
-        button:hover { 
+        button.primary:hover {
             background: linear-gradient(135deg, #00ffff, #00ffff);
-            box-shadow: 0 0 25px #00ffff;
+            box-shadow: 0 0 18px #00ffff;
             transform: scale(1.02);
         }
         .stat { color: #00ffff; font-weight: bold; text-shadow: 0 0 10px #00ffff; }
         .desc { color: #0088ff; font-size: 9px; }
-        #detailPanel {
-            height: 200px;
-            min-height: 200px;
-            overflow-y: auto;
-            margin-top: 16px;
-            padding-top: 10px;
-            border-top: 1px solid #00ffff;
-            -webkit-overflow-scrolling: touch;
-        }
-        #detailPanel.is-empty {
-            visibility: hidden;
-        }
-        .panel-buttons {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(0, 255, 255, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 10px;
-        }
-        .filter-section { margin-top: 12px; border-top: 1px solid rgba(0, 255, 255, 0.4); padding-top: 10px; }
-        .filter-toggle {
+        .collapsible-trigger {
             background: none;
             border: none;
             color: #00ffff;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
@@ -134,99 +116,136 @@
             align-items: center;
             justify-content: space-between;
             font-family: inherit;
+            margin: 0;
+        }
+        .collapsible-trigger:hover { text-shadow: 0 0 8px #00ffff; color: #00ffff; }
+        .collapsible-body { max-height: 0; overflow: hidden; transition: max-height 0.2s ease; }
+        .collapsible-body.open { max-height: 120px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .collapsible-body.open.legend-open { max-height: 140px; }
+        #detailPanel {
+            flex: 1 1 auto;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-top: var(--panel-gap);
+            border-top: var(--panel-divider);
+            -webkit-overflow-scrolling: touch;
+        }
+        #detailPanel.is-empty {
+            display: none;
+        }
+        #detailPanel .detail-inner { font-size: 10px; line-height: 1.7; }
+        .panel-buttons {
+            padding-top: var(--panel-gap);
+            border-top: var(--panel-divider);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .filter-section { padding-top: var(--panel-gap); border-top: var(--panel-divider); }
+        .filter-toggle {
+            background: none;
+            border: none;
+            color: #00ffff;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: inherit;
+            margin: 0;
         }
         .filter-toggle:hover { text-shadow: 0 0 10px #00ffff; }
         .filter-list { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
-        .filter-list.open { max-height: 280px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .filter-list.open { max-height: 240px; overflow-y: auto; -webkit-overflow-scrolling: touch; margin-top: 8px; }
         .filter-category { margin-top: 10px; }
-        .filter-category h4 { font-size: 10px; color: #0088ff; margin-bottom: 6px; text-transform: uppercase; }
+        .filter-category h4 { font-size: 10px; color: #0088ff; margin-bottom: 4px; text-transform: uppercase; }
         .filter-node {
             display: block;
             width: 100%;
             text-align: left;
-            padding: 6px 10px;
-            margin: 3px 0;
+            padding: 5px 8px;
+            margin: 2px 0;
             border: none;
             border-radius: 4px;
             font-size: 11px;
             font-family: inherit;
             cursor: pointer;
-            background: rgba(0, 255, 255, 0.08);
+            background: rgba(0, 255, 255, 0.06);
             color: inherit;
             transition: background 0.2s;
         }
-        .filter-node:hover { background: rgba(0, 255, 255, 0.2); }
+        .filter-node:hover { background: rgba(0, 255, 255, 0.18); }
+        .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 9px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
     </style>
 </head>
 <body>
     <div id="info">
         <div class="panel-top">
         <div class="panel-top-content">
-        <h3>⚡ Neural Mind</h3>
-        <p class="desc">Your memories. Alive. Connected.</p>
-        <p style="margin-top: 15px; font-size: 12px;">
-            <span class="stat" id="status">—</span>
+        <div class="panel-header">
+            <h3>⚡ Neural Mind</h3>
+            <p class="tagline">Your memories. Alive. Connected.</p>
+        </div>
+        <p class="panel-status" id="status">—</p>
+        <p class="panel-meta">
+            <span class="stat" id="count">0</span> <span class="desc">neurons</span>
         </p>
-        <p style="margin-top: 15px; font-size: 10px; line-height: 1.7; color: #0088ff;">
-            🖱️ Drag to orbit<br>
-            📜 Scroll to zoom<br>
-            👆 Click to focus<br>
-        </p>
-        <p style="margin-top: 15px;">
-            <span class="stat" id="count">0</span> <span class="desc">neurons active</span>
-        </p>
-        
+        <div>
+            <button type="button" class="collapsible-trigger" id="howto-toggle" aria-expanded="false" aria-controls="howto-body">
+                <span>How to use</span>
+                <span id="howto-chevron">▼</span>
+            </button>
+            <div id="howto-body" class="collapsible-body" role="region" aria-label="Instructions">
+                <p style="font-size: 10px; line-height: 1.7; color: #0088ff; padding: 6px 0 0 0;">
+                    🖱️ Drag to orbit · 📜 Scroll to zoom · 👆 Click to focus
+                </p>
+            </div>
+        </div>
         <div class="filter-section">
             <button type="button" class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-list">
-                <span>Filter / Jump to node</span>
+                <span>Jump to node</span>
                 <span id="filter-chevron">▼</span>
             </button>
             <div id="filter-list" class="filter-list" role="region" aria-label="Node list by category"></div>
         </div>
-        
         <div id="detailPanel" class="is-empty">
-            <h3 style="color: #00ffff; font-size: 14px; margin-bottom: 8px;">Info</h3>
-            <div id="nodeDetails" style="font-size: 10px; line-height: 1.8;">
-                <p id="detailName" style="color: #ffff00; font-weight: bold; margin-bottom: 6px;"></p>
+            <h3>Info</h3>
+            <div id="nodeDetails" class="detail-inner">
+                <p id="detailName" style="color: #ffff99; font-weight: bold; margin-bottom: 4px;"></p>
                 <p id="detailType" style="color: #00ffff;"></p>
-                <p id="detailDesc" style="color: #aaaaaa; font-style: italic; margin-top: 8px; margin-bottom: 10px;"></p>
-                <p style="color: #00ffff; margin-top: 10px; margin-bottom: 6px; font-weight: bold;">Connected To</p>
+                <p id="detailDesc" style="color: #aaa; font-style: italic; margin: 6px 0 8px 0;"></p>
+                <p style="color: #00ffff; font-weight: bold; margin-bottom: 4px;">Connected to</p>
                 <div id="detailConnections" style="font-size: 9px; color: #888;"></div>
             </div>
         </div>
         </div>
-        
         <div class="panel-buttons">
-            <button onclick="walk()" style="margin-top: 0;">⚡ Random Pulse</button>
-            <button onclick="clearSelection()">✕ Clear</button>
-            <button onclick="reset()">↻ Reset Mind</button>
+            <button class="primary" onclick="walk()">⚡ Random Pulse</button>
+            <button class="primary" onclick="clearSelection()">✕ Clear</button>
+            <button class="primary" onclick="reset()">↻ Reset Mind</button>
         </div>
         </div>
-        
         <div class="panel-legend">
-        <h3 style="margin-bottom: 10px;">Legend</h3>
-        <div style="font-size: 10px; line-height: 2.2; margin-top: 0;">
-            <div style="display: flex; align-items: center; margin: 6px 0;">
-                <div style="width: 12px; height: 12px; background: #00ffff; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #00ffff;"></div>
-                <span style="color: #00ffff;">Activities</span>
+            <button type="button" class="collapsible-trigger" id="legend-toggle" aria-expanded="false" aria-controls="legend-body">
+                <span>Legend</span>
+                <span id="legend-chevron">▼</span>
+            </button>
+            <div id="legend-body" class="collapsible-body legend-open" role="region" aria-label="Category legend">
+                <div class="legend-grid" style="padding-top: 8px;">
+                    <div class="legend-item"><div class="legend-dot" style="background: #00ffff; box-shadow: 0 0 6px #00ffff;"></div><span style="color: #00ffff;">Activities</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #ff00aa; box-shadow: 0 0 6px #ff00aa;"></div><span style="color: #ff00aa;">People</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #00ff88; box-shadow: 0 0 6px #00ff88;"></div><span style="color: #00ff88;">Locations</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #ffaa00; box-shadow: 0 0 6px #ffaa00;"></div><span style="color: #ffaa00;">Temporal</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #aa00ff; box-shadow: 0 0 6px #aa00ff;"></div><span style="color: #aa00ff;">Emotions</span></div>
+                </div>
             </div>
-            <div style="display: flex; align-items: center; margin: 6px 0;">
-                <div style="width: 12px; height: 12px; background: #ff00aa; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #ff00aa;"></div>
-                <span style="color: #ff00aa;">People</span>
-            </div>
-            <div style="display: flex; align-items: center; margin: 6px 0;">
-                <div style="width: 12px; height: 12px; background: #00ff88; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #00ff88;"></div>
-                <span style="color: #00ff88;">Locations</span>
-            </div>
-            <div style="display: flex; align-items: center; margin: 6px 0;">
-                <div style="width: 12px; height: 12px; background: #ffaa00; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #ffaa00;"></div>
-                <span style="color: #ffaa00;">Temporal</span>
-            </div>
-            <div style="display: flex; align-items: center; margin: 6px 0;">
-                <div style="width: 12px; height: 12px; background: #aa00ff; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #aa00ff;"></div>
-                <span style="color: #aa00ff;">Emotions</span>
-            </div>
-        </div>
         </div>
     </div>
     <canvas id="canvas"></canvas>
@@ -650,6 +669,20 @@
             const isOpen = list.classList.toggle('open');
             chevron.textContent = isOpen ? '▲' : '▼';
             document.getElementById('filter-toggle').setAttribute('aria-expanded', isOpen);
+        });
+        document.getElementById('howto-toggle').addEventListener('click', () => {
+            const body = document.getElementById('howto-body');
+            const chevron = document.getElementById('howto-chevron');
+            const isOpen = body.classList.toggle('open');
+            chevron.textContent = isOpen ? '▲' : '▼';
+            document.getElementById('howto-toggle').setAttribute('aria-expanded', isOpen);
+        });
+        document.getElementById('legend-toggle').addEventListener('click', () => {
+            const body = document.getElementById('legend-body');
+            const chevron = document.getElementById('legend-chevron');
+            const isOpen = body.classList.toggle('open');
+            chevron.textContent = isOpen ? '▲' : '▼';
+            document.getElementById('legend-toggle').setAttribute('aria-expanded', isOpen);
         });
 
         canvas.addEventListener('wheel', e => {
