@@ -122,6 +122,7 @@
         
         <div class="panel-buttons">
             <button onclick="walk()" style="margin-top: 0;">⚡ Random Pulse</button>
+            <button onclick="clearSelection()">✕ Clear</button>
             <button onclick="reset()">↻ Reset Mind</button>
         </div>
         </div>
@@ -451,22 +452,21 @@
             const rect = canvas.getBoundingClientRect();
             const mx = e.clientX - rect.left;
             const my = e.clientY - rect.top;
-            let hit = false;
             for (let n of nodes) {
                 const p = project(n.x, n.y, n.z);
                 const d = Math.hypot(p.x - mx, p.y - my);
                 if (d < n.size * p.scale + 25) {
                     selected = selected === n.id ? null : n.id;
                     showNodeDetails(selected !== null ? nodes[selected] : null);
-                    hit = true;
                     break;
                 }
             }
-            if (!hit) {
-                selected = null;
-                showNodeDetails(null);
-            }
         });
+
+        window.clearSelection = () => {
+            selected = null;
+            showNodeDetails(null);
+        };
         
         function showNodeDetails(node) {
             const panel = document.getElementById('detailPanel');
