@@ -1,0 +1,1696 @@
+[
+  {
+    "source": "paul",
+    "target": "volleyball",
+    "weight": 0.95,
+    "type": "core-activity",
+    "label": "18-year passion, 7+ episodes, flow state"
+  },
+  {
+    "source": "paul",
+    "target": "urban-runner",
+    "weight": 0.92,
+    "type": "core-project",
+    "label": "meta-narrative, 28+ episodes, legacy"
+  },
+  {
+    "source": "paul",
+    "target": "travel",
+    "weight": 0.90,
+    "type": "lifestyle",
+    "label": "9+ months continuous, nomadic"
+  },
+  {
+    "source": "paul",
+    "target": "wouter",
+    "weight": 0.80,
+    "type": "relationship",
+    "label": "adventure brother, 7+ countries, deepest"
+  },
+  {
+    "source": "paul",
+    "target": "khanh",
+    "weight": 0.77,
+    "type": "relationship",
+    "label": "travel buddy, bridge person, mentor"
+  },
+  {
+    "source": "paul",
+    "target": "mom",
+    "weight": 0.78,
+    "type": "relationship",
+    "label": "family anchor, emotional support, home"
+  },
+  {
+    "source": "paul",
+    "target": "leo",
+    "weight": 0.75,
+    "type": "relationship",
+    "label": "co-conspirator, K-FIT partner, crew"
+  },
+  {
+    "source": "paul",
+    "target": "dad",
+    "weight": 0.62,
+    "type": "relationship",
+    "label": "16-year estrangement, reunited, healing"
+  },
+  {
+    "source": "paul",
+    "target": "brother",
+    "weight": 0.68,
+    "type": "relationship",
+    "label": "reconnected, co-conspiraor, shares energy"
+  },
+  {
+    "source": "paul",
+    "target": "work",
+    "weight": 0.72,
+    "type": "activity",
+    "label": "remote engineer, 6h baseline, integrated"
+  },
+  {
+    "source": "paul",
+    "target": "fitness",
+    "weight": 0.77,
+    "type": "activity",
+    "label": "daily routine, 2h, discipline, recovery"
+  },
+  {
+    "source": "paul",
+    "target": "beach-volleyball",
+    "weight": 0.94,
+    "type": "core-activity",
+    "label": "flow state, peak performance"
+  },
+  {
+    "source": "paul",
+    "target": "growth",
+    "weight": 0.87,
+    "type": "emotion",
+    "label": "nomadic arc, discovery, transformation"
+  },
+  {
+    "source": "paul",
+    "target": "mastery",
+    "weight": 0.84,
+    "type": "emotion",
+    "label": "excellence, creative output, leadership"
+  },
+  {
+    "source": "paul",
+    "target": "where-is-paul",
+    "weight": 0.90,
+    "type": "core-project",
+    "label": "legacy, 53 destinations, 10,790 days"
+  },
+  {
+    "source": "paul",
+    "target": "character-bible",
+    "weight": 0.84,
+    "type": "documentation",
+    "label": "18+ characters, narrative framework"
+  },
+  {
+    "source": "paul",
+    "target": "episode-production",
+    "weight": 0.90,
+    "type": "creative-process",
+    "label": "pipeline, daily output, storytelling"
+  },
+  {
+    "source": "paul",
+    "target": "meta-gaming",
+    "weight": 0.88,
+    "type": "philosophy",
+    "label": "aware narrative, intentional story"
+  },
+  {
+    "source": "paul",
+    "target": "authenticity-philosophy",
+    "weight": 0.86,
+    "type": "philosophy",
+    "label": "real + AI blend, honest integration"
+  },
+  {
+    "source": "paul",
+    "target": "wealth-philosophy",
+    "weight": 0.80,
+    "type": "philosophy",
+    "label": "generosity, money flows to people"
+  },
+  {
+    "source": "wouter",
+    "target": "ray",
+    "weight": 0.85,
+    "type": "relationship",
+    "label": "partner, travels together, yoga buddy"
+  },
+  {
+    "source": "wouter",
+    "target": "bangkok",
+    "weight": 0.84,
+    "type": "location-visit",
+    "label": "crew reunion, travel together"
+  },
+  {
+    "source": "wouter",
+    "target": "boracay",
+    "weight": 0.90,
+    "type": "location-visit",
+    "label": "island trip, gym partner, fitness hub"
+  },
+  {
+    "source": "wouter",
+    "target": "yoga",
+    "weight": 0.78,
+    "type": "shared-activity",
+    "label": "hot yoga partner, wellness"
+  },
+  {
+    "source": "wouter",
+    "target": "fitness",
+    "weight": 0.76,
+    "type": "shared-activity",
+    "label": "gym buddy, training partner"
+  },
+  {
+    "source": "wouter",
+    "target": "beach-volleyball",
+    "weight": 0.75,
+    "type": "shared-activity",
+    "label": "volleyball partner, competitive play"
+  },
+  {
+    "source": "wouter",
+    "target": "san-diego",
+    "weight": 0.82,
+    "type": "location-visit",
+    "label": "yoga farewell dinner, work-life model"
+  },
+  {
+    "source": "wouter",
+    "target": "authenticity",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "genuine friendship, depth"
+  },
+  {
+    "source": "wouter",
+    "target": "connection",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "deep bond, traveled continents"
+  },
+  {
+    "source": "wouter",
+    "target": "mastery",
+    "weight": 0.75,
+    "type": "emotion",
+    "label": "athletic excellence, yoga flow"
+  },
+  {
+    "source": "khanh",
+    "target": "ho-chi-minh-city",
+    "weight": 0.94,
+    "type": "location-visit",
+    "label": "expert local guide, home connection"
+  },
+  {
+    "source": "khanh",
+    "target": "honolulu",
+    "weight": 0.82,
+    "type": "location-visit",
+    "label": "connection origin, trainer host, Hawaii"
+  },
+  {
+    "source": "khanh",
+    "target": "fitness",
+    "weight": 0.80,
+    "type": "shared-activity",
+    "label": "mentor, trainer, gym buddy"
+  },
+  {
+    "source": "khanh",
+    "target": "volleyball",
+    "weight": 0.72,
+    "type": "shared-activity",
+    "label": "Hawaii connection, play together"
+  },
+  {
+    "source": "khanh",
+    "target": "southeast-asia",
+    "weight": 0.92,
+    "type": "region",
+    "label": "Vietnam-America bridge expert"
+  },
+  {
+    "source": "khanh",
+    "target": "connection",
+    "weight": 0.84,
+    "type": "emotion",
+    "label": "deep friendship, authentic bond"
+  },
+  {
+    "source": "khanh",
+    "target": "mastery",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "fitness excellence, mentorship"
+  },
+  {
+    "source": "leo",
+    "target": "boy",
+    "weight": 0.92,
+    "type": "relationship",
+    "label": "brothers, crew architects together"
+  },
+  {
+    "source": "leo",
+    "target": "k-fit-vision",
+    "weight": 0.92,
+    "type": "shared-project",
+    "label": "co-visionary, Valencia inspiration"
+  },
+  {
+    "source": "leo",
+    "target": "urban-runner",
+    "weight": 0.78,
+    "type": "shared-project",
+    "label": "K-FIT collaborator, episode subject"
+  },
+  {
+    "source": "leo",
+    "target": "bangkok",
+    "weight": 0.70,
+    "type": "location-visit",
+    "label": "traveled together, crew leadership"
+  },
+  {
+    "source": "leo",
+    "target": "growth",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "co-conspirator transformation"
+  },
+  {
+    "source": "boy",
+    "target": "bangkok",
+    "weight": 0.82,
+    "type": "location-visit",
+    "label": "crew reunion, social catalyst"
+  },
+  {
+    "source": "boy",
+    "target": "ho-chi-minh-city",
+    "weight": 0.78,
+    "type": "location-visit",
+    "label": "recent travel together"
+  },
+  {
+    "source": "boy",
+    "target": "episode-production",
+    "weight": 0.75,
+    "type": "creative-process",
+    "label": "episode subject, crew member"
+  },
+  {
+    "source": "dad",
+    "target": "chicago",
+    "weight": 0.90,
+    "type": "location-visit",
+    "label": "family reunion Oct 2025, healing moment"
+  },
+  {
+    "source": "dad",
+    "target": "connection",
+    "weight": 0.75,
+    "type": "emotion",
+    "label": "emotional reconciliation after 16 years"
+  },
+  {
+    "source": "dad",
+    "target": "growth",
+    "weight": 0.72,
+    "type": "emotion",
+    "label": "family healing arc"
+  },
+  {
+    "source": "brother",
+    "target": "urban-runner",
+    "weight": 0.75,
+    "type": "shared-project",
+    "label": "shares energy, co-conspirator"
+  },
+  {
+    "source": "brother",
+    "target": "growth",
+    "weight": 0.70,
+    "type": "emotion",
+    "label": "reconnection arc"
+  },
+  {
+    "source": "mom",
+    "target": "clearwater",
+    "weight": 0.96,
+    "type": "location-anchor",
+    "label": "home base, central hub"
+  },
+  {
+    "source": "mom",
+    "target": "miami",
+    "weight": 0.82,
+    "type": "location-proximity",
+    "label": "Florida presence, nearby"
+  },
+  {
+    "source": "mom",
+    "target": "fitness",
+    "weight": 0.70,
+    "type": "shared-activity",
+    "label": "spa & pedicures, recovery"
+  },
+  {
+    "source": "mom",
+    "target": "cooking",
+    "weight": 0.72,
+    "type": "shared-activity",
+    "label": "home-cooked meals, care"
+  },
+  {
+    "source": "mom",
+    "target": "restoration",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "recovery time, emotional anchor"
+  },
+  {
+    "source": "mom",
+    "target": "connection",
+    "weight": 0.88,
+    "type": "emotion",
+    "label": "family bond, unconditional love"
+  },
+  {
+    "source": "mom",
+    "target": "renewal",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "reset visits, safe harbor"
+  },
+  {
+    "source": "jeandel",
+    "target": "siargao",
+    "weight": 0.98,
+    "type": "location-visit",
+    "label": "2+ month co-habitation, hub"
+  },
+  {
+    "source": "jeandel",
+    "target": "cooking",
+    "weight": 0.96,
+    "type": "shared-activity",
+    "label": "cooking partner, meals"
+  },
+  {
+    "source": "jeandel",
+    "target": "connection",
+    "weight": 0.92,
+    "type": "emotion",
+    "label": "intimate emotional bond"
+  },
+  {
+    "source": "jeandel",
+    "target": "character-bible",
+    "weight": 0.85,
+    "type": "documentation",
+    "label": "central character profile"
+  },
+  {
+    "source": "jeandel",
+    "target": "vulnerability",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "authentic openness"
+  },
+  {
+    "source": "sean",
+    "target": "ho-chi-minh-city",
+    "weight": 0.84,
+    "type": "location-visit",
+    "label": "travel companion, local guide"
+  },
+  {
+    "source": "sean",
+    "target": "siargao",
+    "weight": 0.82,
+    "type": "location-visit",
+    "label": "anchor friend, local"
+  },
+  {
+    "source": "sean",
+    "target": "episode-production",
+    "weight": 0.70,
+    "type": "creative-process",
+    "label": "episode subject"
+  },
+  {
+    "source": "maria",
+    "target": "manila",
+    "weight": 0.90,
+    "type": "location-visit",
+    "label": "Manila local connection"
+  },
+  {
+    "source": "maria",
+    "target": "cooking",
+    "weight": 0.75,
+    "type": "shared-activity",
+    "label": "food culture, local experience"
+  },
+  {
+    "source": "maria",
+    "target": "character-bible",
+    "weight": 0.78,
+    "type": "documentation",
+    "label": "character profile"
+  },
+  {
+    "source": "divine",
+    "target": "manila",
+    "weight": 0.96,
+    "type": "location-visit",
+    "label": "first in-person meeting"
+  },
+  {
+    "source": "divine",
+    "target": "connection",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "new friendship formation"
+  },
+  {
+    "source": "bartek",
+    "target": "miami",
+    "weight": 0.88,
+    "type": "location-base",
+    "label": "Fort Lauderdale hub, anchor"
+  },
+  {
+    "source": "bartek",
+    "target": "volleyball",
+    "weight": 0.80,
+    "type": "shared-activity",
+    "label": "beach volleyball partner"
+  },
+  {
+    "source": "bartek",
+    "target": "fitness",
+    "weight": 0.78,
+    "type": "shared-activity",
+    "label": "gym buddy, workout partner"
+  },
+  {
+    "source": "bartek",
+    "target": "massage-recovery",
+    "weight": 0.92,
+    "type": "shared-activity",
+    "label": "specialist, recovery expert"
+  },
+  {
+    "source": "bartek",
+    "target": "work",
+    "weight": 0.70,
+    "type": "shared-activity",
+    "label": "OutSystems colleague, work buddy"
+  },
+  {
+    "source": "bartek",
+    "target": "character-bible",
+    "weight": 0.75,
+    "type": "documentation",
+    "label": "character profile, crew anchor"
+  },
+  {
+    "source": "irina",
+    "target": "miami",
+    "weight": 0.88,
+    "type": "location-visit",
+    "label": "South Beach Airbnb roommate"
+  },
+  {
+    "source": "irina",
+    "target": "volleyball",
+    "weight": 0.88,
+    "type": "shared-activity",
+    "label": "athletic community, play partner"
+  },
+  {
+    "source": "irina",
+    "target": "crew-community",
+    "weight": 0.80,
+    "type": "community",
+    "label": "international crew member"
+  },
+  {
+    "source": "danie",
+    "target": "miami",
+    "weight": 0.92,
+    "type": "location-activity",
+    "label": "Ocean Drive courts core"
+  },
+  {
+    "source": "danie",
+    "target": "crew-community",
+    "weight": 0.98,
+    "type": "community",
+    "label": "crew core member"
+  },
+  {
+    "source": "danie",
+    "target": "volleyball",
+    "weight": 0.92,
+    "type": "shared-activity",
+    "label": "AA+ competitive partner"
+  },
+  {
+    "source": "ash",
+    "target": "miami",
+    "weight": 0.92,
+    "type": "location-activity",
+    "label": "Ocean Drive courts hub"
+  },
+  {
+    "source": "ash",
+    "target": "crew-community",
+    "weight": 0.98,
+    "type": "community",
+    "label": "crew core member"
+  },
+  {
+    "source": "ash",
+    "target": "volleyball",
+    "weight": 0.90,
+    "type": "shared-activity",
+    "label": "AA+ player, competitive"
+  },
+  {
+    "source": "cat",
+    "target": "miami",
+    "weight": 0.92,
+    "type": "location-activity",
+    "label": "Ocean Drive courts regular"
+  },
+  {
+    "source": "cat",
+    "target": "crew-community",
+    "weight": 0.98,
+    "type": "community",
+    "label": "crew core member"
+  },
+  {
+    "source": "cat",
+    "target": "volleyball",
+    "weight": 0.90,
+    "type": "shared-activity",
+    "label": "volleyball player, competitor"
+  },
+  {
+    "source": "kj",
+    "target": "miami",
+    "weight": 0.90,
+    "type": "location-activity",
+    "label": "crew community hub"
+  },
+  {
+    "source": "kj",
+    "target": "crew-community",
+    "weight": 0.96,
+    "type": "community",
+    "label": "crew member"
+  },
+  {
+    "source": "kj",
+    "target": "volleyball",
+    "weight": 0.88,
+    "type": "shared-activity",
+    "label": "volleyball partner"
+  },
+  {
+    "source": "welli",
+    "target": "st-petersburg",
+    "weight": 0.92,
+    "type": "location-base",
+    "label": "Tampa connection, crew hub"
+  },
+  {
+    "source": "welli",
+    "target": "nightlife-exploration",
+    "weight": 0.85,
+    "type": "shared-activity",
+    "label": "goth clubs, late-night"
+  },
+  {
+    "source": "welli",
+    "target": "connection",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "friendship milestones"
+  },
+  {
+    "source": "leigha",
+    "target": "st-petersburg",
+    "weight": 0.92,
+    "type": "location-base",
+    "label": "Tampa connection, crew hub"
+  },
+  {
+    "source": "leigha",
+    "target": "nightlife-exploration",
+    "weight": 0.85,
+    "type": "shared-activity",
+    "label": "goth clubs, cultural exploration"
+  },
+  {
+    "source": "leigha",
+    "target": "connection",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "friendship depth"
+  },
+  {
+    "source": "ray",
+    "target": "yoga",
+    "weight": 0.88,
+    "type": "shared-activity",
+    "label": "hot yoga partner with Paul"
+  },
+  {
+    "source": "ray",
+    "target": "san-diego",
+    "weight": 0.80,
+    "type": "location-visit",
+    "label": "work-life balance model location"
+  },
+  {
+    "source": "mo",
+    "target": "miami",
+    "weight": 0.85,
+    "type": "location-visit",
+    "label": "space sharing, adventure"
+  },
+  {
+    "source": "mo",
+    "target": "episode-production",
+    "weight": 0.72,
+    "type": "creative-process",
+    "label": "episode subject, co-adventurer"
+  },
+  {
+    "source": "sandro",
+    "target": "miami",
+    "weight": 0.88,
+    "type": "location-visit",
+    "label": "space sharing, adventures"
+  },
+  {
+    "source": "sandro",
+    "target": "episode-production",
+    "weight": 0.72,
+    "type": "creative-process",
+    "label": "episode subject"
+  },
+  {
+    "source": "hallie",
+    "target": "volleyball",
+    "weight": 0.75,
+    "type": "shared-activity",
+    "label": "volleyball community"
+  },
+  {
+    "source": "volleyball",
+    "target": "miami",
+    "weight": 0.87,
+    "type": "location-activity",
+    "label": "Ocean Drive courts, 7 episodes"
+  },
+  {
+    "source": "volleyball",
+    "target": "chicago",
+    "weight": 0.90,
+    "type": "location-activity",
+    "label": "origin story, discovered 18, 5 episodes"
+  },
+  {
+    "source": "volleyball",
+    "target": "honolulu",
+    "weight": 0.80,
+    "type": "location-activity",
+    "label": "island courts training"
+  },
+  {
+    "source": "volleyball",
+    "target": "crew-community",
+    "weight": 0.96,
+    "type": "community",
+    "label": "crew foundation, family"
+  },
+  {
+    "source": "volleyball",
+    "target": "beach-volleyball",
+    "weight": 0.92,
+    "type": "activity-subset",
+    "label": "specialized form, primary"
+  },
+  {
+    "source": "volleyball",
+    "target": "mastery",
+    "weight": 0.90,
+    "type": "emotion",
+    "label": "flow state, AA+ achievement"
+  },
+  {
+    "source": "volleyball",
+    "target": "growth",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "physical growth, skill"
+  },
+  {
+    "source": "volleyball",
+    "target": "connection",
+    "weight": 0.86,
+    "type": "emotion",
+    "label": "crew bonding, community"
+  },
+  {
+    "source": "beach-volleyball",
+    "target": "mastery",
+    "weight": 0.92,
+    "type": "emotion",
+    "label": "peak performance, flow"
+  },
+  {
+    "source": "beach-volleyball",
+    "target": "connection",
+    "weight": 0.88,
+    "type": "emotion",
+    "label": "crew bonding, team"
+  },
+  {
+    "source": "beach-volleyball",
+    "target": "growth",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "physical growth"
+  },
+  {
+    "source": "beach-volleyball",
+    "target": "joy",
+    "weight": 0.84,
+    "type": "emotion",
+    "label": "fun, laughter, wins"
+  },
+  {
+    "source": "urban-runner",
+    "target": "bangkok",
+    "weight": 0.92,
+    "type": "episode-location",
+    "label": "Days 1-8, proof-of-concept"
+  },
+  {
+    "source": "urban-runner",
+    "target": "ho-chi-minh-city",
+    "weight": 0.87,
+    "type": "episode-location",
+    "label": "Feb 9-19 episode, 77 pages"
+  },
+  {
+    "source": "urban-runner",
+    "target": "da-nang",
+    "weight": 0.84,
+    "type": "episode-location",
+    "label": "Heaven on Earth meditation"
+  },
+  {
+    "source": "urban-runner",
+    "target": "chicago",
+    "weight": 0.82,
+    "type": "episode-location",
+    "label": "5 episodes, father reunion"
+  },
+  {
+    "source": "urban-runner",
+    "target": "miami",
+    "weight": 0.84,
+    "type": "episode-location",
+    "label": "7 episodes, crew storytelling"
+  },
+  {
+    "source": "urban-runner",
+    "target": "st-petersburg",
+    "weight": 0.82,
+    "type": "episode-location",
+    "label": "10 episodes, extended local"
+  },
+  {
+    "source": "urban-runner",
+    "target": "lisbon",
+    "weight": 0.80,
+    "type": "episode-location",
+    "label": "5 episodes, Mediterranean"
+  },
+  {
+    "source": "urban-runner",
+    "target": "turkey",
+    "weight": 0.78,
+    "type": "episode-location",
+    "label": "7 episodes, bridge geography"
+  },
+  {
+    "source": "urban-runner",
+    "target": "boracay",
+    "weight": 0.75,
+    "type": "episode-location",
+    "label": "island adventure episodes"
+  },
+  {
+    "source": "urban-runner",
+    "target": "travel",
+    "weight": 0.96,
+    "type": "core-activity",
+    "label": "travel documentation, 28+"
+  },
+  {
+    "source": "urban-runner",
+    "target": "wealth-redistribution",
+    "weight": 0.80,
+    "type": "activity-mechanic",
+    "label": "quest system, ฿741"
+  },
+  {
+    "source": "urban-runner",
+    "target": "growth",
+    "weight": 0.84,
+    "type": "emotion",
+    "label": "storytelling transformation"
+  },
+  {
+    "source": "urban-runner",
+    "target": "episode-production",
+    "weight": 0.98,
+    "type": "creative-process",
+    "label": "core pipeline, output"
+  },
+  {
+    "source": "urban-runner",
+    "target": "character-bible",
+    "weight": 0.90,
+    "type": "documentation",
+    "label": "character mapping"
+  },
+  {
+    "source": "urban-runner",
+    "target": "authenticity-philosophy",
+    "weight": 0.88,
+    "type": "philosophy",
+    "label": "real + AI blend"
+  },
+  {
+    "source": "urban-runner",
+    "target": "meta-gaming",
+    "weight": 0.90,
+    "type": "philosophy",
+    "label": "intentional narrative"
+  },
+  {
+    "source": "urban-runner",
+    "target": "mastery",
+    "weight": 0.86,
+    "type": "emotion",
+    "label": "creative excellence"
+  },
+  {
+    "source": "work",
+    "target": "fitness",
+    "weight": 0.80,
+    "type": "daily-balance",
+    "label": "6h + 2h integrated rhythm"
+  },
+  {
+    "source": "work",
+    "target": "bangkok",
+    "weight": 0.68,
+    "type": "location-activity",
+    "label": "OutSystems timezone"
+  },
+  {
+    "source": "work",
+    "target": "san-diego",
+    "weight": 0.92,
+    "type": "location-activity",
+    "label": "work-life balance proof"
+  },
+  {
+    "source": "work",
+    "target": "travel",
+    "weight": 0.82,
+    "type": "activity-integration",
+    "label": "remote enables nomadism"
+  },
+  {
+    "source": "work",
+    "target": "mastery",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "professional excellence"
+  },
+  {
+    "source": "fitness",
+    "target": "massage-recovery",
+    "weight": 0.92,
+    "type": "wellness-sequence",
+    "label": "post-activity ritual"
+  },
+  {
+    "source": "fitness",
+    "target": "restoration",
+    "weight": 0.90,
+    "type": "emotion",
+    "label": "physical recovery"
+  },
+  {
+    "source": "fitness",
+    "target": "yoga",
+    "weight": 0.80,
+    "type": "complementary-activity",
+    "label": "flexibility focus"
+  },
+  {
+    "source": "fitness",
+    "target": "growth",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "physical growth"
+  },
+  {
+    "source": "fitness",
+    "target": "mastery",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "strength mastery"
+  },
+  {
+    "source": "fitness",
+    "target": "confidence",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "body confidence"
+  },
+  {
+    "source": "yoga",
+    "target": "restoration",
+    "weight": 0.85,
+    "type": "wellness",
+    "label": "flexibility + mindfulness"
+  },
+  {
+    "source": "yoga",
+    "target": "san-diego",
+    "weight": 0.85,
+    "type": "location-activity",
+    "label": "Indie Yoga studio, regular"
+  },
+  {
+    "source": "travel",
+    "target": "southeast-asia",
+    "weight": 0.90,
+    "type": "region",
+    "label": "current phase, rapid loop"
+  },
+  {
+    "source": "travel",
+    "target": "growth",
+    "weight": 0.92,
+    "type": "emotion",
+    "label": "discovery, learning"
+  },
+  {
+    "source": "travel",
+    "target": "connection",
+    "weight": 0.86,
+    "type": "emotion",
+    "label": "meeting people"
+  },
+  {
+    "source": "travel",
+    "target": "coastal-nomad-phase",
+    "weight": 0.96,
+    "type": "lifestyle-era",
+    "label": "current mode"
+  },
+  {
+    "source": "travel",
+    "target": "renewal",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "reset transitions"
+  },
+  {
+    "source": "meditation",
+    "target": "da-nang",
+    "weight": 0.90,
+    "type": "location-activity",
+    "label": "mountain meditation"
+  },
+  {
+    "source": "meditation",
+    "target": "restoration",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "mindful recovery"
+  },
+  {
+    "source": "meditation",
+    "target": "episode-production",
+    "weight": 0.78,
+    "type": "creative-process",
+    "label": "breathing episodes, animated"
+  },
+  {
+    "source": "meditation",
+    "target": "growth",
+    "weight": 0.75,
+    "type": "emotion",
+    "label": "presence practice"
+  },
+  {
+    "source": "cooking",
+    "target": "connection",
+    "weight": 0.90,
+    "type": "emotion",
+    "label": "intimacy ritual"
+  },
+  {
+    "source": "cooking",
+    "target": "siargao",
+    "weight": 0.92,
+    "type": "location-activity",
+    "label": "island kitchen, Jeandel"
+  },
+  {
+    "source": "cooking",
+    "target": "wealth-redistribution",
+    "weight": 0.75,
+    "type": "activity",
+    "label": "local markets, community"
+  },
+  {
+    "source": "nightlife-exploration",
+    "target": "bangkok",
+    "weight": 0.78,
+    "type": "location-activity",
+    "label": "Amsterdam Café reggae"
+  },
+  {
+    "source": "nightlife-exploration",
+    "target": "miami",
+    "weight": 0.75,
+    "type": "location-activity",
+    "label": "South Beach culture"
+  },
+  {
+    "source": "nightlife-exploration",
+    "target": "st-petersburg",
+    "weight": 0.82,
+    "type": "location-activity",
+    "label": "goth clubs, immersion"
+  },
+  {
+    "source": "nightlife-exploration",
+    "target": "growth",
+    "weight": 0.72,
+    "type": "emotion",
+    "label": "cultural experience"
+  },
+  {
+    "source": "nightlife-exploration",
+    "target": "joy",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "fun, dancing, connection"
+  },
+  {
+    "source": "running",
+    "target": "bangkok",
+    "weight": 0.84,
+    "type": "location-activity",
+    "label": "48 miles across episodes"
+  },
+  {
+    "source": "running",
+    "target": "urban-runner",
+    "weight": 0.87,
+    "type": "activity-connection",
+    "label": "literal Urban Runner"
+  },
+  {
+    "source": "running",
+    "target": "growth",
+    "weight": 0.75,
+    "type": "emotion",
+    "label": "exploration, endurance"
+  },
+  {
+    "source": "wealth-redistribution",
+    "target": "bangkok",
+    "weight": 0.92,
+    "type": "episode-mechanic",
+    "label": "฿741 redistributed"
+  },
+  {
+    "source": "wealth-redistribution",
+    "target": "authenticity",
+    "weight": 0.84,
+    "type": "emotion",
+    "label": "honest giving"
+  },
+  {
+    "source": "wealth-redistribution",
+    "target": "connection",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "human connection, gratitude"
+  },
+  {
+    "source": "wealth-redistribution",
+    "target": "joy",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "generous moments"
+  },
+  {
+    "source": "wealth-redistribution",
+    "target": "wealth-philosophy",
+    "weight": 0.95,
+    "type": "activity",
+    "label": "core practice"
+  },
+  {
+    "source": "qr-codes",
+    "target": "urban-runner",
+    "weight": 0.85,
+    "type": "innovation",
+    "label": "real-world bridge"
+  },
+  {
+    "source": "qr-codes",
+    "target": "bangkok",
+    "weight": 0.75,
+    "type": "location-technology",
+    "label": "validated Thai Cannabis Club"
+  },
+  {
+    "source": "image-generation",
+    "target": "episode-production",
+    "weight": 0.90,
+    "type": "creative-tool",
+    "label": "cover art, illustrations"
+  },
+  {
+    "source": "image-generation",
+    "target": "character-bible",
+    "weight": 0.82,
+    "type": "creative-tool",
+    "label": "character visualizations"
+  },
+  {
+    "source": "bangkok",
+    "target": "southeast-asia",
+    "weight": 0.92,
+    "type": "region",
+    "label": "Thailand hub"
+  },
+  {
+    "source": "bangkok",
+    "target": "mastery",
+    "weight": 0.84,
+    "type": "emotion",
+    "label": "peak creative output"
+  },
+  {
+    "source": "bangkok",
+    "target": "episode-production",
+    "weight": 0.92,
+    "type": "creative-process",
+    "label": "Days 1-8 validated"
+  },
+  {
+    "source": "bangkok",
+    "target": "k-fit-vision",
+    "weight": 0.92,
+    "type": "realization",
+    "label": "Pura Vida validated"
+  },
+  {
+    "source": "ho-chi-minh-city",
+    "target": "southeast-asia",
+    "weight": 0.94,
+    "type": "region",
+    "label": "Vietnam center"
+  },
+  {
+    "source": "boracay",
+    "target": "southeast-asia",
+    "weight": 0.92,
+    "type": "region",
+    "label": "Philippines island"
+  },
+  {
+    "source": "da-nang",
+    "target": "southeast-asia",
+    "weight": 0.94,
+    "type": "region",
+    "label": "Vietnam coast"
+  },
+  {
+    "source": "siargao",
+    "target": "southeast-asia",
+    "weight": 0.92,
+    "type": "region",
+    "label": "Philippines island"
+  },
+  {
+    "source": "manila",
+    "target": "southeast-asia",
+    "weight": 0.90,
+    "type": "region",
+    "label": "Philippines gateway"
+  },
+  {
+    "source": "sofia",
+    "target": "bulgaria-era",
+    "weight": 0.94,
+    "type": "temporal-location",
+    "label": "teenage years"
+  },
+  {
+    "source": "varna",
+    "target": "bulgaria-era",
+    "weight": 0.98,
+    "type": "temporal-location",
+    "label": "childhood foundation"
+  },
+  {
+    "source": "chicago",
+    "target": "usa-foundation",
+    "weight": 0.98,
+    "type": "temporal-location",
+    "label": "decade transformation"
+  },
+  {
+    "source": "chicago",
+    "target": "volleyball",
+    "weight": 0.92,
+    "type": "origin",
+    "label": "discovered at 18"
+  },
+  {
+    "source": "chicago",
+    "target": "crew-community",
+    "weight": 0.78,
+    "type": "origin",
+    "label": "lifelong friendships"
+  },
+  {
+    "source": "chicago",
+    "target": "episode-production",
+    "weight": 0.82,
+    "type": "creative-process",
+    "label": "5 episodes, Episode 1 father"
+  },
+  {
+    "source": "honolulu",
+    "target": "florida-hub",
+    "weight": 0.72,
+    "type": "seasonal-return",
+    "label": "island gateway"
+  },
+  {
+    "source": "miami",
+    "target": "florida-hub",
+    "weight": 0.98,
+    "type": "temporal-location",
+    "label": "crew hub anchor"
+  },
+  {
+    "source": "clearwater",
+    "target": "florida-hub",
+    "weight": 0.96,
+    "type": "temporal-location",
+    "label": "mom anchor"
+  },
+  {
+    "source": "st-petersburg",
+    "target": "florida-hub",
+    "weight": 0.92,
+    "type": "temporal-location",
+    "label": "crew hub, 10 episodes"
+  },
+  {
+    "source": "sofia",
+    "target": "growth",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "fearless youth"
+  },
+  {
+    "source": "athens",
+    "target": "mediterranean-summer",
+    "weight": 0.94,
+    "type": "temporal-location",
+    "label": "Greece exploration"
+  },
+  {
+    "source": "barcelona",
+    "target": "mediterranean-summer",
+    "weight": 0.94,
+    "type": "temporal-location",
+    "label": "Spain culture"
+  },
+  {
+    "source": "lisbon",
+    "target": "mediterranean-summer",
+    "weight": 0.90,
+    "type": "temporal-location",
+    "label": "Portugal, 5 episodes"
+  },
+  {
+    "source": "turkey",
+    "target": "mediterranean-summer",
+    "weight": 0.87,
+    "type": "temporal-location",
+    "label": "bridge geography, 7 episodes"
+  },
+  {
+    "source": "beirut",
+    "target": "mediterranean-summer",
+    "weight": 0.88,
+    "type": "temporal-location",
+    "label": "Lebanon exploration"
+  },
+  {
+    "source": "medellin",
+    "target": "growth",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "market learning"
+  },
+  {
+    "source": "san-diego",
+    "target": "coastal-nomad-phase",
+    "weight": 0.92,
+    "type": "validation",
+    "label": "6h + 2h + 3h proof"
+  },
+  {
+    "source": "boulder",
+    "target": "restoration",
+    "weight": 0.89,
+    "type": "location-activity",
+    "label": "wellness retreat"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "fitness",
+    "weight": 0.96,
+    "type": "project-activity",
+    "label": "integrated system"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "volleyball",
+    "weight": 0.92,
+    "type": "project-activity",
+    "label": "core component"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "yoga",
+    "weight": 0.80,
+    "type": "project-activity",
+    "label": "flexibility layer"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "massage-recovery",
+    "weight": 0.90,
+    "type": "project-activity",
+    "label": "recovery infrastructure"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "bangkok",
+    "weight": 0.92,
+    "type": "realization",
+    "label": "Pura Vida Episode 7"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "san-diego",
+    "weight": 0.88,
+    "type": "manifestation",
+    "label": "daily proof"
+  },
+  {
+    "source": "k-fit-vision",
+    "target": "leo",
+    "weight": 0.90,
+    "type": "project-partner",
+    "label": "co-vision"
+  },
+  {
+    "source": "where-is-paul",
+    "target": "travel",
+    "weight": 0.92,
+    "type": "documentation",
+    "label": "53 destinations, 10,790 days"
+  },
+  {
+    "source": "where-is-paul",
+    "target": "growth",
+    "weight": 0.84,
+    "type": "narrative",
+    "label": "life trajectory"
+  },
+  {
+    "source": "where-is-paul",
+    "target": "episode-production",
+    "weight": 0.90,
+    "type": "creative-process",
+    "label": "episode archive, hub"
+  },
+  {
+    "source": "growth",
+    "target": "mastery",
+    "weight": 0.89,
+    "type": "emotion-pair",
+    "label": "excellence through experience"
+  },
+  {
+    "source": "vulnerability",
+    "target": "connection",
+    "weight": 0.92,
+    "type": "emotion-pair",
+    "label": "authenticity builds bonds"
+  },
+  {
+    "source": "authenticity",
+    "target": "mastery",
+    "weight": 0.80,
+    "type": "emotion-pair",
+    "label": "honest excellence"
+  },
+  {
+    "source": "restoration",
+    "target": "mastery",
+    "weight": 0.84,
+    "type": "emotion-pair",
+    "label": "recovery enables peak"
+  },
+  {
+    "source": "confidence",
+    "target": "mastery",
+    "weight": 0.88,
+    "type": "emotion-pair",
+    "label": "agency + excellence"
+  },
+  {
+    "source": "joy",
+    "target": "connection",
+    "weight": 0.86,
+    "type": "emotion-pair",
+    "label": "shared happiness, crew"
+  },
+  {
+    "source": "crew-community",
+    "target": "connection",
+    "weight": 0.96,
+    "type": "community-emotion",
+    "label": "family atmosphere"
+  },
+  {
+    "source": "crew-community",
+    "target": "mastery",
+    "weight": 0.90,
+    "type": "community-emotion",
+    "label": "AA+ competition"
+  },
+  {
+    "source": "crew-community",
+    "target": "joy",
+    "weight": 0.88,
+    "type": "community-emotion",
+    "label": "fun, laughter"
+  },
+  {
+    "source": "crew-community",
+    "target": "renewal",
+    "weight": 0.76,
+    "type": "community-emotion",
+    "label": "gathering reset"
+  },
+  {
+    "source": "character-bible",
+    "target": "episode-production",
+    "weight": 0.94,
+    "type": "documentation",
+    "label": "foundation for storytelling"
+  },
+  {
+    "source": "character-bible",
+    "target": "urban-runner",
+    "weight": 0.90,
+    "type": "documentation",
+    "label": "character framework"
+  },
+  {
+    "source": "character-bible",
+    "target": "authenticity-philosophy",
+    "weight": 0.80,
+    "type": "documentation",
+    "label": "real people, real stories"
+  },
+  {
+    "source": "episode-production",
+    "target": "urban-runner",
+    "weight": 0.98,
+    "type": "creative-process",
+    "label": "pipeline output"
+  },
+  {
+    "source": "episode-production",
+    "target": "where-is-paul",
+    "weight": 0.92,
+    "type": "creative-process",
+    "label": "episode archive"
+  },
+  {
+    "source": "episode-production",
+    "target": "mastery",
+    "weight": 0.88,
+    "type": "creative-process",
+    "label": "creative excellence"
+  },
+  {
+    "source": "episode-production",
+    "target": "image-generation",
+    "weight": 0.92,
+    "type": "creative-process",
+    "label": "AI art generation"
+  },
+  {
+    "source": "february-2026",
+    "target": "ho-chi-minh-city",
+    "weight": 0.96,
+    "type": "temporal",
+    "label": "current month"
+  },
+  {
+    "source": "february-2026",
+    "target": "urban-runner",
+    "weight": 0.87,
+    "type": "temporal",
+    "label": "episode integration"
+  },
+  {
+    "source": "february-2026",
+    "target": "southeast-asia",
+    "weight": 0.92,
+    "type": "temporal",
+    "label": "regional phase"
+  },
+  {
+    "source": "coastal-nomad-phase",
+    "target": "work",
+    "weight": 0.92,
+    "type": "lifestyle",
+    "label": "6h component"
+  },
+  {
+    "source": "coastal-nomad-phase",
+    "target": "fitness",
+    "weight": 0.96,
+    "type": "lifestyle",
+    "label": "2h daily core"
+  },
+  {
+    "source": "coastal-nomad-phase",
+    "target": "travel",
+    "weight": 0.98,
+    "type": "lifestyle",
+    "label": "3h exploration, movement"
+  },
+  {
+    "source": "meta-gaming",
+    "target": "urban-runner",
+    "weight": 0.92,
+    "type": "philosophy",
+    "label": "core principle"
+  },
+  {
+    "source": "meta-gaming",
+    "target": "authenticity",
+    "weight": 0.85,
+    "type": "philosophy",
+    "label": "conscious play"
+  },
+  {
+    "source": "authenticity-philosophy",
+    "target": "episode-production",
+    "weight": 0.88,
+    "type": "philosophy",
+    "label": "AI amplifies real"
+  },
+  {
+    "source": "authenticity-philosophy",
+    "target": "image-generation",
+    "weight": 0.82,
+    "type": "philosophy",
+    "label": "blend real + AI"
+  },
+  {
+    "source": "wealth-philosophy",
+    "target": "wealth-redistribution",
+    "weight": 0.98,
+    "type": "philosophy",
+    "label": "practice"
+  },
+  {
+    "source": "wealth-philosophy",
+    "target": "connection",
+    "weight": 0.84,
+    "type": "philosophy",
+    "label": "human connection"
+  }
+]
