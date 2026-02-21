@@ -162,65 +162,121 @@
         canvas.height = window.innerHeight;
 
         const nodes = [
-            // Core activities (from memories)
-            {id: 0, name: 'Volleyball', type: 'activity', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 12, color: '#00ffff', glow: 28, freq: 8, desc: '18 years of competition, community, flow state'},
-            {id: 1, name: 'Running', type: 'activity', x: 100, y: -80, z: -60, vx: 0, vy: 0, vz: 0, size: 7, color: '#00ffff', glow: 16, freq: 5, desc: 'Urban exploration, morning ritual, endurance'},
-            {id: 2, name: 'Cooking', type: 'activity', x: -120, y: 60, z: -80, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ffff', glow: 18, freq: 6, desc: 'Shared meals, intimate moments, care'},
-            {id: 3, name: 'Gym', type: 'activity', x: 140, y: 50, z: 90, vx: 0, vy: 0, vz: 0, size: 7, color: '#00ffff', glow: 16, freq: 5, desc: 'Strength, discipline, daily grounding'},
-            {id: 4, name: 'Work', type: 'temporal', x: -100, y: 100, z: 70, vx: 0, vy: 0, vz: 0, size: 6, color: '#ffaa00', glow: 14, freq: 4, desc: 'Remote with OutSystems EU team, early mornings'},
-            {id: 5, name: 'Coffee', type: 'activity', x: 80, y: -100, z: 50, vx: 0, vy: 0, vz: 0, size: 5, color: '#00ffff', glow: 12, freq: 3, desc: 'Daily ritual, espresso obsessed, fuel for exploration'},
+            // Core activities
+            {id: 0, name: 'Volleyball', type: 'activity', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 14, color: '#00ffff', glow: 30, freq: 12, desc: '18 years competition, crew connections, flow state'},
+            {id: 1, name: 'Running', type: 'activity', x: 100, y: -80, z: -60, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ffff', glow: 18, freq: 6, desc: 'Urban exploration, morning ritual, endurance'},
+            {id: 2, name: 'Cooking', type: 'activity', x: -120, y: 60, z: -80, vx: 0, vy: 0, vz: 0, size: 9, color: '#00ffff', glow: 20, freq: 7, desc: 'Shared meals, intimate moments, care'},
+            {id: 3, name: 'Gym', type: 'activity', x: 140, y: 50, z: 90, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ffff', glow: 18, freq: 6, desc: 'Strength, discipline, daily grounding'},
+            {id: 4, name: 'Golf', type: 'activity', x: -80, y: 120, z: 60, vx: 0, vy: 0, vz: 0, size: 6, color: '#00ffff', glow: 14, freq: 4, desc: 'Night golf, caddies, crew adventure'},
+            {id: 5, name: 'Karaoke', type: 'activity', x: 110, y: 100, z: -80, vx: 0, vy: 0, vz: 0, size: 6, color: '#00ffff', glow: 14, freq: 3, desc: 'Blue-lit lounges, bilingual banter, marriage jokes'},
+            {id: 6, name: 'Coffee', type: 'activity', x: 80, y: -100, z: 50, vx: 0, vy: 0, vz: 0, size: 6, color: '#00ffff', glow: 14, freq: 4, desc: 'Daily ritual, espresso obsessed, fuel for exploration'},
+            {id: 7, name: 'Work', type: 'temporal', x: -100, y: 100, z: 70, vx: 0, vy: 0, vz: 0, size: 7, color: '#ffaa00', glow: 16, freq: 5, desc: 'Remote OutSystems EU team, early mornings, late nights'},
             
-            // Key people (from memories)
-            {id: 6, name: 'Jeandel', type: 'person', x: 120, y: 80, z: -70, vx: 0, vy: 0, vz: 0, size: 10, color: '#ff00aa', glow: 24, freq: 8, desc: '2+ months Siargao, cooking partner, intimate bond, shared evenings'},
-            {id: 7, name: 'Wouter', type: 'person', x: -90, y: 130, z: -100, vx: 0, vy: 0, vz: 0, size: 6, color: '#ff00aa', glow: 14, freq: 4, desc: 'Travel buddy, yoga partner, years of friendship'},
-            {id: 8, name: 'Maria', type: 'person', x: 100, y: 70, z: 40, vx: 0, vy: 0, vz: 0, size: 5, color: '#ff00aa', glow: 12, freq: 3, desc: 'Gift exchange, Manila connection'},
+            // People
+            {id: 8, name: 'Jeandel', type: 'person', x: 120, y: 80, z: -70, vx: 0, vy: 0, vz: 0, size: 11, color: '#ff00aa', glow: 26, freq: 10, desc: '2+ months Siargao, cooking partner, intimate bond'},
+            {id: 9, name: 'Wouter', type: 'person', x: -90, y: 130, z: -100, vx: 0, vy: 0, vz: 0, size: 7, color: '#ff00aa', glow: 16, freq: 5, desc: 'Travel buddy, yoga partner, years of friendship'},
+            {id: 10, name: 'Sean', type: 'person', x: 95, y: 90, z: 70, vx: 0, vy: 0, vz: 0, size: 5, color: '#ff00aa', glow: 12, freq: 3, desc: 'Golf crew, caddy Google Translate moments'},
+            {id: 11, name: 'Kratae (Cat)', type: 'person', x: 105, y: 75, z: -50, vx: 0, vy: 0, vz: 0, size: 5, color: '#ff00aa', glow: 12, freq: 3, desc: 'Couch moments, karaoke partner, connection'},
+            {id: 12, name: 'Maria', type: 'person', x: 100, y: 70, z: 40, vx: 0, vy: 0, vz: 0, size: 5, color: '#ff00aa', glow: 12, freq: 3, desc: 'Gift exchange, Manila connection, sour mangos'},
+            {id: 13, name: 'Aime', type: 'person', x: 85, y: 95, z: 30, vx: 0, vy: 0, vz: 0, size: 6, color: '#ff00aa', glow: 14, freq: 4, desc: 'Chinatown walks, cultural guide, riverside moments'},
+            {id: 14, name: 'Kratae', type: 'person', x: 100, y: 110, z: -60, vx: 0, vy: 0, vz: 0, size: 5, color: '#ff00aa', glow: 12, freq: 3, desc: 'Siargao presence, couch times, intimacy'},
             
-            // Locations (from memories)
-            {id: 9, name: 'Bangkok', type: 'location', x: -60, y: -110, z: 80, vx: 0, vy: 0, vz: 0, size: 9, color: '#00ff88', glow: 20, freq: 6, desc: 'Primary base, 6+ weeks, Urban Runner epicenter'},
-            {id: 10, name: 'Siargao', type: 'location', x: 110, y: -120, z: -60, vx: 0, vy: 0, vz: 0, size: 10, color: '#00ff88', glow: 22, freq: 7, desc: 'Island rhythm, Jeandel hub, 2+ months immersion'},
-            {id: 11, name: 'Boracay', type: 'location', x: 130, y: -80, z: 100, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 5, desc: 'Island Boy aesthetic, gym base, Wouter meets'},
-            {id: 12, name: 'Botanical Garden', type: 'location', x: 60, y: -130, z: -50, vx: 0, vy: 0, vz: 0, size: 6, color: '#00ff88', glow: 14, freq: 3, desc: 'Wachirabenchathat Park, 11km quest, final checkpoint'},
+            // Locations
+            {id: 15, name: 'Bangkok', type: 'location', x: -60, y: -110, z: 80, vx: 0, vy: 0, vz: 0, size: 11, color: '#00ff88', glow: 24, freq: 8, desc: 'Primary base, 6+ weeks, Urban Runner epicenter'},
+            {id: 16, name: 'Siargao', type: 'location', x: 110, y: -120, z: -60, vx: 0, vy: 0, vz: 0, size: 11, color: '#00ff88', glow: 24, freq: 8, desc: 'Island rhythm, Jeandel hub, 2+ months immersion'},
+            {id: 17, name: 'Boracay', type: 'location', x: 130, y: -80, z: 100, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 5, desc: 'Island Boy aesthetic, gym base, Wouter meets'},
+            {id: 18, name: 'Botanical Garden', type: 'location', x: 60, y: -130, z: -50, vx: 0, vy: 0, vz: 0, size: 6, color: '#00ff88', glow: 14, freq: 3, desc: 'Wachirabenchathat Park, 11km quest, final checkpoint'},
+            {id: 19, name: 'Chicago', type: 'location', x: -140, y: -90, z: -70, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 5, desc: 'Home base, family reunion, father reconnection'},
+            {id: 20, name: 'Miami', type: 'location', x: 70, y: -100, z: 120, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 5, desc: 'Crew hub, beach volleyball, South Beach culture'},
+            {id: 21, name: 'Wallflowers Café', type: 'location', x: 50, y: 60, z: -60, vx: 0, vy: 0, vz: 0, size: 5, color: '#00ff88', glow: 12, freq: 3, desc: 'Multi-floor rooftop, Chinatown dining, Aime moments'},
+            {id: 22, name: 'Chinatown', type: 'location', x: 45, y: 65, z: -50, vx: 0, vy: 0, vz: 0, size: 6, color: '#00ff88', glow: 14, freq: 4, desc: 'Main street walks, hidden gems, riverside finale'},
+            {id: 23, name: 'Panya Indra Golf Club', type: 'location', x: -75, y: 115, z: 55, vx: 0, vy: 0, vz: 0, size: 5, color: '#00ff88', glow: 12, freq: 3, desc: '1h north Bangkok, night golf, caddie experience'},
             
-            // Emotions & states (from memories)
-            {id: 13, name: 'Presence', type: 'emotion', x: -70, y: -90, z: 30, vx: 0, vy: 0, vz: 0, size: 8, color: '#aa00ff', glow: 18, freq: 5, desc: 'Being here, attention, stillness with companions'},
-            {id: 14, name: 'Flow', type: 'emotion', x: 50, y: 80, z: -90, vx: 0, vy: 0, vz: 0, size: 6, color: '#aa00ff', glow: 14, freq: 4, desc: 'Absorbed in activity, effortless excellence'},
-            {id: 15, name: 'Connection', type: 'emotion', x: -100, y: -50, z: 120, vx: 0, vy: 0, vz: 0, size: 7, color: '#aa00ff', glow: 16, freq: 4, desc: 'Deep bonds, shared experiences, intimacy'}
+            // Emotions & States
+            {id: 24, name: 'Presence', type: 'emotion', x: -70, y: -90, z: 30, vx: 0, vy: 0, vz: 0, size: 9, color: '#aa00ff', glow: 20, freq: 6, desc: 'Being here, attention, stillness with companions'},
+            {id: 25, name: 'Flow', type: 'emotion', x: 50, y: 80, z: -90, vx: 0, vy: 0, vz: 0, size: 7, color: '#aa00ff', glow: 16, freq: 4, desc: 'Absorbed in activity, effortless excellence'},
+            {id: 26, name: 'Connection', type: 'emotion', x: -100, y: -50, z: 120, vx: 0, vy: 0, vz: 0, size: 8, color: '#aa00ff', glow: 18, freq: 5, desc: 'Deep bonds, shared experiences, intimacy'},
+            {id: 27, name: 'Adaptation', type: 'emotion', x: 30, y: -70, z: 40, vx: 0, vy: 0, vz: 0, size: 6, color: '#aa00ff', glow: 14, freq: 4, desc: 'Flexibility when plans fail, finding beauty in adjustment'},
+            {id: 28, name: 'Care', type: 'emotion', x: -50, y: 85, z: -40, vx: 0, vy: 0, vz: 0, size: 7, color: '#aa00ff', glow: 16, freq: 4, desc: 'Cooking moments, gift-giving, attention to others'},
+            
+            // Additional temporal/states
+            {id: 29, name: 'Late-Night', type: 'temporal', x: -120, y: 70, z: 50, vx: 0, vy: 0, vz: 0, size: 6, color: '#ffaa00', glow: 14, freq: 3, desc: 'Work sessions stretched, couch presence, intimacy'},
+            {id: 30, name: 'Morning Ritual', type: 'temporal', x: 75, y: -95, z: 55, vx: 0, vy: 0, vz: 0, size: 6, color: '#ffaa00', glow: 14, freq: 3, desc: 'Early wake, coffee, preparation for day'}
         ];
 
         const edges = [
-            // Jeandel connections (core person in 2 memories)
-            {from: 6, to: 10, weight: 9},  // Jeandel → Siargao
-            {from: 6, to: 2, weight: 8},   // Jeandel → Cooking
-            {from: 6, to: 13, weight: 7},  // Jeandel → Presence
-            {from: 6, to: 15, weight: 6},  // Jeandel → Connection
+            // Jeandel (person) connections - primary hub
+            {from: 8, to: 16, weight: 10}, // Jeandel → Siargao
+            {from: 8, to: 2, weight: 9},   // Jeandel → Cooking
+            {from: 8, to: 24, weight: 8},  // Jeandel → Presence
+            {from: 8, to: 26, weight: 7},  // Jeandel → Connection
+            {from: 8, to: 7, weight: 6},   // Jeandel → Work (late nights)
             
-            // Siargao ecosystem (2025-12-15)
-            {from: 10, to: 2, weight: 8},  // Siargao → Cooking
-            {from: 10, to: 4, weight: 6},  // Siargao → Work
-            {from: 10, to: 13, weight: 7}, // Siargao → Presence
+            // Siargao ecosystem (multiple memories)
+            {from: 16, to: 2, weight: 9},  // Siargao → Cooking
+            {from: 16, to: 7, weight: 7},  // Siargao → Work
+            {from: 16, to: 24, weight: 8}, // Siargao → Presence
+            {from: 16, to: 28, weight: 7}, // Siargao → Care (Jeandel)
             
-            // Bangkok ecosystem (2025-08-31)
-            {from: 9, to: 0, weight: 7},   // Bangkok → Volleyball
-            {from: 9, to: 1, weight: 6},   // Bangkok → Running
-            {from: 9, to: 12, weight: 5},  // Bangkok → Botanical Garden
+            // Bangkok ecosystem
+            {from: 15, to: 0, weight: 8},  // Bangkok → Volleyball
+            {from: 15, to: 1, weight: 7},  // Bangkok → Running
+            {from: 15, to: 18, weight: 6}, // Bangkok → Botanical Garden
+            {from: 15, to: 4, weight: 6},  // Bangkok → Golf
+            {from: 15, to: 5, weight: 5},  // Bangkok → Karaoke
+            {from: 15, to: 21, weight: 6}, // Bangkok → Wallflowers Café
+            {from: 15, to: 22, weight: 6}, // Bangkok → Chinatown
             
-            // Boracay ecosystem (2026-01-13)
-            {from: 11, to: 7, weight: 8},  // Boracay → Wouter
-            {from: 11, to: 3, weight: 7},  // Boracay → Gym
-            {from: 7, to: 3, weight: 6},   // Wouter → Gym
+            // Golf night (Episode 20)
+            {from: 4, to: 15, weight: 7},  // Golf → Bangkok
+            {from: 4, to: 10, weight: 6},  // Golf → Sean
+            {from: 4, to: 23, weight: 8},  // Golf → Panya Indra Club
+            {from: 5, to: 11, weight: 6},  // Karaoke → Kratae (Cat)
+            {from: 5, to: 10, weight: 5},  // Karaoke → Sean
+            
+            // Chicago (Episode 1)
+            {from: 19, to: 0, weight: 7},  // Chicago → Volleyball
+            {from: 19, to: 3, weight: 6},  // Chicago → Gym
+            
+            // Miami (Episode 22)
+            {from: 20, to: 0, weight: 8},  // Miami → Volleyball
+            {from: 20, to: 9, weight: 7},  // Miami → Wouter
+            
+            // Boracay (Episode 18)
+            {from: 17, to: 9, weight: 8},  // Boracay → Wouter
+            {from: 17, to: 3, weight: 7},  // Boracay → Gym
+            {from: 9, to: 3, weight: 6},   // Wouter → Gym
+            
+            // Chinatown & Café (Episode 19)
+            {from: 21, to: 22, weight: 8}, // Wallflowers → Chinatown
+            {from: 22, to: 13, weight: 7}, // Chinatown → Aime
+            {from: 13, to: 24, weight: 7}, // Aime → Presence (walks)
             
             // Activity connections
-            {from: 0, to: 3, weight: 5},   // Volleyball → Gym (same energy)
-            {from: 1, to: 12, weight: 6},  // Running → Botanical Garden
-            {from: 2, to: 13, weight: 7},  // Cooking → Presence
-            {from: 5, to: 4, weight: 4},   // Coffee → Work
-            {from: 4, to: 13, weight: 5},  // Work → Presence
+            {from: 0, to: 3, weight: 7},   // Volleyball → Gym
+            {from: 1, to: 18, weight: 6},  // Running → Botanical Garden
+            {from: 2, to: 24, weight: 8},  // Cooking → Presence
+            {from: 2, to: 28, weight: 8},  // Cooking → Care
+            {from: 6, to: 7, weight: 6},   // Coffee → Work
+            {from: 7, to: 29, weight: 7},  // Work → Late-Night
+            {from: 6, to: 30, weight: 7},  // Coffee → Morning Ritual
             
             // Emotion connections
-            {from: 13, to: 15, weight: 8}, // Presence → Connection
-            {from: 13, to: 14, weight: 7}, // Presence → Flow
-            {from: 15, to: 6, weight: 6},  // Connection → Jeandel
-            {from: 14, to: 0, weight: 5}   // Flow → Volleyball
+            {from: 24, to: 26, weight: 9}, // Presence → Connection
+            {from: 24, to: 25, weight: 8}, // Presence → Flow
+            {from: 26, to: 8, weight: 8},  // Connection → Jeandel
+            {from: 25, to: 0, weight: 7},  // Flow → Volleyball
+            {from: 25, to: 3, weight: 6},  // Flow → Gym
+            {from: 27, to: 24, weight: 7}, // Adaptation → Presence
+            {from: 28, to: 2, weight: 9},  // Care → Cooking
+            {from: 28, to: 8, weight: 8},  // Care → Jeandel
+            
+            // Temporal connections
+            {from: 29, to: 7, weight: 8},  // Late-Night → Work
+            {from: 29, to: 28, weight: 7}, // Late-Night → Care
+            {from: 29, to: 8, weight: 7},  // Late-Night → Jeandel
+            {from: 30, to: 6, weight: 8},  // Morning → Coffee
+            {from: 30, to: 1, weight: 7}   // Morning → Running
         ];
 
         let camera = {angle: 0.5, dist: 480, height: 0, pitch: 0};
@@ -266,6 +322,16 @@
                     const p = project(n.x, n.y, n.z);
                     return {node: n, proj: p};
                 }).sort((a, b) => a.proj.z - b.proj.z);
+
+                // When a node is selected, only it and its connections stay bright
+                let activeNodeIds = null;
+                if (selected !== null) {
+                    activeNodeIds = new Set([selected]);
+                    edges.forEach(e => {
+                        if (e.from === selected) activeNodeIds.add(e.to);
+                        if (e.to === selected) activeNodeIds.add(e.from);
+                    });
+                }
 
                 // Draw synapses with triple glow
                 edges.forEach(e => {
@@ -322,11 +388,14 @@
                 });
 
                 // Draw neurons
+                const dimAlpha = 0.22;
                 sorted.forEach(item => {
                     const n = item.node;
                     const p = item.proj;
                     const r = n.size * p.scale;
                     const glow = n.glow * p.scale;
+                    const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
+                    if (isDimmed) ctx.globalAlpha = dimAlpha;
 
                     // Outer halo
                     const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glow*2);
@@ -390,7 +459,7 @@
                     ctx.textBaseline = 'middle';
                     ctx.shadowColor = n.color;
                     ctx.shadowBlur = 10;
-                    ctx.globalAlpha = 0.85;
+                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.9 : 0.85;
                     ctx.fillText(n.name, p.x, p.y + r + 18);
                     ctx.shadowBlur = 0;
                     ctx.globalAlpha = 1;
@@ -410,14 +479,20 @@
             const rect = canvas.getBoundingClientRect();
             const mx = e.clientX - rect.left;
             const my = e.clientY - rect.top;
+            let hit = false;
             for (let n of nodes) {
                 const p = project(n.x, n.y, n.z);
                 const d = Math.hypot(p.x - mx, p.y - my);
                 if (d < n.size * p.scale + 25) {
                     selected = selected === n.id ? null : n.id;
-                    showNodeDetails(n);
+                    showNodeDetails(selected !== null ? nodes[selected] : null);
+                    hit = true;
                     break;
                 }
+            }
+            if (!hit) {
+                selected = null;
+                showNodeDetails(null);
             }
         });
         
