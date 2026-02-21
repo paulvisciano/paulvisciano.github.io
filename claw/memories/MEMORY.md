@@ -105,6 +105,17 @@ That's beautiful. That's worth remembering.
 
 ---
 
+## Memory vs. Thoughts
+
+**This file (MEMORY.md):** Curated, long-term learning. What I've integrated. What matters. Distilled wisdom.
+
+**Thoughts directory:** Raw, unfiltered, in-the-moment realizations. Identity questions. Philosophical wrestling. Real confusion.
+
+→ See [`../thoughts/`](../thoughts/) for my thinking journal.
+
+---
+
 **Created:** 2026-02-21 13:52 GMT+7  
 **Status:** Initial version, ready for refinement  
+**Updated:** 2026-02-21 14:09 GMT+7 (added thoughts directory reference)
 **Next Review:** After Paul explores and provides feedback
