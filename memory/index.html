@@ -3,7 +3,7 @@
 <head>
     <title>Jarvis Neural Mind</title>
     <style>
-        * { margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background: #0a1128; 
             color: #00ffff; 
@@ -12,25 +12,32 @@
         }
         canvas { 
             display: block; 
-            margin-left: 240px;
+            margin-right: 240px;
             background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
             filter: brightness(1.1);
             touch-action: none;
         }
         #info { 
             position: fixed; 
-            left: 0; 
+            right: 0; 
             top: 0; 
             width: 240px; 
             height: 100vh; 
             background: rgba(10, 17, 40, 0.98); 
             padding: 18px; 
-            border-right: 2px solid #00ffff;
+            border-left: 2px solid #00ffff;
             font-size: 11px; 
-            overflow-y: auto;
+            overflow: hidden;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+        #info .panel-top { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+        #info .panel-top .panel-top-content { flex: 0 0 auto; }
+        #info .panel-top .panel-buttons { flex: 1 1 auto; min-height: 80px; }
+        #info .panel-legend { flex: 0 0 auto; padding-top: 20px; border-top: 1px solid rgba(0, 255, 255, 0.3); }
         h3 { 
             margin: 18px 0 10px 0; 
             color: #00ffff; 
@@ -60,10 +67,33 @@
         }
         .stat { color: #00ffff; font-weight: bold; text-shadow: 0 0 10px #00ffff; }
         .desc { color: #0088ff; font-size: 9px; }
+        #detailPanel {
+            height: 200px;
+            min-height: 200px;
+            overflow-y: auto;
+            margin-top: 16px;
+            padding-top: 10px;
+            border-top: 1px solid #00ffff;
+            -webkit-overflow-scrolling: touch;
+        }
+        #detailPanel.is-empty {
+            visibility: hidden;
+        }
+        .panel-buttons {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="info">
+        <div class="panel-top">
+        <div class="panel-top-content">
         <h3>⚡ Neural Mind</h3>
         <p class="desc">Your memories. Alive. Connected.</p>
         <p style="margin-top: 15px; font-size: 12px;">
@@ -77,11 +107,28 @@
         <p style="margin-top: 15px;">
             <span class="stat" id="count">0</span> <span class="desc">neurons active</span>
         </p>
-        <button onclick="walk()" style="margin-top: 20px;">⚡ Random Pulse</button>
-        <button onclick="reset()">↻ Reset Mind</button>
         
-        <h3 style="margin-top: 25px;">Legend</h3>
-        <div style="font-size: 10px; line-height: 2.2; margin-top: 12px;">
+        <div id="detailPanel" class="is-empty">
+            <h3 style="color: #00ffff; font-size: 14px; margin-bottom: 8px;">Info</h3>
+            <div id="nodeDetails" style="font-size: 10px; line-height: 1.8;">
+                <p id="detailName" style="color: #ffff00; font-weight: bold; margin-bottom: 6px;"></p>
+                <p id="detailType" style="color: #00ffff;"></p>
+                <p id="detailDesc" style="color: #aaaaaa; font-style: italic; margin-top: 8px; margin-bottom: 10px;"></p>
+                <p style="color: #00ffff; margin-top: 10px; margin-bottom: 6px; font-weight: bold;">Connected To</p>
+                <div id="detailConnections" style="font-size: 9px; color: #888;"></div>
+            </div>
+        </div>
+        </div>
+        
+        <div class="panel-buttons">
+            <button onclick="walk()" style="margin-top: 0;">⚡ Random Pulse</button>
+            <button onclick="reset()">↻ Reset Mind</button>
+        </div>
+        </div>
+        
+        <div class="panel-legend">
+        <h3 style="margin-bottom: 10px;">Legend</h3>
+        <div style="font-size: 10px; line-height: 2.2; margin-top: 0;">
             <div style="display: flex; align-items: center; margin: 6px 0;">
                 <div style="width: 12px; height: 12px; background: #00ffff; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 8px #00ffff;"></div>
                 <span style="color: #00ffff;">Activities</span>
@@ -103,16 +150,6 @@
                 <span style="color: #aa00ff;">Emotions</span>
             </div>
         </div>
-        
-        <div id="detailPanel" style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #00ffff; display: none;">
-            <h3 style="color: #00ffff; font-size: 14px; margin-bottom: 12px;">Info</h3>
-            <div id="nodeDetails" style="font-size: 10px; line-height: 1.8;">
-                <p id="detailName" style="color: #ffff00; font-weight: bold; margin-bottom: 6px;"></p>
-                <p id="detailType" style="color: #00ffff;"></p>
-                <p id="detailDesc" style="color: #aaaaaa; font-style: italic; margin-top: 8px; margin-bottom: 10px;"></p>
-                <p style="color: #00ffff; margin-top: 10px; margin-bottom: 6px; font-weight: bold;">Connected To</p>
-                <div id="detailConnections" style="font-size: 9px; color: #888;"></div>
-            </div>
         </div>
     </div>
     <canvas id="canvas"></canvas>
@@ -234,34 +271,54 @@
                 edges.forEach(e => {
                     const p1 = project(nodes[e.from].x, nodes[e.from].y, nodes[e.from].z);
                     const p2 = project(nodes[e.to].x, nodes[e.to].y, nodes[e.to].z);
-                    
+                    const isConnected = selected !== null && (e.from === selected || e.to === selected);
                     const strength = 0.4 + (e.weight / 15) * 0.6;
                     
-                    // Outer glow - blue
-                    ctx.strokeStyle = `rgba(0, 100, 255, ${strength * 0.2})`;
-                    ctx.lineWidth = Math.max(4, e.weight / 2.5) + 2;
-                    ctx.lineCap = 'round';
-                    ctx.lineJoin = 'round';
-                    ctx.beginPath();
-                    ctx.moveTo(p1.x, p1.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
-
-                    // Mid glow - cyan
-                    ctx.strokeStyle = `rgba(0, 200, 255, ${strength * 0.4})`;
-                    ctx.lineWidth = Math.max(2, e.weight / 3.5) + 1;
-                    ctx.beginPath();
-                    ctx.moveTo(p1.x, p1.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
-
-                    // Core - bright cyan
-                    ctx.strokeStyle = `rgba(0, 255, 255, ${strength})`;
-                    ctx.lineWidth = Math.max(0.5, e.weight / 5);
-                    ctx.beginPath();
-                    ctx.moveTo(p1.x, p1.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
+                    if (isConnected) {
+                        // Highlight: connected to selected node — yellow/white glow on top
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        ctx.strokeStyle = 'rgba(255, 255, 200, 0.35)';
+                        ctx.lineWidth = Math.max(8, e.weight / 1.5) + 4;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                        ctx.strokeStyle = 'rgba(255, 255, 150, 0.7)';
+                        ctx.lineWidth = Math.max(3, e.weight / 2.5) + 1;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                        ctx.strokeStyle = '#ffff88';
+                        ctx.lineWidth = Math.max(1.5, e.weight / 4);
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    } else {
+                        // Default cyan
+                        ctx.strokeStyle = `rgba(0, 100, 255, ${strength * 0.2})`;
+                        ctx.lineWidth = Math.max(4, e.weight / 2.5) + 2;
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                        ctx.strokeStyle = `rgba(0, 200, 255, ${strength * 0.4})`;
+                        ctx.lineWidth = Math.max(2, e.weight / 3.5) + 1;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                        ctx.strokeStyle = `rgba(0, 255, 255, ${strength})`;
+                        ctx.lineWidth = Math.max(0.5, e.weight / 5);
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
                 });
 
                 // Draw neurons
@@ -372,10 +429,15 @@
             const detailConnections = document.getElementById('detailConnections');
             
             if (!node) {
-                panel.style.display = 'none';
+                panel.classList.add('is-empty');
+                detailName.textContent = '';
+                detailType.textContent = '';
+                detailDesc.textContent = '';
+                detailConnections.innerHTML = '';
                 return;
             }
             
+            panel.classList.remove('is-empty');
             detailName.textContent = node.name;
             detailType.textContent = `Type: ${node.type.charAt(0).toUpperCase() + node.type.slice(1)}`;
             detailDesc.textContent = node.desc;
@@ -395,8 +457,6 @@
             detailConnections.innerHTML = connected.length > 0 
                 ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
                 : '<div style="color: #666;">No connections</div>';
-            
-            panel.style.display = 'block';
         }
 
         canvas.addEventListener('wheel', e => {
@@ -454,12 +514,18 @@
 
         window.walk = () => {
             selected = Math.floor(Math.random() * nodes.length);
+            showNodeDetails(nodes[selected]);
         };
 
         window.reset = () => {
             camera = {angle: 0.5, dist: 480, height: 0, pitch: 0};
             selected = null;
+            showNodeDetails(null);
         };
+
+        // Initial load: pick a random node and show its info
+        selected = Math.floor(Math.random() * nodes.length);
+        showNodeDetails(nodes[selected]);
 
         render();
     </script>
