@@ -1692,5 +1692,12 @@
     "weight": 0.84,
     "type": "philosophy",
     "label": "human connection"
+  },
+  {
+    "source": "wouter",
+    "target": "medellin",
+    "weight": 0.92,
+    "type": "location-origin",
+    "label": "epic months, travel brotherhood origin"
   }
 ]

@@ -379,6 +379,9 @@
         }
 
         let camera = {angle: 0.5, dist: 680, height: 0, pitch: 0};
+        let viewZoom = 1;   // 2D scale of the graph (zoom in = focus on nodes, zoom out = big picture)
+        const VIEW_ZOOM_MIN = 0.25;
+        const VIEW_ZOOM_MAX = 5;
         let selected = null;
         let time = 0;
         let particles = [];
@@ -393,11 +396,18 @@
             const viewY = y * cp - rz * sp;
             const viewZ = y * sp + rz * cp;
             const scale = camera.dist / (camera.dist + viewZ + 200);
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            let sx = cx + rx * scale;
+            let sy = cy + (viewY + camera.height) * scale;
+            // Apply 2D view zoom around center (so pinch/scroll scales the whole graph)
+            sx = cx + (sx - cx) * viewZoom;
+            sy = cy + (sy - cy) * viewZoom;
             return {
-                x: canvas.width/2 + rx * scale,
-                y: canvas.height/2 + (viewY + camera.height) * scale,
+                x: sx,
+                y: sy,
                 z: viewZ,
-                scale: Math.max(0.1, scale)
+                scale: Math.max(0.1, scale) * viewZoom
             };
         }
 
@@ -687,14 +697,10 @@
 
         canvas.addEventListener('wheel', e => {
             e.preventDefault();
-            // Trackpad pinch (Mac: ctrlKey set) — pinch out = zoom in (dist down)
-            const zoomSpeed = 10;
-            if (e.ctrlKey) {
-                camera.dist -= e.deltaY * zoomSpeed;
-            } else {
-                camera.dist += e.deltaY * zoomSpeed;
-            }
-            camera.dist = Math.max(5, Math.min(1500, camera.dist));
+            // Scale the whole graph (scroll up / pinch out = zoom in, scroll down = zoom out)
+            const zoomSpeed = 0.002;
+            viewZoom *= 1 - e.deltaY * zoomSpeed;
+            viewZoom = Math.max(VIEW_ZOOM_MIN, Math.min(VIEW_ZOOM_MAX, viewZoom));
         });
 
         let pinchDist = null;
@@ -742,8 +748,10 @@
                 e.preventDefault();
                 const d = pinchDistance(e.touches);
                 if (pinchDist === null) { pinchDist = d; return; }
-                camera.dist += (pinchDist - d) * 2.5;
-                camera.dist = Math.max(5, Math.min(1500, camera.dist));
+                // Pinch out (d > pinchDist) = zoom in = increase viewZoom
+                const ratio = d / pinchDist;
+                viewZoom *= ratio;
+                viewZoom = Math.max(VIEW_ZOOM_MIN, Math.min(VIEW_ZOOM_MAX, viewZoom));
                 pinchDist = d;
             } else if (e.touches.length === 1) {
                 const dx = e.touches[0].clientX - lastTouchX;
@@ -791,6 +799,7 @@
 
         window.reset = () => {
             camera = {angle: 0.5, dist: 680, height: 0, pitch: 0};
+            viewZoom = 1;
             selected = null;
             showNodeDetails(null);
         };
