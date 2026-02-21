@@ -1103,5 +1103,49 @@
       "impact": "high",
       "color": "#EC4899"
     }
+  },
+  {
+    "id": "bai",
+    "label": "Bai",
+    "category": "person",
+    "frequency": 12,
+    "attributes": {
+      "role": "reconnection",
+      "description": "Met at Havana Aug 2025 with Jamie. Sweet in messages, caring, thoughtful. In-person: avoidant, uses alcohol to manage vulnerability, plays games, tests. Gap between online intimacy and in-person distance.",
+      "color": "#FFB6C1"
+    }
+  },
+  {
+    "id": "havana-bangkok",
+    "label": "Havana (Bangkok Venue)",
+    "category": "location",
+    "frequency": 8,
+    "attributes": {
+      "type": "nightclub",
+      "significance": "Where Paul first met Bai Aug 2025. Magical first meeting. Feb 21 2026 reconnection attempt showed place can't recreate moments.",
+      "color": "#FF6B35"
+    }
+  },
+  {
+    "id": "clarity-through-action",
+    "label": "Clarity Through Action",
+    "category": "emotion",
+    "frequency": 14,
+    "attributes": {
+      "type": "wisdom",
+      "significance": "Reading actions over words. Recognizing gaps between message-self and in-person-self. Not playing games. Moving on when patterns don't align.",
+      "color": "#FFD60A"
+    }
+  },
+  {
+    "id": "grace-under-disappointment",
+    "label": "Grace Under Disappointment",
+    "category": "emotion",
+    "frequency": 12,
+    "attributes": {
+      "type": "wisdom",
+      "significance": "Not imposing disappointment on someone's joy. Choosing when to address issues. Restraint and maturity. Respecting her fun instead of being bitter.",
+      "color": "#FFC300"
+    }
   }
 ]

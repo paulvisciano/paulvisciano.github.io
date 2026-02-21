@@ -16,14 +16,14 @@
   {
     "source": "paul",
     "target": "travel",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "lifestyle",
     "label": "9+ months continuous, nomadic"
   },
   {
     "source": "paul",
     "target": "wouter",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "relationship",
     "label": "adventure brother, 7+ countries, deepest"
   },
@@ -100,7 +100,7 @@
   {
     "source": "paul",
     "target": "where-is-paul",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "core-project",
     "label": "legacy, 53 destinations, 10,790 days"
   },
@@ -114,7 +114,7 @@
   {
     "source": "paul",
     "target": "episode-production",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "creative-process",
     "label": "pipeline, daily output, storytelling"
   },
@@ -135,7 +135,7 @@
   {
     "source": "paul",
     "target": "wealth-philosophy",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "philosophy",
     "label": "generosity, money flows to people"
   },
@@ -156,7 +156,7 @@
   {
     "source": "wouter",
     "target": "boracay",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "location-visit",
     "label": "island trip, gym partner, fitness hub"
   },
@@ -226,7 +226,7 @@
   {
     "source": "khanh",
     "target": "fitness",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "shared-activity",
     "label": "mentor, trainer, gym buddy"
   },
@@ -254,7 +254,7 @@
   {
     "source": "khanh",
     "target": "mastery",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "fitness excellence, mentorship"
   },
@@ -282,14 +282,14 @@
   {
     "source": "leo",
     "target": "bangkok",
-    "weight": 0.70,
+    "weight": 0.7,
     "type": "location-visit",
     "label": "traveled together, crew leadership"
   },
   {
     "source": "leo",
     "target": "growth",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "co-conspirator transformation"
   },
@@ -317,7 +317,7 @@
   {
     "source": "dad",
     "target": "chicago",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "location-visit",
     "label": "family reunion Oct 2025, healing moment"
   },
@@ -345,7 +345,7 @@
   {
     "source": "brother",
     "target": "growth",
-    "weight": 0.70,
+    "weight": 0.7,
     "type": "emotion",
     "label": "reconnection arc"
   },
@@ -366,7 +366,7 @@
   {
     "source": "mom",
     "target": "fitness",
-    "weight": 0.70,
+    "weight": 0.7,
     "type": "shared-activity",
     "label": "spa & pedicures, recovery"
   },
@@ -394,7 +394,7 @@
   {
     "source": "mom",
     "target": "renewal",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "reset visits, safe harbor"
   },
@@ -429,7 +429,7 @@
   {
     "source": "jeandel",
     "target": "vulnerability",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "authentic openness"
   },
@@ -450,14 +450,14 @@
   {
     "source": "sean",
     "target": "episode-production",
-    "weight": 0.70,
+    "weight": 0.7,
     "type": "creative-process",
     "label": "episode subject"
   },
   {
     "source": "maria",
     "target": "manila",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "location-visit",
     "label": "Manila local connection"
   },
@@ -499,7 +499,7 @@
   {
     "source": "bartek",
     "target": "volleyball",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "shared-activity",
     "label": "beach volleyball partner"
   },
@@ -520,7 +520,7 @@
   {
     "source": "bartek",
     "target": "work",
-    "weight": 0.70,
+    "weight": 0.7,
     "type": "shared-activity",
     "label": "OutSystems colleague, work buddy"
   },
@@ -548,7 +548,7 @@
   {
     "source": "irina",
     "target": "crew-community",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "community",
     "label": "international crew member"
   },
@@ -590,7 +590,7 @@
   {
     "source": "ash",
     "target": "volleyball",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "shared-activity",
     "label": "AA+ player, competitive"
   },
@@ -611,14 +611,14 @@
   {
     "source": "cat",
     "target": "volleyball",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "shared-activity",
     "label": "volleyball player, competitor"
   },
   {
     "source": "kj",
     "target": "miami",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "location-activity",
     "label": "crew community hub"
   },
@@ -653,7 +653,7 @@
   {
     "source": "welli",
     "target": "connection",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "friendship milestones"
   },
@@ -674,7 +674,7 @@
   {
     "source": "leigha",
     "target": "connection",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "friendship depth"
   },
@@ -688,7 +688,7 @@
   {
     "source": "ray",
     "target": "san-diego",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "location-visit",
     "label": "work-life balance model location"
   },
@@ -737,14 +737,14 @@
   {
     "source": "volleyball",
     "target": "chicago",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "location-activity",
     "label": "origin story, discovered 18, 5 episodes"
   },
   {
     "source": "volleyball",
     "target": "honolulu",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "location-activity",
     "label": "island courts training"
   },
@@ -765,7 +765,7 @@
   {
     "source": "volleyball",
     "target": "mastery",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "emotion",
     "label": "flow state, AA+ achievement"
   },
@@ -856,7 +856,7 @@
   {
     "source": "urban-runner",
     "target": "lisbon",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "episode-location",
     "label": "5 episodes, Mediterranean"
   },
@@ -884,7 +884,7 @@
   {
     "source": "urban-runner",
     "target": "wealth-redistribution",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "activity-mechanic",
     "label": "quest system, ฿741"
   },
@@ -905,7 +905,7 @@
   {
     "source": "urban-runner",
     "target": "character-bible",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "documentation",
     "label": "character mapping"
   },
@@ -919,7 +919,7 @@
   {
     "source": "urban-runner",
     "target": "meta-gaming",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "philosophy",
     "label": "intentional narrative"
   },
@@ -933,7 +933,7 @@
   {
     "source": "work",
     "target": "fitness",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "daily-balance",
     "label": "6h + 2h integrated rhythm"
   },
@@ -975,14 +975,14 @@
   {
     "source": "fitness",
     "target": "restoration",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "emotion",
     "label": "physical recovery"
   },
   {
     "source": "fitness",
     "target": "yoga",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "complementary-activity",
     "label": "flexibility focus"
   },
@@ -1003,7 +1003,7 @@
   {
     "source": "fitness",
     "target": "confidence",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "body confidence"
   },
@@ -1024,7 +1024,7 @@
   {
     "source": "travel",
     "target": "southeast-asia",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "region",
     "label": "current phase, rapid loop"
   },
@@ -1059,7 +1059,7 @@
   {
     "source": "meditation",
     "target": "da-nang",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "location-activity",
     "label": "mountain meditation"
   },
@@ -1087,7 +1087,7 @@
   {
     "source": "cooking",
     "target": "connection",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "emotion",
     "label": "intimacy ritual"
   },
@@ -1185,7 +1185,7 @@
   {
     "source": "wealth-redistribution",
     "target": "joy",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion",
     "label": "generous moments"
   },
@@ -1213,7 +1213,7 @@
   {
     "source": "image-generation",
     "target": "episode-production",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "creative-tool",
     "label": "cover art, illustrations"
   },
@@ -1283,7 +1283,7 @@
   {
     "source": "manila",
     "target": "southeast-asia",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "region",
     "label": "Philippines gateway"
   },
@@ -1381,7 +1381,7 @@
   {
     "source": "lisbon",
     "target": "mediterranean-summer",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "temporal-location",
     "label": "Portugal, 5 episodes"
   },
@@ -1437,14 +1437,14 @@
   {
     "source": "k-fit-vision",
     "target": "yoga",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "project-activity",
     "label": "flexibility layer"
   },
   {
     "source": "k-fit-vision",
     "target": "massage-recovery",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "project-activity",
     "label": "recovery infrastructure"
   },
@@ -1465,7 +1465,7 @@
   {
     "source": "k-fit-vision",
     "target": "leo",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "project-partner",
     "label": "co-vision"
   },
@@ -1486,7 +1486,7 @@
   {
     "source": "where-is-paul",
     "target": "episode-production",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "creative-process",
     "label": "episode archive, hub"
   },
@@ -1507,7 +1507,7 @@
   {
     "source": "authenticity",
     "target": "mastery",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "emotion-pair",
     "label": "honest excellence"
   },
@@ -1542,7 +1542,7 @@
   {
     "source": "crew-community",
     "target": "mastery",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "community-emotion",
     "label": "AA+ competition"
   },
@@ -1570,14 +1570,14 @@
   {
     "source": "character-bible",
     "target": "urban-runner",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "documentation",
     "label": "character framework"
   },
   {
     "source": "character-bible",
     "target": "authenticity-philosophy",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "documentation",
     "label": "real people, real stories"
   },
@@ -1699,5 +1699,47 @@
     "weight": 0.92,
     "type": "location-origin",
     "label": "epic months, travel brotherhood origin"
+  },
+  {
+    "source": "paul",
+    "target": "bai",
+    "weight": 6,
+    "type": "encounter"
+  },
+  {
+    "source": "bai",
+    "target": "havana-bangkok",
+    "weight": 8,
+    "type": "meeting-place"
+  },
+  {
+    "source": "paul",
+    "target": "havana-bangkok",
+    "weight": 7,
+    "type": "reconnection"
+  },
+  {
+    "source": "paul",
+    "target": "clarity-through-action",
+    "weight": 8,
+    "type": "learning"
+  },
+  {
+    "source": "paul",
+    "target": "grace-under-disappointment",
+    "weight": 8,
+    "type": "growth"
+  },
+  {
+    "source": "bai",
+    "target": "clarity-through-action",
+    "weight": 5,
+    "type": "mirror"
+  },
+  {
+    "source": "nightlife-exploration",
+    "target": "havana-bangkok",
+    "weight": 6,
+    "type": "venue"
   }
 ]
