@@ -1,0 +1,443 @@
+[
+  {
+    "source": "paul",
+    "target": "volleyball",
+    "weight": 0.95,
+    "type": "core-activity",
+    "label": "18-year passion"
+  },
+  {
+    "source": "paul",
+    "target": "urban-runner",
+    "weight": 0.92,
+    "type": "core-project",
+    "label": "meta-narrative"
+  },
+  {
+    "source": "paul",
+    "target": "travel",
+    "weight": 0.90,
+    "type": "lifestyle",
+    "label": "nomadic life"
+  },
+  {
+    "source": "paul",
+    "target": "wouter",
+    "weight": 0.75,
+    "type": "relationship",
+    "label": "adventure brother"
+  },
+  {
+    "source": "paul",
+    "target": "khanh",
+    "weight": 0.70,
+    "type": "relationship",
+    "label": "travel buddy"
+  },
+  {
+    "source": "paul",
+    "target": "mom",
+    "weight": 0.72,
+    "type": "relationship",
+    "label": "family base"
+  },
+  {
+    "source": "paul",
+    "target": "leo",
+    "weight": 0.65,
+    "type": "relationship",
+    "label": "co-conspirator"
+  },
+  {
+    "source": "paul",
+    "target": "work",
+    "weight": 0.68,
+    "type": "activity",
+    "label": "remote engineer"
+  },
+  {
+    "source": "paul",
+    "target": "fitness",
+    "weight": 0.70,
+    "type": "activity",
+    "label": "daily routine"
+  },
+  {
+    "source": "wouter",
+    "target": "bangkok",
+    "weight": 0.80,
+    "type": "location-visit",
+    "label": "travel companion"
+  },
+  {
+    "source": "wouter",
+    "target": "boracay",
+    "weight": 0.85,
+    "type": "location-visit",
+    "label": "recent trip"
+  },
+  {
+    "source": "wouter",
+    "target": "volleyball",
+    "weight": 0.68,
+    "type": "activity",
+    "label": "yoga & fitness"
+  },
+  {
+    "source": "wouter",
+    "target": "ray",
+    "weight": 0.80,
+    "type": "relationship",
+    "label": "partner"
+  },
+  {
+    "source": "khanh",
+    "target": "ho-chi-minh-city",
+    "weight": 0.90,
+    "type": "location-visit",
+    "label": "local guide"
+  },
+  {
+    "source": "khanh",
+    "target": "honolulu",
+    "weight": 0.75,
+    "type": "location-visit",
+    "label": "connection origin"
+  },
+  {
+    "source": "khanh",
+    "target": "fitness",
+    "weight": 0.72,
+    "type": "shared-activity",
+    "label": "trainer/host"
+  },
+  {
+    "source": "khanh",
+    "target": "volleyball",
+    "weight": 0.65,
+    "type": "shared-activity",
+    "label": "Hawaii connection"
+  },
+  {
+    "source": "boy",
+    "target": "bangkok",
+    "weight": 0.78,
+    "type": "location-visit",
+    "label": "crew reunion"
+  },
+  {
+    "source": "boy",
+    "target": "ho-chi-minh-city",
+    "weight": 0.72,
+    "type": "location-visit",
+    "label": "recent stay"
+  },
+  {
+    "source": "leo",
+    "target": "urban-runner",
+    "weight": 0.70,
+    "type": "shared-project",
+    "label": "K-FIT partner"
+  },
+  {
+    "source": "leo",
+    "target": "bangkok",
+    "weight": 0.65,
+    "type": "location-visit",
+    "label": "traveled together"
+  },
+  {
+    "source": "bartek",
+    "target": "miami",
+    "weight": 0.82,
+    "type": "location-base",
+    "label": "Fort Lauderdale"
+  },
+  {
+    "source": "bartek",
+    "target": "volleyball",
+    "weight": 0.75,
+    "type": "shared-activity",
+    "label": "beach volleyball"
+  },
+  {
+    "source": "bartek",
+    "target": "fitness",
+    "weight": 0.70,
+    "type": "shared-activity",
+    "label": "massage recovery"
+  },
+  {
+    "source": "mom",
+    "target": "miami",
+    "weight": 0.80,
+    "type": "location-base",
+    "label": "Clearwater hub"
+  },
+  {
+    "source": "mom",
+    "target": "fitness",
+    "weight": 0.62,
+    "type": "shared-activity",
+    "label": "pedicures & spa"
+  },
+  {
+    "source": "jeandel",
+    "target": "boracay",
+    "weight": 0.85,
+    "type": "location-visit",
+    "label": "emotional connection"
+  },
+  {
+    "source": "jeandel",
+    "target": "connection",
+    "weight": 0.80,
+    "type": "emotion",
+    "label": "significant moments"
+  },
+  {
+    "source": "sean",
+    "target": "ho-chi-minh-city",
+    "weight": 0.78,
+    "type": "location-visit",
+    "label": "travel companion"
+  },
+  {
+    "source": "irina",
+    "target": "miami",
+    "weight": 0.82,
+    "type": "location-visit",
+    "label": "South Beach Airbnb"
+  },
+  {
+    "source": "irina",
+    "target": "volleyball",
+    "weight": 0.88,
+    "type": "shared-activity",
+    "label": "athlete connection"
+  },
+  {
+    "source": "volleyball",
+    "target": "miami",
+    "weight": 0.80,
+    "type": "location-activity",
+    "label": "Ocean Drive courts"
+  },
+  {
+    "source": "volleyball",
+    "target": "chicago",
+    "weight": 0.85,
+    "type": "location-activity",
+    "label": "origin story"
+  },
+  {
+    "source": "volleyball",
+    "target": "honolulu",
+    "weight": 0.72,
+    "type": "location-activity",
+    "label": "island courts"
+  },
+  {
+    "source": "volleyball",
+    "target": "creek-community",
+    "weight": 0.92,
+    "type": "community",
+    "label": "crew family"
+  },
+  {
+    "source": "urban-runner",
+    "target": "bangkok",
+    "weight": 0.88,
+    "type": "episode-location",
+    "label": "Episodes 4-7, 13, 15, 20"
+  },
+  {
+    "source": "urban-runner",
+    "target": "ho-chi-minh-city",
+    "weight": 0.82,
+    "type": "episode-location",
+    "label": "Feb 9-19 episode"
+  },
+  {
+    "source": "urban-runner",
+    "target": "da-nang",
+    "weight": 0.80,
+    "type": "episode-location",
+    "label": "Heaven on Earth"
+  },
+  {
+    "source": "urban-runner",
+    "target": "chicago",
+    "weight": 0.75,
+    "type": "episode-location",
+    "label": "Episode 1, father reunion"
+  },
+  {
+    "source": "urban-runner",
+    "target": "miami",
+    "weight": 0.78,
+    "type": "episode-location",
+    "label": "Episodes 1-4, 7"
+  },
+  {
+    "source": "urban-runner",
+    "target": "travel",
+    "weight": 0.92,
+    "type": "core-activity",
+    "label": "travel documentation"
+  },
+  {
+    "source": "urban-runner",
+    "target": "wealth-redistribution",
+    "weight": 0.75,
+    "type": "activity-mechanic",
+    "label": "quest system"
+  },
+  {
+    "source": "work",
+    "target": "fitness",
+    "weight": 0.75,
+    "type": "daily-balance",
+    "label": "6h work + 2h fitness"
+  },
+  {
+    "source": "work",
+    "target": "bangkok",
+    "weight": 0.62,
+    "type": "location-activity",
+    "label": "OutSystems timezone"
+  },
+  {
+    "source": "fitness",
+    "target": "meditation",
+    "weight": 0.70,
+    "type": "wellness",
+    "label": "recovery + mindfulness"
+  },
+  {
+    "source": "fitness",
+    "target": "growth",
+    "weight": 0.75,
+    "type": "emotion",
+    "label": "physical growth"
+  },
+  {
+    "source": "travel",
+    "target": "southeast-asia",
+    "weight": 0.85,
+    "type": "region",
+    "label": "current phase 2025-2026"
+  },
+  {
+    "source": "travel",
+    "target": "growth",
+    "weight": 0.88,
+    "type": "emotion",
+    "label": "discovery & learning"
+  },
+  {
+    "source": "travel",
+    "target": "connection",
+    "weight": 0.82,
+    "type": "emotion",
+    "label": "meeting people"
+  },
+  {
+    "source": "bangkok",
+    "target": "southeast-asia",
+    "weight": 0.88,
+    "type": "region",
+    "label": "Thailand hub"
+  },
+  {
+    "source": "ho-chi-minh-city",
+    "target": "southeast-asia",
+    "weight": 0.90,
+    "type": "region",
+    "label": "Vietnam center"
+  },
+  {
+    "source": "boracay",
+    "target": "southeast-asia",
+    "weight": 0.88,
+    "type": "region",
+    "label": "Philippines island"
+  },
+  {
+    "source": "da-nang",
+    "target": "southeast-asia",
+    "weight": 0.90,
+    "type": "region",
+    "label": "Vietnam coast"
+  },
+  {
+    "source": "da-nang",
+    "target": "meditation",
+    "weight": 0.85,
+    "type": "location-activity",
+    "label": "mountain meditation"
+  },
+  {
+    "source": "february-2026",
+    "target": "ho-chi-minh-city",
+    "weight": 0.92,
+    "type": "temporal",
+    "label": "current focus"
+  },
+  {
+    "source": "february-2026",
+    "target": "urban-runner",
+    "weight": 0.80,
+    "type": "temporal",
+    "label": "episode integration"
+  },
+  {
+    "source": "chicago",
+    "target": "volleyball",
+    "weight": 0.88,
+    "type": "origin",
+    "label": "discovered at 18"
+  },
+  {
+    "source": "chicago",
+    "target": "growth",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "foundation decade"
+  },
+  {
+    "source": "miami",
+    "target": "creek-community",
+    "weight": 0.90,
+    "type": "community-location",
+    "label": "crew hub"
+  },
+  {
+    "source": "honolulu",
+    "target": "volleyball",
+    "weight": 0.75,
+    "type": "location-activity",
+    "label": "island training"
+  },
+  {
+    "source": "renewal",
+    "target": "fitness",
+    "weight": 0.68,
+    "type": "emotion-activity",
+    "label": "recovery reset"
+  },
+  {
+    "source": "growth",
+    "target": "urban-runner",
+    "weight": 0.80,
+    "type": "emotion-project",
+    "label": "storytelling transformation"
+  },
+  {
+    "source": "connection",
+    "target": "crew-community",
+    "weight": 0.85,
+    "type": "emotion-community",
+    "label": "crew vibes"
+  }
+]
