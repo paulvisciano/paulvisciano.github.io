@@ -18,6 +18,7 @@
             background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
             filter: brightness(1.1);
             touch-action: none;
+            transition: margin-right 0.25s ease;
         }
         #info { 
             position: fixed; 
@@ -35,7 +36,35 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: transform 0.25s ease, width 0.25s ease;
         }
+        #info.collapsed {
+            transform: translateX(100%);
+            pointer-events: none;
+        }
+        #panel-toggle {
+            position: fixed;
+            right: 240px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 11;
+            width: 36px;
+            height: 56px;
+            border: 2px solid #00ffff;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            background: rgba(10, 17, 40, 0.95);
+            color: #00ffff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: right 0.25s ease, background 0.2s;
+        }
+        #panel-toggle:hover { background: rgba(0, 136, 255, 0.3); }
+        #info.collapsed ~ #panel-toggle { right: 0; }
         #info .panel-top { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
         #info .panel-top .panel-top-content { flex: 0 0 auto; }
         #info .panel-top .panel-buttons { flex: 1 1 auto; min-height: 80px; }
@@ -90,6 +119,43 @@
             justify-content: center;
             gap: 10px;
         }
+        .filter-section { margin-top: 12px; border-top: 1px solid rgba(0, 255, 255, 0.4); padding-top: 10px; }
+        .filter-toggle {
+            background: none;
+            border: none;
+            color: #00ffff;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: inherit;
+        }
+        .filter-toggle:hover { text-shadow: 0 0 10px #00ffff; }
+        .filter-list { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; }
+        .filter-list.open { max-height: 280px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .filter-category { margin-top: 10px; }
+        .filter-category h4 { font-size: 10px; color: #0088ff; margin-bottom: 6px; text-transform: uppercase; }
+        .filter-node {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 6px 10px;
+            margin: 3px 0;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: inherit;
+            cursor: pointer;
+            background: rgba(0, 255, 255, 0.08);
+            color: inherit;
+            transition: background 0.2s;
+        }
+        .filter-node:hover { background: rgba(0, 255, 255, 0.2); }
     </style>
 </head>
 <body>
@@ -109,6 +175,14 @@
         <p style="margin-top: 15px;">
             <span class="stat" id="count">0</span> <span class="desc">neurons active</span>
         </p>
+        
+        <div class="filter-section">
+            <button type="button" class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-list">
+                <span>Filter / Jump to node</span>
+                <span id="filter-chevron">▼</span>
+            </button>
+            <div id="filter-list" class="filter-list" role="region" aria-label="Node list by category"></div>
+        </div>
         
         <div id="detailPanel" class="is-empty">
             <h3 style="color: #00ffff; font-size: 14px; margin-bottom: 8px;">Info</h3>
@@ -156,13 +230,42 @@
         </div>
     </div>
     <canvas id="canvas"></canvas>
+    <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d', {alpha: true});
-        
-        canvas.width = window.innerWidth - 240;
-        canvas.height = window.innerHeight;
+        const infoPanel = document.getElementById('info');
+        const panelToggle = document.getElementById('panel-toggle');
+
+        const PANEL_WIDTH = 240;
+        let panelOpen = true;
+
+        function getCanvasWidth() {
+            return panelOpen ? window.innerWidth - PANEL_WIDTH : window.innerWidth;
+        }
+        function resizeCanvas() {
+            canvas.width = getCanvasWidth();
+            canvas.height = window.innerHeight;
+            if (canvas.style) canvas.style.marginRight = panelOpen ? PANEL_WIDTH + 'px' : '0';
+        }
+        function togglePanel() {
+            panelOpen = !panelOpen;
+            infoPanel.classList.toggle('collapsed', !panelOpen);
+            panelToggle.textContent = panelOpen ? '‹' : '›';
+            panelToggle.setAttribute('aria-label', panelOpen ? 'Collapse panel' : 'Expand panel');
+            resizeCanvas();
+        }
+
+        resizeCanvas();
+        panelToggle.addEventListener('click', togglePanel);
+
+        window.addEventListener('resize', function() {
+            resizeCanvas();
+        });
+        window.addEventListener('orientationchange', function() {
+            setTimeout(resizeCanvas, 100);
+        });
 
         // Category to color mapping
         const categoryColors = {
@@ -188,6 +291,7 @@
                 { from: 0, to: 2, weight: 7 },
                 { from: 1, to: 2, weight: 6 }
             ];
+            populateFilterList();
             render();
             if (nodes.length > 0) {
                 selected = Math.floor(Math.random() * nodes.length);
@@ -243,6 +347,7 @@
                 }).filter(e => e !== null);
 
                 console.log(`✅ Loaded ${nodes.length} neurons and ${edges.length} synapses`);
+                populateFilterList();
                 render();
                 if (nodes.length > 0) {
                     selected = Math.floor(Math.random() * nodes.length);
@@ -499,6 +604,53 @@
                 ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
                 : '<div style="color: #666;">No connections</div>';
         }
+
+        window.selectNodeByIndex = function(idx) {
+            if (idx < 0 || idx >= nodes.length) return;
+            selected = idx;
+            showNodeDetails(nodes[selected]);
+        };
+
+        const filterCategoryOrder = ['person', 'location', 'activity', 'temporal', 'emotion'];
+        const filterCategoryLabels = { person: 'People', location: 'Locations', activity: 'Activities', temporal: 'Temporal', emotion: 'Emotions' };
+
+        function populateFilterList() {
+            const listEl = document.getElementById('filter-list');
+            if (!listEl || nodes.length === 0) return;
+            const byCategory = { person: [], location: [], activity: [], temporal: [], emotion: [] };
+            nodes.forEach((n, idx) => {
+                const t = (n.type || '').toLowerCase();
+                if (byCategory[t]) byCategory[t].push({ node: n, idx });
+            });
+            listEl.innerHTML = '';
+            filterCategoryOrder.forEach(cat => {
+                const items = byCategory[cat];
+                if (!items || items.length === 0) return;
+                const label = filterCategoryLabels[cat] || cat;
+                const color = categoryColors[cat] || '#00ffff';
+                const heading = document.createElement('h4');
+                heading.textContent = label;
+                heading.style.color = color;
+                listEl.appendChild(heading);
+                items.forEach(({ node, idx }) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'filter-node';
+                    btn.textContent = node.name;
+                    btn.style.color = color;
+                    btn.addEventListener('click', () => selectNodeByIndex(idx));
+                    listEl.appendChild(btn);
+                });
+            });
+        }
+
+        document.getElementById('filter-toggle').addEventListener('click', () => {
+            const list = document.getElementById('filter-list');
+            const chevron = document.getElementById('filter-chevron');
+            const isOpen = list.classList.toggle('open');
+            chevron.textContent = isOpen ? '▲' : '▼';
+            document.getElementById('filter-toggle').setAttribute('aria-expanded', isOpen);
+        });
 
         canvas.addEventListener('wheel', e => {
             e.preventDefault();
