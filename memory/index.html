@@ -203,7 +203,7 @@
                 return;
             }
             try {
-                const nodesResponse = await fetch('./data/nodes.json');
+                const nodesResponse = await fetch('./data/nodes-50pct.json');
                 const rawNodes = await nodesResponse.json();
 
                 nodes = rawNodes.map((n, idx) => {
@@ -230,7 +230,7 @@
                     };
                 });
 
-                const synapsesResponse = await fetch('./data/synapses.json');
+                const synapsesResponse = await fetch('./data/synapses-50pct.json');
                 const rawSynapses = await synapsesResponse.json();
 
                 edges = rawSynapses.map(s => {
