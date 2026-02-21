@@ -338,7 +338,9 @@
                         ctx.lineTo(p2.x, p2.y);
                         ctx.stroke();
                     } else {
-                        // Default cyan
+                        // Not connected to selected — dim like non-selected nodes
+                        const edgeDimAlpha = activeNodeIds !== null ? 0.22 : 1;
+                        ctx.globalAlpha = edgeDimAlpha;
                         ctx.strokeStyle = `rgba(0, 100, 255, ${strength * 0.2})`;
                         ctx.lineWidth = Math.max(4, e.weight / 2.5) + 2;
                         ctx.lineCap = 'round';
@@ -359,6 +361,7 @@
                         ctx.moveTo(p1.x, p1.y);
                         ctx.lineTo(p2.x, p2.y);
                         ctx.stroke();
+                        ctx.globalAlpha = 1;
                     }
                 });
 
