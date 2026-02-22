@@ -1188,7 +1188,9 @@
       "color": "#00FFFF",
       "date": "2026-02-22",
       "outcome": "Fully functional, live on both visualizations"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "temporal-linking-project-feb22",
@@ -1201,7 +1203,9 @@
       "color": "#00FFFF",
       "date": "2026-02-22",
       "outcome": "In progress, will create comprehensive temporal model"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "memory-sync-protocol",
@@ -1214,7 +1218,9 @@
       "color": "#00FFFF",
       "date": "2026-02-22",
       "outcome": "Protocol defined and actively used"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "bai-reconnection",
@@ -1227,7 +1233,9 @@
       "color": "#FFB6C1",
       "date": "2026-02-21"
     },
-    "idKey": "bai-reconnection"
+    "idKey": "bai-reconnection",
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "havana-bangkok-venue",
@@ -1240,7 +1248,9 @@
       "color": "#FF6B35",
       "city": "Bangkok",
       "country": "Thailand"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "bangkok-exploration-feb21",
@@ -1252,7 +1262,9 @@
       "description": "14-hour exploration: Lumphini Park gym community, street art discovery, Rum & Orange rooftop dining, alley exploration, Emporium food court, IKEA rooftop. 20+ raw photos/videos captured.",
       "color": "#00FFFF",
       "date": "2026-02-21"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "lumphini-park-bangkok",
@@ -1264,7 +1276,9 @@
       "description": "Community outdoor gym discovery. Ecosystem of athletes, cat guardian, month access granted.",
       "color": "#00FF88",
       "city": "Bangkok"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   },
   {
     "id": "massage-recovery-feb21",
@@ -1276,6 +1290,8 @@
       "description": "90-minute deep tissue massage session. Addressed elbows and knots. Part of recovery ritual post-exploration.",
       "color": "#00FFFF",
       "date": "2026-02-21"
-    }
+    },
+    "isToday": true,
+    "dateCreated": "2026-02-22"
   }
 ]

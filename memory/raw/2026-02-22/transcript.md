@@ -100,3 +100,49 @@ The nodes ARE the memories. Everything feeds into them.
 **Key Insight:** The nodes/synapses JSON is the canonical source of truth for both Paul's and Claude Code's memories. Everything—raw content, memory files, visualizations—derives from and feeds back into this graph.
 
 **Next:** Await temporal linking completion, then memory sync with updated nodes reflecting full 4D structure.
+
+### 13:00–13:41 - RawClaw Infrastructure & Deep Linking
+
+#### 13:00+ - QR Code & URL Strategy
+Paul shared link to existing character pages (paulvisciano.github.io/characters/#greta). Discussed adding:
+- Deep links from neural nodes to character pages
+- URL-driven navigation: click node → hash updates → shareable URL
+- QR code generation for sharing individual people
+
+#### 13:30 - Deep Linking Implementation
+Implemented URL-driven navigation on Jarvis:
+- Click a node → URL updates to paulvisciano.github.io/memory/#leo (or any node id)
+- Hash-based routing enables deep linking to specific people
+- Shareability: Copy URL → anyone can explore that person's story
+- Browser back/forward buttons work naturally
+
+#### 13:35 - Mobile UX Enhancement
+Discussed mobile-first UI redesign:
+- Bottom drawer (slide-up) instead of fixed sidebar
+- Native mobile experience (swipe up/down)
+- Integrated filter bar in drawer (All, Today, People, Locations, Activities)
+- Desktop keeps sidebar, mobile gets drawer
+
+#### 13:41 - Bottom Drawer Deployed
+Implemented fully responsive bottom drawer:
+- Mobile: Click node → drawer slides up with details + filters
+- Desktop: Fixed sidebar continues to work
+- Swipe handle to dismiss
+- Filter state synced between desktop/mobile
+
+#### 13:41 - Memory Sync Requested
+Paul requested memory sync to capture full day + activate Today filter functionality.
+
+---
+
+**Session Achievements (Feb 22, full day):**
+- ✅ Filter system (desktop + mobile)
+- ✅ Deep linking (shareable URLs)
+- ✅ Mobile bottom drawer
+- ✅ Character page integration
+- ✅ 20+ raw photos captured (curated set to be selected)
+- ✅ Infrastructure planning (Feb 22 episode structure)
+- ✅ RawClaw repo initialized
+- ✅ 104 nodes, 297 synapses
+- ✅ Khanh character enriched
+- ✅ URL navigation live
