@@ -1147,53 +1147,5 @@
       "significance": "Not imposing disappointment on someone's joy. Choosing when to address issues. Restraint and maturity. Respecting her fun instead of being bitter.",
       "color": "#FFC300"
     }
-  },
-  {
-    "id": "filter-interface",
-    "label": "Filter Interface",
-    "category": "capability",
-    "frequency": 8,
-    "attributes": {
-      "type": "system",
-      "description": "Interactive filtering by category - People, Locations, Activities. Auto-switch to All when clicking node to reveal full context.",
-      "color": "#00FFFF",
-      "createdDate": "2026-02-22"
-    }
-  },
-  {
-    "id": "accountability-in-collaboration",
-    "label": "Accountability in Collaboration",
-    "category": "value",
-    "frequency": 7,
-    "attributes": {
-      "type": "principle",
-      "description": "Honest feedback improves systems. Forgetting technical details creates friction. Documentation of implementation specs is essential.",
-      "color": "#FFD700",
-      "createdDate": "2026-02-22"
-    }
-  },
-  {
-    "id": "temporal-linking",
-    "label": "Temporal Linking",
-    "category": "capability",
-    "frequency": 10,
-    "attributes": {
-      "type": "architecture",
-      "description": "4D memory model: people + places + dates + connections. Parse moments.js → extract from ChatGPT logs → build temporal synapses.",
-      "color": "#00FFFF",
-      "createdDate": "2026-02-22"
-    }
-  },
-  {
-    "id": "canonical-nodes",
-    "label": "Canonical Nodes",
-    "category": "value",
-    "frequency": 9,
-    "attributes": {
-      "type": "principle",
-      "description": "The nodes ARE the memories. nodes-100pct.json + synapses-100pct.json = source of truth for all understanding. Everything derives from the graph.",
-      "color": "#FFD700",
-      "createdDate": "2026-02-22"
-    }
   }
 ]

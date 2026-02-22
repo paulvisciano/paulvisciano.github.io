@@ -1741,59 +1741,5 @@
     "target": "havana-bangkok",
     "weight": 6,
     "type": "venue"
-  },
-  {
-    "source": "claude-code",
-    "target": "filter-interface",
-    "weight": 8,
-    "type": "built"
-  },
-  {
-    "source": "paul",
-    "target": "filter-interface",
-    "weight": 6,
-    "type": "used"
-  },
-  {
-    "source": "claude-code",
-    "target": "accountability-in-collaboration",
-    "weight": 7,
-    "type": "learned"
-  },
-  {
-    "source": "paul",
-    "target": "accountability-in-collaboration",
-    "weight": 6,
-    "type": "taught"
-  },
-  {
-    "source": "claude-code",
-    "target": "temporal-linking",
-    "weight": 10,
-    "type": "architected"
-  },
-  {
-    "source": "paul",
-    "target": "temporal-linking",
-    "weight": 9,
-    "type": "initiated"
-  },
-  {
-    "source": "claude-code",
-    "target": "canonical-nodes",
-    "weight": 9,
-    "type": "recognized"
-  },
-  {
-    "source": "filter-interface",
-    "target": "neural-mind",
-    "weight": 6,
-    "type": "enables"
-  },
-  {
-    "source": "temporal-linking",
-    "target": "neural-mind",
-    "weight": 7,
-    "type": "deepens"
   }
 ]
