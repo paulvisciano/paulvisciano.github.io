@@ -1186,5 +1186,66 @@
       "date": "2026-02-22",
       "outcome": "Protocol defined and actively used"
     }
+  },
+  {
+    "id": "bai-reconnection",
+    "label": "Bai",
+    "category": "person",
+    "frequency": 8,
+    "attributes": {
+      "role": "reconnection",
+      "description": "Met at Havana Aug 2025. Sweet messages online. Feb 21 2026 reconnection attempt showed gap between online intimacy and in-person authenticity. Red flags: plays games, uses alcohol to cope, avoidant.",
+      "color": "#FFB6C1",
+      "date": "2026-02-21"
+    }
+  },
+  {
+    "id": "havana-bangkok-venue",
+    "label": "Havana",
+    "category": "location",
+    "frequency": 8,
+    "attributes": {
+      "type": "nightclub",
+      "description": "Bangkok nightclub where Paul first met Bai (Aug 2025) and attempted reconnection (Feb 21). Place can't recreate magic - reconnection was awkward despite good memories of first meeting.",
+      "color": "#FF6B35",
+      "city": "Bangkok",
+      "country": "Thailand"
+    }
+  },
+  {
+    "id": "bangkok-exploration-feb21",
+    "label": "Bangkok Urban Exploration",
+    "category": "activity",
+    "frequency": 9,
+    "attributes": {
+      "role": "journey",
+      "description": "14-hour exploration: Lumphini Park gym community, street art discovery, Rum & Orange rooftop dining, alley exploration, Emporium food court, IKEA rooftop. 20+ raw photos/videos captured.",
+      "color": "#00FFFF",
+      "date": "2026-02-21"
+    }
+  },
+  {
+    "id": "lumphini-park-bangkok",
+    "label": "Lumphini Park",
+    "category": "location",
+    "frequency": 6,
+    "attributes": {
+      "type": "outdoor gym",
+      "description": "Community outdoor gym discovery. Ecosystem of athletes, cat guardian, month access granted.",
+      "color": "#00FF88",
+      "city": "Bangkok"
+    }
+  },
+  {
+    "id": "massage-recovery-feb21",
+    "label": "Deep Tissue Massage Recovery",
+    "category": "activity",
+    "frequency": 5,
+    "attributes": {
+      "role": "self-care",
+      "description": "90-minute deep tissue massage session. Addressed elbows and knots. Part of recovery ritual post-exploration.",
+      "color": "#00FFFF",
+      "date": "2026-02-21"
+    }
   }
 ]

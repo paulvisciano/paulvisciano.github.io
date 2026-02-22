@@ -1777,5 +1777,59 @@
     "target": "memory-architecture",
     "weight": 7,
     "type": "defines"
+  },
+  {
+    "source": "paul",
+    "target": "bai-reconnection",
+    "weight": 8,
+    "type": "met"
+  },
+  {
+    "source": "bai-reconnection",
+    "target": "havana-bangkok-venue",
+    "weight": 9,
+    "type": "met-at"
+  },
+  {
+    "source": "paul",
+    "target": "havana-bangkok-venue",
+    "weight": 7,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "bangkok-exploration-feb21",
+    "weight": 9,
+    "type": "explored"
+  },
+  {
+    "source": "bangkok-exploration-feb21",
+    "target": "lumphini-park-bangkok",
+    "weight": 8,
+    "type": "includes"
+  },
+  {
+    "source": "bangkok-exploration-feb21",
+    "target": "havana-bangkok-venue",
+    "weight": 6,
+    "type": "evening-at"
+  },
+  {
+    "source": "paul",
+    "target": "massage-recovery-feb21",
+    "weight": 6,
+    "type": "experienced"
+  },
+  {
+    "source": "bangkok-exploration-feb21",
+    "target": "massage-recovery-feb21",
+    "weight": 6,
+    "type": "followed-by"
+  },
+  {
+    "source": "bai-reconnection",
+    "target": "clarity-through-action",
+    "weight": 7,
+    "type": "taught"
   }
 ]
