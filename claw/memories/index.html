@@ -669,7 +669,14 @@
         });
 
         canvas.addEventListener('click', e => {
-            hitTestNode(e.clientX, e.clientY);
+            if (hitTestNode(e.clientX, e.clientY)) {
+                // Node was clicked - switch to "All" filter to show all connections
+                if (currentFilter !== 'all') {
+                    currentFilter = 'all';
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelector('[data-filter="all"]').classList.add('active');
+                }
+            }
         });
 
         window.clearSelection = () => {
