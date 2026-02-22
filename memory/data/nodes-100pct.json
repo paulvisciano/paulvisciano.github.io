@@ -27,9 +27,11 @@
     "category": "person",
     "frequency": 52,
     "attributes": {
-      "role": "travel buddy",
-      "description": "Vietnam-American bridge, Hawaii origin, fitness mentor, Asia guide, authentic connection",
-      "color": "#45B7D1"
+      "role": "travel buddy, Chicago origin",
+      "description": "Vietnam-American bridge. Met Paul in Chicago playing volleyball (back when Paul was married). Knows Leo and Boy from Chicago. Hawaii origin, fitness mentor, Asia guide, authentic connection. Multiple countries traveled together.",
+      "color": "#45B7D1",
+      "firstMet": "Chicago, volleyball",
+      "knownSince": "married era"
     }
   },
   {

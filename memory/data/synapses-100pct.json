@@ -2005,5 +2005,23 @@
     "target": "lumphini-park-bangkok",
     "weight": 0,
     "type": "visited"
+  },
+  {
+    "source": "khanh",
+    "target": "chicago",
+    "weight": 8,
+    "type": "first-met-at"
+  },
+  {
+    "source": "khanh",
+    "target": "leo",
+    "weight": 7,
+    "type": "knows-from-chicago"
+  },
+  {
+    "source": "khanh",
+    "target": "boy",
+    "weight": 6,
+    "type": "knows-from-chicago"
   }
 ]
