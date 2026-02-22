@@ -49,3 +49,22 @@ coverage/
 *.zip
 *.tar.gz# AI Memory - exclude personal conversation history
 memories/sessions/*cursor-history*
+
+# Raw content - local files only, never commit to GitHub
+raw/
+memory/raw/
+*.html.bak
+chat.*
+conversations.*
+group_chats.*
+message_feedback.*
+shared_conversations.*
+shopping.*
+sora.*
+basispoints.*
+user-*/
+
+# Large files that block GitHub Pages deployment
+*.tar.gz
+*.zip
+*.rar

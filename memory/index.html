@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
     <title>Jarvis Neural Mind</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,12 +22,17 @@
             background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
             filter: brightness(1.1);
             touch-action: none;
-            transition: margin-right 0.25s ease;
+            transition: margin-right 0.25s ease, margin-bottom 0.3s ease;
         }
         
         @media (max-width: 768px) {
             canvas {
                 margin-right: 0;
+                margin-bottom: 0;
+                transition: margin-bottom 0.3s ease;
+            }
+            canvas.drawer-open {
+                margin-bottom: 60vh;
             }
         }
         #filter-bar {
@@ -165,7 +173,25 @@
         
         @media (max-width: 768px) {
             #info {
-                display: none !important;
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                top: auto;
+                width: 100%;
+                height: auto;
+                min-height: 60vh;
+                max-height: 70vh;
+                border-left: none;
+                border-top: 2px solid rgba(0, 255, 255, 0.6);
+                border-radius: 20px 20px 0 0;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            #info.open {
+                transform: translateY(0);
             }
             #panel-toggle {
                 display: none !important;
@@ -449,7 +475,8 @@
             'person': '#ff00aa',
             'location': '#00ff88',
             'emotion': '#aa00ff',
-            'temporal': '#ffaa00'
+            'temporal': '#ffaa00',
+            'region': '#8800ff'  // Purple for geographic regions
         };
 
         let nodes = [];
@@ -483,8 +510,14 @@
                 return;
             }
             try {
-                const nodesResponse = await fetch('./data/nodes-100pct.json');
+                const nodesResponse = await fetch('./data/nodes-100pct.json?t=' + Date.now());
+                if (!nodesResponse.ok) {
+                    throw new Error(`Nodes fetch failed: ${nodesResponse.status}`);
+                }
                 const rawNodes = await nodesResponse.json();
+                if (!rawNodes || rawNodes.length === 0) {
+                    throw new Error('Nodes JSON is empty');
+                }
 
                 nodes = rawNodes.map((n, idx) => {
                     const angle = (idx / rawNodes.length) * Math.PI * 2;
@@ -492,7 +525,10 @@
                     const x = Math.cos(angle) * radius;
                     const y = (Math.random() - 0.5) * 500;
                     const z = Math.sin(angle) * radius;
-                    const size = 6 + (n.frequency / 85) * 10;
+                    // Regions are bigger and brighter
+                    const baseSize = n.category === 'region' ? 12 : 6;
+                    const sizeBoost = n.category === 'region' ? 3 : 1;
+                    const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
                     const glow = size * 2.5;
                     const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
                     return {
@@ -510,8 +546,14 @@
                     };
                 });
 
-                const synapsesResponse = await fetch('./data/synapses-100pct.json');
+                const synapsesResponse = await fetch('./data/synapses-100pct.json?t=' + Date.now());
+                if (!synapsesResponse.ok) {
+                    throw new Error(`Synapses fetch failed: ${synapsesResponse.status}`);
+                }
                 const rawSynapses = await synapsesResponse.json();
+                if (!rawSynapses || rawSynapses.length === 0) {
+                    throw new Error('Synapses JSON is empty');
+                }
 
                 edges = rawSynapses.map(s => {
                     const fromIdx = nodes.findIndex(n => n.idKey === s.source);
@@ -984,19 +1026,37 @@
             }
         }
 
+        // Mobile drawer management
+        function openDrawer() {
+            const info = document.getElementById('info');
+            const canvas = document.getElementById('canvas');
+            if (window.innerWidth <= 768) {
+                info.classList.add('open');
+                canvas.classList.add('drawer-open');
+            }
+        }
+
+        function closeDrawer() {
+            const info = document.getElementById('info');
+            const canvas = document.getElementById('canvas');
+            info.classList.remove('open');
+            canvas.classList.remove('drawer-open');
+        }
+
         window.selectNodeByIndex = function(idx) {
             if (idx < 0 || idx >= nodes.length) return;
             selected = idx;
             showNodeDetails(nodes[selected]);
+            openDrawer();
         };
 
-        const filterCategoryOrder = ['person', 'location', 'activity', 'temporal', 'emotion'];
-        const filterCategoryLabels = { person: 'People', location: 'Locations', activity: 'Activities', temporal: 'Temporal', emotion: 'Emotions' };
+        const filterCategoryOrder = ['region', 'person', 'location', 'activity', 'temporal', 'emotion'];
+        const filterCategoryLabels = { region: 'Regions', person: 'People', location: 'Locations', activity: 'Activities', temporal: 'Temporal', emotion: 'Emotions' };
 
         function populateFilterList() {
             const listEl = document.getElementById('filter-list');
             if (!listEl || nodes.length === 0) return;
-            const byCategory = { person: [], location: [], activity: [], temporal: [], emotion: [] };
+            const byCategory = { person: [], location: [], activity: [], region: [], temporal: [], emotion: [] };
             nodes.forEach((n, idx) => {
                 const t = (n.type || '').toLowerCase();
                 if (byCategory[t]) byCategory[t].push({ node: n, idx });

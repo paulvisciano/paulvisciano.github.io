@@ -886,7 +886,7 @@
     "target": "wealth-redistribution",
     "weight": 0.8,
     "type": "activity-mechanic",
-    "label": "quest system, ฿741"
+    "label": "quest system, \u0e3f741"
   },
   {
     "source": "urban-runner",
@@ -1110,7 +1110,7 @@
     "target": "bangkok",
     "weight": 0.78,
     "type": "location-activity",
-    "label": "Amsterdam Café reggae"
+    "label": "Amsterdam Caf\u00e9 reggae"
   },
   {
     "source": "nightlife-exploration",
@@ -1166,7 +1166,7 @@
     "target": "bangkok",
     "weight": 0.92,
     "type": "episode-mechanic",
-    "label": "฿741 redistributed"
+    "label": "\u0e3f741 redistributed"
   },
   {
     "source": "wealth-redistribution",
@@ -2023,5 +2023,159 @@
     "target": "boy",
     "weight": 6,
     "type": "knows-from-chicago"
+  },
+  {
+    "from": "europe",
+    "to": "athens",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "europe",
+    "to": "barcelona",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "europe",
+    "to": "lisbon",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "europe",
+    "to": "sofia",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "europe",
+    "to": "varna",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "europe",
+    "to": "germany",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "europe",
+    "to": "turkey",
+    "label": "part of Europe",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "chicago",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "miami",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "san-diego",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "boulder",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "fort-lauderdale",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "clearwater",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "st-petersburg",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "americas",
+    "to": "medellin",
+    "label": "part of Americas",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "middle-east",
+    "to": "beirut",
+    "label": "part of Middle East",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "middle-east",
+    "to": "baalbek",
+    "label": "part of Middle East",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "middle-east",
+    "to": "dubai",
+    "label": "part of Middle East",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "middle-east",
+    "to": "abu-dhabi",
+    "label": "part of Middle East",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "pacific",
+    "to": "honolulu",
+    "label": "part of Pacific",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "bulgaria",
+    "to": "sofia",
+    "label": "part of Bulgaria (Childhood)",
+    "strength": 1.5,
+    "type": "geographic"
+  },
+  {
+    "from": "bulgaria",
+    "to": "varna",
+    "label": "part of Bulgaria (Childhood)",
+    "strength": 1.5,
+    "type": "geographic"
   }
 ]

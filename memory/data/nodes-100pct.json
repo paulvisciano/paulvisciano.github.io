@@ -18,7 +18,7 @@
     "frequency": 58,
     "attributes": {
       "role": "travel companion",
-      "description": "Met Miami beach volleyball (Ocean Drive), both traveling to Medellín simultaneously, epic months there, evolved into deep travel brotherhood, 7+ countries, yoga/wellness partner, like younger brother",
+      "description": "Met Miami beach volleyball (Ocean Drive), both traveling to Medell\u00edn simultaneously, epic months there, evolved into deep travel brotherhood, 7+ countries, yoga/wellness partner, like younger brother",
       "color": "#4ECDC4"
     },
     "idKey": "wouter"
@@ -321,7 +321,7 @@
     "attributes": {
       "country": "Thailand",
       "type": "city",
-      "significance": "Urban Runner Days 1-8, 48 miles, ฿741 redistribution, Pura Vida K-FIT, peak creative",
+      "significance": "Urban Runner Days 1-8, 48 miles, \u0e3f741 redistribution, Pura Vida K-FIT, peak creative",
       "color": "#FF6B9D"
     }
   },
@@ -447,7 +447,7 @@
   },
   {
     "id": "medellin",
-    "label": "Medellín",
+    "label": "Medell\u00edn",
     "category": "location",
     "frequency": 26,
     "attributes": {
@@ -751,7 +751,7 @@
     "frequency": 36,
     "attributes": {
       "type": "philosophy",
-      "significance": "Urban Runner quests, street vendors, service workers, ฿741 Bangkok",
+      "significance": "Urban Runner quests, street vendors, service workers, \u0e3f741 Bangkok",
       "impact": "high",
       "color": "#2A9D8F"
     }
@@ -787,7 +787,7 @@
     "frequency": 34,
     "attributes": {
       "type": "lifestyle",
-      "significance": "Amsterdam Café Bangkok, karaoke Manila, goth clubs Tampa, balanced",
+      "significance": "Amsterdam Caf\u00e9 Bangkok, karaoke Manila, goth clubs Tampa, balanced",
       "impact": "medium",
       "color": "#6C63FF"
     }
@@ -983,7 +983,7 @@
   },
   {
     "id": "bulgaria-era",
-    "label": "Bulgaria Era (1988–2004)",
+    "label": "Bulgaria Era (1988\u20132004)",
     "category": "temporal",
     "frequency": 34,
     "attributes": {
@@ -994,7 +994,7 @@
   },
   {
     "id": "usa-foundation",
-    "label": "USA Foundation (2005–2015)",
+    "label": "USA Foundation (2005\u20132015)",
     "category": "temporal",
     "frequency": 40,
     "attributes": {
@@ -1016,7 +1016,7 @@
   },
   {
     "id": "florida-hub",
-    "label": "Florida Hub (2023–2026)",
+    "label": "Florida Hub (2023\u20132026)",
     "category": "temporal",
     "frequency": 32,
     "attributes": {
@@ -1027,7 +1027,7 @@
   },
   {
     "id": "coastal-nomad-phase",
-    "label": "Coastal Nomad Phase (2025–Present)",
+    "label": "Coastal Nomad Phase (2025\u2013Present)",
     "category": "temporal",
     "frequency": 40,
     "attributes": {
@@ -1043,7 +1043,7 @@
     "frequency": 32,
     "attributes": {
       "type": "infrastructure-project",
-      "significance": "Integrated fitness (volleyball + gym + yoga + recovery) continents, Valencia→Bangkok",
+      "significance": "Integrated fitness (volleyball + gym + yoga + recovery) continents, Valencia\u2192Bangkok",
       "impact": "high",
       "color": "#00FF88"
     }
@@ -1091,7 +1091,7 @@
     "frequency": 56,
     "attributes": {
       "type": "creative-process",
-      "significance": "Voice→ChatGPT→image→Grok→comic→publish, 28+ episodes, pipeline",
+      "significance": "Voice\u2192ChatGPT\u2192image\u2192Grok\u2192comic\u2192publish, 28+ episodes, pipeline",
       "impact": "high",
       "color": "#34D399"
     }
@@ -1292,6 +1292,61 @@
       "date": "2026-02-21"
     },
     "isToday": true,
+    "dateCreated": "2026-02-22"
+  },
+  {
+    "id": "europe",
+    "label": "Europe",
+    "category": "region",
+    "frequency": 0,
+    "attributes": {
+      "role": "geographic-cluster",
+      "color": "#ff88ff"
+    },
+    "dateCreated": "2026-02-22"
+  },
+  {
+    "id": "americas",
+    "label": "Americas",
+    "category": "region",
+    "frequency": 0,
+    "attributes": {
+      "role": "geographic-cluster",
+      "color": "#ff8888"
+    },
+    "dateCreated": "2026-02-22"
+  },
+  {
+    "id": "middle-east",
+    "label": "Middle East",
+    "category": "region",
+    "frequency": 0,
+    "attributes": {
+      "role": "geographic-cluster",
+      "color": "#ffff88"
+    },
+    "dateCreated": "2026-02-22"
+  },
+  {
+    "id": "pacific",
+    "label": "Pacific",
+    "category": "region",
+    "frequency": 0,
+    "attributes": {
+      "role": "geographic-cluster",
+      "color": "#88ffff"
+    },
+    "dateCreated": "2026-02-22"
+  },
+  {
+    "id": "bulgaria",
+    "label": "Bulgaria (Childhood)",
+    "category": "region",
+    "frequency": 0,
+    "attributes": {
+      "role": "geographic-cluster",
+      "color": "#ff00aa"
+    },
     "dateCreated": "2026-02-22"
   }
 ]

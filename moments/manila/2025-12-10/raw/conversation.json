@@ -1,0 +1,630 @@
+{
+  "title": "Manila day 9 details",
+  "create_time": 1765331425.611531,
+  "update_time": 1765332576.541829,
+  "mapping": {
+    "9d11a4c6-4f89-47e4-b301-d8cde4b56e62": {
+      "id": "9d11a4c6-4f89-47e4-b301-d8cde4b56e62",
+      "message": null,
+      "parent": null,
+      "children": [
+        "d1b91175-4e2b-49d0-9337-8e156c223803"
+      ]
+    },
+    "d1b91175-4e2b-49d0-9337-8e156c223803": {
+      "id": "d1b91175-4e2b-49d0-9337-8e156c223803",
+      "message": {
+        "id": "d1b91175-4e2b-49d0-9337-8e156c223803",
+        "author": {
+          "role": "system",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": null,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            ""
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 0.0,
+        "metadata": {
+          "is_visually_hidden_from_conversation": true,
+          "can_save": false
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "9d11a4c6-4f89-47e4-b301-d8cde4b56e62",
+      "children": [
+        "b988c78e-f6c4-4d5b-ace7-0101d5a3facd"
+      ]
+    },
+    "b988c78e-f6c4-4d5b-ace7-0101d5a3facd": {
+      "id": "b988c78e-f6c4-4d5b-ace7-0101d5a3facd",
+      "message": {
+        "id": "b988c78e-f6c4-4d5b-ace7-0101d5a3facd",
+        "author": {
+          "role": "system",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765331425.2538211,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            ""
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "attachments": [
+            {
+              "id": "file-1ohcKkVRm6cvet6nkpUodw",
+              "name": "episode-cover.png",
+              "mimeType": "image/png",
+              "fileSizeTokens": null
+            },
+            {
+              "id": "file-SawzM35ymbD7z61G2nirFy",
+              "name": "page-template.png",
+              "mimeType": "image/png",
+              "fileSizeTokens": null
+            },
+            {
+              "id": "file-UxwSoa8DJAUUEjKu84Zo5Z",
+              "name": "character-paul.png",
+              "mimeType": "image/png",
+              "fileSizeTokens": null
+            }
+          ],
+          "is_visually_hidden_from_conversation": true,
+          "can_save": false
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "d1b91175-4e2b-49d0-9337-8e156c223803",
+      "children": [
+        "bbb212ef-c7a8-46db-9779-612780dbe786"
+      ]
+    },
+    "bbb212ef-c7a8-46db-9779-612780dbe786": {
+      "id": "bbb212ef-c7a8-46db-9779-612780dbe786",
+      "message": {
+        "id": "bbb212ef-c7a8-46db-9779-612780dbe786",
+        "author": {
+          "role": "user",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765331425.278918,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "Manila day 9"
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "is_visually_hidden_from_conversation": false,
+          "content_references": [],
+          "search_result_groups": [],
+          "search_queries": [],
+          "image_results": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "real_time_audio_has_video": false,
+          "dictation": false,
+          "image_gen_async": false,
+          "trigger_async_ux": false,
+          "writing_blocks": {},
+          "request_id": "e1df2419-ba5e-4194-af04-e7e3c99f6879",
+          "message_source": null,
+          "turn_exchange_id": "a390e4b7-01ff-4ff1-81de-6d40675351e7",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "b988c78e-f6c4-4d5b-ace7-0101d5a3facd",
+      "children": [
+        "9b502783-2772-4099-9ea2-2a036c144381"
+      ]
+    },
+    "9b502783-2772-4099-9ea2-2a036c144381": {
+      "id": "9b502783-2772-4099-9ea2-2a036c144381",
+      "message": {
+        "id": "9b502783-2772-4099-9ea2-2a036c144381",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765331425.4438405,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            ""
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "request_id": "e1df2419-ba5e-4194-af04-e7e3c99f6879",
+          "message_type": "next",
+          "model_slug": "gpt-5-1",
+          "default_model_slug": "gpt-5-1",
+          "parent_id": "bbb212ef-c7a8-46db-9779-612780dbe786",
+          "turn_exchange_id": "a390e4b7-01ff-4ff1-81de-6d40675351e7",
+          "can_save": false
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "bbb212ef-c7a8-46db-9779-612780dbe786",
+      "children": [
+        "fd3dc127-484b-4221-b677-f58128582c31"
+      ]
+    },
+    "fd3dc127-484b-4221-b677-f58128582c31": {
+      "id": "fd3dc127-484b-4221-b677-f58128582c31",
+      "message": {
+        "id": "fd3dc127-484b-4221-b677-f58128582c31",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765331427.966204,
+        "update_time": 1765331431.552242,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "Got you — **Manila Day 9** is now open.  \nBefore I generate Page 1, tell me:\n\n**What happened on Day 9?**  \nGive me the sequence of events + any photos you want me to match (fit, locations, who was with you).\n\nOnce you drop the details, I’ll turn it into the first HD cinematic Urban Runner comic page."
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 1.0,
+        "metadata": {
+          "finish_details": {
+            "type": "stop",
+            "stop_tokens": [
+              200002
+            ]
+          },
+          "is_complete": true,
+          "citations": [],
+          "content_references": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "request_id": "e1df2419-ba5e-4194-af04-e7e3c99f6879",
+          "message_type": "next",
+          "model_slug": "gpt-5-1",
+          "default_model_slug": "gpt-5-1",
+          "parent_id": "9b502783-2772-4099-9ea2-2a036c144381",
+          "turn_exchange_id": "a390e4b7-01ff-4ff1-81de-6d40675351e7",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": "final"
+      },
+      "parent": "9b502783-2772-4099-9ea2-2a036c144381",
+      "children": [
+        "bbb21052-1cfe-4f74-960d-dcdd9b55ab59"
+      ]
+    },
+    "bbb21052-1cfe-4f74-960d-dcdd9b55ab59": {
+      "id": "bbb21052-1cfe-4f74-960d-dcdd9b55ab59",
+      "message": {
+        "id": "bbb21052-1cfe-4f74-960d-dcdd9b55ab59",
+        "author": {
+          "role": "user",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765331443.919778,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "What is the date of day 9?"
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "is_visually_hidden_from_conversation": false,
+          "content_references": [],
+          "search_result_groups": [],
+          "search_queries": [],
+          "image_results": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "real_time_audio_has_video": false,
+          "dictation": false,
+          "image_gen_async": false,
+          "trigger_async_ux": false,
+          "writing_blocks": {},
+          "request_id": "2c841ba6-6fa8-4e8e-9150-7786c598c612",
+          "message_source": null,
+          "turn_exchange_id": "caa6611f-e8c4-4312-9cc7-2d30479f7094",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "fd3dc127-484b-4221-b677-f58128582c31",
+      "children": [
+        "caa62217-27b3-4a8f-9c31-c5e354d35a57"
+      ]
+    },
+    "caa62217-27b3-4a8f-9c31-c5e354d35a57": {
+      "id": "caa62217-27b3-4a8f-9c31-c5e354d35a57",
+      "message": {
+        "id": "caa62217-27b3-4a8f-9c31-c5e354d35a57",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765331444.127181,
+        "update_time": 1765331455.878066,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "Here’s the timeline you and I have been building for **Manila Days 1–8**, and from that the exact date for **Day 9** falls into place.\n\n### ✔️ Your Manila Timeline  \n- **Day 1:** You arrived from Siargao → **Nov 30, 2025**  \n- **Day 2:** Condom experiment, massage → **Dec 1, 2025**  \n- **Day 3:** Dinner, KTV with Bozhi → **Dec 2, 2025**  \n- **Day 4:** Starfleet → Okada → massage → crashed early → **Dec 3, 2025**  \n- **Day 5:** All-night walk, Korean BBQ with friend → **Dec 4, 2025**  \n- **Day 6:** Korean BBQ → Makati walk → power nap → **Dec 5, 2025**  \n- **Day 7:** Old apartment in Greenbelt → Bumble convos → timeline fix → **Dec 6, 2025**  \n- **Day 8:** The psychedelic/neurology cafe convo + coffee shop day → **Dec 7, 2025**\n\n### 📅 **Therefore:**  \n**Manila Day 9 = December 8, 2025 (Monday).**\n\nIf you want, I can also keep a clean canonical table for every Manila day in your global memory to avoid recalculating later."
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 1.0,
+        "metadata": {
+          "finish_details": {
+            "type": "stop",
+            "stop_tokens": [
+              200002
+            ]
+          },
+          "is_complete": true,
+          "citations": [],
+          "content_references": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "request_id": "2c841ba6-6fa8-4e8e-9150-7786c598c612",
+          "message_type": "next",
+          "model_slug": "gpt-5-1",
+          "default_model_slug": "gpt-5-1",
+          "parent_id": "bbb21052-1cfe-4f74-960d-dcdd9b55ab59",
+          "turn_exchange_id": "caa6611f-e8c4-4312-9cc7-2d30479f7094",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": "final"
+      },
+      "parent": "bbb21052-1cfe-4f74-960d-dcdd9b55ab59",
+      "children": [
+        "bbb21b73-a1bb-42d8-b512-16ef8f4fa20a"
+      ]
+    },
+    "bbb21b73-a1bb-42d8-b512-16ef8f4fa20a": {
+      "id": "bbb21b73-a1bb-42d8-b512-16ef8f4fa20a",
+      "message": {
+        "id": "bbb21b73-a1bb-42d8-b512-16ef8f4fa20a",
+        "author": {
+          "role": "user",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765332492.257581,
+        "update_time": null,
+        "content": {
+          "content_type": "multimodal_text",
+          "parts": [
+            {
+              "content_type": "image_asset_pointer",
+              "asset_pointer": "sediment://file_000000007f7871f5bb7dbdcd680525ac",
+              "size_bytes": 101483,
+              "width": 1440,
+              "height": 3120,
+              "fovea": null,
+              "metadata": {
+                "dalle": null,
+                "gizmo": null,
+                "generation": null,
+                "container_pixel_height": null,
+                "container_pixel_width": null,
+                "emu_omit_glimpse_image": null,
+                "emu_patches_override": null,
+                "lpe_keep_patch_ijhw": null,
+                "lpe_delta_encoding_channel": null,
+                "sanitized": true,
+                "asset_pointer_link": null,
+                "watermarked_asset_pointer": null,
+                "is_no_auth_placeholder": null
+              }
+            },
+            {
+              "content_type": "image_asset_pointer",
+              "asset_pointer": "sediment://file_00000000792471f7a14cadb9129ed413",
+              "size_bytes": 93152,
+              "width": 1440,
+              "height": 3120,
+              "fovea": null,
+              "metadata": {
+                "dalle": null,
+                "gizmo": null,
+                "generation": null,
+                "container_pixel_height": null,
+                "container_pixel_width": null,
+                "emu_omit_glimpse_image": null,
+                "emu_patches_override": null,
+                "lpe_keep_patch_ijhw": null,
+                "lpe_delta_encoding_channel": null,
+                "sanitized": true,
+                "asset_pointer_link": null,
+                "watermarked_asset_pointer": null,
+                "is_no_auth_placeholder": null
+              }
+            },
+            "Here is my timeline from today "
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "is_visually_hidden_from_conversation": false,
+          "content_references": [],
+          "search_result_groups": [],
+          "search_queries": [],
+          "image_results": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "real_time_audio_has_video": false,
+          "dictation": false,
+          "image_gen_async": false,
+          "trigger_async_ux": false,
+          "writing_blocks": {},
+          "request_id": "0d8a3c8e-6c97-468e-abdd-0b602ef4025c",
+          "message_source": null,
+          "turn_exchange_id": "641d5183-fa99-45e8-8ac8-6262243372a6",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "caa62217-27b3-4a8f-9c31-c5e354d35a57",
+      "children": [
+        "9dc7451a-5461-47c3-951b-807691b62161"
+      ]
+    },
+    "9dc7451a-5461-47c3-951b-807691b62161": {
+      "id": "9dc7451a-5461-47c3-951b-807691b62161",
+      "message": {
+        "id": "9dc7451a-5461-47c3-951b-807691b62161",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765332493.3622208,
+        "update_time": null,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            ""
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "request_id": "0d8a3c8e-6c97-468e-abdd-0b602ef4025c",
+          "message_type": "next",
+          "model_slug": "gpt-5-1",
+          "default_model_slug": "gpt-5-1",
+          "parent_id": "bbb21b73-a1bb-42d8-b512-16ef8f4fa20a",
+          "turn_exchange_id": "641d5183-fa99-45e8-8ac8-6262243372a6",
+          "can_save": false
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "bbb21b73-a1bb-42d8-b512-16ef8f4fa20a",
+      "children": [
+        "d5ef2bba-37ee-4f40-a4cf-887149082ff1"
+      ]
+    },
+    "d5ef2bba-37ee-4f40-a4cf-887149082ff1": {
+      "id": "d5ef2bba-37ee-4f40-a4cf-887149082ff1",
+      "message": {
+        "id": "d5ef2bba-37ee-4f40-a4cf-887149082ff1",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765332493.638095,
+        "update_time": 1765332507.070993,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "Perfect — this confirms everything.\n\n### ✅ **Manila Day 9 = Monday, December 8, 2025**\n\nYour Google Timeline screenshots clearly show:\n\n- **Mon, Dec 8, 2025**\n- Start: **The Colonnade Residences**\n- Walking → Greenbelt 3  \n- Back home → long stay at Legazpi Park View  \n- Walking → **iVegan Café**  \n- Long Grab ride → **Wilderness Health Zone (QC)**  \n- Walk → Grab → **Ayala North Exchange**\n- Dinner at **Mr. Korea Unlimited BBQ**\n- Walk home → The Colonnade Residences\n\nSo yes — **Day 9 is December 8, 2025** and we can now generate the full comic for it.\n\n---\n\n### ✔️ Before we generate Page 1  \nTell me:\n\n1. **What was your fit that day?**  \n2. **What were the main story beats?**  \n   (e.g., why you went to QC, what happened at Wilderness Health Zone, any interactions, vibe, reflections)\n3. **Any photos you want matched?**\n\nOnce you drop that, I’ll start **Manila Day 9 – Page 1** in the high-definition Manila template."
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 1.0,
+        "metadata": {
+          "citations": [],
+          "content_references": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "request_id": "0d8a3c8e-6c97-468e-abdd-0b602ef4025c",
+          "message_type": "next",
+          "model_slug": "gpt-5-1",
+          "default_model_slug": "gpt-5-1",
+          "parent_id": "9dc7451a-5461-47c3-951b-807691b62161",
+          "turn_exchange_id": "641d5183-fa99-45e8-8ac8-6262243372a6",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": "final"
+      },
+      "parent": "9dc7451a-5461-47c3-951b-807691b62161",
+      "children": [
+        "bbb2189f-3370-486b-8b70-1b5f8dc0f12d"
+      ]
+    },
+    "bbb2189f-3370-486b-8b70-1b5f8dc0f12d": {
+      "id": "bbb2189f-3370-486b-8b70-1b5f8dc0f12d",
+      "message": {
+        "id": "bbb2189f-3370-486b-8b70-1b5f8dc0f12d",
+        "author": {
+          "role": "user",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765332556.910301,
+        "update_time": null,
+        "content": {
+          "content_type": "multimodal_text",
+          "parts": [
+            {
+              "content_type": "image_asset_pointer",
+              "asset_pointer": "sediment://file_0000000018b071f7bd3c6d7674fbcb8d",
+              "size_bytes": 299852,
+              "width": 3072,
+              "height": 4080,
+              "fovea": null,
+              "metadata": {
+                "dalle": null,
+                "gizmo": null,
+                "generation": null,
+                "container_pixel_height": null,
+                "container_pixel_width": null,
+                "emu_omit_glimpse_image": null,
+                "emu_patches_override": null,
+                "lpe_keep_patch_ijhw": null,
+                "lpe_delta_encoding_channel": null,
+                "sanitized": true,
+                "asset_pointer_link": null,
+                "watermarked_asset_pointer": null,
+                "is_no_auth_placeholder": null
+              }
+            },
+            "This was the fit"
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": null,
+        "weight": 1.0,
+        "metadata": {
+          "is_visually_hidden_from_conversation": false,
+          "content_references": [],
+          "search_result_groups": [],
+          "search_queries": [],
+          "image_results": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "real_time_audio_has_video": false,
+          "dictation": false,
+          "image_gen_async": false,
+          "trigger_async_ux": false,
+          "writing_blocks": {},
+          "request_id": "63d5b923-0a4b-4aea-9490-e34d1525d1e6",
+          "message_source": null,
+          "turn_exchange_id": "0d1d11c7-9f28-4659-99a9-eddc1678d300",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": null
+      },
+      "parent": "d5ef2bba-37ee-4f40-a4cf-887149082ff1",
+      "children": [
+        "6c10e123-c630-4d3e-aa1c-33936c116784"
+      ]
+    },
+    "6c10e123-c630-4d3e-aa1c-33936c116784": {
+      "id": "6c10e123-c630-4d3e-aa1c-33936c116784",
+      "message": {
+        "id": "6c10e123-c630-4d3e-aa1c-33936c116784",
+        "author": {
+          "role": "assistant",
+          "name": null,
+          "metadata": {}
+        },
+        "create_time": 1765332558.094771,
+        "update_time": 1765332573.98287,
+        "content": {
+          "content_type": "text",
+          "parts": [
+            "Perfect — this will be **your canonical fit for Manila Day 9**:\n\n- White textured short-sleeve button-up  \n- Tan shorts  \n- Black fanny pack  \n- Yeezys  \n- Sunglasses  \n- Hair styled back, clean Manila hallway lighting  \n\nI'll match this look exactly on every panel of the Day 9 pages.\n\n### Next  \nTell me **the story beats** of Day 9 so I can generate Page 1:\n\nFrom your Google Timeline, the skeleton is:\n\n- Morning walk → Greenbelt  \n- Back home  \n- Long chill/work block  \n- iVegan Café  \n- Long Grab ride to **Wilderness Health Zone (Quezon City)**  \n- Walk → Grab  \n- **Ayala North Exchange**  \n- **Mr. Korea Unlimited BBQ**  \n- Walk home to The Colonnade\n\nBut I need **your narrative**:\n\n1. *Why did you go to QC?*  \n2. *What happened at Wilderness Health Zone?*  \n3. *How were you feeling this day?*  \n4. *Anything noteworthy at the Korean BBQ or during your walks?*\n\nDrop that and I’ll generate **Manila Day 9 – Page 1** in full HD comic format."
+          ]
+        },
+        "status": "finished_successfully",
+        "end_turn": true,
+        "weight": 1.0,
+        "metadata": {
+          "finish_details": {
+            "type": "stop",
+            "stop_tokens": [
+              200002
+            ]
+          },
+          "is_complete": true,
+          "citations": [],
+          "content_references": [],
+          "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+          "request_id": "63d5b923-0a4b-4aea-9490-e34d1525d1e6",
+          "message_type": "next",
+          "model_slug": "gpt-5-1",
+          "default_model_slug": "gpt-5-1",
+          "parent_id": "bbb2189f-3370-486b-8b70-1b5f8dc0f12d",
+          "turn_exchange_id": "0d1d11c7-9f28-4659-99a9-eddc1678d300",
+          "can_save": true
+        },
+        "recipient": "all",
+        "channel": "final"
+      },
+      "parent": "bbb2189f-3370-486b-8b70-1b5f8dc0f12d",
+      "children": []
+    }
+  },
+  "moderation_results": [],
+  "current_node": "6c10e123-c630-4d3e-aa1c-33936c116784",
+  "plugin_ids": null,
+  "conversation_id": "6938d1df-bd38-832a-874e-dfa2dd023b44",
+  "conversation_template_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+  "gizmo_id": "g-p-68b15e1a6670819181a03d2e7828969d",
+  "gizmo_type": "snorlax",
+  "is_archived": false,
+  "is_starred": null,
+  "safe_urls": [
+    "https://www.openai.com"
+  ],
+  "blocked_urls": [],
+  "default_model_slug": "gpt-5-1",
+  "atlas_mode_enabled": null,
+  "conversation_origin": null,
+  "is_read_only": null,
+  "voice": null,
+  "async_status": null,
+  "disabled_tool_ids": [],
+  "is_do_not_remember": false,
+  "memory_scope": "global_enabled",
+  "context_scopes": null,
+  "sugar_item_id": null,
+  "sugar_item_visible": false,
+  "pinned_time": null,
+  "is_study_mode": false,
+  "owner": null,
+  "id": "6938d1df-bd38-832a-874e-dfa2dd023b44"
+}
