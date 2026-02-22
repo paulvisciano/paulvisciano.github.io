@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
+    <!-- Disable service worker caching -->
+    <meta name="service-worker" content="no-cache">
     <title>Jarvis Neural Mind</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -572,7 +574,9 @@
                     showNodeDetails(nodes[selected]);
                 }
             } catch (e) {
-                console.warn('Graph data fetch failed. Using fallback.', e);
+                console.error('❌ Graph data fetch FAILED:', e.message, e);
+                console.log('Attempted to fetch: ./data/nodes-100pct.json?t=' + Date.now());
+                console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }
         }
