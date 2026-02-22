@@ -21,6 +21,12 @@
             touch-action: none;
             transition: margin-right 0.25s ease;
         }
+        
+        @media (max-width: 768px) {
+            canvas {
+                margin-right: 0;
+            }
+        }
         #filter-bar {
             position: fixed;
             top: 0;
@@ -57,6 +63,76 @@
             border-color: #00ffff;
             color: #000;
             text-shadow: none;
+        }
+        
+        /* Mobile Bottom Drawer */
+        .bottom-drawer {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 26, 48, 0.98);
+            border-top: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 20px 20px 0 0;
+            max-height: 70vh;
+            z-index: 20;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+            touch-action: none;
+        }
+        
+        .bottom-drawer.open {
+            display: flex;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .drawer-handle {
+            width: 40px;
+            height: 5px;
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 3px;
+            margin: 12px auto 16px;
+            cursor: grab;
+        }
+        
+        .drawer-filters {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 16px;
+            overflow-x: auto;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        #drawerDetails {
+            color: #00ffff;
+        }
+        
+        /* Show drawer on mobile only */
+        @media (max-width: 768px) {
+            #detailPanel {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .bottom-drawer {
+                display: none !important;
+            }
         }
         #info {
             --panel-gap: 14px;
@@ -295,6 +371,21 @@
     </div>
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
+    
+    <!-- Mobile Bottom Drawer -->
+    <div id="bottomDrawer" class="bottom-drawer">
+        <div class="drawer-handle"></div>
+        <div id="drawerFilters" class="drawer-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="today">Today</button>
+            <button class="filter-btn" data-filter="people">People</button>
+            <button class="filter-btn" data-filter="locations">Locations</button>
+            <button class="filter-btn" data-filter="activities">Activities</button>
+        </div>
+        <div id="drawerContent" class="drawer-content">
+            <div id="drawerDetails"></div>
+        </div>
+    </div>
 
     <div style="position: fixed; bottom: 12px; left: 12px; font-size: 10px; color: #94a3b8; z-index: 20;">
         <div><a href="../latest/" style="color: #06b6d4; text-decoration: none; font-weight: bold;">↻ Latest</a></div>
@@ -658,7 +749,7 @@
             }
         }
 
-        // Filter bar functionality
+        // Filter bar functionality (desktop)
         let currentFilter = 'all';
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -666,7 +757,52 @@
                 btn.classList.add('active');
                 currentFilter = btn.dataset.filter;
                 console.log('Filter applied:', currentFilter);
-                // TODO: Implement actual filtering logic based on category
+            });
+        });
+        
+        // Mobile drawer functionality
+        let drawerStartY = 0;
+        let drawerOpen = false;
+        
+        const drawer = document.getElementById('bottomDrawer');
+        const drawerHandle = document.querySelector('.drawer-handle');
+        
+        drawerHandle.addEventListener('mousedown', (e) => {
+            drawerStartY = e.clientY;
+        });
+        
+        drawerHandle.addEventListener('touchstart', (e) => {
+            drawerStartY = e.touches[0].clientY;
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (drawerStartY && drawerOpen) {
+                const delta = e.clientY - drawerStartY;
+                if (delta > 100) {
+                    drawer.classList.remove('open');
+                    drawerOpen = false;
+                    drawerStartY = 0;
+                }
+            }
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (drawerStartY && drawerOpen) {
+                const delta = e.touches[0].clientY - drawerStartY;
+                if (delta > 100) {
+                    drawer.classList.remove('open');
+                    drawerOpen = false;
+                    drawerStartY = 0;
+                }
+            }
+        });
+        
+        // Filter buttons in drawer
+        document.querySelectorAll('#drawerFilters .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
             });
         });
 
@@ -677,14 +813,39 @@
                     currentFilter = 'all';
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     document.querySelector('[data-filter="all"]').classList.add('active');
+                    document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelector('#drawerFilters [data-filter="all"]').classList.add('active');
                 }
                 // Update URL hash for deep linking
                 if (selected !== null) {
                     const selectedNode = nodes[selected];
                     window.location.hash = selectedNode.id;
+                    
+                    // On mobile: open drawer
+                    if (window.innerWidth <= 768) {
+                        drawer.classList.add('open');
+                        drawerOpen = true;
+                        showNodeDetailsInDrawer(selectedNode);
+                    }
                 }
             }
         });
+        
+        // Helper function to show details in drawer
+        function showNodeDetailsInDrawer(node) {
+            const content = document.getElementById('drawerDetails');
+            const detailPanel = document.getElementById('detailPanel');
+            
+            // Copy the content from detail panel or regenerate
+            showNodeDetails(node);
+            
+            // Populate drawer with node info
+            content.innerHTML = `
+                <h2>${node.name}</h2>
+                <p style="font-size: 12px; color: #888; margin-top: 8px;">Type: ${node.type}</p>
+                <p style="margin-top: 12px; line-height: 1.6;">${node.desc || 'No description'}</p>
+            `;
+        }
 
         // Handle URL hash navigation
         function handleHashNavigation() {
