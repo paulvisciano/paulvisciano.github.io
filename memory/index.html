@@ -40,6 +40,13 @@
             gap: 8px;
             padding: 0 16px;
             z-index: 12;
+            transition: right 0.25s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #filter-bar {
+                right: 0;
+            }
         }
         .filter-btn {
             background: rgba(0, 136, 255, 0.1);
@@ -154,6 +161,15 @@
             min-height: 100vh;
             gap: 0;
             transition: transform 0.25s ease, width 0.25s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #info {
+                display: none !important;
+            }
+            #panel-toggle {
+                display: none !important;
+            }
         }
         #info.collapsed {
             transform: translateX(100%);
