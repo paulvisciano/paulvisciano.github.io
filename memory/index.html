@@ -1223,6 +1223,16 @@
         render();
         
         // Load character profiles, then graph data
+        // Unregister old service workers that were caching aggressively
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                registrations.forEach(reg => {
+                    console.log('Unregistering service worker:', reg);
+                    reg.unregister();
+                });
+            }).catch(err => console.log('No service workers to unregister:', err));
+        }
+        
         loadCharacterProfiles();
         
         loadGraphData().then(() => {
