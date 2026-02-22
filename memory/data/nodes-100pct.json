@@ -1147,5 +1147,44 @@
       "significance": "Not imposing disappointment on someone's joy. Choosing when to address issues. Restraint and maturity. Respecting her fun instead of being bitter.",
       "color": "#FFC300"
     }
+  },
+  {
+    "id": "filter-system-feb22",
+    "label": "Interactive Filter System",
+    "category": "activity",
+    "frequency": 8,
+    "attributes": {
+      "role": "project",
+      "description": "Built category-based filtering for Jarvis and Claude Code neural visualizations. Click to filter by People/Locations/Activities. Auto-switch to All when selecting a node.",
+      "color": "#00FFFF",
+      "date": "2026-02-22",
+      "outcome": "Fully functional, live on both visualizations"
+    }
+  },
+  {
+    "id": "temporal-linking-project-feb22",
+    "label": "Temporal Linking Project",
+    "category": "activity",
+    "frequency": 10,
+    "attributes": {
+      "role": "project",
+      "description": "4D memory architecture: connect people + places + dates. Parse moments.js, extract from ChatGPT logs, build temporal synapses. Sub-agent execution (2-4 hours).",
+      "color": "#00FFFF",
+      "date": "2026-02-22",
+      "outcome": "In progress, will create comprehensive temporal model"
+    }
+  },
+  {
+    "id": "memory-sync-protocol",
+    "label": "Memory Sync Protocol",
+    "category": "activity",
+    "frequency": 8,
+    "attributes": {
+      "role": "system",
+      "description": "Established 'memory sync' command: update nodes (source of truth) + raw content + memory files + commit all. The nodes ARE the memories.",
+      "color": "#00FFFF",
+      "date": "2026-02-22",
+      "outcome": "Protocol defined and actively used"
+    }
   }
 ]

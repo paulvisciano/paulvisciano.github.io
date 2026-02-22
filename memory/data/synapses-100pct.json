@@ -1741,5 +1741,41 @@
     "target": "havana-bangkok",
     "weight": 6,
     "type": "venue"
+  },
+  {
+    "source": "paul",
+    "target": "filter-system-feb22",
+    "weight": 7,
+    "type": "worked-on"
+  },
+  {
+    "source": "filter-system-feb22",
+    "target": "neural-mind",
+    "weight": 8,
+    "type": "enhances"
+  },
+  {
+    "source": "paul",
+    "target": "temporal-linking-project-feb22",
+    "weight": 9,
+    "type": "initiated"
+  },
+  {
+    "source": "temporal-linking-project-feb22",
+    "target": "neural-mind",
+    "weight": 9,
+    "type": "will-expand"
+  },
+  {
+    "source": "paul",
+    "target": "memory-sync-protocol",
+    "weight": 8,
+    "type": "established"
+  },
+  {
+    "source": "memory-sync-protocol",
+    "target": "memory-architecture",
+    "weight": 7,
+    "type": "defines"
   }
 ]
