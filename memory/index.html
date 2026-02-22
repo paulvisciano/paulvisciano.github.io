@@ -980,8 +980,18 @@
         // Start rendering immediately (will display as data loads)
         render();
         
-        // Load character profiles
+        // Load character profiles, then graph data
         loadCharacterProfiles();
+        
+        loadGraphData().then(() => {
+            // Check URL hash first, otherwise pick random node
+            if (window.location.hash) {
+                handleHashNavigation();
+            } else if (nodes.length > 0) {
+                selected = Math.floor(Math.random() * nodes.length);
+                showNodeDetails(nodes[selected]);
+            }
+        });
     </script>
 </body>
 </html>
