@@ -492,8 +492,22 @@
                     });
                 }
 
+                // Helper to check if node passes current filter
+                const passesFilter = (nodeIndex) => {
+                    const n = nodes[nodeIndex];
+                    if (currentFilter === 'all') return true;
+                    if (currentFilter === 'people') return n.category === 'person';
+                    if (currentFilter === 'locations') return n.category === 'location';
+                    if (currentFilter === 'activities') return n.category === 'activity';
+                    if (currentFilter === 'today') return n.isToday;
+                    return true;
+                };
+
                 // Draw synapses with triple glow
                 edges.forEach(e => {
+                    // Skip edges if either node is filtered out
+                    if (!passesFilter(e.from) || !passesFilter(e.to)) return;
+                    
                     const p1 = project(nodes[e.from].x, nodes[e.from].y, nodes[e.from].z);
                     const p2 = project(nodes[e.to].x, nodes[e.to].y, nodes[e.to].z);
                     const isConnected = selected !== null && (e.from === selected || e.to === selected);
@@ -554,6 +568,13 @@
                 sorted.forEach(item => {
                     const n = item.node;
                     const p = item.proj;
+                    
+                    // Filter logic: check if node should be visible
+                    if (currentFilter === 'people' && n.category !== 'person') return;
+                    if (currentFilter === 'locations' && n.category !== 'location') return;
+                    if (currentFilter === 'activities' && n.category !== 'activity') return;
+                    if (currentFilter === 'today' && !n.isToday) return; // Optional: requires node.isToday flag
+                    
                     const r = n.size * p.scale;
                     const glow = n.glow * p.scale;
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
