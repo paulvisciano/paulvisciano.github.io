@@ -496,9 +496,9 @@
                 const passesFilter = (nodeIndex) => {
                     const n = nodes[nodeIndex];
                     if (currentFilter === 'all') return true;
-                    if (currentFilter === 'people') return n.category === 'person';
-                    if (currentFilter === 'locations') return n.category === 'location';
-                    if (currentFilter === 'activities') return n.category === 'activity';
+                    if (currentFilter === 'people') return n.type === 'person';
+                    if (currentFilter === 'locations') return n.type === 'location';
+                    if (currentFilter === 'activities') return n.type === 'activity';
                     if (currentFilter === 'today') return n.isToday;
                     return true;
                 };
@@ -570,9 +570,9 @@
                     const p = item.proj;
                     
                     // Filter logic: check if node should be visible
-                    if (currentFilter === 'people' && n.category !== 'person') return;
-                    if (currentFilter === 'locations' && n.category !== 'location') return;
-                    if (currentFilter === 'activities' && n.category !== 'activity') return;
+                    if (currentFilter === 'people' && n.type !== 'person') return;
+                    if (currentFilter === 'locations' && n.type !== 'location') return;
+                    if (currentFilter === 'activities' && n.type !== 'activity') return;
                     if (currentFilter === 'today' && !n.isToday) return; // Optional: requires node.isToday flag
                     
                     const r = n.size * p.scale;
