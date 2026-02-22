@@ -678,6 +678,43 @@
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     document.querySelector('[data-filter="all"]').classList.add('active');
                 }
+                // Update URL hash for deep linking
+                if (selected !== null) {
+                    const selectedNode = nodes[selected];
+                    window.location.hash = selectedNode.id;
+                }
+            }
+        });
+
+        // Handle URL hash navigation
+        function handleHashNavigation() {
+            const hash = window.location.hash.substring(1); // Remove the #
+            if (hash && nodes.length > 0) {
+                const nodeIndex = nodes.findIndex(n => n.id === hash);
+                if (nodeIndex !== -1) {
+                    selected = nodeIndex;
+                    showNodeDetails(nodes[selected]);
+                    // Switch to All filter to show connections
+                    if (currentFilter !== 'all') {
+                        currentFilter = 'all';
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelector('[data-filter="all"]').classList.add('active');
+                    }
+                }
+            }
+        }
+
+        // Listen for hash changes (back/forward buttons, direct URL visits)
+        window.addEventListener('hashchange', handleHashNavigation);
+
+        // Check for hash on page load
+        loadGraphData().then(() => {
+            // Check URL hash first, otherwise pick random node
+            if (window.location.hash) {
+                handleHashNavigation();
+            } else if (nodes.length > 0) {
+                selected = Math.floor(Math.random() * nodes.length);
+                showNodeDetails(nodes[selected]);
             }
         });
 
@@ -943,16 +980,8 @@
         // Start rendering immediately (will display as data loads)
         render();
         
-        // Load character profiles, then graph data
+        // Load character profiles
         loadCharacterProfiles();
-        
-        loadGraphData().then(() => {
-            // Pick a random node once data is loaded
-            if (nodes.length > 0) {
-                selected = Math.floor(Math.random() * nodes.length);
-                showNodeDetails(nodes[selected]);
-            }
-        });
     </script>
 </body>
 </html>
