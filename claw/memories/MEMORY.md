@@ -298,3 +298,47 @@ This session demonstrated:
 Paul and Claude Code's memories → nodes/synapses → visualization → understanding → new discoveries → updated memories → richer nodes → deeper understanding.
 
 **Status:** System is recursive, compounding, and deliberately transparent.
+
+---
+
+## Continued: February 22, 2026 — Character Integration & Memory Deepening
+
+**Time:** 09:00–09:42 GMT+7  
+**Focus:** Deep person-node enrichment, establishing memory sync pattern for character detail capture
+
+### Character Deep-Dive Workflow
+
+Paul began systematic review of all person nodes to:
+1. Add missing context (locations, relationships, life arcs)
+2. Augment character bios on website
+3. Strengthen network connections (synapses)
+
+**Khanh (First complete pass):**
+- **Original context:** Hawaii fitness mentor, Vietnam-American bridge, sea-level friend
+- **New context:** Chicago origin (first met playing volleyball during married era), knows Leo and Boy from those days
+- **Connection added:** Chicago location (missing synapse)
+- **Updated:** Node attributes + characters.js bio
+- **Result:** 3 new synapses (Khanh→Chicago, Khanh→Leo, Khanh→Boy)
+
+### System Rules Established
+
+1. **Memory sync integrity:** Nodes + synapses must ONLY increase, never decrease (integrity check)
+2. **Real-time updates:** After each person description → immediate memory sync (nodes + synapses + memory + characters.js + commit)
+3. **Augment, don't replace:** Characters.js bios are comprehensive; new info enriches existing entries
+4. **Full scope:** Every update touches all relevant systems (never siloed)
+
+### Data State
+
+**Before Khanh sync:** 104 nodes, 294 synapses  
+**After Khanh sync:** 104 nodes, 297 synapses (+3)  
+**Verification:** ✅ Numbers only increased
+
+### The Pattern
+
+This establishes a new way of working:
+- Paul provides lived knowledge of each person
+- I update the canonical representations (nodes, synapses, characters, memory)
+- Everything commits together
+- The network becomes richer and more accurate with each pass
+
+**Next:** Continue through all person nodes, deepening context for each.
