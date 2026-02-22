@@ -1,11 +1,17 @@
 # Voice Notes — Feb 22, 2026
 
-## Morning Session (07:00-07:09 GMT+7)
+## Audio Files
+- All raw .ogg files stored in `/audio/` directory
+- Transcripts below with file references
+
+## Morning Session (07:00-07:11 GMT+7)
 
 ### Note 1: Good Morning (07:00)
+**Audio:** `075c65da-f39c-4997-8a5a-eab3c6c7531b.ogg` (180K)
 - Good morning
 
 ### Note 2: Sleep & Bai Reflection (07:02)
+**Audio:** `4f32a7e7-b774-4a30-8eef-3dc867d78531.ogg` (246K)
 - Didn't get much sleep but woke with sunrise
 - Still processing last night's Bai encounter
 - Caught by surprise, not positive experience
