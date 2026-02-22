@@ -1831,5 +1831,179 @@
     "target": "clarity-through-action",
     "weight": 7,
     "type": "taught"
+  },
+  {
+    "source": "paul",
+    "target": "bangkok",
+    "weight": 7,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "ho-chi-minh-city",
+    "weight": 4,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "boracay",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "miami",
+    "weight": 6,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "da-nang",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "chicago",
+    "weight": 5,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "honolulu",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "siargao",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "manila",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "sofia",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "varna",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "medellin",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "san-diego",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "boulder",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "athens",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "barcelona",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "lisbon",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "turkey",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "st-petersburg",
+    "weight": 3,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "beirut",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "baalbek",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "clearwater",
+    "weight": 2,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "fort-lauderdale",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "cuban-event",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "germany",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "dubai",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "abu-dhabi",
+    "weight": 1,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "southeast-asia",
+    "weight": 7,
+    "type": "visited"
+  },
+  {
+    "source": "paul",
+    "target": "lumphini-park-bangkok",
+    "weight": 0,
+    "type": "visited"
   }
 ]
