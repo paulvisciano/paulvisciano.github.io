@@ -686,6 +686,31 @@
             showNodeDetails(null);
         };
         
+        // Character profiles (loaded from characters.js data)
+        let characterProfiles = {};
+        async function loadCharacterProfiles() {
+            try {
+                const response = await fetch('./characters/characters.js');
+                if (!response.ok) return;
+                const text = await response.text();
+                // Parse characters array from the JS file
+                const match = text.match(/const characters = \[([\s\S]*?)\];/);
+                if (match) {
+                  eval('characterProfiles = ' + '[' + match[1] + ']');
+                  // Build lookup by id
+                  const profiles = {};
+                  if (Array.isArray(characterProfiles)) {
+                    characterProfiles.forEach(char => {
+                      profiles[char.id] = char;
+                    });
+                  }
+                  characterProfiles = profiles;
+                }
+            } catch (e) {
+                console.warn('Could not load character profiles:', e);
+            }
+        }
+
         function showNodeDetails(node) {
             const panel = document.getElementById('detailPanel');
             const detailName = document.getElementById('detailName');
@@ -703,25 +728,46 @@
             }
             
             panel.classList.remove('is-empty');
-            detailName.textContent = node.name;
-            detailType.textContent = `Type: ${node.type.charAt(0).toUpperCase() + node.type.slice(1)}`;
-            detailDesc.textContent = node.desc;
             
-            // Find connected nodes
-            const connected = [];
-            edges.forEach(e => {
-                if (e.from === node.id) {
-                    const target = nodes[e.to];
-                    connected.push(`→ ${target.name} (${target.type})`);
-                } else if (e.to === node.id) {
-                    const source = nodes[e.from];
-                    connected.push(`← ${source.name} (${source.type})`);
+            // Check if this is a person node with character profile
+            if (node.type === 'person' && characterProfiles[node.idKey]) {
+                const char = characterProfiles[node.idKey];
+                detailName.innerHTML = `<img src="${char.avatar}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 12px;" alt="${char.name}">
+                                        <span style="color: #fbbf24; font-weight: bold;">${char.name}</span>`;
+                detailType.textContent = `${char.role}`;
+                detailDesc.textContent = char.bio;
+                
+                // Add episode links if available
+                let connectionHTML = '';
+                if (char.episodes && char.episodes.length > 0) {
+                    connectionHTML += '<p style="color: #00ffff; font-weight: bold; margin-top: 12px;">Episodes:</p>';
+                    connectionHTML += char.episodes.map(ep => 
+                        `<div style="margin: 4px 0; color: #fbbf24; font-size: 10px;">${ep}</div>`
+                    ).join('');
                 }
-            });
-            
-            detailConnections.innerHTML = connected.length > 0 
-                ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
-                : '<div style="color: #666;">No connections</div>';
+                detailConnections.innerHTML = connectionHTML || '<div style="color: #666; font-size: 10px;">No episodes linked</div>';
+            } else {
+                // Standard node display
+                detailName.textContent = node.name;
+                detailType.textContent = `Type: ${node.type.charAt(0).toUpperCase() + node.type.slice(1)}`;
+                detailDesc.textContent = node.desc;
+                
+                // Find connected nodes
+                const connected = [];
+                edges.forEach(e => {
+                    if (e.from === node.id) {
+                        const target = nodes[e.to];
+                        connected.push(`→ ${target.name} (${target.type})`);
+                    } else if (e.to === node.id) {
+                        const source = nodes[e.from];
+                        connected.push(`← ${source.name} (${source.type})`);
+                    }
+                });
+                
+                detailConnections.innerHTML = connected.length > 0 
+                    ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
+                    : '<div style="color: #666;">No connections</div>';
+            }
         }
 
         window.selectNodeByIndex = function(idx) {
@@ -897,7 +943,9 @@
         // Start rendering immediately (will display as data loads)
         render();
         
-        // Load graph data in background
+        // Load character profiles, then graph data
+        loadCharacterProfiles();
+        
         loadGraphData().then(() => {
             // Pick a random node once data is loaded
             if (nodes.length > 0) {

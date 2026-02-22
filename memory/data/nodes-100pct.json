@@ -8,7 +8,8 @@
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller, meta-gamer, wealth redistributor, builder",
       "color": "#FF6B6B"
-    }
+    },
+    "idKey": "paul"
   },
   {
     "id": "wouter",
@@ -19,7 +20,8 @@
       "role": "travel companion",
       "description": "Met Miami beach volleyball (Ocean Drive), both traveling to Medellín simultaneously, epic months there, evolved into deep travel brotherhood, 7+ countries, yoga/wellness partner, like younger brother",
       "color": "#4ECDC4"
-    }
+    },
+    "idKey": "wouter"
   },
   {
     "id": "khanh",
@@ -32,7 +34,8 @@
       "color": "#45B7D1",
       "firstMet": "Chicago, volleyball",
       "knownSince": "married era"
-    }
+    },
+    "idKey": "khanh"
   },
   {
     "id": "boy",
@@ -43,7 +46,8 @@
       "role": "crew member",
       "description": "Leo's brother, Bangkok catalyst, social energy, multi-city travels, crew leader",
       "color": "#96CEB4"
-    }
+    },
+    "idKey": "boy"
   },
   {
     "id": "leo",
@@ -54,7 +58,8 @@
       "role": "brother-like",
       "description": "Co-conspirator, K-FIT partner, continents-apart travels, crew architect, vision holder",
       "color": "#FFEAA7"
-    }
+    },
+    "idKey": "leo"
   },
   {
     "id": "bartek",
@@ -65,7 +70,8 @@
       "role": "crew member",
       "description": "Fort Lauderdale base, beach volleyball, massage expert, OutSystems work buddy, recovery specialist",
       "color": "#DDA0DD"
-    }
+    },
+    "idKey": "bartek"
   },
   {
     "id": "mom",
@@ -76,7 +82,8 @@
       "role": "family",
       "description": "Clearwater base, emotional anchor, pedicures, massage hub, home-cooked meals, unconditional support",
       "color": "#FFB6C1"
-    }
+    },
+    "idKey": "mom"
   },
   {
     "id": "jeandel",
@@ -87,7 +94,8 @@
       "role": "friend",
       "description": "2+ months Siargao, cooking partner, intimate bond, emotional depth, character archetype",
       "color": "#9B59B6"
-    }
+    },
+    "idKey": "jeandel"
   },
   {
     "id": "sean",
@@ -98,7 +106,8 @@
       "role": "crew member",
       "description": "Ho Chi Minh City companion, Siargao anchor, crew gatherings, local guide",
       "color": "#3498DB"
-    }
+    },
+    "idKey": "sean"
   },
   {
     "id": "irina",
@@ -109,7 +118,8 @@
       "role": "athlete",
       "description": "French volleyball player, South Beach Airbnb roommate, athletic community connector",
       "color": "#E74C3C"
-    }
+    },
+    "idKey": "irina"
   },
   {
     "id": "ray",
@@ -120,7 +130,8 @@
       "role": "crew member",
       "description": "Wouter's girlfriend, yoga buddy, integrated travels, relationship model",
       "color": "#B983FF"
-    }
+    },
+    "idKey": "ray"
   },
   {
     "id": "maria",
@@ -131,7 +142,8 @@
       "role": "friend",
       "description": "Manila connection, gift exchange, food culture, local perspective",
       "color": "#FF6B9D"
-    }
+    },
+    "idKey": "maria"
   },
   {
     "id": "welli",
@@ -142,7 +154,8 @@
       "role": "friend",
       "description": "St. Petersburg/Tampa crew, beach yoga, goth clubs, friendship milestones",
       "color": "#A8D8EA"
-    }
+    },
+    "idKey": "welli"
   },
   {
     "id": "leigha",
@@ -153,7 +166,8 @@
       "role": "friend",
       "description": "St. Petersburg/Tampa crew, late-night adventures, local anchor",
       "color": "#AA96DA"
-    }
+    },
+    "idKey": "leigha"
   },
   {
     "id": "mo",
@@ -164,7 +178,8 @@
       "role": "travel buddy",
       "description": "Co-adventurer, multi-city connections, shared experiences, episode subject",
       "color": "#F8B195"
-    }
+    },
+    "idKey": "mo"
   },
   {
     "id": "danie",
@@ -175,7 +190,8 @@
       "role": "crew member",
       "description": "Miami volleyball crew, Ocean Drive courts, competitive partner, consistent player",
       "color": "#FF1744"
-    }
+    },
+    "idKey": "danie"
   },
   {
     "id": "ash",
@@ -186,7 +202,8 @@
       "role": "crew member",
       "description": "Miami volleyball crew, AA+ level play, regular partner, competitive spirit",
       "color": "#FF1744"
-    }
+    },
+    "idKey": "ash"
   },
   {
     "id": "cat",
@@ -197,7 +214,8 @@
       "role": "crew member",
       "description": "Miami volleyball crew, Under the Mango Tree regular, competitive focus",
       "color": "#FF1744"
-    }
+    },
+    "idKey": "cat"
   },
   {
     "id": "kj",
@@ -208,7 +226,8 @@
       "role": "crew member",
       "description": "Miami volleyball crew, community energy, regular player",
       "color": "#FF1744"
-    }
+    },
+    "idKey": "kj"
   },
   {
     "id": "divine",
@@ -219,7 +238,8 @@
       "role": "friend",
       "description": "Manila layover connection, first in-person meeting, meaningful encounter",
       "color": "#00D9FF"
-    }
+    },
+    "idKey": "divine"
   },
   {
     "id": "sandro",
@@ -230,7 +250,8 @@
       "role": "travel buddy",
       "description": "Miami space sharing, multi-city co-adventurer, episode subject",
       "color": "#FFD700"
-    }
+    },
+    "idKey": "sandro"
   },
   {
     "id": "hallie",
@@ -241,7 +262,8 @@
       "role": "friend",
       "description": "Extended network, travel buddy, multi-location connection",
       "color": "#FFB6D9"
-    }
+    },
+    "idKey": "hallie"
   },
   {
     "id": "zacharias",
@@ -252,7 +274,8 @@
       "role": "travel buddy",
       "description": "Co-adventurer, multi-city experiences, shared episodes",
       "color": "#FFB6D9"
-    }
+    },
+    "idKey": "zacharias"
   },
   {
     "id": "fairy",
@@ -263,7 +286,8 @@
       "role": "friend",
       "description": "Extended network connection, volleyball community",
       "color": "#FFB6D9"
-    }
+    },
+    "idKey": "fairy"
   },
   {
     "id": "dad",
@@ -274,7 +298,8 @@
       "role": "family",
       "description": "16-year estrangement, reunited Oct 2025 Chicago, emotional milestone, healing arc",
       "color": "#CD5C5C"
-    }
+    },
+    "idKey": "dad"
   },
   {
     "id": "brother",
@@ -285,7 +310,8 @@
       "role": "family",
       "description": "Recent reconnection, shares Urban Runner energy, co-conspirator",
       "color": "#DEB887"
-    }
+    },
+    "idKey": "brother"
   },
   {
     "id": "bangkok",
@@ -1115,7 +1141,8 @@
       "role": "reconnection",
       "description": "Met at Havana Aug 2025 with Jamie. Sweet in messages, caring, thoughtful. In-person: avoidant, uses alcohol to manage vulnerability, plays games, tests. Gap between online intimacy and in-person distance.",
       "color": "#FFB6C1"
-    }
+    },
+    "idKey": "bai"
   },
   {
     "id": "havana-bangkok",
@@ -1199,7 +1226,8 @@
       "description": "Met at Havana Aug 2025. Sweet messages online. Feb 21 2026 reconnection attempt showed gap between online intimacy and in-person authenticity. Red flags: plays games, uses alcohol to cope, avoidant.",
       "color": "#FFB6C1",
       "date": "2026-02-21"
-    }
+    },
+    "idKey": "bai-reconnection"
   },
   {
     "id": "havana-bangkok-venue",
