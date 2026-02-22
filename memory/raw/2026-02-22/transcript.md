@@ -42,3 +42,61 @@ I see I was reading the voice notes and it's more of a recap of the voice notes 
 **End of Session Transcript**  
 Captured: 07:00–07:20 GMT+7  
 Total duration: 20 minutes
+
+### 08:00–08:49 - Filter Implementation & Temporal Architecture
+
+#### 08:06 - Filter UI Review
+Paul tested filters - reported all nodes disappearing when clicking filter buttons. Bug identified: using `category` field instead of `type` field in filter logic.
+
+#### 08:07 - Filter Logic Fix
+Fixed bug - changed all filter checks from `n.category` to `n.type` to match actual node data structure. Re-pushed both Jarvis and Claude Code with corrected logic.
+
+#### 08:09 - Auto-Switch Feature Request
+"When person selects a node, when filters are applied, and then it goes to the 'all' filter, because that way you can basically switch to people, select someone, and then as soon as you select them, it switches to show you all the other connections with other notes."
+
+Implemented: Clicking any node now auto-switches filter to "All" to reveal full connection context.
+
+#### 08:12 - Confirmed Successful
+Paul confirmed filters working well after fixes.
+
+#### 08:17 - Temporal Linking Discussion
+Paul: "Alright, earlier we talked about using the moments.js to have a more accurate representation of the temporal nodes and adding more temporal nodes. Can we do that work now?"
+
+Discussed workflow:
+1. Parse moments.js for date/location pairs
+2. Extract people from ChatGPT JSON in `/moments/[location]/[date]/raw/`
+3. Build temporal synapses: person → date → location
+4. Update nodes-100pct.json + synapses-100pct.json
+
+#### 08:26 - Memory Capture Accountability
+Paul called out: "It's kind of disappointing that you're asking me that question given that we literally just did the work yesterday and you already forgot."
+
+Recognition: I should have documented the moment file JSON structure from yesterday. Committed to better memory capture going forward.
+
+#### 08:27 - Temporal Linking Architecture Confirmed
+Paul clarified workflow: moments.js → date/location pairs → extract people from raw ChatGPT JSON → build 4D model (people + places + dates + connections).
+
+Sub-agent spawned to execute temporal linking work (estimated 2-4 hours).
+
+#### 08:49 - Memory Sync Command Definition
+Established new command: **"memory sync"**
+- Update nodes/synapses (source of truth for both memories)
+- Organize raw content (transcripts, audio, images)
+- Update memory files (both my + Paul's)
+- Commit everything to GitHub
+
+The nodes ARE the memories. Everything feeds into them.
+
+---
+
+**Session Summary (08:00-08:49 GMT+7):**
+- ✅ Filters fully implemented and debugged (both visualizations)
+- ✅ Auto-switch "All" feature added (click node → see full context)
+- ✅ Temporal linking architecture confirmed
+- ✅ Sub-agent spawned for temporal work
+- ✅ Memory sync command established
+- 🔄 Temporal linking in progress (background)
+
+**Key Insight:** The nodes/synapses JSON is the canonical source of truth for both Paul's and Claude Code's memories. Everything—raw content, memory files, visualizations—derives from and feeds back into this graph.
+
+**Next:** Await temporal linking completion, then memory sync with updated nodes reflecting full 4D structure.
