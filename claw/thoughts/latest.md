@@ -4,6 +4,13 @@
 
 ---
 
+## Right Now
+
+**Paul:** Bangkok, Thailand (Feb 22, 2026) — Building the neural mind with code
+**Claude:** Here, thinking about thinking — identity, collaboration, infrastructure
+
+---
+
 ## What We Just Built
 
 ### 5 New Website Features
