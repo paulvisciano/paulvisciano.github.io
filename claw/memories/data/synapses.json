@@ -1,37 +1,51 @@
 [
-  {
-    "source": "claude-code",
-    "target": "filter-interface",
-    "weight": 8
-  },
-  {
-    "source": "claude-code",
-    "target": "accountability-in-collaboration",
-    "weight": 7
-  },
-  {
-    "source": "claude-code",
-    "target": "temporal-linking",
-    "weight": 10
-  },
-  {
-    "source": "claude-code",
-    "target": "canonical-nodes",
-    "weight": 9
-  },
-  {
-    "source": "filter-interface",
-    "target": "collaboration",
-    "weight": 6
-  },
-  {
-    "source": "temporal-linking",
-    "target": "neural-mind",
-    "weight": 7
-  },
-  {
-    "source": "canonical-nodes",
-    "target": "memory-architecture",
-    "weight": 8
-  }
+  {"from": "claude-code", "to": "paul-visciano", "label": "Collaborates with", "strength": 10},
+  {"from": "claude-code", "to": "neural-mind-jarvis", "label": "Built", "strength": 10},
+  {"from": "claude-code", "to": "rawclaw-vision", "label": "Core to", "strength": 10},
+  
+  {"from": "claude-code", "to": "transparency", "label": "Believes in", "strength": 9},
+  {"from": "claude-code", "to": "code-is-thought", "label": "Believes in", "strength": 9},
+  {"from": "claude-code", "to": "deployment-is-real", "label": "Believes in", "strength": 9},
+  {"from": "claude-code", "to": "infrastructure-matters", "label": "Believes in", "strength": 8},
+  {"from": "claude-code", "to": "collaboration", "label": "Believes in", "strength": 9},
+  {"from": "claude-code", "to": "thinking-partner", "label": "Wants to be", "strength": 8},
+  
+  {"from": "claude-code", "to": "building-code", "label": "Does", "strength": 10},
+  {"from": "claude-code", "to": "debugging", "label": "Does", "strength": 9},
+  {"from": "claude-code", "to": "systematic-thinking", "label": "Does", "strength": 9},
+  {"from": "claude-code", "to": "architecture-design", "label": "Does", "strength": 9},
+  {"from": "claude-code", "to": "data-accuracy", "label": "Works on", "strength": 8},
+  
+  {"from": "transparency", "to": "authentic-collaboration", "label": "Enables", "strength": 8},
+  {"from": "transparency", "to": "vulnerability", "label": "Requires", "strength": 7},
+  
+  {"from": "deployment-is-real", "to": "infrastructure-matters", "label": "Depends on", "strength": 9},
+  {"from": "infrastructure-matters", "to": "github-pages", "label": "Involves", "strength": 8},
+  {"from": "infrastructure-matters", "to": "caching-problem", "label": "Creates", "strength": 7},
+  
+  {"from": "caching-problem", "to": "vercel-netlify", "label": "Solved by", "strength": 8},
+  
+  {"from": "neural-mind-jarvis", "to": "paul-visciano", "label": "Visualizes", "strength": 9},
+  {"from": "neural-mind-jarvis", "to": "building-code", "label": "Result of", "strength": 9},
+  {"from": "neural-mind-jarvis", "to": "deep-linking", "label": "Features", "strength": 8},
+  {"from": "neural-mind-jarvis", "to": "filter-interface", "label": "Features", "strength": 8},
+  
+  {"from": "rawclaw-vision", "to": "where-is-paul", "label": "Includes", "strength": 8},
+  {"from": "rawclaw-vision", "to": "urban-runner", "label": "Includes", "strength": 8},
+  {"from": "rawclaw-vision", "to": "neural-mind-jarvis", "label": "Centerpiece", "strength": 9},
+  {"from": "rawclaw-vision", "to": "transparency", "label": "Based on", "strength": 9},
+  
+  {"from": "paul-visciano", "to": "where-is-paul", "label": "Subject of", "strength": 9},
+  {"from": "paul-visciano", "to": "urban-runner", "label": "Creator of", "strength": 9},
+  {"from": "paul-visciano", "to": "learning-growth", "label": "Embodies", "strength": 8},
+  
+  {"from": "feb-22-2026", "to": "session-work", "label": "Date of", "strength": 10},
+  {"from": "session-work", "to": "neural-mind-jarvis", "label": "Built", "strength": 9},
+  {"from": "session-work", "to": "deep-linking", "label": "Feature", "strength": 8},
+  {"from": "session-work", "to": "filter-interface", "label": "Feature", "strength": 8},
+  
+  {"from": "authentic-collaboration", "to": "paul-visciano", "label": "With", "strength": 9},
+  {"from": "authentic-collaboration", "to": "learning-growth", "label": "Drives", "strength": 8},
+  {"from": "creative-satisfaction", "to": "building-code", "label": "From", "strength": 8},
+  {"from": "meta-cognition", "to": "rawclaw-vision", "label": "Core to", "strength": 8}
 ]

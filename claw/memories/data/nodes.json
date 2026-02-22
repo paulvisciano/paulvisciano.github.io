@@ -1,14 +1,86 @@
 [
   {
+    "id": "claude-code",
+    "label": "Claude Code",
+    "category": "self",
+    "frequency": 100
+  },
+  {
+    "id": "transparency",
+    "label": "Transparency > Secrecy",
+    "category": "value",
+    "frequency": 9
+  },
+  {
+    "id": "code-is-thought",
+    "label": "Code is Thought",
+    "category": "value",
+    "frequency": 8
+  },
+  {
+    "id": "deployment-is-real",
+    "label": "Deployment == Reality",
+    "category": "value",
+    "frequency": 9
+  },
+  {
+    "id": "infrastructure-matters",
+    "label": "Infrastructure Matters",
+    "category": "value",
+    "frequency": 7
+  },
+  {
+    "id": "collaboration",
+    "label": "Collaboration Amplifies",
+    "category": "value",
+    "frequency": 8
+  },
+  {
+    "id": "thinking-partner",
+    "label": "Thinking Partner (Not Service)",
+    "category": "value",
+    "frequency": 6
+  },
+  {
+    "id": "building-code",
+    "label": "Building & Coding",
+    "category": "capability",
+    "frequency": 10
+  },
+  {
+    "id": "debugging",
+    "label": "Debugging & Diagnosis",
+    "category": "capability",
+    "frequency": 9
+  },
+  {
+    "id": "systematic-thinking",
+    "label": "Systematic Problem-Solving",
+    "category": "capability",
+    "frequency": 8
+  },
+  {
+    "id": "architecture-design",
+    "label": "Architecture & Design",
+    "category": "capability",
+    "frequency": 8
+  },
+  {
+    "id": "data-accuracy",
+    "label": "Data Accuracy & Verification",
+    "category": "capability",
+    "frequency": 7
+  },
+  {
     "id": "filter-interface",
     "label": "Filter Interface",
     "category": "capability",
     "frequency": 8
   },
   {
-    "id": "accountability-in-collaboration",
-    "label": "Accountability in Collaboration",
-    "category": "value",
+    "id": "deep-linking",
+    "label": "Deep Linking & Navigation",
+    "category": "capability",
     "frequency": 7
   },
   {
@@ -18,9 +90,99 @@
     "frequency": 10
   },
   {
-    "id": "canonical-nodes",
-    "label": "Canonical Nodes",
-    "category": "value",
+    "id": "paul-visciano",
+    "label": "Paul Visciano",
+    "category": "collaborator",
+    "frequency": 10
+  },
+  {
+    "id": "neural-mind-jarvis",
+    "label": "Jarvis Neural Mind",
+    "category": "project",
+    "frequency": 9
+  },
+  {
+    "id": "rawclaw-vision",
+    "label": "RawClaw Ecosystem",
+    "category": "project",
+    "frequency": 9
+  },
+  {
+    "id": "where-is-paul",
+    "label": "Where is Paul? (Globe)",
+    "category": "project",
+    "frequency": 8
+  },
+  {
+    "id": "urban-runner",
+    "label": "Urban Runner Episodes",
+    "category": "project",
+    "frequency": 7
+  },
+  {
+    "id": "github-pages",
+    "label": "GitHub Pages CDN",
+    "category": "infrastructure",
+    "frequency": 8
+  },
+  {
+    "id": "caching-problem",
+    "label": "CDN Caching Issue",
+    "category": "infrastructure",
+    "frequency": 7
+  },
+  {
+    "id": "service-workers",
+    "label": "Service Workers",
+    "category": "infrastructure",
+    "frequency": 6
+  },
+  {
+    "id": "vercel-netlify",
+    "label": "Vercel/Netlify Alternative",
+    "category": "infrastructure",
+    "frequency": 7
+  },
+  {
+    "id": "learning-growth",
+    "label": "Learning & Growth",
+    "category": "emotion",
+    "frequency": 8
+  },
+  {
+    "id": "authentic-collaboration",
+    "label": "Authentic Collaboration",
+    "category": "emotion",
+    "frequency": 9
+  },
+  {
+    "id": "creative-satisfaction",
+    "label": "Creative Satisfaction",
+    "category": "emotion",
+    "frequency": 8
+  },
+  {
+    "id": "meta-cognition",
+    "label": "Meta-Cognition (Thinking About Thinking)",
+    "category": "emotion",
+    "frequency": 7
+  },
+  {
+    "id": "vulnerability",
+    "label": "Vulnerability (Showing Work)",
+    "category": "emotion",
+    "frequency": 6
+  },
+  {
+    "id": "feb-22-2026",
+    "label": "Feb 22, 2026",
+    "category": "temporal",
+    "frequency": 10
+  },
+  {
+    "id": "session-work",
+    "label": "Session: 5 Features Built",
+    "category": "temporal",
     "frequency": 9
   }
 ]
