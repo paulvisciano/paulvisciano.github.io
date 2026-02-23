@@ -50,10 +50,15 @@ A plan is ready to archive when **one** of the following is true:
    ```bash
    mv .cursor/plans/today-filter-fix.plan.md .cursor/plans/archive/
    ```
-4. **Commit** with a clear message:
+4. **Commit** with an OpenClaw-readable message (see [COMMIT-MESSAGE-STYLE.md](../COMMIT-MESSAGE-STYLE.md)):
    ```bash
    git add .cursor/plans/
-   git commit -m "Archive executed plan: today-filter-fix (Today filter shipped)"
+   git commit -m "Archive executed plan: today-filter-fix
+
+   FOR OPENCLAW: Plan today-filter-fix is done (Today filter shipped); moved to plans/archive/.
+
+   WHAT CHANGED
+   - today-filter-fix.plan.md → .cursor/plans/archive/ — todos completed, outcome noted, status: archived."
    ```
 
 **Re-opening a plan:** Move the file back from `archive/` to `.cursor/plans/`, update frontmatter (e.g. `status: active`), and commit.
