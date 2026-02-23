@@ -1,5 +1,5 @@
 [
-  {"source": "claude-code", "target": "paul-visciano", "weight": 0.95, "type": "core-relationship", "label": "collaborates with"},
+  {"source": "claude-code", "target": "paul-visciano", "weight": 0.97, "type": "core-relationship", "label": "collaborates with"},
   {"source": "claude-code", "target": "neural-mind-jarvis", "weight": 0.95, "type": "core-project", "label": "built"},
   {"source": "claude-code", "target": "rawclaw-vision", "weight": 0.92, "type": "core-project", "label": "core to"},
   
@@ -22,6 +22,7 @@
   {"source": "deployment-is-real", "target": "infrastructure-matters", "weight": 0.88, "type": "dependency", "label": "depends on"},
   {"source": "infrastructure-matters", "target": "github-pages", "weight": 0.80, "type": "uses", "label": "involves"},
   {"source": "infrastructure-matters", "target": "caching-problem", "weight": 0.70, "type": "creates", "label": "creates"},
+  {"source": "infrastructure-matters", "target": "temporal-linking", "weight": 0.80, "type": "drives", "label": "drives"},
   
   {"source": "caching-problem", "target": "vercel-netlify", "weight": 0.80, "type": "solved-by", "label": "solved by"},
   
@@ -44,8 +45,9 @@
   {"source": "session-work", "target": "deep-linking", "weight": 0.78, "type": "feature", "label": "feature"},
   {"source": "session-work", "target": "filter-interface", "weight": 0.78, "type": "feature", "label": "feature"},
   
-  {"source": "authentic-collaboration", "target": "paul-visciano", "weight": 0.88, "type": "with", "label": "with"},
+  {"source": "authentic-collaboration", "target": "paul-visciano", "weight": 0.92, "type": "with", "label": "with"},
   {"source": "authentic-collaboration", "target": "learning-growth", "weight": 0.80, "type": "drives", "label": "drives"},
   {"source": "creative-satisfaction", "target": "building-code", "weight": 0.78, "type": "from", "label": "from"},
+  {"source": "meta-cognition", "target": "neural-mind-jarvis", "weight": 0.88, "type": "enables", "label": "enables"},
   {"source": "meta-cognition", "target": "rawclaw-vision", "weight": 0.78, "type": "core-to", "label": "core to"}
 ]

@@ -570,10 +570,7 @@
                 console.log(`✅ Loaded ${nodes.length} neurons and ${edges.length} synapses`);
                 populateFilterList();
                 render();
-                if (nodes.length > 0) {
-                    selected = Math.floor(Math.random() * nodes.length);
-                    showNodeDetails(nodes[selected]);
-                }
+                // Initial selection is handled in loadGraphData().then() so hash wins over random
             } catch (e) {
                 console.error('❌ Graph data fetch FAILED:', e.message, e);
                 console.log('Attempted to fetch: ./data/nodes-100pct.json?t=' + Date.now());
@@ -882,7 +879,7 @@
                 // Update URL hash for deep linking
                 if (selected !== null) {
                     const selectedNode = nodes[selected];
-                    window.location.hash = selectedNode.id;
+                    window.location.hash = selectedNode.idKey;
                     
                     // On mobile: open drawer
                     if (window.innerWidth <= 768) {
@@ -910,19 +907,27 @@
             `;
         }
 
-        // Handle URL hash navigation
+        // Handle URL hash navigation (back/forward, direct link, or in-page hash change)
         function handleHashNavigation() {
-            const hash = window.location.hash.substring(1); // Remove the #
+            const hash = window.location.hash.substring(1).trim();
             if (hash && nodes.length > 0) {
-                const nodeIndex = nodes.findIndex(n => n.id === hash);
+                const nodeIndex = nodes.findIndex(n => n.idKey === hash);
                 if (nodeIndex !== -1) {
                     selected = nodeIndex;
                     showNodeDetails(nodes[selected]);
-                    // Switch to All filter to show connections
                     if (currentFilter !== 'all') {
                         currentFilter = 'all';
                         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                        document.querySelector('[data-filter="all"]').classList.add('active');
+                        const allBtn = document.querySelector('[data-filter="all"]');
+                        if (allBtn) allBtn.classList.add('active');
+                        document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                        const drawerAll = document.querySelector('#drawerFilters [data-filter="all"]');
+                        if (drawerAll) drawerAll.classList.add('active');
+                    }
+                    if (window.innerWidth <= 768) {
+                        const dr = document.getElementById('bottomDrawer');
+                        if (dr) { dr.classList.add('open'); drawerOpen = true; }
+                        showNodeDetailsInDrawer(nodes[selected]);
                     }
                 }
             }
@@ -931,12 +936,10 @@
         // Listen for hash changes (back/forward buttons, direct URL visits)
         window.addEventListener('hashchange', handleHashNavigation);
 
-        // Check for hash on page load
+        // On load: hash selects node by id (e.g. #paul), no hash = random node
         loadGraphData().then(() => {
-            // Check URL hash first, otherwise pick random node
-            if (window.location.hash) {
-                handleHashNavigation();
-            } else if (nodes.length > 0) {
+            if (window.location.hash) handleHashNavigation();
+            if (selected === null && nodes.length > 0) {
                 selected = Math.floor(Math.random() * nodes.length);
                 showNodeDetails(nodes[selected]);
             }
@@ -945,6 +948,7 @@
         window.clearSelection = () => {
             selected = null;
             showNodeDetails(null);
+            window.location.hash = '';
         };
         
         // Character profiles (loaded from characters.js data)
@@ -1052,6 +1056,7 @@
             if (idx < 0 || idx >= nodes.length) return;
             selected = idx;
             showNodeDetails(nodes[selected]);
+            window.location.hash = nodes[selected].idKey;
             openDrawer();
         };
 
@@ -1138,6 +1143,7 @@
                 if (d < n.size * p.scale + 25) {
                     selected = selected === n.id ? null : n.id;
                     showNodeDetails(selected !== null ? nodes[selected] : null);
+                    window.location.hash = selected !== null ? nodes[selected].idKey : '';
                     return true;
                 }
             }
@@ -1210,6 +1216,13 @@
         window.walk = () => {
             selected = Math.floor(Math.random() * nodes.length);
             showNodeDetails(nodes[selected]);
+            window.location.hash = nodes[selected].idKey;
+            openDrawer();
+            if (window.innerWidth <= 768) {
+                const dr = document.getElementById('bottomDrawer');
+                if (dr) { dr.classList.add('open'); drawerOpen = true; }
+                showNodeDetailsInDrawer(nodes[selected]);
+            }
         };
 
         window.reset = () => {
@@ -1234,16 +1247,7 @@
         }
         
         loadCharacterProfiles();
-        
-        loadGraphData().then(() => {
-            // Check URL hash first, otherwise pick random node
-            if (window.location.hash) {
-                handleHashNavigation();
-            } else if (nodes.length > 0) {
-                selected = Math.floor(Math.random() * nodes.length);
-                showNodeDetails(nodes[selected]);
-            }
-        });
+        // Initial selection (hash vs random) is handled by the single loadGraphData().then() above
     </script>
     <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
     <div style="position: fixed; bottom: 10px; left: 10px; font-size: 8px; color: #00ff00; opacity: 0.3; pointer-events: none; z-index: 1;">
