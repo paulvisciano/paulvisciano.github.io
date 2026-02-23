@@ -72,7 +72,7 @@
   {
     "source": "paul",
     "target": "fitness",
-    "weight": 0.7,
+    "weight": 0.72,
     "type": "activity",
     "label": "daily routine"
   },
@@ -86,7 +86,7 @@
   {
     "source": "paul",
     "target": "growth",
-    "weight": 0.515,
+    "weight": 0.54,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -989,7 +989,7 @@
   {
     "source": "fitness",
     "target": "growth",
-    "weight": 0.75,
+    "weight": 0.76,
     "type": "emotion",
     "label": "physical growth"
   },
@@ -1835,7 +1835,7 @@
   {
     "source": "paul",
     "target": "bangkok",
-    "weight": 0.54,
+    "weight": 0.56,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -2119,7 +2119,21 @@
   {
     "source": "paul",
     "target": "connection",
-    "weight": 0.515,
+    "weight": 0.54,
+    "type": "memory-sync",
+    "label": "synced 2026-02-23"
+  },
+  {
+    "source": "paul",
+    "target": "february-2026",
+    "weight": 0.52,
+    "type": "memory-sync",
+    "label": "synced 2026-02-23"
+  },
+  {
+    "source": "paul",
+    "target": "decision-making",
+    "weight": 0.52,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   }

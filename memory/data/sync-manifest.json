@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
-  "updated_at": "2026-02-23T12:54:34.021Z",
+  "updated_at": "2026-02-23T15:02:17.214Z",
   "by_date": {
     "2026-02-23": {
       "sources": [
@@ -44,6 +44,24 @@
           "mtime": 1771839796190.1223,
           "integrated": true,
           "integrated_at": "2026-02-23T12:54:29.164Z"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23-file-sorting.md",
+          "type": "openclaw",
+          "label": "2026-02-23-file-sorting.md (OpenClaw)",
+          "mtime": 1771852920154.7937,
+          "integrated": true,
+          "integrated_at": "2026-02-23T14:46:04.608Z",
+          "content_hash": "5811b2a4bd0b01a0186b487a11a47a1c2060b91f2ef814ec009d18b6fd5dc6b2"
+        },
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/integrated/OPTICAL-SHOP-MOMENT-2026-02-23.md",
+          "type": "raw-moment",
+          "label": "OPTICAL-SHOP-MOMENT-2026-02-23.md (raw)",
+          "mtime": 1771824292217.058,
+          "integrated": true,
+          "integrated_at": "2026-02-23T14:46:04.608Z",
+          "content_hash": "608d41fa2f2ddbbb9916b5d9b7ae199500570c692af09cb1abd354fb8581bb8c"
         }
       ]
     }
