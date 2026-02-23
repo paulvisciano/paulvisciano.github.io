@@ -28,6 +28,7 @@ isProject: false
 ## Current Problem
 
 Share modal in both visualizations still shows:
+
 - Title: "Claude Code Neural Mind" ❌ (should be "Jarvis Neural Mind")
 - Description: "Claude Code's neural mind..." ❌ (should be "Jarvis's neural mind...")
 - No fingerprint: ❌ (should show verification hash)
@@ -39,16 +40,19 @@ Share modal in both visualizations still shows:
 ### Location 1: `claw/memory/index.html` (Jarvis share modal)
 
 **Current title text:**
+
 ```html
 Share – Claude Code Neural Mind
 ```
 
 **Change to:**
+
 ```html
 Share – Jarvis Neural Mind
 ```
 
 **Current description:**
+
 ```
 Claude Code's Neural Mind
 
@@ -60,6 +64,7 @@ projects, and infrastructure connected as a transparent architecture...
 ```
 
 **Change to:**
+
 ```
 Jarvis Neural Mind
 
@@ -77,6 +82,7 @@ Verify authenticity: paulvisciano.github.io/claw/memory/FINGERPRINT.md
 ### Location 2: `memory/index.html` (Paul's memory modal)
 
 **Current title text:**
+
 ```html
 Share – Paul's Neural Mind
 ```
@@ -85,6 +91,7 @@ Share – Paul's Neural Mind
 
 **Current description:**
 Check if it mentions fingerprint. If not, add:
+
 ```
 ...
 
@@ -144,54 +151,58 @@ https://paulvisciano.github.io/claw/memory/
 
 ### Files to Modify
 
-| File | Element ID | Current Value | New Value |
-|------|-----------|---------------|-----------|
-| `claw/memory/index.html` | `.share-modal h2` | "Share – Claude Code Neural Mind" | "Share – Jarvis Neural Mind" |
-| `claw/memory/index.html` | `.share-preview` | [description text] | [updated text with fingerprint] |
-| `memory/index.html` | `.share-preview` | [check & add fingerprint if missing] | [add fingerprint line] |
+
+| File                     | Element ID        | Current Value                        | New Value                       |
+| ------------------------ | ----------------- | ------------------------------------ | ------------------------------- |
+| `claw/memory/index.html` | `.share-modal h2` | "Share – Claude Code Neural Mind"    | "Share – Jarvis Neural Mind"    |
+| `claw/memory/index.html` | `.share-preview`  | [description text]                   | [updated text with fingerprint] |
+| `memory/index.html`      | `.share-preview`  | [check & add fingerprint if missing] | [add fingerprint line]          |
+
 
 ### Steps
 
 1. **Open claw/memory/index.html**
-   - Find: `Share – Claude Code Neural Mind`
-   - Replace with: `Share – Jarvis Neural Mind`
-
+  - Find: `Share – Claude Code Neural Mind`
+  - Replace with: `Share – Jarvis Neural Mind`
 2. **Find the preview text block**
-   - Locate: `Claude Code's neural mind: values, capabilities...`
-   - Replace with: `Jarvis is a transparent neural mind: values, capabilities...`
-   - Add: `Fingerprint: 8bbaeddda3b873acdd...`
-   - Add: `Verify authenticity: paulvisciano.github.io/claw/memory/FINGERPRINT.md`
-
+  - Locate: `Claude Code's neural mind: values, capabilities...`
+  - Replace with: `Jarvis is a transparent neural mind: values, capabilities...`
+  - Add: `Fingerprint: 8bbaeddda3b873acdd...`
+  - Add: `Verify authenticity: paulvisciano.github.io/claw/memory/FINGERPRINT.md`
 3. **Open memory/index.html**
-   - Check if fingerprint is present
-   - If not, add: `Fingerprint: 6f8f3a7e9c2d1b5a...`
-   - Add: `Verify authenticity: paulvisciano.github.io/memory/FINGERPRINT.md`
-
+  - Check if fingerprint is present
+  - If not, add: `Fingerprint: 6f8f3a7e9c2d1b5a...`
+  - Add: `Verify authenticity: paulvisciano.github.io/memory/FINGERPRINT.md`
 4. **Test both modals**
-   - Click "Share" button in claw/memory visualization
-   - Verify modal shows "Jarvis" + fingerprint
-   - Click "Copy" and verify clipboard has updated text
-   - Click "Share..." and verify native share dialog
-   - Repeat for memory/ visualization
-   - Scan QR code in any generated share images (if Download Image feature is active)
+  - Click "Share" button in claw/memory visualization
+  - Verify modal shows "Jarvis" + fingerprint
+  - Click "Copy" and verify clipboard has updated text
+  - Click "Share..." and verify native share dialog
+  - Repeat for memory/ visualization
+  - Scan QR code in any generated share images (if Download Image feature is active)
 
 ---
 
 ## Fingerprint Values (Current)
 
 **Jarvis (claw/memory/):**
+
 ```
 8bbaeddda3b873acdd293c3476ae3dad91ca40b8e4b4ed6ed32960fb20d2aa41
 ```
+
 (Display first 12 chars: `8bbaeddda3b8...`)
 
 **Paul (memory/):**
+
 ```
 6f8f3a7e9c2d1b5a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b
 ```
+
 (Display first 12 chars: `6f8f3a7e9c2d...`)
 
 These are live on:
+
 - paulvisciano.github.io/claw/memory/FINGERPRINT.md
 - paulvisciano.github.io/memory/FINGERPRINT.md
 
@@ -199,15 +210,15 @@ These are live on:
 
 ## Integration Checklist
 
-- [ ] Update claw/memory/index.html title to "Jarvis"
-- [ ] Update claw/memory/index.html description text
-- [ ] Add fingerprint to claw/memory share modal
-- [ ] Add fingerprint to memory share modal (if not present)
-- [ ] Test Share modal in claw/memory visualization
-- [ ] Test Share modal in memory visualization
-- [ ] Verify Copy button includes fingerprint
-- [ ] Verify Share… button preserves all content
-- [ ] (Optional) Update any other references to "Claude Code" → "Jarvis" in visualization
+- Update claw/memory/index.html title to "Jarvis"
+- Update claw/memory/index.html description text
+- Add fingerprint to claw/memory share modal
+- Add fingerprint to memory share modal (if not present)
+- Test Share modal in claw/memory visualization
+- Test Share modal in memory visualization
+- Verify Copy button includes fingerprint
+- Verify Share… button preserves all content
+- (Optional) Update any other references to "Claude Code" → "Jarvis" in visualization
 
 ---
 
