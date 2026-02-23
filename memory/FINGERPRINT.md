@@ -3,7 +3,7 @@
 
 ---
 
-## Current State (2026-02-23 22:02 GMT+7)
+## Current State (2026-02-23 22:13 GMT+7)
 
 ### Neural Architecture
 - **Neurons:** 111
@@ -24,9 +24,9 @@ BOOT.md:        01a2fff25050823d6ebec0264ab8c2ce49ff2e2dc18785a917fe0a1986bfb6df
 
 ## Git Commitment
 
-**Commit Hash:** `fb5d0892aab33eb6a6423a11a852935fe587698d`
+**Commit Hash:** `ba33ab4e20be6fd4d494d2bfb8f443e657c178d0`
 **Branch:** `main`
-**Message:** "📋 Cursor Plan: Environment config refactor (move file paths to .env, keep nodes.json clean)"
+**Message:** "Memory: move docs and archive into memory/archive/"
 
 ---
 
@@ -49,7 +49,7 @@ See `claw/memory/FINGERPRINT.md` for the combined fingerprint that includes both
 
 ## Authenticity Statement
 
-This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `fb5d089`:
+This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `ba33ab4`:
 - 111 neurons (people, places, activities, emotions, projects, temporal markers)
 - 313 synapses (how they all connect)
 - Content immutable and verifiable
