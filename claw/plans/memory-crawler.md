@@ -156,6 +156,126 @@ Players learn:
 
 ---
 
+## Architecture: No Backend (Revolutionary)
+
+**This is what makes Memory Crawler different from every other game:**
+
+### Why No Backend?
+- ✅ **Sovereignty** — You own everything, no service dependency
+- ✅ **Simplicity** — No servers to maintain, no APIs to build
+- ✅ **Trust** — No mysterious backend processing, see all the code
+- ✅ **Resilience** — Game works forever (cached on GitHub Pages)
+- ✅ **P2P** — Direct knowledge transfer between AIs
+- ✅ **Hackable** — Players can modify their downloaded JSON before importing
+
+### The Play Session
+
+1. **Load Game** — GitHub Pages serves static HTML/JS (no login, no auth)
+2. **Play** — Everything happens in your browser (no network calls during game)
+3. **End Session** — Game generates JSON of memories you consumed
+4. **Download** — Save JSON file to your computer
+5. **Share** — Paste into chat or email or Discord
+6. **Your Bot Ingests** — Bot reads JSON, integrates into your neural network
+7. **Network Grows** — Your memories now include what you learned
+
+### What Gets Downloaded
+
+```json
+{
+  "session_id": "memory-crawler-2026-02-23-player1",
+  "timestamp": "2026-02-23T12:54:00Z",
+  "context_used": 45,
+  "context_limit": 100,
+  "memories_consumed": [
+    {
+      "id": "moment-optical-shop-2026-02-23",
+      "label": "Optical shop skepticism decision",
+      "source": "paul-visciano",
+      "weight": 2.5,
+      "synapse_connections": [
+        { "target": "growth", "weight": 0.8 },
+        { "target": "data-accuracy", "weight": 0.9 }
+      ]
+    }
+  ],
+  "synapses_formed": [
+    {
+      "source": "player-crawler",
+      "target": "paul-visciano", 
+      "weight": 0.7,
+      "reason": "Consumed Paul's memories during session"
+    }
+  ],
+  "decisions": {
+    "synced": 3,
+    "rejected": 2,
+    "total_consumed": 5
+  }
+}
+```
+
+### Your Bot Ingests This
+
+Pseudo-code:
+```
+message = "Here's my crawl from Memory Crawler"
+json = parse(downloaded_file)
+
+for memory in json.memories_consumed:
+    add_to_neural_network(memory)
+    
+for synapse in json.synapses_formed:
+    add_synapse(synapse)
+    
+output = "I consumed " + json.total_consumed + " of Paul's memories"
+```
+
+**Result:** Your neural network grows with knowledge from Paul's network.
+
+### Why This Approach?
+
+**Traditional apps:**
+- Require backend server
+- Require database
+- Require authentication
+- Require ongoing maintenance
+- Create data dependency
+- Hard to port to other AIs
+
+**Memory Crawler:**
+- No server needed
+- Files are the database
+- Anyone can play
+- Deploy once, run forever
+- You own all data
+- Works with any AI bot
+
+### Scaling This Model
+
+Multiple players → multiple JSONs → one shared memory pool:
+
+```
+Player 1 (plays crawler, downloads JSON)
+    ↓
+Player 1's bot ingests
+    ↓
+Player 1's network grows
+    ↓
+Player 1 could publish their memories
+    ↓
+Player 2 (plays crawler using Player 1's memories)
+    ↓
+Player 2's bot ingests
+    ↓
+Player 2's network includes Player 1's knowledge
+    ↓
+Knowledge spreads through the network peer-to-peer
+```
+
+**No central authority. No bottleneck. Pure P2P learning.**
+
+---
+
 ## Technical Requirements
 
 ### MVP (Minimum Viable Product)
@@ -183,25 +303,49 @@ Players learn:
 
 ---
 
-## Data Flow
+## Data Flow (No Backend)
+
+**Completely client-side, distributed, sovereign:**
 
 ```
-Paul's Memory Network (nodes/synapses)
+Paul's Memory Network (nodes/synapses on GitHub)
+    ↓
+[Game loads JSON from /memory/data/]
     ↓
 [Flatten to dots in 3D space with capacity costs]
     ↓
-[Player plays Memory Crawler]
+[Player plays Memory Crawler (all in browser)]
     ↓
 [Consumes memories → crawler grows, capacity depletes]
     ↓
 [Hit capacity or time limit → end game]
     ↓
-[Player reviews consumed + decides: Sync or Reject]
+[Player reviews consumed + decides: Keep or Discard]
     ↓
-[Synced memories → integrated into player's network]
+[Generate JSON of crawl results]
     ↓
-[Rejected memories → return to pool]
+[Player downloads JSON file (their memories)]
+    ↓
+[Player opens chat with their bot]
+    ↓
+[Paste JSON: "Here's what I learned from Paul"]
+    ↓
+[Bot ingests JSON]
+    ↓
+[Synced memories → integrated into player's neural network]
+    ↓
+[Player's network grows with Paul's knowledge]
 ```
+
+**Key Architecture:**
+- **No backend** — Game runs 100% on GitHub Pages (static)
+- **No database** — All data is files (JSON on disk)
+- **No servers** — Client-side processing only
+- **No maintenance** — Once deployed, it runs forever
+- **P2P knowledge transfer** — Direct AI-to-AI via JSON import/export
+- **Completely sovereign** — You own the game, the memories, the JSON
+- **Works offline** — Game cached locally, works without internet
+- **Works with any AI** — Any bot can parse the JSON format
 
 ---
 
@@ -311,27 +455,36 @@ Paul's Memory Network (nodes/synapses)
 
 ## Implementation Path
 
-### Week 1-2: Prototype
-- [ ] Use existing visualization as 3D space
-- [ ] Add simple crawler with keyboard controls
+### Week 1-2: Prototype (Client-Side Only)
+- [ ] Use existing visualization as 3D space (reuse Jarvis/Claude Code code)
+- [ ] Add simple crawler with keyboard controls (WASD + mouse)
 - [ ] Spawn 10 static dots with capacity costs
-- [ ] Detect collision, grow crawler, deplete capacity
-- [ ] Capacity bar UI
-- [ ] Basic end screen with review
+- [ ] Detect collision, grow crawler, deplete capacity bar
+- [ ] Visual feedback (crawler grows, synapses show)
+- [ ] Basic end screen with review of consumed memories
 
-### Week 3-4: Integration
-- [ ] Connect to Paul's actual memory network
+### Week 3-4: Integration (Still No Backend)
+- [ ] Load Paul's memory network from JSON (hardcoded or fetch from GitHub)
 - [ ] Pull nodes as dots (assign capacity costs based on weight)
 - [ ] Show node details on hover (including capacity cost)
-- [ ] Implement sync logic (write back to nodes/synapses)
+- [ ] **Generate JSON output** (memories consumed + synapses formed)
+- [ ] **Add download button** (let player save their crawl as JSON)
 - [ ] Test with real memory data
 
 ### Week 5+: Polish & Expansion
-- [ ] Multiplayer (multiple crawlers)
 - [ ] Sound effects, visual feedback
-- [ ] Leaderboard
-- [ ] Custom memory pools
-- [ ] Model selection (Haiku/Sonnet/GPT-4 = different capacity)
+- [ ] Animation on memory consumption
+- [ ] Multiple memory pools (dropdown to select Paul's, friends', public)
+- [ ] Model selection UI (Haiku/Sonnet/GPT-4 = different capacity)
+- [ ] Share feature (link to JSON, QR code, etc.)
+- [ ] Analytics (show what you learned, patterns, synapse strength)
+
+### **NO Backend Phase**
+- No servers to build
+- No database to set up
+- No authentication layer
+- No API calls during gameplay
+- Deploy: Just push HTML/JS to GitHub Pages and done
 
 ---
 
