@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
-  "updated_at": "2026-02-23T15:13:34.983Z",
+  "updated_at": "2026-02-23T18:14:07.013Z",
   "by_date": {
     "2026-02-23": {
       "sources": [
@@ -62,6 +62,24 @@
           "integrated": true,
           "integrated_at": "2026-02-23T14:46:04.608Z",
           "content_hash": "608d41fa2f2ddbbb9916b5d9b7ae199500570c692af09cb1abd354fb8581bb8c"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23-memory-sync.md",
+          "type": "openclaw",
+          "label": "2026-02-23-memory-sync.md (OpenClaw)",
+          "mtime": 1771869680515.2258,
+          "integrated": true,
+          "integrated_at": "2026-02-23T18:14:07.013Z",
+          "content_hash": "cacd0ebddbffe414ac89427027214890c638983a3d748c8509f942fabdd0a828"
+        },
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/integrated/transcript.md",
+          "type": "raw-transcript",
+          "label": "transcript.md (raw)",
+          "mtime": 1771865342345.5388,
+          "integrated": true,
+          "integrated_at": "2026-02-23T18:14:07.013Z",
+          "content_hash": "ecbd47492d600774ec076e9122562c9561e295c35fc1df3b756967cf5a4e2b4a"
         }
       ]
     }
