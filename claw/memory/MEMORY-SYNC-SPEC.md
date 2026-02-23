@@ -20,7 +20,7 @@
 ### 1. Memory Load (First Action of Session)
 
 ```
-Session Start → Check /claw/memories/data/
+Session Start → Check /claw/memory/data/
   ├─ nodes.json exists?
   │  ├─ YES: Load all 31+ neurons
   │  └─ NO: First run, start fresh
@@ -189,11 +189,11 @@ sessions_spawn(
 
 ```bash
 # 1. Check what's pending
-cat /claw/memories/sync/sync-queue.json
+cat /claw/memory/sync/sync-queue.json
 
 # 2. Inspect actual files
-cat /claw/memories/data/nodes.json
-cat /claw/memories/data/synapses.json
+cat /claw/memory/data/nodes.json
+cat /claw/memory/data/synapses.json
 
 # 3. If good, commit
 cd /Users/paulvisciano/Personal/paulvisciano.github.io
@@ -201,7 +201,7 @@ git add claw/memories/data/ claw/memories/sync/
 git commit -m "memory: $(date +%Y-%m-%d) - synced neural growth, reviewed & approved"
 
 # 4. Clean sync queue (optional)
-rm /claw/memories/sync/sync-queue.json
+rm /claw/memory/sync/sync-queue.json
 # (Or leave it for next day's reference)
 ```
 
@@ -243,7 +243,7 @@ Paul is the quality gate. If something looks wrong, fix it before committing.
 ## Files & Directory Structure
 
 ```
-/claw/memories/
+/claw/memory/
 ├── data/
 │   ├── nodes.json                 # Current neurons (canonical + working)
 │   ├── synapses.json              # Current connections (canonical + working)

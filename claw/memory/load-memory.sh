@@ -6,7 +6,7 @@
 
 set -e
 
-MEMORY_DIR="/Users/paulvisciano/Personal/paulvisciano.github.io/claw/memories/data"
+MEMORY_DIR="/Users/paulvisciano/Personal/paulvisciano.github.io/claw/memory/data"
 NODES_FILE="$MEMORY_DIR/nodes.json"
 SYNAPSES_FILE="$MEMORY_DIR/synapses.json"
 TIMELINE_FILE="$MEMORY_DIR/timeline.json"

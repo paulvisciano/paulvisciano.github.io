@@ -17,7 +17,7 @@ Active memory sync system that:
 ## File Structure
 
 ```
-/claw/memories/
+/claw/memory/
 ├── data/
 │   ├── nodes.json                    # 31+ neurons (canonical + working)
 │   ├── synapses.json                 # 39+ connections (canonical + working)
@@ -117,7 +117,7 @@ Active memory sync system that:
 When next session begins:
 
 ```
-1. Check if /claw/memories/data/nodes.json exists
+1. Check if /claw/memory/data/nodes.json exists
 2. If yes:
    - Load nodes.json → memory
    - Load synapses.json → memory
@@ -154,18 +154,18 @@ Integrated into main session loop:
 
 ```bash
 # 1. Paul reviews pending changes
-cat /claw/memories/sync/sync-queue.json
+cat /claw/memory/sync/sync-queue.json
 
 # 2. Paul edits if needed (cleanup/merge)
-vim /claw/memories/data/nodes.json
-vim /claw/memories/data/synapses.json
+vim /claw/memory/data/nodes.json
+vim /claw/memory/data/synapses.json
 
 # 3. Paul commits when clean
 git add claw/memories/data/
 git commit -m "memory: day's neural growth - added X changes, reviewed & clean"
 
 # 4. System clears sync queue
-rm /claw/memories/sync/sync-queue.json
+rm /claw/memory/sync/sync-queue.json
 ```
 
 ---
