@@ -252,7 +252,7 @@ Paul: "It's disappointing that you're asking me that question given that we lite
 Definition: **"memory sync"** = Update nodes/synapses + raw content + memory files + commit
 
 Canonical principle: **"The nodes ARE the memories"**
-- nodes-100pct.json + synapses-100pct.json = source of truth for what both Paul and Claude Code remember
+- nodes.json + synapses.json = source of truth for what both Paul and Claude Code remember
 - Raw content (transcripts, audio, images) organizes the input
 - Memory files (MEMORY.md, daily logs) curate the synthesis
 - Everything feeds into and derives from the neural graph

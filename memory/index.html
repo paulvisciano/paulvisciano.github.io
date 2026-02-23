@@ -542,6 +542,7 @@
         <button class="filter-btn" data-filter="people">People</button>
         <button class="filter-btn" data-filter="locations">Locations</button>
         <button class="filter-btn" data-filter="activities">Activities</button>
+        <button class="filter-btn" data-filter="temporal">Temporal</button>
     </div>
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
@@ -559,6 +560,7 @@
             <button class="filter-btn" data-filter="people">People</button>
             <button class="filter-btn" data-filter="locations">Locations</button>
             <button class="filter-btn" data-filter="activities">Activities</button>
+            <button class="filter-btn" data-filter="temporal">Temporal</button>
         </div>
         <div id="drawerContent" class="drawer-content">
             <div id="drawerDetails"></div>
@@ -659,7 +661,7 @@
                 return;
             }
             try {
-                const nodesResponse = await fetch('./data/nodes-100pct.json?t=' + Date.now());
+                const nodesResponse = await fetch('./data/nodes.json?t=' + Date.now());
                 if (!nodesResponse.ok) {
                     throw new Error(`Nodes fetch failed: ${nodesResponse.status}`);
                 }
@@ -668,6 +670,7 @@
                     throw new Error('Nodes JSON is empty');
                 }
 
+                const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD (local-ish for Today filter)
                 nodes = rawNodes.map((n, idx) => {
                     const angle = (idx / rawNodes.length) * Math.PI * 2;
                     const radius = 280 + Math.random() * 220;
@@ -680,6 +683,7 @@
                     const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
                     const glow = size * 2.5;
                     const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
+                    const isToday = !!(n.temporal_activations && n.temporal_activations.some(ta => ta.timestamp && ta.timestamp.slice(0, 10) === todayStr));
                     return {
                         id: idx,
                         idKey: n.id,
@@ -691,11 +695,12 @@
                         glow,
                         color,
                         freq: n.frequency,
-                        desc: n.attributes?.description || ''
+                        desc: n.attributes?.description || '',
+                        isToday
                     };
                 });
 
-                const synapsesResponse = await fetch('./data/synapses-100pct.json?t=' + Date.now());
+                const synapsesResponse = await fetch('./data/synapses.json?t=' + Date.now());
                 if (!synapsesResponse.ok) {
                     throw new Error(`Synapses fetch failed: ${synapsesResponse.status}`);
                 }
@@ -719,7 +724,7 @@
                 // Initial selection is handled in loadGraphData().then() so hash wins over random
             } catch (e) {
                 console.error('❌ Graph data fetch FAILED:', e.message, e);
-                console.log('Attempted to fetch: ./data/nodes-100pct.json?t=' + Date.now());
+                console.log('Attempted to fetch: ./data/nodes.json?t=' + Date.now());
                 console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }
@@ -793,10 +798,11 @@
                 const passesFilter = (nodeIndex) => {
                     const n = nodes[nodeIndex];
                     if (currentFilter === 'all') return true;
+                    if (currentFilter === 'today') return n.isToday === true;
                     if (currentFilter === 'people') return n.type === 'person';
                     if (currentFilter === 'locations') return n.type === 'location';
                     if (currentFilter === 'activities') return n.type === 'activity';
-                    if (currentFilter === 'today') return n.isToday;
+                    if (currentFilter === 'temporal') return n.type === 'temporal';
                     return true;
                 };
 
@@ -867,10 +873,11 @@
                     const p = item.proj;
                     
                     // Filter logic: check if node should be visible
+                    if (currentFilter === 'today' && !n.isToday) return;
                     if (currentFilter === 'people' && n.type !== 'person') return;
                     if (currentFilter === 'locations' && n.type !== 'location') return;
                     if (currentFilter === 'activities' && n.type !== 'activity') return;
-                    if (currentFilter === 'today' && !n.isToday) return; // Optional: requires node.isToday flag
+                    if (currentFilter === 'temporal' && n.type !== 'temporal') return;
                     
                     const r = n.size * p.scale;
                     const glow = n.glow * p.scale;
@@ -956,13 +963,17 @@
             }
         }
 
-        // Filter bar functionality (desktop)
+        // Filter bar functionality (desktop + drawer stay in sync)
         let currentFilter = 'all';
+        function setActiveFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.filter === currentFilter);
+            });
+        }
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
+                setActiveFilter(btn.dataset.filter);
                 console.log('Filter applied:', currentFilter);
             });
         });
@@ -1000,25 +1011,15 @@
             setDrawerOpen(false);
         });
         
-        // Filter buttons in drawer
+        // Filter buttons in drawer (setActiveFilter keeps bar + drawer in sync)
         document.querySelectorAll('#drawerFilters .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-            });
+            btn.addEventListener('click', () => setActiveFilter(btn.dataset.filter));
         });
 
         canvas.addEventListener('click', e => {
             if (hitTestNode(e.clientX, e.clientY)) {
                 // Node was clicked - switch to "All" filter to show all connections
-                if (currentFilter !== 'all') {
-                    currentFilter = 'all';
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelector('[data-filter="all"]').classList.add('active');
-                    document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelector('#drawerFilters [data-filter="all"]').classList.add('active');
-                }
+                if (currentFilter !== 'all') setActiveFilter('all');
                 // Update URL hash for deep linking
                 if (selected !== null) {
                     const selectedNode = nodes[selected];
@@ -1059,15 +1060,7 @@
                 if (nodeIndex !== -1) {
                     selected = nodeIndex;
                     showNodeDetails(nodes[selected]);
-                    if (currentFilter !== 'all') {
-                        currentFilter = 'all';
-                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                        const allBtn = document.querySelector('[data-filter="all"]');
-                        if (allBtn) allBtn.classList.add('active');
-                        document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                        const drawerAll = document.querySelector('#drawerFilters [data-filter="all"]');
-                        if (drawerAll) drawerAll.classList.add('active');
-                    }
+                    if (currentFilter !== 'all') setActiveFilter('all');
                     if (window.innerWidth <= 768) {
                         setDrawerOpen(true);
                         showNodeDetailsInDrawer(nodes[selected]);

@@ -3,22 +3,47 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 100,
+    "frequency": 151,
     "attributes": {
       "role": "protagonist",
-      "description": "Urban Runner, digital nomad, AI storyteller, meta-gamer, wealth redistributor, builder",
+      "description": "Urban Runner, digital nomad, AI storyteller",
       "color": "#FF6B6B"
     },
-    "idKey": "paul"
+    "idKey": "paul",
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "duration_minutes": 12,
+        "thinking_patterns": [
+          "verification",
+          "skepticism",
+          "systematic-evaluation",
+          "value-assessment"
+        ],
+        "reason": "Decision-making: checked reviews, asked questions, recognized markup, walked away"
+      },
+      {
+        "moment": "memory-sync-2026-02-23",
+        "timestamp": "2026-02-23T12:35:14.465Z",
+        "duration_minutes": 0,
+        "thinking_patterns": [
+          "memory-sync",
+          "narrative-integration",
+          "journal-integration"
+        ],
+        "reason": "Synced narrative + journal from 2026-02-23: 8 entities (narrative.md, 2026-02-23.md, 2026-02-23-neural-sync.md, 2026-02-23-neural-persistence.md)"
+      }
+    ]
   },
   {
     "id": "wouter",
     "label": "Wouter",
     "category": "person",
-    "frequency": 58,
+    "frequency": 45,
     "attributes": {
       "role": "travel companion",
-      "description": "Met Miami beach volleyball (Ocean Drive), both traveling to Medell\u00edn simultaneously, epic months there, evolved into deep travel brotherhood, 7+ countries, yoga/wellness partner, like younger brother",
+      "description": "Adventure brother, long-arc relationship, conquest philosophy",
       "color": "#4ECDC4"
     },
     "idKey": "wouter"
@@ -27,13 +52,11 @@
     "id": "khanh",
     "label": "Khanh",
     "category": "person",
-    "frequency": 52,
+    "frequency": 38,
     "attributes": {
-      "role": "travel buddy, Chicago origin",
-      "description": "Vietnam-American bridge. Met Paul in Chicago playing volleyball (back when Paul was married). Knows Leo and Boy from Chicago. Hawaii origin, fitness mentor, Asia guide, authentic connection. Multiple countries traveled together.",
-      "color": "#45B7D1",
-      "firstMet": "Chicago, volleyball",
-      "knownSince": "married era"
+      "role": "travel buddy",
+      "description": "Chicago crew, Hawaii trainer/host, Vietnam-American bridge",
+      "color": "#45B7D1"
     },
     "idKey": "khanh"
   },
@@ -41,10 +64,10 @@
     "id": "boy",
     "label": "Boy",
     "category": "person",
-    "frequency": 38,
+    "frequency": 31,
     "attributes": {
       "role": "crew member",
-      "description": "Leo's brother, Bangkok catalyst, social energy, multi-city travels, crew leader",
+      "description": "Leo's brother, Bangkok crew addition",
       "color": "#96CEB4"
     },
     "idKey": "boy"
@@ -53,10 +76,10 @@
     "id": "leo",
     "label": "Leo",
     "category": "person",
-    "frequency": 48,
+    "frequency": 35,
     "attributes": {
       "role": "brother-like",
-      "description": "Co-conspirator, K-FIT partner, continents-apart travels, crew architect, vision holder",
+      "description": "Co-conspirator, K-FIT partner",
       "color": "#FFEAA7"
     },
     "idKey": "leo"
@@ -65,10 +88,10 @@
     "id": "bartek",
     "label": "Bartek",
     "category": "person",
-    "frequency": 34,
+    "frequency": 22,
     "attributes": {
       "role": "crew member",
-      "description": "Fort Lauderdale base, beach volleyball, massage expert, OutSystems work buddy, recovery specialist",
+      "description": "Fort Lauderdale base, beach volleyball partner",
       "color": "#DDA0DD"
     },
     "idKey": "bartek"
@@ -77,10 +100,10 @@
     "id": "mom",
     "label": "Mom",
     "category": "person",
-    "frequency": 55,
+    "frequency": 40,
     "attributes": {
       "role": "family",
-      "description": "Clearwater base, emotional anchor, pedicures, massage hub, home-cooked meals, unconditional support",
+      "description": "Clearwater base, supportive, pedicures & recovery",
       "color": "#FFB6C1"
     },
     "idKey": "mom"
@@ -89,10 +112,10 @@
     "id": "jeandel",
     "label": "Jeandel",
     "category": "person",
-    "frequency": 32,
+    "frequency": 18,
     "attributes": {
       "role": "friend",
-      "description": "2+ months Siargao, cooking partner, intimate bond, emotional depth, character archetype",
+      "description": "Emotional connection, Boracay memories",
       "color": "#9B59B6"
     },
     "idKey": "jeandel"
@@ -101,10 +124,10 @@
     "id": "sean",
     "label": "Sean",
     "category": "person",
-    "frequency": 26,
+    "frequency": 16,
     "attributes": {
       "role": "crew member",
-      "description": "Ho Chi Minh City companion, Siargao anchor, crew gatherings, local guide",
+      "description": "Ho Chi Minh City companion",
       "color": "#3498DB"
     },
     "idKey": "sean"
@@ -113,10 +136,10 @@
     "id": "irina",
     "label": "Irina",
     "category": "person",
-    "frequency": 24,
+    "frequency": 14,
     "attributes": {
       "role": "athlete",
-      "description": "French volleyball player, South Beach Airbnb roommate, athletic community connector",
+      "description": "French volleyball player, South Beach Airbnb roommate",
       "color": "#E74C3C"
     },
     "idKey": "irina"
@@ -125,10 +148,10 @@
     "id": "ray",
     "label": "Ray",
     "category": "person",
-    "frequency": 22,
+    "frequency": 12,
     "attributes": {
       "role": "crew member",
-      "description": "Wouter's girlfriend, yoga buddy, integrated travels, relationship model",
+      "description": "Wouter's girlfriend, yoga buddy, travels",
       "color": "#B983FF"
     },
     "idKey": "ray"
@@ -137,10 +160,10 @@
     "id": "maria",
     "label": "Maria",
     "category": "person",
-    "frequency": 24,
+    "frequency": 14,
     "attributes": {
       "role": "friend",
-      "description": "Manila connection, gift exchange, food culture, local perspective",
+      "description": "Boracay connection",
       "color": "#FF6B9D"
     },
     "idKey": "maria"
@@ -317,23 +340,37 @@
     "id": "bangkok",
     "label": "Bangkok",
     "category": "location",
-    "frequency": 70,
+    "frequency": 64,
     "attributes": {
       "country": "Thailand",
       "type": "city",
-      "significance": "Urban Runner Days 1-8, 48 miles, \u0e3f741 redistribution, Pura Vida K-FIT, peak creative",
+      "significance": "Urban Runner proof-of-concept, high creative output",
       "color": "#FF6B9D"
-    }
+    },
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "activity": "Navigation + decision-making at Charoen Optical",
+        "context": "Discovered overpriced lenses, walked away"
+      },
+      {
+        "moment": "memory-sync-2026-02-23",
+        "timestamp": "2026-02-23T12:35:14.474Z",
+        "activity": "Narrative + journal sync",
+        "context": "Day narrative and journal entries integrated for 2026-02-23"
+      }
+    ]
   },
   {
     "id": "ho-chi-minh-city",
     "label": "Ho Chi Minh City",
     "category": "location",
-    "frequency": 44,
+    "frequency": 32,
     "attributes": {
       "country": "Vietnam",
       "type": "city",
-      "significance": "Feb 9-19 episode, 77 pages, Khanh guide, big city skyline, 4 conversations",
+      "significance": "Episode integration, February 2026",
       "color": "#C44569"
     }
   },
@@ -341,11 +378,11 @@
     "id": "boracay",
     "label": "Boracay",
     "category": "location",
-    "frequency": 36,
+    "frequency": 28,
     "attributes": {
       "country": "Philippines",
       "type": "island",
-      "significance": "Wouter trip, Island Boy gym, volleyball community, emotional moments",
+      "significance": "Recent travel with Wouter, emotional connections",
       "color": "#F8B195"
     }
   },
@@ -353,11 +390,11 @@
     "id": "miami",
     "label": "Miami",
     "category": "location",
-    "frequency": 62,
+    "frequency": 42,
     "attributes": {
       "country": "USA",
       "type": "city",
-      "significance": "7 episodes, crew hub, Ocean Drive courts, South Beach, 4+ conversations",
+      "significance": "Volleyball crew hub, South Beach, mom base proximity",
       "color": "#AA96DA"
     }
   },
@@ -365,11 +402,11 @@
     "id": "da-nang",
     "label": "Da Nang",
     "category": "location",
-    "frequency": 30,
+    "frequency": 22,
     "attributes": {
       "country": "Vietnam",
       "type": "city",
-      "significance": "Heaven on Earth episode, meditation, mountain experience, breathwork focus",
+      "significance": "Heaven on Earth episode, meditation, mountain experience",
       "color": "#FCBAD3"
     }
   },
@@ -377,11 +414,11 @@
     "id": "chicago",
     "label": "Chicago",
     "category": "location",
-    "frequency": 56,
+    "frequency": 38,
     "attributes": {
       "country": "USA",
       "type": "city",
-      "significance": "5 episodes, decade foundation 2005-2015, father reunion Oct 2025, volleyball origin",
+      "significance": "Decade foundation, father reunion, volleyball origins",
       "color": "#A8DADC"
     }
   },
@@ -389,11 +426,11 @@
     "id": "honolulu",
     "label": "Honolulu",
     "category": "location",
-    "frequency": 38,
+    "frequency": 26,
     "attributes": {
       "country": "USA",
       "type": "city",
-      "significance": "Island rhythm 38+ days, Khanh origin, Hawaii gateway, training base",
+      "significance": "Island rhythm, 38+ days, Khanh connection origin",
       "color": "#457B9D"
     }
   },
@@ -447,7 +484,7 @@
   },
   {
     "id": "medellin",
-    "label": "Medell\u00edn",
+    "label": "Medellín",
     "category": "location",
     "frequency": 26,
     "attributes": {
@@ -641,10 +678,10 @@
     "id": "southeast-asia",
     "label": "Southeast Asia",
     "category": "location",
-    "frequency": 78,
+    "frequency": 58,
     "attributes": {
       "type": "region",
-      "significance": "Current active phase 2025-2026, rapid-fire 3-7 day loop, primary exploration",
+      "significance": "Current exploration phase, rapid-fire loop 2025-2026",
       "color": "#D5573B"
     }
   },
@@ -652,10 +689,10 @@
     "id": "volleyball",
     "label": "Volleyball",
     "category": "activity",
-    "frequency": 90,
+    "frequency": 82,
     "attributes": {
       "type": "sport",
-      "significance": "18-year passion, central life, crew connector, flow state, 7+ episodes",
+      "significance": "Central life activity, crew connector, 18-year history",
       "impact": "very-high",
       "color": "#E63946"
     }
@@ -676,10 +713,10 @@
     "id": "urban-runner",
     "label": "Urban Runner",
     "category": "activity",
-    "frequency": 88,
+    "frequency": 71,
     "attributes": {
       "type": "creative project",
-      "significance": "Meta-narrative, gamified storytelling, legacy, 28+ episodes, 8+ locations",
+      "significance": "Meta-narrative, generational legacy, gamified storytelling",
       "impact": "very-high",
       "color": "#1D3557"
     }
@@ -688,10 +725,10 @@
     "id": "work",
     "label": "Work (OutSystems)",
     "category": "activity",
-    "frequency": 62,
+    "frequency": 50,
     "attributes": {
       "type": "employment",
-      "significance": "Remote engineering, European team, early mornings, 6h baseline, integrated",
+      "significance": "Remote engineering, European team, early mornings",
       "impact": "high",
       "color": "#457B9D"
     }
@@ -700,10 +737,10 @@
     "id": "fitness",
     "label": "Fitness & Gym",
     "category": "activity",
-    "frequency": 72,
+    "frequency": 52,
     "attributes": {
       "type": "wellness",
-      "significance": "Daily routine, strength training, 2h baseline, discipline, recovery",
+      "significance": "Daily routine, recovery rituals, K-FIT project",
       "impact": "high",
       "color": "#2A9D8F"
     }
@@ -724,22 +761,22 @@
     "id": "travel",
     "label": "Travel & Nomadism",
     "category": "activity",
-    "frequency": 98,
+    "frequency": 85,
     "attributes": {
       "type": "lifestyle",
-      "significance": "9+ months continuous Aug 2025-Feb 2026+, cultural immersion, velocity living",
+      "significance": "9+ months continuous, cultural immersion, exploration",
       "impact": "very-high",
       "color": "#F4A261"
     }
   },
   {
     "id": "meditation",
-    "label": "Meditation & Breathwork",
+    "label": "Meditation & Yoga",
     "category": "activity",
-    "frequency": 42,
+    "frequency": 28,
     "attributes": {
       "type": "mindfulness",
-      "significance": "Breathing episodes, presence practice, emotional anchoring, Da Nang focus",
+      "significance": "Breathwork, presence practice, emotional anchoring",
       "impact": "medium",
       "color": "#E76F51"
     }
@@ -748,10 +785,10 @@
     "id": "wealth-redistribution",
     "label": "Wealth Redistribution",
     "category": "activity",
-    "frequency": 36,
+    "frequency": 24,
     "attributes": {
       "type": "philosophy",
-      "significance": "Urban Runner quests, street vendors, service workers, \u0e3f741 Bangkok",
+      "significance": "Urban Runner missions, giving back to communities",
       "impact": "high",
       "color": "#2A9D8F"
     }
@@ -787,7 +824,7 @@
     "frequency": 34,
     "attributes": {
       "type": "lifestyle",
-      "significance": "Amsterdam Caf\u00e9 Bangkok, karaoke Manila, goth clubs Tampa, balanced",
+      "significance": "Amsterdam Café Bangkok, karaoke Manila, goth clubs Tampa, balanced",
       "impact": "medium",
       "color": "#6C63FF"
     }
@@ -832,14 +869,12 @@
     "id": "renewal",
     "label": "Renewal",
     "category": "emotion",
-    "frequency": 28,
+    "frequency": 18,
     "attributes": {
       "triggers": [
         "reset days",
         "nice Airbnbs",
-        "skyline views",
-        "spa moments",
-        "transitions"
+        "skyline views"
       ],
       "color": "#52B788"
     }
@@ -848,14 +883,12 @@
     "id": "connection",
     "label": "Emotional Connection",
     "category": "emotion",
-    "frequency": 52,
+    "frequency": 34,
     "attributes": {
       "triggers": [
         "crew moments",
-        "Jeandel talks",
-        "family reunions",
-        "meals",
-        "authentic"
+        "conversations with Jeandel",
+        "family reunions"
       ],
       "color": "#D62828"
     }
@@ -864,17 +897,25 @@
     "id": "growth",
     "label": "Growth & Discovery",
     "category": "emotion",
-    "frequency": 65,
+    "frequency": 47,
     "attributes": {
       "triggers": [
         "new cities",
         "adventure",
         "learning",
-        "confrontations",
-        "skill"
+        "confrontations"
       ],
       "color": "#F77F00"
-    }
+    },
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "learning": "Recognized markup through questioning and verification",
+        "insight": "Fancy storefront doesn't guarantee fair pricing; systematic questioning reveals true value",
+        "growth_type": "pattern-recognition"
+      }
+    ]
   },
   {
     "id": "vulnerability",
@@ -974,16 +1015,16 @@
     "id": "february-2026",
     "label": "February 2026",
     "category": "temporal",
-    "frequency": 32,
+    "frequency": 28,
     "attributes": {
       "type": "month",
-      "significance": "Ho Chi Minh City, Jarvis integration, LoRA training, Southeast Asia loop",
+      "significance": "Ho Chi Minh City, Jarvis integration, LoRA training",
       "color": "#06A77D"
     }
   },
   {
     "id": "bulgaria-era",
-    "label": "Bulgaria Era (1988\u20132004)",
+    "label": "Bulgaria Era (1988–2004)",
     "category": "temporal",
     "frequency": 34,
     "attributes": {
@@ -994,7 +1035,7 @@
   },
   {
     "id": "usa-foundation",
-    "label": "USA Foundation (2005\u20132015)",
+    "label": "USA Foundation (2005–2015)",
     "category": "temporal",
     "frequency": 40,
     "attributes": {
@@ -1016,7 +1057,7 @@
   },
   {
     "id": "florida-hub",
-    "label": "Florida Hub (2023\u20132026)",
+    "label": "Florida Hub (2023–2026)",
     "category": "temporal",
     "frequency": 32,
     "attributes": {
@@ -1027,7 +1068,7 @@
   },
   {
     "id": "coastal-nomad-phase",
-    "label": "Coastal Nomad Phase (2025\u2013Present)",
+    "label": "Coastal Nomad Phase (2025–Present)",
     "category": "temporal",
     "frequency": 40,
     "attributes": {
@@ -1043,7 +1084,7 @@
     "frequency": 32,
     "attributes": {
       "type": "infrastructure-project",
-      "significance": "Integrated fitness (volleyball + gym + yoga + recovery) continents, Valencia\u2192Bangkok",
+      "significance": "Integrated fitness (volleyball + gym + yoga + recovery) continents, Valencia→Bangkok",
       "impact": "high",
       "color": "#00FF88"
     }
@@ -1091,7 +1132,7 @@
     "frequency": 56,
     "attributes": {
       "type": "creative-process",
-      "significance": "Voice\u2192ChatGPT\u2192image\u2192Grok\u2192comic\u2192publish, 28+ episodes, pipeline",
+      "significance": "Voice→ChatGPT→image→Grok→comic→publish, 28+ episodes, pipeline",
       "impact": "high",
       "color": "#34D399"
     }
@@ -1348,5 +1389,38 @@
       "color": "#ff00aa"
     },
     "dateCreated": "2026-02-22"
+  },
+  {
+    "id": "decision-making",
+    "label": "Strategic Decision-Making",
+    "category": "capability",
+    "frequency": 8,
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "activity": "Verified pricing, recognized markup, walked away from bad deal",
+        "pattern": "Systematic evaluation leading to informed decisions"
+      }
+    ],
+    "attributes": {
+      "role": "skill",
+      "description": "Evaluating options, recognizing patterns, making informed choices",
+      "color": "#10b981"
+    },
+    "idKey": "decision-making"
+  },
+  {
+    "id": "creek-community",
+    "label": "Volleyball Crew",
+    "category": "activity",
+    "frequency": 48,
+    "attributes": {
+      "type": "community",
+      "significance": "Miami Ocean Drive courts, Danie, Ash, Cat, KJ - family atmosphere",
+      "impact": "high",
+      "color": "#FF1744"
+    },
+    "idKey": "creek-community"
   }
 ]

@@ -2,51 +2,51 @@
   {
     "source": "paul",
     "target": "volleyball",
-    "weight": 0.95,
+    "weight": 0.99,
     "type": "core-activity",
-    "label": "18-year passion, 7+ episodes, flow state"
+    "label": "18-year passion"
   },
   {
     "source": "paul",
     "target": "urban-runner",
-    "weight": 0.92,
+    "weight": 0.96,
     "type": "core-project",
-    "label": "meta-narrative, 28+ episodes, legacy"
+    "label": "meta-narrative"
   },
   {
     "source": "paul",
     "target": "travel",
     "weight": 0.9,
     "type": "lifestyle",
-    "label": "9+ months continuous, nomadic"
+    "label": "nomadic life"
   },
   {
     "source": "paul",
     "target": "wouter",
-    "weight": 0.8,
+    "weight": 0.75,
     "type": "relationship",
-    "label": "adventure brother, 7+ countries, deepest"
+    "label": "adventure brother"
   },
   {
     "source": "paul",
     "target": "khanh",
-    "weight": 0.77,
+    "weight": 0.7,
     "type": "relationship",
-    "label": "travel buddy, bridge person, mentor"
+    "label": "travel buddy"
   },
   {
     "source": "paul",
     "target": "mom",
-    "weight": 0.78,
+    "weight": 0.72,
     "type": "relationship",
-    "label": "family anchor, emotional support, home"
+    "label": "family base"
   },
   {
     "source": "paul",
     "target": "leo",
-    "weight": 0.75,
+    "weight": 0.65,
     "type": "relationship",
-    "label": "co-conspirator, K-FIT partner, crew"
+    "label": "co-conspirator"
   },
   {
     "source": "paul",
@@ -65,16 +65,16 @@
   {
     "source": "paul",
     "target": "work",
-    "weight": 0.72,
+    "weight": 0.6950000000000001,
     "type": "activity",
-    "label": "remote engineer, 6h baseline, integrated"
+    "label": "remote engineer"
   },
   {
     "source": "paul",
     "target": "fitness",
-    "weight": 0.77,
+    "weight": 0.7,
     "type": "activity",
-    "label": "daily routine, 2h, discipline, recovery"
+    "label": "daily routine"
   },
   {
     "source": "paul",
@@ -86,9 +86,9 @@
   {
     "source": "paul",
     "target": "growth",
-    "weight": 0.87,
-    "type": "emotion",
-    "label": "nomadic arc, discovery, transformation"
+    "weight": 0.515,
+    "type": "memory-sync",
+    "label": "synced 2026-02-23"
   },
   {
     "source": "paul",
@@ -142,23 +142,23 @@
   {
     "source": "wouter",
     "target": "ray",
-    "weight": 0.85,
+    "weight": 0.8,
     "type": "relationship",
-    "label": "partner, travels together, yoga buddy"
+    "label": "partner"
   },
   {
     "source": "wouter",
     "target": "bangkok",
-    "weight": 0.84,
+    "weight": 0.8,
     "type": "location-visit",
-    "label": "crew reunion, travel together"
+    "label": "travel companion"
   },
   {
     "source": "wouter",
     "target": "boracay",
-    "weight": 0.9,
+    "weight": 0.85,
     "type": "location-visit",
-    "label": "island trip, gym partner, fitness hub"
+    "label": "recent trip"
   },
   {
     "source": "wouter",
@@ -212,30 +212,30 @@
   {
     "source": "khanh",
     "target": "ho-chi-minh-city",
-    "weight": 0.94,
+    "weight": 0.9,
     "type": "location-visit",
-    "label": "expert local guide, home connection"
+    "label": "local guide"
   },
   {
     "source": "khanh",
     "target": "honolulu",
-    "weight": 0.82,
+    "weight": 0.75,
     "type": "location-visit",
-    "label": "connection origin, trainer host, Hawaii"
+    "label": "connection origin"
   },
   {
     "source": "khanh",
     "target": "fitness",
-    "weight": 0.8,
+    "weight": 0.72,
     "type": "shared-activity",
-    "label": "mentor, trainer, gym buddy"
+    "label": "trainer/host"
   },
   {
     "source": "khanh",
     "target": "volleyball",
-    "weight": 0.72,
+    "weight": 0.65,
     "type": "shared-activity",
-    "label": "Hawaii connection, play together"
+    "label": "Hawaii connection"
   },
   {
     "source": "khanh",
@@ -275,16 +275,16 @@
   {
     "source": "leo",
     "target": "urban-runner",
-    "weight": 0.78,
+    "weight": 0.7,
     "type": "shared-project",
-    "label": "K-FIT collaborator, episode subject"
+    "label": "K-FIT partner"
   },
   {
     "source": "leo",
     "target": "bangkok",
-    "weight": 0.7,
+    "weight": 0.65,
     "type": "location-visit",
-    "label": "traveled together, crew leadership"
+    "label": "traveled together"
   },
   {
     "source": "leo",
@@ -296,16 +296,16 @@
   {
     "source": "boy",
     "target": "bangkok",
-    "weight": 0.82,
+    "weight": 0.785,
     "type": "location-visit",
-    "label": "crew reunion, social catalyst"
+    "label": "crew reunion"
   },
   {
     "source": "boy",
     "target": "ho-chi-minh-city",
-    "weight": 0.78,
+    "weight": 0.72,
     "type": "location-visit",
-    "label": "recent travel together"
+    "label": "recent stay"
   },
   {
     "source": "boy",
@@ -359,16 +359,16 @@
   {
     "source": "mom",
     "target": "miami",
-    "weight": 0.82,
-    "type": "location-proximity",
-    "label": "Florida presence, nearby"
+    "weight": 0.8,
+    "type": "location-base",
+    "label": "Clearwater hub"
   },
   {
     "source": "mom",
     "target": "fitness",
-    "weight": 0.7,
+    "weight": 0.62,
     "type": "shared-activity",
-    "label": "spa & pedicures, recovery"
+    "label": "pedicures & spa"
   },
   {
     "source": "mom",
@@ -415,9 +415,9 @@
   {
     "source": "jeandel",
     "target": "connection",
-    "weight": 0.92,
+    "weight": 0.8,
     "type": "emotion",
-    "label": "intimate emotional bond"
+    "label": "significant moments"
   },
   {
     "source": "jeandel",
@@ -436,9 +436,9 @@
   {
     "source": "sean",
     "target": "ho-chi-minh-city",
-    "weight": 0.84,
+    "weight": 0.78,
     "type": "location-visit",
-    "label": "travel companion, local guide"
+    "label": "travel companion"
   },
   {
     "source": "sean",
@@ -492,23 +492,23 @@
   {
     "source": "bartek",
     "target": "miami",
-    "weight": 0.88,
+    "weight": 0.82,
     "type": "location-base",
-    "label": "Fort Lauderdale hub, anchor"
+    "label": "Fort Lauderdale"
   },
   {
     "source": "bartek",
     "target": "volleyball",
-    "weight": 0.8,
+    "weight": 0.75,
     "type": "shared-activity",
-    "label": "beach volleyball partner"
+    "label": "beach volleyball"
   },
   {
     "source": "bartek",
     "target": "fitness",
-    "weight": 0.78,
+    "weight": 0.7,
     "type": "shared-activity",
-    "label": "gym buddy, workout partner"
+    "label": "massage recovery"
   },
   {
     "source": "bartek",
@@ -534,16 +534,16 @@
   {
     "source": "irina",
     "target": "miami",
-    "weight": 0.88,
+    "weight": 0.82,
     "type": "location-visit",
-    "label": "South Beach Airbnb roommate"
+    "label": "South Beach Airbnb"
   },
   {
     "source": "irina",
     "target": "volleyball",
     "weight": 0.88,
     "type": "shared-activity",
-    "label": "athletic community, play partner"
+    "label": "athlete connection"
   },
   {
     "source": "irina",
@@ -730,23 +730,23 @@
   {
     "source": "volleyball",
     "target": "miami",
-    "weight": 0.87,
+    "weight": 0.8,
     "type": "location-activity",
-    "label": "Ocean Drive courts, 7 episodes"
+    "label": "Ocean Drive courts"
   },
   {
     "source": "volleyball",
     "target": "chicago",
-    "weight": 0.9,
+    "weight": 0.85,
     "type": "location-activity",
-    "label": "origin story, discovered 18, 5 episodes"
+    "label": "origin story"
   },
   {
     "source": "volleyball",
     "target": "honolulu",
-    "weight": 0.8,
+    "weight": 0.72,
     "type": "location-activity",
-    "label": "island courts training"
+    "label": "island courts"
   },
   {
     "source": "volleyball",
@@ -814,37 +814,37 @@
   {
     "source": "urban-runner",
     "target": "bangkok",
-    "weight": 0.92,
+    "weight": 0.89,
     "type": "episode-location",
-    "label": "Days 1-8, proof-of-concept"
+    "label": "Episodes 4-7, 13, 15, 20"
   },
   {
     "source": "urban-runner",
     "target": "ho-chi-minh-city",
-    "weight": 0.87,
+    "weight": 0.82,
     "type": "episode-location",
-    "label": "Feb 9-19 episode, 77 pages"
+    "label": "Feb 9-19 episode"
   },
   {
     "source": "urban-runner",
     "target": "da-nang",
-    "weight": 0.84,
+    "weight": 0.8,
     "type": "episode-location",
-    "label": "Heaven on Earth meditation"
+    "label": "Heaven on Earth"
   },
   {
     "source": "urban-runner",
     "target": "chicago",
-    "weight": 0.82,
+    "weight": 0.75,
     "type": "episode-location",
-    "label": "5 episodes, father reunion"
+    "label": "Episode 1, father reunion"
   },
   {
     "source": "urban-runner",
     "target": "miami",
-    "weight": 0.84,
+    "weight": 0.78,
     "type": "episode-location",
-    "label": "7 episodes, crew storytelling"
+    "label": "Episodes 1-4, 7"
   },
   {
     "source": "urban-runner",
@@ -877,16 +877,16 @@
   {
     "source": "urban-runner",
     "target": "travel",
-    "weight": 0.96,
+    "weight": 0.92,
     "type": "core-activity",
-    "label": "travel documentation, 28+"
+    "label": "travel documentation"
   },
   {
     "source": "urban-runner",
     "target": "wealth-redistribution",
-    "weight": 0.8,
+    "weight": 0.75,
     "type": "activity-mechanic",
-    "label": "quest system, \u0e3f741"
+    "label": "quest system"
   },
   {
     "source": "urban-runner",
@@ -933,14 +933,14 @@
   {
     "source": "work",
     "target": "fitness",
-    "weight": 0.8,
+    "weight": 0.75,
     "type": "daily-balance",
-    "label": "6h + 2h integrated rhythm"
+    "label": "6h work + 2h fitness"
   },
   {
     "source": "work",
     "target": "bangkok",
-    "weight": 0.68,
+    "weight": 0.625,
     "type": "location-activity",
     "label": "OutSystems timezone"
   },
@@ -989,7 +989,7 @@
   {
     "source": "fitness",
     "target": "growth",
-    "weight": 0.78,
+    "weight": 0.75,
     "type": "emotion",
     "label": "physical growth"
   },
@@ -1024,21 +1024,21 @@
   {
     "source": "travel",
     "target": "southeast-asia",
-    "weight": 0.9,
+    "weight": 0.85,
     "type": "region",
-    "label": "current phase, rapid loop"
+    "label": "current phase 2025-2026"
   },
   {
     "source": "travel",
     "target": "growth",
-    "weight": 0.92,
+    "weight": 0.88,
     "type": "emotion",
-    "label": "discovery, learning"
+    "label": "discovery & learning"
   },
   {
     "source": "travel",
     "target": "connection",
-    "weight": 0.86,
+    "weight": 0.82,
     "type": "emotion",
     "label": "meeting people"
   },
@@ -1110,7 +1110,7 @@
     "target": "bangkok",
     "weight": 0.78,
     "type": "location-activity",
-    "label": "Amsterdam Caf\u00e9 reggae"
+    "label": "Amsterdam Café reggae"
   },
   {
     "source": "nightlife-exploration",
@@ -1166,7 +1166,7 @@
     "target": "bangkok",
     "weight": 0.92,
     "type": "episode-mechanic",
-    "label": "\u0e3f741 redistributed"
+    "label": "฿741 redistributed"
   },
   {
     "source": "wealth-redistribution",
@@ -1227,7 +1227,7 @@
   {
     "source": "bangkok",
     "target": "southeast-asia",
-    "weight": 0.92,
+    "weight": 0.88,
     "type": "region",
     "label": "Thailand hub"
   },
@@ -1255,21 +1255,21 @@
   {
     "source": "ho-chi-minh-city",
     "target": "southeast-asia",
-    "weight": 0.94,
+    "weight": 0.9,
     "type": "region",
     "label": "Vietnam center"
   },
   {
     "source": "boracay",
     "target": "southeast-asia",
-    "weight": 0.92,
+    "weight": 0.88,
     "type": "region",
     "label": "Philippines island"
   },
   {
     "source": "da-nang",
     "target": "southeast-asia",
-    "weight": 0.94,
+    "weight": 0.9,
     "type": "region",
     "label": "Vietnam coast"
   },
@@ -1311,7 +1311,7 @@
   {
     "source": "chicago",
     "target": "volleyball",
-    "weight": 0.92,
+    "weight": 0.88,
     "type": "origin",
     "label": "discovered at 18"
   },
@@ -1612,14 +1612,14 @@
   {
     "source": "february-2026",
     "target": "ho-chi-minh-city",
-    "weight": 0.96,
+    "weight": 0.92,
     "type": "temporal",
-    "label": "current month"
+    "label": "current focus"
   },
   {
     "source": "february-2026",
     "target": "urban-runner",
-    "weight": 0.87,
+    "weight": 0.8,
     "type": "temporal",
     "label": "episode integration"
   },
@@ -1835,8 +1835,9 @@
   {
     "source": "paul",
     "target": "bangkok",
-    "weight": 7,
-    "type": "visited"
+    "weight": 0.54,
+    "type": "memory-sync",
+    "label": "synced 2026-02-23"
   },
   {
     "source": "paul",
@@ -2025,157 +2026,101 @@
     "type": "knows-from-chicago"
   },
   {
-    "from": "europe",
-    "to": "athens",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "europe",
-    "to": "barcelona",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "europe",
-    "to": "lisbon",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "europe",
-    "to": "sofia",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "europe",
-    "to": "varna",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "europe",
-    "to": "germany",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "europe",
-    "to": "turkey",
-    "label": "part of Europe",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "chicago",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "miami",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "san-diego",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "boulder",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "fort-lauderdale",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "clearwater",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "st-petersburg",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "americas",
-    "to": "medellin",
-    "label": "part of Americas",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "middle-east",
-    "to": "beirut",
-    "label": "part of Middle East",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "middle-east",
-    "to": "baalbek",
-    "label": "part of Middle East",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "middle-east",
-    "to": "dubai",
-    "label": "part of Middle East",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "middle-east",
-    "to": "abu-dhabi",
-    "label": "part of Middle East",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "pacific",
-    "to": "honolulu",
-    "label": "part of Pacific",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
-    "from": "bulgaria",
-    "to": "sofia",
-    "label": "part of Bulgaria (Childhood)",
-    "strength": 1.5,
-    "type": "geographic"
-  },
-  {
     "from": "bulgaria",
     "to": "varna",
     "label": "part of Bulgaria (Childhood)",
     "strength": 1.5,
     "type": "geographic"
+  },
+  {
+    "source": "wouter",
+    "target": "volleyball",
+    "weight": 0.68,
+    "type": "activity",
+    "label": "yoga & fitness"
+  },
+  {
+    "source": "jeandel",
+    "target": "boracay",
+    "weight": 0.85,
+    "type": "location-visit",
+    "label": "emotional connection"
+  },
+  {
+    "source": "volleyball",
+    "target": "creek-community",
+    "weight": 0.92,
+    "type": "community",
+    "label": "crew family"
+  },
+  {
+    "source": "fitness",
+    "target": "meditation",
+    "weight": 0.7,
+    "type": "wellness",
+    "label": "recovery + mindfulness"
+  },
+  {
+    "source": "da-nang",
+    "target": "meditation",
+    "weight": 0.85,
+    "type": "location-activity",
+    "label": "mountain meditation"
+  },
+  {
+    "source": "chicago",
+    "target": "growth",
+    "weight": 0.78,
+    "type": "emotion",
+    "label": "foundation decade"
+  },
+  {
+    "source": "miami",
+    "target": "creek-community",
+    "weight": 0.9,
+    "type": "community-location",
+    "label": "crew hub"
+  },
+  {
+    "source": "honolulu",
+    "target": "volleyball",
+    "weight": 0.75,
+    "type": "location-activity",
+    "label": "island training"
+  },
+  {
+    "source": "renewal",
+    "target": "fitness",
+    "weight": 0.68,
+    "type": "emotion-activity",
+    "label": "recovery reset"
+  },
+  {
+    "source": "growth",
+    "target": "urban-runner",
+    "weight": 0.805,
+    "type": "emotion-project",
+    "label": "storytelling transformation"
+  },
+  {
+    "source": "connection",
+    "target": "crew-community",
+    "weight": 0.85,
+    "type": "emotion-community",
+    "label": "crew vibes"
+  },
+  {
+    "source": "paul",
+    "target": "boy",
+    "weight": 0.515,
+    "type": "memory-sync",
+    "label": "synced 2026-02-23"
+  },
+  {
+    "source": "paul",
+    "target": "connection",
+    "weight": 0.515,
+    "type": "memory-sync",
+    "label": "synced 2026-02-23"
   }
 ]

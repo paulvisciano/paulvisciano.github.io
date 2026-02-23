@@ -513,7 +513,7 @@
                 return;
             }
             try {
-                const nodesResponse = await fetch('./data/nodes-100pct.json?t=' + Date.now());
+                const nodesResponse = await fetch('./data/nodes.json?t=' + Date.now());
                 if (!nodesResponse.ok) {
                     throw new Error(`Nodes fetch failed: ${nodesResponse.status}`);
                 }
@@ -549,7 +549,7 @@
                     };
                 });
 
-                const synapsesResponse = await fetch('./data/synapses-100pct.json?t=' + Date.now());
+                const synapsesResponse = await fetch('./data/synapses.json?t=' + Date.now());
                 if (!synapsesResponse.ok) {
                     throw new Error(`Synapses fetch failed: ${synapsesResponse.status}`);
                 }
@@ -576,7 +576,7 @@
                 }
             } catch (e) {
                 console.error('❌ Graph data fetch FAILED:', e.message, e);
-                console.log('Attempted to fetch: ./data/nodes-100pct.json?t=' + Date.now());
+                console.log('Attempted to fetch: ./data/nodes.json?t=' + Date.now());
                 console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }

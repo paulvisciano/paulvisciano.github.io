@@ -723,7 +723,7 @@
                 // Initial selection is handled in loadGraphData().then() so hash wins over random
             } catch (e) {
                 console.error('❌ Graph data fetch FAILED:', e.message, e);
-                console.log('Attempted to fetch: ./data/nodes-100pct.json?t=' + Date.now());
+                console.log('Attempted to fetch: ./data/nodes.json?t=' + Date.now());
                 console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }
