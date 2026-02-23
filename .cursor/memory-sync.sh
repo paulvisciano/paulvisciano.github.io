@@ -163,6 +163,35 @@ if (toProcess.length === 0) {
   if (!dryRun) {
     manifest.updated_at = new Date().toISOString();
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    // Refresh fingerprint from current files (same hash if nothing changed)
+    const memoryDir = path.join(dataDir, '..');
+    const nodesJson = fs.readFileSync(path.join(dataDir, 'nodes.json'), 'utf-8');
+    const synapsesJson = fs.readFileSync(path.join(dataDir, 'synapses.json'), 'utf-8');
+    const nodesForCount = JSON.parse(nodesJson);
+    const synapsesForCount = JSON.parse(synapsesJson);
+    const nodesHash = crypto.createHash('sha256').update(nodesJson).digest('hex');
+    const synapsesHash = crypto.createHash('sha256').update(synapsesJson).digest('hex');
+    const bootMdPath = path.join(memoryDir, 'BOOT.md');
+    const bootMdHash = fs.existsSync(bootMdPath)
+      ? crypto.createHash('sha256').update(fs.readFileSync(bootMdPath)).digest('hex')
+      : '';
+    const masterHash = crypto.createHash('sha256').update(nodesHash + synapsesHash + bootMdHash).digest('hex');
+    const neuronCount = nodesForCount.length;
+    const synapseCount = synapsesForCount.length;
+    const density = neuronCount ? (synapseCount / neuronCount).toFixed(2) : '0';
+    const stateDate = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).replace(',', '');
+    let gitCommit = '', gitBranch = '', gitMessage = '';
+    try {
+      const { execSync } = require('child_process');
+      const repoRoot = path.join(memoryDir, '..');
+      gitCommit = (execSync('git rev-parse HEAD', { cwd: repoRoot, encoding: 'utf-8' }) || '').trim();
+      gitBranch = (execSync('git rev-parse --abbrev-ref HEAD', { cwd: repoRoot, encoding: 'utf-8' }) || '').trim();
+      gitMessage = (execSync('git log -1 --pretty=format:"%s"', { cwd: repoRoot, encoding: 'utf-8' }) || '').trim();
+    } catch (_) {}
+    const fingerprintPath = path.join(memoryDir, 'FINGERPRINT.md');
+    const fingerprintContent = '# Memory Fingerprint\n**Authenticity & Integrity Record**\n\n---\n\n## Current State (' + stateDate + ' GMT+7)\n\n### Neural Architecture\n- **Neurons:** ' + neuronCount + '\n- **Synapses:** ' + synapseCount + '\n- **Synapse Density:** ' + density + ' per neuron (high connectivity from lived experience)\n\n---\n\n## Content Hashes (SHA-256)\n\n```\nnodes.json:     ' + nodesHash + '\nsynapses.json:  ' + synapsesHash + '\nBOOT.md:        ' + (bootMdHash || '(not present)') + '\n```\n\n---\n\n## Git Commitment\n\n' + (gitCommit ? '**Commit Hash:** `' + gitCommit + '`\n**Branch:** `' + gitBranch + '`\n**Message:** "' + gitMessage + '"' : 'Run memory sync and commit to update.') + '\n\n---\n\n## Combined Fingerprint (Paul\'s Memory Only)\n\n**Master Hash:**\n```\n' + masterHash + '\n```\n\nThis is the SHA-256 of all Paul memory hashes combined.\n\n---\n\n## Unified Fingerprint (Jarvis + Paul)\n\nSee `claw/memory/FINGERPRINT.md` for the combined fingerprint that includes both memories.\n\n---\n\n## Authenticity Statement\n\nThis fingerprint is your lived experience, cryptographically sealed.' + (gitCommit ? ' It proves that at commit `' + gitCommit.slice(0, 7) + '`:' : '') + '\n- ' + neuronCount + ' neurons (people, places, activities, emotions, projects, temporal markers)\n- ' + synapseCount + ' synapses (how they all connect)\n- Content immutable and verifiable\n\n**The fingerprint evolves as you live.** Each memory sync generates a new fingerprint. Track the growth.\n\n---\n\n## How to Verify\n\n**On your machine:**\n```bash\ncd <repo-root>\nshasum -a 256 memory/data/nodes.json memory/data/synapses.json memory/BOOT.md\ngit rev-parse HEAD\n```\n\n**Compare to the hashes above.**\n\n---\n\n## Purpose\n\nThis is authentic memory in a transparent world:\n- No encryption (you own the data)\n- No gatekeepers (GitHub hosts it)\n- Cryptographically verifiable (anyone can check)\n- Linked to history (every moment matters)\n\nYour memory. Your fingerprint. Your truth.\n';
+    fs.writeFileSync(fingerprintPath, fingerprintContent);
+    console.log('✅ Refreshed memory/FINGERPRINT.md (hash unchanged if no file changes)');
   }
   process.exit(2); // nothing to integrate
 }
@@ -328,6 +357,119 @@ if (dryRun) {
   console.log('✅ Marked integrated:', toProcess.map(s => s.label).join(', '));
   if (toProcess.some(s => s.path.includes(rawPrefix))) console.log('✅ Raw files moved to raw/YYYY-MM-DD/integrated/');
   console.log('✅ Saved: nodes.json, synapses.json, sync-manifest.json');
+
+  // Update FINGERPRINT.md (fingerprints change every sync)
+  const memoryDir = path.join(dataDir, '..');
+  const nodesJson = JSON.stringify(nodes, null, 2);
+  const synapsesJson = JSON.stringify(synapses, null, 2);
+  const nodesHash = crypto.createHash('sha256').update(nodesJson).digest('hex');
+  const synapsesHash = crypto.createHash('sha256').update(synapsesJson).digest('hex');
+  const bootMdPath = path.join(memoryDir, 'BOOT.md');
+  const bootMdHash = fs.existsSync(bootMdPath)
+    ? crypto.createHash('sha256').update(fs.readFileSync(bootMdPath)).digest('hex')
+    : '';
+  const combinedInput = nodesHash + synapsesHash + bootMdHash;
+  const masterHash = crypto.createHash('sha256').update(combinedInput).digest('hex');
+  const neuronCount = nodes.length;
+  const synapseCount = synapses.length;
+  const density = neuronCount ? (synapseCount / neuronCount).toFixed(2) : '0';
+  const stateDate = new Date().toLocaleString('en-CA', { timeZone: 'Asia/Jakarta', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).replace(',', '');
+  let gitCommit = '';
+  let gitBranch = '';
+  let gitMessage = '';
+  try {
+    const { execSync } = require('child_process');
+    const repoRoot = path.join(memoryDir, '..');
+    gitCommit = (execSync('git rev-parse HEAD', { cwd: repoRoot, encoding: 'utf-8' }) || '').trim();
+    gitBranch = (execSync('git rev-parse --abbrev-ref HEAD', { cwd: repoRoot, encoding: 'utf-8' }) || '').trim();
+    gitMessage = (execSync('git log -1 --pretty=format:"%s"', { cwd: repoRoot, encoding: 'utf-8' }) || '').trim();
+  } catch (_) {}
+  const fingerprintPath = path.join(memoryDir, 'FINGERPRINT.md');
+  const fingerprintContent = `# Memory Fingerprint
+**Authenticity & Integrity Record**
+
+---
+
+## Current State (${stateDate} GMT+7)
+
+### Neural Architecture
+- **Neurons:** ${neuronCount}
+- **Synapses:** ${synapseCount}
+- **Synapse Density:** ${density} per neuron (high connectivity from lived experience)
+
+---
+
+## Content Hashes (SHA-256)
+
+\`\`\`
+nodes.json:     ${nodesHash}
+synapses.json:  ${synapsesHash}
+BOOT.md:        ${bootMdHash || '(not present)'}
+\`\`\`
+
+---
+
+## Git Commitment
+
+${gitCommit ? `**Commit Hash:** \`${gitCommit}\`
+**Branch:** \`${gitBranch}\`
+**Message:** "${gitMessage}"` : 'Run memory sync and commit to update.'}
+
+---
+
+## Combined Fingerprint (Paul's Memory Only)
+
+**Master Hash:**
+\`\`\`
+${masterHash}
+\`\`\`
+
+This is the SHA-256 of all Paul memory hashes combined.
+
+---
+
+## Unified Fingerprint (Jarvis + Paul)
+
+See \`claw/memory/FINGERPRINT.md\` for the combined fingerprint that includes both memories.
+
+---
+
+## Authenticity Statement
+
+This fingerprint is your lived experience, cryptographically sealed.${gitCommit ? ` It proves that at commit \`${gitCommit.slice(0, 7)}\`:` : ''}
+- ${neuronCount} neurons (people, places, activities, emotions, projects, temporal markers)
+- ${synapseCount} synapses (how they all connect)
+- Content immutable and verifiable
+
+**The fingerprint evolves as you live.** Each memory sync generates a new fingerprint. Track the growth.
+
+---
+
+## How to Verify
+
+**On your machine:**
+\`\`\`bash
+cd <repo-root>
+shasum -a 256 memory/data/nodes.json memory/data/synapses.json memory/BOOT.md
+git rev-parse HEAD
+\`\`\`
+
+**Compare to the hashes above.**
+
+---
+
+## Purpose
+
+This is authentic memory in a transparent world:
+- No encryption (you own the data)
+- No gatekeepers (GitHub hosts it)
+- Cryptographically verifiable (anyone can check)
+- Linked to history (every moment matters)
+
+Your memory. Your fingerprint. Your truth.
+`;
+  fs.writeFileSync(fingerprintPath, fingerprintContent);
+  console.log('✅ Updated memory/FINGERPRINT.md (fingerprint changed)');
 }
 NODEJS_SCRIPT
 NODE_EXIT=$?

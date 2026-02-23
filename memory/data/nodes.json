@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 151,
+    "frequency": 155,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -32,7 +32,21 @@
           "narrative-integration",
           "journal-integration"
         ],
-        "reason": "Synced narrative + journal from 2026-02-23: 8 entities (narrative.md, 2026-02-23.md, 2026-02-23-neural-sync.md, 2026-02-23-neural-persistence.md)"
+        "reason": "Synced narrative + journal from 2026-02-23: 8 entities (narrative.md, 2026-02-23.md, 2026-02-23-neural-sync.md, 2026-02-23-neural-persistence.md)",
+        "sources": [
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23-file-sorting.md",
+            "label": "2026-02-23-file-sorting.md (OpenClaw)",
+            "integrated_at": "2026-02-23T14:46:04.608Z"
+          },
+          {
+            "type": "raw-moment",
+            "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/OPTICAL-SHOP-MOMENT-2026-02-23.md",
+            "label": "OPTICAL-SHOP-MOMENT-2026-02-23.md (raw)",
+            "integrated_at": "2026-02-23T14:46:04.608Z"
+          }
+        ]
       }
     ]
   },
@@ -340,7 +354,7 @@
     "id": "bangkok",
     "label": "Bangkok",
     "category": "location",
-    "frequency": 64,
+    "frequency": 68,
     "attributes": {
       "country": "Thailand",
       "type": "city",
@@ -358,7 +372,21 @@
         "moment": "memory-sync-2026-02-23",
         "timestamp": "2026-02-23T12:35:14.474Z",
         "activity": "Narrative + journal sync",
-        "context": "Day narrative and journal entries integrated for 2026-02-23"
+        "context": "Day narrative and journal entries integrated for 2026-02-23",
+        "sources": [
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23-file-sorting.md",
+            "label": "2026-02-23-file-sorting.md (OpenClaw)",
+            "integrated_at": "2026-02-23T14:46:04.608Z"
+          },
+          {
+            "type": "raw-moment",
+            "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/OPTICAL-SHOP-MOMENT-2026-02-23.md",
+            "label": "OPTICAL-SHOP-MOMENT-2026-02-23.md (raw)",
+            "integrated_at": "2026-02-23T14:46:04.608Z"
+          }
+        ]
       }
     ]
   },
@@ -737,7 +765,7 @@
     "id": "fitness",
     "label": "Fitness & Gym",
     "category": "activity",
-    "frequency": 52,
+    "frequency": 53,
     "attributes": {
       "type": "wellness",
       "significance": "Daily routine, recovery rituals, K-FIT project",
@@ -883,7 +911,7 @@
     "id": "connection",
     "label": "Emotional Connection",
     "category": "emotion",
-    "frequency": 34,
+    "frequency": 36,
     "attributes": {
       "triggers": [
         "crew moments",
@@ -897,7 +925,7 @@
     "id": "growth",
     "label": "Growth & Discovery",
     "category": "emotion",
-    "frequency": 47,
+    "frequency": 50,
     "attributes": {
       "triggers": [
         "new cities",
@@ -1015,7 +1043,7 @@
     "id": "february-2026",
     "label": "February 2026",
     "category": "temporal",
-    "frequency": 28,
+    "frequency": 29,
     "attributes": {
       "type": "month",
       "significance": "Ho Chi Minh City, Jarvis integration, LoRA training",
@@ -1394,7 +1422,7 @@
     "id": "decision-making",
     "label": "Strategic Decision-Making",
     "category": "capability",
-    "frequency": 8,
+    "frequency": 12,
     "temporal_activations": [
       {
         "moment": "optical-shop-skepticism-bangkok-2026-02-23",
