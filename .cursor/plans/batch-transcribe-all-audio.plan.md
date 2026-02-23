@@ -1,313 +1,137 @@
 ---
-name: Batch Transcribe All Audio Files with Whisper
-overview: Use local Whisper to transcribe all 930 audio files (Feb 16-23) and organize by date
+name: Batch Transcribe All Audio & Fill Transcript Gaps
+overview: Transcribe all voice-note audio with Whisper, then match transcriptions to the &lt;Media omitted&gt; gaps in each day's transcript.md so the full conversation is in one file per day.
 todos:
-  - id: transcribe-all
-    content: Run Whisper on memory/raw/[date]/audio/*.ogg for each date
+  - id: locate-audio
+    content: Confirm audio paths (memory/raw/YYYY-MM-DD/audio/*.ogg) and ordering
     status: pending
-  - id: organize
-    content: Rename transcript files to sequential naming (transcript-001.txt, etc) per date
+  - id: batch-transcribe
+    content: Run Whisper on all audio files; output text per file (e.g. uuid.txt or manifest)
+    status: pending
+  - id: match-gaps
+    content: Map Nth voice message per day (from transcript.md) to Nth transcription
+    status: pending
+  - id: fill-transcript
+    content: Replace <Media omitted> in each transcript.md with transcribed text
     status: pending
   - id: validate
-    content: Verify all 930 audio files have corresponding transcripts
-    status: pending
-  - id: manifest
-    content: Update TRANSCRIPT-ARCHIVE-MANIFEST.md with final counts
+    content: Verify every <Media omitted> is filled; one transcript.md per day unchanged
     status: pending
   - id: commit
-    content: Commit all transcripts to git
-    status: pending
+    content: (N/A — transcript.md is under memory/raw/, which is gitignored)
+    status: cancelled
 isProject: false
 ---
 
-# Batch Transcribe All Audio Files with Whisper
+# Batch Transcribe All Audio & Fill Transcript Gaps
 
-**Objective:** Use locally-installed Whisper to transcribe all 930 audio files (.ogg) from Feb 16-23, organize transcripts by date with sequential naming, and create manifest.
+**Prerequisite:** [whatsapp-transcript-extraction.plan.md](whatsapp-transcript-extraction.plan.md) Phase 1 done — full chat split by day into `memory/raw/YYYY-MM-DD/transcript.md`. Voice messages appear as `<Media omitted>` (gaps).
 
-**Status:** Whisper is installed and verified working (`/usr/local/bin/whisper`)
+**Objective:** Transcribe all voice-note audio with Whisper, match transcriptions to those gaps by order (or timestamp), and update each day’s `transcript.md` so the conversation has no gaps.
 
-**Approach:** Direct audio-to-text (better than WhatsApp parsing because it avoids regex issues)
+**One comprehensive file per day:** `memory/raw/YYYY-MM-DD/transcript.md` is the single canonical transcript for that day (chat + filled voice with in-audio timing). Per-clip files in `audio/transcripts/` (e.g. `.json`, `.txt`) are build artifacts for Whisper; the deliverable is only `transcript.md`.
 
 ---
 
-## Test Results
+## Context
 
-**Test file:** `/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/audio/00b3deed-f436-4b19-bf44-7467887723fd.ogg`
+- **Input:** `memory/raw/YYYY-MM-DD/transcript.md` (one per day) + `memory/raw/YYYY-MM-DD/audio/*.ogg` (voice notes).
+- **Gaps:** Lines like `### 8:50 PM — Paul` with body `<Media omitted>`.
+- **Output:** Same files with `<Media omitted>` replaced by the transcribed text (or transcription inline below). No new transcript files per day; no `transcripts/` subfolder with many files.
 
-**Command:**
+---
+
+## Step 1: Locate audio and ordering
+
+- **Audio path:** `memory/raw/YYYY-MM-DD/audio/*.ogg` (UUID filenames).
+- **Order:** Audio files must be matched to the order of `<Media omitted>` in `transcript.md` for that day. Options:
+  - Sort audio by file mtime or filename (if timestamp/UUID order reflects send order).
+  - Or: parse `transcript.md` to get the order of voice blocks (1st, 2nd, …) and assume disk order matches.
+
+**Deliverable:** Clear rule: “Nth `<Media omitted>` on date D = Nth audio file in sorted list for D.”
+
+---
+
+## Step 2: Batch transcribe with Whisper
+
+**Tool:** Local Whisper (`/usr/local/bin/whisper` or equivalent).
+
+**Test (already verified):**
+
 ```bash
 whisper /path/to/audio.ogg --output_format txt --output_dir /output/
+# → creates [basename].txt with transcript text
 ```
 
-**Output:**
-```
-So technically Jarvis, like you're Jarvis, you live under Claw, that's your memory.
-What I just posted is my memory.
-```
+**Batch approach:**
 
-✅ Works perfectly. Creates `[uuid].txt` with clean transcript text.
+- For each date dir: list `audio/*.ogg` in a deterministic order (e.g. sort by name or mtime).
+- Run Whisper on each file; write transcript to a known location, e.g.:
+  - `memory/raw/YYYY-MM-DD/audio/transcripts/[uuid].txt`, or
+  - a single JSON/manifest per date: `{ "uuid1": "text1", "uuid2": "text2", ... }` in same order as audio list.
+
+**Script idea:** `scripts/batch-transcribe-whisper.sh` — loop over `memory/raw/*/audio/*.ogg`, run Whisper, save `.txt` next to the `.ogg` or in a temporary `transcripts/` per date. Preserve order (e.g. process in sorted order and output a list of paths or a manifest).
+
+**Time:** ~15–30 min for hundreds of files (CPU-dependent).
 
 ---
 
-## Implementation
+## Step 3: Match transcriptions to gaps
 
-### Step 1: Batch Transcribe All Audio Files
+- For each `memory/raw/YYYY-MM-DD/transcript.md`:
+  - Parse the file to find every block whose body is (or contains) `<Media omitted>`; record their order (1, 2, 3, …).
+  - For that date, the ordered list of Whisper outputs (same order as Step 1) is the list of transcriptions.
+  - So: 1st gap ← 1st transcription, 2nd gap ← 2nd transcription, etc.
 
-**Script:** Create `scripts/batch-transcribe-whisper.sh`
-
-```bash
-#!/bin/bash
-# Batch transcribe all audio files using Whisper
-
-BASE_PATH="/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw"
-TOTAL_FILES=0
-TRANSCRIBED=0
-FAILED=0
-
-echo "Starting batch transcription of all audio files..."
-echo ""
-
-# For each date directory
-for DATE_DIR in "$BASE_PATH"/*/audio/; do
-  DATE=$(basename $(dirname "$DATE_DIR"))
-  TRANSCRIPT_DIR="$(dirname "$DATE_DIR")/transcripts"
-  
-  echo "Processing: $DATE"
-  
-  # Create transcripts directory if it doesn't exist
-  mkdir -p "$TRANSCRIPT_DIR"
-  
-  # Count audio files
-  AUDIO_COUNT=$(ls "$DATE_DIR"*.ogg 2>/dev/null | wc -l)
-  TOTAL_FILES=$((TOTAL_FILES + AUDIO_COUNT))
-  
-  if [ $AUDIO_COUNT -eq 0 ]; then
-    echo "  ✗ No audio files found"
-    continue
-  fi
-  
-  echo "  Found $AUDIO_COUNT audio files"
-  
-  # Transcribe all files in this date directory
-  whisper "$DATE_DIR"*.ogg \
-    --output_format txt \
-    --output_dir "$TRANSCRIPT_DIR" \
-    2>&1 | grep -E "Transcribed|error" || true
-  
-  # Count successful transcriptions
-  TRANSCRIPT_COUNT=$(ls "$TRANSCRIPT_DIR"/*.txt 2>/dev/null | wc -l)
-  TRANSCRIBED=$((TRANSCRIBED + TRANSCRIPT_COUNT))
-  
-  echo "  ✓ Transcribed $TRANSCRIPT_COUNT files"
-  echo ""
-done
-
-echo "============================================"
-echo "Batch Transcription Complete"
-echo "Total audio files: $TOTAL_FILES"
-echo "Successfully transcribed: $TRANSCRIBED"
-echo "============================================"
-```
-
-**Run it:**
-```bash
-chmod +x scripts/batch-transcribe-whisper.sh
-./scripts/batch-transcribe-whisper.sh
-```
-
-**Time estimate:** 15-30 minutes for 930 files (depends on CPU)
-
-### Step 2: Rename Transcripts to Sequential Naming
-
-**Why:** Whisper creates `[uuid].txt` files; we want `transcript-001.txt`, `transcript-002.txt` for consistency.
-
-**Script:** Create `scripts/rename-transcripts-sequential.sh`
-
-```bash
-#!/bin/bash
-# Rename Whisper output files to sequential naming per date
-
-BASE_PATH="/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw"
-
-for DATE_DIR in "$BASE_PATH"/*/transcripts/; do
-  DATE=$(basename $(dirname "$DATE_DIR"))
-  
-  echo "Renaming transcripts for: $DATE"
-  
-  # Get all txt files, sort them, rename to sequential
-  cd "$DATE_DIR"
-  
-  COUNTER=1
-  for FILE in $(ls *.txt 2>/dev/null | sort); do
-    # Skip TRANSCRIPT-MANIFEST.md if it exists
-    if [[ "$FILE" == "TRANSCRIPT-MANIFEST"* ]]; then
-      continue
-    fi
-    
-    NEW_NAME=$(printf "transcript-%03d.txt" $COUNTER)
-    
-    if [ "$FILE" != "$NEW_NAME" ]; then
-      mv "$FILE" "$NEW_NAME"
-      echo "  $FILE → $NEW_NAME"
-    fi
-    
-    COUNTER=$((COUNTER + 1))
-  done
-  
-  echo "  ✓ Renamed $(($COUNTER - 1)) transcripts"
-  echo ""
-done
-```
-
-**Run it:**
-```bash
-chmod +x scripts/rename-transcripts-sequential.sh
-./scripts/rename-transcripts-sequential.sh
-```
-
-### Step 3: Add Metadata Headers to Transcripts
-
-**Optional:** Add timestamp + sequence header to each transcript (like we did for Feb 23 manual transcripts)
-
-This requires parsing the filename (UUID) and matching to audio metadata, which is complex. For now, clean transcripts without headers are fine.
-
-### Step 4: Validate Transcription Coverage
-
-**Script:** Create `scripts/validate-transcripts.sh`
-
-```bash
-#!/bin/bash
-# Validate that all audio files have corresponding transcripts
-
-BASE_PATH="/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw"
-TOTAL_AUDIO=0
-TOTAL_TRANSCRIPTS=0
-MISSING=0
-
-echo "Validating transcript coverage..."
-echo ""
-
-for DATE_DIR in "$BASE_PATH"/*/audio/; do
-  DATE=$(basename $(dirname "$DATE_DIR"))
-  TRANSCRIPT_DIR="$(dirname "$DATE_DIR")/transcripts"
-  
-  AUDIO_COUNT=$(ls "$DATE_DIR"*.ogg 2>/dev/null | wc -l)
-  TRANSCRIPT_COUNT=$(ls "$TRANSCRIPT_DIR"/transcript-*.txt 2>/dev/null | wc -l)
-  
-  TOTAL_AUDIO=$((TOTAL_AUDIO + AUDIO_COUNT))
-  TOTAL_TRANSCRIPTS=$((TOTAL_TRANSCRIPTS + TRANSCRIPT_COUNT))
-  
-  if [ $AUDIO_COUNT -eq $TRANSCRIPT_COUNT ]; then
-    echo "✓ $DATE: $AUDIO_COUNT audio = $TRANSCRIPT_COUNT transcripts"
-  else
-    DIFF=$((AUDIO_COUNT - TRANSCRIPT_COUNT))
-    echo "✗ $DATE: $AUDIO_COUNT audio vs $TRANSCRIPT_COUNT transcripts (missing: $DIFF)"
-    MISSING=$((MISSING + DIFF))
-  fi
-done
-
-echo ""
-echo "============================================"
-echo "Total audio files: $TOTAL_AUDIO"
-echo "Total transcripts: $TOTAL_TRANSCRIPTS"
-echo "Missing transcripts: $MISSING"
-echo "============================================"
-
-if [ $MISSING -eq 0 ]; then
-  echo "✓ All audio files have transcripts!"
-else
-  echo "✗ $MISSING transcripts are missing"
-fi
-```
-
-**Run it:**
-```bash
-chmod +x scripts/validate-transcripts.sh
-./scripts/validate-transcripts.sh
-```
-
-### Step 5: Update Manifest
-
-**File:** `memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md`
-
-Update with final counts:
-- Total audio files: 930
-- Total transcripts: 930
-- Date range: Feb 16 – Feb 23, 2026
-- Method: Whisper (local, offline)
-
-### Step 6: Commit
-
-```bash
-git add memory/raw/*/transcripts/
-git add memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md
-git commit -m "📝 Archive: Batch transcribe all 930 audio files (Feb 16-23) using Whisper"
-```
+**Edge cases:** If audio count ≠ gap count for a day, log and skip or mark “untranscribed” for the extra gaps.
 
 ---
 
-## Key Differences from WhatsApp Parsing
+## Step 4: Fill gaps in transcript.md
 
-| Aspect | WhatsApp Parsing | Whisper Transcription |
-|--------|------------------|----------------------|
-| **Source** | Chat export text | Raw audio files |
-| **Regex complexity** | High (pattern matching) | None (direct transcription) |
-| **Accuracy** | Depends on export format | Whisper ML model (high accuracy) |
-| **Coverage** | Only files with [openclaw] responses | All 930 audio files |
-| **Speed** | Fast | 15-30 min for 930 files |
-| **Reliability** | Fragile (format changes break it) | Robust (same input = same output) |
-| **Cost** | Free (local) | Free (local) |
+- For each date:
+  - Read `transcript.md`.
+  - Replace each `<Media omitted>` (or the whole message body when it’s only that) with the corresponding transcribed text. Keep the same structure (`### time — sender` + body).
+  - Write back to `transcript.md` (or write to `transcript-with-voice.md` and then replace; either way, end state is one file per day with gaps filled).
+
+**Format choice:** In-place replacement keeps one file; optional: add a line like `*[Voice note]*` before the transcribed text for clarity.
 
 ---
 
-## Audio-Transcript Mapping
+## Step 5: Validate
 
-**After transcription:**
-- 930 audio files (.ogg, UUID-based names)
-- 930 transcripts (.txt, sequential names)
-
-**Optional next step:** Create mapping file to link UUIDs to sequential transcripts:
-```json
-{
-  "00b3deed-f436-4b19-bf44-7467887723fd": "transcript-001.txt",
-  "0304c767-d507-4a8a-8ef6-16b6b730a8fb": "transcript-002.txt",
-  ...
-}
-```
-
-This enables "click audio UUID → get transcript" in the deep-dive system.
+- For each date that had audio: no remaining `<Media omitted>` (or each is explicitly marked “untranscribed”).
+- Each day still has a single transcript file (`transcript.md`).
+- Spot-check a few days: read the filled transcript and confirm voice segments make sense in order.
 
 ---
 
-## Execution Order
+## Step 6: Commit
 
-1. ✅ Test: Single file transcription (already done)
-2. ⏳ Run: `batch-transcribe-whisper.sh`
-3. ⏳ Run: `rename-transcripts-sequential.sh`
-4. ⏳ Run: `validate-transcripts.sh`
-5. ⏳ Update manifest
-6. ⏳ Commit all changes
-
-**Total time:** ~45 min (30 min transcription + 15 min validation + commit)
+**Not applicable:** `memory/raw/` is gitignored (see `.gitignore`), so `transcript.md` and all raw content stay local. No commit step for transcripts.
 
 ---
 
-## Success Criteria
+## Execution order
 
-✅ All 930 audio files transcribed  
-✅ All transcripts in correct folders (one per date)  
-✅ Sequential naming: transcript-001.txt through transcript-NNN.txt  
-✅ Manifest updated with final counts  
-✅ All changes committed to git  
-✅ No data loss or corruption  
+1. Confirm audio paths and sort order (Step 1).
+2. Run batch Whisper script; ensure output order matches gap order (Step 2).
+3. Implement match + fill (Steps 3–4) in a small script or inline in the batch script.
+4. Validate (Step 5). Skip commit — transcript files are gitignored.
+
+---
+
+## Success criteria
+
+- All voice-note audio files transcribed (Whisper).
+- Every `<Media omitted>` in each day’s transcript has been replaced with transcription (or explicitly marked).
+- One `transcript.md` per day; no extra transcript files per day.
+- Optional: retain a mapping (e.g. UUID → transcript snippet) for “click audio → show transcript” in other tools.
 
 ---
 
 ## Notes
 
-- Whisper runs offline (no API calls, no rate limits)
-- Output files are plain text (no special formatting needed)
-- Can rerun on any subset of files without affecting others
-- Previous Feb 23 manual transcripts (13 files) will be overwritten by this batch job (they'll be recreated from audio)
-
-**Status:** Ready for Cursor execution
+- Whisper is local/offline; no API keys.
+- If we ever need to regenerate, we can re-run Phase 1 (WhatsApp split) then re-run this plan.
+- `memory/raw/` is gitignored (`.gitignore`), so both audio (`.ogg`) and `transcript.md` stay local — nothing under `memory/raw/` is committed.
