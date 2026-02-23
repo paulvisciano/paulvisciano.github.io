@@ -206,9 +206,17 @@
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.9);
             white-space: pre-wrap;
+            word-break: break-all;
             overflow-y: auto;
             flex: 1;
             min-height: 0;
+        }
+        .share-modal .share-preview a {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+        .share-modal .share-preview a:hover {
+            color: #66ffff;
         }
         .share-modal .share-actions {
             display: flex;
@@ -1368,13 +1376,15 @@
         };
 
         const LIVE_MEMORY_URL = 'https://paulvisciano.github.io/memory/';
+        let fingerprintData = null;
+        fetch('./fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {});
         function isLocalhost() {
             const h = window.location.hostname;
             return h === 'localhost' || h === '127.0.0.1';
         }
         function getSharePayload() {
             const lastSyncEl = document.getElementById('memory-version');
-            const lastSync = (lastSyncEl && lastSyncEl.getAttribute('data-last-sync')) || new Date().toISOString().slice(0, 10);
+            const lastSync = fingerprintData ? fingerprintData.lastSynced : ((lastSyncEl && lastSyncEl.getAttribute('data-last-sync')) || new Date().toISOString().slice(0, 10));
             const n = nodes.length;
             const s = edges.length;
             const currentUrl = window.location.href;
@@ -1384,8 +1394,8 @@
                 "Paul's Memory is his interactive life archive: people, places, activities, emotions, and time, connected as a neural graph.",
                 "Part of his public memory at paulvisciano.github.io/memory. View live, explore nodes, read stories. The memory is alive."
             ].join(' ');
-            const fingerprint = "6f8f3a7e9c2d...";
-            const verifyUrl = "paulvisciano.github.io/memory/FINGERPRINT.md";
+            const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
+            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/memory/FINGERPRINT.md';
             const lines = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
                 `Last synced: ${lastSync} · ${n} neurons · ${s} synapses`,
@@ -1400,25 +1410,30 @@
             const text = lines.join('\n');
             return { title, text, url, lastSync, n, s, shortBoot };
         }
+        function escapeHtml(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
         function shareMemory() {
             const { title, text, url, lastSync, n, s, shortBoot } = getSharePayload();
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
-            const fingerprint = "6f8f3a7e9c2d...";
-            const verifyUrl = "paulvisciano.github.io/memory/FINGERPRINT.md";
-            preview.textContent = [
+            const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
+            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/memory/FINGERPRINT.md';
+            const verifyHref = verifyUrl.startsWith('http') ? verifyUrl : 'https://' + verifyUrl;
+            const lines = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
                 ``,
-                `Last synced: ${lastSync}`,
-                `Size: ${n} neurons · ${s} synapses`,
-                `Fingerprint: ${fingerprint}`,
+                `Last synced: ${escapeHtml(lastSync)}`,
+                `Size: ${escapeHtml(n)} neurons · ${escapeHtml(s)} synapses`,
+                `Fingerprint: ${escapeHtml(fingerprint)}`,
                 ``,
-                shortBoot,
+                escapeHtml(shortBoot),
                 ``,
-                `Verify authenticity: ${verifyUrl}`,
+                `Verify authenticity: <a href="${escapeHtml(verifyHref)}" target="_blank" rel="noopener">${escapeHtml(verifyUrl)}</a>`,
                 ``,
-                url
-            ].join('\n');
+                `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`
+            ];
+            preview.innerHTML = lines.join('\n');
             overlay.classList.add('is-open');
             overlay.setAttribute('aria-hidden', 'false');
         }
