@@ -1,0 +1,40 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-02-22T07:00:00Z",
+      "session": "2026-02-22-session-1",
+      "type": "neural_mind_initialized",
+      "metadata": "Created initial 31 neurons, 39 synapses",
+      "neurons_total": 31,
+      "synapses_total": 39
+    },
+    {
+      "timestamp": "2026-02-22T08:45:00Z",
+      "session": "2026-02-22-session-1",
+      "type": "memory_sync_designed",
+      "metadata": "Designed memory persistence system",
+      "related_nodes": ["rawclaw-vision", "neural-mind-jarvis"]
+    },
+    {
+      "timestamp": "2026-02-23T10:00:00Z",
+      "session": "2026-02-23-session-1",
+      "type": "session_start",
+      "metadata": "Claude Code neural mind visible, data synced with Paul's framework",
+      "action": "loaded_memory"
+    },
+    {
+      "timestamp": "2026-02-23T10:20:00Z",
+      "session": "2026-02-23-session-1",
+      "type": "neural_visualization_reviewed",
+      "metadata": "Paul reviewed visualization: 'Much better visual now'",
+      "feedback": "positive"
+    },
+    {
+      "timestamp": "2026-02-23T10:31:00Z",
+      "session": "2026-02-23-session-1",
+      "type": "memory_sync_planning",
+      "metadata": "Designed active memory sync with pause detection and Paul's editorial review",
+      "related_nodes": ["authentic-collaboration", "infrastructure-matters"]
+    }
+  ]
+}
