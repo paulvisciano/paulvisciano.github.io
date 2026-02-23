@@ -4,6 +4,15 @@
     "label": "Paul",
     "category": "person",
     "frequency": 100,
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "duration_minutes": 12,
+        "thinking_patterns": ["verification", "skepticism", "systematic-evaluation", "value-assessment"],
+        "reason": "Decision-making: checked reviews, asked questions, recognized markup, walked away"
+      }
+    ],
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -114,6 +123,14 @@
     "label": "Bangkok",
     "category": "location",
     "frequency": 55,
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "activity": "Navigation + decision-making at Charoen Optical",
+        "context": "Discovered overpriced lenses, walked away"
+      }
+    ],
     "attributes": {
       "country": "Thailand",
       "type": "city",
@@ -302,6 +319,15 @@
     "label": "Growth & Discovery",
     "category": "emotion",
     "frequency": 45,
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "learning": "Recognized markup through questioning and verification",
+        "insight": "Fancy storefront doesn't guarantee fair pricing; systematic questioning reveals true value",
+        "growth_type": "pattern-recognition"
+      }
+    ],
     "attributes": {
       "triggers": ["new cities", "adventure", "learning", "confrontations"],
       "color": "#F77F00"
