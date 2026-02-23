@@ -334,6 +334,25 @@
     }
   },
   {
+    "id": "decision-making",
+    "label": "Strategic Decision-Making",
+    "category": "capability",
+    "frequency": 8,
+    "temporal_activations": [
+      {
+        "moment": "optical-shop-skepticism-bangkok-2026-02-23",
+        "timestamp": "2026-02-23T12:04:00Z",
+        "activity": "Verified pricing, recognized markup, walked away from bad deal",
+        "pattern": "Systematic evaluation leading to informed decisions"
+      }
+    ],
+    "attributes": {
+      "role": "skill",
+      "description": "Evaluating options, recognizing patterns, making informed choices",
+      "color": "#10b981"
+    }
+  },
+  {
     "id": "february-2026",
     "label": "February 2026",
     "category": "temporal",
