@@ -1,25 +1,32 @@
 ---
 name: WhatsApp Transcript Extraction & Archiving
-overview: (1) Parse full WhatsApp chat export and split by day → one transcript.md per day in memory/raw/YYYY-MM-DD/. (2) Transcribe voice-note audio and fill gaps in the conversation where <Media omitted> appears.
+overview: (1) Parse full WhatsApp chat export and split by day → one transcript.md per day. (2) Transcribe voice-note audio and fill gaps. Abandoned for now — future conversations are set up to work better (OpenClaw/flow changed).
+status: archived
+archived_at: "2026-02-23"
 todos:
   - id: full-chat-split
     content: Parse full chat export, split by day, write one transcript.md per day
     status: completed
   - id: validate-split
     content: Validate message counts and date range for split transcripts
-    status: pending
+    status: cancelled
   - id: commit-split
     content: (N/A — memory/raw/ is gitignored; transcript.md stays local)
     status: cancelled
   - id: transcribe-audio
     content: See batch-transcribe-all-audio.plan.md (transcribe + fill gaps)
-    status: pending
+    status: cancelled
+  - id: alt-processing
+    content: Explore alternative ways to process exports (current extraction didn't work well)
+    status: cancelled
 isProject: false
 ---
 
 # WhatsApp Transcript Extraction & Archiving
 
-**Implementation:** `process-whatsapp-transcripts.sh` (repo root) — parses full chat export, splits by day, writes **one** `memory/raw/YYYY-MM-DD/transcript.md` per day. One transcript file per day; script removes any legacy `transcripts/` subfolder.
+**Abandoned for now.** Future conversations are set up to work better (OpenClaw/flow changed), so we're not pursuing export-based extraction or alternative processing for the moment.
+
+**Implementation (legacy):** `process-whatsapp-transcripts.sh` (repo root) — parses full chat export, splits by day, writes **one** `memory/raw/YYYY-MM-DD/transcript.md` per day. Script and plans kept for reference.
 
 ---
 
@@ -68,9 +75,9 @@ memory/raw/
 
 ## Phase 2: Transcribe audio and fill gaps
 
-**See:** [batch-transcribe-all-audio.plan.md](batch-transcribe-all-audio.plan.md)
+**See:** [batch-transcribe-all-audio.plan.md](../batch-transcribe-all-audio.plan.md)
 
-That plan covers: batch transcribe all voice-note audio with Whisper → match transcriptions to `<Media omitted>` gaps by order → update each day’s `transcript.md` in place so the full conversation is in one file per day.
+That plan covers: batch transcribe all voice-note audio with Whisper → match transcriptions to `<Media omitted>` gaps by order → update each day's `transcript.md` in place so the full conversation is in one file per day.
 
 ---
 
@@ -92,7 +99,7 @@ That plan covers: batch transcribe all voice-note audio with Whisper → match t
 
 1. Run `./process-whatsapp-transcripts.sh`; check message counts and dates.
 2. Confirm one `transcript.md` per day under `memory/raw/YYYY-MM-DD/`.
-3. Spot-check a day’s content against the WhatsApp export.
+3. Spot-check a day's content against the WhatsApp export.
 
 ### Phase 2 (when implemented)
 
@@ -101,9 +108,21 @@ That plan covers: batch transcribe all voice-note audio with Whisper → match t
 
 ---
 
+## Alternative processing (on hold — kept for reference)
+
+Ideas to explore if we revisit export-based extraction:
+
+- **Different export format** — e.g. if WhatsApp or a tool can export in JSON/HTML with clearer structure or message IDs.
+- **Parser improvements** — handle edge cases in the current export format (encoding, date formats, multi-line, attachments).
+- **OpenClaw-native flow** — if OpenClaw can produce or ingest transcripts (e.g. from message-received hooks) so we don't rely on manual export + script.
+- **Hybrid** — keep daily folder + one transcript per day, but change how we populate it (e.g. append from another source, merge exports).
+
+Capture specific pain points and desired format when trying again.
+
+---
+
 ## Notes
 
 - **One transcript per day** — No `transcripts/` subfolder; script removes it if present.
 - **Voice = gaps** — Phase 1 leaves `<Media omitted>` as placeholders; Phase 2 fills them from audio transcription.
 - **Gitignore** — `memory/raw/` is in `.gitignore`; transcript.md and audio stay local, not committed.
-
