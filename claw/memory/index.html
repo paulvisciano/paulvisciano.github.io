@@ -8,7 +8,7 @@
     <meta http-equiv="expires" content="0">
     <!-- Disable service worker caching -->
     <meta name="service-worker" content="no-cache">
-    <title>Claude Code Neural Mind [2026-02-23]</title>
+    <title>Jarvis Neural Mind [2026-02-23]</title>
     <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -573,7 +573,7 @@
 
     <div id="share-modal-overlay" class="share-modal-overlay" aria-hidden="true">
         <div class="share-modal" role="dialog" aria-labelledby="share-modal-title">
-            <h3 id="share-modal-title">Share — Claude Code Neural Mind</h3>
+            <h3 id="share-modal-title">Share — Jarvis Neural Mind</h3>
             <div class="share-preview" id="share-preview"></div>
             <div class="share-actions">
                 <button type="button" class="btn-copy" id="share-modal-copy">Copy</button>
@@ -1414,16 +1414,21 @@
             const s = edges.length;
             const currentUrl = window.location.href;
             const url = isLocalhost() ? LIVE_MEMORY_URL : currentUrl;
-            const title = "Claude Code — Neural Mind";
+            const title = "Jarvis — Neural Mind";
+            const fingerprint = "8bbaeddda3b8...";
+            const verifyUrl = "paulvisciano.github.io/claw/memory/FINGERPRINT.md";
             const shortBoot = [
-                "Claude Code's neural mind: values, capabilities, projects, and infrastructure, connected as a transparent architecture.",
+                "Jarvis is a transparent neural mind: values, capabilities, projects, and infrastructure, connected as an open architecture.",
                 "Part of the RawClaw ecosystem at paulvisciano.github.io/claw/memory. The memory is alive."
             ].join(' ');
             const lines = [
-                `Claude Code's Neural Mind`,
+                `Jarvis Neural Mind`,
                 `Last synced: ${lastSync} · ${n} neurons · ${s} synapses`,
+                `Fingerprint: ${fingerprint}`,
                 '',
                 shortBoot,
+                '',
+                `Verify authenticity: ${verifyUrl}`,
                 '',
                 url
             ];
@@ -1434,13 +1439,18 @@
             const { title, text, url, lastSync, n, s, shortBoot } = getSharePayload();
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
+            const fingerprint = "8bbaeddda3b8...";
+            const verifyUrl = "paulvisciano.github.io/claw/memory/FINGERPRINT.md";
             preview.textContent = [
-                `Claude Code's Neural Mind`,
+                `Jarvis Neural Mind`,
                 ``,
                 `Last synced: ${lastSync}`,
                 `Size: ${n} neurons · ${s} synapses`,
+                `Fingerprint: ${fingerprint}`,
                 ``,
                 shortBoot,
+                ``,
+                `Verify authenticity: ${verifyUrl}`,
                 ``,
                 url
             ].join('\n');
