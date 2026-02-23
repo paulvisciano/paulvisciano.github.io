@@ -551,6 +551,7 @@
         <button class="filter-btn" data-filter="capability">Capabilities</button>
         <button class="filter-btn" data-filter="foundation">Foundation</button>
         <button class="filter-btn" data-filter="project">Projects</button>
+        <button class="filter-btn" data-filter="temporal">Temporal</button>
     </div>
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
@@ -568,6 +569,7 @@
             <button class="filter-btn" data-filter="capability">Capabilities</button>
             <button class="filter-btn" data-filter="foundation">Foundation</button>
             <button class="filter-btn" data-filter="project">Projects</button>
+            <button class="filter-btn" data-filter="temporal">Temporal</button>
         </div>
         <div id="drawerContent" class="drawer-content">
             <div id="drawerDetails"></div>
@@ -809,6 +811,7 @@
                     if (currentFilter === 'capability') return n.type === 'capability';
                     if (currentFilter === 'foundation') return n.type === 'foundation';
                     if (currentFilter === 'project') return n.type === 'project';
+                    if (currentFilter === 'temporal') return n.type === 'temporal';
                     if (currentFilter === 'today') return n.isToday;
                     return true;
                 };
@@ -884,6 +887,7 @@
                     if (currentFilter === 'capability' && n.type !== 'capability') return;
                     if (currentFilter === 'foundation' && n.type !== 'foundation') return;
                     if (currentFilter === 'project' && n.type !== 'project') return;
+                    if (currentFilter === 'temporal' && n.type !== 'temporal') return;
                     if (currentFilter === 'today' && !n.isToday) return; // Optional: requires node.isToday flag
                     
                     const r = n.size * p.scale;
@@ -970,13 +974,17 @@
             }
         }
 
-        // Filter bar functionality (desktop)
+        // Filter bar functionality (desktop + drawer stay in sync)
         let currentFilter = 'all';
+        function setActiveFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.filter === currentFilter);
+            });
+        }
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
+                setActiveFilter(btn.dataset.filter);
                 console.log('Filter applied:', currentFilter);
             });
         });
@@ -1014,13 +1022,9 @@
             setDrawerOpen(false);
         });
         
-        // Filter buttons in drawer
+        // Filter buttons in drawer (setActiveFilter keeps bar + drawer in sync)
         document.querySelectorAll('#drawerFilters .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentFilter = btn.dataset.filter;
-            });
+            btn.addEventListener('click', () => setActiveFilter(btn.dataset.filter));
         });
 
         canvas.addEventListener('click', e => {

@@ -733,5 +733,103 @@
     "weight": 0.92,
     "type": "learning",
     "label": "learned-during"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "jarvis-comic-system",
+    "weight": 0.95,
+    "type": "created",
+    "label": "built"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "chatgpt-boot-sequence",
+    "weight": 0.92,
+    "type": "created",
+    "label": "built"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "unified-memory-arch",
+    "weight": 0.9,
+    "type": "implemented",
+    "label": "implemented"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "memory-versioning-system",
+    "weight": 0.9,
+    "type": "created",
+    "label": "built"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "portable-memory-system",
+    "weight": 0.9,
+    "type": "created",
+    "label": "built"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "namespace-separation",
+    "weight": 0.92,
+    "type": "decided",
+    "label": "decided"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "memory-ownership-boundary",
+    "weight": 0.92,
+    "type": "decided",
+    "label": "decided"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "github-source-of-truth",
+    "weight": 0.88,
+    "type": "decided",
+    "label": "decided"
+  },
+  {
+    "source": "feb-23-2026-session",
+    "target": "paul-visciano",
+    "weight": 0.96,
+    "type": "collaboration",
+    "label": "with"
+  },
+  {
+    "source": "namespace-separation",
+    "target": "unified-memory-arch",
+    "weight": 0.88,
+    "type": "informs",
+    "label": "informs"
+  },
+  {
+    "source": "memory-ownership-boundary",
+    "target": "jarvis-identity",
+    "weight": 0.9,
+    "type": "defines",
+    "label": "defines"
+  },
+  {
+    "source": "memory-ownership-boundary",
+    "target": "paul-visciano",
+    "weight": 0.85,
+    "type": "boundary-with",
+    "label": "boundary-with"
+  },
+  {
+    "source": "github-source-of-truth",
+    "target": "working-narrative",
+    "weight": 0.88,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "github-source-of-truth",
+    "target": "chatgpt-tool",
+    "weight": 0.85,
+    "type": "feeds",
+    "label": "feeds"
   }
 ]

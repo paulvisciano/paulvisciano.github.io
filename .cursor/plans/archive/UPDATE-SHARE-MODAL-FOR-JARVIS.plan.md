@@ -1,6 +1,8 @@
 ---
 name: Update Share Modal for Jarvis Identity
 overview: Share modal still shows "Claude Code" branding; needs update to Jarvis identity + fingerprint display
+status: archived
+archived_at: "2026-02-24"
 todos:
   - id: update-title
     content: Change modal title from "Claude Code Neural Mind" to "Jarvis Neural Mind"
@@ -19,7 +21,7 @@ isProject: false
 
 # Update Share Modal for Jarvis Identity
 
-**Outcome:** Implemented. claw/memory: modal title "Share — Jarvis Neural Mind", payload and preview use "Jarvis" copy, fingerprint 8bbaeddda3b8…, verify link to FINGERPRINT.md. memory: fingerprint 6f8f3a7e9c2d… and verify link added. Page title set to "Jarvis Neural Mind".
+**Outcome:** Done. Both modals load from memory/fingerprint.json and claw/memory/fingerprint.json (pre-commit hook keeps Paul’s in sync). Full master hash shown, word-break for wrapping; verify + main URL are clickable. Jarvis identity and Paul’s modal both updated.
 
 **For:** Cursor (AI code editor)  
 **Purpose:** Update share modal to reflect Jarvis identity, not Claude Code; display current fingerprint for verification  
