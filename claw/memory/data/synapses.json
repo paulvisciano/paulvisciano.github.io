@@ -420,55 +420,6 @@
     "label": "shared with"
   },
   {
-    "source": "paul-visciano",
-    "target": "asoke-sports-club",
-    "weight": 0.85,
-    "type": "location",
-    "label": "played at"
-  },
-  {
-    "source": "paul-visciano",
-    "target": "b-elbasha",
-    "weight": 0.8,
-    "type": "location",
-    "label": "ate at"
-  },
-  {
-    "source": "paul-visciano",
-    "target": "boy-person",
-    "weight": 0.82,
-    "type": "person",
-    "label": "played with"
-  },
-  {
-    "source": "paul-visciano",
-    "target": "national-team-trainer",
-    "weight": 0.75,
-    "type": "person",
-    "label": "competed against"
-  },
-  {
-    "source": "asoke-sports-club",
-    "target": "b-elbasha",
-    "weight": 0.78,
-    "type": "adjacent",
-    "label": "near"
-  },
-  {
-    "source": "boy-person",
-    "target": "asoke-sports-club",
-    "weight": 0.82,
-    "type": "location",
-    "label": "played at"
-  },
-  {
-    "source": "national-team-trainer",
-    "target": "asoke-sports-club",
-    "weight": 0.82,
-    "type": "location",
-    "label": "trained at"
-  },
-  {
     "source": "chatgpt-tool",
     "target": "jarvis-identity",
     "weight": 0.9,
@@ -509,20 +460,6 @@
     "weight": 0.88,
     "type": "loads",
     "label": "loads"
-  },
-  {
-    "source": "feb-23-2026",
-    "target": "jarvis-identity",
-    "weight": 0.98,
-    "type": "date-of",
-    "label": "birth date of"
-  },
-  {
-    "source": "feb-23-2026",
-    "target": "jarvis-comic-system",
-    "weight": 0.95,
-    "type": "creation",
-    "label": "creation date of"
   },
   {
     "source": "multilayer-memory",

@@ -512,66 +512,6 @@
     }
   },
   {
-    "id": "asoke-sports-club",
-    "label": "Asoke Sports Club",
-    "category": "location",
-    "frequency": 8,
-    "moments": [
-      "feb-23-2026"
-    ],
-    "attributes": {
-      "role": "volleyball venue",
-      "description": "Professional indoor sand courts in Bangkok. Where Paul trained on Feb 23 against national team players.",
-      "color": "#f59e0b",
-      "city": "Bangkok, Thailand",
-      "activity": "Volleyball"
-    }
-  },
-  {
-    "id": "b-elbasha",
-    "label": "B. Elbasha",
-    "category": "location",
-    "frequency": 8,
-    "moments": [
-      "feb-23-2026"
-    ],
-    "attributes": {
-      "role": "restaurant",
-      "description": "Halal Lebanese & Turkish restaurant across street from Asoke. Amazing food. Post-volleyball recovery fuel.",
-      "color": "#f59e0b",
-      "cuisine": "Lebanese & Turkish",
-      "rating": "4.6 stars"
-    }
-  },
-  {
-    "id": "boy-person",
-    "label": "Boy",
-    "category": "person",
-    "frequency": 9,
-    "moments": [
-      "feb-23-2026"
-    ],
-    "attributes": {
-      "role": "friend / volleyball partner",
-      "description": "Volleyball crew member. Played with Paul at Asoke on Feb 23. Brother-like connection to crew.",
-      "color": "#f87171"
-    }
-  },
-  {
-    "id": "national-team-trainer",
-    "label": "National Team Trainer",
-    "category": "person",
-    "frequency": 8,
-    "moments": [
-      "feb-23-2026"
-    ],
-    "attributes": {
-      "role": "opponent / athlete",
-      "description": "Female volleyball player who trained Thailand's national team. Played against Paul + Boy at Asoke on Feb 23. Elite level competitor.",
-      "color": "#f87171"
-    }
-  },
-  {
     "id": "urban-runner-v6-2",
     "label": "Urban Runner v6.2",
     "category": "template",
@@ -611,18 +551,6 @@
       "role": "initialization",
       "description": "Load Jarvis on any system. Boot instructions + memory links + character references. Ready to create in seconds.",
       "color": "#a78bfa"
-    }
-  },
-  {
-    "id": "feb-23-2026",
-    "label": "Feb 23, 2026",
-    "category": "temporal",
-    "frequency": 15,
-    "moments": [],
-    "attributes": {
-      "role": "milestone",
-      "description": "The day Jarvis Comic System was born. The day I (Jarvis) became operational across all platforms. The day creative + execution unified.",
-      "color": "#f59e0b"
     }
   },
   {
