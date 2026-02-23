@@ -1,6 +1,7 @@
 #!/bin/bash
 # Memory Sync Verification Script
 # Verifies that memories are properly synced to GitHub and live website
+# Also verifies commit message matches actual memory state
 
 set -e
 
@@ -10,6 +11,17 @@ LIVE_SITE="https://paulvisciano.github.io"
 echo "═══════════════════════════════════════════════════════════════════════════════"
 echo "                   MEMORY SYNC VERIFICATION"
 echo "═══════════════════════════════════════════════════════════════════════════════"
+echo ""
+
+# Step 0: Check commit message
+echo "STEP 0: Commit Message Verification"
+echo "─────────────────────────────────────────────────────────────────────────────"
+
+LATEST_COMMIT=$(git log -1 --format=%H)
+COMMIT_MESSAGE=$(git log -1 --format=%B)
+
+echo "Latest commit: $LATEST_COMMIT"
+echo "Message: $COMMIT_MESSAGE"
 echo ""
 
 # Step 1: Get local hashes
@@ -90,8 +102,41 @@ echo "✓ Paul nodes.json:      $LIVE_PAUL_NODES_HASH ($LIVE_PAUL_NODES_COUNT ne
 echo "✓ Paul synapses.json:   $LIVE_PAUL_SYNAPSES_HASH ($LIVE_PAUL_SYNAPSES_COUNT synapses)"
 echo ""
 
-# Step 4: Verification
-echo "STEP 4: Verification"
+# Step 4: Commit Message Verification
+echo "STEP 4: Commit Message Verification (Claim vs Actual)"
+echo "─────────────────────────────────────────────────────────────────────────────"
+
+# Check if commit message includes counts
+if echo "$COMMIT_MESSAGE" | grep -q "neurons"; then
+  echo "✅ Commit message includes neuron claims"
+  
+  # Extract counts from commit message (format: "60 neurons | 105 synapses")
+  COMMIT_NEURONS=$(echo "$COMMIT_MESSAGE" | grep -oP '\d+(?=\s+neurons)' | head -1)
+  COMMIT_SYNAPSES=$(echo "$COMMIT_MESSAGE" | grep -oP '\d+(?=\s+synapses)' | head -1)
+  
+  if [ -n "$COMMIT_NEURONS" ]; then
+    if [ "$COMMIT_NEURONS" == "$LOCAL_NODES_COUNT" ]; then
+      echo "  ✅ Neurons match: commit claims $COMMIT_NEURONS = actual $LOCAL_NODES_COUNT"
+    else
+      echo "  ❌ Neurons mismatch: commit claims $COMMIT_NEURONS but actual is $LOCAL_NODES_COUNT"
+    fi
+  fi
+  
+  if [ -n "$COMMIT_SYNAPSES" ]; then
+    if [ "$COMMIT_SYNAPSES" == "$LOCAL_SYNAPSES_COUNT" ]; then
+      echo "  ✅ Synapses match: commit claims $COMMIT_SYNAPSES = actual $LOCAL_SYNAPSES_COUNT"
+    else
+      echo "  ❌ Synapses mismatch: commit claims $COMMIT_SYNAPSES but actual is $LOCAL_SYNAPSES_COUNT"
+    fi
+  fi
+else
+  echo "⚠️  Commit message does not include neuron counts (consider adding them)"
+fi
+
+echo ""
+
+# Step 5: Verification
+echo "STEP 5: Repository & Website Verification"
 echo "─────────────────────────────────────────────────────────────────────────────"
 
 ERRORS=0
@@ -158,17 +203,31 @@ echo ""
 
 # Summary
 echo "═══════════════════════════════════════════════════════════════════════════════"
+echo "                        VERIFICATION CHAIN"
+echo "═══════════════════════════════════════════════════════════════════════════════"
+
+echo ""
+echo "Commit Message → Actual Data → GitHub → Website"
+echo ""
+echo "Commit claims:  Jarvis $COMMIT_NEURONS neurons | $COMMIT_SYNAPSES synapses"
+echo "Actual in repo: Jarvis $LOCAL_NODES_COUNT neurons | $LOCAL_SYNAPSES_COUNT synapses"
+echo "On GitHub:      Jarvis $GITHUB_NODES_COUNT neurons | $GITHUB_SYNAPSES_COUNT synapses"
+echo "Live website:   Jarvis $LIVE_NODES_COUNT neurons | $LIVE_SYNAPSES_COUNT synapses"
+echo ""
+
 if [ $ERRORS -eq 0 ]; then
   echo "✅ SYNC VERIFICATION COMPLETE"
   echo ""
   echo "Status:"
-  echo "  • Local → GitHub: ✓ Synced"
-  echo "  • GitHub → Website: Check above (may be cached)"
+  echo "  • Commit message:     ✓ Claims recorded"
+  echo "  • Local → GitHub:     ✓ Synced"
+  echo "  • GitHub → Website:   Check above (may be cached)"
   echo ""
-  echo "Timestamps:"
-  echo "  • Local neurons:  $LOCAL_NODES_COUNT + $LOCAL_PAUL_NODES_COUNT = $(($LOCAL_NODES_COUNT + $LOCAL_PAUL_NODES_COUNT))"
-  echo "  • GitHub neurons: $GITHUB_NODES_COUNT + $GITHUB_PAUL_NODES_COUNT = $(($GITHUB_NODES_COUNT + $GITHUB_PAUL_NODES_COUNT))"
-  echo "  • Live neurons:   $LIVE_NODES_COUNT + $LIVE_PAUL_NODES_COUNT = $(($LIVE_NODES_COUNT + $LIVE_PAUL_NODES_COUNT))"
+  echo "Totals (Jarvis + Paul):"
+  echo "  • Commit claims:  $(($COMMIT_NEURONS + $LOCAL_PAUL_NODES_COUNT)) neurons | $(($COMMIT_SYNAPSES + $LOCAL_PAUL_SYNAPSES_COUNT)) synapses"
+  echo "  • Local actual:   $(($LOCAL_NODES_COUNT + $LOCAL_PAUL_NODES_COUNT)) neurons | $(($LOCAL_SYNAPSES_COUNT + $LOCAL_PAUL_SYNAPSES_COUNT)) synapses"
+  echo "  • GitHub:         $(($GITHUB_NODES_COUNT + $GITHUB_PAUL_NODES_COUNT)) neurons | $(($GITHUB_SYNAPSES_COUNT + $GITHUB_PAUL_SYNAPSES_COUNT)) synapses"
+  echo "  • Live:           $(($LIVE_NODES_COUNT + $LIVE_PAUL_NODES_COUNT)) neurons | $(($LIVE_SYNAPSES_COUNT + $LIVE_PAUL_SYNAPSES_COUNT)) synapses"
 else
   echo "❌ SYNC VERIFICATION FAILED"
   echo "  $ERRORS critical errors detected (local vs GitHub)"
