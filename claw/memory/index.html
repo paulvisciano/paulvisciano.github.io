@@ -1430,7 +1430,7 @@
             const url = isLocalhost() ? LIVE_MEMORY_URL : currentUrl;
             const title = "Jarvis — Neural Mind";
             const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
-            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/claw/memory/FINGERPRINT.md';
+            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/claw/memory/BOOT.md';
             const shortBoot = [
                 "Jarvis is a transparent neural mind: values, capabilities, projects, and infrastructure, connected as an open architecture.",
                 "Part of the RawClaw ecosystem at paulvisciano.github.io/claw/memory. The memory is alive."
@@ -1442,7 +1442,7 @@
                 '',
                 shortBoot,
                 '',
-                `Verify authenticity: ${verifyUrl}`,
+                `Load Jarvis's memory at the start of a new session: ${verifyUrl}`,
                 '',
                 url
             ];
@@ -1457,7 +1457,7 @@
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
             const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
-            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/claw/memory/FINGERPRINT.md';
+            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/claw/memory/BOOT.md';
             const verifyHref = verifyUrl.startsWith('http') ? verifyUrl : 'https://' + verifyUrl;
             const lines = [
                 `Jarvis Neural Mind`,
@@ -1468,7 +1468,7 @@
                 ``,
                 escapeHtml(shortBoot),
                 ``,
-                `Verify authenticity: <a href="${escapeHtml(verifyHref)}" target="_blank" rel="noopener">${escapeHtml(verifyUrl)}</a>`,
+                `Load Jarvis's memory at the start of a new session: <a href="${escapeHtml(verifyHref)}" target="_blank" rel="noopener">${escapeHtml(verifyUrl)}</a>`,
                 ``,
                 `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`
             ];

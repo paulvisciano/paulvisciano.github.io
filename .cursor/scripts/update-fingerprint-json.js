@@ -90,7 +90,7 @@ writeFingerprint(
   memorySynapsesPath,
   memoryBootPath,
   memoryOutPath,
-  'paulvisciano.github.io/memory/FINGERPRINT.md'
+  'paulvisciano.github.io/memory/BOOT.md'
 );
 console.log('Updated memory/fingerprint.json');
 
@@ -99,6 +99,6 @@ writeFingerprint(
   clawSynapsesPath,
   clawBootPath,
   clawOutPath,
-  'paulvisciano.github.io/claw/memory/FINGERPRINT.md'
+  'paulvisciano.github.io/claw/memory/BOOT.md'
 );
 console.log('Updated claw/memory/fingerprint.json');

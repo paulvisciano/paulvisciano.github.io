@@ -1395,7 +1395,7 @@
                 "Part of his public memory at paulvisciano.github.io/memory. View live, explore nodes, read stories. The memory is alive."
             ].join(' ');
             const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
-            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/memory/FINGERPRINT.md';
+            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/memory/BOOT.md';
             const lines = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
                 `Last synced: ${lastSync} · ${n} neurons · ${s} synapses`,
@@ -1403,7 +1403,7 @@
                 '',
                 shortBoot,
                 '',
-                `Verify authenticity: ${verifyUrl}`,
+                `Load Paul's memory at the start of a new session: ${verifyUrl}`,
                 '',
                 url
             ];
@@ -1418,7 +1418,7 @@
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
             const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
-            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/memory/FINGERPRINT.md';
+            const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : 'paulvisciano.github.io/memory/BOOT.md';
             const verifyHref = verifyUrl.startsWith('http') ? verifyUrl : 'https://' + verifyUrl;
             const lines = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
@@ -1429,7 +1429,7 @@
                 ``,
                 escapeHtml(shortBoot),
                 ``,
-                `Verify authenticity: <a href="${escapeHtml(verifyHref)}" target="_blank" rel="noopener">${escapeHtml(verifyUrl)}</a>`,
+                `Load Paul's memory at the start of a new session: <a href="${escapeHtml(verifyHref)}" target="_blank" rel="noopener">${escapeHtml(verifyUrl)}</a>`,
                 ``,
                 `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(url)}</a>`
             ];
