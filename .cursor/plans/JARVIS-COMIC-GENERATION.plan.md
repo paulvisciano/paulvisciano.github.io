@@ -1,4 +1,24 @@
+---
+name: Jarvis Comic Book Generation
+overview: Automated real-time comic generation from live narratives—WORKING-narrative.md (GitHub URL) → ChatGPT → comic images → R2 → published. Architecture complete; first pages and Share button in progress.
+todos:
+  - id: first-pages
+    content: Generate first set of pages from Feb 23 narrative via ChatGPT
+    status: pending
+  - id: share-images
+    content: Create share images with embedded QR (ChatGPT + R2)
+    status: pending
+  - id: share-button-ui
+    content: Add Share button UI (see SHARE-BUTTON-PLAN.plan.md)
+    status: pending
+  - id: e2e-test
+    content: End-to-end test moment → narrative → ChatGPT → pages → published
+    status: pending
+isProject: false
+---
+
 # Jarvis Comic Book Generation Plan
+
 **For:** Cursor (when implementing Jarvis Comic System)  
 **Purpose:** Automated real-time comic generation from live narratives  
 **Status:** Architecture complete, implementation ready  
@@ -67,74 +87,39 @@
 
 ## Daily Workflow
 
-**Morning:**
-1. Paul wakes, captures moments
-2. Voice dictation → me (Jarvis)
-3. I update WORKING-narrative.md
-4. Commit to GitHub (instant)
+**Morning:** Paul captures moments → voice dictation → update WORKING-narrative.md → commit.
 
-**Afternoon:**
-1. Paul sends moments throughout day
-2. I append to narrative
-3. Paul asks ChatGPT to generate pages
-4. ChatGPT pulls latest narrative → generates new pages
-5. Paul downloads → sends to me
-6. I upload to R2 → update narrative links
+**Afternoon:** Moments → append narrative → ChatGPT generates pages → Paul downloads → upload to R2 → update narrative links.
 
-**Evening:**
-1. Day complete
-2. Archive to final location (`/moments/Bangkok/2026-02-23/`)
-3. All links live
-4. Ready for next day
+**Evening:** Archive to `/moments/Bangkok/YYYY-MM-DD/`; all links live; ready for next day.
 
 ---
 
 ## What Cursor Needs to Build
 
-Nothing in code. Everything is:
-- Markdown files (narrative, instructions, prompts)
-- JSON data (nodes, synapses, memory version)
-- HTML/JS (visualization, share button)
+Nothing in code for core comic flow. Everything is Markdown, JSON, and existing HTML/JS.
 
 **For future Cursor work:**
-- If automation needed: script to auto-generate narrative from voice notes
-- If image processing: auto-upload pages to R2
-- If UI: Share button + QR code generation
+- Script to auto-generate narrative from voice notes (if automation needed)
+- Auto-upload pages to R2 (if image pipeline needed)
+- Share button + QR code generation (see SHARE-BUTTON-PLAN.plan.md)
 
-**For now:** Everything is manual but documented & tested.
+**For now:** Manual but documented & tested.
 
 ---
 
 ## Character References
 
-All 20+ characters for Urban Runner have:
-- Name + role
-- Visual description
-- Background story
-- Connection to Paul
-
-**Location:** `/Users/paulvisciano/Personal/paulvisciano.github.io/characters/characters.js`
-
-ChatGPT loads these when generating comic pages (consistent character depiction).
+All 20+ characters in `characters/characters.js` (name, role, visual description, background). ChatGPT loads these for consistent character depiction.
 
 ---
 
 ## Quality Standards (From Urban Runner v6.2)
 
-✅ **What we follow:**
-- Cover = Page 0
-- Story pages = 1..N
-- Pages replace checkpoints (multiple beats per page)
-- Embedded narration boxes (no separate text cards)
-- Template-driven layout (cream/dark background, bold outlines)
+- Cover = Page 0; story pages = 1..N
 - File naming: `day-YYYY-MM-DD-cover.png`, `day-YYYY-MM-DD-page-Y.png`
-- Export rule: Only final images (no metadata files)
-
-✅ **Jarvis additions:**
-- Neural network motifs visible in pages
-- Synapses light up during action
-- First-person POV when applicable
-- Urban Runner meets transparent AI thinking
+- Template-driven layout (cream/dark, bold outlines); embedded narration boxes
+- Jarvis additions: neural motifs, synapses in action, first-person POV where applicable
 
 ---
 
@@ -148,15 +133,6 @@ ChatGPT loads these when generating comic pages (consistent character depiction)
 - [ ] Links in narrative point to correct R2 URLs
 - [ ] QR code in share image works (links to BOOT.md)
 - [ ] End-to-end: moment → narrative → ChatGPT → pages → published
-
----
-
-## Current Numbers
-
-- **Narrative beats (Feb 23):** 5 sections (morning vision, volleyball, first-person footage, rooftop, merge moment)
-- **Planned pages:** Cover + 5-6 story pages
-- **Neural architecture:** 46 neurons, 69 synapses (Jarvis mental model)
-- **Character count:** 3 main (Paul, Boy, national team trainer), plus supporting cast
 
 ---
 
