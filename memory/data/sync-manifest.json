@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
+  "updated_at": "2026-02-23T12:54:34.021Z",
+  "by_date": {
+    "2026-02-23": {
+      "sources": [
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/moments/bangkok/2026-02-23/narrative.md",
+          "type": "narrative",
+          "label": "narrative.md",
+          "mtime": 1771836231967.353,
+          "integrated": true,
+          "integrated_at": "2026-02-23T12:35:14.465Z"
+        },
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/claw/memory/2026-02-23.md",
+          "type": "journal",
+          "label": "2026-02-23.md",
+          "mtime": 1771848950330.73,
+          "integrated": true,
+          "integrated_at": "2026-02-23T12:35:14.465Z"
+        },
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/claw/memory/2026-02-23-neural-sync.md",
+          "type": "journal",
+          "label": "2026-02-23-neural-sync.md",
+          "mtime": 1771816742275.837,
+          "integrated": true,
+          "integrated_at": "2026-02-23T12:35:14.465Z"
+        },
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/claw/thoughts/2026-02-23-neural-persistence.md",
+          "type": "journal",
+          "label": "2026-02-23-neural-persistence.md",
+          "mtime": 1771818321973.2222,
+          "integrated": true,
+          "integrated_at": "2026-02-23T12:35:14.465Z"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23.md",
+          "type": "openclaw",
+          "label": "2026-02-23.md (OpenClaw)",
+          "mtime": 1771839796190.1223,
+          "integrated": true,
+          "integrated_at": "2026-02-23T12:54:29.164Z"
+        }
+      ]
+    }
+  }
+}
