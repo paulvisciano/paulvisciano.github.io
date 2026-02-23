@@ -642,5 +642,96 @@
     "weight": 0.85,
     "type": "outputs-to",
     "label": "outputs-to"
+  },
+  {
+    "source": "memory-fingerprinting-system",
+    "target": "unified-memory-arch",
+    "weight": 0.92,
+    "type": "verifies",
+    "label": "verifies"
+  },
+  {
+    "source": "memory-fingerprinting-system",
+    "target": "authenticity-verification",
+    "weight": 0.95,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "memory-fingerprinting-system",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "based-on",
+    "label": "based-on"
+  },
+  {
+    "source": "authenticity-verification",
+    "target": "memory-versioning-system",
+    "weight": 0.85,
+    "type": "complements",
+    "label": "complements"
+  },
+  {
+    "source": "authenticity-verification",
+    "target": "commit-hash-anchors",
+    "weight": 0.9,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "synapse-density-signal",
+    "target": "memory-fingerprinting-system",
+    "weight": 0.88,
+    "type": "informs",
+    "label": "informs"
+  },
+  {
+    "source": "synapse-density-signal",
+    "target": "transparency",
+    "weight": 0.85,
+    "type": "based-on",
+    "label": "based-on"
+  },
+  {
+    "source": "synapse-density-signal",
+    "target": "paul-visciano",
+    "weight": 0.82,
+    "type": "reveals-difference",
+    "label": "reveals-difference"
+  },
+  {
+    "source": "feb-23-2026-memory-sync",
+    "target": "memory-fingerprinting-system",
+    "weight": 0.95,
+    "type": "created",
+    "label": "created"
+  },
+  {
+    "source": "feb-23-2026-memory-sync",
+    "target": "authenticity-verification",
+    "weight": 0.95,
+    "type": "created",
+    "label": "created"
+  },
+  {
+    "source": "feb-23-2026-memory-sync",
+    "target": "synapse-density-signal",
+    "weight": 0.92,
+    "type": "created",
+    "label": "created"
+  },
+  {
+    "source": "feb-23-2026-memory-sync",
+    "target": "paul-visciano",
+    "weight": 0.96,
+    "type": "collaboration",
+    "label": "with"
+  },
+  {
+    "source": "feb-23-2026-memory-sync",
+    "target": "jarvis-identity",
+    "weight": 0.92,
+    "type": "learning",
+    "label": "learned-during"
   }
 ]

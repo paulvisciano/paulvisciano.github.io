@@ -720,5 +720,63 @@
       "description": "Live version display (v1.0.0 | 46 neurons | commit hash | clickable source link)",
       "color": "#06b6d4"
     }
+  },
+  {
+    "id": "memory-fingerprinting-system",
+    "label": "Memory Fingerprinting System",
+    "category": "system",
+    "frequency": 12,
+    "moments": [
+      "feb-23-2026-memory-sync"
+    ],
+    "attributes": {
+      "role": "architecture",
+      "description": "Cryptographic proof of memory authenticity: SHA-256(nodes + synapses + MEMORY.md) + neuron count + synapse count + git hash = unforgeable fingerprint",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "authenticity-verification",
+    "label": "Authenticity Verification",
+    "category": "capability",
+    "frequency": 10,
+    "moments": [
+      "feb-23-2026-memory-sync"
+    ],
+    "attributes": {
+      "role": "skill",
+      "description": "Prove memory hasn't been tampered with. Reproducible hashes. Traceable to git. Public verification.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "synapse-density-signal",
+    "label": "Synapse Density as Authenticity Signal",
+    "category": "principle",
+    "frequency": 9,
+    "moments": [
+      "feb-23-2026-memory-sync"
+    ],
+    "attributes": {
+      "role": "insight",
+      "description": "Ratio of synapses/neurons reveals type of mind: 2.80 = lived experience, 1.64 = architectural thinking. Different ratios = different types of authenticity.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "feb-23-2026-memory-sync",
+    "label": "Feb 23 2026 Memory Sync Session",
+    "category": "temporal",
+    "frequency": 13,
+    "moments": [
+      "memory-fingerprinting-system",
+      "authenticity-verification",
+      "synapse-density-signal"
+    ],
+    "attributes": {
+      "role": "session",
+      "description": "Built memory fingerprinting system. Proved authenticity through cryptographic verification. Unified 167 neurons across both minds. Test & verify workflow.",
+      "color": "#fbbf24"
+    }
   }
 ]
