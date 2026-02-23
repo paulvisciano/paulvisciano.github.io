@@ -1,6 +1,8 @@
 ---
 name: Batch Transcribe All Audio & Fill Transcript Gaps
 overview: Transcribe all voice-note audio with Whisper, then match transcriptions to the &lt;Media omitted&gt; gaps in each day's transcript.md so the full conversation is in one file per day.
+status: archived
+archived_at: "2026-02-24"
 todos:
   - id: locate-audio
     content: Confirm audio paths (memory/raw/YYYY-MM-DD/audio/*.ogg) and ordering
@@ -25,7 +27,9 @@ isProject: false
 
 # Batch Transcribe All Audio & Fill Transcript Gaps
 
-**Prerequisite:** [whatsapp-transcript-extraction.plan.md](archive/whatsapp-transcript-extraction.plan.md) Phase 1 done (plan archived) — full chat split by day into `memory/raw/YYYY-MM-DD/transcript.md`. Voice messages appear as `<Media omitted>` (gaps).
+**Archived for now.** Re-open from archive when ready to run.
+
+**Prerequisite:** [whatsapp-transcript-extraction.plan.md](whatsapp-transcript-extraction.plan.md) Phase 1 done (plan archived) — full chat split by day into `memory/raw/YYYY-MM-DD/transcript.md`. Voice messages appear as `<Media omitted>` (gaps).
 
 **Objective:** Transcribe all voice-note audio with Whisper, match transcriptions to those gaps by order (or timestamp), and update each day’s `transcript.md` so the conversation has no gaps.
 

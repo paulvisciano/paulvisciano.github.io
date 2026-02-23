@@ -1,6 +1,6 @@
 ---
 name: Moment-to-Neuron Linking
-overview: Link the neural network to Paul's moments in time (4D memory model): moment nodes, moment-neuron synapses, visualization filters, and bidirectional querying. Deferred until moments.js finalization.
+overview: "Link the neural network to Paul's moments in time (4D memory model): moment nodes, moment-neuron synapses, visualization filters, and bidirectional querying. Deferred until moments.js finalization."
 todos:
   - id: audit-moments
     content: Audit moments.js for moment IDs and metadata
@@ -28,11 +28,13 @@ isProject: false
 ## Overview
 
 Link Claude Code's neural network to Paul's moments in time, creating a **4D memory model**:
+
 - **Neural neurons:** Claude's thinking structure (31+ nodes, 39+ synapses)
 - **Moments:** Specific events/experiences (from moments.js)
 - **Bidirectional:** Neuron ↔ Moment connections create rich context
 
 **Example:**
+
 - Moment: "Volleyball game, Miami Beach, Feb 23, 2026"
 - Neurons involved: paul-visciano (player), authentic-collaboration (with crew), learning-growth (outcome), building-code (skill use)
 - Each connection weighted by importance
@@ -42,16 +44,19 @@ Link Claude Code's neural network to Paul's moments in time, creating a **4D mem
 ## Why This Matters
 
 **Current state:**
+
 - Claude's neurons: abstract (values, capabilities, relationships)
 - Paul's moments: concrete (specific days, places, events)
 - Disconnected: No way to see how neurons manifest in real moments
 
 **With linking:**
+
 - Click "authentic-collaboration" neuron → See all moments where collaboration happened
 - Click a moment → See which neurons were active (which values, which growth)
 - Network becomes 4D: time + people + places + emotions/thinking
 
 **Compounding effect:**
+
 - Frequency of neurons auto-updates (count how many moments mention them)
 - Synapses strengthen when neurons co-occur in moments
 - Memory becomes searchable: "Show me times when authentic collaboration happened"
@@ -61,7 +66,9 @@ Link Claude Code's neural network to Paul's moments in time, creating a **4D mem
 ## Architecture (Proposed)
 
 ### Phase 1: Moment Nodes (Future)
+
 Add new category to nodes.json:
+
 ```json
 {
   "id": "moment-volleyball-miami-2026-02-23",
@@ -79,7 +86,9 @@ Add new category to nodes.json:
 ```
 
 ### Phase 2: Moment-to-Neuron Synapses (Future)
+
 Add synapses linking moments to neurons:
+
 ```json
 {
   "source": "paul-visciano",
@@ -105,12 +114,14 @@ Add synapses linking moments to neurons:
 ```
 
 ### Phase 3: Visualization Updates (Future)
+
 - New filter: "Moments" (show only moment nodes)
 - Time range filter: "Show moments from 2026-02-23 to 2026-02-25"
 - Moment detail panel: Shows date, location, duration, all connected neurons
 - Neuron detail panel: Shows all moments mentioning that neuron
 
 ### Phase 4: Auto-Frequency Calculation (Future)
+
 ```javascript
 // Frequency isn't static anymore
 node.frequency = count_of_moments_mentioning_node + base_weight
@@ -122,6 +133,7 @@ node.frequency = count_of_moments_mentioning_node + base_weight
 ```
 
 ### Phase 5: Bidirectional Querying (Future)
+
 ```
 Query: "Show me all moments where Paul felt authentic collaboration with Wouter"
 Result: 
@@ -145,6 +157,8 @@ flowchart TB
   G --> H[Visualization updates]
   H --> I[User queries: Show moments of growth]
 ```
+
+
 
 ---
 
@@ -175,19 +189,23 @@ flowchart TB
 ## Future Considerations
 
 **Scaling:** 
+
 - 100 moments × 10 neurons per moment = 1000 new synapses
 - Visualization may need performance optimization (LOD rendering)
 
 **Data accuracy:**
+
 - Manual tagging of moments to neurons initially
 - Eventually: Auto-tagging via NLP (ChatGPT could analyze moment descriptions)
 
 **Historical backfill:**
+
 - Start with recent moments (Feb 2026)
 - Gradually backfill historical moments (2023-2025)
 - Miami founding principle moments are high priority
 
 **Integration with "Where is Paul?":**
+
 - Moments already have location data
 - Could show neuron activity on the 3D globe
 - "Click Miami → See all moments there → See which neurons were active"
@@ -197,12 +215,14 @@ flowchart TB
 ## Decision: Keep Simple Now
 
 **For now (Feb 23, 2026):**
+
 - ✅ Nodes have `moments: []` field (prepared but empty)
 - ✅ Plan is written (this doc)
 - ❌ Don't implement linking yet
 - ⏳ Wait for moments.js finalization
 
 **When ready to implement:**
+
 - Start with Phase 1 (moment nodes)
 - Progressively add phases 2-5
 - Each phase is a discrete, testable feature
