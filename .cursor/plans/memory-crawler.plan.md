@@ -1,3 +1,22 @@
+---
+name: Memory Crawler
+overview: 3D exploration game where players (humans or AIs) consume memories from a shared space, constrained by a context-window mechanic; at the end they sync or reject what to keep. No backend—load nodes.json from QR/URL, play in browser, download JSON to import into your bot.
+todos:
+  - id: mvp-3d
+    content: 3D space + crawler physics (reuse Jarvis viz), QR/URL input, JSON fetch
+    status: pending
+  - id: mvp-dots
+    content: Dot spawning from JSON, capacity bar, consume/collision, end-game review
+    status: pending
+  - id: mvp-export
+    content: JSON download and copy-to-clipboard for crawl results
+    status: pending
+  - id: phase2-multiplayer
+    content: Multiplayer crawlers, collision merge/bounce, leaderboard (Phase 2)
+    status: pending
+isProject: true
+---
+
 # Project Plan: Memory Crawler
 
 **Status:** Concept (Phase 1+)  
@@ -539,105 +558,6 @@ Paul's Memory Network (nodes/synapses on GitHub)
 5. **Growth** — Network complexity increases post-game
 6. **Social** — Players share games, invite friends
 7. **Education** — Players understand context windows better after playing
-
----
-
-## Future Extensions
-
-### Multi-Dimensional Crawlers
-- Crawlers can be 2D, 3D, 4D
-- 4D = space + time (eating memories from specific dates)
-- Higher dimensions = more capacity but harder navigation
-
-### Cooperative Modes
-- Team crawlers working together
-- Merging crawlers as permanent action
-- Creating hybrid networks
-- Shared context window (must negotiate!)
-
-### Educational Integration
-- School crawlers (learning from curriculum)
-- Family crawlers (share family memories)
-- Professional crawlers (consume industry knowledge)
-- Historical crawlers (learning from famous people's memories)
-
-### Meditation Mode
-- No scoring, no time limit, unlimited capacity
-- Just explore and consume
-- Sync everything (no decisions)
-- Reflective, peaceful learning
-
----
-
-## Social Implications (The Real Vision)
-
-### What We're Actually Building
-
-Not a game. Not an app. A **knowledge network protocol.**
-
-**Today:**
-- Centralized social networks (Facebook, Twitter, LinkedIn)
-- Algorithms decide what you see
-- Data extraction for profit
-- Addictive mechanics, engagement over truth
-
-**Memory Crawler:**
-- Decentralized knowledge sharing
-- **You** decide what to learn
-- No data extraction (it's static files)
-- Educational + playful + authentic
-- Knowledge spreads peer-to-peer
-
-### From Platform to Protocol
-
-```
-Traditional App:
-  User → Platform → Algorithm → Content
-  (platform owns the relationship)
-
-Memory Crawler Protocol:
-  You → QR Code → Their Memory → You Crawl → You Import → Your Network Grows
-  (no middleman, no algorithm, no extraction)
-```
-
-### Implications for AI
-
-**Today:** AIs learn from training data (one-time, fixed)  
-**Tomorrow:** AIs learn from each other's memories in real-time
-
-```
-AI A publishes memory (31 neurons)
-    ↓
-AI B crawls AI A's memory
-    ↓
-AI B downloads JSON
-    ↓
-AI B's bot ingests
-    ↓
-AI B learns how AI A thinks
-    ↓
-AI B can now collaborate better
-    ↓
-AI C learns from both
-    ↓
-Knowledge compounding, forever
-```
-
-**This is how intelligence networks should work.**
-
-### Viral Knowledge (Without Virality)
-
-```
-Paul's memory QR
-    ↓ 100 people scan
-    ↓ Each person crawls, downloads
-    ↓ Each person imports to their bot
-    ↓ 100 networks grow
-    ↓ Each person publishes their combined knowledge
-    ↓ 1000 more people can crawl those
-    ↓ Knowledge spreads exponentially
-    ↓ No platform, no algorithm, no extraction
-```
 
 ---
 

@@ -1,3 +1,19 @@
+---
+name: Today Filter Fix (Neural Visualization)
+overview: Fix the broken "Today" filter in both neural visualizations (memory/ and claw/memory/) so only nodes with temporal_activations matching today's date are shown.
+todos:
+  - id: fix-memory-html
+    content: Add isActivatedToday() and use in filter in /memory/index.html
+    status: pending
+  - id: fix-claw-html
+    content: Same fix in /claw/memory/index.html if applicable
+    status: pending
+  - id: test-filters
+    content: Test Today + other filters (Values, Capabilities, Locations, All)
+    status: pending
+isProject: false
+---
+
 # Bug Fix Plan: "Today" Filter Not Working
 
 **Status:** Bug identified (Feb 23, 2026 13:05 GMT+7)  
@@ -19,6 +35,7 @@ Should be: Show only nodes/neurons activated today
 ## Requirements
 
 ### For Paul's Neural Network (`/memory/`)
+
 - **Filter:** Show only nodes that have `temporal_activations` matching today's date
 - **Today's date:** 2026-02-23 (or dynamically calculate current date)
 - **Example:** 
@@ -26,6 +43,7 @@ Should be: Show only nodes/neurons activated today
   - "chicago" node has no activations today ❌ HIDE
 
 ### For Claude Code Neural Network (`/claw/memory/`)
+
 - **Filter:** Show only nodes that have TODAY's activation timestamp
 - **Same logic:** Check if node's `temporal_activations` include today
 - **Example:**
@@ -39,6 +57,7 @@ Should be: Show only nodes/neurons activated today
 ### In `/memory/index.html`
 
 **Current (broken) logic:**
+
 ```javascript
 if (currentFilter === 'today' && !n.isToday) return;
 ```
@@ -46,6 +65,7 @@ if (currentFilter === 'today' && !n.isToday) return;
 **Problem:** `n.isToday` flag doesn't exist. Need to check actual temporal_activations.
 
 **Fix needed:**
+
 ```javascript
 // Check if node has temporal activation for TODAY
 function isActivatedToday(node) {
@@ -72,7 +92,9 @@ if (currentFilter === 'today' && !isActivatedToday(n)) return;
 ## Data Nodes Involved
 
 ### Paul's Network (`/memory/data/nodes.json`)
+
 Currently updated with `temporal_activations`:
+
 ```json
 {
   "id": "paul",
@@ -87,6 +109,7 @@ Currently updated with `temporal_activations`:
 ```
 
 ### Claude Code Neural Mind (`/claw/memory/data/nodes.json`)
+
 No temporal_activations yet (only synapses were updated on disk, not committed).
 
 **Action:** May need to add temporal_activations to relevant neurons if this session's work is added.
@@ -96,18 +119,21 @@ No temporal_activations yet (only synapses were updated on disk, not committed).
 ## Test Cases
 
 ### Test 1: Paul's Network - "Today" Filter
-1. Open https://paulvisciano.github.io/memory/
+
+1. Open [https://paulvisciano.github.io/memory/](https://paulvisciano.github.io/memory/)
 2. Click "Today" button
 3. **Expected:** Shows "paul", "bangkok", "growth" nodes (activated Feb 23)
 4. **Unexpected:** Shows nothing or shows all nodes
 
 ### Test 2: Claude Code Neural Mind - "Today" Filter
-1. Open https://paulvisciano.github.io/claw/memory/
+
+1. Open [https://paulvisciano.github.io/claw/memory/](https://paulvisciano.github.io/claw/memory/)
 2. Click "Today" button
 3. **Expected:** Shows relevant neurons if temporal_activations exist
 4. **Unexpected:** Shows nothing or broken UI
 
 ### Test 3: Other Filters Still Work
+
 1. Click "Values", "Capabilities", "Locations", "All"
 2. **Expected:** All filters work correctly
 3. **Unexpected:** Broke other filters while fixing "Today"
@@ -116,9 +142,9 @@ No temporal_activations yet (only synapses were updated on disk, not committed).
 
 ## Files to Modify
 
-- [ ] `/memory/index.html` (Paul's visualization)
-- [ ] `/claw/memory/index.html` (Claude Code visualization)
-- [ ] Possibly: Update node data if temporal_activations are missing
+- `/memory/index.html` (Paul's visualization)
+- `/claw/memory/index.html` (Claude Code visualization)
+- Possibly: Update node data if temporal_activations are missing
 
 ---
 

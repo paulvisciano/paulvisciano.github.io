@@ -1,3 +1,22 @@
+---
+name: Moment-to-Neuron Linking
+overview: Link the neural network to Paul's moments in time (4D memory model): moment nodes, moment-neuron synapses, visualization filters, and bidirectional querying. Deferred until moments.js finalization.
+todos:
+  - id: audit-moments
+    content: Audit moments.js for moment IDs and metadata
+    status: pending
+  - id: moment-nodes
+    content: Create moment nodes in nodes.json (Phase 1)
+    status: pending
+  - id: moment-synapses
+    content: Add moment-to-neuron synapses (Phase 2)
+    status: pending
+  - id: viz-updates
+    content: Add Moments filter and time range controls (Phase 3)
+    status: pending
+isProject: false
+---
+
 # Feature Plan: Moment-to-Neuron Linking
 
 **Status:** Planned (not yet implemented)  
@@ -113,6 +132,22 @@ Result:
 
 ---
 
+## Data Flow
+
+```mermaid
+flowchart TB
+  A[moments.js] --> B[Parse moments]
+  B --> C[Create moment nodes]
+  C --> D[Analyze each moment]
+  D --> E[Identify active neurons]
+  E --> F[Create synapses]
+  F --> G[Update nodes.json + synapses.json]
+  G --> H[Visualization updates]
+  H --> I[User queries: Show moments of growth]
+```
+
+---
+
 ## Implementation Steps (When Ready)
 
 1. **Audit moments.js** — Get list of all moment IDs and metadata
@@ -123,30 +158,6 @@ Result:
 6. **Update visualization** — Add moment filters, time range controls
 7. **Test queries** — Verify bidirectional navigation works
 8. **Optimize** — Cache moment lookups for performance
-
----
-
-## Data Flow
-
-```
-moments.js (Paul's source of truth)
-    ↓
-[Parse moments]
-    ↓
-Create moment nodes (1 per moment)
-    ↓
-[Analyze each moment]
-    ↓
-Identify active neurons (which values, emotions, people involved?)
-    ↓
-Create synapses (moment ↔ neuron with weights)
-    ↓
-Update nodes.json + synapses.json
-    ↓
-Visualization auto-updates (moment nodes visible, bigger neurons)
-    ↓
-User can query: "Show me moments of growth"
-```
 
 ---
 

@@ -1,4 +1,27 @@
+---
+name: Share Button Implementation
+overview: Add a Share button to the neural visualization that opens a modal to download memory snapshot image (with QR) and copy share URL to clipboard. Targets claw/memory/index.html and new share.js + share-modal.css.
+todos:
+  - id: share-button-ui
+    content: Add Share button and modal HTML to claw/memory/index.html
+    status: pending
+  - id: share-js
+    content: Create claw/memory/share.js (openShareModal, downloadShareImage, copyShareUrl)
+    status: pending
+  - id: share-css
+    content: Create claw/memory/share-modal.css for modal styling
+    status: pending
+  - id: r2-image
+    content: Generate share image via ChatGPT, upload to R2, set URL in share.js
+    status: pending
+  - id: test-share
+    content: Test button, modal, copy URL, image download, QR scan
+    status: pending
+isProject: false
+---
+
 # Share Button Implementation Plan
+
 **For:** Cursor (AI code editor)  
 **Purpose:** Add shareable memory snapshot functionality to neural visualization  
 **Status:** Ready for implementation  
@@ -30,136 +53,58 @@ Add a "Share" button to the neural visualization that:
 ┌─────────────────────────────────────┐
 │  Share Jarvis Memory                │
 ├─────────────────────────────────────┤
-│                                     │
 │  📷 Share Image (with QR)           │
-│  Download the neural visualization │
-│  with embedded QR code              │
-│                                     │
 │  [Download Image]                   │
-│                                     │
 │  ─────────────────────────────────  │
-│                                     │
 │  🔗 Copy Memory Link                │
-│  Share the live visualization       │
-│                                     │
 │  URL: [paulvisciano.github.io/...] │
 │  [Copy Link]  [Copied! ✓]          │
-│                                     │
 │  ─────────────────────────────────  │
-│                                     │
 │  ℹ️  What's Included?               │
 │  • Full neural topology             │
 │  • 46 neurons, 69 synapses         │
 │  • Boot instructions (via QR)      │
-│  • Verification hash               │
-│                                     │
 └─────────────────────────────────────┘
 ```
 
-### Files to Modify
+### Files to Modify / Create
 
-**1. `/claw/memory/index.html`**
-- Add Share button next to existing controls
-- Add modal dialog HTML structure
-- Link to modal CSS + JavaScript
+| File | Change |
+|------|--------|
+| `/claw/memory/index.html` | Add Share button, modal HTML, link share.js + share-modal.css |
+| `/claw/memory/share.js` | **Create** — openShareModal, downloadShareImage, copyShareUrl, closeShareModal |
+| `/claw/memory/share-modal.css` | **Create** — .share-modal, .share-modal-content, .share-button, .close-button |
 
-**2. Create `/claw/memory/share.js`**
-New file with:
+### share.js (core handlers)
+
 ```javascript
-// Share button click handler
 function openShareModal() {
-  // Show modal
   document.getElementById('shareModal').style.display = 'block';
 }
-
-// Download image
 function downloadShareImage() {
-  // URL to pre-generated image on R2
-  const imageUrl = 'https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/shared/jarvis-memory-share-v1.0.0.png';
-  // Trigger download
+  const imageUrl = 'https://pub-....r2.dev/shared/jarvis-memory-share-v1.0.0.png';
   const a = document.createElement('a');
   a.href = imageUrl;
   a.download = 'jarvis-memory-v1.0.0.png';
   a.click();
 }
-
-// Copy share URL
 function copyShareUrl() {
   const url = window.location.href;
   navigator.clipboard.writeText(url);
-  // Show "Copied!" feedback
   document.getElementById('copyFeedback').innerHTML = '✓ Copied to clipboard!';
-  setTimeout(() => {
-    document.getElementById('copyFeedback').innerHTML = '';
-  }, 2000);
+  setTimeout(() => { document.getElementById('copyFeedback').innerHTML = ''; }, 2000);
 }
-
-// Close modal
 function closeShareModal() {
   document.getElementById('shareModal').style.display = 'none';
 }
 ```
 
-**3. Create `/claw/memory/share-modal.css`**
-New file with styling for modal:
-```css
-.share-modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-}
+### share-modal.css (key styles)
 
-.share-modal-content {
-  background-color: #0f172a;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #06b6d4;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  color: #e0e7ff;
-  font-family: monospace;
-}
-
-.share-button-group {
-  margin: 15px 0;
-  padding: 12px;
-  background: rgba(6, 182, 212, 0.1);
-  border-radius: 4px;
-}
-
-.share-button {
-  background-color: #06b6d4;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.share-button:hover {
-  background-color: #0891b2;
-}
-
-.close-button {
-  color: #999;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color: #06b6d4;
-}
-```
+- `.share-modal`: fixed overlay, rgba background
+- `.share-modal-content`: dark bg (#0f172a), border #06b6d4, max-width 500px
+- `.share-button`: bg #06b6d4, hover #0891b2
+- `.close-button`: float right, cursor pointer
 
 ---
 
@@ -183,12 +128,12 @@ New file with styling for modal:
 
 ## HTML Snippets (Add to index.html)
 
-**Add to button row (find existing buttons):**
+**Button row:**
 ```html
 <button id="shareBtn" style="...">📤 Share</button>
 ```
 
-**Add modal HTML (somewhere in body):**
+**Modal:**
 ```html
 <div id="shareModal" class="share-modal">
   <div class="share-modal-content">
@@ -206,5 +151,7 @@ New file with styling for modal:
   </div>
 </div>
 ```
+
+---
 
 **Status:** Ready for Cursor implementation

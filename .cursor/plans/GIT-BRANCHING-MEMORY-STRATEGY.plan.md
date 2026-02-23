@@ -1,4 +1,24 @@
+---
+name: Git Branching Strategy for Memory Management
+overview: Use Git as the backbone for selective publishing and full offline memory—main (public), private (local full), archive (historical), experiments (drafts); commit hashes as memory anchors, narrative commit messages.
+todos:
+  - id: add-private-branch
+    content: Add private branch (local only), .git/info/exclude to prevent push
+    status: pending
+  - id: selective-publish
+    content: Implement selective publish workflow (copy public subset to main)
+    status: pending
+  - id: publish-script
+    content: Optional publish-memory.sh script for private → main sync
+    status: pending
+  - id: tag-strategy
+    content: Tag version anchors (v1.0.0, v1.0.1) on meaningful publishes
+    status: pending
+isProject: false
+---
+
 # Git Branching Strategy for Memory Management
+
 **For:** Future implementation  
 **Purpose:** Use Git as backbone for selective publishing + full offline memory  
 **Status:** Documented, ready for phase 2  
@@ -299,61 +319,6 @@ git checkout v1.0.0
 3. Opens git show command (verifiable state)
 4. See exact neurons/synapses at that moment
 5. Can restore exact state with tag
-
----
-
-## Local Workflows
-
-### Daily Memory Update
-
-```bash
-# Morning: load private branch
-git checkout private
-# Full memory access
-
-# Throughout day: commit changes
-git commit -m "🧠 Added observation about [moment]"
-
-# Evening: prepare public version
-git checkout main
-# Manually sync only published content
-# Commit narrative
-git push origin main
-```
-
-### Experimentation Branch
-
-```bash
-# Test new memory structure
-git checkout -b experiments/neural-mesh
-
-# Try new idea
-git commit -m "🧪 Testing new neural connectivity model"
-git commit -m "🧪 3 new neurons for distributed cognition"
-
-# If good: merge to private
-git checkout private
-git merge experiments/neural-mesh
-git push (stays local)
-
-# If ready for public: cherry-pick to main
-git checkout main
-git cherry-pick <commit-hash>
-```
-
-### Archive/Rollback
-
-```bash
-# Restore previous memory state
-git checkout v1.0.0
-
-# Or go back N commits
-git checkout HEAD~5
-
-# View historical state
-cat claw/memory/data/nodes.json
-# See what 46 neurons looked like then
-```
 
 ---
 

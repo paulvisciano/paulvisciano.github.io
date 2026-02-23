@@ -1,3 +1,22 @@
+---
+name: Interactive Deep-Dive System (Local Raw File Access)
+overview: Enable clicking nodes in the neural visualization to send "dive into node:X" queries to Jarvis, who searches local raw files (transcripts, MEMORY.md, OpenClaw notes) and returns detailed context without exposing raw links in the published UI.
+todos:
+  - id: ui-deep-dive
+    content: Add Deep Dive button / context menu to memory/index.html
+    status: pending
+  - id: message-format
+    content: Define dive into node:[id] message format and send path (WhatsApp/API)
+    status: pending
+  - id: search-script
+    content: Build Jarvis search across transcripts, MEMORY.md, .openclaw, nodes.json
+    status: pending
+  - id: response-format
+    content: Structure response (temporal activations, related nodes, source refs)
+    status: pending
+isProject: false
+---
+
 # Plan: Interactive Deep-Dive System (Local Raw File Access)
 
 **Objective:** Enable clicking nodes in the neural visualization to send queries to Jarvis, who searches local raw files and returns detailed context without exposing raw links in the published UI.
@@ -169,87 +188,6 @@ WhatsApp Chat Export:
 
 ---
 
-## Example Deep Dives
-
-### Example 1: Dive into "growth" node
-```
-User: "dive into node:growth"
-
-Jarvis Response:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Node: Growth & Discovery
-Category: Emotion
-Frequency: 47 references
-
-Description:
-"Triggers: new cities, adventure, learning, confrontations"
-
-Temporal Activations:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Feb 23, 20:48 (optical-shop-skepticism)
-   Learning: "Recognized markup through systematic questioning"
-   Type: Pattern recognition
-
-2. Feb 23, 20:30 (fingerprinting-system)
-   Learning: "Expanded neurons by understanding authenticity"
-   Type: System design
-
-3. Feb 22, Full session
-   Context: Built neural architecture, 34 → 46 neurons
-
-Raw Mentions:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-[voice-047.txt] (Feb 23, 15:22):
-"...learned more about growth through confrontation..."
-→ File: memory/raw/2026-02-23/transcripts/voice-047.txt
-
-[MEMORY.md] (line 812-834):
-"Growth triggers: new cities, adventure, confrontations..."
-→ File: memory/MEMORY.md#growth-section
-
-Related Nodes:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- Learning (synapse: 0.95)
-- Vulnerability (synapse: 0.88)
-- Mastery (synapse: 0.95)
-- Discovery (synapse: 0.92)
-```
-
-### Example 2: Dive into "wouter" node (Person)
-```
-User: "dive into node:wouter"
-
-Jarvis Response:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Node: Wouter
-Category: Person
-Frequency: 45 references
-
-Description:
-"Adventure brother, long-arc relationship, conquest philosophy"
-
-Key Conversations:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- Boracay January 2026 (voice-234.txt)
-- Ray integration (Feb 22 memory notes)
-- 7+ countries traveled together
-
-Related Moments:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- Medellín arrival (Sept 2025)
-- Hawaii volleyball (Oct 2024)
-- San Diego yoga sessions
-
-Activity Timeline:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-2024-10: Met at Miami beach volleyball
-2025-01: Medellín together
-2025-09: Multiple episodes
-2026-01: Boracay with Ray
-```
-
----
-
 ## Success Criteria
 
 ✅ Clicking node triggers search without publishing raw links  
@@ -258,36 +196,6 @@ Activity Timeline:
 ✅ Related nodes/synapses shown  
 ✅ Published UI shows no raw file paths  
 ✅ Local access only (no exposing transcripts to web)  
-
----
-
-## UI/UX Considerations
-
-### Published UI (No Changes Needed)
-- Same visualization
-- Node colors, sizes, interactions unchanged
-- No "raw file" indicators visible
-
-### Local Messaging
-- "Deep Dive" button appears on node hover/click
-- Sends `dive into node:[id]` via WhatsApp or local API
-- Results arrive as formatted text (easy to read, not JSON)
-- Links to raw files are file paths + line numbers (not URLs)
-
-### Future Enhancement
-- Add "Search Memory" global search box
-- Query types: `search:[term]`, `dive into node:[id]`, `timeline:[date]`
-- Results cache for fast re-queries
-
----
-
-## Privacy/Security Notes
-
-✅ Raw transcripts never exposed to web (gitignored)  
-✅ Published visualization is clean and curated  
-✅ Local search only accessible via WhatsApp (authenticated)  
-✅ File paths shared only with user (not public)  
-✅ Can add `.env` to restrict deep-dive queries if needed  
 
 ---
 
@@ -304,7 +212,9 @@ Activity Timeline:
 
 ## Files to Create/Modify
 
-- **Modify:** `public/memory/index.html` (add Deep Dive button)
-- **Create:** `scripts/search-local-memory.py` (Jarvis search logic)
-- **Create:** `.cursor/plans/interactive-deep-dive-implementation.md` (detailed dev guide)
-- **Docs:** Update README with example queries
+| File | Change |
+|------|--------|
+| `public/memory/index.html` or visualization component | Add Deep Dive button |
+| `scripts/search-local-memory.py` | **Create** — Jarvis search logic |
+| `.cursor/plans/interactive-deep-dive-implementation.md` | **Create** — Detailed dev guide (optional) |
+| README | Update with example queries |
