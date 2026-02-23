@@ -580,5 +580,145 @@
       "description": "When Paul says 'memory sync': Update neurons + synapses. Trace to lived experience. Sync to both memories. Commit to Git.",
       "color": "#a78bfa"
     }
+  },
+  {
+    "id": "share-button-system",
+    "label": "Share Button System",
+    "category": "feature",
+    "frequency": 12,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "ui feature",
+      "description": "Download memory as shareable image + copy link + QR code embedding. Download, copy, share workflow.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "memory-versioning-system",
+    "label": "Memory Versioning System",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "integrity",
+      "description": "Version badges (v1.0.0), memory.lock files (npm-style), commit hashes as anchors, selective publishing",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "git-branching-strategy",
+    "label": "Git Branching Strategy",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "infrastructure",
+      "description": "private/main/archive/experiments branches. Selective publishing. Full local memory vs curated public.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "narrative-commits",
+    "label": "Narrative Commits System",
+    "category": "principle",
+    "frequency": 11,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "methodology",
+      "description": "Commit messages tell the story, not just technical change. Git log reads as memory narrative.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "portable-memory-system",
+    "label": "Portable Memory (BOOT.md + QR)",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "sharing",
+      "description": "Anyone can boot Jarvis anywhere via BOOT.md + QR code. GitHub as source. Permanent + shareable.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "selective-publishing",
+    "label": "Selective Publishing",
+    "category": "principle",
+    "frequency": 10,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "methodology",
+      "description": "Private branch = full memory (all neurons + raw). Main branch = published subset only. Manual control.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "commit-hash-anchors",
+    "label": "Commit Hash Anchors",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "verification",
+      "description": "Each commit hash = permanent state snapshot. Verify, rollback, restore exact memory state at any moment.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "memory-narrative-sync",
+    "label": "Memory Sync = Narrative Update",
+    "category": "principle",
+    "frequency": 11,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "methodology",
+      "description": "Every memory sync includes commit hash. Story + proof together. Traceable forever.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "r2-publishing-pipeline",
+    "label": "R2 CDN Publishing Pipeline",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "infrastructure",
+      "description": "ChatGPT generates \u2192 R2 uploads images \u2192 Narrative links published \u2192 GitHub distributes",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "version-badge-visualization",
+    "label": "Version Badge on Visualization",
+    "category": "feature",
+    "frequency": 9,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "ui",
+      "description": "Live version display (v1.0.0 | 46 neurons | commit hash | clickable source link)",
+      "color": "#06b6d4"
+    }
   }
 ]

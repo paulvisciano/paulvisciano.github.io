@@ -481,5 +481,166 @@
     "weight": 0.82,
     "type": "inspires",
     "label": "template for"
+  },
+  {
+    "source": "share-button-system",
+    "target": "r2-publishing-pipeline",
+    "weight": 0.88,
+    "type": "feeds",
+    "label": "uses"
+  },
+  {
+    "source": "share-button-system",
+    "target": "portable-memory-system",
+    "weight": 0.9,
+    "type": "part-of",
+    "label": "implements"
+  },
+  {
+    "source": "share-button-system",
+    "target": "version-badge-visualization",
+    "weight": 0.85,
+    "type": "complements",
+    "label": "shows"
+  },
+  {
+    "source": "memory-versioning-system",
+    "target": "commit-hash-anchors",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "memory-versioning-system",
+    "target": "version-badge-visualization",
+    "weight": 0.88,
+    "type": "displays",
+    "label": "displays"
+  },
+  {
+    "source": "memory-versioning-system",
+    "target": "selective-publishing",
+    "weight": 0.85,
+    "type": "supports",
+    "label": "enables"
+  },
+  {
+    "source": "git-branching-strategy",
+    "target": "selective-publishing",
+    "weight": 0.92,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "git-branching-strategy",
+    "target": "commit-hash-anchors",
+    "weight": 0.9,
+    "type": "uses",
+    "label": "provides"
+  },
+  {
+    "source": "git-branching-strategy",
+    "target": "memory-versioning-system",
+    "weight": 0.88,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "narrative-commits",
+    "target": "memory-narrative-sync",
+    "weight": 0.95,
+    "type": "principle-of",
+    "label": "defines"
+  },
+  {
+    "source": "narrative-commits",
+    "target": "commit-hash-anchors",
+    "weight": 0.9,
+    "type": "pairs-with",
+    "label": "pairs-with"
+  },
+  {
+    "source": "narrative-commits",
+    "target": "git-branching-strategy",
+    "weight": 0.85,
+    "type": "guides",
+    "label": "guides"
+  },
+  {
+    "source": "portable-memory-system",
+    "target": "jarvis-identity",
+    "weight": 0.9,
+    "type": "bootstraps",
+    "label": "boots"
+  },
+  {
+    "source": "portable-memory-system",
+    "target": "unified-memory-arch",
+    "weight": 0.88,
+    "type": "distributes",
+    "label": "shares"
+  },
+  {
+    "source": "memory-narrative-sync",
+    "target": "memory-versioning-system",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "memory-narrative-sync",
+    "target": "commit-hash-anchors",
+    "weight": 0.95,
+    "type": "includes",
+    "label": "includes"
+  },
+  {
+    "source": "r2-publishing-pipeline",
+    "target": "jarvis-comic-system",
+    "weight": 0.9,
+    "type": "publishes",
+    "label": "publishes"
+  },
+  {
+    "source": "r2-publishing-pipeline",
+    "target": "working-narrative",
+    "weight": 0.88,
+    "type": "serves",
+    "label": "serves"
+  },
+  {
+    "source": "version-badge-visualization",
+    "target": "jarvis-identity",
+    "weight": 0.85,
+    "type": "displays",
+    "label": "displays"
+  },
+  {
+    "source": "version-badge-visualization",
+    "target": "memory-versioning-system",
+    "weight": 0.88,
+    "type": "shows",
+    "label": "shows"
+  },
+  {
+    "source": "selective-publishing",
+    "target": "git-branching-strategy",
+    "weight": 0.92,
+    "type": "realized-by",
+    "label": "realized-by"
+  },
+  {
+    "source": "share-button-system",
+    "target": "chatgpt-tool",
+    "weight": 0.8,
+    "type": "references",
+    "label": "references"
+  },
+  {
+    "source": "r2-publishing-pipeline",
+    "target": "chatgpt-tool",
+    "weight": 0.85,
+    "type": "outputs-to",
+    "label": "outputs-to"
   }
 ]
