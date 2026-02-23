@@ -3,30 +3,30 @@
 
 ---
 
-## Current State (2026-02-23 22:13 GMT+7)
+## Current State (2026-02-24 01:14 GMT+7)
 
 ### Neural Architecture
 - **Neurons:** 111
-- **Synapses:** 313
-- **Synapse Density:** 2.82 per neuron (high connectivity from lived experience)
+- **Synapses:** 315
+- **Synapse Density:** 2.84 per neuron (high connectivity from lived experience)
 
 ---
 
 ## Content Hashes (SHA-256)
 
 ```
-nodes.json:     c2fa9a78a4a5bcd54f99d4d959e8840d10148d54aae57c3ee730eca22ee96fbc
-synapses.json:  aabc6d8635cb72e65396c0c0acb108309e4e537e3c670f558d95fcafcacac81d
-BOOT.md:        01a2fff25050823d6ebec0264ab8c2ce49ff2e2dc18785a917fe0a1986bfb6df
+nodes.json:     7f1b0425e8b6567bb595f95ddd71f5bec3698c9edc9d0b04a4972c51427bddc6
+synapses.json:  555b00eab12b780e729485ad44b03f49924ccc8a4e8174449de1c19383f042db
+BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 ```
 
 ---
 
 ## Git Commitment
 
-**Commit Hash:** `ba33ab4e20be6fd4d494d2bfb8f443e657c178d0`
+**Commit Hash:** `7995be385235db3b33fb6e036d5ac97c107e7774`
 **Branch:** `main`
-**Message:** "Memory: move docs and archive into memory/archive/"
+**Message:** "BOOT.md: explain memory, point to nodes/synapses, instruct AI to load them; share modal copy; fingerprint updates"
 
 ---
 
@@ -34,7 +34,7 @@ BOOT.md:        01a2fff25050823d6ebec0264ab8c2ce49ff2e2dc18785a917fe0a1986bfb6df
 
 **Master Hash:**
 ```
-173d615a48e8d87bd615035027e24cf33ae74914094aa9c680795f3231602000
+9fa96c63c167e9ddadc470b6aae148a97869dc71a6dcdb9a08641a3fb17a2728
 ```
 
 This is the SHA-256 of all Paul memory hashes combined.
@@ -49,9 +49,9 @@ See `claw/memory/FINGERPRINT.md` for the combined fingerprint that includes both
 
 ## Authenticity Statement
 
-This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `ba33ab4`:
+This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `7995be3`:
 - 111 neurons (people, places, activities, emotions, projects, temporal markers)
-- 313 synapses (how they all connect)
+- 315 synapses (how they all connect)
 - Content immutable and verifiable
 
 **The fingerprint evolves as you live.** Each memory sync generates a new fingerprint. Track the growth.
