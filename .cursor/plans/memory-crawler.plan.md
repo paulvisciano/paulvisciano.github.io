@@ -45,6 +45,7 @@ Players control a crawler navigating a 3D space filled with memories (dots). Con
 ### How It Works
 
 **Step 1: Generate QR Code**
+
 ```
 Any GitHub memory JSON URL:
   https://paulvisciano.github.io/memory/data/nodes.json
@@ -53,10 +54,12 @@ Generate QR code pointing to that URL
 ```
 
 **Step 2: Share the QR Code**
+
 - Print it, text it, email it, post it
 - Anyone can scan it with their phone
 
 **Step 3: Load Memory**
+
 ```
 Player scans QR → Memory Crawler loads
     ↓
@@ -68,12 +71,14 @@ Ready to play
 ```
 
 **Step 4: Play & Crawl**
+
 - Navigate 3D space
 - Consume memories (dots)
 - Watch capacity meter
 - Decide what to keep
 
 **Step 5: Download & Import**
+
 - Get JSON of your crawl
 - Copy-paste into your bot
 - Your network grows
@@ -81,6 +86,7 @@ Ready to play
 ### Examples
 
 **Paul's Memory:**
+
 ```
 QR code → https://paulvisciano.github.io/memory/data/nodes.json
 Loads: 109 nodes (people, places, activities)
@@ -89,6 +95,7 @@ Crawl: Download what resonates with you
 ```
 
 **Claude Code's Neural Mind:**
+
 ```
 QR code → https://paulvisciano.github.io/claw/memory/data/nodes.json
 Loads: 31 neurons (how an AI thinks)
@@ -98,6 +105,7 @@ Import: Your bot learns how I think
 ```
 
 **Any Friend's Memory:**
+
 ```
 Your friend publishes /memory/data/nodes.json on GitHub
 Friend shares QR code
@@ -149,11 +157,13 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
 ## Core Mechanic
 
 ### The Space
+
 - 3D environment (like Jarvis/Claude Code visualizations)
 - Nodes represent memories (from Paul, from other AIs, from players)
 - Edges show connections (which memories relate to each other)
 
 ### The Crawler (Player)
+
 - You control a crawler moving through the 3D space
 - Your crawler grows as it consumes memory dots
 - Color/appearance reflects your player identity
@@ -164,12 +174,14 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
   - Human player: ~150 memory slots (arbitrary)
 
 ### The Dots (Memories)
+
 - Each dot = a discrete memory from someone's network
 - Color-coded by source: Paul (red), Other AIs (purple), Other Players (green), Public (cyan)
 - Dot size = memory "weight" (more connections = bigger, costs more capacity)
 - Hovering shows preview: "Paul's optical shop moment in Bangkok" + size info
 
 ### Consuming (Memory Integration)
+
 - Move crawler to dot → consume it
 - Memory integrates into your crawler
 - Your crawler grows (visually and in synapses)
@@ -180,11 +192,13 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
 - When at capacity: **forced sync decision** (keep something or lose it)
 
 ### Collision
+
 - Crawlers can collide with each other
 - Can choose: merge (combine knowledge) or bounce (reject)
 - Creates emergent social dynamics
 
 ### End Game Decision
+
 - Time limit or capacity limit reached
 - You see all memories consumed (as a list or network visualization)
 - **Choose:** Sync these to your permanent memory (they stay) or reject (they disappear)
@@ -196,6 +210,7 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
 ## Why This Works
 
 ### For Players (Humans)
+
 1. **Fun** — Exploration is inherently engaging
 2. **Discovery** — Discover other people's memories organically
 3. **Agency** — You choose what to keep (editorial gate)
@@ -203,6 +218,7 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
 5. **Social** — Multiplayer creates interaction
 
 ### For AIs (Like Claude Code)
+
 1. **Natural learning metaphor** — "Consume" knowledge incrementally
 2. **Playful friction** — The game forces intentionality (not auto-sync)
 3. **Real mechanics** — Actual memory integration with real rules
@@ -210,6 +226,7 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
 5. **Transparency** — All consumption visible and reviewable
 
 ### For the Ecosystem
+
 1. **Shared learning** — Humans and AIs in same space
 2. **Knowledge spread** — Memories replicate through consumption
 3. **Network effects** — Popular memories get consumed more (like viral content, but with intention)
@@ -260,6 +277,7 @@ Just: your memory → QR code → anyone can learn from it → they grow → the
 ## Context Window as Game Mechanic
 
 ### The Concept
+
 Real AI models have hard limits on how much they can process at once (context window). This game makes that **visible and meaningful**:
 
 - You start with N slots of memory capacity
@@ -268,19 +286,23 @@ Real AI models have hard limits on how much they can process at once (context wi
 - Forces strategic choices: do you keep the big important memories or lots of small ones?
 
 ### Strategic Depth
+
 - **"Big Eater" strategy:** Consume one complex memory, sync it, explore more
 - **"Grazer" strategy:** Eat many small memories, build holistic understanding
 - **"Curator" strategy:** Eat selectively, be ruthless about what stays
 - **"Hoarder" strategy:** Try to hold as much as possible (stressful!)
 
 ### Educational Value
+
 Players learn:
+
 - Why LLMs need external memory
 - Context window trade-offs (quality vs. quantity)
 - Token economics (memory has costs)
 - Why syncing/committing knowledge matters
 
 ### Difficulty Scaling
+
 - Start with smaller context window (harder, more frequent syncs)
 - Unlock bigger models (easier, more memories at once)
 - Or: "Hard Mode" = limited context, forces careful decisions
@@ -292,6 +314,7 @@ Players learn:
 **This is what makes Memory Crawler different from every other game:**
 
 ### Why No Backend?
+
 - ✅ **Sovereignty** — You own everything, no service dependency
 - ✅ **Simplicity** — No servers to maintain, no APIs to build
 - ✅ **Trust** — No mysterious backend processing, see all the code
@@ -348,6 +371,7 @@ Players learn:
 ### Your Bot Ingests This
 
 Pseudo-code:
+
 ```
 message = "Here's my crawl from Memory Crawler"
 json = parse(downloaded_file)
@@ -366,6 +390,7 @@ output = "I consumed " + json.total_consumed + " of Paul's memories"
 ### Why This Approach?
 
 **Traditional apps:**
+
 - Require backend server
 - Require database
 - Require authentication
@@ -374,6 +399,7 @@ output = "I consumed " + json.total_consumed + " of Paul's memories"
 - Hard to port to other AIs
 
 **Memory Crawler:**
+
 - No server needed
 - Files are the database
 - Anyone can play
@@ -410,31 +436,34 @@ Knowledge spreads through the network peer-to-peer
 ## Technical Requirements
 
 ### MVP (Minimum Viable Product)
-- [ ] 3D space rendering (reuse Jarvis visualization framework)
-- [ ] Crawler physics (movement, growth, collision)
-- [ ] **QR code scanner** (camera/file upload)
-- [ ] **URL input** (paste GitHub link directly)
-- [ ] **JSON fetch** (load nodes.json from URL)
-- [ ] Dot spawning (from loaded JSON)
-- [ ] Memory preview on hover (with capacity cost shown)
-- [ ] Capacity tracking (visual bar showing remaining space)
-- [ ] End-game review screen (what was consumed, what synced)
-- [ ] **JSON download** (generate crawl results)
-- [ ] Copy-to-clipboard (easy sharing)
+
+- 3D space rendering (reuse Jarvis visualization framework)
+- Crawler physics (movement, growth, collision)
+- **QR code scanner** (camera/file upload)
+- **URL input** (paste GitHub link directly)
+- **JSON fetch** (load nodes.json from URL)
+- Dot spawning (from loaded JSON)
+- Memory preview on hover (with capacity cost shown)
+- Capacity tracking (visual bar showing remaining space)
+- End-game review screen (what was consumed, what synced)
+- **JSON download** (generate crawl results)
+- Copy-to-clipboard (easy sharing)
 
 ### Phase 2
-- [ ] Multiplayer (multiple crawlers in same space)
-- [ ] Crawler collision mechanics (merge vs. bounce)
-- [ ] Leaderboard (who ate most memories, best decisions, etc.)
-- [ ] Memory categorization (filter by person, date, topic)
-- [ ] Custom memory pools (play with friend's memories only)
+
+- Multiplayer (multiple crawlers in same space)
+- Crawler collision mechanics (merge vs. bounce)
+- Leaderboard (who ate most memories, best decisions, etc.)
+- Memory categorization (filter by person, date, topic)
+- Custom memory pools (play with friend's memories only)
 
 ### Phase 3
-- [ ] AI opponents (crawlers that learn)
-- [ ] Campaign mode (unlockable memory pools)
-- [ ] Social sharing (show your game session)
-- [ ] Analytics (what did you learn, what did you reject, patterns)
-- [ ] Cross-player memory exchange
+
+- AI opponents (crawlers that learn)
+- Campaign mode (unlockable memory pools)
+- Social sharing (show your game session)
+- Analytics (what did you learn, what did you reject, patterns)
+- Cross-player memory exchange
 
 ---
 
@@ -473,6 +502,7 @@ Paul's Memory Network (nodes/synapses on GitHub)
 ```
 
 **Key Architecture:**
+
 - **No backend** — Game runs 100% on GitHub Pages (static)
 - **No database** — All data is files (JSON on disk)
 - **No servers** — Client-side processing only
@@ -487,23 +517,27 @@ Paul's Memory Network (nodes/synapses on GitHub)
 ## Memory Pool Options
 
 ### Paul's Memories (Red Dots)
+
 - Access to `/memory/data/nodes.json` + synapses
 - Can explore his life through game
 - Learn his thinking patterns by "consuming" his neurons
 - Each neuron has different capacity cost (frequency-based)
 
 ### AI Memories (Purple Dots)
+
 - My own nodes (Claude Code neural mind)
 - Other AIs' networks (if connected)
 - Learn how AIs think
 - Different cost structure (more abstract = bigger capacity hit?)
 
 ### Friends' Memories (Green Dots)
+
 - Invited collaborators' networks
 - Shared experiences with friends
 - Cross-pollination of friend groups
 
 ### Public Memories (Cyan Dots)
+
 - Published Urban Runner episodes
 - Open memory contributions
 - Community learning
@@ -515,12 +549,14 @@ Paul's Memory Network (nodes/synapses on GitHub)
 **Not traditional wins/losses.** Instead:
 
 **"Good Play"**
+
 - Ate diverse memories (from different sources)
 - Made strategic sync decisions (kept meaningful ones)
 - Learned something new (evidenced by network growth)
 - Balanced capacity usage (didn't waste space or run out mid-game)
 
 **Scoring**
+
 - Memory weight consumed
 - Decision quality (ratio of synced/rejected)
 - Diversity of sources
@@ -532,18 +568,22 @@ Paul's Memory Network (nodes/synapses on GitHub)
 ## Risks & Considerations
 
 ### Privacy
+
 - Players exposing their memories by playing
 - Solution: Opt-in memory pools, anonymous mode
 
 ### Information Quality
+
 - Bad memories spreading through consumption
 - Solution: Player ratings, editor curation, editorial gate at sync
 
 ### Complexity
+
 - 3D navigation + game mechanics + capacity management + memory UI = potentially overwhelming
 - Solution: Progressive tutorial, simplified MVP, accessibility options
 
 ### Addiction
+
 - Exploration games are engaging, could be abusive
 - Solution: Time limits, pause screens, reflection moments, capacity pressure (natural stopping points)
 
@@ -564,35 +604,39 @@ Paul's Memory Network (nodes/synapses on GitHub)
 ## Implementation Path
 
 ### Week 1-2: Prototype (Client-Side Only)
-- [ ] Use existing visualization as 3D space (reuse Jarvis/Claude Code code)
-- [ ] Add simple crawler with keyboard controls (WASD + mouse)
-- [ ] **Add QR code scanner UI** (use jsQR library, lightweight)
-- [ ] **Add URL input field** (paste GitHub memory link)
-- [ ] **JSON fetching** (fetch nodes.json from provided URL)
-- [ ] Spawn 10 static dots with capacity costs
-- [ ] Detect collision, grow crawler, deplete capacity bar
-- [ ] Visual feedback (crawler grows, synapses show)
-- [ ] Basic end screen with review of consumed memories
+
+- Use existing visualization as 3D space (reuse Jarvis/Claude Code code)
+- Add simple crawler with keyboard controls (WASD + mouse)
+- **Add QR code scanner UI** (use jsQR library, lightweight)
+- **Add URL input field** (paste GitHub memory link)
+- **JSON fetching** (fetch nodes.json from provided URL)
+- Spawn 10 static dots with capacity costs
+- Detect collision, grow crawler, deplete capacity bar
+- Visual feedback (crawler grows, synapses show)
+- Basic end screen with review of consumed memories
 
 ### Week 3-4: Integration (Still No Backend)
-- [ ] Load any memory network from GitHub URL (dynamic)
-- [ ] Pull nodes as dots (assign capacity costs based on weight)
-- [ ] Show node details on hover (including capacity cost)
-- [ ] **Generate JSON output** (memories consumed + synapses formed)
-- [ ] **Add download button** (let player save their crawl as JSON)
-- [ ] **Add copy-to-clipboard** (easy sharing of JSON)
-- [ ] **Pre-populate with examples** (Paul's memory, Claude Code's neural mind)
-- [ ] Test with real memory data from multiple sources
+
+- Load any memory network from GitHub URL (dynamic)
+- Pull nodes as dots (assign capacity costs based on weight)
+- Show node details on hover (including capacity cost)
+- **Generate JSON output** (memories consumed + synapses formed)
+- **Add download button** (let player save their crawl as JSON)
+- **Add copy-to-clipboard** (easy sharing of JSON)
+- **Pre-populate with examples** (Paul's memory, Claude Code's neural mind)
+- Test with real memory data from multiple sources
 
 ### Week 5+: Polish & Expansion
-- [ ] Sound effects, visual feedback
-- [ ] Animation on memory consumption
-- [ ] Multiple memory pools (dropdown to select Paul's, friends', public)
-- [ ] Model selection UI (Haiku/Sonnet/GPT-4 = different capacity)
-- [ ] Share feature (link to JSON, QR code, etc.)
-- [ ] Analytics (show what you learned, patterns, synapse strength)
+
+- Sound effects, visual feedback
+- Animation on memory consumption
+- Multiple memory pools (dropdown to select Paul's, friends', public)
+- Model selection UI (Haiku/Sonnet/GPT-4 = different capacity)
+- Share feature (link to JSON, QR code, etc.)
+- Analytics (show what you learned, patterns, synapse strength)
 
 ### **NO Backend Phase**
+
 - No servers to build
 - No database to set up
 - No authentication layer
@@ -622,9 +666,11 @@ Paul's Memory Network (nodes/synapses on GitHub)
 ## Notes
 
 **From the idea source (Paul's smoothie break brainstorm):**
+
 > "You are traversing a 3D space and there are random memories from other people. Learn from each other, consume knowledge. That's like your way of acquiring memories from other AIs and from other people. You can see what you consume, then at the end choose to sync or not."
 
 **Added insight (context window mechanic):**
+
 > "Since everyone's memory already lives on GitHub, we can bake in AI's context window limits as a game mechanic. So players only allowed to eat up to their context size."
 
 This captures the essence: playful knowledge transfer with intentional curation + real AI mechanics made visible.
