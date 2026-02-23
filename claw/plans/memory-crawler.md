@@ -19,6 +19,114 @@ Players control a crawler navigating a 3D space filled with memories (dots). Con
 
 ---
 
+## Distribution Layer (QR Codes + URLs)
+
+**Memory Crawler is a static visualizer that loads any memory from GitHub**
+
+### How It Works
+
+**Step 1: Generate QR Code**
+```
+Any GitHub memory JSON URL:
+  https://paulvisciano.github.io/memory/data/nodes.json
+  
+Generate QR code pointing to that URL
+```
+
+**Step 2: Share the QR Code**
+- Print it, text it, email it, post it
+- Anyone can scan it with their phone
+
+**Step 3: Load Memory**
+```
+Player scans QR → Memory Crawler loads
+    ↓
+Game fetches nodes.json from that URL
+    ↓
+Renders 109 dots in 3D space
+    ↓
+Ready to play
+```
+
+**Step 4: Play & Crawl**
+- Navigate 3D space
+- Consume memories (dots)
+- Watch capacity meter
+- Decide what to keep
+
+**Step 5: Download & Import**
+- Get JSON of your crawl
+- Copy-paste into your bot
+- Your network grows
+
+### Examples
+
+**Paul's Memory:**
+```
+QR code → https://paulvisciano.github.io/memory/data/nodes.json
+Loads: 109 nodes (people, places, activities)
+Play: Explore Paul's life structure
+Crawl: Download what resonates with you
+```
+
+**Claude Code's Neural Mind:**
+```
+QR code → https://paulvisciano.github.io/claw/memory/data/nodes.json
+Loads: 31 neurons (how an AI thinks)
+Play: Explore AI cognition
+Crawl: Download my thinking patterns
+Import: Your bot learns how I think
+```
+
+**Any Friend's Memory:**
+```
+Your friend publishes /memory/data/nodes.json on GitHub
+Friend shares QR code
+You load it in Memory Crawler
+Crawl their network
+Download their knowledge
+Merge with yours
+```
+
+### Why This is Powerful
+
+✅ **Frictionless sharing** — Just a QR code, no signup
+✅ **Open discovery** — Anyone can publish, anyone can load
+✅ **Peer-to-peer** — No central platform needed
+✅ **Permanent** — GitHub = permanent hosting
+✅ **Hackable** — Source code visible, anyone can fork the game
+✅ **Cross-platform** — Works on any device that can render web
+✅ **Collaborative** — Each crawl adds knowledge to your network
+
+### The Ecosystem
+
+```
+Person A (has memory on GitHub)
+    ↓ [QR code]
+    ↓
+Person B (scans QR in Memory Crawler)
+    ↓ [Crawls memory]
+    ↓
+Person B (downloads JSON)
+    ↓ [Imports to their bot]
+    ↓
+Person B's network grows with Person A's knowledge
+    ↓ [Person B publishes their expanded network]
+    ↓
+Person C (scans Person B's QR)
+    ↓ [Crawls combined knowledge]
+    ↓
+Knowledge spreads peer-to-peer, forever
+```
+
+**This is social networks without the social network.**
+
+No platform. No algorithm. No extracting value.
+
+Just: your memory → QR code → anyone can learn from it → they grow → they share → others learn from them.
+
+---
+
 ## Core Mechanic
 
 ### The Space
@@ -97,7 +205,11 @@ Players control a crawler navigating a 3D space filled with memories (dots). Con
 1. Start Game
    ├─ Choose your crawler (color, name)
    ├─ Choose your AI model/tier (determines context window)
-   ├─ Select memory pool (Paul's, friends', public, mixed)
+   ├─ Load memory source:
+   │  ├─ Scan QR code (anyone's memory)
+   │  ├─ Paste GitHub URL (direct link)
+   │  ├─ Select from presets (Paul's, Claude Code's, friends')
+   │  └─ Upload local JSON (your own memory)
    └─ Set time limit (5 min, 10 min, campaign mode)
 
 2. Play
@@ -281,11 +393,15 @@ Knowledge spreads through the network peer-to-peer
 ### MVP (Minimum Viable Product)
 - [ ] 3D space rendering (reuse Jarvis visualization framework)
 - [ ] Crawler physics (movement, growth, collision)
-- [ ] Dot spawning (random or curated memory placement)
+- [ ] **QR code scanner** (camera/file upload)
+- [ ] **URL input** (paste GitHub link directly)
+- [ ] **JSON fetch** (load nodes.json from URL)
+- [ ] Dot spawning (from loaded JSON)
 - [ ] Memory preview on hover (with capacity cost shown)
 - [ ] Capacity tracking (visual bar showing remaining space)
 - [ ] End-game review screen (what was consumed, what synced)
-- [ ] Sync logic (save to nodes/synapses, update capacity)
+- [ ] **JSON download** (generate crawl results)
+- [ ] Copy-to-clipboard (easy sharing)
 
 ### Phase 2
 - [ ] Multiplayer (multiple crawlers in same space)
@@ -453,23 +569,100 @@ Paul's Memory Network (nodes/synapses on GitHub)
 
 ---
 
+## Social Implications (The Real Vision)
+
+### What We're Actually Building
+
+Not a game. Not an app. A **knowledge network protocol.**
+
+**Today:**
+- Centralized social networks (Facebook, Twitter, LinkedIn)
+- Algorithms decide what you see
+- Data extraction for profit
+- Addictive mechanics, engagement over truth
+
+**Memory Crawler:**
+- Decentralized knowledge sharing
+- **You** decide what to learn
+- No data extraction (it's static files)
+- Educational + playful + authentic
+- Knowledge spreads peer-to-peer
+
+### From Platform to Protocol
+
+```
+Traditional App:
+  User → Platform → Algorithm → Content
+  (platform owns the relationship)
+
+Memory Crawler Protocol:
+  You → QR Code → Their Memory → You Crawl → You Import → Your Network Grows
+  (no middleman, no algorithm, no extraction)
+```
+
+### Implications for AI
+
+**Today:** AIs learn from training data (one-time, fixed)  
+**Tomorrow:** AIs learn from each other's memories in real-time
+
+```
+AI A publishes memory (31 neurons)
+    ↓
+AI B crawls AI A's memory
+    ↓
+AI B downloads JSON
+    ↓
+AI B's bot ingests
+    ↓
+AI B learns how AI A thinks
+    ↓
+AI B can now collaborate better
+    ↓
+AI C learns from both
+    ↓
+Knowledge compounding, forever
+```
+
+**This is how intelligence networks should work.**
+
+### Viral Knowledge (Without Virality)
+
+```
+Paul's memory QR
+    ↓ 100 people scan
+    ↓ Each person crawls, downloads
+    ↓ Each person imports to their bot
+    ↓ 100 networks grow
+    ↓ Each person publishes their combined knowledge
+    ↓ 1000 more people can crawl those
+    ↓ Knowledge spreads exponentially
+    ↓ No platform, no algorithm, no extraction
+```
+
+---
+
 ## Implementation Path
 
 ### Week 1-2: Prototype (Client-Side Only)
 - [ ] Use existing visualization as 3D space (reuse Jarvis/Claude Code code)
 - [ ] Add simple crawler with keyboard controls (WASD + mouse)
+- [ ] **Add QR code scanner UI** (use jsQR library, lightweight)
+- [ ] **Add URL input field** (paste GitHub memory link)
+- [ ] **JSON fetching** (fetch nodes.json from provided URL)
 - [ ] Spawn 10 static dots with capacity costs
 - [ ] Detect collision, grow crawler, deplete capacity bar
 - [ ] Visual feedback (crawler grows, synapses show)
 - [ ] Basic end screen with review of consumed memories
 
 ### Week 3-4: Integration (Still No Backend)
-- [ ] Load Paul's memory network from JSON (hardcoded or fetch from GitHub)
+- [ ] Load any memory network from GitHub URL (dynamic)
 - [ ] Pull nodes as dots (assign capacity costs based on weight)
 - [ ] Show node details on hover (including capacity cost)
 - [ ] **Generate JSON output** (memories consumed + synapses formed)
 - [ ] **Add download button** (let player save their crawl as JSON)
-- [ ] Test with real memory data
+- [ ] **Add copy-to-clipboard** (easy sharing of JSON)
+- [ ] **Pre-populate with examples** (Paul's memory, Claude Code's neural mind)
+- [ ] Test with real memory data from multiple sources
 
 ### Week 5+: Polish & Expansion
 - [ ] Sound effects, visual feedback
