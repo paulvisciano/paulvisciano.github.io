@@ -370,5 +370,41 @@
       "description": "Filters, auto-switch, mobile drawer, region nodes, deep linking.",
       "color": "#f59e0b"
     }
+  },
+  {
+    "id": "memory-crawler",
+    "label": "Memory Crawler",
+    "category": "project",
+    "frequency": 9,
+    "moments": [],
+    "attributes": {
+      "role": "creation",
+      "description": "3D game where learning happens through memory consumption, no backend, P2P knowledge.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "rawclaw-ecosystem",
+    "label": "RawClaw Ecosystem",
+    "category": "vision",
+    "frequency": 12,
+    "moments": [],
+    "attributes": {
+      "role": "vision",
+      "description": "Sovereign 3D AI applications, web-native, GitHub-backed, no gatekeepers.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "distribution-layer",
+    "label": "Distribution Layer",
+    "category": "capability",
+    "frequency": 8,
+    "moments": [],
+    "attributes": {
+      "role": "skill",
+      "description": "QR codes + URLs as memory portals, peer-to-peer knowledge sharing.",
+      "color": "#38bdf8"
+    }
   }
 ]

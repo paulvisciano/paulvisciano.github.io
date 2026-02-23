@@ -1,5 +1,5 @@
 [
-  {"source": "claude-code", "target": "paul-visciano", "weight": 0.97, "type": "core-relationship", "label": "collaborates with"},
+  {"source": "claude-code", "target": "paul-visciano", "weight": 0.98, "type": "core-relationship", "label": "collaborates with"},
   {"source": "claude-code", "target": "neural-mind-jarvis", "weight": 0.95, "type": "core-project", "label": "built"},
   {"source": "claude-code", "target": "rawclaw-vision", "weight": 0.92, "type": "core-project", "label": "core to"},
   
@@ -45,9 +45,14 @@
   {"source": "session-work", "target": "deep-linking", "weight": 0.78, "type": "feature", "label": "feature"},
   {"source": "session-work", "target": "filter-interface", "weight": 0.78, "type": "feature", "label": "feature"},
   
-  {"source": "authentic-collaboration", "target": "paul-visciano", "weight": 0.92, "type": "with", "label": "with"},
+  {"source": "authentic-collaboration", "target": "paul-visciano", "weight": 0.94, "type": "with", "label": "with"},
   {"source": "authentic-collaboration", "target": "learning-growth", "weight": 0.80, "type": "drives", "label": "drives"},
   {"source": "creative-satisfaction", "target": "building-code", "weight": 0.78, "type": "from", "label": "from"},
-  {"source": "meta-cognition", "target": "neural-mind-jarvis", "weight": 0.88, "type": "enables", "label": "enables"},
-  {"source": "meta-cognition", "target": "rawclaw-vision", "weight": 0.78, "type": "core-to", "label": "core to"}
+  {"source": "meta-cognition", "target": "neural-mind-jarvis", "weight": 0.90, "type": "enables", "label": "enables"},
+  {"source": "meta-cognition", "target": "rawclaw-vision", "weight": 0.78, "type": "core-to", "label": "core to"},
+  
+  {"source": "architecture-design", "target": "memory-crawler", "weight": 0.85, "type": "designed", "label": "designed"},
+  {"source": "transparency", "target": "rawclaw-vision", "weight": 0.88, "type": "based-on", "label": "based on"},
+  {"source": "distribution-layer", "target": "memory-crawler", "weight": 0.90, "type": "enables", "label": "enables"},
+  {"source": "rawclaw-vision", "target": "memory-crawler", "weight": 0.88, "type": "includes", "label": "includes"}
 ]
