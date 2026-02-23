@@ -176,6 +176,69 @@
             .drawer-toggle-btn { display: flex; }
         }
         
+        .share-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .share-modal-overlay.is-open { display: flex; }
+        .share-modal {
+            background: #0f1a30;
+            border: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 12px;
+            max-width: 420px;
+            width: 100%;
+            max-height: 85vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.15);
+        }
+        .share-modal h3 { padding: 16px 20px 8px; color: #00ffff; font-size: 14px; margin: 0; }
+        .share-modal .share-preview {
+            padding: 12px 20px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            white-space: pre-wrap;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+        }
+        .share-modal .share-actions {
+            display: flex;
+            gap: 10px;
+            padding: 16px 20px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .share-modal .share-actions button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .share-modal .share-actions .btn-copy {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+        }
+        .share-modal .share-actions .btn-share {
+            background: linear-gradient(135deg, #0088ff, #00ffff);
+            color: #000;
+        }
+        .share-modal .share-actions .btn-close {
+            background: transparent;
+            color: #888;
+        }
+        
         .drawer-filters {
             display: flex;
             gap: 8px;
@@ -419,7 +482,7 @@
         </div>
         <p class="panel-status" id="status">—</p>
         <p class="panel-meta">
-            <span class="stat" id="count">0</span> <span class="desc">neurons</span>
+            <span class="stat" id="count">0</span> neurons · <span class="stat" id="synapseCount">0</span> synapses
         </p>
         <div>
             <button type="button" class="collapsible-trigger" id="howto-toggle" aria-expanded="false" aria-controls="howto-body">
@@ -454,6 +517,7 @@
             <button class="primary" onclick="walk()">⚡ Random Pulse</button>
             <button class="primary" onclick="clearSelection()">✕ Clear</button>
             <button class="primary" onclick="reset()">↻ Reset Mind</button>
+            <button class="primary" id="share-memory-btn" type="button">⎘ Share</button>
         </div>
         </div>
         <div class="panel-legend">
@@ -504,6 +568,18 @@
     <div style="position: fixed; bottom: 12px; left: 12px; font-size: 10px; color: #94a3b8; z-index: 20;">
         <div><a href="../latest/" style="color: #06b6d4; text-decoration: none; font-weight: bold;">↻ Latest</a></div>
         <div><a href="../claw/" style="color: #fbbf24; text-decoration: none; font-weight: bold;">⚙️ Claude Code</a></div>
+    </div>
+
+    <div id="share-modal-overlay" class="share-modal-overlay" aria-hidden="true">
+        <div class="share-modal" role="dialog" aria-labelledby="share-modal-title">
+            <h3 id="share-modal-title">Share — Paul's Neural Mind</h3>
+            <div class="share-preview" id="share-preview"></div>
+            <div class="share-actions">
+                <button type="button" class="btn-copy" id="share-modal-copy">Copy</button>
+                <button type="button" class="btn-share" id="share-modal-native">Share…</button>
+                <button type="button" class="btn-close" id="share-modal-close">Close</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -870,6 +946,7 @@
                 });
 
                 document.getElementById('count').textContent = nodes.length;
+                document.getElementById('synapseCount').textContent = edges.length;
                 document.getElementById('status').textContent = selected !== null ? `🧠 ${nodes[selected].name}` : '—';
 
                 step();
@@ -1297,6 +1374,91 @@
             showNodeDetails(null);
         };
 
+        const LIVE_MEMORY_URL = 'https://paulvisciano.github.io/memory/';
+        function isLocalhost() {
+            const h = window.location.hostname;
+            return h === 'localhost' || h === '127.0.0.1';
+        }
+        function getSharePayload() {
+            const lastSyncEl = document.getElementById('memory-version');
+            const lastSync = (lastSyncEl && lastSyncEl.getAttribute('data-last-sync')) || new Date().toISOString().slice(0, 10);
+            const n = nodes.length;
+            const s = edges.length;
+            const currentUrl = window.location.href;
+            const url = isLocalhost() ? LIVE_MEMORY_URL : currentUrl;
+            const title = "Paul's Memory — Neural Mind";
+            const shortBoot = [
+                "Paul's Memory is his interactive life archive: people, places, activities, emotions, and time, connected as a neural graph.",
+                "Part of his public memory at paulvisciano.github.io/memory. View live, explore nodes, read stories. The memory is alive."
+            ].join(' ');
+            const lines = [
+                `Paul's Neural Mind (Paul Visciano's memory graph)`,
+                `Last synced: ${lastSync} · ${n} neurons · ${s} synapses`,
+                '',
+                shortBoot,
+                '',
+                url
+            ];
+            if (isLocalhost()) {
+                lines.splice(lines.length - 1, 0, `Running locally: ${currentUrl}`, '');
+            }
+            const text = lines.join('\n');
+            return { title, text, url, lastSync, n, s, shortBoot, currentUrl, isLocal: isLocalhost() };
+        }
+        function shareMemory() {
+            const { title, text, url, lastSync, n, s, shortBoot, currentUrl, isLocal } = getSharePayload();
+            const overlay = document.getElementById('share-modal-overlay');
+            const preview = document.getElementById('share-preview');
+            const previewLines = [
+                `Paul's Neural Mind (Paul Visciano's memory graph)`,
+                ``,
+                `Last synced: ${lastSync}`,
+                `Size: ${n} neurons · ${s} synapses`,
+                ``,
+                shortBoot,
+                ``,
+                url
+            ];
+            if (isLocal) {
+                previewLines.splice(previewLines.length - 1, 0, `Running locally: ${currentUrl}`, '');
+            }
+            preview.textContent = previewLines.join('\n');
+            overlay.classList.add('is-open');
+            overlay.setAttribute('aria-hidden', 'false');
+        }
+        document.getElementById('share-modal-close').addEventListener('click', () => {
+            document.getElementById('share-modal-overlay').classList.remove('is-open');
+            document.getElementById('share-modal-overlay').setAttribute('aria-hidden', 'true');
+        });
+        document.getElementById('share-modal-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'share-modal-overlay') {
+                document.getElementById('share-modal-overlay').classList.remove('is-open');
+                document.getElementById('share-modal-overlay').setAttribute('aria-hidden', 'true');
+            }
+        });
+        document.getElementById('share-modal-copy').addEventListener('click', () => {
+            const { text } = getSharePayload();
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('share-modal-copy');
+                const t = btn.textContent; btn.textContent = '✓ Copied';
+                setTimeout(() => { btn.textContent = t; }, 2000);
+            }).catch(() => alert('Share text copy failed.'));
+        });
+        document.getElementById('share-modal-native').addEventListener('click', () => {
+            const { title, text, url } = getSharePayload();
+            if (navigator.share) {
+                navigator.share({ title, text, url }).then(() => {
+                    document.getElementById('share-modal-overlay').classList.remove('is-open');
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(text).then(() => {
+                    document.getElementById('share-modal-copy').textContent = '✓ Copied';
+                    setTimeout(() => { document.getElementById('share-modal-overlay').classList.remove('is-open'); }, 500);
+                });
+            }
+        });
+        document.getElementById('share-memory-btn').addEventListener('click', shareMemory);
+
         // Start rendering immediately (will display as data loads)
         render();
         
@@ -1315,7 +1477,7 @@
         // Initial selection (hash vs random) is handled by the single loadGraphData().then() above
     </script>
     <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
-    <div style="position: fixed; bottom: 10px; left: 10px; font-size: 8px; color: #00ff00; opacity: 0.3; pointer-events: none; z-index: 1;">
+    <div id="memory-version" data-last-sync="2026-02-22" style="position: fixed; bottom: 10px; left: 10px; font-size: 8px; color: #00ff00; opacity: 0.3; pointer-events: none; z-index: 1;">
         v:2026-02-22-15:31:58
     </div>
 </body>
