@@ -83,43 +83,98 @@
             text-shadow: none;
         }
         
-        /* Mobile Bottom Drawer */
+        /* Mobile bottom sheet (Material-style) */
+        .drawer-scrim {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 18;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .drawer-scrim.is-open {
+            display: block;
+            opacity: 1;
+        }
+        @media (min-width: 769px) {
+            .drawer-scrim { display: none !important; }
+        }
+        
         .bottom-drawer {
             display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(15, 26, 48, 0.98);
-            border-top: 2px solid rgba(0, 255, 255, 0.4);
-            border-radius: 20px 20px 0 0;
-            max-height: 70vh;
+            background: #0f1a30;
+            border-radius: 24px 24px 0 0;
+            height: 50vh;
+            max-height: 50vh;
             z-index: 20;
             flex-direction: column;
-            animation: slideUp 0.3s ease-out;
-            touch-action: none;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
         }
         
         .bottom-drawer.open {
             display: flex;
+            transform: translateY(0);
         }
         
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
+        @media (max-width: 768px) {
+            .bottom-drawer {
+                display: flex;
+                transform: translateY(calc(100% - 48px));
+                height: 50vh;
+                max-height: 50vh;
             }
-            to {
+            .bottom-drawer.open {
                 transform: translateY(0);
             }
+            /* No duplicate filters in sheet – use top filter bar only */
+            .bottom-drawer .drawer-filters {
+                display: none;
+            }
         }
         
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 16px 12px;
+            flex-shrink: 0;
+            position: relative;
+        }
         .drawer-handle {
+            width: 36px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        .drawer-toggle-btn {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
             width: 40px;
-            height: 5px;
-            background: rgba(0, 255, 255, 0.3);
-            border-radius: 3px;
-            margin: 12px auto 16px;
-            cursor: grab;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #00ffff;
+            font-size: 18px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .drawer-toggle-btn:hover { background: rgba(0, 255, 255, 0.2); }
+        @media (max-width: 768px) {
+            .drawer-toggle-btn { display: flex; }
         }
         
         .drawer-filters {
@@ -132,13 +187,24 @@
         
         .drawer-content {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
-            padding: 16px;
+            overflow-x: hidden;
+            padding: 0 20px 24px;
+            -webkit-overflow-scrolling: touch;
         }
         
         #drawerDetails {
-            color: #00ffff;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            line-height: 1.5;
         }
+        #drawerDetails .drawer-detail-name { margin-bottom: 8px; }
+        #drawerDetails .drawer-detail-name img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 8px; }
+        #drawerDetails .drawer-detail-type { font-size: 12px; color: #00ffff; margin: 4px 0; }
+        #drawerDetails .drawer-detail-desc { margin: 8px 0; color: rgba(255, 255, 255, 0.7); line-height: 1.5; }
+        #drawerDetails .drawer-detail-connections { font-size: 12px; color: rgba(255, 255, 255, 0.8); }
+        #drawerDetails .drawer-detail-connections div { margin: 4px 0; }
         
         /* Show drawer on mobile only */
         @media (max-width: 768px) {
@@ -417,10 +483,14 @@
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
     
-    <!-- Mobile Bottom Drawer -->
-    <div id="bottomDrawer" class="bottom-drawer">
-        <div class="drawer-handle"></div>
-        <div id="drawerFilters" class="drawer-filters">
+    <!-- Mobile bottom sheet: scrim (tap to close) + sheet -->
+    <div id="drawerScrim" class="drawer-scrim" aria-hidden="true"></div>
+    <div id="bottomDrawer" class="bottom-drawer" role="dialog" aria-label="Node details">
+        <div class="drawer-header">
+            <div class="drawer-handle" aria-hidden="true"></div>
+            <button type="button" id="drawer-toggle" class="drawer-toggle-btn" aria-label="Open details">▲</button>
+        </div>
+        <div id="drawerFilters" class="drawer-filters" aria-hidden="true">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="value">Values</button>
             <button class="filter-btn" data-filter="capability">Capabilities</button>
@@ -447,12 +517,13 @@
         let panelOpen = true;
 
         function getCanvasWidth() {
+            if (window.innerWidth <= 768) return window.innerWidth;
             return panelOpen ? window.innerWidth - PANEL_WIDTH : window.innerWidth;
         }
         function resizeCanvas() {
             canvas.width = getCanvasWidth();
             canvas.height = window.innerHeight;
-            if (canvas.style) canvas.style.marginRight = panelOpen ? PANEL_WIDTH + 'px' : '0';
+            if (canvas.style) canvas.style.marginRight = window.innerWidth <= 768 ? '0' : (panelOpen ? PANEL_WIDTH + 'px' : '0');
         }
         function togglePanel() {
             panelOpen = !panelOpen;
@@ -825,41 +896,37 @@
             });
         });
         
-        // Mobile drawer functionality
-        let drawerStartY = 0;
+        // Mobile drawer: open/close via button only (no swipe)
         let drawerOpen = false;
-        
         const drawer = document.getElementById('bottomDrawer');
-        const drawerHandle = document.querySelector('.drawer-handle');
         
-        drawerHandle.addEventListener('mousedown', (e) => {
-            drawerStartY = e.clientY;
-        });
-        
-        drawerHandle.addEventListener('touchstart', (e) => {
-            drawerStartY = e.touches[0].clientY;
-        });
-        
-        document.addEventListener('mousemove', (e) => {
-            if (drawerStartY && drawerOpen) {
-                const delta = e.clientY - drawerStartY;
-                if (delta > 100) {
-                    drawer.classList.remove('open');
-                    drawerOpen = false;
-                    drawerStartY = 0;
-                }
+        function setDrawerOpen(open) {
+            drawerOpen = open;
+            const canvas = document.getElementById('canvas');
+            const btn = document.getElementById('drawer-toggle');
+            const scrim = document.getElementById('drawerScrim');
+            if (open) {
+                drawer.classList.add('open');
+                drawer.style.transform = '';
+                if (canvas) canvas.classList.add('drawer-open');
+                if (btn) { btn.textContent = '✕'; btn.setAttribute('aria-label', 'Close'); }
+                if (scrim) { scrim.classList.add('is-open'); scrim.setAttribute('aria-hidden', 'false'); }
+            } else {
+                drawer.classList.remove('open');
+                drawer.style.transform = '';
+                if (canvas) canvas.classList.remove('drawer-open');
+                if (btn) { btn.textContent = '▲'; btn.setAttribute('aria-label', 'Open details'); }
+                if (scrim) { scrim.classList.remove('is-open'); scrim.setAttribute('aria-hidden', 'true'); }
             }
-        });
+        }
         
-        document.addEventListener('touchmove', (e) => {
-            if (drawerStartY && drawerOpen) {
-                const delta = e.touches[0].clientY - drawerStartY;
-                if (delta > 100) {
-                    drawer.classList.remove('open');
-                    drawerOpen = false;
-                    drawerStartY = 0;
-                }
-            }
+        document.getElementById('drawer-toggle').addEventListener('click', () => {
+            if (window.innerWidth > 768) return;
+            setDrawerOpen(!drawerOpen);
+        });
+        document.getElementById('drawerScrim').addEventListener('click', () => {
+            if (window.innerWidth > 768) return;
+            setDrawerOpen(false);
         });
         
         // Filter buttons in drawer
@@ -888,27 +955,28 @@
                     
                     // On mobile: open drawer
                     if (window.innerWidth <= 768) {
-                        drawer.classList.add('open');
-                        drawerOpen = true;
+                        setDrawerOpen(true);
                         showNodeDetailsInDrawer(selectedNode);
                     }
                 }
             }
         });
         
-        // Helper function to show details in drawer
+        // Helper function to show details in drawer (same info as desktop panel)
         function showNodeDetailsInDrawer(node) {
-            const content = document.getElementById('drawerDetails');
-            const detailPanel = document.getElementById('detailPanel');
-            
-            // Copy the content from detail panel or regenerate
+            if (!node) return;
             showNodeDetails(node);
-            
-            // Populate drawer with node info
+            const content = document.getElementById('drawerDetails');
+            const detailName = document.getElementById('detailName');
+            const detailType = document.getElementById('detailType');
+            const detailDesc = document.getElementById('detailDesc');
+            const detailConnections = document.getElementById('detailConnections');
             content.innerHTML = `
-                <h2>${node.name}</h2>
-                <p style="font-size: 12px; color: #888; margin-top: 8px;">Type: ${node.type}</p>
-                <p style="margin-top: 12px; line-height: 1.6;">${node.desc || 'No description'}</p>
+                <div class="drawer-detail-name">${detailName.innerHTML}</div>
+                <p class="drawer-detail-type">${detailType.textContent}</p>
+                <p class="drawer-detail-desc">${detailDesc.textContent || ''}</p>
+                <p style="color: #00ffff; font-weight: bold; margin-top: 12px; margin-bottom: 6px;">Connected to</p>
+                <div class="drawer-detail-connections">${detailConnections.innerHTML}</div>
             `;
         }
 
@@ -928,8 +996,7 @@
                         if (allBtn) allBtn.classList.add('active');
                     }
                     if (window.innerWidth <= 768) {
-                        const dr = document.getElementById('bottomDrawer');
-                        if (dr) { dr.classList.add('open'); drawerOpen = true; }
+                        setDrawerOpen(true);
                         showNodeDetailsInDrawer(nodes[selected]);
                     }
                 }
@@ -954,8 +1021,7 @@
                         if (allBtn) allBtn.classList.add('active');
                     }
                     if (window.innerWidth <= 768) {
-                        const dr = document.getElementById('bottomDrawer');
-                        if (dr) { dr.classList.add('open'); drawerOpen = true; }
+                        setDrawerOpen(true);
                         showNodeDetailsInDrawer(nodes[selected]);
                     }
                 } else {
@@ -1247,8 +1313,7 @@
             window.location.hash = nodes[selected].idKey;
             openDrawer();
             if (window.innerWidth <= 768) {
-                const dr = document.getElementById('bottomDrawer');
-                if (dr) { dr.classList.add('open'); drawerOpen = true; }
+                setDrawerOpen(true);
                 showNodeDetailsInDrawer(nodes[selected]);
             }
         };
