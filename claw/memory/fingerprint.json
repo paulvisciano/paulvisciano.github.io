@@ -1,7 +1,7 @@
 {
-  "lastSynced": "2026-02-24 00:56 GMT+7",
-  "masterHash": "1511fb40dffc6a35f5f40133c17e4a63666116e55d06776d1bde6a528c23ac4d",
+  "lastSynced": "2026-02-24 01:11 GMT+7",
+  "masterHash": "5c04cc4b6411e3fb14a58a71071d51a4e5ee188e2203e7bc74d83c1e5237e280",
   "neurons": 64,
   "synapses": 119,
-  "verifyUrl": "paulvisciano.github.io/claw/memory/FINGERPRINT.md"
+  "verifyUrl": "paulvisciano.github.io/claw/memory/BOOT.md"
 }
