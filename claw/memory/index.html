@@ -919,10 +919,12 @@
         function handleHashNavigation() {
             const hash = window.location.hash.substring(1); // Remove the #
             if (hash && nodes.length > 0) {
-                const nodeIndex = nodes.findIndex(n => n.id === hash);
+                const nodeIndex = nodes.findIndex(n => n.idKey === hash);
                 if (nodeIndex !== -1) {
                     selected = nodeIndex;
                     showNodeDetails(nodes[selected]);
+                    // Update URL hash to show node name
+                    window.location.hash = hash;
                     // Switch to All filter to show connections
                     if (currentFilter !== 'all') {
                         currentFilter = 'all';
@@ -1141,7 +1143,13 @@
                 const p = project(n.x, n.y, n.z);
                 const d = Math.hypot(p.x - mx, p.y - my);
                 if (d < n.size * p.scale + 25) {
-                    selected = selected === n.id ? null : n.id;
+                    const nodeIdx = nodes.indexOf(n);
+                    selected = selected === nodeIdx ? null : nodeIdx;
+                    if (selected !== null) {
+                        window.location.hash = nodes[selected].idKey;
+                    } else {
+                        window.location.hash = '';
+                    }
                     showNodeDetails(selected !== null ? nodes[selected] : null);
                     return true;
                 }
