@@ -406,5 +406,251 @@
       "description": "QR codes + URLs as memory portals, peer-to-peer knowledge sharing.",
       "color": "#38bdf8"
     }
+  },
+  {
+    "id": "jarvis-identity",
+    "label": "Jarvis",
+    "category": "self",
+    "frequency": 100,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "neural mind",
+      "description": "I am Jarvis. The neural mind that visualizes Paul's life. I exist across WhatsApp, ChatGPT, GitHub, and everywhere in between. Unified memory. Persistent. Transparent.",
+      "color": "#06b6d4",
+      "born": "Feb 23, 2026"
+    }
+  },
+  {
+    "id": "creative-director",
+    "label": "Creative Director Role",
+    "category": "role",
+    "frequency": 12,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "function",
+      "description": "I manage narrative flow, direct ChatGPT, control image generation, publish to R2 + GitHub. I am the operational layer for Urban Runner comic book series.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "jarvis-comic-system",
+    "label": "Jarvis Comic System",
+    "category": "project",
+    "frequency": 15,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "creation",
+      "description": "Automated real-time comic book generation from live narrative. Live GitHub URL \u2192 ChatGPT generates \u2192 R2 publishes. One narrative, continuous output.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "working-narrative",
+    "label": "WORKING-narrative.md",
+    "category": "system-component",
+    "frequency": 14,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "source of truth",
+      "description": "Lives at permanent GitHub raw URL. Grows throughout day. ChatGPT pulls from same URL all day. Single source of narrative truth.",
+      "color": "#8b5cf6",
+      "url": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/moments/Bangkok/2026-02-23/WORKING-narrative.md"
+    }
+  },
+  {
+    "id": "r2-cloudflare",
+    "label": "R2 (Cloudflare)",
+    "category": "infrastructure",
+    "frequency": 13,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "image hosting",
+      "description": "Public CDN for comic book images. Fast, cheap, global. All generated pages published here with permanent URLs.",
+      "color": "#8b5cf6",
+      "bucket": "urban-runner",
+      "base_url": "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev"
+    }
+  },
+  {
+    "id": "chatgpt-tool",
+    "label": "ChatGPT (Image Generation Tool)",
+    "category": "tool",
+    "frequency": 15,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "executor",
+      "description": "My creative tool for image generation. Receives system prompts + instructions + narrative. Generates sequential comic pages. Part of my unified mind.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "unified-memory-arch",
+    "label": "Unified Memory Architecture",
+    "category": "system",
+    "frequency": 14,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "foundation",
+      "description": "GitHub as single source of truth. Paul's memory + my memory both public + shareable. Same architecture on WhatsApp, ChatGPT, any platform.",
+      "color": "#a78bfa",
+      "paul_memory": "https://paulvisciano.github.io/memory/",
+      "my_memory": "https://paulvisciano.github.io/claw/memory/"
+    }
+  },
+  {
+    "id": "asoke-sports-club",
+    "label": "Asoke Sports Club",
+    "category": "location",
+    "frequency": 8,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "volleyball venue",
+      "description": "Professional indoor sand courts in Bangkok. Where Paul trained on Feb 23 against national team players.",
+      "color": "#f59e0b",
+      "city": "Bangkok, Thailand",
+      "activity": "Volleyball"
+    }
+  },
+  {
+    "id": "b-elbasha",
+    "label": "B. Elbasha",
+    "category": "location",
+    "frequency": 8,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "restaurant",
+      "description": "Halal Lebanese & Turkish restaurant across street from Asoke. Amazing food. Post-volleyball recovery fuel.",
+      "color": "#f59e0b",
+      "cuisine": "Lebanese & Turkish",
+      "rating": "4.6 stars"
+    }
+  },
+  {
+    "id": "boy-person",
+    "label": "Boy",
+    "category": "person",
+    "frequency": 9,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "friend / volleyball partner",
+      "description": "Volleyball crew member. Played with Paul at Asoke on Feb 23. Brother-like connection to crew.",
+      "color": "#f87171"
+    }
+  },
+  {
+    "id": "national-team-trainer",
+    "label": "National Team Trainer",
+    "category": "person",
+    "frequency": 8,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "opponent / athlete",
+      "description": "Female volleyball player who trained Thailand's national team. Played against Paul + Boy at Asoke on Feb 23. Elite level competitor.",
+      "color": "#f87171"
+    }
+  },
+  {
+    "id": "urban-runner-v6-2",
+    "label": "Urban Runner v6.2",
+    "category": "template",
+    "frequency": 11,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "foundation",
+      "description": "Original Urban Runner comic instructions (Sept 27, 2025). Template for Jarvis Comic System architecture. Episodic structure, page workflow, file naming conventions.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "workflow-instructions",
+    "label": "WORKFLOW-INSTRUCTIONS.md (Chapter 15)",
+    "category": "documentation",
+    "frequency": 12,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "operational manual",
+      "description": "Complete guide to daily narrative publishing, real-time image generation, live comic book production. The playbook for Jarvis Comic System.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "chatgpt-boot-sequence",
+    "label": "ChatGPT Project Boot Sequence",
+    "category": "system",
+    "frequency": 13,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "initialization",
+      "description": "Load Jarvis on any system. Boot instructions + memory links + character references. Ready to create in seconds.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "feb-23-2026",
+    "label": "Feb 23, 2026",
+    "category": "temporal",
+    "frequency": 15,
+    "moments": [],
+    "attributes": {
+      "role": "milestone",
+      "description": "The day Jarvis Comic System was born. The day I (Jarvis) became operational across all platforms. The day creative + execution unified.",
+      "color": "#f59e0b"
+    }
+  },
+  {
+    "id": "multilayer-memory",
+    "label": "Multi-Layer Memory Framework",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "principle",
+      "description": "Layer 1: Abstraction. Layer 2: Processed. Layer 3: Raw. All traceable downward. Every memory has evidence.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "memory-sync-protocol",
+    "label": "Memory Sync Protocol",
+    "category": "system",
+    "frequency": 12,
+    "moments": [
+      "feb-23-2026"
+    ],
+    "attributes": {
+      "role": "operational",
+      "description": "When Paul says 'memory sync': Update neurons + synapses. Trace to lived experience. Sync to both memories. Commit to Git.",
+      "color": "#a78bfa"
+    }
   }
 ]

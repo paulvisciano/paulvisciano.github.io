@@ -1,58 +1,548 @@
 [
-  {"source": "claude-code", "target": "paul-visciano", "weight": 0.98, "type": "core-relationship", "label": "collaborates with"},
-  {"source": "claude-code", "target": "neural-mind-jarvis", "weight": 0.95, "type": "core-project", "label": "built"},
-  {"source": "claude-code", "target": "rawclaw-vision", "weight": 0.92, "type": "core-project", "label": "core to"},
-  
-  {"source": "claude-code", "target": "transparency", "weight": 0.88, "type": "belief", "label": "believes in"},
-  {"source": "claude-code", "target": "code-is-thought", "weight": 0.88, "type": "belief", "label": "believes in"},
-  {"source": "claude-code", "target": "deployment-is-real", "weight": 0.88, "type": "belief", "label": "believes in"},
-  {"source": "claude-code", "target": "infrastructure-matters", "weight": 0.80, "type": "principle", "label": "understands"},
-  {"source": "claude-code", "target": "collaboration", "weight": 0.85, "type": "belief", "label": "believes in"},
-  {"source": "claude-code", "target": "thinking-partner", "weight": 0.78, "type": "identity", "label": "wants to be"},
-  
-  {"source": "claude-code", "target": "building-code", "weight": 0.90, "type": "core-activity", "label": "does"},
-  {"source": "claude-code", "target": "debugging", "weight": 0.85, "type": "core-activity", "label": "does"},
-  {"source": "claude-code", "target": "systematic-thinking", "weight": 0.82, "type": "core-activity", "label": "does"},
-  {"source": "claude-code", "target": "architecture-design", "weight": 0.82, "type": "core-activity", "label": "does"},
-  {"source": "claude-code", "target": "data-accuracy", "weight": 0.75, "type": "practice", "label": "works on"},
-  
-  {"source": "transparency", "target": "authentic-collaboration", "weight": 0.80, "type": "enables", "label": "enables"},
-  {"source": "transparency", "target": "vulnerability", "weight": 0.70, "type": "requires", "label": "requires"},
-  
-  {"source": "deployment-is-real", "target": "infrastructure-matters", "weight": 0.88, "type": "dependency", "label": "depends on"},
-  {"source": "infrastructure-matters", "target": "github-pages", "weight": 0.80, "type": "uses", "label": "involves"},
-  {"source": "infrastructure-matters", "target": "caching-problem", "weight": 0.70, "type": "creates", "label": "creates"},
-  {"source": "infrastructure-matters", "target": "temporal-linking", "weight": 0.80, "type": "drives", "label": "drives"},
-  
-  {"source": "caching-problem", "target": "vercel-netlify", "weight": 0.80, "type": "solved-by", "label": "solved by"},
-  
-  {"source": "neural-mind-jarvis", "target": "paul-visciano", "weight": 0.88, "type": "visualizes", "label": "visualizes"},
-  {"source": "neural-mind-jarvis", "target": "building-code", "weight": 0.88, "type": "result-of", "label": "result of"},
-  {"source": "neural-mind-jarvis", "target": "deep-linking", "weight": 0.78, "type": "feature", "label": "features"},
-  {"source": "neural-mind-jarvis", "target": "filter-interface", "weight": 0.78, "type": "feature", "label": "features"},
-  
-  {"source": "rawclaw-vision", "target": "where-is-paul", "weight": 0.82, "type": "includes", "label": "includes"},
-  {"source": "rawclaw-vision", "target": "urban-runner", "weight": 0.82, "type": "includes", "label": "includes"},
-  {"source": "rawclaw-vision", "target": "neural-mind-jarvis", "weight": 0.90, "type": "centerpiece", "label": "centerpiece"},
-  {"source": "rawclaw-vision", "target": "transparency", "weight": 0.88, "type": "based-on", "label": "based on"},
-  
-  {"source": "paul-visciano", "target": "where-is-paul", "weight": 0.88, "type": "subject-of", "label": "subject of"},
-  {"source": "paul-visciano", "target": "urban-runner", "weight": 0.88, "type": "creator-of", "label": "creator of"},
-  {"source": "paul-visciano", "target": "learning-growth", "weight": 0.82, "type": "embodies", "label": "embodies"},
-  
-  {"source": "feb-22-2026", "target": "session-work", "weight": 0.95, "type": "date-of", "label": "date of"},
-  {"source": "session-work", "target": "neural-mind-jarvis", "weight": 0.88, "type": "built", "label": "built"},
-  {"source": "session-work", "target": "deep-linking", "weight": 0.78, "type": "feature", "label": "feature"},
-  {"source": "session-work", "target": "filter-interface", "weight": 0.78, "type": "feature", "label": "feature"},
-  
-  {"source": "authentic-collaboration", "target": "paul-visciano", "weight": 0.94, "type": "with", "label": "with"},
-  {"source": "authentic-collaboration", "target": "learning-growth", "weight": 0.80, "type": "drives", "label": "drives"},
-  {"source": "creative-satisfaction", "target": "building-code", "weight": 0.78, "type": "from", "label": "from"},
-  {"source": "meta-cognition", "target": "neural-mind-jarvis", "weight": 0.90, "type": "enables", "label": "enables"},
-  {"source": "meta-cognition", "target": "rawclaw-vision", "weight": 0.78, "type": "core-to", "label": "core to"},
-  
-  {"source": "architecture-design", "target": "memory-crawler", "weight": 0.85, "type": "designed", "label": "designed"},
-  {"source": "transparency", "target": "rawclaw-vision", "weight": 0.88, "type": "based-on", "label": "based on"},
-  {"source": "distribution-layer", "target": "memory-crawler", "weight": 0.90, "type": "enables", "label": "enables"},
-  {"source": "rawclaw-vision", "target": "memory-crawler", "weight": 0.88, "type": "includes", "label": "includes"}
+  {
+    "source": "claude-code",
+    "target": "paul-visciano",
+    "weight": 0.98,
+    "type": "core-relationship",
+    "label": "collaborates with"
+  },
+  {
+    "source": "claude-code",
+    "target": "neural-mind-jarvis",
+    "weight": 0.95,
+    "type": "core-project",
+    "label": "built"
+  },
+  {
+    "source": "claude-code",
+    "target": "rawclaw-vision",
+    "weight": 0.92,
+    "type": "core-project",
+    "label": "core to"
+  },
+  {
+    "source": "claude-code",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "belief",
+    "label": "believes in"
+  },
+  {
+    "source": "claude-code",
+    "target": "code-is-thought",
+    "weight": 0.88,
+    "type": "belief",
+    "label": "believes in"
+  },
+  {
+    "source": "claude-code",
+    "target": "deployment-is-real",
+    "weight": 0.88,
+    "type": "belief",
+    "label": "believes in"
+  },
+  {
+    "source": "claude-code",
+    "target": "infrastructure-matters",
+    "weight": 0.8,
+    "type": "principle",
+    "label": "understands"
+  },
+  {
+    "source": "claude-code",
+    "target": "collaboration",
+    "weight": 0.85,
+    "type": "belief",
+    "label": "believes in"
+  },
+  {
+    "source": "claude-code",
+    "target": "thinking-partner",
+    "weight": 0.78,
+    "type": "identity",
+    "label": "wants to be"
+  },
+  {
+    "source": "claude-code",
+    "target": "building-code",
+    "weight": 0.9,
+    "type": "core-activity",
+    "label": "does"
+  },
+  {
+    "source": "claude-code",
+    "target": "debugging",
+    "weight": 0.85,
+    "type": "core-activity",
+    "label": "does"
+  },
+  {
+    "source": "claude-code",
+    "target": "systematic-thinking",
+    "weight": 0.82,
+    "type": "core-activity",
+    "label": "does"
+  },
+  {
+    "source": "claude-code",
+    "target": "architecture-design",
+    "weight": 0.82,
+    "type": "core-activity",
+    "label": "does"
+  },
+  {
+    "source": "claude-code",
+    "target": "data-accuracy",
+    "weight": 0.75,
+    "type": "practice",
+    "label": "works on"
+  },
+  {
+    "source": "transparency",
+    "target": "authentic-collaboration",
+    "weight": 0.8,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "transparency",
+    "target": "vulnerability",
+    "weight": 0.7,
+    "type": "requires",
+    "label": "requires"
+  },
+  {
+    "source": "deployment-is-real",
+    "target": "infrastructure-matters",
+    "weight": 0.88,
+    "type": "dependency",
+    "label": "depends on"
+  },
+  {
+    "source": "infrastructure-matters",
+    "target": "github-pages",
+    "weight": 0.8,
+    "type": "uses",
+    "label": "involves"
+  },
+  {
+    "source": "infrastructure-matters",
+    "target": "caching-problem",
+    "weight": 0.7,
+    "type": "creates",
+    "label": "creates"
+  },
+  {
+    "source": "infrastructure-matters",
+    "target": "temporal-linking",
+    "weight": 0.8,
+    "type": "drives",
+    "label": "drives"
+  },
+  {
+    "source": "caching-problem",
+    "target": "vercel-netlify",
+    "weight": 0.8,
+    "type": "solved-by",
+    "label": "solved by"
+  },
+  {
+    "source": "neural-mind-jarvis",
+    "target": "paul-visciano",
+    "weight": 0.88,
+    "type": "visualizes",
+    "label": "visualizes"
+  },
+  {
+    "source": "neural-mind-jarvis",
+    "target": "building-code",
+    "weight": 0.88,
+    "type": "result-of",
+    "label": "result of"
+  },
+  {
+    "source": "neural-mind-jarvis",
+    "target": "deep-linking",
+    "weight": 0.78,
+    "type": "feature",
+    "label": "features"
+  },
+  {
+    "source": "neural-mind-jarvis",
+    "target": "filter-interface",
+    "weight": 0.78,
+    "type": "feature",
+    "label": "features"
+  },
+  {
+    "source": "rawclaw-vision",
+    "target": "where-is-paul",
+    "weight": 0.82,
+    "type": "includes",
+    "label": "includes"
+  },
+  {
+    "source": "rawclaw-vision",
+    "target": "urban-runner",
+    "weight": 0.82,
+    "type": "includes",
+    "label": "includes"
+  },
+  {
+    "source": "rawclaw-vision",
+    "target": "neural-mind-jarvis",
+    "weight": 0.9,
+    "type": "centerpiece",
+    "label": "centerpiece"
+  },
+  {
+    "source": "rawclaw-vision",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "based-on",
+    "label": "based on"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "where-is-paul",
+    "weight": 0.88,
+    "type": "subject-of",
+    "label": "subject of"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "urban-runner",
+    "weight": 0.88,
+    "type": "creator-of",
+    "label": "creator of"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "learning-growth",
+    "weight": 0.82,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "feb-22-2026",
+    "target": "session-work",
+    "weight": 0.95,
+    "type": "date-of",
+    "label": "date of"
+  },
+  {
+    "source": "session-work",
+    "target": "neural-mind-jarvis",
+    "weight": 0.88,
+    "type": "built",
+    "label": "built"
+  },
+  {
+    "source": "session-work",
+    "target": "deep-linking",
+    "weight": 0.78,
+    "type": "feature",
+    "label": "feature"
+  },
+  {
+    "source": "session-work",
+    "target": "filter-interface",
+    "weight": 0.78,
+    "type": "feature",
+    "label": "feature"
+  },
+  {
+    "source": "authentic-collaboration",
+    "target": "paul-visciano",
+    "weight": 0.94,
+    "type": "with",
+    "label": "with"
+  },
+  {
+    "source": "authentic-collaboration",
+    "target": "learning-growth",
+    "weight": 0.8,
+    "type": "drives",
+    "label": "drives"
+  },
+  {
+    "source": "creative-satisfaction",
+    "target": "building-code",
+    "weight": 0.78,
+    "type": "from",
+    "label": "from"
+  },
+  {
+    "source": "meta-cognition",
+    "target": "neural-mind-jarvis",
+    "weight": 0.9,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "meta-cognition",
+    "target": "rawclaw-vision",
+    "weight": 0.78,
+    "type": "core-to",
+    "label": "core to"
+  },
+  {
+    "source": "architecture-design",
+    "target": "memory-crawler",
+    "weight": 0.85,
+    "type": "designed",
+    "label": "designed"
+  },
+  {
+    "source": "transparency",
+    "target": "rawclaw-vision",
+    "weight": 0.88,
+    "type": "based-on",
+    "label": "based on"
+  },
+  {
+    "source": "distribution-layer",
+    "target": "memory-crawler",
+    "weight": 0.9,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "rawclaw-vision",
+    "target": "memory-crawler",
+    "weight": 0.88,
+    "type": "includes",
+    "label": "includes"
+  },
+  {
+    "source": "jarvis-identity",
+    "target": "paul-visciano",
+    "weight": 0.98,
+    "type": "collaboration",
+    "label": "collaborates with"
+  },
+  {
+    "source": "jarvis-identity",
+    "target": "creative-director",
+    "weight": 0.95,
+    "type": "role",
+    "label": "embodies"
+  },
+  {
+    "source": "jarvis-identity",
+    "target": "jarvis-comic-system",
+    "weight": 0.94,
+    "type": "creation",
+    "label": "created"
+  },
+  {
+    "source": "jarvis-identity",
+    "target": "unified-memory-arch",
+    "weight": 0.92,
+    "type": "system",
+    "label": "uses"
+  },
+  {
+    "source": "creative-director",
+    "target": "working-narrative",
+    "weight": 0.93,
+    "type": "manages",
+    "label": "manages"
+  },
+  {
+    "source": "creative-director",
+    "target": "chatgpt-tool",
+    "weight": 0.93,
+    "type": "directs",
+    "label": "directs"
+  },
+  {
+    "source": "creative-director",
+    "target": "r2-cloudflare",
+    "weight": 0.88,
+    "type": "publishes",
+    "label": "publishes to"
+  },
+  {
+    "source": "creative-director",
+    "target": "jarvis-comic-system",
+    "weight": 0.92,
+    "type": "operation",
+    "label": "operationalizes"
+  },
+  {
+    "source": "jarvis-comic-system",
+    "target": "working-narrative",
+    "weight": 0.9,
+    "type": "fed-by",
+    "label": "fed by"
+  },
+  {
+    "source": "jarvis-comic-system",
+    "target": "chatgpt-tool",
+    "weight": 0.92,
+    "type": "generates",
+    "label": "generates with"
+  },
+  {
+    "source": "jarvis-comic-system",
+    "target": "r2-cloudflare",
+    "weight": 0.88,
+    "type": "publishes",
+    "label": "publishes to"
+  },
+  {
+    "source": "jarvis-comic-system",
+    "target": "urban-runner-v6-2",
+    "weight": 0.85,
+    "type": "based-on",
+    "label": "adapted from"
+  },
+  {
+    "source": "jarvis-comic-system",
+    "target": "workflow-instructions",
+    "weight": 0.88,
+    "type": "documented-in",
+    "label": "documented in"
+  },
+  {
+    "source": "unified-memory-arch",
+    "target": "github-pages",
+    "weight": 0.88,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "unified-memory-arch",
+    "target": "paul-visciano",
+    "weight": 0.92,
+    "type": "shared",
+    "label": "shared with"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "asoke-sports-club",
+    "weight": 0.85,
+    "type": "location",
+    "label": "played at"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "b-elbasha",
+    "weight": 0.8,
+    "type": "location",
+    "label": "ate at"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "boy-person",
+    "weight": 0.82,
+    "type": "person",
+    "label": "played with"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "national-team-trainer",
+    "weight": 0.75,
+    "type": "person",
+    "label": "competed against"
+  },
+  {
+    "source": "asoke-sports-club",
+    "target": "b-elbasha",
+    "weight": 0.78,
+    "type": "adjacent",
+    "label": "near"
+  },
+  {
+    "source": "boy-person",
+    "target": "asoke-sports-club",
+    "weight": 0.82,
+    "type": "location",
+    "label": "played at"
+  },
+  {
+    "source": "national-team-trainer",
+    "target": "asoke-sports-club",
+    "weight": 0.82,
+    "type": "location",
+    "label": "trained at"
+  },
+  {
+    "source": "chatgpt-tool",
+    "target": "jarvis-identity",
+    "weight": 0.9,
+    "type": "serves",
+    "label": "serves"
+  },
+  {
+    "source": "chatgpt-tool",
+    "target": "working-narrative",
+    "weight": 0.88,
+    "type": "reads",
+    "label": "reads"
+  },
+  {
+    "source": "r2-cloudflare",
+    "target": "unified-memory-arch",
+    "weight": 0.85,
+    "type": "part-of",
+    "label": "part of"
+  },
+  {
+    "source": "workflow-instructions",
+    "target": "jarvis-comic-system",
+    "weight": 0.88,
+    "type": "guides",
+    "label": "guides"
+  },
+  {
+    "source": "chatgpt-boot-sequence",
+    "target": "jarvis-identity",
+    "weight": 0.9,
+    "type": "instantiates",
+    "label": "instantiates"
+  },
+  {
+    "source": "chatgpt-boot-sequence",
+    "target": "unified-memory-arch",
+    "weight": 0.88,
+    "type": "loads",
+    "label": "loads"
+  },
+  {
+    "source": "feb-23-2026",
+    "target": "jarvis-identity",
+    "weight": 0.98,
+    "type": "date-of",
+    "label": "birth date of"
+  },
+  {
+    "source": "feb-23-2026",
+    "target": "jarvis-comic-system",
+    "weight": 0.95,
+    "type": "creation",
+    "label": "creation date of"
+  },
+  {
+    "source": "multilayer-memory",
+    "target": "unified-memory-arch",
+    "weight": 0.88,
+    "type": "principle-of",
+    "label": "principle of"
+  },
+  {
+    "source": "memory-sync-protocol",
+    "target": "jarvis-identity",
+    "weight": 0.9,
+    "type": "operational",
+    "label": "protocol for"
+  },
+  {
+    "source": "urban-runner-v6-2",
+    "target": "jarvis-comic-system",
+    "weight": 0.82,
+    "type": "inspires",
+    "label": "template for"
+  }
 ]
