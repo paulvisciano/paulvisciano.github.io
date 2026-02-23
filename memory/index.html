@@ -1384,11 +1384,16 @@
                 "Paul's Memory is his interactive life archive: people, places, activities, emotions, and time, connected as a neural graph.",
                 "Part of his public memory at paulvisciano.github.io/memory. View live, explore nodes, read stories. The memory is alive."
             ].join(' ');
+            const fingerprint = "6f8f3a7e9c2d...";
+            const verifyUrl = "paulvisciano.github.io/memory/FINGERPRINT.md";
             const lines = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
                 `Last synced: ${lastSync} · ${n} neurons · ${s} synapses`,
+                `Fingerprint: ${fingerprint}`,
                 '',
                 shortBoot,
+                '',
+                `Verify authenticity: ${verifyUrl}`,
                 '',
                 url
             ];
@@ -1399,13 +1404,18 @@
             const { title, text, url, lastSync, n, s, shortBoot } = getSharePayload();
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
+            const fingerprint = "6f8f3a7e9c2d...";
+            const verifyUrl = "paulvisciano.github.io/memory/FINGERPRINT.md";
             preview.textContent = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
                 ``,
                 `Last synced: ${lastSync}`,
                 `Size: ${n} neurons · ${s} synapses`,
+                `Fingerprint: ${fingerprint}`,
                 ``,
                 shortBoot,
+                ``,
+                `Verify authenticity: ${verifyUrl}`,
                 ``,
                 url
             ].join('\n');
