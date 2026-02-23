@@ -149,16 +149,72 @@ https://paulvisciano.github.io/claw/memory/
 
 ---
 
+## Data Source (CRITICAL)
+
+**Do NOT hardcode values.** Instead:
+
+1. On page load, fetch `/claw/memory/FINGERPRINT.md` via fetch API
+2. Parse the markdown:
+  - Extract: `Last synced: YYYY-MM-DD HH:MM:SS`
+  - Extract: `Master Hash: [64-char hash]`
+3. Dynamically populate the share modal with these values
+4. Display first 12 chars of hash: `8bbaeddda3b8...`
+5. Repeat for `/memory/FINGERPRINT.md` (Paul's memory)
+
+**Why:** Ensures modal is always current without manual updates. Each memory sync updates FINGERPRINT.md automatically; modal reflects latest state.
+
+**Code sketch:**
+
+```javascript
+// Load and parse FINGERPRINT.md
+fetch('/claw/memory/FINGERPRINT.md')
+  .then(r => r.text())
+  .then(text => {
+    // Extract "Last synced: 2026-02-23 20:30 GMT+7"
+    const syncMatch = text.match(/Last synced \((.+?)\)/);
+    const lastSynced = syncMatch ? syncMatch[1] : 'Unknown';
+    
+    // Extract "Master Hash: 8bbaeddda3b873acdd..."
+    const hashMatch = text.match(/Master Hash:\s*```\s*([a-f0-9]+)/);
+    const fullHash = hashMatch ? hashMatch[1] : '';
+    const displayHash = fullHash.slice(0, 12) + '...';
+    
+    // Update modal
+    document.querySelector('#share-modal .sync-info').innerHTML = 
+      `Last synced: ${lastSynced}<br>Fingerprint: ${displayHash}`;
+  });
+```
+
+---
+
+## Pending Changes (Optional Display)
+
+**Option A (Recommended - Clean):** Keep modal showing only published state
+
+- Do NOT show pending changes
+- Modal shows FINGERPRINT.md values only
+- Cleaner UX, less noise
+
+**Option B (Transparent):** Show staged pending updates
+
+- If `claw/memory/sync/sync-queue.json` exists and `pending_review` is true
+- Add line: "Pending: +4 synapse updates (awaiting commit)"
+- Helps users understand current state
+
+**Decision:** Recommend Option A for now (clean, published state only). Can add Option B later if transparency is needed.
+
+---
+
 ## Implementation
 
 ### Files to Modify
 
 
-| File                     | Element ID        | Current Value                        | New Value                       |
-| ------------------------ | ----------------- | ------------------------------------ | ------------------------------- |
-| `claw/memory/index.html` | `.share-modal h2` | "Share – Claude Code Neural Mind"    | "Share – Jarvis Neural Mind"    |
-| `claw/memory/index.html` | `.share-preview`  | [description text]                   | [updated text with fingerprint] |
-| `memory/index.html`      | `.share-preview`  | [check & add fingerprint if missing] | [add fingerprint line]          |
+| File                     | Element ID        | Current Value                        | New Value                                 |
+| ------------------------ | ----------------- | ------------------------------------ | ----------------------------------------- |
+| `claw/memory/index.html` | `.share-modal h2` | "Share – Claude Code Neural Mind"    | "Share – Jarvis Neural Mind"              |
+| `claw/memory/index.html` | `.share-preview`  | [static description text]            | [dynamic text loaded from FINGERPRINT.md] |
+| `memory/index.html`      | `.share-preview`  | [check & add fingerprint if missing] | [dynamic text loaded from FINGERPRINT.md] |
 
 
 ### Steps
@@ -167,14 +223,11 @@ https://paulvisciano.github.io/claw/memory/
   - Find: `Share – Claude Code Neural Mind`
   - Replace with: `Share – Jarvis Neural Mind`
 2. **Find the preview text block**
-  - Locate: `Claude Code's neural mind: values, capabilities...`
-  - Replace with: `Jarvis is a transparent neural mind: values, capabilities...`
-  - Add: `Fingerprint: 8bbaeddda3b873acdd...`
-  - Add: `Verify authenticity: paulvisciano.github.io/claw/memory/FINGERPRINT.md`
+  - Do NOT hardcode "Last synced" or "Fingerprint"
+  - Instead: Add JavaScript to fetch `/claw/memory/FINGERPRINT.md` on page load
+  - Parse and populate dynamically (see Data Source section above)
 3. **Open memory/index.html**
-  - Check if fingerprint is present
-  - If not, add: `Fingerprint: 6f8f3a7e9c2d1b5a...`
-  - Add: `Verify authenticity: paulvisciano.github.io/memory/FINGERPRINT.md`
+  - Same approach: fetch `/memory/FINGERPRINT.md` and populate dynamically
 4. **Test both modals**
   - Click "Share" button in claw/memory visualization
   - Verify modal shows "Jarvis" + fingerprint
