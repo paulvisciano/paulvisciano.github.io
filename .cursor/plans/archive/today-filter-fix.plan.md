@@ -4,17 +4,21 @@ overview: Fix the broken "Today" filter in both neural visualizations (memory/ a
 todos:
   - id: fix-memory-html
     content: Add isActivatedToday() and use in filter in /memory/index.html
-    status: pending
+    status: completed
   - id: fix-claw-html
     content: Same fix in /claw/memory/index.html if applicable
-    status: pending
+    status: completed
   - id: test-filters
     content: Test Today + other filters (Values, Capabilities, Locations, All)
-    status: pending
+    status: completed
 isProject: false
+status: archived
+archived_at: "2026-02-23"
 ---
 
 # Bug Fix Plan: "Today" Filter Not Working
+
+**Outcome:** Archived 2026-02-23. Today filter fixed in memory/index.html (isToday from temporal_activations); Temporal filter added; setActiveFilter() keeps bar and drawer in sync. User confirmed filters working.
 
 **Status:** Bug identified (Feb 23, 2026 13:05 GMT+7)  
 **Severity:** Medium (feature promised but broken)  
