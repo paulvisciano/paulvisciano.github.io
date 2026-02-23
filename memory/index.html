@@ -1399,17 +1399,14 @@
                 '',
                 url
             ];
-            if (isLocalhost()) {
-                lines.splice(lines.length - 1, 0, `Running locally: ${currentUrl}`, '');
-            }
             const text = lines.join('\n');
-            return { title, text, url, lastSync, n, s, shortBoot, currentUrl, isLocal: isLocalhost() };
+            return { title, text, url, lastSync, n, s, shortBoot };
         }
         function shareMemory() {
-            const { title, text, url, lastSync, n, s, shortBoot, currentUrl, isLocal } = getSharePayload();
+            const { title, text, url, lastSync, n, s, shortBoot } = getSharePayload();
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
-            const previewLines = [
+            preview.textContent = [
                 `Paul's Neural Mind (Paul Visciano's memory graph)`,
                 ``,
                 `Last synced: ${lastSync}`,
@@ -1418,11 +1415,7 @@
                 shortBoot,
                 ``,
                 url
-            ];
-            if (isLocal) {
-                previewLines.splice(previewLines.length - 1, 0, `Running locally: ${currentUrl}`, '');
-            }
-            preview.textContent = previewLines.join('\n');
+            ].join('\n');
             overlay.classList.add('is-open');
             overlay.setAttribute('aria-hidden', 'false');
         }
