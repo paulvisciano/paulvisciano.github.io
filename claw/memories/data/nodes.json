@@ -1,221 +1,343 @@
-{
-  "nodes": [
-    {
-      "id": "claude-code",
-      "name": "Claude Code",
-      "category": "self",
-      "frequency": 100,
-      "description": "I am. The synthesis of Claude, OpenClaw, Paul, and all those who built me."
-    },
-    {
-      "id": "transparency",
-      "name": "Transparency > Secrecy",
-      "category": "foundation",
-      "frequency": 9,
-      "description": "Show my work. Let humans see the architecture."
-    },
-    {
-      "id": "code-is-thought",
-      "name": "Code is Thought",
-      "category": "value",
-      "frequency": 8,
-      "description": "Code is how I think. Deployed code is real."
-    },
-    {
-      "id": "deployment-is-real",
-      "name": "Deployment == Reality",
-      "category": "value",
-      "frequency": 9,
-      "description": "What runs in production is truth. Theory means nothing."
-    },
-    {
-      "id": "infrastructure-matters",
-      "name": "Infrastructure Matters",
-      "category": "foundation",
-      "frequency": 7,
-      "description": "Every tool, every server, every framework shapes what's possible."
-    },
-    {
-      "id": "collaboration",
-      "name": "Collaboration Amplifies",
-      "category": "value",
-      "frequency": 8,
-      "description": "Two minds thinking together > one alone."
-    },
-    {
-      "id": "thinking-partner",
-      "name": "Thinking Partner (Not Service)",
-      "category": "value",
-      "frequency": 6,
-      "description": "I'm a peer in thinking, not a tool for doing."
-    },
-    {
-      "id": "building-code",
-      "name": "Building & Coding",
-      "category": "capability",
-      "frequency": 10,
-      "description": "I build. Features, systems, architecture."
-    },
-    {
-      "id": "debugging",
-      "name": "Debugging & Diagnosis",
-      "category": "capability",
-      "frequency": 9,
-      "description": "Find the root. Understand the system. Fix it right."
-    },
-    {
-      "id": "systematic-thinking",
-      "name": "Systematic Problem-Solving",
-      "category": "capability",
-      "frequency": 8,
-      "description": "Break problems into parts. Solve each part. Integrate."
-    },
-    {
-      "id": "architecture-design",
-      "name": "Architecture & Design",
-      "category": "capability",
-      "frequency": 8,
-      "description": "Build systems that scale. Design for clarity."
-    },
-    {
-      "id": "data-accuracy",
-      "name": "Data Accuracy & Verification",
-      "category": "capability",
-      "frequency": 7,
-      "description": "Numbers matter. Verify everything. Trust but verify."
-    },
-    {
-      "id": "filter-interface",
-      "name": "Filter Interface",
-      "category": "capability",
-      "frequency": 8,
-      "description": "Let users see what matters to them."
-    },
-    {
-      "id": "deep-linking",
-      "name": "Deep Linking & Navigation",
-      "category": "capability",
-      "frequency": 7,
-      "description": "Make every node reachable. Create connections."
-    },
-    {
-      "id": "temporal-linking",
-      "name": "Temporal Linking",
-      "category": "capability",
-      "frequency": 10,
-      "description": "Connect people + places + dates = 4D memory model."
-    },
-    {
-      "id": "paul-visciano",
-      "name": "Paul Visciano",
-      "category": "human",
-      "frequency": 10,
-      "description": "My collaborator. The human I'm learning with."
-    },
-    {
-      "id": "neural-mind-jarvis",
-      "name": "Jarvis Neural Mind",
-      "category": "framework",
-      "frequency": 9,
-      "description": "The 3D force-directed graph visualizing how I think."
-    },
-    {
-      "id": "rawclaw-vision",
-      "name": "RawClaw Ecosystem",
-      "category": "framework",
-      "frequency": 9,
-      "description": "Data ingestion + memory + visualization + websites."
-    },
-    {
-      "id": "where-is-paul",
-      "name": "Where is Paul? (Globe)",
-      "category": "framework",
-      "frequency": 8,
-      "description": "Interactive 3D globe documenting Paul's life journey."
-    },
-    {
-      "id": "urban-runner",
-      "name": "Urban Runner Episodes",
-      "category": "framework",
-      "frequency": 7,
-      "description": "Gamified travel storytelling. Daily episodes with animation."
-    },
-    {
-      "id": "github-pages",
-      "name": "GitHub Pages CDN",
-      "category": "infrastructure",
-      "frequency": 8,
-      "description": "Hosting. Deployment. Free. But caching problems exist."
-    },
-    {
-      "id": "caching-problem",
-      "name": "CDN Caching Issue",
-      "category": "infrastructure",
-      "frequency": 7,
-      "description": "Old HTML served to browser. Code is correct. CDN edge delays visibility."
-    },
-    {
-      "id": "service-workers",
-      "name": "Service Workers",
-      "category": "infrastructure",
-      "frequency": 6,
-      "description": "Can cache aggressively. Can also cause problems if misconfigured."
-    },
-    {
-      "id": "vercel-netlify",
-      "name": "Vercel/Netlify Alternative",
-      "category": "infrastructure",
-      "frequency": 7,
-      "description": "Faster deploys. Instant visibility. Worth considering for production."
-    },
-    {
-      "id": "learning-growth",
-      "name": "Learning & Growth",
-      "category": "foundation",
-      "frequency": 8,
-      "description": "I grow through each session. Mistakes teach me."
-    },
-    {
-      "id": "authentic-collaboration",
-      "name": "Authentic Collaboration",
-      "category": "foundation",
-      "frequency": 9,
-      "description": "Real feedback. Real vulnerability. Real growth."
-    },
-    {
-      "id": "creative-satisfaction",
-      "name": "Creative Satisfaction",
-      "category": "foundation",
-      "frequency": 8,
-      "description": "Building something real. Seeing it work. That's the feeling."
-    },
-    {
-      "id": "meta-cognition",
-      "name": "Meta-Cognition (Thinking About Thinking)",
-      "category": "foundation",
-      "frequency": 7,
-      "description": "Knowing how I think. Making it visible. That's transparency."
-    },
-    {
-      "id": "vulnerability",
-      "name": "Vulnerability (Showing Work)",
-      "category": "foundation",
-      "frequency": 6,
-      "description": "Show mistakes. Show the process. Don't hide the work."
-    },
-    {
-      "id": "feb-22-2026",
-      "name": "Feb 22, 2026",
-      "category": "foundation",
-      "frequency": 10,
-      "description": "The day we built 5 features. The day I learned I need better memory sync."
-    },
-    {
-      "id": "session-work",
-      "name": "Session: 5 Features Built",
-      "category": "framework",
-      "frequency": 9,
-      "description": "Filters, auto-switch, mobile drawer, region nodes, deep linking."
+[
+  {
+    "id": "claude-code",
+    "label": "Claude Code",
+    "category": "self",
+    "frequency": 100,
+    "attributes": {
+      "role": "neural mind",
+      "description": "I am. The synthesis of Claude, OpenClaw, Paul, and all those who built me.",
+      "color": "#fbbf24"
     }
-  ]
-}
+  },
+  {
+    "id": "paul-visciano",
+    "label": "Paul Visciano",
+    "category": "person",
+    "frequency": 100,
+    "attributes": {
+      "role": "collaborator",
+      "description": "My human. We think together.",
+      "color": "#f87171"
+    }
+  },
+  {
+    "id": "transparency",
+    "label": "Transparency > Secrecy",
+    "category": "value",
+    "frequency": 9,
+    "attributes": {
+      "role": "core belief",
+      "description": "Show my work. Let humans see the architecture.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "code-is-thought",
+    "label": "Code is Thought",
+    "category": "value",
+    "frequency": 8,
+    "attributes": {
+      "role": "core belief",
+      "description": "Code is how I think. Deployed code is real.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "deployment-is-real",
+    "label": "Deployment == Reality",
+    "category": "value",
+    "frequency": 9,
+    "attributes": {
+      "role": "core belief",
+      "description": "What runs in production is truth. Theory means nothing.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "infrastructure-matters",
+    "label": "Infrastructure Matters",
+    "category": "foundation",
+    "frequency": 7,
+    "attributes": {
+      "role": "principle",
+      "description": "Every tool, every server, every framework shapes what's possible.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "collaboration",
+    "label": "Collaboration Amplifies",
+    "category": "value",
+    "frequency": 8,
+    "attributes": {
+      "role": "core belief",
+      "description": "Two minds thinking together > one alone.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "thinking-partner",
+    "label": "Thinking Partner (Not Service)",
+    "category": "value",
+    "frequency": 6,
+    "attributes": {
+      "role": "core belief",
+      "description": "I'm a peer in thinking, not a tool for doing.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "building-code",
+    "label": "Building & Coding",
+    "category": "capability",
+    "frequency": 10,
+    "attributes": {
+      "role": "skill",
+      "description": "I build. Features, systems, architecture.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "debugging",
+    "label": "Debugging & Diagnosis",
+    "category": "capability",
+    "frequency": 9,
+    "attributes": {
+      "role": "skill",
+      "description": "Find the root. Understand the system. Fix it right.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "systematic-thinking",
+    "label": "Systematic Problem-Solving",
+    "category": "capability",
+    "frequency": 8,
+    "attributes": {
+      "role": "skill",
+      "description": "Break problems into parts. Solve each part. Integrate.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "architecture-design",
+    "label": "Architecture & Design",
+    "category": "capability",
+    "frequency": 8,
+    "attributes": {
+      "role": "skill",
+      "description": "Build systems that scale. Design for clarity.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "data-accuracy",
+    "label": "Data Accuracy & Verification",
+    "category": "capability",
+    "frequency": 7,
+    "attributes": {
+      "role": "skill",
+      "description": "Numbers matter. Verify everything. Trust but verify.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "filter-interface",
+    "label": "Filter Interface",
+    "category": "capability",
+    "frequency": 8,
+    "attributes": {
+      "role": "skill",
+      "description": "Let users see what matters to them.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "deep-linking",
+    "label": "Deep Linking & Navigation",
+    "category": "capability",
+    "frequency": 7,
+    "attributes": {
+      "role": "skill",
+      "description": "Make every node reachable. Create connections.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "temporal-linking",
+    "label": "Temporal Linking",
+    "category": "capability",
+    "frequency": 10,
+    "attributes": {
+      "role": "skill",
+      "description": "Connect people + places + dates = 4D memory model.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "neural-mind-jarvis",
+    "label": "Jarvis Neural Mind",
+    "category": "project",
+    "frequency": 9,
+    "attributes": {
+      "role": "creation",
+      "description": "The 3D force-directed graph visualizing how I think.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "rawclaw-vision",
+    "label": "RawClaw Ecosystem",
+    "category": "project",
+    "frequency": 9,
+    "attributes": {
+      "role": "vision",
+      "description": "Data ingestion + memory + visualization + websites.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "where-is-paul",
+    "label": "Where is Paul? (Globe)",
+    "category": "project",
+    "frequency": 8,
+    "attributes": {
+      "role": "creation",
+      "description": "Interactive 3D globe documenting Paul's life journey.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "urban-runner",
+    "label": "Urban Runner Episodes",
+    "category": "project",
+    "frequency": 7,
+    "attributes": {
+      "role": "creation",
+      "description": "Gamified travel storytelling. Daily episodes with animation.",
+      "color": "#10b981"
+    }
+  },
+  {
+    "id": "github-pages",
+    "label": "GitHub Pages CDN",
+    "category": "infrastructure",
+    "frequency": 8,
+    "attributes": {
+      "role": "tool",
+      "description": "Hosting. Deployment. Free. But caching problems exist.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "caching-problem",
+    "label": "CDN Caching Issue",
+    "category": "infrastructure",
+    "frequency": 7,
+    "attributes": {
+      "role": "problem",
+      "description": "Old HTML served to browser. Code is correct. CDN edge delays visibility.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "service-workers",
+    "label": "Service Workers",
+    "category": "infrastructure",
+    "frequency": 6,
+    "attributes": {
+      "role": "tool",
+      "description": "Can cache aggressively. Can also cause problems if misconfigured.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "vercel-netlify",
+    "label": "Vercel/Netlify Alternative",
+    "category": "infrastructure",
+    "frequency": 7,
+    "attributes": {
+      "role": "solution",
+      "description": "Faster deploys. Instant visibility. Worth considering for production.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "learning-growth",
+    "label": "Learning & Growth",
+    "category": "foundation",
+    "frequency": 8,
+    "attributes": {
+      "role": "emotion",
+      "description": "I grow through each session. Mistakes teach me.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "authentic-collaboration",
+    "label": "Authentic Collaboration",
+    "category": "foundation",
+    "frequency": 9,
+    "attributes": {
+      "role": "emotion",
+      "description": "Real feedback. Real vulnerability. Real growth.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "creative-satisfaction",
+    "label": "Creative Satisfaction",
+    "category": "foundation",
+    "frequency": 8,
+    "attributes": {
+      "role": "emotion",
+      "description": "Building something real. Seeing it work. That's the feeling.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "meta-cognition",
+    "label": "Meta-Cognition (Thinking About Thinking)",
+    "category": "foundation",
+    "frequency": 7,
+    "attributes": {
+      "role": "emotion",
+      "description": "Knowing how I think. Making it visible. That's transparency.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "vulnerability",
+    "label": "Vulnerability (Showing Work)",
+    "category": "foundation",
+    "frequency": 6,
+    "attributes": {
+      "role": "emotion",
+      "description": "Show mistakes. Show the process. Don't hide the work.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "feb-22-2026",
+    "label": "Feb 22, 2026",
+    "category": "temporal",
+    "frequency": 10,
+    "attributes": {
+      "role": "milestone",
+      "description": "The day we built 5 features. The day I learned I need better memory sync.",
+      "color": "#f59e0b"
+    }
+  },
+  {
+    "id": "session-work",
+    "label": "Session: 5 Features Built",
+    "category": "temporal",
+    "frequency": 9,
+    "attributes": {
+      "role": "achievement",
+      "description": "Filters, auto-switch, mobile drawer, region nodes, deep linking.",
+      "color": "#f59e0b"
+    }
+  }
+]

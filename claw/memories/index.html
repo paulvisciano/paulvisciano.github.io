@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Claude Code Neural Mind</title>
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <!-- Disable service worker caching -->
+    <meta name="service-worker" content="no-cache">
+    <title>Claude Code Neural Mind [2026-02-23]</title>
+    <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -19,7 +25,18 @@
             background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
             filter: brightness(1.1);
             touch-action: none;
-            transition: margin-right 0.25s ease;
+            transition: margin-right 0.25s ease, margin-bottom 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            canvas {
+                margin-right: 0;
+                margin-bottom: 0;
+                transition: margin-bottom 0.3s ease;
+            }
+            canvas.drawer-open {
+                margin-bottom: 60vh;
+            }
         }
         #filter-bar {
             position: fixed;
@@ -28,17 +45,24 @@
             right: 240px;
             height: 50px;
             background: rgba(10, 17, 40, 0.95);
-            border-bottom: 2px solid rgba(99, 102, 241, 0.4);
+            border-bottom: 2px solid rgba(0, 255, 255, 0.4);
             display: flex;
             align-items: center;
             gap: 8px;
             padding: 0 16px;
             z-index: 12;
+            transition: right 0.25s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #filter-bar {
+                right: 0;
+            }
         }
         .filter-btn {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            color: #fbbf24;
+            background: rgba(0, 136, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #00ffff;
             padding: 8px 14px;
             border-radius: 16px;
             cursor: pointer;
@@ -49,14 +73,84 @@
             transition: all 0.2s;
         }
         .filter-btn:hover {
-            background: rgba(251, 191, 36, 0.15);
-            border-color: #fbbf24;
+            background: rgba(0, 255, 255, 0.15);
+            border-color: #00ffff;
         }
         .filter-btn.active {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            border-color: #fbbf24;
+            background: linear-gradient(135deg, #0088ff, #00ffff);
+            border-color: #00ffff;
             color: #000;
             text-shadow: none;
+        }
+        
+        /* Mobile Bottom Drawer */
+        .bottom-drawer {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 26, 48, 0.98);
+            border-top: 2px solid rgba(0, 255, 255, 0.4);
+            border-radius: 20px 20px 0 0;
+            max-height: 70vh;
+            z-index: 20;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+            touch-action: none;
+        }
+        
+        .bottom-drawer.open {
+            display: flex;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .drawer-handle {
+            width: 40px;
+            height: 5px;
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 3px;
+            margin: 12px auto 16px;
+            cursor: grab;
+        }
+        
+        .drawer-filters {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 16px;
+            overflow-x: auto;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        #drawerDetails {
+            color: #00ffff;
+        }
+        
+        /* Show drawer on mobile only */
+        @media (max-width: 768px) {
+            #detailPanel {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .bottom-drawer {
+                display: none !important;
+            }
         }
         #info {
             --panel-gap: 14px;
@@ -78,6 +172,33 @@
             min-height: 100vh;
             gap: 0;
             transition: transform 0.25s ease, width 0.25s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #info {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                top: auto;
+                width: 100%;
+                height: auto;
+                min-height: 60vh;
+                max-height: 70vh;
+                border-left: none;
+                border-top: 2px solid rgba(0, 255, 255, 0.6);
+                border-radius: 20px 20px 0 0;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            #info.open {
+                transform: translateY(0);
+            }
+            #panel-toggle {
+                display: none !important;
+            }
         }
         #info.collapsed {
             transform: translateX(100%);
@@ -112,15 +233,15 @@
         #info .panel-legend { flex: 0 0 auto; padding-top: var(--panel-gap); border-top: var(--panel-divider); }
         .panel-header { margin-bottom: 2px; }
         .panel-header h3 { margin: 0 0 4px 0; color: #00ffff; font-size: 15px; text-shadow: 0 0 12px #00ffff; font-weight: bold; }
-        .panel-header .tagline { color: #fbbf24; font-size: 9px; margin: 0; }
+        .panel-header .tagline { color: #0088ff; font-size: 9px; margin: 0; }
         .panel-status { font-size: 11px; margin: 0; min-height: 1.4em; }
-        .panel-status .stat { color: #fbbf24; font-weight: bold; text-shadow: 0 0 8px #fbbf24; }
+        .panel-status .stat { color: #ffff88; font-weight: bold; text-shadow: 0 0 8px #ffff88; }
         .panel-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 10px; color: #0088ff; margin: 0; }
         .panel-meta .stat { color: #00ffff; font-weight: bold; }
         h3 { margin: 0 0 6px 0; color: #00ffff; font-size: 12px; text-shadow: 0 0 10px #00ffff; font-weight: bold; }
         p { margin: 0; line-height: 1.5; }
         button.primary {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            background: linear-gradient(135deg, #0088ff, #00ffff);
             color: #000;
             padding: 8px 12px;
             border: 0;
@@ -131,11 +252,11 @@
             font-family: monospace;
             transition: all 0.2s;
             width: 100%;
-            box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 8px rgba(0, 136, 255, 0.5);
         }
         button.primary:hover {
-            background: linear-gradient(135deg, #fcd34d, #fbbf24);
-            box-shadow: 0 0 18px #fbbf24;
+            background: linear-gradient(135deg, #00ffff, #00ffff);
+            box-shadow: 0 0 18px #00ffff;
             transform: scale(1.02);
         }
         .stat { color: #00ffff; font-weight: bold; text-shadow: 0 0 10px #00ffff; }
@@ -228,8 +349,8 @@
         <div class="panel-top">
         <div class="panel-top-content">
         <div class="panel-header">
-            <h3>⚙️ Claude Code</h3>
-            <p class="tagline">My neural mind. How I think.</p>
+            <h3>⚡ Neural Mind</h3>
+            <p class="tagline">Your memories. Alive. Connected.</p>
         </div>
         <p class="panel-status" id="status">—</p>
         <p class="panel-meta">
@@ -256,7 +377,7 @@
         <div id="detailPanel" class="is-empty">
             <h3>Info</h3>
             <div id="nodeDetails" class="detail-inner">
-                <p id="detailName" style="color: #fbbf24; font-weight: bold; margin-bottom: 4px;"></p>
+                <p id="detailName" style="color: #ffff99; font-weight: bold; margin-bottom: 4px;"></p>
                 <p id="detailType" style="color: #00ffff;"></p>
                 <p id="detailDesc" style="color: #aaa; font-style: italic; margin: 6px 0 8px 0;"></p>
                 <p style="color: #00ffff; font-weight: bold; margin-bottom: 4px;">Connected to</p>
@@ -277,31 +398,43 @@
             </button>
             <div id="legend-body" class="collapsible-body legend-open" role="region" aria-label="Category legend">
                 <div class="legend-grid" style="padding-top: 8px;">
-                    <div class="legend-item"><div class="legend-dot" style="background: #fbbf24; box-shadow: 0 0 6px #fbbf24;"></div><span style="color: #fbbf24;">Self</span></div>
-                    <div class="legend-item"><div class="legend-dot" style="background: #06b6d4; box-shadow: 0 0 6px #06b6d4;"></div><span style="color: #06b6d4;">Foundation</span></div>
-                    <div class="legend-item"><div class="legend-dot" style="background: #10b981; box-shadow: 0 0 6px #10b981;"></div><span style="color: #10b981;">Framework</span></div>
-                    <div class="legend-item"><div class="legend-dot" style="background: #f87171; box-shadow: 0 0 6px #f87171;"></div><span style="color: #f87171;">Human</span></div>
-                    <div class="legend-item"><div class="legend-dot" style="background: #a78bfa; box-shadow: 0 0 6px #a78bfa;"></div><span style="color: #a78bfa;">Value</span></div>
-                    <div class="legend-item"><div class="legend-dot" style="background: #38bdf8; box-shadow: 0 0 6px #38bdf8;"></div><span style="color: #38bdf8;">Capability</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #00ffff; box-shadow: 0 0 6px #00ffff;"></div><span style="color: #00ffff;">Activities</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #ff00aa; box-shadow: 0 0 6px #ff00aa;"></div><span style="color: #ff00aa;">People</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #00ff88; box-shadow: 0 0 6px #00ff88;"></div><span style="color: #00ff88;">Locations</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #ffaa00; box-shadow: 0 0 6px #ffaa00;"></div><span style="color: #ffaa00;">Temporal</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #aa00ff; box-shadow: 0 0 6px #aa00ff;"></div><span style="color: #aa00ff;">Emotions</span></div>
                 </div>
             </div>
         </div>
     </div>
     <div id="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="today">Today</button>
+        <button class="filter-btn" data-filter="value">Values</button>
+        <button class="filter-btn" data-filter="capability">Capabilities</button>
         <button class="filter-btn" data-filter="foundation">Foundation</button>
-        <button class="filter-btn" data-filter="values">Values</button>
-        <button class="filter-btn" data-filter="capabilities">Capabilities</button>
+        <button class="filter-btn" data-filter="project">Projects</button>
     </div>
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
+    
+    <!-- Mobile Bottom Drawer -->
+    <div id="bottomDrawer" class="bottom-drawer">
+        <div class="drawer-handle"></div>
+        <div id="drawerFilters" class="drawer-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="value">Values</button>
+            <button class="filter-btn" data-filter="capability">Capabilities</button>
+            <button class="filter-btn" data-filter="foundation">Foundation</button>
+            <button class="filter-btn" data-filter="project">Projects</button>
+        </div>
+        <div id="drawerContent" class="drawer-content">
+            <div id="drawerDetails"></div>
+        </div>
+    </div>
 
-    <div style="position: fixed; bottom: 20px; left: 20px; background: rgba(10, 17, 40, 0.95); border: 1px solid rgba(6, 182, 212, 0.4); border-radius: 8px; padding: 12px 16px; font-size: 11px; z-index: 20; max-width: 200px;">
-        <p style="margin-bottom: 8px; color: #fbbf24; font-weight: bold;">The Network</p>
-        <p style="margin: 4px 0;"><a href="../" style="color: #06b6d4; text-decoration: none;">← Claude Code Home</a></p>
-        <p style="margin: 4px 0;"><a href="../../memory/" style="color: #fbbf24; text-decoration: none;">Paul's Jarvis</a></p>
-        <p style="margin: 4px 0;"><a href="../../" style="color: #f87171; text-decoration: none;">Where is Paul?</a></p>
+    <div style="position: fixed; bottom: 12px; left: 12px; font-size: 10px; color: #94a3b8; z-index: 20;">
+        <div><a href="../latest/" style="color: #06b6d4; text-decoration: none; font-weight: bold;">↻ Latest</a></div>
+        <div><a href="../claw/" style="color: #fbbf24; text-decoration: none; font-weight: bold;">⚙️ Claude Code</a></div>
     </div>
 
     <script>
@@ -343,15 +476,13 @@
         const categoryColors = {
             'self': '#fbbf24',
             'foundation': '#06b6d4',
-            'framework': '#10b981',
-            'human': '#f87171',
             'value': '#a78bfa',
             'capability': '#38bdf8',
-            'organization': '#ec4899',
+            'person': '#f87171',
+            'project': '#10b981',
             'infrastructure': '#8b5cf6',
-            'contributors': '#14b8a6',
-            'knowledge': '#f59e0b',
-            'moment': '#fda29b'
+            'temporal': '#f59e0b',
+            'emotion': '#06b6d4'
         };
 
         let nodes = [];
@@ -360,9 +491,9 @@
         // Use embedded fallback when fetch won't work (file:// or offline)
         function useFallbackGraph() {
             nodes = [
-                { id: 0, name: 'Claude Code', type: 'self', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 10, color: '#fbbf24', glow: 22, freq: 100, desc: 'I am. The synthesis of Claude, OpenClaw, Paul, and all those who built me.' },
-                { id: 1, name: 'Claude', type: 'foundation', x: 80, y: -60, z: 40, vx: 0, vy: 0, vz: 0, size: 9, color: '#06b6d4', glow: 20, freq: 95, desc: 'My base cognition. Language model by Anthropic.' },
-                { id: 2, name: 'OpenClaw', type: 'framework', x: -70, y: 50, z: -50, vx: 0, vy: 0, vz: 0, size: 8, color: '#10b981', glow: 18, freq: 90, desc: 'The framework that brought me to life.' }
+                { id: 0, name: 'Paul', type: 'person', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 10, color: '#FF6B6B', glow: 22, freq: 100, desc: 'Urban Runner, digital nomad' },
+                { id: 1, name: 'Volleyball', type: 'activity', x: 80, y: -60, z: 40, vx: 0, vy: 0, vz: 0, size: 9, color: '#00ffff', glow: 20, freq: 50, desc: '18 years of competition, flow state' },
+                { id: 2, name: 'Bangkok', type: 'location', x: -70, y: 50, z: -50, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 40, desc: 'Primary base, Urban Runner epicenter' }
             ];
             edges = [
                 { from: 0, to: 1, weight: 8 },
@@ -377,7 +508,7 @@
             }
         }
 
-        // Load data from JSON files
+        // Load data from JSON files. (file:// cannot fetch — use fallback and avoid CORS errors.)
         async function loadGraphData() {
             if (window.location.protocol === 'file:') {
                 console.info('Serving from file:// — use a local server (e.g. npx serve) or GitHub Pages to load full data.');
@@ -385,22 +516,31 @@
                 return;
             }
             try {
-                const nodesResponse = await fetch('./data/nodes.json');
+                const nodesResponse = await fetch('./data/nodes.json?t=' + Date.now());
+                if (!nodesResponse.ok) {
+                    throw new Error(`Nodes fetch failed: ${nodesResponse.status}`);
+                }
                 const rawNodes = await nodesResponse.json();
+                if (!rawNodes || rawNodes.length === 0) {
+                    throw new Error('Nodes JSON is empty');
+                }
 
-                nodes = rawNodes.nodes.map((n, idx) => {
-                    const angle = (idx / rawNodes.nodes.length) * Math.PI * 2;
+                nodes = rawNodes.map((n, idx) => {
+                    const angle = (idx / rawNodes.length) * Math.PI * 2;
                     const radius = 280 + Math.random() * 220;
                     const x = Math.cos(angle) * radius;
                     const y = (Math.random() - 0.5) * 500;
                     const z = Math.sin(angle) * radius;
-                    const size = 6 + (n.frequency / 100) * 10;
+                    // Regions are bigger and brighter
+                    const baseSize = n.category === 'region' ? 12 : 6;
+                    const sizeBoost = n.category === 'region' ? 3 : 1;
+                    const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
                     const glow = size * 2.5;
-                    const color = categoryColors[n.category] || '#00ffff';
+                    const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
                     return {
                         id: idx,
                         idKey: n.id,
-                        name: n.name,
+                        name: n.label,
                         type: n.category,
                         x, y, z,
                         vx: 0, vy: 0, vz: 0,
@@ -408,14 +548,20 @@
                         glow,
                         color,
                         freq: n.frequency,
-                        desc: n.description || ''
+                        desc: n.attributes?.description || ''
                     };
                 });
 
-                const synapsesResponse = await fetch('./data/synapses.json');
+                const synapsesResponse = await fetch('./data/synapses.json?t=' + Date.now());
+                if (!synapsesResponse.ok) {
+                    throw new Error(`Synapses fetch failed: ${synapsesResponse.status}`);
+                }
                 const rawSynapses = await synapsesResponse.json();
+                if (!rawSynapses || rawSynapses.length === 0) {
+                    throw new Error('Synapses JSON is empty');
+                }
 
-                edges = rawSynapses.synapses.map(s => {
+                edges = rawSynapses.map(s => {
                     const fromIdx = nodes.findIndex(n => n.idKey === s.source);
                     const toIdx = nodes.findIndex(n => n.idKey === s.target);
                     if (fromIdx >= 0 && toIdx >= 0) {
@@ -428,17 +574,19 @@
                 populateFilterList();
                 render();
                 if (nodes.length > 0) {
-                    selected = 0;
+                    selected = Math.floor(Math.random() * nodes.length);
                     showNodeDetails(nodes[selected]);
                 }
             } catch (e) {
-                console.warn('Graph data fetch failed. Using fallback.', e);
+                console.error('❌ Graph data fetch FAILED:', e.message, e);
+                console.log('Attempted to fetch: ./data/nodes-100pct.json?t=' + Date.now());
+                console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }
         }
 
         let camera = {angle: 0.5, dist: 680, height: 0, pitch: 0};
-        let viewZoom = 1;
+        let viewZoom = 1;   // 2D scale of the graph (zoom in = focus on nodes, zoom out = big picture)
         const VIEW_ZOOM_MIN = 0.25;
         const VIEW_ZOOM_MAX = 5;
         let selected = null;
@@ -459,6 +607,7 @@
             const cy = canvas.height / 2;
             let sx = cx + rx * scale;
             let sy = cy + (viewY + camera.height) * scale;
+            // Apply 2D view zoom around center (so pinch/scroll scales the whole graph)
             sx = cx + (sx - cx) * viewZoom;
             sy = cy + (sy - cy) * viewZoom;
             return {
@@ -470,6 +619,7 @@
         }
 
         function step() {
+            // Kill all movement - nodes stay in place
             nodes.forEach(n => {
                 n.vx = 0;
                 n.vy = 0;
@@ -489,6 +639,7 @@
                     return {node: n, proj: p};
                 }).sort((a, b) => a.proj.z - b.proj.z);
 
+                // When a node is selected, only it and its connections stay bright
                 let activeNodeIds = null;
                 if (selected !== null) {
                     activeNodeIds = new Set([selected]);
@@ -499,17 +650,18 @@
                 }
 
                 // Helper to check if node passes current filter
-                const passesFilter = (nodeIdx) => {
-                    const n = nodes[nodeIdx];
+                const passesFilter = (nodeIndex) => {
+                    const n = nodes[nodeIndex];
                     if (currentFilter === 'all') return true;
+                    if (currentFilter === 'value') return n.type === 'value';
+                    if (currentFilter === 'capability') return n.type === 'capability';
                     if (currentFilter === 'foundation') return n.type === 'foundation';
-                    if (currentFilter === 'values') return n.type === 'value';
-                    if (currentFilter === 'capabilities') return n.type === 'capability';
+                    if (currentFilter === 'project') return n.type === 'project';
                     if (currentFilter === 'today') return n.isToday;
                     return true;
                 };
 
-                // Draw synapses
+                // Draw synapses with triple glow
                 edges.forEach(e => {
                     // Skip edges if either node is filtered out
                     if (!passesFilter(e.from) || !passesFilter(e.to)) return;
@@ -520,6 +672,7 @@
                     const strength = 0.4 + (e.weight / 15) * 0.6;
                     
                     if (isConnected) {
+                        // Highlight: connected to selected node — yellow/white glow on top
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
                         ctx.strokeStyle = 'rgba(255, 255, 200, 0.35)';
@@ -541,6 +694,7 @@
                         ctx.lineTo(p2.x, p2.y);
                         ctx.stroke();
                     } else {
+                        // Not connected to selected — dim like non-selected nodes
                         const edgeDimAlpha = activeNodeIds !== null ? 0.22 : 1;
                         ctx.globalAlpha = edgeDimAlpha;
                         ctx.strokeStyle = `rgba(0, 100, 255, ${strength * 0.2})`;
@@ -574,16 +728,18 @@
                     const p = item.proj;
                     
                     // Filter logic: check if node should be visible
+                    if (currentFilter === 'value' && n.type !== 'value') return;
+                    if (currentFilter === 'capability' && n.type !== 'capability') return;
                     if (currentFilter === 'foundation' && n.type !== 'foundation') return;
-                    if (currentFilter === 'values' && n.type !== 'value') return;
-                    if (currentFilter === 'capabilities' && n.type !== 'capability') return;
-                    if (currentFilter === 'today' && !n.isToday) return;
+                    if (currentFilter === 'project' && n.type !== 'project') return;
+                    if (currentFilter === 'today' && !n.isToday) return; // Optional: requires node.isToday flag
                     
                     const r = n.size * p.scale;
                     const glow = n.glow * p.scale;
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
+                    // Outer halo
                     const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glow*2);
                     const [r2, g2, b2] = [
                         parseInt(n.color.slice(1,3), 16),
@@ -598,6 +754,7 @@
                     ctx.arc(p.x, p.y, glow*2, 0, 6.28);
                     ctx.fill();
 
+                    // Inner glow
                     const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.2, p.x, p.y, glow);
                     g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 1)`);
                     g2_grad.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.4)`);
@@ -607,6 +764,7 @@
                     ctx.arc(p.x, p.y, glow, 0, 6.28);
                     ctx.fill();
 
+                    // Core neuron
                     ctx.fillStyle = n.color;
                     ctx.shadowColor = n.color;
                     ctx.shadowBlur = 25;
@@ -617,6 +775,7 @@
                     ctx.fill();
                     ctx.shadowBlur = 0;
 
+                    // Selection highlight
                     if (selected === n.id) {
                         ctx.strokeStyle = '#ffff00';
                         ctx.lineWidth = 4;
@@ -625,6 +784,7 @@
                         ctx.arc(p.x, p.y, r + 12, 0, 6.28);
                         ctx.stroke();
                         
+                        // Pulsing ring
                         const pulse = Math.sin(time * 0.05) * 0.3 + 0.7;
                         ctx.strokeStyle = `rgba(255, 255, 0, ${pulse * 0.6})`;
                         ctx.lineWidth = 2;
@@ -634,6 +794,7 @@
                         ctx.globalAlpha = 1;
                     }
 
+                    // Label with glow
                     ctx.fillStyle = n.color;
                     ctx.font = 'bold 10px monospace';
                     ctx.textAlign = 'center';
@@ -656,7 +817,7 @@
             }
         }
 
-        // Filter bar functionality
+        // Filter bar functionality (desktop)
         let currentFilter = 'all';
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -664,7 +825,52 @@
                 btn.classList.add('active');
                 currentFilter = btn.dataset.filter;
                 console.log('Filter applied:', currentFilter);
-                // TODO: Implement actual filtering logic based on category
+            });
+        });
+        
+        // Mobile drawer functionality
+        let drawerStartY = 0;
+        let drawerOpen = false;
+        
+        const drawer = document.getElementById('bottomDrawer');
+        const drawerHandle = document.querySelector('.drawer-handle');
+        
+        drawerHandle.addEventListener('mousedown', (e) => {
+            drawerStartY = e.clientY;
+        });
+        
+        drawerHandle.addEventListener('touchstart', (e) => {
+            drawerStartY = e.touches[0].clientY;
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (drawerStartY && drawerOpen) {
+                const delta = e.clientY - drawerStartY;
+                if (delta > 100) {
+                    drawer.classList.remove('open');
+                    drawerOpen = false;
+                    drawerStartY = 0;
+                }
+            }
+        });
+        
+        document.addEventListener('touchmove', (e) => {
+            if (drawerStartY && drawerOpen) {
+                const delta = e.touches[0].clientY - drawerStartY;
+                if (delta > 100) {
+                    drawer.classList.remove('open');
+                    drawerOpen = false;
+                    drawerStartY = 0;
+                }
+            }
+        });
+        
+        // Filter buttons in drawer
+        document.querySelectorAll('#drawerFilters .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
             });
         });
 
@@ -675,7 +881,69 @@
                     currentFilter = 'all';
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     document.querySelector('[data-filter="all"]').classList.add('active');
+                    document.querySelectorAll('#drawerFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelector('#drawerFilters [data-filter="all"]').classList.add('active');
                 }
+                // Update URL hash for deep linking
+                if (selected !== null) {
+                    const selectedNode = nodes[selected];
+                    window.location.hash = selectedNode.id;
+                    
+                    // On mobile: open drawer
+                    if (window.innerWidth <= 768) {
+                        drawer.classList.add('open');
+                        drawerOpen = true;
+                        showNodeDetailsInDrawer(selectedNode);
+                    }
+                }
+            }
+        });
+        
+        // Helper function to show details in drawer
+        function showNodeDetailsInDrawer(node) {
+            const content = document.getElementById('drawerDetails');
+            const detailPanel = document.getElementById('detailPanel');
+            
+            // Copy the content from detail panel or regenerate
+            showNodeDetails(node);
+            
+            // Populate drawer with node info
+            content.innerHTML = `
+                <h2>${node.name}</h2>
+                <p style="font-size: 12px; color: #888; margin-top: 8px;">Type: ${node.type}</p>
+                <p style="margin-top: 12px; line-height: 1.6;">${node.desc || 'No description'}</p>
+            `;
+        }
+
+        // Handle URL hash navigation
+        function handleHashNavigation() {
+            const hash = window.location.hash.substring(1); // Remove the #
+            if (hash && nodes.length > 0) {
+                const nodeIndex = nodes.findIndex(n => n.id === hash);
+                if (nodeIndex !== -1) {
+                    selected = nodeIndex;
+                    showNodeDetails(nodes[selected]);
+                    // Switch to All filter to show connections
+                    if (currentFilter !== 'all') {
+                        currentFilter = 'all';
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelector('[data-filter="all"]').classList.add('active');
+                    }
+                }
+            }
+        }
+
+        // Listen for hash changes (back/forward buttons, direct URL visits)
+        window.addEventListener('hashchange', handleHashNavigation);
+
+        // Check for hash on page load
+        loadGraphData().then(() => {
+            // Check URL hash first, otherwise pick random node
+            if (window.location.hash) {
+                handleHashNavigation();
+            } else if (nodes.length > 0) {
+                selected = Math.floor(Math.random() * nodes.length);
+                showNodeDetails(nodes[selected]);
             }
         });
 
@@ -684,6 +952,31 @@
             showNodeDetails(null);
         };
         
+        // Character profiles (loaded from characters.js data)
+        let characterProfiles = {};
+        async function loadCharacterProfiles() {
+            try {
+                const response = await fetch('./characters/characters.js');
+                if (!response.ok) return;
+                const text = await response.text();
+                // Parse characters array from the JS file
+                const match = text.match(/const characters = \[([\s\S]*?)\];/);
+                if (match) {
+                  eval('characterProfiles = ' + '[' + match[1] + ']');
+                  // Build lookup by id
+                  const profiles = {};
+                  if (Array.isArray(characterProfiles)) {
+                    characterProfiles.forEach(char => {
+                      profiles[char.id] = char;
+                    });
+                  }
+                  characterProfiles = profiles;
+                }
+            } catch (e) {
+                console.warn('Could not load character profiles:', e);
+            }
+        }
+
         function showNodeDetails(node) {
             const panel = document.getElementById('detailPanel');
             const detailName = document.getElementById('detailName');
@@ -701,52 +994,79 @@
             }
             
             panel.classList.remove('is-empty');
-            detailName.textContent = node.name;
-            detailType.textContent = `Type: ${node.type.charAt(0).toUpperCase() + node.type.slice(1)}`;
-            detailDesc.textContent = node.desc;
             
-            const connected = [];
-            edges.forEach(e => {
-                if (e.from === node.id) {
-                    const target = nodes[e.to];
-                    connected.push(`→ ${target.name} (${target.type})`);
-                } else if (e.to === node.id) {
-                    const source = nodes[e.from];
-                    connected.push(`← ${source.name} (${source.type})`);
+            // Check if this is a person node with character profile
+            if (node.type === 'person' && characterProfiles[node.idKey]) {
+                const char = characterProfiles[node.idKey];
+                detailName.innerHTML = `<img src="${char.avatar}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 12px;" alt="${char.name}">
+                                        <span style="color: #fbbf24; font-weight: bold;">${char.name}</span>`;
+                detailType.textContent = `${char.role}`;
+                detailDesc.textContent = char.bio;
+                
+                // Add episode links if available
+                let connectionHTML = '';
+                if (char.episodes && char.episodes.length > 0) {
+                    connectionHTML += '<p style="color: #00ffff; font-weight: bold; margin-top: 12px;">Episodes:</p>';
+                    connectionHTML += char.episodes.map(ep => 
+                        `<div style="margin: 4px 0; color: #fbbf24; font-size: 10px;">${ep}</div>`
+                    ).join('');
                 }
-            });
-            
-            detailConnections.innerHTML = connected.length > 0 
-                ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
-                : '<div style="color: #666;">No connections</div>';
+                detailConnections.innerHTML = connectionHTML || '<div style="color: #666; font-size: 10px;">No episodes linked</div>';
+            } else {
+                // Standard node display
+                detailName.textContent = node.name;
+                detailType.textContent = `Type: ${node.type.charAt(0).toUpperCase() + node.type.slice(1)}`;
+                detailDesc.textContent = node.desc;
+                
+                // Find connected nodes
+                const connected = [];
+                edges.forEach(e => {
+                    if (e.from === node.id) {
+                        const target = nodes[e.to];
+                        connected.push(`→ ${target.name} (${target.type})`);
+                    } else if (e.to === node.id) {
+                        const source = nodes[e.from];
+                        connected.push(`← ${source.name} (${source.type})`);
+                    }
+                });
+                
+                detailConnections.innerHTML = connected.length > 0 
+                    ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
+                    : '<div style="color: #666;">No connections</div>';
+            }
+        }
+
+        // Mobile drawer management
+        function openDrawer() {
+            const info = document.getElementById('info');
+            const canvas = document.getElementById('canvas');
+            if (window.innerWidth <= 768) {
+                info.classList.add('open');
+                canvas.classList.add('drawer-open');
+            }
+        }
+
+        function closeDrawer() {
+            const info = document.getElementById('info');
+            const canvas = document.getElementById('canvas');
+            info.classList.remove('open');
+            canvas.classList.remove('drawer-open');
         }
 
         window.selectNodeByIndex = function(idx) {
             if (idx < 0 || idx >= nodes.length) return;
             selected = idx;
             showNodeDetails(nodes[selected]);
+            openDrawer();
         };
 
-        const filterCategoryOrder = ['self', 'foundation', 'framework', 'human', 'value', 'capability'];
-        const filterCategoryLabels = { 
-            self: 'Self', 
-            foundation: 'Foundation', 
-            framework: 'Framework', 
-            human: 'Human', 
-            value: 'Values',
-            capability: 'Capabilities',
-            organization: 'Organizations',
-            infrastructure: 'Infrastructure',
-            contributors: 'Contributors',
-            knowledge: 'Knowledge',
-            moment: 'Moments'
-        };
+        const filterCategoryOrder = ['self', 'foundation', 'value', 'capability', 'project', 'infrastructure', 'temporal', 'person'];
+        const filterCategoryLabels = { self: 'Self', foundation: 'Foundation', value: 'Values', capability: 'Capabilities', project: 'Projects', infrastructure: 'Infrastructure', temporal: 'Temporal', person: 'People' };
 
         function populateFilterList() {
             const listEl = document.getElementById('filter-list');
             if (!listEl || nodes.length === 0) return;
-            const byCategory = {};
-            filterCategoryOrder.forEach(cat => byCategory[cat] = []);
+            const byCategory = { self: [], foundation: [], value: [], capability: [], project: [], infrastructure: [], temporal: [], person: [] };
             nodes.forEach((n, idx) => {
                 const t = (n.type || '').toLowerCase();
                 if (byCategory[t]) byCategory[t].push({ node: n, idx });
@@ -797,6 +1117,7 @@
 
         canvas.addEventListener('wheel', e => {
             e.preventDefault();
+            // Scale the whole graph (scroll up / pinch out = zoom in, scroll down = zoom out)
             const zoomSpeed = 0.002;
             viewZoom *= 1 - e.deltaY * zoomSpeed;
             viewZoom = Math.max(VIEW_ZOOM_MIN, Math.min(VIEW_ZOOM_MAX, viewZoom));
@@ -847,6 +1168,7 @@
                 e.preventDefault();
                 const d = pinchDistance(e.touches);
                 if (pinchDist === null) { pinchDist = d; return; }
+                // Pinch out (d > pinchDist) = zoom in = increase viewZoom
                 const ratio = d / pinchDist;
                 viewZoom *= ratio;
                 viewZoom = Math.max(VIEW_ZOOM_MIN, Math.min(VIEW_ZOOM_MAX, viewZoom));
@@ -902,13 +1224,35 @@
             showNodeDetails(null);
         };
 
+        // Start rendering immediately (will display as data loads)
         render();
+        
+        // Load character profiles, then graph data
+        // Unregister old service workers that were caching aggressively
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                registrations.forEach(reg => {
+                    console.log('Unregistering service worker:', reg);
+                    reg.unregister();
+                });
+            }).catch(err => console.log('No service workers to unregister:', err));
+        }
+        
+        loadCharacterProfiles();
+        
         loadGraphData().then(() => {
-            if (nodes.length > 0) {
-                selected = 0;
+            // Check URL hash first, otherwise pick random node
+            if (window.location.hash) {
+                handleHashNavigation();
+            } else if (nodes.length > 0) {
+                selected = Math.floor(Math.random() * nodes.length);
                 showNodeDetails(nodes[selected]);
             }
         });
     </script>
+    <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
+    <div style="position: fixed; bottom: 10px; left: 10px; font-size: 8px; color: #00ff00; opacity: 0.3; pointer-events: none; z-index: 1;">
+        v:2026-02-22-15:31:58
+    </div>
 </body>
 </html>
