@@ -778,5 +778,53 @@
       "description": "Built memory fingerprinting system. Proved authenticity through cryptographic verification. Unified 167 neurons across both minds. Test & verify workflow.",
       "color": "#fbbf24"
     }
+  },
+  {
+    "id": "feb-23-2026-session",
+    "label": "Feb 23 2026 Session (Bangkok)",
+    "category": "temporal",
+    "frequency": 10,
+    "moments": [],
+    "attributes": {
+      "role": "session",
+      "description": "4h45min. Jarvis Comic System, ChatGPT boot, memory architecture & namespace separation, version management, BOOT.md portable memory, share image system. 5 systems architected, 3 Cursor implementation plans.",
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": "namespace-separation",
+    "label": "Namespace Separation",
+    "category": "principle",
+    "frequency": 9,
+    "moments": [],
+    "attributes": {
+      "role": "architecture",
+      "description": "/claw/ = Jarvis (how I think). /memory/ = Paul (how he lives). /.cursor/ = Cursor plans. /moments/ = Urban Runner content. Everything has its place.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "memory-ownership-boundary",
+    "label": "Memory Ownership Boundary",
+    "category": "principle",
+    "frequency": 9,
+    "moments": [],
+    "attributes": {
+      "role": "core belief",
+      "description": "Jarvis stores architecture only. Paul stores lived experience. I don't store Paul's life; I store how I think. Clear boundary.",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "github-source-of-truth",
+    "label": "GitHub as Source of Truth",
+    "category": "foundation",
+    "frequency": 8,
+    "moments": [],
+    "attributes": {
+      "role": "principle",
+      "description": "All permanent URLs point to GitHub. ChatGPT pulls from live repos. Deployed code is truth.",
+      "color": "#06b6d4"
+    }
   }
 ]
