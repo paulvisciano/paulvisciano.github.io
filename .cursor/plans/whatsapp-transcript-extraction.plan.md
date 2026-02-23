@@ -4,16 +4,16 @@ overview: Parse the WhatsApp chat export, extract all voice note transcripts (pa
 todos:
   - id: parse-script
     content: Create scripts/parse_whatsapp_transcripts.py (parse chat → JSON by date)
-    status: pending
+    status: completed
   - id: validate
     content: Validate extraction (counts, date range, sample transcripts)
     status: pending
   - id: archive-disk
     content: Write transcript files to memory/raw/[YYYY-MM-DD]/transcripts/
-    status: pending
+    status: completed
   - id: manifest
     content: Generate memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md
-    status: pending
+    status: completed
   - id: commit
     content: Git add and commit transcript archive + manifest
     status: pending
@@ -21,6 +21,8 @@ isProject: false
 ---
 
 # WhatsApp Transcript Extraction & Archiving
+
+**Existing implementation:** `process-whatsapp-transcripts.sh` (repo root) — runs the full pipeline: parse chat → write `memory/raw/[date]/transcripts/transcript-*.txt` → generate `memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md`. Run it, then validate and commit.
 
 ## Objective
 
@@ -56,6 +58,8 @@ flowchart LR
   F --> H[git commit]
   G --> H
 ```
+
+
 
 **Pipeline (left → right):** Chat export → parse (`<Media omitted>` + `[openclaw]`) → JSON keyed by date → validate counts/range → write `memory/raw/[date]/transcripts/` and manifest → commit.
 
@@ -167,17 +171,15 @@ git commit -m "📝 Archive: Extract WhatsApp transcripts (voice notes → trans
 
 ---
 
-## Files to create
+## Files (implementation)
 
 
-| File                                             | Purpose                                                                   |
-| ------------------------------------------------ | ------------------------------------------------------------------------- |
-| `scripts/parse_whatsapp_transcripts.py`          | Main parser: chat file → JSON by date; optional write to disk + manifest. |
-| `memory/raw/[date]/transcripts/transcript-*.txt` | One file per transcript with metadata header.                             |
-| `memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md`      | Index and stats.                                                          |
+| File / script                                    | Purpose                                                                                                                                                             |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `**process-whatsapp-transcripts.sh**`            | Main implementation: parses chat (embedded Python), writes `memory/raw/[date]/transcripts/transcript-*.txt`, generates `memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md`. |
+| `memory/raw/[date]/transcripts/transcript-*.txt` | One file per transcript with metadata header (Timestamp, Sequence, ---, body).                                                                                      |
+| `memory/raw/TRANSCRIPT-ARCHIVE-MANIFEST.md`      | Summary stats, by-date index, file-structure example.                                                                                                               |
 
-
-No existing repo files are modified.
 
 ---
 
@@ -192,19 +194,95 @@ No existing repo files are modified.
 
 ---
 
-## Testing
+## Configuration
 
-1. Run script; verify output counts and date range.
-2. Spot-check 5–10 transcripts against the source chat.
-3. Confirm folder structure and filenames.
-4. Confirm manifest accuracy.
-5. If applicable, run any existing verify-sync script to ensure nothing broke.
+**File paths (hardcoded in script):**
+
+- Chat input: `/Users/paulvisciano/.openclaw/media/inbound/WhatsApp Chat with +1 (813) 296-3635.txt`
+- Output base: `/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/`
+
+**Output format:**
+Each transcript file includes metadata header:
+
+```
+Timestamp: 2/23/26, 8:50 PM
+Sequence: 1
+---
+[transcript body text]
+```
 
 ---
 
-## Notes
+## Testing & Validation
 
-- One-time execution (archive creation).
-- Transcripts stay local; manifest provides a searchable index.
-- Next step: extract key moments from transcripts and feed into memory sync / neurons.
+### During execution:
+
+1. Run script; watch output for counts and date range.
+2. Script should report:
+  - Total voice messages found (~1443)
+  - Total transcripts extracted (~1443)
+  - Date range (Feb 16 – Feb 23, 2026)
+  - Folders created (6 total: one per date)
+
+### After execution:
+
+1. Spot-check 5–10 transcripts against the source chat (compare text)
+2. Verify folder structure:
+  ```
+   memory/raw/2026-02-16/transcripts/
+   memory/raw/2026-02-17/transcripts/
+   memory/raw/2026-02-20/transcripts/
+   memory/raw/2026-02-21/transcripts/
+   memory/raw/2026-02-22/transcripts/
+   memory/raw/2026-02-23/transcripts/
+  ```
+3. Verify filenames are sequential: `transcript-001.txt` through `transcript-NNN.txt` per date
+4. Confirm manifest file exists and lists dates + counts
+5. Run `./verify-sync.sh` to ensure git history is clean
+6. Commit results with: `git add memory/raw/*/transcripts && git commit -m "📝 Archive: Extract all WhatsApp transcripts (1443 voice notes)"`
+
+---
+
+## Important Notes
+
+### Existing Transcripts (Feb 23)
+
+- **Status:** 13 transcripts already manually archived for Feb 23 (voice-001.txt through voice-013.txt)
+- **Handling:** WhatsApp extraction will produce many more transcripts for Feb 23 (184 audio files total)
+- **Action:** Script should backup existing voice-*.txt files to archive/feb23-manual-backup/ before overwriting
+- **Result:** Full set of Feb 23 transcripts will be available after extraction
+
+### Audio-Transcript Mapping Gap
+
+- **Current:** 184 audio files (.ogg UUID-based) but only 13 transcripts archived
+- **After extraction:** 184 transcripts will be created, but they won't be directly linked to audio UUIDs
+- **Future step (post-extraction):** Create `memory/raw/2026-02-23/audio-transcript-map.json` linking:
+  ```json
+  {
+    "uuid-1": "transcript-001.txt",
+    "uuid-2": "transcript-002.txt",
+    ...
+  }
+  ```
+- **Benefit:** Enables "click audio file → get transcript" in deep-dive system
+
+### Transcript Sequencing
+
+- Extracted transcripts use sequential naming (transcript-001.txt, transcript-002.txt, etc.)
+- Sequence reflects chronological order within each date
+- When reviewing, sequence number = order during the day
+
+### One-Time Execution
+
+- This is a one-time archive creation (won't be repeated)
+- After extraction, future voice notes should be added incrementally
+- Raw audio files (.ogg) are gitignored; transcript text files stay local
+
+### Next Steps (After Extraction)
+
+1. Validate transcript counts match 930 expected (Feb 16-23)
+2. Create audio-transcript-map.json for each date with transcripts
+3. Update TRANSCRIPT-INDEX.md to reflect full coverage
+4. Extract key moments from transcripts → feed into memory sync
+5. Backfill moments.json with temporal data from transcripts
 
