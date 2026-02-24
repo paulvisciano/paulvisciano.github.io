@@ -2510,7 +2510,7 @@
   },
   {
     "source": "paul",
-    "target": "bai-reconnection",
+    "target": "bai",
     "weight": 0.8,
     "type": "reconnected-with",
     "label": "reconnected-with"
