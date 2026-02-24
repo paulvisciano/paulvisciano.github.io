@@ -88,6 +88,7 @@
                     <div class="legend-item"><div class="legend-dot" style="background: #00ff88; box-shadow: 0 0 6px #00ff88;"></div><span style="color: #00ff88;">Locations</span></div>
                     <div class="legend-item"><div class="legend-dot" style="background: #ffaa00; box-shadow: 0 0 6px #ffaa00;"></div><span style="color: #ffaa00;">Temporal</span></div>
                     <div class="legend-item"><div class="legend-dot" style="background: #aa00ff; box-shadow: 0 0 6px #aa00ff;"></div><span style="color: #aa00ff;">Emotions</span></div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #fbbf24; box-shadow: 0 0 6px #fbbf24;"></div><span style="color: #fbbf24;">Memory links</span></div>
                 </div>
             </div>
         </div>
@@ -99,6 +100,7 @@
         <button class="filter-btn" data-filter="locations">Locations</button>
         <button class="filter-btn" data-filter="activities">Activities</button>
         <button class="filter-btn" data-filter="temporal">Temporal</button>
+        <button class="filter-btn" data-filter="memorylinks">Memory links</button>
     </div>
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
@@ -117,6 +119,7 @@
             <button class="filter-btn" data-filter="locations">Locations</button>
             <button class="filter-btn" data-filter="activities">Activities</button>
             <button class="filter-btn" data-filter="temporal">Temporal</button>
+            <button class="filter-btn" data-filter="memorylinks">Memory links</button>
         </div>
         <div id="drawerContent" class="drawer-content">
             <div id="drawerDetails"></div>
@@ -145,10 +148,10 @@
 
     <script>
     window.NEURAL_GRAPH_CONFIG = {
-        categoryColors: { activity: '#00ffff', person: '#ff00aa', location: '#00ff88', emotion: '#aa00ff', temporal: '#ffaa00', region: '#8800ff' },
+        categoryColors: { activity: '#00ffff', person: '#ff00aa', location: '#00ff88', emotion: '#aa00ff', temporal: '#ffaa00', region: '#8800ff', memoryReference: '#fbbf24' },
         filterToType: { people: 'person', locations: 'location', activities: 'activity' },
-        filterCategoryOrder: ['region', 'person', 'location', 'activity', 'temporal', 'emotion'],
-        filterCategoryLabels: { region: 'Regions', person: 'People', location: 'Locations', activity: 'Activities', temporal: 'Temporal', emotion: 'Emotions' },
+        filterCategoryOrder: ['region', 'person', 'location', 'activity', 'temporal', 'emotion', 'memoryReference'],
+        filterCategoryLabels: { region: 'Regions', person: 'People', location: 'Locations', activity: 'Activities', temporal: 'Temporal', emotion: 'Emotions', memoryReference: 'Memory links' },
         fallbackNodes: [
             { id: 0, name: 'Paul', type: 'person', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 10, color: '#FF6B6B', glow: 22, freq: 100, desc: 'Urban Runner, digital nomad' },
             { id: 1, name: 'Volleyball', type: 'activity', x: 80, y: -60, z: 40, vx: 0, vy: 0, vz: 0, size: 9, color: '#00ffff', glow: 20, freq: 50, desc: '18 years of competition, flow state' },
