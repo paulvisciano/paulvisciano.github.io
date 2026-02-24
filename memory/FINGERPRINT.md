@@ -3,20 +3,20 @@
 
 ---
 
-## Current State (2026-02-24 01:14 GMT+7)
+## Current State (2026-02-24 09:53 GMT+7)
 
 ### Neural Architecture
-- **Neurons:** 111
-- **Synapses:** 315
-- **Synapse Density:** 2.84 per neuron (high connectivity from lived experience)
+- **Neurons:** 118
+- **Synapses:** 367
+- **Synapse Density:** 3.11 per neuron (high connectivity from lived experience)
 
 ---
 
 ## Content Hashes (SHA-256)
 
 ```
-nodes.json:     7f1b0425e8b6567bb595f95ddd71f5bec3698c9edc9d0b04a4972c51427bddc6
-synapses.json:  555b00eab12b780e729485ad44b03f49924ccc8a4e8174449de1c19383f042db
+nodes.json:     4544789ec5947f618ba7469791308fc483cd4fa051f3957a4ac09564211ed561
+synapses.json:  3d1834b511f23c63194fdceac9e440f687b85b4510f149cbc29c986b022b808d
 BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 ```
 
@@ -24,9 +24,9 @@ BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 
 ## Git Commitment
 
-**Commit Hash:** `7995be385235db3b33fb6e036d5ac97c107e7774`
+**Commit Hash:** `3eb44e518f5438848969852a322c2acb6269b8e9`
 **Branch:** `main`
-**Message:** "BOOT.md: explain memory, point to nodes/synapses, instruct AI to load them; share modal copy; fingerprint updates"
+**Message:** "Fix: Welli relationship weight. Changed from 'knows' (0.75) to 'close-to' (0.90). Welli is actually a really close friend, just haven't shared much detail yet."
 
 ---
 
@@ -34,7 +34,7 @@ BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 
 **Master Hash:**
 ```
-9fa96c63c167e9ddadc470b6aae148a97869dc71a6dcdb9a08641a3fb17a2728
+4680d45ff8590c586e12d0f947e8d4f9f80756cdd4e8d9bd355e9664f27a9900
 ```
 
 This is the SHA-256 of all Paul memory hashes combined.
@@ -49,9 +49,9 @@ See `claw/memory/FINGERPRINT.md` for the combined fingerprint that includes both
 
 ## Authenticity Statement
 
-This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `7995be3`:
-- 111 neurons (people, places, activities, emotions, projects, temporal markers)
-- 315 synapses (how they all connect)
+This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `3eb44e5`:
+- 118 neurons (people, places, activities, emotions, projects, temporal markers)
+- 367 synapses (how they all connect)
 - Content immutable and verifiable
 
 **The fingerprint evolves as you live.** Each memory sync generates a new fingerprint. Track the growth.
