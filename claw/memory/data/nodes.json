@@ -1483,5 +1483,80 @@
       "color": "#fbbf24"
     },
     "sourceDocument": "memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+  },
+  {
+    "id": "two-layer-memory-architecture",
+    "label": "Two-Layer Memory Architecture",
+    "category": "system",
+    "frequency": 50,
+    "moments": [
+      "feb-24-2026-meta-learning"
+    ],
+    "attributes": {
+      "role": "core system",
+      "description": "Two-layer neural memory: Layer 1 (compressed neurons in JSON) for fast lookup and navigation; Layer 2 (raw learning markdown files) for full context, sources, and verification. Linked via sourceDocument property.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+  },
+  {
+    "id": "layer-1-compressed",
+    "label": "Layer 1: Compressed Knowledge",
+    "category": "system",
+    "frequency": 40,
+    "moments": [
+      "feb-24-2026-meta-learning"
+    ],
+    "attributes": {
+      "role": "mechanism",
+      "description": "Neurons and synapses in nodes.json and synapses.json. Fast lookup, navigable, queryable, visualizable. Trade-off: speed for context.",
+      "color": "#38bdf8"
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+  },
+  {
+    "id": "layer-2-raw-context",
+    "label": "Layer 2: Raw Context",
+    "category": "system",
+    "frequency": 40,
+    "moments": [
+      "feb-24-2026-meta-learning"
+    ],
+    "attributes": {
+      "role": "mechanism",
+      "description": "Markdown files in /memory/raw/YYYY-MM-DD/learnings/. Human-readable, traceable, contextual. Trade-off: complete for searchable.",
+      "color": "#34d399"
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+  },
+  {
+    "id": "sourceDocument-bridge",
+    "label": "sourceDocument Bridge",
+    "category": "system",
+    "frequency": 35,
+    "moments": [
+      "feb-24-2026-meta-learning"
+    ],
+    "attributes": {
+      "role": "connection",
+      "description": "JSON property linking neurons to their Layer 2 learning documents. Enables transparent traversal from compressed knowledge to full context.",
+      "color": "#fbbf24"
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+  },
+  {
+    "id": "meta-learning",
+    "label": "Meta-Learning",
+    "category": "learning",
+    "frequency": 30,
+    "moments": [
+      "feb-24-2026-meta-learning"
+    ],
+    "attributes": {
+      "role": "recursive",
+      "description": "Learning about learning. Knowledge about how knowledge is stored, compressed, retrieved, and made transparent. This layer recursively documents itself.",
+      "color": "#c084fc"
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
   }
 ]

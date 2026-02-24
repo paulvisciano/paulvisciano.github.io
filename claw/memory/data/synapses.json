@@ -1769,5 +1769,53 @@
     "weight": 0.96,
     "type": "collaboration",
     "label": "with"
+  },
+  {
+    "source": "two-layer-memory-architecture",
+    "target": "layer-1-compressed",
+    "label": "has-component",
+    "weight": 0.95
+  },
+  {
+    "source": "two-layer-memory-architecture",
+    "target": "layer-2-raw-context",
+    "label": "has-component",
+    "weight": 0.95
+  },
+  {
+    "source": "two-layer-memory-architecture",
+    "target": "sourceDocument-bridge",
+    "label": "connects-via",
+    "weight": 0.9
+  },
+  {
+    "source": "layer-1-compressed",
+    "target": "sourceDocument-bridge",
+    "label": "links-to",
+    "weight": 0.85
+  },
+  {
+    "source": "sourceDocument-bridge",
+    "target": "layer-2-raw-context",
+    "label": "bridges-to",
+    "weight": 0.85
+  },
+  {
+    "source": "meta-learning",
+    "target": "two-layer-memory-architecture",
+    "label": "describes",
+    "weight": 0.9
+  },
+  {
+    "source": "claude-code",
+    "target": "two-layer-memory-architecture",
+    "label": "uses",
+    "weight": 0.8
+  },
+  {
+    "source": "transparency",
+    "target": "two-layer-memory-architecture",
+    "label": "enables",
+    "weight": 0.85
   }
 ]
