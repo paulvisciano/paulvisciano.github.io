@@ -1558,5 +1558,17 @@
       "color": "#FFB6C1"
     },
     "idKey": "feb-24-2026-music-preference-learning"
+  },
+  {
+    "id": "listening-to-music",
+    "label": "Listening to Music",
+    "category": "activity",
+    "frequency": 15,
+    "attributes": {
+      "role": "activity",
+      "description": "Active engagement with music: listening, enjoying, exploring artists and genres. Done in shower, travel, downtime. Core part of Paul's personal time.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "listening-to-music"
   }
 ]
