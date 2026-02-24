@@ -2198,5 +2198,75 @@
     "weight": 0.95,
     "type": "belongs-to",
     "label": "belongs-to"
+  },
+  {
+    "source": "three-layer-airgapped-architecture",
+    "target": "layer1-public-github",
+    "weight": 0.95,
+    "type": "component",
+    "label": "has-layer"
+  },
+  {
+    "source": "three-layer-airgapped-architecture",
+    "target": "layer2-local-encrypted",
+    "weight": 0.95,
+    "type": "component",
+    "label": "has-layer"
+  },
+  {
+    "source": "three-layer-airgapped-architecture",
+    "target": "layer3-usb-airgap",
+    "weight": 0.95,
+    "type": "component",
+    "label": "has-layer"
+  },
+  {
+    "source": "layer3-usb-airgap",
+    "target": "fingerprint-usb-drive",
+    "weight": 0.95,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "layer3-usb-airgap",
+    "target": "airgapped-security",
+    "weight": 0.95,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "three-layer-airgapped-architecture",
+    "target": "proof-without-exposure",
+    "weight": 0.92,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "three-layer-airgapped-architecture",
+    "target": "empowerment-vs-gatekeeping",
+    "weight": 0.93,
+    "type": "solves",
+    "label": "solves"
+  },
+  {
+    "source": "claude-code",
+    "target": "three-layer-airgapped-architecture",
+    "weight": 0.9,
+    "type": "understands",
+    "label": "understands"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "three-layer-airgapped-architecture",
+    "weight": 0.95,
+    "type": "designed",
+    "label": "designed"
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "three-layer-airgapped-architecture",
+    "weight": 0.92,
+    "type": "anchors-to",
+    "label": "anchors-to"
   }
 ]

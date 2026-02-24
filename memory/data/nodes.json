@@ -1673,5 +1673,108 @@
     "sourceDocument": [
       "memory/raw/2026-02-24/integrated/transcript.md"
     ]
+  },
+  {
+    "id": "three-layer-airgapped-architecture",
+    "label": "Three-Layer Airgapped Architecture",
+    "category": "system",
+    "frequency": 95,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "core-security",
+      "description": "Layer 1 (Public GitHub) + Layer 2 (Local Encrypted) + Layer 3 (USB Airgap). Radical transparency AND radical privacy. No compromise.",
+      "color": "#3b82f6",
+      "criticality": "core-foundation"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
+  },
+  {
+    "id": "layer1-public-github",
+    "label": "Layer 1: Public GitHub",
+    "category": "architecture",
+    "frequency": 12,
+    "attributes": {
+      "role": "teaching",
+      "description": "Implementation plans, philosophy, architecture - teach the world completely. Commits tell story.",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
+  },
+  {
+    "id": "layer2-local-encrypted",
+    "label": "Layer 2: Local Encrypted",
+    "category": "architecture",
+    "frequency": 12,
+    "attributes": {
+      "role": "working",
+      "description": "Fast working memory on encrypted device. Pull from Layer 3, work, push back. Can be cleared anytime.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
+  },
+  {
+    "id": "layer3-usb-airgap",
+    "label": "Layer 3: USB Airgap",
+    "category": "architecture",
+    "frequency": 14,
+    "attributes": {
+      "role": "private-secrets",
+      "description": "Fingerprint USB drive, airgapped from network. Complete git history. Deep secrets stay offline. You own it.",
+      "color": "#ef4444",
+      "criticality": "core-secret"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
+  },
+  {
+    "id": "fingerprint-usb-drive",
+    "label": "Fingerprint USB Drive",
+    "category": "hardware",
+    "frequency": 13,
+    "attributes": {
+      "role": "security-token",
+      "description": "Kingston/SanDisk/Samsung fingerprint USB. Biometric auth. Git repo on drive. Only you can access (physically controlled).",
+      "color": "#f97316"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
+  },
+  {
+    "id": "airgapped-security",
+    "label": "Airgapped Security (Offline = Safe)",
+    "category": "principle",
+    "frequency": 13,
+    "attributes": {
+      "role": "security-philosophy",
+      "description": "USB disconnected = impossible to hack remotely. Network attack surface = zero. Physical ownership = control.",
+      "color": "#10b981"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
+  },
+  {
+    "id": "proof-without-exposure",
+    "label": "Proof Without Exposure",
+    "category": "concept",
+    "frequency": 12,
+    "attributes": {
+      "role": "cryptographic",
+      "description": "Show fingerprint hash to prove authenticity without showing data. Git history proves integrity. Transparency + Privacy.",
+      "color": "#6366f1"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
+    ]
   }
 ]
