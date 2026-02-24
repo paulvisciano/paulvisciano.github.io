@@ -1474,5 +1474,89 @@
       "color": "#FF1744"
     },
     "idKey": "creek-community"
+  },
+  {
+    "id": "music-preference-genre",
+    "label": "Classic Rock/Pop (1950s-1960s)",
+    "category": "preference",
+    "frequency": 8,
+    "attributes": {
+      "role": "genre-preference",
+      "description": "Classic rock, doo-wop, oldies. Travelin' Man, Runaround Sue, Return To Sender era. Loved for storytelling, melody, traveling themes.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "music-preference-genre"
+  },
+  {
+    "id": "ricky-nelson-artist",
+    "label": "Ricky Nelson",
+    "category": "artist",
+    "frequency": 7,
+    "attributes": {
+      "role": "favorite-artist",
+      "description": "Travelin' Man (Remastered) - the song Michael recommended. 5.2M views. About moving through the world.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "ricky-nelson-artist"
+  },
+  {
+    "id": "dion-artist",
+    "label": "Dion",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Runaround Sue in the playlist. Part of Paul's music taste.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "dion-artist"
+  },
+  {
+    "id": "elvis-presley-artist",
+    "label": "Elvis Presley",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Return To Sender in the playlist. Classic artist in Paul's preferred era.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "elvis-presley-artist"
+  },
+  {
+    "id": "bobby-darin-artist",
+    "label": "Bobby Darin",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Dream Lover in the playlist. Part of the classic rock era Paul enjoys.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "bobby-darin-artist"
+  },
+  {
+    "id": "paul-anka-artist",
+    "label": "Paul Anka",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Put Your Head On My Shoulder in the playlist. Classic era singer Paul likes.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "paul-anka-artist"
+  },
+  {
+    "id": "feb-24-2026-music-preference-learning",
+    "label": "Feb 24 2026 Music Preference Learning",
+    "category": "temporal",
+    "frequency": 9,
+    "attributes": {
+      "role": "preference-learning",
+      "description": "Discovered Paul's music taste: classic rock/pop from 1950s-1960s. Travelin' Man by Ricky Nelson (Michael's recommendation about the traveling man). Playlist includes Dion, Elvis, Bobby Darin, Paul Anka. Theme: storytelling, melody, wandering.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "feb-24-2026-music-preference-learning"
   }
 ]
