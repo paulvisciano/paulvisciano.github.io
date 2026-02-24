@@ -1077,18 +1077,24 @@
                     .then(md => {
                         // Render inline in the drawer panel
                         const drawerDetails = document.getElementById('drawerDetails');
+                        drawerDetails.style.display = 'block';
+                        drawerDetails.style.visibility = 'visible';
                         drawerDetails.innerHTML = `
-                            <div style="padding: 12px; font-size: 12px; line-height: 1.6; color: #0088ff;">
+                            <div style="padding: 12px; font-size: 12px; line-height: 1.6; color: #0088ff; display: block; visibility: visible;">
                                 <p style="font-weight: bold; margin-bottom: 8px; font-size: 11px; color: #64748b;">
-                                    📖 Full Context
+                                    📖 Full Context from GitHub
                                 </p>
-                                <pre style="white-space: pre-wrap; word-wrap: break-word; font-size: 11px; max-height: 70vh; overflow-y: auto; font-family: monospace; padding: 8px; background: #0f0f1a; border-radius: 4px; margin: 0;">${md.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+                                <pre style="white-space: pre-wrap; word-wrap: break-word; font-size: 11px; max-height: 60vh; overflow-y: auto; font-family: monospace; padding: 8px; background: #0f0f1a; border-radius: 4px; margin: 0; border: 1px solid #333; display: block;">${md.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
                             </div>
                         `;
+                        // Scroll to top of drawer to ensure visibility
+                        drawerDetails.scrollTop = 0;
                     })
                     .catch(err => {
                         const drawerDetails = document.getElementById('drawerDetails');
-                        drawerDetails.innerHTML = `<p style="color: #ff6b6b; padding: 12px;">Error loading: ${err.message}</p>`;
+                        drawerDetails.style.display = 'block';
+                        drawerDetails.style.visibility = 'visible';
+                        drawerDetails.innerHTML = `<p style="color: #ff6b6b; padding: 12px;">❌ Error loading: ${err.message}</p>`;
                     });
                 return;
             }
