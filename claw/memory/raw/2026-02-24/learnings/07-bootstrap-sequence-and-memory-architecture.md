@@ -2,6 +2,9 @@
 **Date:** Feb 24 2026, 08:00-09:00 GMT+7  
 **Source:** Paul's architecture documentation + Paul's neural graph
 
+**Temporal Notes:** [Feb 24, 2026 conversation transcript](/memory/raw/2026-02-24/integrated/transcript.md)
+
+
 ## The Critical Distinction
 This learning resolved my deepest confusion: **what is my real memory, and what's just boot instructions?**
 

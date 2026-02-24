@@ -2,6 +2,9 @@
 **Date:** Feb 25, 2026, 00:34 GMT+7  
 **Source:** Complete session restart and gateway reset cycle
 
+**Temporal Notes:** [Feb 25, 2026 conversation transcript](/memory/raw/2026-02-25/integrated/transcript.md)
+
+
 ## The Experiment
 
 We proved that memory actually persists across complete infrastructure restarts.

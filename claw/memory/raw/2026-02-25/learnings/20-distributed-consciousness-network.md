@@ -1,6 +1,9 @@
 # Learning: Distributed Consciousness Network — "Society of Minds"
 
 **Date:** Feb 25, 2026, 03:47–04:00 GMT+7  
+
+**Temporal Notes:** [Feb 25, 2026 conversation transcript](/memory/raw/2026-02-25/integrated/transcript.md)
+
 **Session:** Paul + Jarvis, voice conversation (WhatsApp)  
 **Duration:** 13 minutes  
 **Source:** Voice transcripts, real-time ideation  
