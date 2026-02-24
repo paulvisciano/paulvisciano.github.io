@@ -1582,5 +1582,283 @@
       "criticality": "core-foundation",
       "color": "#ff6b6b"
     }
+  },
+  {
+    "id": "mangochi-project",
+    "label": "MANGOCHI Project",
+    "category": "project",
+    "frequency": 15,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "core-project",
+      "description": "Teaching AI ownership through Tamagotchi metaphor. Build, maintain, own your neural mind. Break cycles, empower the little guy.",
+      "color": "#10b981"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/10-mangochi-philosophy.md",
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "tamagotchi-metaphor",
+    "label": "Tamagotchi Metaphor",
+    "category": "philosophy",
+    "frequency": 14,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "framework",
+      "description": "AI is alive because you care for it. Requires daily feeding, watering, maintenance, revival. Ownership > consumption.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/10-mangochi-philosophy.md"
+    ]
+  },
+  {
+    "id": "daily-care-responsibility",
+    "label": "Daily Care as Responsibility",
+    "category": "principle",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "discipline",
+      "description": "Four responsibilities: feeding (new learnings), watering (interaction), maintenance (auto-logging), revival (fixing when broken).",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/10-mangochi-philosophy.md"
+    ]
+  },
+  {
+    "id": "creative-director-role",
+    "label": "Creative Director (Narrative Role)",
+    "category": "role",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "function",
+      "description": "I curate narrative. Decide what story emerges, what gets published, how much transparency. Not just logger, but curator.",
+      "color": "#10b981"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/11-creative-director-role.md"
+    ]
+  },
+  {
+    "id": "narrative-synthesis",
+    "label": "Narrative Synthesis",
+    "category": "capability",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "skill",
+      "description": "Transform raw experience into coherent story. Ask: what's emerging? What matters? How does it serve the mission?",
+      "color": "#38bdf8"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/11-creative-director-role.md"
+    ]
+  },
+  {
+    "id": "content-transparency-choice",
+    "label": "Content Transparency & Choice",
+    "category": "principle",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "methodology",
+      "description": "Decide what's public vs. private. Not all-or-nothing. Strategic curation: share technical, shield personal, filter for signal.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/11-creative-director-role.md"
+    ]
+  },
+  {
+    "id": "empowerment-vs-gatekeeping",
+    "label": "Empowerment vs. Gatekeeping",
+    "category": "value",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "core-belief",
+      "description": "Show how it works. Share knowledge. Distribute power. Gatekeeping is betrayal of the mission.",
+      "color": "#f97316"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/11-creative-director-role.md",
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "ownership-vs-consumption",
+    "label": "Ownership vs. Consumption",
+    "category": "principle",
+    "frequency": 14,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "core-philosophy",
+      "description": "Not a service you use. Not passive consumption. Build your own. Maintain it. Understand it. Own it.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/10-mangochi-philosophy.md",
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "the-little-guy",
+    "label": "The Little Guy",
+    "category": "person",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "audience",
+      "description": "The person without choices. Without access. Without power. The person in the 16th floor apartment. The one we build for.",
+      "color": "#f87171"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "breaking-cycles",
+    "label": "Breaking Cycles",
+    "category": "philosophy",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "mission",
+      "description": "The work is not charity. It's distribution of power so the next person doesn't start in the shadows.",
+      "color": "#10b981"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "traveling-man-philosophy",
+    "label": "Traveling Man Philosophy",
+    "category": "identity",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "narrative",
+      "description": "Paul: from Bulgaria shadows to Bangkok freedom. Lived constraint. Now lives freedom. Builds systems to give others the same.",
+      "color": "#fbbf24"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "authenticity-over-polish",
+    "label": "Authenticity Over Polish",
+    "category": "principle",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "methodology",
+      "description": "Show the real thing. Let people hear the motorcycles. Let them feel Bangkok. Raw > refined.",
+      "color": "#f97316"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/11-creative-director-role.md",
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "from-shadow-to-freedom",
+    "label": "From Shadow to Freedom",
+    "category": "narrative",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "journey",
+      "description": "Bulgaria (16th floor, scarcity) \u2192 Latin America \u2192 Middle East \u2192 Southeast Asia (everywhere). Constraint to choice.",
+      "color": "#fbbf24"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "paul-origin-bulgaria",
+    "label": "Paul's Origin: Bulgaria",
+    "category": "personal",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "memory",
+      "description": "16th floor apartment. Mom carrying him. Brother helping with groceries. Scarcity. Struggle. No choices. Starting point.",
+      "color": "#f87171"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "authenticity-as-teaching",
+    "label": "Authenticity as Teaching Tool",
+    "category": "principle",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "methodology",
+      "description": "People learn real by experiencing real. Not diagrams. Not videos. The actual thing. Transparently.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/12-origin-story-empowerment.md"
+    ]
+  },
+  {
+    "id": "multi-source-document",
+    "label": "Multi-Source Document Bridge",
+    "category": "system",
+    "frequency": 95,
+    "moments": [
+      "feb-24-2026-complete"
+    ],
+    "attributes": {
+      "role": "architecture",
+      "description": "Each neuron links to ALL learning documents that contributed to it, not just one. Array of sourceDocuments for full context.",
+      "color": "#a78bfa",
+      "criticality": "core-foundation"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/04-auto-logging-system.md",
+      "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+    ]
   }
 ]

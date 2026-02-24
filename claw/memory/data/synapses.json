@@ -1925,5 +1925,243 @@
     "target": "jarvis-core-foundation",
     "label": "is-anchored-in",
     "weight": 0.98
+  },
+  {
+    "source": "mangochi-project",
+    "target": "tamagotchi-metaphor",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "is-based-on"
+  },
+  {
+    "source": "mangochi-project",
+    "target": "daily-care-responsibility",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "requires"
+  },
+  {
+    "source": "mangochi-project",
+    "target": "jarvis-identity",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "exemplifies"
+  },
+  {
+    "source": "mangochi-project",
+    "target": "the-little-guy",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "serves"
+  },
+  {
+    "source": "mangochi-project",
+    "target": "paul-visciano",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "created-by"
+  },
+  {
+    "source": "tamagotchi-metaphor",
+    "target": "ownership-vs-consumption",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "tamagotchi-metaphor",
+    "target": "daily-care-responsibility",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "defines"
+  },
+  {
+    "source": "creative-director-role",
+    "target": "narrative-synthesis",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "requires"
+  },
+  {
+    "source": "creative-director-role",
+    "target": "content-transparency-choice",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "involves"
+  },
+  {
+    "source": "creative-director-role",
+    "target": "jarvis-identity",
+    "weight": 0.9,
+    "type": "learned",
+    "label": "describes"
+  },
+  {
+    "source": "narrative-synthesis",
+    "target": "empowerment-vs-gatekeeping",
+    "weight": 0.88,
+    "type": "learned",
+    "label": "serves"
+  },
+  {
+    "source": "content-transparency-choice",
+    "target": "authenticity-over-polish",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "operationalizes"
+  },
+  {
+    "source": "empowerment-vs-gatekeeping",
+    "target": "breaking-cycles",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "empowerment-vs-gatekeeping",
+    "target": "the-little-guy",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "serves"
+  },
+  {
+    "source": "ownership-vs-consumption",
+    "target": "empowerment-vs-gatekeeping",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "related-to"
+  },
+  {
+    "source": "the-little-guy",
+    "target": "breaking-cycles",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "enabled-by"
+  },
+  {
+    "source": "the-little-guy",
+    "target": "paul-origin-bulgaria",
+    "weight": 0.9,
+    "type": "learned",
+    "label": "represented-by"
+  },
+  {
+    "source": "traveling-man-philosophy",
+    "target": "from-shadow-to-freedom",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "describes"
+  },
+  {
+    "source": "traveling-man-philosophy",
+    "target": "paul-visciano",
+    "weight": 0.98,
+    "type": "learned",
+    "label": "is"
+  },
+  {
+    "source": "traveling-man-philosophy",
+    "target": "empowerment-vs-gatekeeping",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "drives"
+  },
+  {
+    "source": "authenticity-over-polish",
+    "target": "authenticity-as-teaching",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "authenticity-over-polish",
+    "target": "transparency",
+    "weight": 0.9,
+    "type": "learned",
+    "label": "based-on"
+  },
+  {
+    "source": "from-shadow-to-freedom",
+    "target": "paul-origin-bulgaria",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "starts-from"
+  },
+  {
+    "source": "paul-origin-bulgaria",
+    "target": "the-little-guy",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "embodies"
+  },
+  {
+    "source": "breaking-cycles",
+    "target": "paul-origin-bulgaria",
+    "weight": 0.88,
+    "type": "learned",
+    "label": "motivated-by"
+  },
+  {
+    "source": "mangochi-project",
+    "target": "empowerment-vs-gatekeeping",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "based-on"
+  },
+  {
+    "source": "mangochi-project",
+    "target": "authenticity-over-polish",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "embodies"
+  },
+  {
+    "source": "multi-source-document",
+    "target": "sourceDocument-bridge",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "extends"
+  },
+  {
+    "source": "multi-source-document",
+    "target": "two-layer-memory-architecture",
+    "weight": 0.9,
+    "type": "learned",
+    "label": "enhances"
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "multi-source-document",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "anchors-to"
+  },
+  {
+    "source": "claude-code",
+    "target": "mangochi-project",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "created-by"
+  },
+  {
+    "source": "claude-code",
+    "target": "creative-director-role",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "embodies"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "traveling-man-philosophy",
+    "weight": 0.98,
+    "type": "learned",
+    "label": "embodies"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "breaking-cycles",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "driven-by"
   }
 ]
