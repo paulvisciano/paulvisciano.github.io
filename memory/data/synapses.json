@@ -2815,5 +2815,40 @@
     "weight": 0.56,
     "type": "memory-sync",
     "label": "synced 2026-02-24"
+  },
+  {
+    "source": "paul",
+    "target": "complete-transparency-architecture",
+    "weight": 0.93,
+    "type": "created",
+    "label": "built"
+  },
+  {
+    "source": "complete-transparency-architecture",
+    "target": "master-hash-verification",
+    "weight": 0.89,
+    "type": "contains",
+    "label": "uses"
+  },
+  {
+    "source": "cursor-rapid-iteration",
+    "target": "complete-transparency-architecture",
+    "weight": 0.87,
+    "type": "enables",
+    "label": "developed-with"
+  },
+  {
+    "source": "paul",
+    "target": "cursor-rapid-iteration",
+    "weight": 0.91,
+    "type": "practices",
+    "label": "workflow"
+  },
+  {
+    "source": "transparency-secrecy",
+    "target": "complete-transparency-architecture",
+    "weight": 0.95,
+    "type": "manifests",
+    "label": "embodied-in"
   }
 ]

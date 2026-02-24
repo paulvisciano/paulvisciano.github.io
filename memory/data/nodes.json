@@ -2009,5 +2009,35 @@
     "sourceDocument": [
       "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
     ]
+  },
+  {
+    "id": "complete-transparency-architecture",
+    "label": "Complete Transparency Architecture",
+    "category": "system",
+    "frequency": 95,
+    "attributes": {
+      "role": "core-system",
+      "description": "Three-layer traceability system: neural graph (compressed) → learning documents (full context) → git commits (immutable proof). Master hash as single source of truth."
+    }
+  },
+  {
+    "id": "master-hash-verification",
+    "label": "Master Hash Verification",
+    "category": "foundation",
+    "frequency": 92,
+    "attributes": {
+      "role": "verification-system",
+      "description": "SHA256 hash of combined nodes.json + synapses.json. Cryptographic proof of exact neural state. Displayed in UI for public verification."
+    }
+  },
+  {
+    "id": "cursor-rapid-iteration",
+    "label": "Cursor Rapid Iteration",
+    "category": "capability",
+    "frequency": 94,
+    "attributes": {
+      "role": "workflow-pattern",
+      "description": "Write detailed plan → Cursor executes → git deploys → iterate. 15-min plans → 26-min execution. Feedback loop so tight that ideas become reality before finishing forming."
+    }
   }
 ]
