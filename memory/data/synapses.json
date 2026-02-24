@@ -65,7 +65,7 @@
   {
     "source": "paul",
     "target": "work",
-    "weight": 0.74,
+    "weight": 0.76,
     "type": "activity",
     "label": "remote engineer"
   },
@@ -86,7 +86,7 @@
   {
     "source": "paul",
     "target": "growth",
-    "weight": 0.56,
+    "weight": 0.57,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -940,7 +940,7 @@
   {
     "source": "work",
     "target": "bangkok",
-    "weight": 0.63,
+    "weight": 0.64,
     "type": "location-activity",
     "label": "OutSystems timezone"
   },
@@ -1110,7 +1110,7 @@
     "target": "bangkok",
     "weight": 0.78,
     "type": "location-activity",
-    "label": "Amsterdam Caf\u00e9 reggae"
+    "label": "Amsterdam Café reggae"
   },
   {
     "source": "nightlife-exploration",
@@ -1166,7 +1166,7 @@
     "target": "bangkok",
     "weight": 0.92,
     "type": "episode-mechanic",
-    "label": "\u0e3f741 redistributed"
+    "label": "฿741 redistributed"
   },
   {
     "source": "wealth-redistribution",
@@ -1835,7 +1835,7 @@
   {
     "source": "paul",
     "target": "bangkok",
-    "weight": 0.57,
+    "weight": 0.59,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -2794,5 +2794,26 @@
     "weight": 0.95,
     "type": "learned",
     "label": "tested-by"
+  },
+  {
+    "source": "paul",
+    "target": "authenticity",
+    "weight": 0.52,
+    "type": "memory-sync",
+    "label": "synced 2026-02-24"
+  },
+  {
+    "source": "paul",
+    "target": "bulgaria",
+    "weight": 0.52,
+    "type": "memory-sync",
+    "label": "synced 2026-02-24"
+  },
+  {
+    "source": "paul",
+    "target": "first-person-navigation",
+    "weight": 0.52,
+    "type": "memory-sync",
+    "label": "synced 2026-02-24"
   }
 ]
