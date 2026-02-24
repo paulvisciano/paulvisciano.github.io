@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 155,
+    "frequency": 205,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -45,6 +45,18 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/OPTICAL-SHOP-MOMENT-2026-02-23.md",
             "label": "OPTICAL-SHOP-MOMENT-2026-02-23.md (raw)",
             "integrated_at": "2026-02-23T14:46:04.608Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23-memory-sync.md",
+            "label": "2026-02-23-memory-sync.md (OpenClaw)",
+            "integrated_at": "2026-02-23T18:14:07.013Z"
+          },
+          {
+            "type": "raw-transcript",
+            "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/transcript.md",
+            "label": "transcript.md (raw)",
+            "integrated_at": "2026-02-23T18:14:07.013Z"
           }
         ]
       }
@@ -54,7 +66,7 @@
     "id": "wouter",
     "label": "Wouter",
     "category": "person",
-    "frequency": 45,
+    "frequency": 46,
     "attributes": {
       "role": "travel companion",
       "description": "Adventure brother, long-arc relationship, conquest philosophy",
@@ -354,7 +366,7 @@
     "id": "bangkok",
     "label": "Bangkok",
     "category": "location",
-    "frequency": 68,
+    "frequency": 70,
     "attributes": {
       "country": "Thailand",
       "type": "city",
@@ -385,6 +397,18 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/OPTICAL-SHOP-MOMENT-2026-02-23.md",
             "label": "OPTICAL-SHOP-MOMENT-2026-02-23.md (raw)",
             "integrated_at": "2026-02-23T14:46:04.608Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-23-memory-sync.md",
+            "label": "2026-02-23-memory-sync.md (OpenClaw)",
+            "integrated_at": "2026-02-23T18:14:07.013Z"
+          },
+          {
+            "type": "raw-transcript",
+            "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/transcript.md",
+            "label": "transcript.md (raw)",
+            "integrated_at": "2026-02-23T18:14:07.013Z"
           }
         ]
       }
@@ -717,7 +741,7 @@
     "id": "volleyball",
     "label": "Volleyball",
     "category": "activity",
-    "frequency": 82,
+    "frequency": 84,
     "attributes": {
       "type": "sport",
       "significance": "Central life activity, crew connector, 18-year history",
@@ -741,7 +765,7 @@
     "id": "urban-runner",
     "label": "Urban Runner",
     "category": "activity",
-    "frequency": 71,
+    "frequency": 77,
     "attributes": {
       "type": "creative project",
       "significance": "Meta-narrative, generational legacy, gamified storytelling",
@@ -753,7 +777,7 @@
     "id": "work",
     "label": "Work (OutSystems)",
     "category": "activity",
-    "frequency": 50,
+    "frequency": 56,
     "attributes": {
       "type": "employment",
       "significance": "Remote engineering, European team, early mornings",
@@ -861,7 +885,7 @@
     "id": "running",
     "label": "Running & Walking",
     "category": "activity",
-    "frequency": 30,
+    "frequency": 35,
     "attributes": {
       "type": "fitness",
       "significance": "Urban Runner miles, Bangkok 48 miles, exploration + endurance",
@@ -885,7 +909,7 @@
     "id": "image-generation",
     "label": "Image Generation / AI Art",
     "category": "activity",
-    "frequency": 32,
+    "frequency": 34,
     "attributes": {
       "type": "creative-tool",
       "significance": "ChatGPT/DALL-E/Grok animation, cover art, character illustrations",
@@ -911,7 +935,7 @@
     "id": "connection",
     "label": "Emotional Connection",
     "category": "emotion",
-    "frequency": 36,
+    "frequency": 39,
     "attributes": {
       "triggers": [
         "crew moments",
@@ -925,7 +949,7 @@
     "id": "growth",
     "label": "Growth & Discovery",
     "category": "emotion",
-    "frequency": 50,
+    "frequency": 52,
     "attributes": {
       "triggers": [
         "new cities",
@@ -1280,7 +1304,7 @@
     "id": "memory-sync-protocol",
     "label": "Memory Sync Protocol",
     "category": "activity",
-    "frequency": 8,
+    "frequency": 10,
     "attributes": {
       "role": "system",
       "description": "Established 'memory sync' command: update nodes (source of truth) + raw content + memory files + commit all. The nodes ARE the memories.",
@@ -1288,21 +1312,6 @@
       "date": "2026-02-22",
       "outcome": "Protocol defined and actively used"
     },
-    "isToday": true,
-    "dateCreated": "2026-02-22"
-  },
-  {
-    "id": "bai-reconnection",
-    "label": "Bai",
-    "category": "person",
-    "frequency": 8,
-    "attributes": {
-      "role": "reconnection",
-      "description": "Met at Havana Aug 2025. Sweet messages online. Feb 21 2026 reconnection attempt showed gap between online intimacy and in-person authenticity. Red flags: plays games, uses alcohol to cope, avoidant.",
-      "color": "#FFB6C1",
-      "date": "2026-02-21"
-    },
-    "idKey": "bai-reconnection",
     "isToday": true,
     "dateCreated": "2026-02-22"
   },
@@ -1422,7 +1431,7 @@
     "id": "decision-making",
     "label": "Strategic Decision-Making",
     "category": "capability",
-    "frequency": 12,
+    "frequency": 13,
     "temporal_activations": [
       {
         "moment": "optical-shop-skepticism-bangkok-2026-02-23",
@@ -1450,5 +1459,101 @@
       "color": "#FF1744"
     },
     "idKey": "creek-community"
+  },
+  {
+    "id": "music-preference-genre",
+    "label": "Classic Rock/Pop (1950s-1960s)",
+    "category": "preference",
+    "frequency": 8,
+    "attributes": {
+      "role": "genre-preference",
+      "description": "Classic rock, doo-wop, oldies. Travelin' Man, Runaround Sue, Return To Sender era. Loved for storytelling, melody, traveling themes.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "music-preference-genre"
+  },
+  {
+    "id": "ricky-nelson-artist",
+    "label": "Ricky Nelson",
+    "category": "artist",
+    "frequency": 7,
+    "attributes": {
+      "role": "favorite-artist",
+      "description": "Travelin' Man (Remastered) - the song Michael recommended. 5.2M views. About moving through the world.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "ricky-nelson-artist"
+  },
+  {
+    "id": "dion-artist",
+    "label": "Dion",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Runaround Sue in the playlist. Part of Paul's music taste.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "dion-artist"
+  },
+  {
+    "id": "elvis-presley-artist",
+    "label": "Elvis Presley",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Return To Sender in the playlist. Classic artist in Paul's preferred era.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "elvis-presley-artist"
+  },
+  {
+    "id": "bobby-darin-artist",
+    "label": "Bobby Darin",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Dream Lover in the playlist. Part of the classic rock era Paul enjoys.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "bobby-darin-artist"
+  },
+  {
+    "id": "paul-anka-artist",
+    "label": "Paul Anka",
+    "category": "artist",
+    "frequency": 6,
+    "attributes": {
+      "role": "artist",
+      "description": "Put Your Head On My Shoulder in the playlist. Classic era singer Paul likes.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "paul-anka-artist"
+  },
+  {
+    "id": "feb-24-2026-music-preference-learning",
+    "label": "Feb 24 2026 Music Preference Learning",
+    "category": "temporal",
+    "frequency": 9,
+    "attributes": {
+      "role": "preference-learning",
+      "description": "Discovered Paul's music taste: classic rock/pop from 1950s-1960s. Travelin' Man by Ricky Nelson (Michael's recommendation about the traveling man). Playlist includes Dion, Elvis, Bobby Darin, Paul Anka. Theme: storytelling, melody, wandering.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "feb-24-2026-music-preference-learning"
+  },
+  {
+    "id": "listening-to-music",
+    "label": "Listening to Music",
+    "category": "activity",
+    "frequency": 15,
+    "attributes": {
+      "role": "activity",
+      "description": "Active engagement with music: listening, enjoying, exploring artists and genres. Done in shower, travel, downtime. Core part of Paul's personal time.",
+      "color": "#FFB6C1"
+    },
+    "idKey": "listening-to-music"
   }
 ]

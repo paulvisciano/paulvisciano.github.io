@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
-  "updated_at": "2026-02-23T18:14:07.013Z",
+  "updated_at": "2026-02-24T02:53:08.231Z",
   "by_date": {
     "2026-02-23": {
       "sources": [
@@ -80,6 +80,55 @@
           "integrated": true,
           "integrated_at": "2026-02-23T18:14:07.013Z",
           "content_hash": "ecbd47492d600774ec076e9122562c9561e295c35fc1df3b756967cf5a4e2b4a"
+        }
+      ]
+    },
+    "2026-02-24": {
+      "sources": [
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-auto-logging-accountability.md",
+          "type": "openclaw",
+          "label": "2026-02-24-auto-logging-accountability.md (OpenClaw)",
+          "mtime": 1771896937996.2366,
+          "integrated": true,
+          "integrated_at": "2026-02-24T02:53:08.231Z",
+          "content_hash": "d32ac8adf78eefd76397fa7257b70b9c441921626a161eda6c19084748be206d"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-auto-logging.md",
+          "type": "openclaw",
+          "label": "2026-02-24-auto-logging.md (OpenClaw)",
+          "mtime": 1771897901757.1958,
+          "integrated": true,
+          "integrated_at": "2026-02-24T02:53:08.231Z",
+          "content_hash": "4243476b53af0aa5c0877d9d0d1c36c5b6d5f4b320d560f16b9b25a981303ca4"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-dual-boot.md",
+          "type": "openclaw",
+          "label": "2026-02-24-dual-boot.md (OpenClaw)",
+          "mtime": 1771894172754.2483,
+          "integrated": true,
+          "integrated_at": "2026-02-24T02:53:08.231Z",
+          "content_hash": "3ed4162d899b3d73c1213f65e7b7509dececc362bd38333c3d832077b5bc265c"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-memory-boot.md",
+          "type": "openclaw",
+          "label": "2026-02-24-memory-boot.md (OpenClaw)",
+          "mtime": 1771896191455.3074,
+          "integrated": true,
+          "integrated_at": "2026-02-24T02:53:08.231Z",
+          "content_hash": "5ed9fae1a04a8a819414b733e0f1577bcbdc355750ef0d0a3eb0472972e31c66"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-transcript-logging.md",
+          "type": "openclaw",
+          "label": "2026-02-24-transcript-logging.md (OpenClaw)",
+          "mtime": 1771897327464.1768,
+          "integrated": true,
+          "integrated_at": "2026-02-24T02:53:08.231Z",
+          "content_hash": "07e59b310c7288aa2672a7bd67ef992713dc8e8c5aa52ccd6b385317c8ff032c"
         }
       ]
     }
