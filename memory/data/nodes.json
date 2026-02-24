@@ -2018,7 +2018,8 @@
     "attributes": {
       "role": "core-system",
       "description": "Three-layer traceability system: neural graph (compressed) → learning documents (full context) → git commits (immutable proof). Master hash as single source of truth."
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/integrated/transcript.md"
   },
   {
     "id": "master-hash-verification",
@@ -2028,7 +2029,8 @@
     "attributes": {
       "role": "verification-system",
       "description": "SHA256 hash of combined nodes.json + synapses.json. Cryptographic proof of exact neural state. Displayed in UI for public verification."
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/integrated/transcript.md"
   },
   {
     "id": "cursor-rapid-iteration",
@@ -2038,6 +2040,7 @@
     "attributes": {
       "role": "workflow-pattern",
       "description": "Write detailed plan → Cursor executes → git deploys → iterate. 15-min plans → 26-min execution. Feedback loop so tight that ideas become reality before finishing forming."
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/integrated/transcript.md"
   }
 ]
