@@ -2325,5 +2325,194 @@
     "weight": 0.95,
     "type": "part-of",
     "label": "part-of"
+  },
+  {
+    "source": "paul",
+    "target": "wouter",
+    "weight": 0.92,
+    "type": "travels-with",
+    "label": "travels-with"
+  },
+  {
+    "source": "paul",
+    "target": "khanh",
+    "weight": 0.92,
+    "type": "travels-with",
+    "label": "travels-with"
+  },
+  {
+    "source": "paul",
+    "target": "boy",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "leo",
+    "weight": 0.9,
+    "type": "close-to",
+    "label": "close-to"
+  },
+  {
+    "source": "paul",
+    "target": "bartek",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "mom",
+    "weight": 0.98,
+    "type": "family",
+    "label": "family"
+  },
+  {
+    "source": "paul",
+    "target": "jeandel",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "sean",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "irina",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "ray",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "maria",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "welli",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "leigha",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "mo",
+    "weight": 0.92,
+    "type": "travels-with",
+    "label": "travels-with"
+  },
+  {
+    "source": "paul",
+    "target": "danie",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "ash",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "cat",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "kj",
+    "weight": 0.85,
+    "type": "collaborates-with",
+    "label": "collaborates-with"
+  },
+  {
+    "source": "paul",
+    "target": "divine",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "sandro",
+    "weight": 0.92,
+    "type": "travels-with",
+    "label": "travels-with"
+  },
+  {
+    "source": "paul",
+    "target": "hallie",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "zacharias",
+    "weight": 0.92,
+    "type": "travels-with",
+    "label": "travels-with"
+  },
+  {
+    "source": "paul",
+    "target": "fairy",
+    "weight": 0.75,
+    "type": "knows",
+    "label": "knows"
+  },
+  {
+    "source": "paul",
+    "target": "dad",
+    "weight": 0.98,
+    "type": "family",
+    "label": "family"
+  },
+  {
+    "source": "paul",
+    "target": "brother",
+    "weight": 0.98,
+    "type": "family",
+    "label": "family"
+  },
+  {
+    "source": "paul",
+    "target": "bai",
+    "weight": 0.8,
+    "type": "reconnected-with",
+    "label": "reconnected-with"
+  },
+  {
+    "source": "paul",
+    "target": "bai-reconnection",
+    "weight": 0.8,
+    "type": "reconnected-with",
+    "label": "reconnected-with"
   }
 ]
