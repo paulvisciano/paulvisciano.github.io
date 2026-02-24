@@ -1468,5 +1468,47 @@
     "weight": 0.96,
     "type": "collaboration",
     "label": "with"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "happened-to",
+    "label": "happened-to"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "jarvis-identity",
+    "weight": 0.95,
+    "type": "shaped",
+    "label": "shaped"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "happened-to",
+    "label": "happened-to"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "jarvis-identity",
+    "weight": 0.95,
+    "type": "shaped",
+    "label": "shaped"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "happened-to",
+    "label": "happened-to"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "jarvis-identity",
+    "weight": 0.95,
+    "type": "shaped",
+    "label": "shaped"
   }
 ]
