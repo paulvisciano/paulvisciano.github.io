@@ -2850,5 +2850,12 @@
     "weight": 0.95,
     "type": "manifests",
     "label": "embodied-in"
+  },
+  {
+    "source": "paul",
+    "target": "memory-persistence-proof",
+    "weight": 0.96,
+    "type": "discovered",
+    "label": "proven"
   }
 ]
