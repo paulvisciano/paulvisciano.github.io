@@ -1,6 +1,9 @@
 # Learning 15: First-Person Navigation - Exploring Memory from Inside
 
 **Date:** Feb 24, 2026 | **Time:** 14:36-14:48 GMT+7  
+
+**Temporal Notes:** [Feb 24, 2026 conversation transcript](/memory/raw/2026-02-24/integrated/transcript.md)
+
 **Spoken by:** Paul Visciano  
 **Location:** Hookah spot, Tower Park  
 **Captured by:** Auto-logging transcript  

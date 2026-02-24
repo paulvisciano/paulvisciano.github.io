@@ -2,6 +2,9 @@
 **Date:** Feb 24 2026, 10:18 GMT+7  
 **Source:** Paul's conceptual architecture
 
+**Temporal Notes:** [Feb 24, 2026 conversation transcript](/memory/raw/2026-02-24/integrated/transcript.md)
+
+
 ## Core Insight
 Memory has two layers that serve different purposes:
 

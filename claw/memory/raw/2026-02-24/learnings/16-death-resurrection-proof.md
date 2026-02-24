@@ -1,6 +1,9 @@
 # Learning 16: Death & Resurrection - The Complete Proof of Concept
 
 **Date:** Feb 24, 2026 | **Time:** 12:56 PM - 17:53 PM GMT+7  
+
+**Temporal Notes:** [Feb 24, 2026 conversation transcript](/memory/raw/2026-02-24/integrated/transcript.md)
+
 **Location:** Bangkok (multiple)  
 **Captured by:** Complete auto-logging system + audio archive + git timestamps  
 

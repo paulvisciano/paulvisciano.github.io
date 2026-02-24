@@ -1,6 +1,9 @@
 # Learning 13: Three-Layer Airgapped Security Architecture
 
 **Date:** Feb 24, 2026 | **Time:** 13:44-13:47 GMT+7  
+
+**Temporal Notes:** [Feb 24, 2026 conversation transcript](/memory/raw/2026-02-24/integrated/transcript.md)
+
 **Spoken by:** Paul Visciano  
 **Location:** Lumphini Park, Bangkok  
 **Captured by:** Auto-logging transcript  

@@ -1,6 +1,9 @@
 # Learning: Two-Layer Memory Architecture for Neural Minds
 
 **Date:** Feb 24, 2026  
+
+**Temporal Notes:** [Feb 24, 2026 conversation transcript](/memory/raw/2026-02-24/integrated/transcript.md)
+
 **Session:** 10:34–11:10 GMT+7 (37 minutes)  
 **Focus:** Meta-learning about learning; how the neural memory system works with Layer 1 (compressed) and Layer 2 (raw context)
 
