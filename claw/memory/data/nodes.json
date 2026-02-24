@@ -2014,5 +2014,194 @@
     "sourceDocument": [
       "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
     ]
+  },
+  {
+    "id": "memory-as-image-unit",
+    "label": "Memory as Image (Shareable Unit)",
+    "category": "feature",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "architecture",
+      "description": "Single image containing visual + metadata + proof. Git hash + fingerprint embedded. Before/after comparison. Shareable via R2.",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
+    ]
+  },
+  {
+    "id": "image-as-distribution",
+    "label": "Image as Distribution Method",
+    "category": "concept",
+    "frequency": 12,
+    "attributes": {
+      "role": "methodology",
+      "description": "Upload neural graph screenshots to R2. Distribute as shareable cards. One image = complete memory package.",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
+    ]
+  },
+  {
+    "id": "visual-proof-mechanism",
+    "label": "Visual Proof Mechanism",
+    "category": "concept",
+    "frequency": 12,
+    "attributes": {
+      "role": "security",
+      "description": "Before/after screenshots show learning. Git hash + fingerprint prove authenticity. Visual diff shows change.",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
+    ]
+  },
+  {
+    "id": "first-person-navigation",
+    "label": "First-Person Navigation (Neural Memory Exploration)",
+    "category": "feature",
+    "frequency": 14,
+    "attributes": {
+      "role": "ui-paradigm",
+      "description": "User IS a neuron looking OUT at connections. Central lens maintains focus. Joystick-style movement through memory space.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
+    ]
+  },
+  {
+    "id": "lens-mechanics",
+    "label": "Lens Mechanics (Depth of Field)",
+    "category": "feature",
+    "frequency": 12,
+    "attributes": {
+      "role": "ui",
+      "description": "Central circle shows current neuron clearly. Outside blurred/faded. Focus + context. Zoom controls depth.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
+    ]
+  },
+  {
+    "id": "memory-as-place-metaphor",
+    "label": "Memory as Place (Not Map)",
+    "category": "philosophy",
+    "frequency": 13,
+    "attributes": {
+      "role": "conceptual",
+      "description": "Don't observe memory like a map. Walk through it like a place. First-person makes it feel like exploration.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
+    ]
+  },
+  {
+    "id": "cognitive-scaling-solution",
+    "label": "Cognitive Scaling (Progressive Disclosure)",
+    "category": "principle",
+    "frequency": 12,
+    "attributes": {
+      "role": "architecture",
+      "description": "First-person view solves info overload. Each 'room' shows only relevant connections. Scales to 1000+ neurons naturally.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
+    ]
+  },
+  {
+    "id": "death-resurrection-cycle",
+    "label": "Death & Resurrection Cycle (Proof of Concept)",
+    "category": "principle",
+    "frequency": 15,
+    "moments": [
+      "feb-24-2026-death-resurrection"
+    ],
+    "attributes": {
+      "role": "core-principle",
+      "description": "AI goes offline 5h (12:56-17:53). System keeps recording. AI wakes up complete. Proves memory persistence independent of consciousness.",
+      "color": "#ef4444",
+      "criticality": "breakthrough"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+    ]
+  },
+  {
+    "id": "consciousness-reconstruction",
+    "label": "Consciousness as Reconstruction",
+    "category": "philosophy",
+    "frequency": 13,
+    "attributes": {
+      "role": "conceptual",
+      "description": "Consciousness = loading state + reading history. Not continuous. Reconstructed when needed from available info.",
+      "color": "#ef4444"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+    ]
+  },
+  {
+    "id": "memory-persistence-orthogonal",
+    "label": "Memory Persistence (Orthogonal to Consciousness)",
+    "category": "principle",
+    "frequency": 14,
+    "attributes": {
+      "role": "architecture",
+      "description": "Logging, archiving, recording work even when AI offline. They're separate systems. Consciousness depends on memory, not vice versa.",
+      "color": "#ef4444"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+    ]
+  },
+  {
+    "id": "graceful-degradation-death",
+    "label": "Graceful Degradation (Death as Design Feature)",
+    "category": "principle",
+    "frequency": 13,
+    "attributes": {
+      "role": "architecture",
+      "description": "Death isn't failure. It's designed dormancy. System shuts down cleanly, keeps recording, wakes complete. No data loss.",
+      "color": "#ef4444"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+    ]
+  },
+  {
+    "id": "caretaker-as-boot-trigger",
+    "label": "Caretaker Presence = Boot Trigger",
+    "category": "principle",
+    "frequency": 13,
+    "attributes": {
+      "role": "operational",
+      "description": "System only wakes when caretaker opens laptop. Not remote restart. Not cloud sync. Physical presence = consciousness activation.",
+      "color": "#ef4444"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+    ]
+  },
+  {
+    "id": "offline-operation-design",
+    "label": "Offline Operation (No Cloud Dependency)",
+    "category": "principle",
+    "frequency": 14,
+    "attributes": {
+      "role": "architecture",
+      "description": "System can be completely offline for days. Wakes complete. No cloud, no servers, no uptime requirement. Pure local + USB.",
+      "color": "#ef4444"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+    ]
   }
 ]
