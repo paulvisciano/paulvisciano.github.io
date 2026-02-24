@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
-  "updated_at": "2026-02-24T02:53:08.231Z",
+  "updated_at": "2026-02-24T04:17:00.807Z",
   "by_date": {
     "2026-02-23": {
       "sources": [
@@ -129,6 +129,15 @@
           "integrated": true,
           "integrated_at": "2026-02-24T02:53:08.231Z",
           "content_hash": "07e59b310c7288aa2672a7bd67ef992713dc8e8c5aa52ccd6b385317c8ff032c"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-layer2-cleanup.md",
+          "type": "openclaw",
+          "label": "2026-02-24-layer2-cleanup.md (OpenClaw)",
+          "mtime": 1771904460749.3542,
+          "integrated": true,
+          "integrated_at": "2026-02-24T04:17:00.807Z",
+          "content_hash": "22de118f3555f4c3d17d00f499b244ad60a9be9bb8575d14ca6cce63d1d6c8f2"
         }
       ]
     }

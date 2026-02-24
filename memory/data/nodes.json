@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 237,
+    "frequency": 244,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -100,6 +100,12 @@
             "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-transcript-logging.md",
             "label": "2026-02-24-transcript-logging.md (OpenClaw)",
             "integrated_at": "2026-02-24T02:53:08.231Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-layer2-cleanup.md",
+            "label": "2026-02-24-layer2-cleanup.md (OpenClaw)",
+            "integrated_at": "2026-02-24T04:17:00.807Z"
           }
         ]
       }
