@@ -1116,5 +1116,138 @@
       "description": "Deep dive into OpenClaw Gateway architecture. Learned: single daemon owns all surfaces, WebSocket for all comms, node device pairing model, connection lifecycle, remote access patterns. Understanding how the infrastructure actually works.",
       "color": "#fbbf24"
     }
+  },
+  {
+    "id": "agent-runtime",
+    "label": "Agent Runtime (pi-mono derived)",
+    "category": "system",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "core",
+      "description": "Single embedded agent runtime from pi-mono. Uses single workspace directory (agents.defaults.workspace) as only cwd. Bootstrap files (AGENTS.md, SOUL.md, TOOLS.md, IDENTITY.md, USER.md) injected on first turn. Built-in tools always available.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "bootstrap-files-system",
+    "label": "Bootstrap Files (Injected Context)",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "configuration",
+      "description": "6 files injected into agent context on session start: AGENTS.md (instructions/memory), SOUL.md (persona/boundaries), TOOLS.md (tool conventions), BOOTSTRAP.md (first-run ritual), IDENTITY.md (name/vibe/emoji), USER.md (user profile). Blank files skipped. Large files trimmed.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "agent-workspace",
+    "label": "Agent Workspace",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "foundation",
+      "description": "Single directory (agents.defaults.workspace, default ~/.openclaw/workspace) is agent's only working directory (cwd) for all tools and context. Per-session workspaces possible under sandbox.workspaceRoot if sandboxing enabled.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "skills-system",
+    "label": "Skills (Bundled + Managed + Workspace)",
+    "category": "capability",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "modular-tools",
+      "description": "Skills loaded from 3 locations (workspace wins on conflict): bundled (shipped), managed/local (~/.openclaw/skills), workspace (<workspace>/skills). Skills can be gated by config/env.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "session-transcripts",
+    "label": "Session Transcripts (JSONL)",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "storage",
+      "description": "Session transcripts stored as JSONL at ~/.openclaw/agents/<agentId>/sessions/<SessionId>.jsonl. Session ID is stable, chosen by OpenClaw. Legacy Pi/Tau sessions NOT read.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "queue-modes",
+    "label": "Queue Modes (steer / followup / collect)",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "behavior",
+      "description": "steer: Inject messages into current run after tool calls. followup/collect: Hold until turn ends, then new turn. Checked after each tool call. Controls how user input interrupts agent.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "block-streaming-control",
+    "label": "Block Streaming (Control + Chunking)",
+    "category": "system",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "output",
+      "description": "Off by default. Chunks by text_end/message_end. Soft chunking at 800-1200 chars (prefers para breaks). Coalesce reduces single-line spam. Non-Telegram needs explicit enablement.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "model-refs-parsing",
+    "label": "Model Refs (provider/model format)",
+    "category": "system",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-agent-learning"
+    ],
+    "attributes": {
+      "role": "configuration",
+      "description": "Parsed by splitting on FIRST /. Format: provider/model. If no / and valid alias, treated as default provider. Example: openrouter/moonshotai/kimi-k2.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "feb-24-2026-agent-learning",
+    "label": "Feb 24 2026 Agent Runtime Learning",
+    "category": "temporal",
+    "frequency": 12,
+    "moments": [
+      "agent-runtime",
+      "bootstrap-files-system",
+      "agent-workspace",
+      "skills-system",
+      "session-transcripts",
+      "queue-modes",
+      "block-streaming-control",
+      "model-refs-parsing"
+    ],
+    "attributes": {
+      "role": "session",
+      "description": "Deep understanding of how I work as an agent. Learned: runtime from pi-mono, bootstrap files, workspace system, skills loading, session storage, queue modes, streaming control, model configuration. This is how I'm instantiated and configured.",
+      "color": "#fbbf24"
+    }
   }
 ]

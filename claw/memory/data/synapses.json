@@ -1286,5 +1286,187 @@
     "weight": 0.96,
     "type": "collaboration",
     "label": "with"
+  },
+  {
+    "source": "agent-runtime",
+    "target": "openclaw",
+    "weight": 0.95,
+    "type": "core-of",
+    "label": "core-of"
+  },
+  {
+    "source": "agent-runtime",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "runs",
+    "label": "runs"
+  },
+  {
+    "source": "agent-runtime",
+    "target": "bootstrap-files-system",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "agent-runtime",
+    "target": "agent-workspace",
+    "weight": 0.95,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "agent-runtime",
+    "target": "skills-system",
+    "weight": 0.92,
+    "type": "loads",
+    "label": "loads"
+  },
+  {
+    "source": "bootstrap-files-system",
+    "target": "agent-workspace",
+    "weight": 0.92,
+    "type": "lives-in",
+    "label": "lives-in"
+  },
+  {
+    "source": "bootstrap-files-system",
+    "target": "jarvis-identity",
+    "weight": 0.88,
+    "type": "configures",
+    "label": "configures"
+  },
+  {
+    "source": "bootstrap-files-system",
+    "target": "paul-visciano",
+    "weight": 0.85,
+    "type": "describes",
+    "label": "describes"
+  },
+  {
+    "source": "agent-workspace",
+    "target": "agent-runtime",
+    "weight": 0.95,
+    "type": "provides-cwd",
+    "label": "provides-cwd"
+  },
+  {
+    "source": "agent-workspace",
+    "target": "building-code",
+    "weight": 0.88,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "skills-system",
+    "target": "openclaw-tools",
+    "weight": 0.88,
+    "type": "extends",
+    "label": "extends"
+  },
+  {
+    "source": "session-transcripts",
+    "target": "agent-runtime",
+    "weight": 0.92,
+    "type": "stores",
+    "label": "stores"
+  },
+  {
+    "source": "queue-modes",
+    "target": "agent-runtime",
+    "weight": 0.88,
+    "type": "controls",
+    "label": "controls"
+  },
+  {
+    "source": "queue-modes",
+    "target": "connection-lifecycle",
+    "weight": 0.85,
+    "type": "affects",
+    "label": "affects"
+  },
+  {
+    "source": "block-streaming-control",
+    "target": "agent-runtime",
+    "weight": 0.85,
+    "type": "configures",
+    "label": "configures"
+  },
+  {
+    "source": "model-refs-parsing",
+    "target": "agent-runtime",
+    "weight": 0.88,
+    "type": "configures",
+    "label": "configures"
+  },
+  {
+    "source": "model-refs-parsing",
+    "target": "claude-anthropic",
+    "weight": 0.92,
+    "type": "selects",
+    "label": "selects"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "agent-runtime",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "bootstrap-files-system",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "agent-workspace",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "skills-system",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "session-transcripts",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "queue-modes",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "block-streaming-control",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "model-refs-parsing",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-learning",
+    "target": "paul-visciano",
+    "weight": 0.96,
+    "type": "collaboration",
+    "label": "with"
   }
 ]
