@@ -126,6 +126,9 @@
     <div style="position: fixed; bottom: 12px; left: 12px; font-size: 10px; color: #94a3b8; z-index: 20;">
         <div><a href="../latest/" style="color: #06b6d4; text-decoration: none; font-weight: bold;">↻ Latest</a></div>
         <div><a href="../claw/" style="color: #fbbf24; text-decoration: none; font-weight: bold;">⚙️ Claude Code</a></div>
+        <div style="margin-top: 6px; font-size: 9px; color: #64748b; font-family: monospace; word-break: break-all; max-width: 120px;">
+            <span style="color: #475569;">hash:</span> <span id="fingerprint-hash">—</span>
+        </div>
     </div>
 
     <div id="share-modal-overlay" class="share-modal-overlay" aria-hidden="true">
@@ -165,6 +168,22 @@
     };
     </script>
     <script src="../shared/neural-graph.js"></script>
+    <script>
+        // Load and display fingerprint hash
+        (async () => {
+            try {
+                const response = await fetch('./data/fingerprint.json');
+                const fingerprint = await response.json();
+                const hashElement = document.getElementById('fingerprint-hash');
+                if (hashElement) {
+                    hashElement.textContent = fingerprint.hash.substring(0, 16) + '…';
+                    hashElement.title = fingerprint.hash;
+                }
+            } catch (e) {
+                console.log('Could not load fingerprint:', e.message);
+            }
+        })();
+    </script>
     <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
     <div id="memory-version" data-last-sync="2026-02-22" style="position: fixed; bottom: 10px; left: 10px; font-size: 8px; color: #00ff00; opacity: 0.3; pointer-events: none; z-index: 1;">
         v:2026-02-22-15:31:58
