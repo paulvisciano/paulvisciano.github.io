@@ -115,6 +115,7 @@
             flex-direction: column;
             box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            overflow: hidden;
         }
         
         .bottom-drawer.open {
@@ -125,12 +126,15 @@
         @media (max-width: 768px) {
             .bottom-drawer {
                 display: flex;
+                flex-direction: column;
                 transform: translateY(calc(100% - 48px));
-                height: 50vh;
-                max-height: 50vh;
+                height: 60vh;
+                max-height: 60vh;
             }
             .bottom-drawer.open {
                 transform: translateY(0);
+                height: 70vh;
+                max-height: 70vh;
             }
             .bottom-drawer .drawer-filters {
                 display: none;
@@ -256,24 +260,28 @@
         }
         
         .drawer-content {
-            flex: 1;
+            flex: 1 1 0;
             min-height: 0;
             overflow-y: auto;
             overflow-x: hidden;
             padding: 0 20px 24px;
             -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
         
         #drawerDetails {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 10px;
+            line-height: 1.7;
+            padding-bottom: 24px;
         }
-        #drawerDetails .drawer-detail-name { margin-bottom: 8px; }
+        #drawerDetails .drawer-detail-heading { color: #00ffff; font-size: 15px; margin: 0 0 8px 0; font-weight: bold; }
+        #drawerDetails .drawer-detail-name { margin-bottom: 4px; color: #ffff99; font-weight: bold; }
         #drawerDetails .drawer-detail-name img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 8px; }
-        #drawerDetails .drawer-detail-type { font-size: 12px; color: #00ffff; margin: 4px 0; }
-        #drawerDetails .drawer-detail-desc { margin: 8px 0; color: rgba(255, 255, 255, 0.7); line-height: 1.5; }
-        #drawerDetails .drawer-detail-connections { font-size: 12px; color: rgba(255, 255, 255, 0.8); }
+        #drawerDetails .drawer-detail-type { font-size: 10px; color: #00ffff; margin: 4px 0; }
+        #drawerDetails .drawer-detail-desc { margin: 6px 0 8px 0; color: #aaa; font-style: italic; line-height: 1.7; }
+        #drawerDetails .drawer-detail-connections-heading { color: #00ffff; font-weight: bold; margin: 0 0 4px 0; font-size: 10px; }
+        #drawerDetails .drawer-detail-connections { font-size: 9px; color: #888; }
         #drawerDetails .drawer-detail-connections div { margin: 4px 0; }
         
         /* Show drawer on mobile only */
@@ -1018,7 +1026,9 @@
         
         document.getElementById('drawer-toggle').addEventListener('click', () => {
             if (window.innerWidth > 768) return;
-            setDrawerOpen(!drawerOpen);
+            const willOpen = !drawerOpen;
+            setDrawerOpen(willOpen);
+            if (willOpen && selected !== null && nodes[selected]) showNodeDetailsInDrawer(nodes[selected]);
         });
         document.getElementById('drawerScrim').addEventListener('click', () => {
             if (window.innerWidth > 768) return;
@@ -1048,22 +1058,61 @@
             }
         });
         
-        // Helper function to show details in drawer (same info as desktop panel)
+        // Helper: build drawer content from node data (no dependency on hidden #detailPanel).
+        // Fixes mobile Android where reading from display:none panel can leave drawer empty.
         function showNodeDetailsInDrawer(node) {
-            if (!node) return;
-            showNodeDetails(node);
             const content = document.getElementById('drawerDetails');
-            const detailName = document.getElementById('detailName');
-            const detailType = document.getElementById('detailType');
-            const detailDesc = document.getElementById('detailDesc');
-            const detailConnections = document.getElementById('detailConnections');
+            if (!content) return;
+            if (!node) {
+                content.innerHTML = '<p class="drawer-detail-desc" style="color: rgba(255,255,255,0.6);">Select a node on the graph to see details.</p>';
+                return;
+            }
+            // Keep desktop panel in sync for URL/hash and full-context button
+            showNodeDetails(node);
+            let nameHtml, typeText, descText, connectionsHtml;
+            if (node.type === 'person' && characterProfiles[node.idKey]) {
+                const char = characterProfiles[node.idKey];
+                nameHtml = `<img src="${char.avatar}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 12px;" alt="${char.name}"><span style="color: #fbbf24; font-weight: bold;">${escapeHtml(char.name)}</span>`;
+                typeText = char.role || '';
+                descText = char.bio || '';
+                if (char.episodes && char.episodes.length > 0) {
+                    connectionsHtml = '<p style="color: #00ffff; font-weight: bold; margin-top: 12px;">Episodes:</p>' +
+                        char.episodes.map(ep => `<div style="margin: 4px 0; color: #fbbf24; font-size: 10px;">${escapeHtml(ep)}</div>`).join('');
+                } else {
+                    connectionsHtml = '<div style="color: #666; font-size: 10px;">No episodes linked</div>';
+                }
+            } else {
+                nameHtml = escapeHtml(node.name);
+                typeText = `Type: ${(node.type || '').charAt(0).toUpperCase() + (node.type || '').slice(1)}`;
+                descText = node.desc || '';
+                const connected = [];
+                edges.forEach(e => {
+                    if (e.from === node.id) {
+                        const target = nodes[e.to];
+                        if (target) connected.push(`→ ${escapeHtml(target.name)} (${target.type})`);
+                    } else if (e.to === node.id) {
+                        const source = nodes[e.from];
+                        if (source) connected.push(`← ${escapeHtml(source.name)} (${source.type})`);
+                    }
+                });
+                connectionsHtml = connected.length > 0
+                    ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
+                    : '<div style="color: #666;">No connections</div>';
+            }
             content.innerHTML = `
-                <div class="drawer-detail-name">${detailName.innerHTML}</div>
-                <p class="drawer-detail-type">${detailType.textContent}</p>
-                <p class="drawer-detail-desc">${detailDesc.textContent || ''}</p>
-                <p style="color: #00ffff; font-weight: bold; margin-top: 12px; margin-bottom: 6px;">Connected to</p>
-                <div class="drawer-detail-connections">${detailConnections.innerHTML}</div>
+                <h3 class="drawer-detail-heading">Info</h3>
+                <div class="drawer-detail-name">${nameHtml}</div>
+                <p class="drawer-detail-type">${escapeHtml(typeText)}</p>
+                <p class="drawer-detail-desc">${escapeHtml(descText)}</p>
+                <p class="drawer-detail-connections-heading">Connected to</p>
+                <div class="drawer-detail-connections">${connectionsHtml}</div>
             `;
+        }
+        function escapeHtml(s) {
+            if (s == null) return '';
+            const div = document.createElement('div');
+            div.textContent = s;
+            return div.innerHTML;
         }
 
         // Handle URL hash navigation (back/forward, direct link, or in-page hash change)
