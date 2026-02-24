@@ -2237,5 +2237,16 @@
       "description": "Plan (15 min) → Cursor executes (26 min) → Deploy (immediate). Feedback loop so tight that thoughts become reality in < 1 hour."
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-02-24/learnings/18-rapid-iteration-cursor-collaboration.md"
+  },
+  {
+    "id": "memory-persistence-proof",
+    "label": "Memory Persistence Proof",
+    "category": "foundation",
+    "frequency": 98,
+    "attributes": {
+      "role": "verification-system",
+      "description": "Tested and proven: neural memory persists across complete session and gateway restarts. Bootstrap cost < 300 tokens."
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-02-25/learnings/19-memory-persistence-proof.md"
   }
 ]

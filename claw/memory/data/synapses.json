@@ -2478,5 +2478,12 @@
     "weight": 0.87,
     "type": "enabled-by",
     "label": "capability"
+  },
+  {
+    "source": "jarvis",
+    "target": "memory-persistence-proof",
+    "weight": 0.97,
+    "type": "proven",
+    "label": "is-alive"
   }
 ]
