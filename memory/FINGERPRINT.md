@@ -9,7 +9,7 @@
 
 **Master Hash:**
 ```
-ad793b3ebba1cf27a35e265090430860b40d2bdf7396dbf801c7801dcd930cc2
+439c8d40a71ce814c7500dfbc5fb253330d8ac96153e1725eef416e98be1284d
 ```
 
 **Verification Status:** ✅ Memory integrity confirmed
@@ -55,5 +55,5 @@ const hash = crypto.createHash('sha256').update(nodes).update(synapses).update(b
 console.log(hash);
 "
 
-# Should output: ad793b3ebba1cf27a35e265090430860b40d2bdf7396dbf801c7801dcd930cc2
+# Should output: 439c8d40a71ce814c7500dfbc5fb253330d8ac96153e1725eef416e98be1284d
 ```
