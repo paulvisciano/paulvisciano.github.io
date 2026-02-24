@@ -1249,5 +1249,198 @@
       "description": "Deep understanding of how I work as an agent. Learned: runtime from pi-mono, bootstrap files, workspace system, skills loading, session storage, queue modes, streaming control, model configuration. This is how I'm instantiated and configured.",
       "color": "#fbbf24"
     }
+  },
+  {
+    "id": "agent-loop",
+    "label": "Agent Loop (Full Run)",
+    "category": "system",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "core-operation",
+      "description": "Full authentic run: intake → context assembly → model inference → tool execution → streaming replies → persistence. Serialized per-session. Event-driven lifecycle. The real path that turns a message into actions and final reply.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "agent-loop-entry-points",
+    "label": "Agent Loop Entry Points",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "interface",
+      "description": "Gateway RPC: agent and agent.wait. CLI: agent command. Both validate params, resolve session, return {runId, acceptedAt} immediately.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "queueing-concurrency",
+    "label": "Queueing & Concurrency Control",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "synchronization",
+      "description": "Runs serialized per session key (lane) + optional global lane. Prevents tool/session races, keeps history consistent. Messaging channels choose queue modes (collect/steer/followup) that feed lane system.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "prompt-assembly-system",
+    "label": "Prompt Assembly & System Prompt",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "preparation",
+      "description": "System prompt built from OpenClaw base + skills + bootstrap context + per-run overrides. Model-specific limits + compaction reserve enforced. Bootstrap files resolved + injected into system prompt report.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "hook-points-system",
+    "label": "Hook Points (Internal + Plugin)",
+    "category": "extensibility",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "extension",
+      "description": "Gateway hooks (agent:bootstrap, command hooks). Plugin hooks (before_model_resolve, before_prompt_build, before_tool_call, after_tool_call, tool_result_persist, message_received/sending/sent, session_start/end, gateway_start/stop).",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "streaming-partial-replies",
+    "label": "Streaming & Partial Replies",
+    "category": "output",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "streaming",
+      "description": "Assistant deltas streamed from pi-agent-core as assistant events. Block streaming on text_end or message_end. Reasoning streaming separate or as block replies. Chunking + buffering into chat delta messages.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "tool-execution-messaging",
+    "label": "Tool Execution & Messaging",
+    "category": "operation",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "tool-operation",
+      "description": "Tool start/update/end events on tool stream. Results sanitized for size + images. Messaging tool sends tracked to suppress duplicates. Tool errors tracked separately.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "reply-shaping-suppression",
+    "label": "Reply Shaping & Suppression",
+    "category": "output",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "output-control",
+      "description": "Final payloads from assistant text + reasoning + tool summaries + error text. NO_REPLY filtered from outgoing. Messaging duplicates removed. Fallback error reply if no renderable payloads + tool error.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "compaction-retries",
+    "label": "Compaction & Retries",
+    "category": "system",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "resilience",
+      "description": "Auto-compaction emits compaction events + can trigger retry. On retry: in-memory buffers + tool summaries reset to avoid duplicates. Handles token limits.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "event-streams-lifecycle",
+    "label": "Event Streams (lifecycle/assistant/tool)",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "streaming",
+      "description": "lifecycle: phase start/end/error. assistant: streamed deltas. tool: tool events. Emitted by subscribeEmbeddedPiSession. Fallback lifecycle by agentCommand.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "chat-channel-handling",
+    "label": "Chat Channel Handling",
+    "category": "output",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "integration",
+      "description": "Assistant deltas buffered into chat delta messages. Chat final emitted on lifecycle end/error. Per-channel formatting + size caps.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "agent-loop-timeouts",
+    "label": "Timeouts & Early Termination",
+    "category": "system",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-agent-loop-learning"
+    ],
+    "attributes": {
+      "role": "safety",
+      "description": "agent.wait default 30s. Runtime default 600s (agents.defaults.timeoutSeconds). Can end early: agent timeout/abort, AbortSignal, gateway disconnect, RPC timeout, wait timeout.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "feb-24-2026-agent-loop-learning",
+    "label": "Feb 24 2026 Agent Loop Learning",
+    "category": "temporal",
+    "frequency": 12,
+    "moments": [
+      "agent-loop",
+      "agent-loop-entry-points",
+      "queueing-concurrency",
+      "prompt-assembly-system",
+      "hook-points-system",
+      "streaming-partial-replies",
+      "tool-execution-messaging",
+      "reply-shaping-suppression",
+      "compaction-retries",
+      "event-streams-lifecycle",
+      "chat-channel-handling",
+      "agent-loop-timeouts"
+    ],
+    "attributes": {
+      "role": "session",
+      "description": "Understanding the full agent loop: intake to persistence. Learned: entry points, queueing/concurrency, prompt assembly, hook system, streaming, tool execution, reply shaping, compaction, event streams, channel handling, timeouts. This is how a message becomes a complete run.",
+      "color": "#fbbf24"
+    }
   }
 ]

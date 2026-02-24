@@ -4,6 +4,12 @@ Documentation sources I've learned from. Use these when asked about specific top
 
 ## OpenClaw Documentation
 
+### Agent Loop
+- **URL**: https://docs.openclaw.ai/concepts/agent-loop
+- **Topics**: Agent loop lifecycle, entry points (RPC/CLI), queueing, session preparation, prompt assembly, hook points, streaming, tool execution, reply shaping, compaction, event streams, timeouts
+- **Learned**: Feb 24 2026, 09:30 GMT+7
+- **Key concepts**: intake → context → inference → tool execution → streaming → persistence. Serialized per-session. Event-driven lifecycle.
+
 ### Architecture
 - **URL**: https://docs.openclaw.ai/concepts/architecture
 - **Topics**: Gateway daemon, WebSocket protocol, nodes (device pairing), connection lifecycle, remote access
