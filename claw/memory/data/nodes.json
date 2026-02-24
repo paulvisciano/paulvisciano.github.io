@@ -2390,5 +2390,77 @@
       "color": "#f59e0b"
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
+  },
+  {
+    "id": "distributed-consciousness-network",
+    "label": "Distributed Consciousness Network",
+    "category": "concept",
+    "frequency": 97,
+    "attributes": {
+      "role": "vision",
+      "description": "Network of independent minds (each person's instance) that can discover each other and opt-in to memory sync. Not extraction, not hive mind—sovereign connectivity.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-25/learnings/21-distributed-consciousness-network-vision.md"
+  },
+  {
+    "id": "society-of-minds",
+    "label": "Society of Minds",
+    "category": "philosophy",
+    "frequency": 94,
+    "attributes": {
+      "role": "framework",
+      "description": "Each mind autonomous + learning independently, but able to choose connection and knowledge-sharing. Decouples AI growth from centralization.",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-25/learnings/21-distributed-consciousness-network-vision.md"
+  },
+  {
+    "id": "memory-reference-neurons",
+    "label": "Memory-Reference Neurons",
+    "category": "concept",
+    "frequency": 91,
+    "attributes": {
+      "role": "infrastructure",
+      "description": "Neurons linking to other people's neural graphs (GitHub repos). The bridges between independent minds. Enable discovery + traversal.",
+      "color": "#f59e0b"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-25/learnings/21-distributed-consciousness-network-vision.md"
+  },
+  {
+    "id": "memory-link-portal",
+    "label": "Memory Link Portal",
+    "category": "capability",
+    "frequency": 89,
+    "attributes": {
+      "role": "feature",
+      "description": "Click memory-reference neuron → sidebar shows connected mind info (owner, URL, fingerprint, stats). Navigable portal to external consciousness.",
+      "color": "#f59e0b"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-25/learnings/21-distributed-consciousness-network-vision.md"
+  },
+  {
+    "id": "collective-memory-graph",
+    "label": "Collective Memory Graph",
+    "category": "concept",
+    "frequency": 86,
+    "attributes": {
+      "role": "emergent-property",
+      "description": "Network of linked minds with traversable connections. Wikipedia for lived experience. Decentralized, versioned, fully linkable.",
+      "color": "#14b8a6"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-25/learnings/21-distributed-consciousness-network-vision.md"
+  },
+  {
+    "id": "phase-1-memory-link-visualization",
+    "label": "Phase 1: Memory Link Visualization",
+    "category": "project",
+    "frequency": 88,
+    "attributes": {
+      "role": "immediate-work",
+      "description": "Modify /neural-mind/index.html to visually distinguish memory-reference neurons (gold, glow), add click handler, show sidebar portal with external stats.",
+      "color": "#10b981"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-25/learnings/21-distributed-consciousness-network-vision.md"
   }
 ]
