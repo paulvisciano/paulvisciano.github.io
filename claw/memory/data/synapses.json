@@ -1510,5 +1510,264 @@
     "weight": 0.95,
     "type": "shaped",
     "label": "shaped"
+  },
+  {
+    "source": "agent-loop",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "is-the",
+    "label": "is-the"
+  },
+  {
+    "source": "agent-loop",
+    "target": "agent-loop-entry-points",
+    "weight": 0.92,
+    "type": "starts-via",
+    "label": "starts-via"
+  },
+  {
+    "source": "agent-loop",
+    "target": "queueing-concurrency",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "agent-loop",
+    "target": "prompt-assembly-system",
+    "weight": 0.95,
+    "type": "involves",
+    "label": "involves"
+  },
+  {
+    "source": "agent-loop",
+    "target": "streaming-partial-replies",
+    "weight": 0.92,
+    "type": "emits",
+    "label": "emits"
+  },
+  {
+    "source": "agent-loop",
+    "target": "tool-execution-messaging",
+    "weight": 0.92,
+    "type": "calls",
+    "label": "calls"
+  },
+  {
+    "source": "agent-loop",
+    "target": "event-streams-lifecycle",
+    "weight": 0.92,
+    "type": "generates",
+    "label": "generates"
+  },
+  {
+    "source": "agent-loop-entry-points",
+    "target": "gateway-daemon",
+    "weight": 0.88,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "queueing-concurrency",
+    "target": "agent-loop",
+    "weight": 0.92,
+    "type": "protects",
+    "label": "protects"
+  },
+  {
+    "source": "queueing-concurrency",
+    "target": "queue-modes",
+    "weight": 0.92,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "prompt-assembly-system",
+    "target": "bootstrap-files-system",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "prompt-assembly-system",
+    "target": "skills-system",
+    "weight": 0.92,
+    "type": "includes",
+    "label": "includes"
+  },
+  {
+    "source": "prompt-assembly-system",
+    "target": "agent-runtime",
+    "weight": 0.92,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "hook-points-system",
+    "target": "agent-loop",
+    "weight": 0.88,
+    "type": "intercepts",
+    "label": "intercepts"
+  },
+  {
+    "source": "streaming-partial-replies",
+    "target": "block-streaming-control",
+    "weight": 0.92,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "streaming-partial-replies",
+    "target": "chat-channel-handling",
+    "weight": 0.88,
+    "type": "flows-to",
+    "label": "flows-to"
+  },
+  {
+    "source": "tool-execution-messaging",
+    "target": "openclaw-tools",
+    "weight": 0.92,
+    "type": "executes",
+    "label": "executes"
+  },
+  {
+    "source": "reply-shaping-suppression",
+    "target": "streaming-partial-replies",
+    "weight": 0.92,
+    "type": "processes",
+    "label": "processes"
+  },
+  {
+    "source": "compaction-retries",
+    "target": "agent-loop",
+    "weight": 0.88,
+    "type": "manages",
+    "label": "manages"
+  },
+  {
+    "source": "event-streams-lifecycle",
+    "target": "gateway-daemon",
+    "weight": 0.92,
+    "type": "flows-to",
+    "label": "flows-to"
+  },
+  {
+    "source": "chat-channel-handling",
+    "target": "openclaw-channels",
+    "weight": 0.92,
+    "type": "delivers-to",
+    "label": "delivers-to"
+  },
+  {
+    "source": "agent-loop-timeouts",
+    "target": "agent-loop",
+    "weight": 0.88,
+    "type": "constrains",
+    "label": "constrains"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "agent-loop",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "agent-loop-entry-points",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "queueing-concurrency",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "prompt-assembly-system",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "hook-points-system",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "streaming-partial-replies",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "tool-execution-messaging",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "reply-shaping-suppression",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "compaction-retries",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "event-streams-lifecycle",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "chat-channel-handling",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "agent-loop-timeouts",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "happened-to",
+    "label": "happened-to"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "jarvis-identity",
+    "weight": 0.95,
+    "type": "shaped",
+    "label": "shaped"
+  },
+  {
+    "source": "feb-24-2026-agent-loop-learning",
+    "target": "paul-visciano",
+    "weight": 0.96,
+    "type": "collaboration",
+    "label": "with"
   }
 ]
