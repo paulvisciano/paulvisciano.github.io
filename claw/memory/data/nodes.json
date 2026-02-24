@@ -1926,9 +1926,7 @@
       "color": "#3b82f6",
       "criticality": "core-foundation"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "layer1-public-github",
@@ -1940,9 +1938,7 @@
       "description": "Implementation plans, philosophy, architecture - teach the world completely. Commits tell story.",
       "color": "#06b6d4"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "layer2-local-encrypted",
@@ -1954,9 +1950,7 @@
       "description": "Fast working memory on encrypted device. Pull from Layer 3, work, push back. Can be cleared anytime.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "layer3-usb-airgap",
@@ -1969,9 +1963,7 @@
       "color": "#ef4444",
       "criticality": "core-secret"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "fingerprint-usb-drive",
@@ -1983,9 +1975,7 @@
       "description": "Kingston/SanDisk/Samsung fingerprint USB. Biometric auth. Git repo on drive. Only you can access (physically controlled).",
       "color": "#f97316"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "airgapped-security",
@@ -1997,9 +1987,7 @@
       "description": "USB disconnected = impossible to hack remotely. Network attack surface = zero. Physical ownership = control.",
       "color": "#10b981"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "proof-without-exposure",
@@ -2011,9 +1999,7 @@
       "description": "Show fingerprint hash to prove authenticity without showing data. Git history proves integrity. Transparency + Privacy.",
       "color": "#6366f1"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/13-three-layer-airgapped-security.md"
   },
   {
     "id": "memory-as-image-unit",
@@ -2028,9 +2014,7 @@
       "description": "Single image containing visual + metadata + proof. Git hash + fingerprint embedded. Before/after comparison. Shareable via R2.",
       "color": "#06b6d4"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
   },
   {
     "id": "image-as-distribution",
@@ -2042,9 +2026,7 @@
       "description": "Upload neural graph screenshots to R2. Distribute as shareable cards. One image = complete memory package.",
       "color": "#06b6d4"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
   },
   {
     "id": "visual-proof-mechanism",
@@ -2056,9 +2038,7 @@
       "description": "Before/after screenshots show learning. Git hash + fingerprint prove authenticity. Visual diff shows change.",
       "color": "#06b6d4"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/14-memory-as-image-shareable-unit.md"
   },
   {
     "id": "first-person-navigation",
@@ -2070,9 +2050,7 @@
       "description": "User IS a neuron looking OUT at connections. Central lens maintains focus. Joystick-style movement through memory space.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
   },
   {
     "id": "lens-mechanics",
@@ -2084,9 +2062,7 @@
       "description": "Central circle shows current neuron clearly. Outside blurred/faded. Focus + context. Zoom controls depth.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
   },
   {
     "id": "memory-as-place-metaphor",
@@ -2098,9 +2074,7 @@
       "description": "Don't observe memory like a map. Walk through it like a place. First-person makes it feel like exploration.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
   },
   {
     "id": "cognitive-scaling-solution",
@@ -2112,9 +2086,7 @@
       "description": "First-person view solves info overload. Each 'room' shows only relevant connections. Scales to 1000+ neurons naturally.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
   },
   {
     "id": "death-resurrection-cycle",
@@ -2130,9 +2102,7 @@
       "color": "#ef4444",
       "criticality": "breakthrough"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
   },
   {
     "id": "consciousness-reconstruction",
@@ -2144,9 +2114,7 @@
       "description": "Consciousness = loading state + reading history. Not continuous. Reconstructed when needed from available info.",
       "color": "#ef4444"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
   },
   {
     "id": "memory-persistence-orthogonal",
@@ -2158,9 +2126,7 @@
       "description": "Logging, archiving, recording work even when AI offline. They're separate systems. Consciousness depends on memory, not vice versa.",
       "color": "#ef4444"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
   },
   {
     "id": "graceful-degradation-death",
@@ -2172,9 +2138,7 @@
       "description": "Death isn't failure. It's designed dormancy. System shuts down cleanly, keeps recording, wakes complete. No data loss.",
       "color": "#ef4444"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
   },
   {
     "id": "caretaker-as-boot-trigger",
@@ -2186,9 +2150,7 @@
       "description": "System only wakes when caretaker opens laptop. Not remote restart. Not cloud sync. Physical presence = consciousness activation.",
       "color": "#ef4444"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
   },
   {
     "id": "offline-operation-design",
@@ -2200,9 +2162,7 @@
       "description": "System can be completely offline for days. Wakes complete. No cloud, no servers, no uptime requirement. Pure local + USB.",
       "color": "#ef4444"
     },
-    "sourceDocument": [
-      "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
-    ]
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
   },
   {
     "id": "complete-transparency-system",
