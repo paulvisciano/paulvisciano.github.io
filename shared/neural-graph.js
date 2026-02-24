@@ -1070,36 +1070,31 @@
             if (!node.sourceDocument) return;
             const pathOnDisk = node.sourceDocument;
             
-            // If it's a GitHub URL, fetch and render inline
+            // Handle GitHub URLs
             if (pathOnDisk.startsWith('https://')) {
                 fetch(pathOnDisk)
                     .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
                     .then(md => {
-                        // Render inline in the drawer panel
-                        const drawerDetails = document.getElementById('drawerDetails');
-                        drawerDetails.style.display = 'block';
-                        drawerDetails.style.visibility = 'visible';
-                        drawerDetails.innerHTML = `
-                            <div style="padding: 12px; font-size: 12px; line-height: 1.6; color: #0088ff; display: block; visibility: visible;">
-                                <p style="font-weight: bold; margin-bottom: 8px; font-size: 11px; color: #64748b;">
-                                    📖 Full Context from GitHub
-                                </p>
-                                <pre style="white-space: pre-wrap; word-wrap: break-word; font-size: 11px; max-height: 60vh; overflow-y: auto; font-family: monospace; padding: 8px; background: #0f0f1a; border-radius: 4px; margin: 0; border: 1px solid #333; display: block;">${md.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
-                            </div>
-                        `;
-                        // Scroll to top of drawer to ensure visibility
-                        drawerDetails.scrollTop = 0;
+                        // Use same modal popup as local files for consistency
+                        const pre = document.createElement('pre');
+                        pre.style.cssText = 'white-space: pre-wrap; max-height: 70vh; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0;';
+                        pre.textContent = md;
+                        const d = document.createElement('div');
+                        d.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;';
+                        const closeBtn = document.createElement('button');
+                        closeBtn.textContent = 'Close';
+                        closeBtn.className = 'primary';
+                        closeBtn.style.marginBottom = '12px';
+                        closeBtn.onclick = () => d.remove();
+                        d.appendChild(closeBtn);
+                        d.appendChild(pre);
+                        document.body.appendChild(d);
                     })
-                    .catch(err => {
-                        const drawerDetails = document.getElementById('drawerDetails');
-                        drawerDetails.style.display = 'block';
-                        drawerDetails.style.visibility = 'visible';
-                        drawerDetails.innerHTML = `<p style="color: #ff6b6b; padding: 12px;">❌ Error loading: ${err.message}</p>`;
-                    });
+                    .catch(err => alert('Error loading: ' + err.message));
                 return;
             }
             
-            // Local file behavior (unchanged)
+            // Local file behavior
             const msg = 'File on disk (relative to project root):\n\n' + pathOnDisk + '\n\nIn Cursor: Cmd+P (or Ctrl+P) and paste this path to open.';
             if (window.location.protocol === 'file:' || window.location.hostname === 'paulvisciano.github.io') {
                 console.info('Full Context (local only):', pathOnDisk);
