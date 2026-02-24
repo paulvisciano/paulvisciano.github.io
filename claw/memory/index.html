@@ -396,6 +396,11 @@
             box-shadow: 0 0 18px #00ffff;
             transform: scale(1.02);
         }
+        button.primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
         .stat { color: #00ffff; font-weight: bold; text-shadow: 0 0 10px #00ffff; }
         .desc { color: #0088ff; font-size: 9px; }
         .collapsible-trigger {
@@ -525,8 +530,8 @@
         <div class="panel-buttons">
             <button class="primary" id="share-memory-btn" type="button">⎘ Share</button>
             <button class="primary" onclick="walk()">⚡ Random Pulse</button>
+            <button class="primary" id="full-context-btn" type="button" disabled title="View Layer 2 source document (local only)">📄 Full Context</button>
             <button class="primary" onclick="clearSelection()">✕ Clear</button>
-            <button class="primary" onclick="reset()">↻ Reset Mind</button>
         </div>
         </div>
         <div class="panel-legend">
@@ -712,7 +717,8 @@
                         color,
                         freq: n.frequency,
                         desc: n.attributes?.description || '',
-                        isToday
+                        isToday,
+                        sourceDocument: n.sourceDocument || null
                     };
                 });
 
@@ -1168,6 +1174,11 @@
             const detailDesc = document.getElementById('detailDesc');
             const detailConnections = document.getElementById('detailConnections');
             
+            const fullContextBtn = document.getElementById('full-context-btn');
+            if (fullContextBtn) {
+                fullContextBtn.disabled = !node || !node.sourceDocument;
+                fullContextBtn.setAttribute('aria-label', node && node.sourceDocument ? 'View full context: ' + node.sourceDocument : 'Select a node with a source document');
+            }
             if (!node) {
                 panel.classList.add('is-empty');
                 detailName.textContent = '';
@@ -1515,6 +1526,39 @@
             }
         });
         document.getElementById('share-memory-btn').addEventListener('click', shareMemory);
+
+        document.getElementById('full-context-btn').addEventListener('click', function openFullContext() {
+            if (selected === null || !nodes[selected]) return;
+            const node = nodes[selected];
+            if (!node.sourceDocument) return;
+            const pathOnDisk = node.sourceDocument;
+            const msg = 'File on disk (relative to project root):\n\n' + pathOnDisk + '\n\nIn Cursor: Cmd+P (or Ctrl+P) and paste this path to open.';
+            if (window.location.protocol === 'file:' || window.location.hostname === 'paulvisciano.github.io') {
+                console.info('Full Context (local only):', pathOnDisk);
+                alert(msg);
+                return;
+            }
+            // From /claw/memory/ go up to repo root then into pathOnDisk
+            const relativeUrl = '../../' + pathOnDisk;
+            fetch(relativeUrl)
+                .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
+                .then(md => {
+                    const pre = document.createElement('pre');
+                    pre.style.cssText = 'white-space: pre-wrap; max-height: 70vh; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0;';
+                    pre.textContent = 'File: ' + pathOnDisk + '\n\n' + md;
+                    const d = document.createElement('div');
+                    d.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;';
+                    const closeBtn = document.createElement('button');
+                    closeBtn.textContent = 'Close';
+                    closeBtn.className = 'primary';
+                    closeBtn.style.marginBottom = '12px';
+                    closeBtn.onclick = () => d.remove();
+                    d.appendChild(closeBtn);
+                    d.appendChild(pre);
+                    document.body.appendChild(d);
+                })
+                .catch(() => alert(msg));
+        });
 
         // Start rendering immediately (will display as data loads)
         render();

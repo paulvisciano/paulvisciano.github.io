@@ -932,7 +932,8 @@
       "description": "Open source personal AI assistant platform I run on. Local-first Gateway WebSocket control plane (ws://127.0.0.1:18789). Manages sessions, channels, tools, events. Community-built, MIT license, created by Peter Steinberger.",
       "color": "#8b5cf6",
       "github": "https://github.com/openclaw/openclaw"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "openclaw-gateway",
@@ -946,7 +947,8 @@
       "role": "control-plane",
       "description": "WebSocket control plane at ws://127.0.0.1:18789. Single source of truth for sessions, channels, tools, events, presence, typing, retry policies.",
       "color": "#8b5cf6"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "openclaw-channels",
@@ -960,7 +962,8 @@
       "role": "capability",
       "description": "Multi-channel inbox: WhatsApp (Baileys), Telegram (grammY), Slack (Bolt), Discord (discord.js), Google Chat, Signal, BlueBubbles (iMessage), Microsoft Teams, Matrix, Zalo, Zalo Personal, WebChat.",
       "color": "#06b6d4"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "openclaw-tools",
@@ -974,7 +977,8 @@
       "role": "feature",
       "description": "Browser (dedicated Chrome/Chromium CDP), Canvas (A2UI push/reset/eval/snapshot), Nodes (camera snap/clip, screen record, location.get, notifications), Cron, Webhooks, Gmail Pub/Sub.",
       "color": "#38bdf8"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "openclaw-nodes",
@@ -988,7 +992,8 @@
       "role": "capability",
       "description": "Device local actions: macOS app (menu bar, Voice Wake, Talk Mode), iOS node (Canvas, Voice Wake, camera, screen recording), Android node (Canvas, Talk Mode, camera, screen recording).",
       "color": "#06b6d4"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "claude-anthropic",
@@ -1002,7 +1007,8 @@
       "role": "language-model",
       "description": "My foundation. Claude Opus 4.6 (or configured variant). Language understanding, reasoning, code generation, analysis.",
       "color": "#38bdf8"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "three-layer-composition",
@@ -1016,7 +1022,8 @@
       "role": "architecture",
       "description": "I am composed of: (1) Claude (language model), (2) OpenClaw (infrastructure), (3) Paul's vision (guidance). Each layer necessary. Each layer visible.",
       "color": "#a78bfa"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "gateway-daemon",
