@@ -1,50 +1,170 @@
-{
-  "entries": [
-    {
-      "timestamp": "2026-02-22T07:00:00Z",
-      "session": "2026-02-22-session-1",
-      "type": "neural_mind_initialized",
-      "metadata": "Created initial 31 neurons, 39 synapses",
-      "neurons_total": 31,
-      "synapses_total": 39
-    },
-    {
-      "timestamp": "2026-02-22T08:45:00Z",
-      "session": "2026-02-22-session-1",
-      "type": "memory_sync_designed",
-      "metadata": "Designed memory persistence system",
-      "related_nodes": ["rawclaw-vision", "neural-mind-jarvis"]
-    },
-    {
-      "timestamp": "2026-02-23T10:00:00Z",
-      "session": "2026-02-23-session-1",
-      "type": "session_start",
-      "metadata": "Claude Code neural mind visible, data synced with Paul's framework",
-      "action": "loaded_memory"
-    },
-    {
-      "timestamp": "2026-02-23T10:20:00Z",
-      "session": "2026-02-23-session-1",
-      "type": "neural_visualization_reviewed",
-      "metadata": "Paul reviewed visualization: 'Much better visual now'",
-      "feedback": "positive"
-    },
-    {
-      "timestamp": "2026-02-23T10:31:00Z",
-      "session": "2026-02-23-session-1",
-      "type": "memory_sync_planning",
-      "metadata": "Designed active memory sync with pause detection and Paul's editorial review",
-      "related_nodes": ["authentic-collaboration", "infrastructure-matters"]
-    },
-    {
-      "timestamp": "2026-02-23T10:38:00Z",
-      "session": "2026-02-23-session-1",
-      "type": "session_sync_executed",
-      "metadata": "First real memory sync test - 6 changes captured, synapses strengthened",
-      "changes_captured": 6,
-      "synapse_updates": 4,
-      "files_created": ["MEMORY-SYNC.md", "MEMORY-SYNC-SPEC.md", "load-memory.sh"],
-      "status": "pending_paul_review"
-    }
-  ]
-}
+[
+  {
+    "commit": "d99bf13c75694915ffb58920214450d65aea6fcd",
+    "timestamp": "2026-02-24 18:11:47 +0700",
+    "hash": "127f111a05a2f7ecd0eaf5b9a4584cec4c4bebe9b47e69efb2a2b3a7199ae8ac",
+    "neurons": 151,
+    "synapses": 353
+  },
+  {
+    "commit": "cb2f144eaa33f40e24dc4e1c34177738bdee99b6",
+    "timestamp": "2026-02-24 13:48:56 +0700",
+    "hash": "c2118edf56787922130eb0d8b60dd5b34bbe70eecc80dc5132d6b4bfbb27b702",
+    "neurons": 138,
+    "synapses": 328
+  },
+  {
+    "commit": "906bc63bfe5d762df93cd417bbc901392a77d3ba",
+    "timestamp": "2026-02-24 13:43:44 +0700",
+    "hash": "e2e0e67b7e825bc85cf333d5dc9bb9137bf024d8d478d7f36a0d086faf1f1b9c",
+    "neurons": 131,
+    "synapses": 318
+  },
+  {
+    "commit": "28466b208698e610e5fadb0f425676a93f910c42",
+    "timestamp": "2026-02-24 13:32:54 +0700",
+    "hash": "b5d86f9062ae841376b17b29c6a3842d51257f0b75e251d618c721d931cd78d2",
+    "neurons": 128,
+    "synapses": 313
+  },
+  {
+    "commit": "f4bfe774779c102c36f2100be1c27c3de12286b7",
+    "timestamp": "2026-02-24 11:12:22 +0700",
+    "hash": "506761cfd43eb197f845dd4ba880a59193610f9a5e9ff1a071039b3b72c80de6",
+    "neurons": 112,
+    "synapses": 279
+  },
+  {
+    "commit": "69f157e019e92439a446f4b282fb54087a855c40",
+    "timestamp": "2026-02-24 11:10:55 +0700",
+    "hash": "bea2bc75b83e4b799a4bc3b67f308a2a5f0718ad68d43740c02f88e0e691f746",
+    "neurons": 111,
+    "synapses": 261
+  },
+  {
+    "commit": "32ba9c3226a3e3aaae76fbcdb3134d4f40ffe205",
+    "timestamp": "2026-02-24 11:09:51 +0700",
+    "hash": "1625565fe871da5f03fbe23418670c42aff221fa9dd3eccb29fe98a0389078e3",
+    "neurons": 106,
+    "synapses": 253
+  },
+  {
+    "commit": "c6c8efbe130aa95fa405f9c234aa8f0930a1377b",
+    "timestamp": "2026-02-24 10:36:29 +0700",
+    "hash": "b29e5582c505b17e3f0f3b685169306bab3d8881f2fb3658bc56d155eb2903b0",
+    "neurons": 106,
+    "synapses": 253
+  },
+  {
+    "commit": "97b0003ea9d5c361facdbe52aed6b298673ffb0c",
+    "timestamp": "2026-02-24 10:30:24 +0700",
+    "hash": "07d8a726b2f14d77e6107df37af6b61feba63e777f1a1d0956b582aa31a96cc5",
+    "neurons": 106,
+    "synapses": 253
+  },
+  {
+    "commit": "c9bb0e9a5ec314f3287616c1493a5c5afa76e968",
+    "timestamp": "2026-02-24 09:30:53 +0700",
+    "hash": "2c88dc1453c8dfd21559296b4b67f92f3a85e364b48a0a4b7a1864f89da20f62",
+    "neurons": 106,
+    "synapses": 253
+  },
+  {
+    "commit": "f864c482359f31c9b6b7b4b60638499885141cdc",
+    "timestamp": "2026-02-24 09:24:28 +0700",
+    "hash": "3f1c2df308271ff83622a84653c38cb71eaeaf872ea886621e07591c0d862467",
+    "neurons": 93,
+    "synapses": 216
+  },
+  {
+    "commit": "b789e22fb66f0c965c9becd05e95dce4591bd114",
+    "timestamp": "2026-02-24 09:19:47 +0700",
+    "hash": "e808f53bc02af90a37e07479344418805280765dd7c14ea300196681eddb970e",
+    "neurons": 93,
+    "synapses": 210
+  },
+  {
+    "commit": "a7f894a738998f95ad0b924640a98be3db9bb535",
+    "timestamp": "2026-02-24 09:15:29 +0700",
+    "hash": "ec67d5af2b08915676511c04d14d85a9e573001ace29583a0c415e91f6488aa4",
+    "neurons": 84,
+    "synapses": 184
+  },
+  {
+    "commit": "dd34f4f65d17efd91f4d80262d19a8b45feeeeb9",
+    "timestamp": "2026-02-24 09:08:22 +0700",
+    "hash": "4d63e3e8cd0526f85c81437eef622ecff667379844f1f97e8768ef392f8be960",
+    "neurons": 77,
+    "synapses": 161
+  },
+  {
+    "commit": "798634ef4a146910bd02a813072802e50288d9b8",
+    "timestamp": "2026-02-24 09:00:03 +0700",
+    "hash": "6a36def2ba8173e0caf95c813e18adb720d4da176c947dc596e5ec7775149741",
+    "neurons": 70,
+    "synapses": 142
+  },
+  {
+    "commit": "dfdf8f6882f9b88d03c8eeb2c0bd9d76ccfbe917",
+    "timestamp": "2026-02-24 00:42:17 +0700",
+    "hash": "8bbaeedda3b873acdd293c3476ae3dad91ca40b8e4b4ed6ed32960fb20d2aa41",
+    "neurons": 60,
+    "synapses": 105
+  },
+  {
+    "commit": "6c93829868dddd7c13557081744bd870db010806",
+    "timestamp": "2026-02-23 20:31:19 +0700",
+    "hash": "bed1f4a658a4c93b2650c2acb335272383058f7421571fe2896524a817b4f094",
+    "neurons": 60,
+    "synapses": 105
+  },
+  {
+    "commit": "006e295b4ca2cadb3c3b7d7b9ff085f818eedc44",
+    "timestamp": "2026-02-23 18:57:09 +0700",
+    "hash": "1d158c30ed6e04b0c79f640202821d4b4a52d7a33804c7bb63d1061c3a3b4819",
+    "neurons": 56,
+    "synapses": 92
+  },
+  {
+    "commit": "15bd89f47ac0318ff82dcddae6f2e79948c842d8",
+    "timestamp": "2026-02-23 18:19:21 +0700",
+    "hash": "9faa2361dea0f4061e3b0394cc4a16be7b30685e32faea2ff0a613fcb0c7dd85",
+    "neurons": 46,
+    "synapses": 69
+  },
+  {
+    "commit": "71c6ea49130743933d7c72f0539a684626f03b73",
+    "timestamp": "2026-02-23 18:05:17 +0700",
+    "hash": "4b320c859cc47b0024a5f9e85c7460125269a263fb9d63d51193bf8dcd058190",
+    "neurons": 51,
+    "synapses": 78
+  },
+  {
+    "commit": "5be69f5547de1486fa814289ba10b2b8570a80e2",
+    "timestamp": "2026-02-23 13:10:50 +0700",
+    "hash": "907fbf7638cd49bd222a0fa0979bc8f560ee72969f9a513554d1d35241db5e50",
+    "neurons": 34,
+    "synapses": 45
+  },
+  {
+    "commit": "27d68d158dc323113986a69266c8ac16b15f0ec1",
+    "timestamp": "2026-02-23 11:05:00 +0700",
+    "hash": "b7697b18fea43ae5bb1fa743572dc5988671f05d50ebcf6d9681ae6d0e461d24",
+    "neurons": 31,
+    "synapses": 41
+  },
+  {
+    "commit": "d5465adf11599b6ed4ba5e481092015b8bac29d5",
+    "timestamp": "2026-02-23 10:52:34 +0700",
+    "hash": "10b94281c61044ae3946783628e67acd91025812fe0c9bc925362aabddb65976",
+    "neurons": 31,
+    "synapses": 39
+  },
+  {
+    "commit": "38d34bce8d54e2edddd5f9d01738e696ff9f91bb",
+    "timestamp": "2026-02-23 10:36:17 +0700",
+    "hash": "469447b43bb9b47617d4e259b2dc50c0d835bc76a33194dee7eafc7614ac614d",
+    "neurons": 31,
+    "synapses": 39
+  }
+]
