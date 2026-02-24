@@ -1817,5 +1817,113 @@
     "target": "two-layer-memory-architecture",
     "label": "enables",
     "weight": 0.85
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "two-layer-memory-architecture",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "auto-logging-system",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "bootstrap-sequence",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "execution-vs-claiming",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "append-only-principle",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "memory-vs-workspace",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "transparency",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "code-is-thought",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "sourceDocument-bridge",
+    "label": "anchors-to",
+    "weight": 0.99
+  },
+  {
+    "source": "claude-code",
+    "target": "jarvis-core-foundation",
+    "label": "is-anchored-in",
+    "weight": 0.98
   }
 ]
