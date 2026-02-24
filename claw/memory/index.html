@@ -547,6 +547,7 @@
     </div>
     <div id="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="today">Today</button>
         <button class="filter-btn" data-filter="value">Values</button>
         <button class="filter-btn" data-filter="capability">Capabilities</button>
         <button class="filter-btn" data-filter="foundation">Foundation</button>
@@ -565,6 +566,7 @@
         </div>
         <div id="drawerFilters" class="drawer-filters" aria-hidden="true">
             <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="today">Today</button>
             <button class="filter-btn" data-filter="value">Values</button>
             <button class="filter-btn" data-filter="capability">Capabilities</button>
             <button class="filter-btn" data-filter="foundation">Foundation</button>
@@ -682,6 +684,9 @@
                     throw new Error('Nodes JSON is empty');
                 }
 
+                const today = new Date();
+                const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+                const todayMoment = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'][today.getMonth()] + '-' + String(today.getDate()).padStart(2, '0') + '-' + today.getFullYear();
                 nodes = rawNodes.map((n, idx) => {
                     const angle = (idx / rawNodes.length) * Math.PI * 2;
                     const radius = 280 + Math.random() * 220;
@@ -694,6 +699,7 @@
                     const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
                     const glow = size * 2.5;
                     const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
+                    const isToday = !!(n.moments && n.moments.length && n.moments.some(m => String(m).toLowerCase().replace(/\s/g, '') === todayMoment.toLowerCase())) || !!(n.temporal_activations && n.temporal_activations.some(ta => ta.timestamp && ta.timestamp.slice(0, 10) === todayStr));
                     return {
                         id: idx,
                         idKey: n.id,
@@ -705,7 +711,8 @@
                         glow,
                         color,
                         freq: n.frequency,
-                        desc: n.attributes?.description || ''
+                        desc: n.attributes?.description || '',
+                        isToday
                     };
                 });
 

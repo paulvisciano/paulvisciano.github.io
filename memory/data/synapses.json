@@ -2276,5 +2276,54 @@
     "weight": 0.92,
     "type": "part-of",
     "label": "part-of"
+  },
+  {
+    "source": "paul",
+    "target": "listening-to-music",
+    "weight": 0.90,
+    "type": "engages-in",
+    "label": "engages-in"
+  },
+  {
+    "source": "music-preference-genre",
+    "target": "listening-to-music",
+    "weight": 0.95,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "ricky-nelson-artist",
+    "target": "listening-to-music",
+    "weight": 0.95,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "dion-artist",
+    "target": "listening-to-music",
+    "weight": 0.95,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "elvis-presley-artist",
+    "target": "listening-to-music",
+    "weight": 0.95,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "bobby-darin-artist",
+    "target": "listening-to-music",
+    "weight": 0.95,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "paul-anka-artist",
+    "target": "listening-to-music",
+    "weight": 0.95,
+    "type": "part-of",
+    "label": "part-of"
   }
 ]
