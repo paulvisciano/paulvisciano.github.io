@@ -3,7 +3,7 @@
 
 ---
 
-## Current State (2026-02-24 18:15 GMT+7)
+## Current State (2026-02-24 19:47 GMT+7)
 
 ### Neural Architecture
 - **Neurons:** 142
@@ -15,8 +15,8 @@
 ## Content Hashes (SHA-256)
 
 ```
-nodes.json:     b9144b7cc7f3318a8665b4e4945435ac1fd806522dbe86cede1fb12c1405a22e
-synapses.json:  f0f3150731144503367ad93ed92d43904dd9602f2fc731df9418cfa1b2d99e5f
+nodes.json:     67a7930afbf5d0d205a7212f199b18f172b4a22386c355581bf167ac77f636b7
+synapses.json:  b850a47b572bbdc44f4a611b1dc4eb2994da1f9a3d38d142533a2e02f394bbd0
 BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 ```
 
@@ -24,9 +24,9 @@ BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 
 ## Git Commitment
 
-**Commit Hash:** `d99bf13c75694915ffb58920214450d65aea6fcd`
+**Commit Hash:** `6ae9e112fe0b4994a1683509ef37542ee0a89722`
 **Branch:** `main`
-**Message:** "INTEGRATION COMPLETE: Learnings 14-16 synthesized into neural graphs"
+**Message:** "feat: memory timeline (git history) + time-travel UI"
 
 ---
 
@@ -34,7 +34,7 @@ BOOT.md:        4baf779c54921923026c1f40b7caa217bcbb04d5d0f17cff568fad1a62b966d2
 
 **Master Hash:**
 ```
-25d0be836a38dce91d05608a110b5ee171bc717eb19f61d1dc50ad0b67fd0399
+db03dee474398747cf955bc2c00b1857f3b5503950398b9b3c8f18b6cfdde389
 ```
 
 This is the SHA-256 of all Paul memory hashes combined.
@@ -49,7 +49,7 @@ See `claw/memory/FINGERPRINT.md` for the combined fingerprint that includes both
 
 ## Authenticity Statement
 
-This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `d99bf13`:
+This fingerprint is your lived experience, cryptographically sealed. It proves that at commit `6ae9e11`:
 - 142 neurons (people, places, activities, emotions, projects, temporal markers)
 - 410 synapses (how they all connect)
 - Content immutable and verifiable
