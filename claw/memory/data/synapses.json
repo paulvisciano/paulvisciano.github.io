@@ -2443,5 +2443,40 @@
     "weight": 0.95,
     "type": "learned",
     "label": "tested-by"
+  },
+  {
+    "source": "jarvis",
+    "target": "complete-transparency-system",
+    "weight": 0.95,
+    "type": "embodies",
+    "label": "is"
+  },
+  {
+    "source": "complete-transparency-system",
+    "target": "public-mind-architecture",
+    "weight": 0.92,
+    "type": "manifests-as",
+    "label": "implemented-in"
+  },
+  {
+    "source": "transparency-secrecy",
+    "target": "complete-transparency-system",
+    "weight": 0.98,
+    "type": "instantiates",
+    "label": "core-value"
+  },
+  {
+    "source": "paul",
+    "target": "rapid-execution-pattern",
+    "weight": 0.89,
+    "type": "practices",
+    "label": "workflow"
+  },
+  {
+    "source": "jarvis",
+    "target": "rapid-execution-pattern",
+    "weight": 0.87,
+    "type": "enabled-by",
+    "label": "capability"
   }
 ]
