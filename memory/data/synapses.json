@@ -1110,7 +1110,7 @@
     "target": "bangkok",
     "weight": 0.78,
     "type": "location-activity",
-    "label": "Amsterdam Café reggae"
+    "label": "Amsterdam Caf\u00e9 reggae"
   },
   {
     "source": "nightlife-exploration",
@@ -1166,7 +1166,7 @@
     "target": "bangkok",
     "weight": 0.92,
     "type": "episode-mechanic",
-    "label": "฿741 redistributed"
+    "label": "\u0e3f741 redistributed"
   },
   {
     "source": "wealth-redistribution",
@@ -2514,5 +2514,40 @@
     "weight": 0.8,
     "type": "reconnected-with",
     "label": "reconnected-with"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "lumphini-park-community",
+    "weight": 0.95,
+    "type": "belongs-to",
+    "label": "belongs-to"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "good-brotherhood",
+    "weight": 0.94,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "lumphini-park-community",
+    "target": "paul-lumphini-gym-og",
+    "weight": 0.92,
+    "type": "maintains",
+    "label": "maintained-by"
+  },
+  {
+    "source": "good-brotherhood",
+    "target": "mangochi-lived",
+    "weight": 0.95,
+    "type": "foundation",
+    "label": "foundation-of"
+  },
+  {
+    "source": "mangochi-lived",
+    "target": "mangochi-project",
+    "weight": 0.95,
+    "type": "embodies",
+    "label": "embodies"
   }
 ]

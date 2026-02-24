@@ -1860,5 +1860,56 @@
       "memory/raw/2026-02-24/learnings/04-auto-logging-system.md",
       "memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
     ]
+  },
+  {
+    "id": "lumphini-park-community",
+    "label": "Lumphini Park Community",
+    "category": "place",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "belonging",
+      "description": "Open gym in Lumphini Park, Bangkok. Home community where Paul belongs. OG maintains gym. Months spent there.",
+      "color": "#10b981"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
+  },
+  {
+    "id": "good-brotherhood",
+    "label": "Good Brotherhood",
+    "category": "value",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "core-principle",
+      "description": "Reciprocal care. Mutual commitment. Bananas & coffee. Not transaction, relationship. Keep what you care for alive.",
+      "color": "#f97316"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
+  },
+  {
+    "id": "mangochi-lived",
+    "label": "MANGOCHI In Practice",
+    "category": "philosophy",
+    "frequency": 14,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "lived-principle",
+      "description": "MANGOCHI isn't theory. Lived daily: show up, bring gifts, maintain, receive care. Brotherhood operationalized.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
   }
 ]
