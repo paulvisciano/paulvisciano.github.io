@@ -2150,5 +2150,131 @@
     "weight": 0.52,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
+  },
+  {
+    "source": "paul",
+    "target": "music-preference-genre",
+    "weight": 0.85,
+    "type": "prefers",
+    "label": "prefers"
+  },
+  {
+    "source": "paul",
+    "target": "ricky-nelson-artist",
+    "weight": 0.88,
+    "type": "enjoys",
+    "label": "enjoys"
+  },
+  {
+    "source": "paul",
+    "target": "dion-artist",
+    "weight": 0.82,
+    "type": "enjoys",
+    "label": "enjoys"
+  },
+  {
+    "source": "paul",
+    "target": "elvis-presley-artist",
+    "weight": 0.82,
+    "type": "enjoys",
+    "label": "enjoys"
+  },
+  {
+    "source": "paul",
+    "target": "bobby-darin-artist",
+    "weight": 0.82,
+    "type": "enjoys",
+    "label": "enjoys"
+  },
+  {
+    "source": "paul",
+    "target": "paul-anka-artist",
+    "weight": 0.82,
+    "type": "enjoys",
+    "label": "enjoys"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "paul",
+    "weight": 0.92,
+    "type": "discovered",
+    "label": "discovered"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "music-preference-genre",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "ricky-nelson-artist",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "dion-artist",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "elvis-presley-artist",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "bobby-darin-artist",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-music-preference-learning",
+    "target": "paul-anka-artist",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "ricky-nelson-artist",
+    "target": "music-preference-genre",
+    "weight": 0.92,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "dion-artist",
+    "target": "music-preference-genre",
+    "weight": 0.92,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "elvis-presley-artist",
+    "target": "music-preference-genre",
+    "weight": 0.92,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "bobby-darin-artist",
+    "target": "music-preference-genre",
+    "weight": 0.92,
+    "type": "part-of",
+    "label": "part-of"
+  },
+  {
+    "source": "paul-anka-artist",
+    "target": "music-preference-genre",
+    "weight": 0.92,
+    "type": "part-of",
+    "label": "part-of"
   }
 ]
