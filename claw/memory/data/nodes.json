@@ -2213,7 +2213,8 @@
       "role": "core-capability",
       "description": "Three-layer traceability: neural graph (compressed) → learning documents (full context) → git commits (immutable). Master hash as cryptographic proof.",
       "color": "#06b6d4"
-    }
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-02-24/learnings/17-complete-transparency-architecture.md"
   },
   {
     "id": "public-mind-architecture",
@@ -2223,7 +2224,8 @@
     "attributes": {
       "role": "core-system",
       "description": "Entire neural graph publicly accessible. Learnings published to GitHub. Master hash displayed in UI. Anyone can verify and explore."
-    }
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-02-24/learnings/17-complete-transparency-architecture.md"
   },
   {
     "id": "rapid-execution-pattern",
@@ -2233,6 +2235,7 @@
     "attributes": {
       "role": "workflow",
       "description": "Plan (15 min) → Cursor executes (26 min) → Deploy (immediate). Feedback loop so tight that thoughts become reality in < 1 hour."
-    }
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-02-24/learnings/18-rapid-iteration-cursor-collaboration.md"
   }
 ]
