@@ -1,29 +1,33 @@
 ---
 name: Source Document Integration for Neural Mind UI
 overview: Add a deep-dive feature so users can click any neuron and see its Layer 2 source document—full context, references, and raw learning behind the compressed node.
+status: archived
+archived_at: "2026-02-24"
 todos:
   - id: metadata-index
     content: Create metadata index of all learning documents (names, timestamps, related nodes)
-    status: pending
+    status: cancelled
   - id: local-file-access
     content: Serve Layer 2 markdown only when running locally (e.g. local API); no public copy
-    status: pending
+    status: completed
   - id: node-inspector-source
     content: Query node sourceDocument when selected; add "View Full Context" when present
-    status: pending
+    status: completed
   - id: fetch-render-markdown
     content: Fetch and parse markdown (summary, sources, full context); render with marked.js
-    status: pending
+    status: completed
   - id: ui-component
     content: Display source doc in side panel, modal, or breadcrumb (choose option)
-    status: pending
+    status: completed
   - id: related-neurons
     content: Show related neurons that reference the same source document
-    status: pending
+    status: cancelled
 isProject: false
 ---
 
 # Plan: Source Document Integration for Neural Mind UI
+
+**Outcome:** Archived 2026-02-24. Full Context button shipped in memory/ and claw/memory/: shows file-on-disk path and Cursor tip; on localhost fetches and displays source doc when served from repo. sourceDocument passed through node mapping; music preference node linked. Future: metadata index, related-neurons, markdown rendering.
 
 **Purpose:** Add a deep-dive feature to the neural mind visualization so users can click on any neuron and see its Layer 2 source document—the full context, references, and raw learning behind the compressed node.
 
@@ -144,4 +148,4 @@ This feature bridges **compressed knowledge** (neurons) and **full understanding
 ---
 
 **Created:** Feb 24, 2026 10:51 GMT+7  
-**Status:** Ready for implementation
+**Status:** Archived (shipped MVP)
