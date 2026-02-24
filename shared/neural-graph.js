@@ -1069,6 +1069,31 @@
             const node = nodes[selected];
             if (!node.sourceDocument) return;
             const pathOnDisk = node.sourceDocument;
+            
+            // If it's a GitHub URL, fetch and render inline
+            if (pathOnDisk.startsWith('https://')) {
+                fetch(pathOnDisk)
+                    .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
+                    .then(md => {
+                        // Render inline in the drawer panel
+                        const drawerDetails = document.getElementById('drawerDetails');
+                        drawerDetails.innerHTML = `
+                            <div style="padding: 12px; font-size: 12px; line-height: 1.6; color: #0088ff;">
+                                <p style="font-weight: bold; margin-bottom: 8px; font-size: 11px; color: #64748b;">
+                                    📖 Full Context
+                                </p>
+                                <pre style="white-space: pre-wrap; word-wrap: break-word; font-size: 11px; max-height: 70vh; overflow-y: auto; font-family: monospace; padding: 8px; background: #0f0f1a; border-radius: 4px; margin: 0;">${md.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+                            </div>
+                        `;
+                    })
+                    .catch(err => {
+                        const drawerDetails = document.getElementById('drawerDetails');
+                        drawerDetails.innerHTML = `<p style="color: #ff6b6b; padding: 12px;">Error loading: ${err.message}</p>`;
+                    });
+                return;
+            }
+            
+            // Local file behavior (unchanged)
             const msg = 'File on disk (relative to project root):\n\n' + pathOnDisk + '\n\nIn Cursor: Cmd+P (or Ctrl+P) and paste this path to open.';
             if (window.location.protocol === 'file:' || window.location.hostname === 'paulvisciano.github.io') {
                 console.info('Full Context (local only):', pathOnDisk);
