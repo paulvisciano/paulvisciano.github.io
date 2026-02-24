@@ -1316,21 +1316,6 @@
     "dateCreated": "2026-02-22"
   },
   {
-    "id": "bai-reconnection",
-    "label": "Bai",
-    "category": "person",
-    "frequency": 8,
-    "attributes": {
-      "role": "reconnection",
-      "description": "Met at Havana Aug 2025. Sweet messages online. Feb 21 2026 reconnection attempt showed gap between online intimacy and in-person authenticity. Red flags: plays games, uses alcohol to cope, avoidant.",
-      "color": "#FFB6C1",
-      "date": "2026-02-21"
-    },
-    "idKey": "bai-reconnection",
-    "isToday": true,
-    "dateCreated": "2026-02-22"
-  },
-  {
     "id": "havana-bangkok-venue",
     "label": "Havana",
     "category": "location",
