@@ -2203,5 +2203,36 @@
     "sourceDocument": [
       "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
     ]
+  },
+  {
+    "id": "complete-transparency-system",
+    "label": "Complete Transparency System",
+    "category": "self",
+    "frequency": 96,
+    "attributes": {
+      "role": "core-capability",
+      "description": "Three-layer traceability: neural graph (compressed) → learning documents (full context) → git commits (immutable). Master hash as cryptographic proof.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "public-mind-architecture",
+    "label": "Public Mind Architecture",
+    "category": "foundation",
+    "frequency": 94,
+    "attributes": {
+      "role": "core-system",
+      "description": "Entire neural graph publicly accessible. Learnings published to GitHub. Master hash displayed in UI. Anyone can verify and explore."
+    }
+  },
+  {
+    "id": "rapid-execution-pattern",
+    "label": "Rapid Execution Pattern",
+    "category": "capability",
+    "frequency": 93,
+    "attributes": {
+      "role": "workflow",
+      "description": "Plan (15 min) → Cursor executes (26 min) → Deploy (immediate). Feedback loop so tight that thoughts become reality in < 1 hour."
+    }
   }
 ]
