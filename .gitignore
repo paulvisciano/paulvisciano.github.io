@@ -53,6 +53,11 @@ memories/sessions/*cursor-history*
 # Raw content - local files only, never commit to GitHub
 raw/
 memory/raw/
+# EXCEPTION: Publish Jarvis's learnings (public memory architecture)
+!claw/memory/raw/
+!claw/memory/raw/2026-02-24/
+!claw/memory/raw/2026-02-24/learnings/
+!claw/memory/raw/2026-02-24/learnings/*.md
 *.html.bak
 chat.*
 conversations.*
