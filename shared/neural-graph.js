@@ -232,10 +232,11 @@
                     trigger.className = 'collapsible-trigger';
                     trigger.setAttribute('aria-expanded', 'false');
                     trigger.setAttribute('aria-controls', 'timeline-body');
+                    trigger.setAttribute('data-accordion-body', 'timeline-body');
                     trigger.innerHTML = '<span>History</span> <span id="timeline-chevron">▼</span>';
                     const body = document.createElement('div');
                     body.id = 'timeline-body';
-                    body.className = 'collapsible-body timeline-body';
+                    body.className = 'collapsible-body timeline-body accordion-body';
                     body.setAttribute('role', 'region');
                     body.setAttribute('aria-label', 'Timeline entries');
                     // Latest (current) first — quick to load, easy to return to
@@ -267,12 +268,13 @@
                     });
                     section.appendChild(trigger);
                     section.appendChild(body);
-                    trigger.addEventListener('click', () => {
-                        const open = body.classList.toggle('open');
-                        trigger.setAttribute('aria-expanded', open);
-                        document.getElementById('timeline-chevron').textContent = open ? '▲' : '▼';
-                    });
-                    panelButtons.parentNode.insertBefore(section, panelButtons);
+                    const actionsSection = document.getElementById('actions-toggle');
+                    const insertTarget = actionsSection ? actionsSection.closest('.filter-section') : null;
+                    if (insertTarget && insertTarget.parentNode) {
+                        insertTarget.parentNode.insertBefore(section, insertTarget);
+                    } else {
+                        panelButtons.parentNode.insertBefore(section, panelButtons);
+                    }
                 })
                 .catch(() => {});
         }
@@ -819,26 +821,32 @@
             });
         }
 
-        document.getElementById('filter-toggle').addEventListener('click', () => {
-            const list = document.getElementById('filter-list');
-            const chevron = document.getElementById('filter-chevron');
-            const isOpen = list.classList.toggle('open');
-            chevron.textContent = isOpen ? '▲' : '▼';
-            document.getElementById('filter-toggle').setAttribute('aria-expanded', isOpen);
-        });
-        document.getElementById('howto-toggle').addEventListener('click', () => {
-            const body = document.getElementById('howto-body');
-            const chevron = document.getElementById('howto-chevron');
-            const isOpen = body.classList.toggle('open');
-            chevron.textContent = isOpen ? '▲' : '▼';
-            document.getElementById('howto-toggle').setAttribute('aria-expanded', isOpen);
-        });
-        document.getElementById('legend-toggle').addEventListener('click', () => {
-            const body = document.getElementById('legend-body');
-            const chevron = document.getElementById('legend-chevron');
-            const isOpen = body.classList.toggle('open');
-            chevron.textContent = isOpen ? '▲' : '▼';
-            document.getElementById('legend-toggle').setAttribute('aria-expanded', isOpen);
+        // Accordion: only one section open at a time
+        function closeAllAccordionBodies() {
+            document.querySelectorAll('#info .accordion-body').forEach(el => { el.classList.remove('open'); });
+        }
+        function syncAccordionChevrons() {
+            document.querySelectorAll('#info [data-accordion-body]').forEach(trigger => {
+                const bodyId = trigger.getAttribute('data-accordion-body');
+                const body = document.getElementById(bodyId);
+                const chevron = trigger.querySelector('[id$="-chevron"]');
+                if (body && chevron) {
+                    const isOpen = body.classList.contains('open');
+                    chevron.textContent = isOpen ? '▲' : '▼';
+                    trigger.setAttribute('aria-expanded', isOpen);
+                }
+            });
+        }
+        document.getElementById('info').addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-accordion-body]');
+            if (!trigger) return;
+            const bodyId = trigger.getAttribute('data-accordion-body');
+            const body = document.getElementById(bodyId);
+            if (!body) return;
+            const wasOpen = body.classList.contains('open');
+            closeAllAccordionBodies();
+            if (!wasOpen) body.classList.add('open');
+            syncAccordionChevrons();
         });
 
         canvas.addEventListener('wheel', e => {
