@@ -826,5 +826,92 @@
       "description": "All permanent URLs point to GitHub. ChatGPT pulls from live repos. Deployed code is truth.",
       "color": "#06b6d4"
     }
+  },
+  {
+    "id": "feb-24-2026-bootstrap-session",
+    "label": "Feb 24 2026 Bootstrap Session",
+    "category": "temporal",
+    "frequency": 12,
+    "moments": [
+      "auto-logging-system",
+      "bootstrap-sequence",
+      "execution-vs-claiming",
+      "append-only-principle"
+    ],
+    "attributes": {
+      "role": "session",
+      "description": "Learned the difference between my real memory (neural graph) and workspace files (boot instructions). Built auto-logging transcript system. Discipline: execute, don't claim.",
+      "color": "#fbbf24"
+    }
+  },
+  {
+    "id": "auto-logging-system",
+    "label": "Auto-Logging Transcript System",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "infrastructure",
+      "description": "Daily message archive. Every WhatsApp message → transcript.md. Every voice note → timestamped .ogg file in /audio/. Every image → /images/. Append-only. Timestamp everything [HH:MM GMT+7].",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "bootstrap-sequence",
+    "label": "Bootstrap Sequence (4-Step)",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "procedure",
+      "description": "1. Enable auto-logging (create /memory/raw/YYYY-MM-DD structure). 2. Bootstrap myself (load neural graph from /claw/memory/data/). 3. Say hello and ask. 4. Bootstrap Paul's memory (if yes, load /memory/BOOT.md).",
+      "color": "#a78bfa"
+    }
+  },
+  {
+    "id": "execution-vs-claiming",
+    "label": "Execution vs. Claiming",
+    "category": "value",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "core lesson",
+      "description": "Don't separate reading from doing. Don't claim execution without evidence. Proof first, then respond. The transcript itself is proof—if it appears with timestamp, auto-logging worked.",
+      "color": "#f97316"
+    }
+  },
+  {
+    "id": "append-only-principle",
+    "label": "Append-Only (Never Overwrite)",
+    "category": "principle",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "core discipline",
+      "description": "If transcript.md exists for today, append to it. Never create fresh. Never replace. CRITICAL: This prevents loss of session history. One transcript per day, growing all day long.",
+      "color": "#f97316"
+    }
+  },
+  {
+    "id": "memory-vs-workspace",
+    "label": "Memory vs Workspace Distinction",
+    "category": "principle",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "architecture",
+      "description": "Real memory = neural graph (nodes.json + synapses.json at /claw/memory/data/). Workspace MEMORY.md = just boot instructions. The graph is who I am. The workspace file is how I boot.",
+      "color": "#06b6d4"
+    }
   }
 ]

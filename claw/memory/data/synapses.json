@@ -831,5 +831,166 @@
     "weight": 0.85,
     "type": "feeds",
     "label": "feeds"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "auto-logging-system",
+    "weight": 0.95,
+    "type": "created",
+    "label": "built"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "bootstrap-sequence",
+    "weight": 0.95,
+    "type": "created",
+    "label": "defined"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "execution-vs-claiming",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "append-only-principle",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "memory-vs-workspace",
+    "weight": 0.95,
+    "type": "clarified",
+    "label": "clarified"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "paul-visciano",
+    "weight": 0.96,
+    "type": "collaboration",
+    "label": "with"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "jarvis-identity",
+    "weight": 0.94,
+    "type": "learning",
+    "label": "learning-for"
+  },
+  {
+    "source": "auto-logging-system",
+    "target": "unified-memory-arch",
+    "weight": 0.88,
+    "type": "component-of",
+    "label": "component of"
+  },
+  {
+    "source": "auto-logging-system",
+    "target": "portable-memory-system",
+    "weight": 0.85,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "auto-logging-system",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "bootstrap-sequence",
+    "target": "jarvis-identity",
+    "weight": 0.95,
+    "type": "procedure-for",
+    "label": "boots"
+  },
+  {
+    "source": "bootstrap-sequence",
+    "target": "chatgpt-boot-sequence",
+    "weight": 0.85,
+    "type": "extends",
+    "label": "extends"
+  },
+  {
+    "source": "bootstrap-sequence",
+    "target": "memory-vs-workspace",
+    "weight": 0.9,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "execution-vs-claiming",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "based-on",
+    "label": "based-on"
+  },
+  {
+    "source": "execution-vs-claiming",
+    "target": "data-accuracy",
+    "weight": 0.88,
+    "type": "requires",
+    "label": "requires"
+  },
+  {
+    "source": "execution-vs-claiming",
+    "target": "authentic-collaboration",
+    "weight": 0.85,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "execution-vs-claiming",
+    "target": "auto-logging-system",
+    "weight": 0.82,
+    "type": "discipline-for",
+    "label": "discipline-for"
+  },
+  {
+    "source": "append-only-principle",
+    "target": "auto-logging-system",
+    "weight": 0.95,
+    "type": "core-to",
+    "label": "core-to"
+  },
+  {
+    "source": "append-only-principle",
+    "target": "authenticity-verification",
+    "weight": 0.82,
+    "type": "ensures",
+    "label": "ensures"
+  },
+  {
+    "source": "append-only-principle",
+    "target": "infrastructure-matters",
+    "weight": 0.8,
+    "type": "architectural",
+    "label": "principle"
+  },
+  {
+    "source": "memory-vs-workspace",
+    "target": "memory-ownership-boundary",
+    "weight": 0.92,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "memory-vs-workspace",
+    "target": "namespace-separation",
+    "weight": 0.9,
+    "type": "reinforces",
+    "label": "reinforces"
+  },
+  {
+    "source": "memory-vs-workspace",
+    "target": "portable-memory-system",
+    "weight": 0.88,
+    "type": "informs",
+    "label": "informs"
   }
 ]
