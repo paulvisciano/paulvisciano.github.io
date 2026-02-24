@@ -856,7 +856,8 @@
       "role": "infrastructure",
       "description": "Daily message archive. Every WhatsApp message \u2192 transcript.md. Every voice note \u2192 timestamped .ogg file in /audio/. Every image \u2192 /images/. Append-only. Timestamp everything [HH:MM GMT+7].",
       "color": "#8b5cf6"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "bootstrap-sequence",
@@ -870,7 +871,8 @@
       "role": "procedure",
       "description": "1. Enable auto-logging (create /memory/raw/YYYY-MM-DD structure). 2. Bootstrap myself (load neural graph from /claw/memory/data/). 3. Say hello and ask. 4. Bootstrap Paul's memory (if yes, load /memory/BOOT.md).",
       "color": "#a78bfa"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "execution-vs-claiming",
@@ -884,7 +886,8 @@
       "role": "core lesson",
       "description": "Don't separate reading from doing. Don't claim execution without evidence. Proof first, then respond. The transcript itself is proof\u2014if it appears with timestamp, auto-logging worked.",
       "color": "#f97316"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "append-only-principle",
@@ -898,7 +901,8 @@
       "role": "core discipline",
       "description": "If transcript.md exists for today, append to it. Never create fresh. Never replace. CRITICAL: This prevents loss of session history. One transcript per day, growing all day long.",
       "color": "#f97316"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "memory-vs-workspace",
@@ -912,7 +916,8 @@
       "role": "architecture",
       "description": "Real memory = neural graph (nodes.json + synapses.json at /claw/memory/data/). Workspace MEMORY.md = just boot instructions. The graph is who I am. The workspace file is how I boot.",
       "color": "#06b6d4"
-    }
+    },
+    "sourceDocument": "memory/raw/2026-02-24/learnings/05-two-layer-memory-architecture.md"
   },
   {
     "id": "openclaw",
@@ -1152,7 +1157,7 @@
       "description": "6 files injected into agent context on session start: AGENTS.md (instructions/memory), SOUL.md (persona/boundaries), TOOLS.md (tool conventions), BOOTSTRAP.md (first-run ritual), IDENTITY.md (name/vibe/emoji), USER.md (user profile). Blank files skipped. Large files trimmed.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "agent-workspace",
@@ -1167,7 +1172,7 @@
       "description": "Single directory (agents.defaults.workspace, default ~/.openclaw/workspace) is agent's only working directory (cwd) for all tools and context. Per-session workspaces possible under sandbox.workspaceRoot if sandboxing enabled.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "skills-system",
@@ -1197,7 +1202,7 @@
       "description": "Session transcripts stored as JSONL at ~/.openclaw/agents/<agentId>/sessions/<SessionId>.jsonl. Session ID is stable, chosen by OpenClaw. Legacy Pi/Tau sessions NOT read.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "queue-modes",
