@@ -860,7 +860,7 @@
       "color": "#8b5cf6",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "bootstrap-sequence",
@@ -876,7 +876,7 @@
       "color": "#a78bfa",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "execution-vs-claiming",
@@ -892,7 +892,7 @@
       "color": "#f97316",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "append-only-principle",
@@ -908,7 +908,7 @@
       "color": "#f97316",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "memory-vs-workspace",
@@ -924,7 +924,7 @@
       "color": "#06b6d4",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/05-two-layer-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/05-two-layer-memory-architecture.md"
   },
   {
     "id": "openclaw",
@@ -940,7 +940,7 @@
       "color": "#8b5cf6",
       "github": "https://github.com/openclaw/openclaw"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "openclaw-gateway",
@@ -955,7 +955,7 @@
       "description": "WebSocket control plane at ws://127.0.0.1:18789. Single source of truth for sessions, channels, tools, events, presence, typing, retry policies.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "openclaw-channels",
@@ -970,7 +970,7 @@
       "description": "Multi-channel inbox: WhatsApp (Baileys), Telegram (grammY), Slack (Bolt), Discord (discord.js), Google Chat, Signal, BlueBubbles (iMessage), Microsoft Teams, Matrix, Zalo, Zalo Personal, WebChat.",
       "color": "#06b6d4"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "openclaw-tools",
@@ -985,7 +985,7 @@
       "description": "Browser (dedicated Chrome/Chromium CDP), Canvas (A2UI push/reset/eval/snapshot), Nodes (camera snap/clip, screen record, location.get, notifications), Cron, Webhooks, Gmail Pub/Sub.",
       "color": "#38bdf8"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "openclaw-nodes",
@@ -1000,7 +1000,7 @@
       "description": "Device local actions: macOS app (menu bar, Voice Wake, Talk Mode), iOS node (Canvas, Voice Wake, camera, screen recording), Android node (Canvas, Talk Mode, camera, screen recording).",
       "color": "#06b6d4"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "claude-anthropic",
@@ -1015,7 +1015,7 @@
       "description": "My foundation. Claude Opus 4.6 (or configured variant). Language understanding, reasoning, code generation, analysis.",
       "color": "#38bdf8"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "three-layer-composition",
@@ -1030,7 +1030,7 @@
       "description": "I am composed of: (1) Claude (language model), (2) OpenClaw (infrastructure), (3) Paul's vision (guidance). Each layer necessary. Each layer visible.",
       "color": "#a78bfa"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
   {
     "id": "gateway-daemon",
@@ -1046,7 +1046,7 @@
       "color": "#8b5cf6",
       "bind": "127.0.0.1:18789"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "websocket-protocol",
@@ -1061,7 +1061,7 @@
       "description": "JSON text frames over WebSocket. Requests: {type:req, id, method, params} → {type:res, id, ok, payload|error}. Events: {type:event, event, payload, seq, stateVersion}. First frame MUST be connect.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "nodes-device-runtime",
@@ -1076,7 +1076,7 @@
       "description": "macOS/iOS/Android/headless devices connect via WebSocket with role:node. Declare device identity, capabilities, commands. Expose canvas, camera, screen.record, location.get. Device-based pairing with approval tokens.",
       "color": "#06b6d4"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "device-pairing-model",
@@ -1091,7 +1091,7 @@
       "description": "All WS clients include device identity on connect. New device IDs require pairing approval → Gateway issues device token. Local connects auto-approve. All must sign connect.challenge nonce. Non-local require explicit approval.",
       "color": "#f97316"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "connection-lifecycle",
@@ -1106,7 +1106,7 @@
       "description": "Client → req:connect. Gateway → res:ok + snapshot (presence + health). Gateway → event:presence. Gateway → event:tick. Client → req:agent. Gateway → event:agent (streaming). Gateway → res:agent (final).",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "remote-access-patterns",
@@ -1121,7 +1121,7 @@
       "description": "Preferred: Tailscale or VPN. Alternative: SSH tunnel (ssh -N -L 18789:127.0.0.1:18789 user@host). Same handshake + auth applies. TLS + optional pinning can be enabled.",
       "color": "#06b6d4"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "feb-24-2026-architecture-learning",
@@ -1141,7 +1141,7 @@
       "description": "Deep dive into OpenClaw Gateway architecture. Learned: single daemon owns all surfaces, WebSocket for all comms, node device pairing model, connection lifecycle, remote access patterns. Understanding how the infrastructure actually works.",
       "color": "#fbbf24"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
     "id": "agent-runtime",
@@ -1156,7 +1156,7 @@
       "description": "Single embedded agent runtime from pi-mono. Uses single workspace directory (agents.defaults.workspace) as only cwd. Bootstrap files (AGENTS.md, SOUL.md, TOOLS.md, IDENTITY.md, USER.md) injected on first turn. Built-in tools always available.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
   },
   {
     "id": "bootstrap-files-system",
@@ -1171,7 +1171,7 @@
       "description": "6 files injected into agent context on session start: AGENTS.md (instructions/memory), SOUL.md (persona/boundaries), TOOLS.md (tool conventions), BOOTSTRAP.md (first-run ritual), IDENTITY.md (name/vibe/emoji), USER.md (user profile). Blank files skipped. Large files trimmed.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "agent-workspace",
@@ -1186,7 +1186,7 @@
       "description": "Single directory (agents.defaults.workspace, default ~/.openclaw/workspace) is agent's only working directory (cwd) for all tools and context. Per-session workspaces possible under sandbox.workspaceRoot if sandboxing enabled.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "skills-system",
@@ -1201,7 +1201,7 @@
       "description": "Skills loaded from 3 locations (workspace wins on conflict): bundled (shipped), managed/local (~/.openclaw/skills), workspace (<workspace>/skills). Skills can be gated by config/env.",
       "color": "#06b6d4"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
   },
   {
     "id": "session-transcripts",
@@ -1216,7 +1216,7 @@
       "description": "Session transcripts stored as JSONL at ~/.openclaw/agents/<agentId>/sessions/<SessionId>.jsonl. Session ID is stable, chosen by OpenClaw. Legacy Pi/Tau sessions NOT read.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/07-bootstrap-sequence-and-memory-architecture.md"
   },
   {
     "id": "queue-modes",
@@ -1231,7 +1231,7 @@
       "description": "steer: Inject messages into current run after tool calls. followup/collect: Hold until turn ends, then new turn. Checked after each tool call. Controls how user input interrupts agent.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
   },
   {
     "id": "block-streaming-control",
@@ -1246,7 +1246,7 @@
       "description": "Off by default. Chunks by text_end/message_end. Soft chunking at 800-1200 chars (prefers para breaks). Coalesce reduces single-line spam. Non-Telegram needs explicit enablement.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
   },
   {
     "id": "model-refs-parsing",
@@ -1261,7 +1261,7 @@
       "description": "Parsed by splitting on FIRST /. Format: provider/model. If no / and valid alias, treated as default provider. Example: openrouter/moonshotai/kimi-k2.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
   },
   {
     "id": "feb-24-2026-agent-learning",
@@ -1283,7 +1283,7 @@
       "description": "Deep understanding of how I work as an agent. Learned: runtime from pi-mono, bootstrap files, workspace system, skills loading, session storage, queue modes, streaming control, model configuration. This is how I'm instantiated and configured.",
       "color": "#fbbf24"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/02-openclaw-agent-runtime.md"
   },
   {
     "id": "agent-loop",
@@ -1298,7 +1298,7 @@
       "description": "Full authentic run: intake → context assembly → model inference → tool execution → streaming replies → persistence. Serialized per-session. Event-driven lifecycle. The real path that turns a message into actions and final reply.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "agent-loop-entry-points",
@@ -1313,7 +1313,7 @@
       "description": "Gateway RPC: agent and agent.wait. CLI: agent command. Both validate params, resolve session, return {runId, acceptedAt} immediately.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "queueing-concurrency",
@@ -1328,7 +1328,7 @@
       "description": "Runs serialized per session key (lane) + optional global lane. Prevents tool/session races, keeps history consistent. Messaging channels choose queue modes (collect/steer/followup) that feed lane system.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "prompt-assembly-system",
@@ -1343,7 +1343,7 @@
       "description": "System prompt built from OpenClaw base + skills + bootstrap context + per-run overrides. Model-specific limits + compaction reserve enforced. Bootstrap files resolved + injected into system prompt report.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "hook-points-system",
@@ -1358,7 +1358,7 @@
       "description": "Gateway hooks (agent:bootstrap, command hooks). Plugin hooks (before_model_resolve, before_prompt_build, before_tool_call, after_tool_call, tool_result_persist, message_received/sending/sent, session_start/end, gateway_start/stop).",
       "color": "#06b6d4"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "streaming-partial-replies",
@@ -1373,7 +1373,7 @@
       "description": "Assistant deltas streamed from pi-agent-core as assistant events. Block streaming on text_end or message_end. Reasoning streaming separate or as block replies. Chunking + buffering into chat delta messages.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "tool-execution-messaging",
@@ -1388,7 +1388,7 @@
       "description": "Tool start/update/end events on tool stream. Results sanitized for size + images. Messaging tool sends tracked to suppress duplicates. Tool errors tracked separately.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "reply-shaping-suppression",
@@ -1403,7 +1403,7 @@
       "description": "Final payloads from assistant text + reasoning + tool summaries + error text. NO_REPLY filtered from outgoing. Messaging duplicates removed. Fallback error reply if no renderable payloads + tool error.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "compaction-retries",
@@ -1418,7 +1418,7 @@
       "description": "Auto-compaction emits compaction events + can trigger retry. On retry: in-memory buffers + tool summaries reset to avoid duplicates. Handles token limits.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "event-streams-lifecycle",
@@ -1433,7 +1433,7 @@
       "description": "lifecycle: phase start/end/error. assistant: streamed deltas. tool: tool events. Emitted by subscribeEmbeddedPiSession. Fallback lifecycle by agentCommand.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "chat-channel-handling",
@@ -1448,7 +1448,7 @@
       "description": "Assistant deltas buffered into chat delta messages. Chat final emitted on lifecycle end/error. Per-channel formatting + size caps.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "agent-loop-timeouts",
@@ -1463,7 +1463,7 @@
       "description": "agent.wait default 30s. Runtime default 600s (agents.defaults.timeoutSeconds). Can end early: agent timeout/abort, AbortSignal, gateway disconnect, RPC timeout, wait timeout.",
       "color": "#8b5cf6"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "feb-24-2026-agent-loop-learning",
@@ -1489,7 +1489,7 @@
       "description": "Understanding the full agent loop: intake to persistence. Learned: entry points, queueing/concurrency, prompt assembly, hook system, streaming, tool execution, reply shaping, compaction, event streams, channel handling, timeouts. This is how a message becomes a complete run.",
       "color": "#fbbf24"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/03-openclaw-agent-loop.md"
   },
   {
     "id": "two-layer-memory-architecture",
@@ -1505,7 +1505,7 @@
       "color": "#a78bfa",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
   },
   {
     "id": "layer-1-compressed",
@@ -1520,7 +1520,7 @@
       "description": "Neurons and synapses in nodes.json and synapses.json. Fast lookup, navigable, queryable, visualizable. Trade-off: speed for context.",
       "color": "#38bdf8"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
   },
   {
     "id": "layer-2-raw-context",
@@ -1535,7 +1535,7 @@
       "description": "Markdown files in /memory/raw/YYYY-MM-DD/learnings/. Human-readable, traceable, contextual. Trade-off: complete for searchable.",
       "color": "#34d399"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
   },
   {
     "id": "sourceDocument-bridge",
@@ -1551,7 +1551,7 @@
       "color": "#fbbf24",
       "criticality": "core-foundation"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
   },
   {
     "id": "meta-learning",
@@ -1566,7 +1566,7 @@
       "description": "Learning about learning. Knowledge about how knowledge is stored, compressed, retrieved, and made transparent. This layer recursively documents itself.",
       "color": "#c084fc"
     },
-    "sourceDocument": "claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/09-layer-1-layer-2-memory-architecture.md"
   },
   {
     "id": "jarvis-core-foundation",
