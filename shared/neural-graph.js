@@ -207,11 +207,12 @@
                 }
 
                 // Helper to check if node passes current filter
+                const typeForFilter = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
                 const passesFilter = (nodeIndex) => {
                     const n = nodes[nodeIndex];
                     if (currentFilter === 'all') return true;
                     if (currentFilter === 'today') return n.isToday === true;
-                    return ((n.type || '').toLowerCase() === (currentFilter || '').toLowerCase());
+                    return ((n.type || '').toLowerCase() === (typeForFilter || '').toLowerCase());
                 };
 
                 // Draw synapses with triple glow
@@ -282,7 +283,8 @@
                     
                     // Filter logic: check if node should be visible
                     if (currentFilter === 'today' && !n.isToday) return;
-                    if (currentFilter !== 'all' && (n.type || '').toLowerCase() !== (currentFilter || '').toLowerCase()) return;
+                    const typeForFilterNode = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
+                    if (currentFilter !== 'all' && (n.type || '').toLowerCase() !== (typeForFilterNode || '').toLowerCase()) return;
                     
                     const r = n.size * p.scale;
                     const glow = n.glow * p.scale;
