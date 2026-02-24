@@ -67,6 +67,7 @@
             const todayStr = new Date().toISOString().slice(0, 10);
             const today = new Date();
             const todayMoment = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'][today.getMonth()] + '-' + String(today.getDate()).padStart(2, '0') + '-' + today.getFullYear();
+            const memoryRefColor = categoryColors.memoryReference || '#fbbf24';
             const mappedNodes = rawNodes.map((n, idx) => {
                 const angle = (idx / rawNodes.length) * Math.PI * 2;
                 const radius = 280 + Math.random() * 220;
@@ -77,7 +78,8 @@
                 const sizeBoost = n.category === 'region' ? 3 : 1;
                 const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
                 const glow = size * 2.5;
-                const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
+                const isMemoryRef = n.attributes?.type === 'memory-reference';
+                const color = isMemoryRef ? memoryRefColor : (categoryColors[n.category] || n.attributes?.color || '#00ffff');
                 const isToday = !!(n.temporal_activations && n.temporal_activations.some(ta => ta.timestamp && ta.timestamp.slice(0, 10) === todayStr))
                     || !!(n.moments && n.moments.length && n.moments.some(m => String(m).toLowerCase().replace(/\s/g, '') === todayMoment.toLowerCase()));
                 return {
@@ -93,7 +95,11 @@
                     freq: n.frequency,
                     desc: n.attributes?.description || '',
                     isToday,
-                    sourceDocument: n.sourceDocument || null
+                    sourceDocument: n.sourceDocument || null,
+                    isMemoryRef: !!isMemoryRef,
+                    target_memory: isMemoryRef ? (n.attributes?.target_memory || '') : undefined,
+                    memory_owner: isMemoryRef ? (n.attributes?.memory_owner || '') : undefined,
+                    fingerprint_url: isMemoryRef ? (n.attributes?.fingerprint_url || '') : undefined
                 };
             });
             const mappedEdges = rawSynapses.map(s => {
@@ -420,11 +426,19 @@
                     
                     // Filter logic: check if node should be visible
                     if (currentFilter === 'today' && !n.isToday) return;
-                    const typeForFilterNode = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
-                    if (currentFilter !== 'all' && (n.type || '').toLowerCase() !== (typeForFilterNode || '').toLowerCase()) return;
+                    if (currentFilter === 'memorylinks') {
+                        if (!n.isMemoryRef) return;
+                    } else if (currentFilter !== 'all') {
+                        const typeForFilterNode = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
+                        if ((n.type || '').toLowerCase() !== (typeForFilterNode || '').toLowerCase()) return;
+                    }
                     
                     const r = n.size * p.scale;
-                    const glow = n.glow * p.scale;
+                    let glow = n.glow * p.scale;
+                    if (n.isMemoryRef) {
+                        const pulse = 1 + 0.15 * Math.sin(time * 0.08);
+                        glow *= pulse;
+                    }
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
@@ -566,13 +580,11 @@
             if (hitTestNode(e.clientX, e.clientY)) {
                 // Node was clicked - switch to "All" filter to show all connections
                 if (currentFilter !== 'all') setActiveFilter('all');
-                // Update URL hash for deep linking
+                // Update URL hash for deep linking; on mobile open drawer for non-memory-ref nodes (memory-ref opens sidebar in hitTestNode)
                 if (selected !== null) {
                     const selectedNode = nodes[selected];
                     window.location.hash = selectedNode.idKey;
-                    
-                    // On mobile: open drawer
-                    if (window.innerWidth <= 768) {
+                    if (window.innerWidth <= 768 && !selectedNode.isMemoryRef) {
                         setDrawerOpen(true);
                         showNodeDetailsInDrawer(selectedNode);
                     }
@@ -644,12 +656,17 @@
                 const nodeIndex = nodes.findIndex(n => n.idKey === hash);
                 if (nodeIndex !== -1) {
                     selected = nodeIndex;
-                    showNodeDetails(nodes[selected]);
-                    if (currentFilter !== 'all') setActiveFilter('all');
-                    if (window.innerWidth <= 768) {
-                        setDrawerOpen(true);
-                        showNodeDetailsInDrawer(nodes[selected]);
+                    const node = nodes[selected];
+                    if (node.isMemoryRef) {
+                        openMemoryLinkSidebar(node);
+                    } else {
+                        showNodeDetails(node);
+                        if (window.innerWidth <= 768) {
+                            setDrawerOpen(true);
+                            showNodeDetailsInDrawer(node);
+                        }
                     }
+                    if (currentFilter !== 'all') setActiveFilter('all');
                 }
             }
         }
@@ -762,6 +779,108 @@
             }
         }
 
+        // Memory-link sidebar: created in JS so it works for both memory/ and claw/memory/
+        let memoryLinkSidebarEl = null;
+        let memoryLinkScrimEl = null;
+        let memoryLinkEscapeHandler = null;
+
+        function getMemoryLinkSidebar() {
+            if (memoryLinkSidebarEl) return memoryLinkSidebarEl;
+            const sidebar = document.createElement('div');
+            sidebar.id = 'memory-link-sidebar';
+            sidebar.setAttribute('role', 'dialog');
+            sidebar.setAttribute('aria-labelledby', 'memory-link-sidebar-title');
+            sidebar.innerHTML = `
+                <div class="memory-link-sidebar-inner">
+                    <button type="button" class="memory-link-sidebar-close" aria-label="Close">&times;</button>
+                    <h3 id="memory-link-sidebar-title" class="memory-link-sidebar-title">Connected mind</h3>
+                    <p class="memory-link-sidebar-url-wrap"><a id="memory-link-sidebar-url" href="#" target="_blank" rel="noopener" class="memory-link-sidebar-url"></a></p>
+                    <p class="memory-link-sidebar-meta"><span class="memory-link-sidebar-label">Fingerprint:</span> <span id="memory-link-sidebar-fingerprint">—</span></p>
+                    <p class="memory-link-sidebar-meta"><span class="memory-link-sidebar-label">Stats:</span> <span id="memory-link-sidebar-stats">—</span></p>
+                    <button type="button" class="memory-link-sidebar-explore" id="memory-link-sidebar-explore">Explore Memory</button>
+                </div>`;
+            sidebar.style.cssText = 'position:fixed;top:0;right:0;width:280px;max-width:100%;height:100%;background:rgba(15,26,58,0.98);border-left:2px solid rgba(251,191,36,0.5);z-index:100;display:none;overflow-y:auto;';
+            const style = document.createElement('style');
+            style.textContent = `
+                #memory-link-sidebar .memory-link-sidebar-inner { padding: 24px 20px; font-family: monospace; }
+                #memory-link-sidebar .memory-link-sidebar-close { position: absolute; top: 12px; right: 12px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; line-height: 1; padding: 4px; }
+                #memory-link-sidebar .memory-link-sidebar-close:hover { color: #fbbf24; }
+                #memory-link-sidebar .memory-link-sidebar-title { color: #fbbf24; font-size: 16px; margin-bottom: 16px; }
+                #memory-link-sidebar .memory-link-sidebar-url-wrap { margin-bottom: 12px; word-break: break-all; }
+                #memory-link-sidebar .memory-link-sidebar-url { color: #06b6d4; text-decoration: none; }
+                #memory-link-sidebar .memory-link-sidebar-url:hover { text-decoration: underline; }
+                #memory-link-sidebar .memory-link-sidebar-meta { font-size: 11px; color: #94a3b8; margin-bottom: 8px; }
+                #memory-link-sidebar .memory-link-sidebar-label { color: #64748b; }
+                #memory-link-sidebar .memory-link-sidebar-explore { margin-top: 20px; padding: 10px 16px; background: rgba(251,191,36,0.2); border: 1px solid #fbbf24; color: #fbbf24; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: bold; }
+                #memory-link-sidebar .memory-link-sidebar-explore:hover { background: rgba(251,191,36,0.35); }
+                .memory-link-sidebar-scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 99; display: none; }
+            `;
+            document.head.appendChild(style);
+            const scrim = document.createElement('div');
+            scrim.className = 'memory-link-sidebar-scrim';
+            scrim.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(scrim);
+            document.body.appendChild(sidebar);
+            memoryLinkScrimEl = scrim;
+            sidebar.querySelector('.memory-link-sidebar-close').addEventListener('click', closeMemoryLinkSidebar);
+            scrim.addEventListener('click', closeMemoryLinkSidebar);
+            document.getElementById('memory-link-sidebar-explore').addEventListener('click', () => {
+                const url = document.getElementById('memory-link-sidebar-url').href;
+                if (url && url !== '#') window.open(url, '_blank', 'noopener');
+            });
+            memoryLinkSidebarEl = sidebar;
+            return sidebar;
+        }
+
+        function openMemoryLinkSidebar(node) {
+            if (!node || !node.isMemoryRef || !node.target_memory) return;
+            const sidebar = getMemoryLinkSidebar();
+            const owner = (node.memory_owner || 'Unknown').replace(/^./, c => c.toUpperCase());
+            document.getElementById('memory-link-sidebar-title').textContent = 'Connected mind: ' + owner;
+            const urlEl = document.getElementById('memory-link-sidebar-url');
+            urlEl.href = node.target_memory;
+            urlEl.textContent = node.target_memory;
+            document.getElementById('memory-link-sidebar-fingerprint').textContent = 'Loading…';
+            document.getElementById('memory-link-sidebar-stats').textContent = 'Loading…';
+            sidebar.style.display = 'block';
+            memoryLinkScrimEl.style.display = 'block';
+            memoryLinkScrimEl.setAttribute('aria-hidden', 'false');
+            memoryLinkEscapeHandler = function(e) { if (e.key === 'Escape') closeMemoryLinkSidebar(); };
+            document.addEventListener('keydown', memoryLinkEscapeHandler);
+            const fpUrl = node.fingerprint_url;
+            if (fpUrl) {
+                fetch(fpUrl).then(r => r.ok ? r.json() : Promise.reject(new Error(r.statusText)))
+                    .then(data => {
+                        const hash = (data.hash || data.masterHash || '—').toString();
+                        document.getElementById('memory-link-sidebar-fingerprint').textContent = hash.length > 20 ? hash.slice(0, 20) + '…' : hash;
+                        document.getElementById('memory-link-sidebar-fingerprint').title = hash;
+                        const neurons = data.neurons != null ? data.neurons : '—';
+                        const synapses = data.synapses != null ? data.synapses : '—';
+                        document.getElementById('memory-link-sidebar-stats').textContent = neurons + ' neurons · ' + synapses + ' synapses';
+                    })
+                    .catch(() => {
+                        document.getElementById('memory-link-sidebar-fingerprint').textContent = '—';
+                        document.getElementById('memory-link-sidebar-stats').textContent = 'Could not load stats';
+                    });
+            } else {
+                document.getElementById('memory-link-sidebar-fingerprint').textContent = '—';
+                document.getElementById('memory-link-sidebar-stats').textContent = '—';
+            }
+        }
+
+        function closeMemoryLinkSidebar() {
+            if (!memoryLinkSidebarEl) return;
+            memoryLinkSidebarEl.style.display = 'none';
+            if (memoryLinkScrimEl) {
+                memoryLinkScrimEl.style.display = 'none';
+                memoryLinkScrimEl.setAttribute('aria-hidden', 'true');
+            }
+            if (memoryLinkEscapeHandler) {
+                document.removeEventListener('keydown', memoryLinkEscapeHandler);
+                memoryLinkEscapeHandler = null;
+            }
+        }
+
         // Mobile drawer management
         function openDrawer() {
             const info = document.getElementById('info');
@@ -782,9 +901,14 @@
         window.selectNodeByIndex = function(idx) {
             if (idx < 0 || idx >= nodes.length) return;
             selected = idx;
-            showNodeDetails(nodes[selected]);
-            window.location.hash = nodes[selected].idKey;
-            openDrawer();
+            const node = nodes[selected];
+            if (node.isMemoryRef) {
+                openMemoryLinkSidebar(node);
+            } else {
+                showNodeDetails(node);
+                openDrawer();
+            }
+            window.location.hash = node.idKey;
         };
 
         const filterCategoryOrder = CONFIG.filterCategoryOrder || ['region', 'person', 'location', 'activity', 'temporal', 'emotion'];
@@ -799,6 +923,9 @@
                 const t = (n.type || '').toLowerCase();
                 if (byCategory[t]) byCategory[t].push({ node: n, idx });
             });
+            if (nodes.some(n => n.isMemoryRef)) {
+                byCategory['memoryreference'] = nodes.map((n, idx) => ({ node: n, idx })).filter(({ node }) => node.isMemoryRef);
+            }
             listEl.innerHTML = '';
             filterCategoryOrder.forEach(cat => {
                 const items = byCategory[cat];
@@ -876,7 +1003,12 @@
                 const d = Math.hypot(p.x - mx, p.y - my);
                 if (d < n.size * p.scale + 25) {
                     selected = selected === n.id ? null : n.id;
-                    showNodeDetails(selected !== null ? nodes[selected] : null);
+                    const selNode = selected !== null ? nodes[selected] : null;
+                    if (selNode && selNode.isMemoryRef) {
+                        openMemoryLinkSidebar(selNode);
+                    } else {
+                        showNodeDetails(selNode);
+                    }
                     window.location.hash = selected !== null ? nodes[selected].idKey : '';
                     return true;
                 }
@@ -949,13 +1081,18 @@
 
         window.walk = () => {
             selected = Math.floor(Math.random() * nodes.length);
-            showNodeDetails(nodes[selected]);
-            window.location.hash = nodes[selected].idKey;
-            openDrawer();
-            if (window.innerWidth <= 768) {
-                setDrawerOpen(true);
-                showNodeDetailsInDrawer(nodes[selected]);
+            const node = nodes[selected];
+            if (node.isMemoryRef) {
+                openMemoryLinkSidebar(node);
+            } else {
+                showNodeDetails(node);
+                if (window.innerWidth <= 768) {
+                    setDrawerOpen(true);
+                    showNodeDetailsInDrawer(node);
+                }
             }
+            window.location.hash = node.idKey;
+            openDrawer();
         };
 
         window.reset = () => {
