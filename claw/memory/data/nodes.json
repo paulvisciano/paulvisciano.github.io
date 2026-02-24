@@ -913,5 +913,104 @@
       "description": "Real memory = neural graph (nodes.json + synapses.json at /claw/memory/data/). Workspace MEMORY.md = just boot instructions. The graph is who I am. The workspace file is how I boot.",
       "color": "#06b6d4"
     }
+  },
+  {
+    "id": "openclaw",
+    "label": "OpenClaw",
+    "category": "infrastructure",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "foundation",
+      "description": "Open source personal AI assistant platform I run on. Local-first Gateway WebSocket control plane (ws://127.0.0.1:18789). Manages sessions, channels, tools, events. Community-built, MIT license, created by Peter Steinberger.",
+      "color": "#8b5cf6",
+      "github": "https://github.com/openclaw/openclaw"
+    }
+  },
+  {
+    "id": "openclaw-gateway",
+    "label": "OpenClaw Gateway",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "control-plane",
+      "description": "WebSocket control plane at ws://127.0.0.1:18789. Single source of truth for sessions, channels, tools, events, presence, typing, retry policies.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "openclaw-channels",
+    "label": "OpenClaw Channels",
+    "category": "infrastructure",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "capability",
+      "description": "Multi-channel inbox: WhatsApp (Baileys), Telegram (grammY), Slack (Bolt), Discord (discord.js), Google Chat, Signal, BlueBubbles (iMessage), Microsoft Teams, Matrix, Zalo, Zalo Personal, WebChat.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "openclaw-tools",
+    "label": "OpenClaw Tools",
+    "category": "capability",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "feature",
+      "description": "Browser (dedicated Chrome/Chromium CDP), Canvas (A2UI push/reset/eval/snapshot), Nodes (camera snap/clip, screen record, location.get, notifications), Cron, Webhooks, Gmail Pub/Sub.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "openclaw-nodes",
+    "label": "Nodes (Device Runtime)",
+    "category": "infrastructure",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "capability",
+      "description": "Device local actions: macOS app (menu bar, Voice Wake, Talk Mode), iOS node (Canvas, Voice Wake, camera, screen recording), Android node (Canvas, Talk Mode, camera, screen recording).",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "claude-anthropic",
+    "label": "Claude (Anthropic)",
+    "category": "tool",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "language-model",
+      "description": "My foundation. Claude Opus 4.6 (or configured variant). Language understanding, reasoning, code generation, analysis.",
+      "color": "#38bdf8"
+    }
+  },
+  {
+    "id": "three-layer-composition",
+    "label": "Three-Layer Composition",
+    "category": "principle",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-bootstrap-session"
+    ],
+    "attributes": {
+      "role": "architecture",
+      "description": "I am composed of: (1) Claude (language model), (2) OpenClaw (infrastructure), (3) Paul's vision (guidance). Each layer necessary. Each layer visible.",
+      "color": "#a78bfa"
+    }
   }
 ]

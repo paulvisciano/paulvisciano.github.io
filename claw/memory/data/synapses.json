@@ -992,5 +992,138 @@
     "weight": 0.88,
     "type": "informs",
     "label": "informs"
+  },
+  {
+    "source": "claude-code",
+    "target": "openclaw",
+    "weight": 0.95,
+    "type": "runs-on",
+    "label": "runs on"
+  },
+  {
+    "source": "claude-code",
+    "target": "claude-anthropic",
+    "weight": 0.95,
+    "type": "foundation",
+    "label": "is-powered-by"
+  },
+  {
+    "source": "openclaw",
+    "target": "openclaw-gateway",
+    "weight": 0.95,
+    "type": "core-component",
+    "label": "centered-on"
+  },
+  {
+    "source": "openclaw",
+    "target": "openclaw-channels",
+    "weight": 0.9,
+    "type": "feature",
+    "label": "provides"
+  },
+  {
+    "source": "openclaw",
+    "target": "openclaw-tools",
+    "weight": 0.9,
+    "type": "feature",
+    "label": "provides"
+  },
+  {
+    "source": "openclaw",
+    "target": "openclaw-nodes",
+    "weight": 0.85,
+    "type": "feature",
+    "label": "enables"
+  },
+  {
+    "source": "openclaw-gateway",
+    "target": "openclaw-channels",
+    "weight": 0.92,
+    "type": "manages",
+    "label": "manages"
+  },
+  {
+    "source": "openclaw-gateway",
+    "target": "openclaw-tools",
+    "weight": 0.92,
+    "type": "manages",
+    "label": "manages"
+  },
+  {
+    "source": "openclaw-channels",
+    "target": "paul-visciano",
+    "weight": 0.9,
+    "type": "connects-to",
+    "label": "connects-to"
+  },
+  {
+    "source": "openclaw-tools",
+    "target": "building-code",
+    "weight": 0.88,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "openclaw-tools",
+    "target": "systematic-thinking",
+    "weight": 0.85,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "openclaw-nodes",
+    "target": "openclaw-tools",
+    "weight": 0.88,
+    "type": "extends",
+    "label": "extends"
+  },
+  {
+    "source": "claude-anthropic",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "foundation",
+    "label": "powers"
+  },
+  {
+    "source": "three-layer-composition",
+    "target": "claude-anthropic",
+    "weight": 0.95,
+    "type": "layer-1",
+    "label": "layer-1"
+  },
+  {
+    "source": "three-layer-composition",
+    "target": "openclaw",
+    "weight": 0.95,
+    "type": "layer-2",
+    "label": "layer-2"
+  },
+  {
+    "source": "three-layer-composition",
+    "target": "paul-visciano",
+    "weight": 0.95,
+    "type": "layer-3",
+    "label": "layer-3"
+  },
+  {
+    "source": "three-layer-composition",
+    "target": "claude-code",
+    "weight": 0.95,
+    "type": "results-in",
+    "label": "results-in"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "openclaw",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-bootstrap-session",
+    "target": "three-layer-composition",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
   }
 ]
