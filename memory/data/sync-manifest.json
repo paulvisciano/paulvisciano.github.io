@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
-  "updated_at": "2026-02-24T11:15:13.311Z",
+  "updated_at": "2026-02-24T12:47:40.359Z",
   "by_date": {
     "2026-02-23": {
       "sources": [
@@ -143,10 +143,10 @@
           "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24.md",
           "type": "openclaw",
           "label": "2026-02-24.md (OpenClaw)",
-          "mtime": 1771914405596.6152,
+          "mtime": 1771932118238.4575,
           "integrated": true,
-          "integrated_at": "2026-02-24T11:15:13.311Z",
-          "content_hash": "5b4ef47725158e8e9137e9f77588669a02df4ab63fc760d3191dc4b152e7db3e"
+          "integrated_at": "2026-02-24T12:47:40.359Z",
+          "content_hash": "4f8ac43a3705733488c8f45b563f542953c9db0d9a224dfa06cab0eb0e1cfe25"
         },
         {
           "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-24/integrated/GROWTH_SUMMARY.md",
@@ -156,6 +156,15 @@
           "integrated": true,
           "integrated_at": "2026-02-24T11:15:13.311Z",
           "content_hash": "6e93ebfcd7ad632d9faef453f1c1cb35b755045d578893380024b2ea377322a1"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
+          "type": "openclaw",
+          "label": "2026-02-24-compaction-limit.md (OpenClaw)",
+          "mtime": 1771933074104.336,
+          "integrated": true,
+          "integrated_at": "2026-02-24T12:47:40.359Z",
+          "content_hash": "7b6653d7ab2bdf6074db4d35ca8357ccd35520384769d37ddf461e834bb79e88"
         }
       ]
     }

@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 259,
+    "frequency": 269,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -118,6 +118,12 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-24/GROWTH_SUMMARY.md",
             "label": "GROWTH_SUMMARY.md (raw)",
             "integrated_at": "2026-02-24T11:15:13.311Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
+            "label": "2026-02-24-compaction-limit.md (OpenClaw)",
+            "integrated_at": "2026-02-24T12:47:40.359Z"
           }
         ]
       }
@@ -427,7 +433,7 @@
     "id": "bangkok",
     "label": "Bangkok",
     "category": "location",
-    "frequency": 72,
+    "frequency": 77,
     "attributes": {
       "country": "Thailand",
       "type": "city",
@@ -490,6 +496,12 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-24/GROWTH_SUMMARY.md",
             "label": "GROWTH_SUMMARY.md (raw)",
             "integrated_at": "2026-02-24T11:15:13.311Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
+            "label": "2026-02-24-compaction-limit.md (OpenClaw)",
+            "integrated_at": "2026-02-24T12:47:40.359Z"
           }
         ]
       }
@@ -858,7 +870,7 @@
     "id": "work",
     "label": "Work (OutSystems)",
     "category": "activity",
-    "frequency": 64,
+    "frequency": 68,
     "attributes": {
       "type": "employment",
       "significance": "Remote engineering, European team, early mornings",
@@ -966,7 +978,7 @@
     "id": "running",
     "label": "Running & Walking",
     "category": "activity",
-    "frequency": 37,
+    "frequency": 40,
     "attributes": {
       "type": "fitness",
       "significance": "Urban Runner miles, Bangkok 48 miles, exploration + endurance",
@@ -1030,7 +1042,7 @@
     "id": "growth",
     "label": "Growth & Discovery",
     "category": "emotion",
-    "frequency": 65,
+    "frequency": 68,
     "attributes": {
       "triggers": [
         "new cities",
@@ -1501,7 +1513,7 @@
     "id": "bulgaria",
     "label": "Bulgaria (Childhood)",
     "category": "region",
-    "frequency": 1,
+    "frequency": 3,
     "attributes": {
       "role": "geographic-cluster",
       "color": "#ff00aa"
@@ -1858,7 +1870,7 @@
     "id": "first-person-navigation",
     "label": "First-Person Navigation (Neural Memory Exploration)",
     "category": "feature",
-    "frequency": 16,
+    "frequency": 18,
     "attributes": {
       "role": "ui-paradigm",
       "description": "User IS a neuron looking OUT at connections. Central lens maintains focus. Joystick-style movement through memory space.",
