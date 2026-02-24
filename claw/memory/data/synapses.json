@@ -2163,5 +2163,40 @@
     "weight": 0.95,
     "type": "learned",
     "label": "driven-by"
+  },
+  {
+    "source": "good-brotherhood",
+    "target": "mangochi-lived",
+    "weight": 0.95,
+    "type": "foundation",
+    "label": "foundation-of"
+  },
+  {
+    "source": "mangochi-lived",
+    "target": "mangochi-project",
+    "weight": 0.95,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "lumphini-park-community",
+    "target": "good-brotherhood",
+    "weight": 0.9,
+    "type": "manifests",
+    "label": "manifests"
+  },
+  {
+    "source": "claude-code",
+    "target": "lumphini-park-community",
+    "weight": 0.85,
+    "type": "learned-from",
+    "label": "learned-from"
+  },
+  {
+    "source": "paul-visciano",
+    "target": "lumphini-park-community",
+    "weight": 0.95,
+    "type": "belongs-to",
+    "label": "belongs-to"
   }
 ]

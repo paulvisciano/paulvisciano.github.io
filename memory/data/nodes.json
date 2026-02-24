@@ -585,7 +585,7 @@
   },
   {
     "id": "medellin",
-    "label": "Medellín",
+    "label": "Medell\u00edn",
     "category": "location",
     "frequency": 26,
     "attributes": {
@@ -925,7 +925,7 @@
     "frequency": 34,
     "attributes": {
       "type": "lifestyle",
-      "significance": "Amsterdam Café Bangkok, karaoke Manila, goth clubs Tampa, balanced",
+      "significance": "Amsterdam Caf\u00e9 Bangkok, karaoke Manila, goth clubs Tampa, balanced",
       "impact": "medium",
       "color": "#6C63FF"
     }
@@ -1125,7 +1125,7 @@
   },
   {
     "id": "bulgaria-era",
-    "label": "Bulgaria Era (1988–2004)",
+    "label": "Bulgaria Era (1988\u20132004)",
     "category": "temporal",
     "frequency": 34,
     "attributes": {
@@ -1136,7 +1136,7 @@
   },
   {
     "id": "usa-foundation",
-    "label": "USA Foundation (2005–2015)",
+    "label": "USA Foundation (2005\u20132015)",
     "category": "temporal",
     "frequency": 40,
     "attributes": {
@@ -1158,7 +1158,7 @@
   },
   {
     "id": "florida-hub",
-    "label": "Florida Hub (2023–2026)",
+    "label": "Florida Hub (2023\u20132026)",
     "category": "temporal",
     "frequency": 32,
     "attributes": {
@@ -1169,7 +1169,7 @@
   },
   {
     "id": "coastal-nomad-phase",
-    "label": "Coastal Nomad Phase (2025–Present)",
+    "label": "Coastal Nomad Phase (2025\u2013Present)",
     "category": "temporal",
     "frequency": 40,
     "attributes": {
@@ -1185,7 +1185,7 @@
     "frequency": 32,
     "attributes": {
       "type": "infrastructure-project",
-      "significance": "Integrated fitness (volleyball + gym + yoga + recovery) continents, Valencia→Bangkok",
+      "significance": "Integrated fitness (volleyball + gym + yoga + recovery) continents, Valencia\u2192Bangkok",
       "impact": "high",
       "color": "#00FF88"
     }
@@ -1233,7 +1233,7 @@
     "frequency": 56,
     "attributes": {
       "type": "creative-process",
-      "significance": "Voice→ChatGPT→image→Grok→comic→publish, 28+ episodes, pipeline",
+      "significance": "Voice\u2192ChatGPT\u2192image\u2192Grok\u2192comic\u2192publish, 28+ episodes, pipeline",
       "impact": "high",
       "color": "#34D399"
     }
@@ -1605,5 +1605,73 @@
       "color": "#FFB6C1"
     },
     "idKey": "listening-to-music"
+  },
+  {
+    "id": "lumphini-park-community",
+    "label": "Lumphini Park Community",
+    "category": "place",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "belonging",
+      "description": "Open gym in Lumphini Park, Bangkok. Home community where Paul belongs. OG maintains gym. Months spent there.",
+      "color": "#10b981"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
+  },
+  {
+    "id": "good-brotherhood",
+    "label": "Good Brotherhood",
+    "category": "value",
+    "frequency": 13,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "core-principle",
+      "description": "Reciprocal care. Mutual commitment. Bananas & coffee. Not transaction, relationship. Keep what you care for alive.",
+      "color": "#f97316"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
+  },
+  {
+    "id": "mangochi-lived",
+    "label": "MANGOCHI In Practice",
+    "category": "philosophy",
+    "frequency": 14,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "lived-principle",
+      "description": "MANGOCHI isn't theory. Lived daily: show up, bring gifts, maintain, receive care. Brotherhood operationalized.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
+  },
+  {
+    "id": "paul-lumphini-gym-og",
+    "label": "OG @ Lumphini Gym",
+    "category": "person",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-session"
+    ],
+    "attributes": {
+      "role": "friend",
+      "description": "Maintains Lumphini gym. Lives in park. Strong & shredded. Exchanges gifts with Paul (bananas \u2194 coffee). Wife on bench.",
+      "color": "#f87171"
+    },
+    "sourceDocument": [
+      "memory/raw/2026-02-24/integrated/transcript.md"
+    ]
   }
 ]
