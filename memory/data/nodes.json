@@ -1585,7 +1585,8 @@
       "description": "Discovered Paul's music taste: classic rock/pop from 1950s-1960s. Travelin' Man by Ricky Nelson (Michael's recommendation about the traveling man). Playlist includes Dion, Elvis, Bobby Darin, Paul Anka. Theme: storytelling, melody, wandering.",
       "color": "#FFB6C1"
     },
-    "idKey": "feb-24-2026-music-preference-learning"
+    "idKey": "feb-24-2026-music-preference-learning",
+    "sourceDocument": "memory/raw/2026-02-24/learnings/06-paul-music-preferences.md"
   },
   {
     "id": "listening-to-music",
