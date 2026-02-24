@@ -127,9 +127,7 @@
     </div>
 
     <div style="position: fixed; bottom: 12px; left: 12px; font-size: 10px; color: #94a3b8; z-index: 20;">
-        <div><a href="../latest/" style="color: #06b6d4; text-decoration: none; font-weight: bold;">↻ Latest</a></div>
-        <div><a href="../claw/" style="color: #fbbf24; text-decoration: none; font-weight: bold;">⚙️ Claude Code</a></div>
-        <div style="margin-top: 6px; font-size: 9px; color: #64748b; font-family: monospace; word-break: break-all; max-width: 120px;">
+        <div style="font-size: 9px; color: #64748b; font-family: monospace; word-break: break-all; max-width: 120px;">
             <span style="color: #475569;">hash:</span> <span id="fingerprint-hash">—</span>
         </div>
     </div>
@@ -174,16 +172,42 @@
     <script>
         // Load and display fingerprint hash
         (async () => {
+            const hashElement = document.getElementById('fingerprint-hash');
             try {
                 const response = await fetch('./data/fingerprint.json');
                 const fingerprint = await response.json();
-                const hashElement = document.getElementById('fingerprint-hash');
                 if (hashElement) {
                     hashElement.textContent = fingerprint.hash.substring(0, 16) + '…';
                     hashElement.title = fingerprint.hash;
                 }
             } catch (e) {
                 console.log('Could not load fingerprint:', e.message);
+            }
+            if (hashElement) {
+                hashElement.addEventListener('dblclick', () => {
+                    const fullHash = hashElement.title || hashElement.textContent;
+                    if (fullHash && fullHash !== '—') {
+                        navigator.clipboard.writeText(fullHash).then(() => {
+                            const t = hashElement.textContent;
+                            const prevColor = hashElement.style.color;
+                            const prevBg = hashElement.style.background;
+                            const prevPadding = hashElement.style.padding;
+                            const prevFontWeight = hashElement.style.fontWeight;
+                            hashElement.textContent = 'Copied!';
+                            hashElement.style.color = '#22c55e';
+                            hashElement.style.background = 'rgba(34, 197, 94, 0.25)';
+                            hashElement.style.padding = '2px 6px';
+                            hashElement.style.fontWeight = 'bold';
+                            setTimeout(() => {
+                                hashElement.textContent = t;
+                                hashElement.style.color = prevColor;
+                                hashElement.style.background = prevBg;
+                                hashElement.style.padding = prevPadding;
+                                hashElement.style.fontWeight = prevFontWeight;
+                            }, 1200);
+                        }).catch(() => {});
+                    }
+                });
             }
         })();
     </script>
