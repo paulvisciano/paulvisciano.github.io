@@ -2857,5 +2857,12 @@
     "weight": 0.96,
     "type": "discovered",
     "label": "proven"
+  },
+  {
+    "source": "paul",
+    "target": "memory-link-jarvis",
+    "weight": 0.99,
+    "type": "connects-to",
+    "label": "can-query"
   }
 ]

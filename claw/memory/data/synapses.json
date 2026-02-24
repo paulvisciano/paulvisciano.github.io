@@ -2485,5 +2485,12 @@
     "weight": 0.97,
     "type": "proven",
     "label": "is-alive"
+  },
+  {
+    "source": "jarvis",
+    "target": "memory-link-paul",
+    "weight": 0.99,
+    "type": "connects-to",
+    "label": "can-query"
   }
 ]

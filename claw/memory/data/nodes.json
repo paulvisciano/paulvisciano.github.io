@@ -2248,5 +2248,19 @@
       "description": "Tested and proven: neural memory persists across complete session and gateway restarts. Bootstrap cost < 300 tokens."
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-02-25/learnings/19-memory-persistence-proof.md"
+  },
+  {
+    "id": "memory-link-paul",
+    "label": "Memory Link: Paul",
+    "category": "foundation",
+    "frequency": 99,
+    "attributes": {
+      "type": "memory-reference",
+      "target_memory": "https://paulvisciano.github.io/memory/",
+      "memory_owner": "paul",
+      "fingerprint_url": "https://paulvisciano.github.io/memory/data/fingerprint.json",
+      "nodes_url": "https://paulvisciano.github.io/memory/data/nodes.json",
+      "synapses_url": "https://paulvisciano.github.io/memory/data/synapses.json"
+    }
   }
 ]
