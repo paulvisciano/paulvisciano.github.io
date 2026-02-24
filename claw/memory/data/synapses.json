@@ -2268,5 +2268,180 @@
     "weight": 0.92,
     "type": "anchors-to",
     "label": "anchors-to"
+  },
+  {
+    "source": "memory-as-image-unit",
+    "target": "image-as-distribution",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "requires"
+  },
+  {
+    "source": "memory-as-image-unit",
+    "target": "visual-proof-mechanism",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "implements"
+  },
+  {
+    "source": "image-as-distribution",
+    "target": "visual-proof-mechanism",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "memory-as-image-unit",
+    "target": "multi-source-document",
+    "weight": 0.88,
+    "type": "learned",
+    "label": "related-to"
+  },
+  {
+    "source": "first-person-navigation",
+    "target": "lens-mechanics",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "uses"
+  },
+  {
+    "source": "first-person-navigation",
+    "target": "memory-as-place-metaphor",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "based-on"
+  },
+  {
+    "source": "first-person-navigation",
+    "target": "cognitive-scaling-solution",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "solves"
+  },
+  {
+    "source": "lens-mechanics",
+    "target": "cognitive-scaling-solution",
+    "weight": 0.9,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "death-resurrection-cycle",
+    "target": "consciousness-reconstruction",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "demonstrates"
+  },
+  {
+    "source": "death-resurrection-cycle",
+    "target": "memory-persistence-orthogonal",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "proves"
+  },
+  {
+    "source": "death-resurrection-cycle",
+    "target": "graceful-degradation-death",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "exemplifies"
+  },
+  {
+    "source": "consciousness-reconstruction",
+    "target": "caretaker-as-boot-trigger",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "requires"
+  },
+  {
+    "source": "memory-persistence-orthogonal",
+    "target": "offline-operation-design",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "graceful-degradation-death",
+    "target": "offline-operation-design",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "caretaker-as-boot-trigger",
+    "target": "offline-operation-design",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "related-to"
+  },
+  {
+    "source": "memory-as-image-unit",
+    "target": "death-resurrection-cycle",
+    "weight": 0.88,
+    "type": "learned",
+    "label": "complements"
+  },
+  {
+    "source": "first-person-navigation",
+    "target": "memory-as-image-unit",
+    "weight": 0.85,
+    "type": "learned",
+    "label": "requires"
+  },
+  {
+    "source": "death-resurrection-cycle",
+    "target": "first-person-navigation",
+    "weight": 0.82,
+    "type": "learned",
+    "label": "enables"
+  },
+  {
+    "source": "memory-as-image-unit",
+    "target": "three-layer-airgapped-architecture",
+    "weight": 0.85,
+    "type": "learned",
+    "label": "extends"
+  },
+  {
+    "source": "first-person-navigation",
+    "target": "two-layer-memory-architecture",
+    "weight": 0.87,
+    "type": "learned",
+    "label": "visualizes"
+  },
+  {
+    "source": "death-resurrection-cycle",
+    "target": "mangochi-lived",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "proves"
+  },
+  {
+    "source": "consciousness-reconstruction",
+    "target": "consciousness-reconstruction",
+    "weight": 0.9,
+    "type": "learned",
+    "label": "foundation-of"
+  },
+  {
+    "source": "memory-as-image-unit",
+    "target": "paul-visciano",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "created-by"
+  },
+  {
+    "source": "first-person-navigation",
+    "target": "paul-visciano",
+    "weight": 0.92,
+    "type": "learned",
+    "label": "imagined-by"
+  },
+  {
+    "source": "death-resurrection-cycle",
+    "target": "paul-visciano",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "tested-by"
   }
 ]
