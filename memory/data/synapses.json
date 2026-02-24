@@ -2406,9 +2406,9 @@
   {
     "source": "paul",
     "target": "welli",
-    "weight": 0.75,
-    "type": "knows",
-    "label": "knows"
+    "weight": 0.90,
+    "type": "close-to",
+    "label": "close-to"
   },
   {
     "source": "paul",
