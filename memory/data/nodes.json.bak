@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 205,
+    "frequency": 237,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -57,6 +57,49 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-23/transcript.md",
             "label": "transcript.md (raw)",
             "integrated_at": "2026-02-23T18:14:07.013Z"
+          }
+        ]
+      },
+      {
+        "moment": "memory-sync-2026-02-24",
+        "timestamp": "2026-02-24T02:53:08.231Z",
+        "duration_minutes": 0,
+        "thinking_patterns": [
+          "memory-sync",
+          "narrative-integration",
+          "journal-integration"
+        ],
+        "reason": "Synced from 2026-02-24: 3 entities",
+        "sources": [
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-auto-logging-accountability.md",
+            "label": "2026-02-24-auto-logging-accountability.md (OpenClaw)",
+            "integrated_at": "2026-02-24T02:53:08.231Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-auto-logging.md",
+            "label": "2026-02-24-auto-logging.md (OpenClaw)",
+            "integrated_at": "2026-02-24T02:53:08.231Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-dual-boot.md",
+            "label": "2026-02-24-dual-boot.md (OpenClaw)",
+            "integrated_at": "2026-02-24T02:53:08.231Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-memory-boot.md",
+            "label": "2026-02-24-memory-boot.md (OpenClaw)",
+            "integrated_at": "2026-02-24T02:53:08.231Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-transcript-logging.md",
+            "label": "2026-02-24-transcript-logging.md (OpenClaw)",
+            "integrated_at": "2026-02-24T02:53:08.231Z"
           }
         ]
       }
@@ -777,7 +820,7 @@
     "id": "work",
     "label": "Work (OutSystems)",
     "category": "activity",
-    "frequency": 56,
+    "frequency": 57,
     "attributes": {
       "type": "employment",
       "significance": "Remote engineering, European team, early mornings",
@@ -885,7 +928,7 @@
     "id": "running",
     "label": "Running & Walking",
     "category": "activity",
-    "frequency": 35,
+    "frequency": 37,
     "attributes": {
       "type": "fitness",
       "significance": "Urban Runner miles, Bangkok 48 miles, exploration + endurance",
@@ -1542,7 +1585,8 @@
       "description": "Discovered Paul's music taste: classic rock/pop from 1950s-1960s. Travelin' Man by Ricky Nelson (Michael's recommendation about the traveling man). Playlist includes Dion, Elvis, Bobby Darin, Paul Anka. Theme: storytelling, melody, wandering.",
       "color": "#FFB6C1"
     },
-    "idKey": "feb-24-2026-music-preference-learning"
+    "idKey": "feb-24-2026-music-preference-learning",
+    "sourceDocument": "memory/raw/2026-02-24/learnings/06-paul-music-preferences.md"
   },
   {
     "id": "listening-to-music",

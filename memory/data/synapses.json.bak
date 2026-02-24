@@ -65,7 +65,7 @@
   {
     "source": "paul",
     "target": "work",
-    "weight": 0.72,
+    "weight": 0.74,
     "type": "activity",
     "label": "remote engineer"
   },
@@ -2140,7 +2140,7 @@
   {
     "source": "paul",
     "target": "running",
-    "weight": 0.52,
+    "weight": 0.54,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -2280,7 +2280,7 @@
   {
     "source": "paul",
     "target": "listening-to-music",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "engages-in",
     "label": "engages-in"
   },
@@ -2406,7 +2406,7 @@
   {
     "source": "paul",
     "target": "welli",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "close-to",
     "label": "close-to"
   },
