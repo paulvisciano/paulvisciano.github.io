@@ -1012,5 +1012,109 @@
       "description": "I am composed of: (1) Claude (language model), (2) OpenClaw (infrastructure), (3) Paul's vision (guidance). Each layer necessary. Each layer visible.",
       "color": "#a78bfa"
     }
+  },
+  {
+    "id": "gateway-daemon",
+    "label": "Gateway Daemon",
+    "category": "infrastructure",
+    "frequency": 12,
+    "moments": [
+      "feb-24-2026-architecture-learning"
+    ],
+    "attributes": {
+      "role": "core-component",
+      "description": "Single long-lived process that owns all messaging surfaces (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, WebChat). Maintains provider connections, exposes typed WS API, validates frames against JSON Schema. One per host.",
+      "color": "#8b5cf6",
+      "bind": "127.0.0.1:18789"
+    }
+  },
+  {
+    "id": "websocket-protocol",
+    "label": "WebSocket Protocol",
+    "category": "system",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-architecture-learning"
+    ],
+    "attributes": {
+      "role": "transport",
+      "description": "JSON text frames over WebSocket. Requests: {type:req, id, method, params} → {type:res, id, ok, payload|error}. Events: {type:event, event, payload, seq, stateVersion}. First frame MUST be connect.",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "nodes-device-runtime",
+    "label": "Nodes (Device Runtime)",
+    "category": "infrastructure",
+    "frequency": 11,
+    "moments": [
+      "feb-24-2026-architecture-learning"
+    ],
+    "attributes": {
+      "role": "capability",
+      "description": "macOS/iOS/Android/headless devices connect via WebSocket with role:node. Declare device identity, capabilities, commands. Expose canvas, camera, screen.record, location.get. Device-based pairing with approval tokens.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "device-pairing-model",
+    "label": "Device Pairing & Trust",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-architecture-learning"
+    ],
+    "attributes": {
+      "role": "security",
+      "description": "All WS clients include device identity on connect. New device IDs require pairing approval → Gateway issues device token. Local connects auto-approve. All must sign connect.challenge nonce. Non-local require explicit approval.",
+      "color": "#f97316"
+    }
+  },
+  {
+    "id": "connection-lifecycle",
+    "label": "Connection Lifecycle",
+    "category": "system",
+    "frequency": 10,
+    "moments": [
+      "feb-24-2026-architecture-learning"
+    ],
+    "attributes": {
+      "role": "protocol",
+      "description": "Client → req:connect. Gateway → res:ok + snapshot (presence + health). Gateway → event:presence. Gateway → event:tick. Client → req:agent. Gateway → event:agent (streaming). Gateway → res:agent (final).",
+      "color": "#8b5cf6"
+    }
+  },
+  {
+    "id": "remote-access-patterns",
+    "label": "Remote Access (Tailscale / SSH)",
+    "category": "infrastructure",
+    "frequency": 9,
+    "moments": [
+      "feb-24-2026-architecture-learning"
+    ],
+    "attributes": {
+      "role": "capability",
+      "description": "Preferred: Tailscale or VPN. Alternative: SSH tunnel (ssh -N -L 18789:127.0.0.1:18789 user@host). Same handshake + auth applies. TLS + optional pinning can be enabled.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "feb-24-2026-architecture-learning",
+    "label": "Feb 24 2026 Architecture Learning",
+    "category": "temporal",
+    "frequency": 12,
+    "moments": [
+      "gateway-daemon",
+      "websocket-protocol",
+      "nodes-device-runtime",
+      "device-pairing-model",
+      "connection-lifecycle",
+      "remote-access-patterns"
+    ],
+    "attributes": {
+      "role": "session",
+      "description": "Deep dive into OpenClaw Gateway architecture. Learned: single daemon owns all surfaces, WebSocket for all comms, node device pairing model, connection lifecycle, remote access patterns. Understanding how the infrastructure actually works.",
+      "color": "#fbbf24"
+    }
   }
 ]
