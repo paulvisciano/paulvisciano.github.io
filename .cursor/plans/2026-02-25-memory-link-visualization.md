@@ -90,20 +90,15 @@ Display these stats in the sidebar.
 
 ## Files to Modify
 
-1. **Neural visualization component** (`/neural-mind/index.html` or wherever the graph rendering lives)
-   - Detect memory-reference neurons
-   - Apply distinct visual style
-   - Add click handler routing
+**Single file: `/neural-mind/index.html`**
 
-2. **CSS/Styling**
-   - Style for memory-reference neurons (color, glow, animation)
-   - Sidebar slide-in animation
-   - Responsive design (mobile sidebar as drawer?)
-
-3. **Sidebar component**
-   - Create sidebar UI
-   - Add button event handlers
-   - Fetch + display external stats
+This is the existing neural visualization. Modify it to:
+- Detect memory-reference neurons in the rendering loop
+- Apply distinct visual style (color, glow, animation)
+- Add click handler that routes memory-reference neurons to sidebar display
+- Add sidebar UI inline (or as hidden HTML that gets shown)
+- Add external fetch for fingerprint.json stats
+- Handle CORS/fetch errors gracefully
 
 ---
 
