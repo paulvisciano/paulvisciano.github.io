@@ -1125,5 +1125,166 @@
     "weight": 0.93,
     "type": "learned",
     "label": "learned"
+  },
+  {
+    "source": "gateway-daemon",
+    "target": "openclaw",
+    "weight": 0.95,
+    "type": "core-component",
+    "label": "core-of"
+  },
+  {
+    "source": "gateway-daemon",
+    "target": "openclaw-gateway",
+    "weight": 0.95,
+    "type": "is",
+    "label": "is"
+  },
+  {
+    "source": "gateway-daemon",
+    "target": "websocket-protocol",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "gateway-daemon",
+    "target": "openclaw-channels",
+    "weight": 0.92,
+    "type": "owns",
+    "label": "owns"
+  },
+  {
+    "source": "gateway-daemon",
+    "target": "device-pairing-model",
+    "weight": 0.88,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "websocket-protocol",
+    "target": "connection-lifecycle",
+    "weight": 0.92,
+    "type": "defines",
+    "label": "defines"
+  },
+  {
+    "source": "websocket-protocol",
+    "target": "gateway-daemon",
+    "weight": 0.92,
+    "type": "used-by",
+    "label": "used-by"
+  },
+  {
+    "source": "nodes-device-runtime",
+    "target": "openclaw-nodes",
+    "weight": 0.95,
+    "type": "is",
+    "label": "is"
+  },
+  {
+    "source": "nodes-device-runtime",
+    "target": "device-pairing-model",
+    "weight": 0.95,
+    "type": "requires",
+    "label": "requires"
+  },
+  {
+    "source": "nodes-device-runtime",
+    "target": "websocket-protocol",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "device-pairing-model",
+    "target": "gateway-daemon",
+    "weight": 0.88,
+    "type": "trusts",
+    "label": "trusts"
+  },
+  {
+    "source": "device-pairing-model",
+    "target": "nodes-device-runtime",
+    "weight": 0.95,
+    "type": "secures",
+    "label": "secures"
+  },
+  {
+    "source": "connection-lifecycle",
+    "target": "gateway-daemon",
+    "weight": 0.92,
+    "type": "describes",
+    "label": "describes"
+  },
+  {
+    "source": "connection-lifecycle",
+    "target": "websocket-protocol",
+    "weight": 0.92,
+    "type": "uses",
+    "label": "uses"
+  },
+  {
+    "source": "remote-access-patterns",
+    "target": "gateway-daemon",
+    "weight": 0.88,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "remote-access-patterns",
+    "target": "websocket-protocol",
+    "weight": 0.88,
+    "type": "tunnels",
+    "label": "tunnels"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "gateway-daemon",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "websocket-protocol",
+    "weight": 0.95,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "nodes-device-runtime",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "device-pairing-model",
+    "weight": 0.94,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "connection-lifecycle",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "remote-access-patterns",
+    "weight": 0.93,
+    "type": "learned",
+    "label": "learned"
+  },
+  {
+    "source": "feb-24-2026-architecture-learning",
+    "target": "paul-visciano",
+    "weight": 0.96,
+    "type": "collaboration",
+    "label": "with"
   }
 ]
