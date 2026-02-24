@@ -62,7 +62,52 @@
             }
         }
 
-        // Load data from JSON files. (file:// cannot fetch — use fallback and avoid CORS errors.)
+        // Map raw nodes/synapses JSON to internal graph format (shared by initial load and time-travel).
+        function mapRawToGraph(rawNodes, rawSynapses) {
+            const todayStr = new Date().toISOString().slice(0, 10);
+            const today = new Date();
+            const todayMoment = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'][today.getMonth()] + '-' + String(today.getDate()).padStart(2, '0') + '-' + today.getFullYear();
+            const mappedNodes = rawNodes.map((n, idx) => {
+                const angle = (idx / rawNodes.length) * Math.PI * 2;
+                const radius = 280 + Math.random() * 220;
+                const x = Math.cos(angle) * radius;
+                const y = (Math.random() - 0.5) * 500;
+                const z = Math.sin(angle) * radius;
+                const baseSize = n.category === 'region' ? 12 : 6;
+                const sizeBoost = n.category === 'region' ? 3 : 1;
+                const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
+                const glow = size * 2.5;
+                const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
+                const isToday = !!(n.temporal_activations && n.temporal_activations.some(ta => ta.timestamp && ta.timestamp.slice(0, 10) === todayStr))
+                    || !!(n.moments && n.moments.length && n.moments.some(m => String(m).toLowerCase().replace(/\s/g, '') === todayMoment.toLowerCase()));
+                return {
+                    id: idx,
+                    idKey: n.id,
+                    name: n.label,
+                    type: n.category,
+                    x, y, z,
+                    vx: 0, vy: 0, vz: 0,
+                    size,
+                    glow,
+                    color,
+                    freq: n.frequency,
+                    desc: n.attributes?.description || '',
+                    isToday,
+                    sourceDocument: n.sourceDocument || null
+                };
+            });
+            const mappedEdges = rawSynapses.map(s => {
+                const fromIdx = mappedNodes.findIndex(n => n.idKey === s.source);
+                const toIdx = mappedNodes.findIndex(n => n.idKey === s.target);
+                if (fromIdx >= 0 && toIdx >= 0) {
+                    return { from: fromIdx, to: toIdx, weight: Math.round(s.weight * 10) };
+                }
+                return null;
+            }).filter(e => e !== null);
+            return { nodes: mappedNodes, edges: mappedEdges };
+        }
+
+        // Load graph: one code path. Uses loadMemory('latest') then inits History UI.
         async function loadGraphData() {
             if (window.location.protocol === 'file:') {
                 console.info('Serving from file:// — use a local server (e.g. npx serve) or GitHub Pages to load full data.');
@@ -70,76 +115,166 @@
                 return;
             }
             try {
-                const nodesResponse = await fetch('./data/nodes.json?t=' + Date.now());
-                if (!nodesResponse.ok) {
-                    throw new Error(`Nodes fetch failed: ${nodesResponse.status}`);
-                }
-                const rawNodes = await nodesResponse.json();
-                if (!rawNodes || rawNodes.length === 0) {
-                    throw new Error('Nodes JSON is empty');
-                }
-
-                const todayStr = new Date().toISOString().slice(0, 10);
-                const today = new Date();
-                const todayMoment = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'][today.getMonth()] + '-' + String(today.getDate()).padStart(2, '0') + '-' + today.getFullYear();
-                nodes = rawNodes.map((n, idx) => {
-                    const angle = (idx / rawNodes.length) * Math.PI * 2;
-                    const radius = 280 + Math.random() * 220;
-                    const x = Math.cos(angle) * radius;
-                    const y = (Math.random() - 0.5) * 500;
-                    const z = Math.sin(angle) * radius;
-                    const baseSize = n.category === 'region' ? 12 : 6;
-                    const sizeBoost = n.category === 'region' ? 3 : 1;
-                    const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
-                    const glow = size * 2.5;
-                    const color = categoryColors[n.category] || n.attributes?.color || '#00ffff';
-                    const isToday = !!(n.temporal_activations && n.temporal_activations.some(ta => ta.timestamp && ta.timestamp.slice(0, 10) === todayStr))
-                        || !!(n.moments && n.moments.length && n.moments.some(m => String(m).toLowerCase().replace(/\s/g, '') === todayMoment.toLowerCase()));
-                    return {
-                        id: idx,
-                        idKey: n.id,
-                        name: n.label,
-                        type: n.category,
-                        x, y, z,
-                        vx: 0, vy: 0, vz: 0,
-                        size,
-                        glow,
-                        color,
-                        freq: n.frequency,
-                        desc: n.attributes?.description || '',
-                        isToday,
-                        sourceDocument: n.sourceDocument || null
-                    };
-                });
-
-                const synapsesResponse = await fetch('./data/synapses.json?t=' + Date.now());
-                if (!synapsesResponse.ok) {
-                    throw new Error(`Synapses fetch failed: ${synapsesResponse.status}`);
-                }
-                const rawSynapses = await synapsesResponse.json();
-                if (!rawSynapses || rawSynapses.length === 0) {
-                    throw new Error('Synapses JSON is empty');
-                }
-
-                edges = rawSynapses.map(s => {
-                    const fromIdx = nodes.findIndex(n => n.idKey === s.source);
-                    const toIdx = nodes.findIndex(n => n.idKey === s.target);
-                    if (fromIdx >= 0 && toIdx >= 0) {
-                        return { from: fromIdx, to: toIdx, weight: Math.round(s.weight * 10) };
-                    }
-                    return null;
-                }).filter(e => e !== null);
-
-                console.log(`✅ Loaded ${nodes.length} neurons and ${edges.length} synapses`);
-                populateFilterList();
-                render();
-                // Initial selection is handled in loadGraphData().then() so hash wins over random
+                const ok = await loadMemory('latest');
+                if (ok) console.log(`✅ Loaded ${nodes.length} neurons and ${edges.length} synapses`);
+                initTimelineUI();
             } catch (e) {
                 console.error('❌ Graph data fetch FAILED:', e.message, e);
                 console.log('Attempted to fetch: ./data/nodes.json?t=' + Date.now());
                 console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }
+        }
+
+        let currentTimelineView = null; // null = latest (current), string = commit hash when viewing past
+        let timelineCache = null; // timeline.json entries for hash → commit resolution
+
+        function setTimelineActive(commitOrLatest) {
+            const container = document.getElementById('timeline-body');
+            if (!container) return;
+            container.querySelectorAll('.timeline-entry').forEach(btn => {
+                const isLatest = btn.dataset.latest === 'true';
+                const match = commitOrLatest === null ? isLatest : (!isLatest && btn.dataset.commit === commitOrLatest);
+                btn.classList.toggle('active', !!match);
+            });
+        }
+
+        // Apply loaded graph data to visualization (single code path for all sources).
+        function applyGraph(rawNodes, rawSynapses, viewState) {
+            if (!rawNodes || !rawNodes.length || !rawSynapses) return;
+            const { nodes: n, edges: e } = mapRawToGraph(rawNodes, rawSynapses);
+            nodes = n;
+            edges = e;
+            currentTimelineView = viewState;
+            setTimelineActive(viewState);
+            populateFilterList();
+            render();
+            showNodeDetails(null);
+        }
+
+        /**
+         * Load memory and update the visualization. Single abstraction for all sources.
+         * @param {string|{ commit: string }|{ hash: string }} source - 'latest' | null | { commit } | { hash (master hash) }
+         * @returns {Promise<boolean>} - true if loaded, false on error
+         */
+        async function loadMemory(source) {
+            const isLatest = source === 'latest' || source == null;
+            const commit = source && source.commit;
+            const hash = source && source.hash;
+            try {
+                let rawNodes, rawSynapses;
+                if (isLatest) {
+                    const [nodesRes, synapsesRes] = await Promise.all([
+                        fetch('./data/nodes.json?t=' + Date.now()),
+                        fetch('./data/synapses.json?t=' + Date.now())
+                    ]);
+                    if (!nodesRes.ok || !synapsesRes.ok) throw new Error('Fetch failed');
+                    rawNodes = await nodesRes.json();
+                    rawSynapses = await synapsesRes.json();
+                    applyGraph(rawNodes, rawSynapses, null);
+                    console.log('✅ Loaded latest memory');
+                    return true;
+                }
+                if (commit) {
+                    const base = CONFIG.rawOrigin && CONFIG.rawCommitBase;
+                    if (!base) throw new Error('rawOrigin/rawCommitBase not set');
+                    const baseUrl = CONFIG.rawOrigin + '/' + commit + '/' + CONFIG.rawCommitBase;
+                    const [nodesRes, synapsesRes] = await Promise.all([
+                        fetch(baseUrl + '/nodes.json'),
+                        fetch(baseUrl + '/synapses.json')
+                    ]);
+                    if (!nodesRes.ok || !synapsesRes.ok) throw new Error('Fetch failed');
+                    rawNodes = await nodesRes.json();
+                    rawSynapses = await synapsesRes.json();
+                    applyGraph(rawNodes, rawSynapses, commit);
+                    console.log('✅ Loaded memory at commit ' + commit.slice(0, 7));
+                    return true;
+                }
+                if (hash) {
+                    const timeline = timelineCache || await fetch('./data/timeline.json?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []);
+                    if (timelineCache == null) timelineCache = Array.isArray(timeline) ? timeline : [];
+                    const entry = timelineCache.find(e => e.hash === hash || (e.hash && e.hash.startsWith(hash)));
+                    if (!entry) {
+                        console.error('No timeline entry for hash:', hash);
+                        return false;
+                    }
+                    return loadMemory({ commit: entry.commit });
+                }
+                return false;
+            } catch (err) {
+                console.error('loadMemory failed:', err);
+                if (commit) alert('Could not load memory at this commit. It may not exist at that ref.');
+                return false;
+            }
+        }
+
+        // One-click return from time-travel.
+        function loadLatestMemory() { return loadMemory('latest'); }
+        function loadMemoryAtCommit(commit) { return loadMemory({ commit }); }
+
+        // Build History (time-travel) UI from timeline.json when CONFIG.rawCommitBase is set.
+        // Initial load is always latest (quick); user can go back in time via History.
+        function initTimelineUI() {
+            if (!CONFIG.rawCommitBase || !CONFIG.rawOrigin) return;
+            fetch('./data/timeline.json?t=' + Date.now())
+                .then(r => r.ok ? r.json() : Promise.reject())
+                .then(timeline => {
+                    if (!Array.isArray(timeline) || timeline.length === 0) return;
+                    timelineCache = timeline;
+                    const panelButtons = document.querySelector('.panel-buttons');
+                    if (!panelButtons) return;
+                    const section = document.createElement('div');
+                    section.className = 'filter-section';
+                    section.setAttribute('role', 'region');
+                    section.setAttribute('aria-label', 'Memory history');
+                    const trigger = document.createElement('button');
+                    trigger.type = 'button';
+                    trigger.className = 'collapsible-trigger';
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.setAttribute('aria-controls', 'timeline-body');
+                    trigger.innerHTML = '<span>History</span> <span id="timeline-chevron">▼</span>';
+                    const body = document.createElement('div');
+                    body.id = 'timeline-body';
+                    body.className = 'collapsible-body timeline-body';
+                    body.setAttribute('role', 'region');
+                    body.setAttribute('aria-label', 'Timeline entries');
+                    // Latest (current) first — quick to load, easy to return to
+                    const latestBtn = document.createElement('button');
+                    latestBtn.type = 'button';
+                    latestBtn.className = 'filter-btn timeline-entry active';
+                    latestBtn.style.display = 'block';
+                    latestBtn.style.width = '100%';
+                    latestBtn.style.textAlign = 'left';
+                    latestBtn.style.marginBottom = '4px';
+                    latestBtn.dataset.latest = 'true';
+                    latestBtn.textContent = 'Latest (current)';
+                    latestBtn.addEventListener('click', () => loadLatestMemory());
+                    body.appendChild(latestBtn);
+                    const ordered = timeline.slice().reverse();
+                    ordered.forEach((entry) => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'filter-btn timeline-entry';
+                        btn.style.display = 'block';
+                        btn.style.width = '100%';
+                        btn.style.textAlign = 'left';
+                        btn.style.marginBottom = '4px';
+                        const ts = entry.timestamp ? entry.timestamp.replace(/ \+0700$/, '') : '';
+                        btn.textContent = (ts ? ts + ' — ' : '') + entry.neurons + ' neurons · ' + entry.synapses + ' synapses';
+                        btn.dataset.commit = entry.commit;
+                        btn.addEventListener('click', () => loadMemoryAtCommit(entry.commit));
+                        body.appendChild(btn);
+                    });
+                    section.appendChild(trigger);
+                    section.appendChild(body);
+                    trigger.addEventListener('click', () => {
+                        const open = body.classList.toggle('open');
+                        trigger.setAttribute('aria-expanded', open);
+                        document.getElementById('timeline-chevron').textContent = open ? '▲' : '▼';
+                    });
+                    panelButtons.parentNode.insertBefore(section, panelButtons);
+                })
+                .catch(() => {});
         }
 
         let camera = {angle: 0.5, dist: 680, height: 0, pitch: 0};
@@ -821,6 +956,9 @@
             selected = null;
             showNodeDetails(null);
         };
+
+        /** Load memory by source: 'latest' | { commit } | { hash (master hash) }. Updates the graph. */
+        window.loadMemory = loadMemory;
 
         const liveUrl = CONFIG.liveUrl || 'https://paulvisciano.github.io/memory/';
         let fingerprintData = null;
