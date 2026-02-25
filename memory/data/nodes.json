@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 269,
+    "frequency": 276,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -124,6 +124,31 @@
             "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
             "label": "2026-02-24-compaction-limit.md (OpenClaw)",
             "integrated_at": "2026-02-24T12:47:40.359Z"
+          }
+        ]
+      },
+      {
+        "moment": "memory-sync-2026-02-25",
+        "timestamp": "2026-02-25T05:43:23.462Z",
+        "duration_minutes": 0,
+        "thinking_patterns": [
+          "memory-sync",
+          "narrative-integration",
+          "journal-integration"
+        ],
+        "reason": "Synced from 2026-02-25: 6 entities",
+        "sources": [
+          {
+            "type": "narrative",
+            "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/moments/bangkok/2026-02-25/narrative.md",
+            "label": "narrative.md",
+            "integrated_at": "2026-02-25T05:43:23.462Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-25.md",
+            "label": "2026-02-25.md (OpenClaw)",
+            "integrated_at": "2026-02-25T05:43:23.462Z"
           }
         ]
       }
@@ -433,7 +458,7 @@
     "id": "bangkok",
     "label": "Bangkok",
     "category": "location",
-    "frequency": 77,
+    "frequency": 81,
     "attributes": {
       "country": "Thailand",
       "type": "city",
@@ -502,6 +527,26 @@
             "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
             "label": "2026-02-24-compaction-limit.md (OpenClaw)",
             "integrated_at": "2026-02-24T12:47:40.359Z"
+          }
+        ]
+      },
+      {
+        "moment": "memory-sync-2026-02-25",
+        "timestamp": "2026-02-25T05:43:23.462Z",
+        "activity": "Narrative + journal sync",
+        "context": "Day narrative and journal entries integrated for 2026-02-25",
+        "sources": [
+          {
+            "type": "narrative",
+            "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/moments/bangkok/2026-02-25/narrative.md",
+            "label": "narrative.md",
+            "integrated_at": "2026-02-25T05:43:23.462Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-25.md",
+            "label": "2026-02-25.md (OpenClaw)",
+            "integrated_at": "2026-02-25T05:43:23.462Z"
           }
         ]
       }
@@ -906,7 +951,7 @@
     "id": "travel",
     "label": "Travel & Nomadism",
     "category": "activity",
-    "frequency": 85,
+    "frequency": 87,
     "attributes": {
       "type": "lifestyle",
       "significance": "9+ months continuous, cultural immersion, exploration",
@@ -978,7 +1023,7 @@
     "id": "running",
     "label": "Running & Walking",
     "category": "activity",
-    "frequency": 40,
+    "frequency": 42,
     "attributes": {
       "type": "fitness",
       "significance": "Urban Runner miles, Bangkok 48 miles, exploration + endurance",
@@ -1028,7 +1073,7 @@
     "id": "connection",
     "label": "Emotional Connection",
     "category": "emotion",
-    "frequency": 39,
+    "frequency": 42,
     "attributes": {
       "triggers": [
         "crew moments",
@@ -1042,7 +1087,7 @@
     "id": "growth",
     "label": "Growth & Discovery",
     "category": "emotion",
-    "frequency": 68,
+    "frequency": 70,
     "attributes": {
       "triggers": [
         "new cities",

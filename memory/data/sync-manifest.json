@@ -1,7 +1,7 @@
 {
   "version": 1,
   "schema": "Per-date list of memory sources. path = path (after sync, raw files moved to .../integrated/); mtime = file mtimeMs when integrated; content_hash = sha256 hex of file content; integrated = true when applied to graph.",
-  "updated_at": "2026-02-24T12:47:40.359Z",
+  "updated_at": "2026-02-25T05:43:23.462Z",
   "by_date": {
     "2026-02-23": {
       "sources": [
@@ -165,6 +165,28 @@
           "integrated": true,
           "integrated_at": "2026-02-24T12:47:40.359Z",
           "content_hash": "7b6653d7ab2bdf6074db4d35ca8357ccd35520384769d37ddf461e834bb79e88"
+        }
+      ]
+    },
+    "2026-02-25": {
+      "sources": [
+        {
+          "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/moments/bangkok/2026-02-25/narrative.md",
+          "type": "narrative",
+          "label": "narrative.md",
+          "mtime": 1771970422670.928,
+          "integrated": true,
+          "integrated_at": "2026-02-25T05:43:23.462Z",
+          "content_hash": "ba64effd6c02134634d6bafabb7d43b89db9491915915d360c802a4a314d0ea2"
+        },
+        {
+          "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-25.md",
+          "type": "openclaw",
+          "label": "2026-02-25.md (OpenClaw)",
+          "mtime": 1771966695408.533,
+          "integrated": true,
+          "integrated_at": "2026-02-25T05:43:23.462Z",
+          "content_hash": "ac6898c7429b2174a472aa9439dcc8512f931625dd5623cdefc947da01d5bf2e"
         }
       ]
     }

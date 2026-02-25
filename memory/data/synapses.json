@@ -16,7 +16,7 @@
   {
     "source": "paul",
     "target": "travel",
-    "weight": 0.9,
+    "weight": 0.92,
     "type": "lifestyle",
     "label": "nomadic life"
   },
@@ -86,7 +86,7 @@
   {
     "source": "paul",
     "target": "growth",
-    "weight": 0.61,
+    "weight": 0.63,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -1031,14 +1031,14 @@
   {
     "source": "travel",
     "target": "growth",
-    "weight": 0.88,
+    "weight": 0.89,
     "type": "emotion",
     "label": "discovery & learning"
   },
   {
     "source": "travel",
     "target": "connection",
-    "weight": 0.82,
+    "weight": 0.83,
     "type": "emotion",
     "label": "meeting people"
   },
@@ -1143,7 +1143,7 @@
   {
     "source": "running",
     "target": "bangkok",
-    "weight": 0.87,
+    "weight": 0.88,
     "type": "location-activity",
     "label": "48 miles across episodes"
   },
@@ -1157,7 +1157,7 @@
   {
     "source": "running",
     "target": "growth",
-    "weight": 0.78,
+    "weight": 0.79,
     "type": "emotion",
     "label": "exploration, endurance"
   },
@@ -1835,7 +1835,7 @@
   {
     "source": "paul",
     "target": "bangkok",
-    "weight": 0.63,
+    "weight": 0.65,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -2119,7 +2119,7 @@
   {
     "source": "paul",
     "target": "connection",
-    "weight": 0.56,
+    "weight": 0.57,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
@@ -2140,7 +2140,7 @@
   {
     "source": "paul",
     "target": "running",
-    "weight": 0.57,
+    "weight": 0.59,
     "type": "memory-sync",
     "label": "synced 2026-02-23"
   },
