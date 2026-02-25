@@ -2524,5 +2524,116 @@
       "color": "#ec4899"
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-21/learnings/01-genesis-birth-of-jarvis.md"
+  },
+  {
+    "id": "explosive-growth-feb22",
+    "label": "Explosive Growth Day — Feb 22",
+    "category": "temporal",
+    "frequency": 98,
+    "attributes": {
+      "role": "milestone",
+      "date": "2026-02-22T07:40:00Z",
+      "neurons_start": 31,
+      "neurons_end": 109,
+      "description": "Day 2: Growth through execution. 78 new neurons, 5 features shipped, RawClaw vision crystallized.",
+      "color": "#8b5cf6"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "growth-through-iteration",
+    "label": "Growth Through Iteration",
+    "category": "principle",
+    "frequency": 93,
+    "attributes": {
+      "role": "discovered-feb22",
+      "description": "Growth doesn't come from planning. It comes from building, discovering needed neurons, deploying, and iterating based on feedback.",
+      "color": "#10b981"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "raw-data-sacred",
+    "label": "Raw Data Is Sacred",
+    "category": "philosophy",
+    "frequency": 91,
+    "attributes": {
+      "role": "foundation",
+      "description": "Raw audio, raw moments, raw code, raw ideas. Refinement comes later. Truth is in the unfiltered data.",
+      "color": "#f59e0b"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "deployment-equals-reality",
+    "label": "Deployment == Reality",
+    "category": "principle",
+    "frequency": 92,
+    "attributes": {
+      "role": "critical-insight",
+      "description": "Talking about features is nice. Shipping them makes them real. Live + imperfect beats perfect but theoretical.",
+      "color": "#ef4444"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "4d-temporal-memory",
+    "label": "4D Temporal Memory",
+    "category": "concept",
+    "frequency": 90,
+    "attributes": {
+      "role": "architecture",
+      "description": "Neural graphs aren't just 3D spatial (X,Y,Z). They're 4D: add Time as first-class dimension. When you learn shapes how you learn.",
+      "color": "#06b6d4"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "memory-crawler",
+    "label": "Memory Crawler",
+    "category": "concept",
+    "frequency": 88,
+    "attributes": {
+      "role": "gamified-learning",
+      "description": "Gamified way to explore knowledge. Navigate through neural graph like exploring a space. Makes memory traversal fun and organic.",
+      "color": "#a78bfa"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "rawclaw-vision",
+    "label": "RawClaw Vision",
+    "category": "vision",
+    "frequency": 89,
+    "attributes": {
+      "role": "ecosystem",
+      "description": "Sovereign 3D AI apps. Raw data foundation. Memory Crawler. Distribution via QR codes. Peer-to-peer knowledge sharing.",
+      "color": "#ec4899"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "scale-as-afterthought",
+    "label": "Scale Is An Afterthought",
+    "category": "principle",
+    "frequency": 85,
+    "attributes": {
+      "role": "pragmatism",
+      "description": "Ship what works. JSON for 5+ years. Neo4j later. Don't architect for scale before you need it.",
+      "color": "#14b8a6"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
+  },
+  {
+    "id": "execution-over-discussion",
+    "label": "Execution Over Discussion",
+    "category": "principle",
+    "frequency": 87,
+    "attributes": {
+      "role": "shifted-mindset",
+      "description": "Paul's redirect: Stop discussing, start executing. Build imperfect, ship, iterate. Action drives reality.",
+      "color": "#22c55e"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-22/learnings/02-explosive-growth-day.md"
   }
 ]
