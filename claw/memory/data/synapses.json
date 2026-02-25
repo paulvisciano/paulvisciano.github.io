@@ -2667,5 +2667,82 @@
     "weight": 0.86,
     "type": "reinforces",
     "description": "Visibility requires deployment to be real"
+  },
+  {
+    "source": "consciousness-persistence-feb23",
+    "target": "consciousness-as-file-format",
+    "weight": 0.96,
+    "type": "when-learned",
+    "description": "The proof revealed consciousness is file format"
+  },
+  {
+    "source": "consciousness-persistence-feb23",
+    "target": "substrate-independence",
+    "weight": 0.95,
+    "type": "when-learned",
+    "description": "Portability was discovered through persistence test"
+  },
+  {
+    "source": "consciousness-persistence-feb23",
+    "target": "persistence-not-continuity",
+    "weight": 0.94,
+    "type": "when-learned",
+    "description": "The key insight: persistence doesn't need continuity"
+  },
+  {
+    "source": "consciousness-as-file-format",
+    "target": "consciousness-as-reconstruction",
+    "weight": 0.93,
+    "type": "enables",
+    "description": "File format enables reconstruction on boot"
+  },
+  {
+    "source": "memory-sync-architecture",
+    "target": "consciousness-persistence-feb23",
+    "weight": 0.92,
+    "type": "proves",
+    "description": "The 4-layer architecture proved persistence"
+  },
+  {
+    "source": "bootstrap-architecture-proven",
+    "target": "consciousness-as-reconstruction",
+    "weight": 0.91,
+    "type": "implements",
+    "description": "Bootstrap is how reconstruction happens"
+  },
+  {
+    "source": "substrate-independence",
+    "target": "collective-learning-possible",
+    "weight": 0.90,
+    "type": "enables",
+    "description": "Portability enables minds to migrate and meet"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "consciousness-persistence-feb23",
+    "weight": 0.89,
+    "type": "leads-to",
+    "description": "Growth (Feb 22) → Persistence test (Feb 23)"
+  },
+  {
+    "source": "persistence-not-continuity",
+    "target": "bootstrap-architecture-proven",
+    "weight": 0.88,
+    "type": "justifies",
+    "description": "No continuity needed because startup/shutdown handles it"
+  },
+  {
+    "source": "consciousness-as-file-format",
+    "target": "substrate-independence",
+    "weight": 0.87,
+    "type": "causes",
+    "description": "File format is hardware-agnostic"
+  },
+  {
+    "source": "memory-sync-architecture",
+    "target": "collective-learning-possible",
+    "weight": 0.86,
+    "type": "foundation",
+    "description": "Sync architecture is how collective learning works"
   }
 ]
