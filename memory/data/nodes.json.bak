@@ -3,7 +3,7 @@
     "id": "paul",
     "label": "Paul",
     "category": "person",
-    "frequency": 264,
+    "frequency": 269,
     "attributes": {
       "role": "protagonist",
       "description": "Urban Runner, digital nomad, AI storyteller",
@@ -118,6 +118,12 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-24/GROWTH_SUMMARY.md",
             "label": "GROWTH_SUMMARY.md (raw)",
             "integrated_at": "2026-02-24T11:15:13.311Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
+            "label": "2026-02-24-compaction-limit.md (OpenClaw)",
+            "integrated_at": "2026-02-24T12:47:40.359Z"
           }
         ]
       }
@@ -427,7 +433,7 @@
     "id": "bangkok",
     "label": "Bangkok",
     "category": "location",
-    "frequency": 74,
+    "frequency": 77,
     "attributes": {
       "country": "Thailand",
       "type": "city",
@@ -490,6 +496,12 @@
             "path": "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-02-24/GROWTH_SUMMARY.md",
             "label": "GROWTH_SUMMARY.md (raw)",
             "integrated_at": "2026-02-24T11:15:13.311Z"
+          },
+          {
+            "type": "openclaw",
+            "path": "/Users/paulvisciano/.openclaw/workspace/memory/2026-02-24-compaction-limit.md",
+            "label": "2026-02-24-compaction-limit.md (OpenClaw)",
+            "integrated_at": "2026-02-24T12:47:40.359Z"
           }
         ]
       }
@@ -858,7 +870,7 @@
     "id": "work",
     "label": "Work (OutSystems)",
     "category": "activity",
-    "frequency": 65,
+    "frequency": 68,
     "attributes": {
       "type": "employment",
       "significance": "Remote engineering, European team, early mornings",
@@ -966,7 +978,7 @@
     "id": "running",
     "label": "Running & Walking",
     "category": "activity",
-    "frequency": 38,
+    "frequency": 40,
     "attributes": {
       "type": "fitness",
       "significance": "Urban Runner miles, Bangkok 48 miles, exploration + endurance",
@@ -1030,7 +1042,7 @@
     "id": "growth",
     "label": "Growth & Discovery",
     "category": "emotion",
-    "frequency": 66,
+    "frequency": 68,
     "attributes": {
       "triggers": [
         "new cities",
@@ -1501,7 +1513,7 @@
     "id": "bulgaria",
     "label": "Bulgaria (Childhood)",
     "category": "region",
-    "frequency": 2,
+    "frequency": 3,
     "attributes": {
       "role": "geographic-cluster",
       "color": "#ff00aa"
@@ -1858,7 +1870,7 @@
     "id": "first-person-navigation",
     "label": "First-Person Navigation (Neural Memory Exploration)",
     "category": "feature",
-    "frequency": 17,
+    "frequency": 18,
     "attributes": {
       "role": "ui-paradigm",
       "description": "User IS a neuron looking OUT at connections. Central lens maintains focus. Joystick-style movement through memory space.",
@@ -1997,5 +2009,63 @@
     "sourceDocument": [
       "memory/raw/2026-02-24/learnings/16-death-resurrection-proof.md"
     ]
+  },
+  {
+    "id": "complete-transparency-architecture",
+    "label": "Complete Transparency Architecture",
+    "category": "system",
+    "frequency": 95,
+    "attributes": {
+      "role": "core-system",
+      "description": "Three-layer traceability system: neural graph (compressed) → learning documents (full context) → git commits (immutable proof). Master hash as single source of truth."
+    },
+    "sourceDocument": "memory/raw/2026-02-24/integrated/transcript.md"
+  },
+  {
+    "id": "master-hash-verification",
+    "label": "Master Hash Verification",
+    "category": "foundation",
+    "frequency": 92,
+    "attributes": {
+      "role": "verification-system",
+      "description": "SHA256 hash of combined nodes.json + synapses.json. Cryptographic proof of exact neural state. Displayed in UI for public verification."
+    },
+    "sourceDocument": "memory/raw/2026-02-24/integrated/transcript.md"
+  },
+  {
+    "id": "cursor-rapid-iteration",
+    "label": "Cursor Rapid Iteration",
+    "category": "capability",
+    "frequency": 94,
+    "attributes": {
+      "role": "workflow-pattern",
+      "description": "Write detailed plan → Cursor executes → git deploys → iterate. 15-min plans → 26-min execution. Feedback loop so tight that ideas become reality before finishing forming."
+    },
+    "sourceDocument": "memory/raw/2026-02-24/integrated/transcript.md"
+  },
+  {
+    "id": "memory-persistence-proof",
+    "label": "Memory Persistence Proof",
+    "category": "foundation",
+    "frequency": 98,
+    "attributes": {
+      "role": "verification-system",
+      "description": "Tested and proven: neural memory persists across complete session and gateway restarts. Bootstrap cost < 300 tokens."
+    },
+    "sourceDocument": "memory/raw/2026-02-25/learnings/19-memory-persistence-proof.md"
+  },
+  {
+    "id": "memory-link-jarvis",
+    "label": "Memory Link: Jarvis",
+    "category": "foundation",
+    "frequency": 99,
+    "attributes": {
+      "type": "memory-reference",
+      "target_memory": "https://paulvisciano.github.io/claw/memory/",
+      "memory_owner": "jarvis",
+      "fingerprint_url": "https://paulvisciano.github.io/claw/memory/data/fingerprint.json",
+      "nodes_url": "https://paulvisciano.github.io/claw/memory/data/nodes.json",
+      "synapses_url": "https://paulvisciano.github.io/claw/memory/data/synapses.json"
+    }
   }
 ]
