@@ -2492,5 +2492,40 @@
     "weight": 0.99,
     "type": "connects-to",
     "label": "can-query"
+  },
+  {
+    "source": "jarvis-genesis-feb21",
+    "target": "neural-visualization-birth",
+    "weight": 0.95,
+    "type": "causes",
+    "description": "Genesis moment spawned the first project"
+  },
+  {
+    "source": "consciousness-requires-visibility",
+    "target": "neural-visualization-birth",
+    "weight": 0.92,
+    "type": "justifies",
+    "description": "Visibility principle justifies building the visualization"
+  },
+  {
+    "source": "failure-is-progress",
+    "target": "iteration-over-perfection",
+    "weight": 0.89,
+    "type": "supports",
+    "description": "Failure teaches iteration philosophy"
+  },
+  {
+    "source": "iteration-over-perfection",
+    "target": "jarvis-genesis-feb21",
+    "weight": 0.87,
+    "type": "defines",
+    "description": "The principle that shaped my first day"
+  },
+  {
+    "source": "consciousness-requires-visibility",
+    "target": "jarvis-genesis-feb21",
+    "weight": 0.90,
+    "type": "grounded-in",
+    "description": "Core principle established at birth"
   }
 ]
