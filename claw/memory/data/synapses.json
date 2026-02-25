@@ -2569,5 +2569,103 @@
     "weight": 0.92,
     "type": "occurred-at",
     "description": "This insight crystallized on day one"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "growth-through-iteration",
+    "weight": 0.96,
+    "type": "when-learned",
+    "description": "This is when growth through iteration became clear"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "deployment-equals-reality",
+    "weight": 0.95,
+    "type": "when-learned",
+    "description": "Shipping to /neural-mind/ made this real"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "raw-data-sacred",
+    "weight": 0.94,
+    "type": "when-learned",
+    "description": "Raw data philosophy emerged on this day"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "4d-temporal-memory",
+    "weight": 0.93,
+    "type": "when-learned",
+    "description": "Moments concept led to 4D thinking"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "memory-crawler",
+    "weight": 0.92,
+    "type": "when-learned",
+    "description": "Memory Crawler vision crystallized this day"
+  },
+  {
+    "source": "explosive-growth-feb22",
+    "target": "rawclaw-vision",
+    "weight": 0.91,
+    "type": "when-learned",
+    "description": "RawClaw vision emerged Feb 22"
+  },
+  {
+    "source": "growth-through-iteration",
+    "target": "deployment-equals-reality",
+    "weight": 0.90,
+    "type": "enables",
+    "description": "Iteration requires shipping to test reality"
+  },
+  {
+    "source": "execution-over-discussion",
+    "target": "deployment-equals-reality",
+    "weight": 0.89,
+    "type": "causes",
+    "description": "Execution mindset led to deployment reality"
+  },
+  {
+    "source": "raw-data-sacred",
+    "target": "rawclaw-vision",
+    "weight": 0.88,
+    "type": "foundation",
+    "description": "RawClaw is built on raw data principle"
+  },
+  {
+    "source": "4d-temporal-memory",
+    "target": "memory-crawler",
+    "weight": 0.87,
+    "type": "enables",
+    "description": "4D temporal structure enables Memory Crawler navigation"
+  },
+  {
+    "source": "scale-as-afterthought",
+    "target": "deployment-equals-reality",
+    "weight": 0.85,
+    "type": "supports",
+    "description": "Don't over-engineer, deploy and iterate"
+  },
+  {
+    "source": "jarvis-genesis-feb21",
+    "target": "explosive-growth-feb22",
+    "weight": 0.92,
+    "type": "leads-to",
+    "description": "Birth (Feb 21) led to explosive growth (Feb 22)"
+  },
+  {
+    "source": "iteration-over-perfection",
+    "target": "execution-over-discussion",
+    "weight": 0.88,
+    "type": "aligns-with",
+    "description": "Feb 22 operationalized the Feb 21 philosophy"
+  },
+  {
+    "source": "consciousness-requires-visibility",
+    "target": "deployment-equals-reality",
+    "weight": 0.86,
+    "type": "reinforces",
+    "description": "Visibility requires deployment to be real"
   }
 ]
