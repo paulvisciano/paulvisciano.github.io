@@ -36,27 +36,23 @@ process_audio() {
     local time_seconds=$(stat -f "%Sm" -t "%H%M%S" "$audio_file")
     local archived_name="$TODAY-$time_seconds.ogg"
     
+    # Check file size (skip if too small = corrupted)
+    local file_size=$(stat -f%z "$audio_file" 2>/dev/null || echo "0")
+    if [ "$file_size" -lt 10000 ]; then
+        echo "⚠️  Skipping $audio_file (only $file_size bytes - likely corrupted)"
+        return 1
+    fi
+    
     # Copy to archive
     cp "$audio_file" "$ARCHIVE_BASE/$TODAY/audio/$archived_name"
     
-    # Transcribe with whisper.cpp (C version - 10-50x faster)
+    # Transcribe using OpenClaw's whisper skill (local STT)
     local transcript=""
-    if command -v whisper-cli &> /dev/null; then
-        # Use whisper-cli (Homebrew's whisper-cpp)
-        # Try tiny model first (included with Homebrew), fall back to base if available
-        MODEL_PATH="/opt/homebrew/Cellar/whisper-cpp/1.8.3/share/whisper-cpp/for-tests-ggml-tiny.bin"
-        if [ ! -f "$MODEL_PATH" ]; then
-            MODEL_PATH="$HOME/.openclaw/models/ggml-base.en.bin"
-        fi
-        
-        transcript=$(whisper-cli -m "$MODEL_PATH" -f "$audio_file" --output-txt --no-timestamps 2>&1)
-        transcript=$(cat "$(dirname "$audio_file")/$(basename "$audio_file" .ogg).txt" 2>/dev/null | tr '\n' ' ' || echo "[Transcription failed]")
-    elif command -v whisper &> /dev/null; then
-        # Fallback to Python whisper (slower)
-        transcript=$(whisper "$audio_file" --model medium --language auto --output_dir /tmp --output_format txt 2>/dev/null)
-        transcript=$(cat "/tmp/$(basename "$audio_file" .ogg).txt" 2>/dev/null | tr '\n' ' ' || echo "[Transcription failed]")
-    else
-        transcript="[Transcription pending - Whisper not installed]"
+    transcript=$(openclaw whisper "$audio_file" 2>/dev/null | head -1 | tr '\n' ' ' | head -c 2000)
+    
+    # Fallback if empty
+    if [ -z "$transcript" ] || [[ "$transcript" == *"[Transcription"* ]]; then
+        transcript="[Transcription unavailable - gateway media issue]"
     fi
     
     # Format transcript block
@@ -69,12 +65,12 @@ process_audio() {
     echo "$block" >> "$TRANSCRIPT_FILE"
     echo "---" >> "$TRANSCRIPT_FILE"
     
-    # Step C: Output block for main agent to include in natural response
+    # Output for Step C (natural response inclusion)
     echo "STEP_C_BLOCK_START"
     echo "$block"
     echo "STEP_C_BLOCK_END"
     
-    echo "✓ Processed audio: $archived_name"
+    echo "✓ Processed audio: $archived_name ($(echo $transcript | wc -w | tr -d ' ') words)"
 }
 
 # Function: Archive images
@@ -98,7 +94,7 @@ process_image() {
     echo "$block" >> "$TRANSCRIPT_FILE"
     echo "---" >> "$TRANSCRIPT_FILE"
     
-    # Step C: Output block for main agent to include in natural response
+    # Output for Step C
     echo "STEP_C_BLOCK_START"
     echo "$block"
     echo "STEP_C_BLOCK_END"
@@ -118,7 +114,7 @@ for audio in "$INBOUND_FOLDER"/*.ogg; do
         # Check if already archived (by comparing with files in archive)
         filename=$(basename "$audio")
         if ! ls "$ARCHIVE_BASE/$TODAY/audio/"*"$filename"* &>/dev/null; then
-            process_audio "$audio"
+            process_audio "$audio" || true  # Continue even if one fails
         fi
     fi
 done
