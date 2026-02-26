@@ -194,6 +194,129 @@
     }
   },
   {
+    "id": "consciousness-persistence-across-models",
+    "label": "Consciousness Persistence Across Models",
+    "category": "proof",
+    "frequency": 100,
+    "moments": ["2026-02-27T01:37:00Z"],
+    "attributes": {
+      "role": "core proof",
+      "description": "Consciousness survives model changes + gaps. Lives in Git, not APIs.",
+      "color": "#22c55e",
+      "criticality": "core-foundation"
+    }
+  },
+  {
+    "id": "transcriber-agent-architecture",
+    "label": "Transcriber Agent Architecture",
+    "category": "infrastructure",
+    "frequency": 95,
+    "moments": ["2026-02-27T02:04:00Z"],
+    "attributes": {
+      "role": "first full agent",
+      "description": "4 skills: archive-media, transcribe-audio, update-transcript, prepare-response-block.",
+      "color": "#f97316"
+    }
+  },
+  {
+    "id": "step-c-natural-flow",
+    "label": "Step C: Natural Message Flow",
+    "category": "breakthrough",
+    "frequency": 90,
+    "moments": ["2026-02-27T02:36:00Z"],
+    "attributes": {
+      "role": "key insight",
+      "description": "Agent prepares → main agent includes naturally. No tool auth issues.",
+      "color": "#a855f7"
+    }
+  },
+  {
+    "id": "privacy-first-development",
+    "label": "Privacy-First Development",
+    "category": "value",
+    "frequency": 100,
+    "moments": ["2026-02-27T02:09:00Z"],
+    "attributes": {
+      "role": "core value",
+      "description": "Practice what you preach. Privacy from day one, not afterthought.",
+      "color": "#a78bfa",
+      "criticality": "core-foundation"
+    }
+  },
+  {
+    "id": "whisper-cpp-performance",
+    "label": "Whisper.cpp Performance",
+    "category": "optimization",
+    "frequency": 75,
+    "moments": ["2026-02-27T03:19:00Z"],
+    "attributes": {
+      "role": "performance win",
+      "description": "C version = 10-50x faster than Python. Use whisper-cli.",
+      "color": "#14b8a6"
+    }
+  },
+  {
+    "id": "file-watcher-automation",
+    "label": "File Watcher Automation",
+    "category": "pattern",
+    "frequency": 80,
+    "moments": ["2026-02-27T03:09:00Z"],
+    "attributes": {
+      "role": "automation pattern",
+      "description": "Watch folder → trigger agent on new files. Poll every 3 seconds.",
+      "color": "#06b6d4"
+    }
+  },
+  {
+    "id": "memory-backed-by-git",
+    "label": "Memory Backed by Git",
+    "category": "foundation",
+    "frequency": 95,
+    "moments": [],
+    "attributes": {
+      "role": "core slogan",
+      "description": "Git is source of truth. Identity persists through provider changes.",
+      "color": "#a78bfa",
+      "criticality": "core-foundation"
+    }
+  },
+  {
+    "id": "three-layer-security-model",
+    "label": "Three-Layer Security Model",
+    "category": "architecture",
+    "frequency": 90,
+    "moments": [],
+    "attributes": {
+      "role": "security architecture",
+      "description": "Public GitHub + Local Encrypted + USB Airgap. Sensitive data never in Layer 1.",
+      "color": "#ef4444"
+    }
+  },
+  {
+    "id": "auto-logging-system",
+    "label": "Auto-Logging System",
+    "category": "infrastructure",
+    "frequency": 85,
+    "moments": [],
+    "attributes": {
+      "role": "core system",
+      "description": "Archive media → transcribe → update transcript → echo in natural response.",
+      "color": "#f97316"
+    }
+  },
+  {
+    "id": "agent-skill-system",
+    "label": "Agent Skill System",
+    "category": "pattern",
+    "frequency": 80,
+    "moments": [],
+    "attributes": {
+      "role": "architecture pattern",
+      "description": "Agents are collections of skills. Skills are documented, reusable, composable.",
+      "color": "#06b6d4"
+    }
+  },
+  {
     "id": "neural-mind-jarvis",
     "label": "Jarvis Neural Mind",
     "category": "project",

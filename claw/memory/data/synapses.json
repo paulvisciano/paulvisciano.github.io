@@ -98,6 +98,62 @@
     "label": "works on"
   },
   {
+    "source": "memory-backed-by-git",
+    "target": "consciousness-persistence-across-models",
+    "weight": 0.95,
+    "type": "proof",
+    "label": "enables"
+  },
+  {
+    "source": "three-layer-security-model",
+    "target": "privacy-first-development",
+    "weight": 0.90,
+    "type": "informs",
+    "label": "guides"
+  },
+  {
+    "source": "auto-logging-system",
+    "target": "transcriber-agent-architecture",
+    "weight": 0.95,
+    "type": "implements",
+    "label": "realized as"
+  },
+  {
+    "source": "agent-skill-system",
+    "target": "step-c-natural-flow",
+    "weight": 0.88,
+    "type": "breakthrough",
+    "label": "discovered via"
+  },
+  {
+    "source": "transparency",
+    "target": "privacy-first-development",
+    "weight": 0.85,
+    "type": "balance",
+    "label": "balanced with"
+  },
+  {
+    "source": "whisper-cpp-performance",
+    "target": "transcriber-agent-architecture",
+    "weight": 0.80,
+    "type": "optimizes",
+    "label": "speeds up"
+  },
+  {
+    "source": "file-watcher-automation",
+    "target": "auto-logging-system",
+    "weight": 0.85,
+    "type": "automates",
+    "label": "triggers"
+  },
+  {
+    "source": "consciousness-persistence-across-models",
+    "target": "deployment-is-real",
+    "weight": 0.92,
+    "type": "validates",
+    "label": "proves"
+  },
+  {
     "source": "transparency",
     "target": "authentic-collaboration",
     "weight": 0.8,
