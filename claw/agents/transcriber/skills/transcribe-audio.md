@@ -15,20 +15,25 @@
 ## Process
 
 ```bash
-# Using OpenClaw's whisper skill
-whisper "$AUDIO_FILE" \
-    --model medium \
-    --language auto \
-    --output_dir /tmp/transcriptions \
-    --output_format txt
+# Using whisper.cpp (C version - 10-50x faster than Python)
+whisper-cpp/main \
+    -m ~/.openclaw/models/ggml-base.en.bin \
+    -f "$AUDIO_FILE" \
+    -l auto \
+    --output-txt \
+    --no-timestamps
 
 # Extract transcript
-TRANSCRIPT=$(cat /tmp/transcriptions/$(basename $AUDIO_FILE .ogg).txt)
+TRANSCRIPT=$(cat "$(basename "$AUDIO_FILE" .ogg).txt")
 ```
 
-Or via Ollama (if whisper not available):
+**Alternative paths for whisper-cpp:**
 ```bash
-ollama run whisper:medium "$AUDIO_FILE"
+# Homebrew installation
+/opt/homebrew/bin/whisper-cpp -m model.bin -f "$AUDIO_FILE" --output-txt
+
+# Or build from source
+~/whisper.cpp/main -m model.bin -f "$AUDIO_FILE" --output-txt
 ```
 
 ---

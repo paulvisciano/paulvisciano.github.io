@@ -8,6 +8,7 @@ INBOUND_FOLDER="$HOME/.openclaw/media/inbound"
 AGENT_SCRIPT="$(dirname "$0")/transcriber.sh"
 PIDFILE="/tmp/transcriber-watcher.pid"
 LOGFILE="$(dirname "$0")/watcher.log"
+STATEFILE="$(dirname "$0")/.watcher-state"
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOGFILE"
@@ -30,21 +31,26 @@ log "Watching: $INBOUND_FOLDER"
 log "Agent: $AGENT_SCRIPT"
 
 # Track existing files (so we don't process old ones on startup)
-declare -A EXISTING_FILES
-for f in "$INBOUND_FOLDER"/*; do
-    if [ -f "$f" ]; then
-        EXISTING_FILES["$(basename "$f")"]=1
-    fi
-done
+# Use a simple file list instead of associative array (macOS bash 3.2 compat)
+if [ -f "$STATEFILE" ]; then
+    cp "$STATEFILE" "${STATEFILE}.old"
+fi
+ls -1 "$INBOUND_FOLDER" 2>/dev/null > "$STATEFILE" || touch "$STATEFILE"
 
-log "Found ${#EXISTING_FILES[@]} existing files (will skip)"
+EXISTING_COUNT=$(wc -l < "$STATEFILE")
+log "Found $EXISTING_COUNT existing files (will skip)"
 
 # Watch for new files
 while true; do
-    for f in "$INBOUND_FOLDER"/*; do
-        if [ -f "$f" ]; then
-            filename=$(basename "$f")
-            if [ -z "${EXISTING_FILES[$filename]}" ]; then
+    # Get current file list
+    ls -1 "$INBOUND_FOLDER" 2>/dev/null > "${STATEFILE}.new" || touch "${STATEFILE}.new"
+    
+    # Find new files (in new but not in old state)
+    NEW_FILES=$(comm -23 "${STATEFILE}.new" "$STATEFILE" 2>/dev/null || true)
+    
+    if [ -n "$NEW_FILES" ]; then
+        while IFS= read -r filename; do
+            if [ -n "$filename" ]; then
                 # New file detected!
                 log "📁 New file detected: $filename"
                 
@@ -53,13 +59,16 @@ while true; do
                 
                 # Run the agent
                 log "▶️  Running transcriber agent..."
-                bash "$AGENT_SCRIPT" >> "$LOGFILE" 2>&1 || log "❌ Agent failed"
-                
-                # Mark as processed
-                EXISTING_FILES[$filename]=1
+                bash "$AGENT_SCRIPT" >> "$LOGFILE" 2>&1 && log "✅ Agent completed" || log "❌ Agent failed"
             fi
-        fi
-    done
+        done <<< "$NEW_FILES"
+        
+        # Update state
+        mv "${STATEFILE}.new" "$STATEFILE"
+    else
+        # No new files, clean up temp file
+        rm -f "${STATEFILE}.new"
+    fi
     
     # Check every 3 seconds
     sleep 3

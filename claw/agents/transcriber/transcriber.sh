@@ -39,11 +39,16 @@ process_audio() {
     # Copy to archive
     cp "$audio_file" "$ARCHIVE_BASE/$TODAY/audio/$archived_name"
     
-    # Transcribe with Whisper
+    # Transcribe with whisper.cpp (C version - 10-50x faster)
     local transcript=""
-    if command -v whisper &> /dev/null; then
+    if command -v whisper-cpp &> /dev/null; then
+        # Use whisper.cpp if available
+        transcript=$(whisper-cpp/main -m ~/.openclaw/models/ggml-base.en.bin -f "$audio_file" --output-txt --no-timestamps 2>/dev/null)
+        transcript=$(cat "$(dirname "$audio_file")/$(basename "$audio_file" .ogg).txt" 2>/dev/null | tr '\n' ' ' || echo "[Transcription failed]")
+    elif command -v whisper &> /dev/null; then
+        # Fallback to Python whisper (slower)
         transcript=$(whisper "$audio_file" --model medium --language auto --output_dir /tmp --output_format txt 2>/dev/null)
-        transcript=$(cat "/tmp/$(basename "$audio_file" .ogg).txt" 2>/dev/null || echo "[Transcription unavailable]")
+        transcript=$(cat "/tmp/$(basename "$audio_file" .ogg).txt" 2>/dev/null | tr '\n' ' ' || echo "[Transcription failed]")
     else
         transcript="[Transcription pending - Whisper not installed]"
     fi
