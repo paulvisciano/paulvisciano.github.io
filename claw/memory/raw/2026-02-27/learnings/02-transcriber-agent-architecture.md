@@ -114,7 +114,7 @@ claw/agents/transcriber/
 
 **.env (gitignored):**
 ```bash
-WHATSAPP_TARGET="+18132963635"
+WHATSAPP_TARGET="+XXXXXXXXXXX"
 ```
 
 **Privacy:** Phone number never in git. Uses env var.

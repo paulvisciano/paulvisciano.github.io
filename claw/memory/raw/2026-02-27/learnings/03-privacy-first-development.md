@@ -16,7 +16,7 @@ During agent development, sensitive data was accidentally committed:
 
 **What happened:**
 1. Created transcriber agent config
-2. Hardcoded phone number: `+18132963635`
+2. Hardcoded phone number: `+XXXXXXXXXXX` (redacted)
 3. Committed to git
 4. Only noticed after commit
 
@@ -36,7 +36,7 @@ During agent development, sensitive data was accidentally committed:
 **Step 1: Replace with env vars**
 ```json
 // Before
-"whatsappTarget": "+18132963635"
+"whatsappTarget": "+XXXXXXXXXXX"  // REDACTED
 
 // After
 "whatsappTarget": "${WHATSAPP_TARGET}"
@@ -88,7 +88,7 @@ The three-layer architecture demands:
 
 ```bash
 # .env (gitignored)
-WHATSAPP_TARGET="+18132963635"
+WHATSAPP_TARGET="+XXXXXXXXXXX"  # REDACTED
 API_KEY="sk-..."
 DATABASE_URL="postgresql://..."
 ```
