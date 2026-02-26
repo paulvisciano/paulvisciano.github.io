@@ -70,9 +70,24 @@ Skill: prepare-response-block (Step C)
 
 ## Trigger
 
-Runs on every new inbound message. Can be:
-- **Event-driven:** Watch folder with `fswatch` or `chokidar`
-- **Polling:** Check every 5 seconds for new files
+**Automatic via file watcher:**
+
+```bash
+# Start the watcher (runs in background)
+./watcher.sh &
+
+# Or run as launchd service (macOS)
+# See: launcher.plist for systemd/launchd config
+```
+
+The watcher:
+- Monitors inbound folder every 3 seconds
+- Skips files that existed at startup
+- Triggers agent on new files only
+- Logs to `watcher.log`
+
+**Alternative triggers:**
+- **Cron job:** Run every 5 minutes
 - **OpenClaw hook:** Triggered by gateway on message receive
 
 ---
@@ -82,7 +97,11 @@ Runs on every new inbound message. Can be:
 - `AGENT.md` — This file (agent spec)
 - `config.json` — Configuration values
 - `skills/*.md` — Skill definitions
-- `transcriber.js` or `transcriber.sh` — Main execution script
+- `transcriber.sh` — Main execution script
+- `watcher.sh` — File watcher (auto-triggers agent)
+- `launcher.plist` — macOS launchd config (optional, for auto-start)
+- `.env` — Environment variables (gitignored)
+- `.env.example` — Template (safe to commit)
 
 ---
 
