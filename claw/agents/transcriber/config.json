@@ -1,0 +1,31 @@
+{
+  "agent": "transcriber",
+  "version": "1.0.0",
+  "created": "2026-02-27",
+  "purpose": "Auto-log WhatsApp messages with Step C (send formatted blocks to chat)",
+  "config": {
+    "inboundFolder": "~/.openclaw/media/inbound/",
+    "archiveBase": "~/Personal/paulvisciano.github.io/memory/raw/",
+    "timezone": "Asia/Bangkok",
+    "languages": ["en", "es", "bg"],
+    "whatsappChannel": "whatsapp",
+    "whatsappTarget": "+18132963635",
+    "whisperModel": "medium",
+    "pollIntervalSeconds": 5
+  },
+  "skills": [
+    "archive-media",
+    "transcribe-audio",
+    "update-transcript",
+    "send-to-whatsapp"
+  ],
+  "trigger": {
+    "type": "poll",
+    "interval": 5,
+    "watchFolder": "~/.openclaw/media/inbound/"
+  },
+  "logging": {
+    "level": "info",
+    "file": "~/Personal/paulvisciano.github.io/claw/agents/transcriber/transcriber.log"
+  }
+}
