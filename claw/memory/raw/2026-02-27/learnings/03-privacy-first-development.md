@@ -63,7 +63,7 @@ git commit --amend -m "security: remove hardcoded phone number"
 **Step 5: Scrub git history**
 ```bash
 git filter-branch --force --tree-filter '
-  find . -type f -name "*.md" -exec sed -i "" "s/813) 296-3635/REDACTED/g" {} \;
+  find . -type f -name "*.md" -exec sed -i "" "s/XXX) XXX-XXXX/REDACTED/g" {} \;
 ' --prune-empty HEAD
 ```
 

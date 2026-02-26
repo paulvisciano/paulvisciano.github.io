@@ -30,7 +30,7 @@ Created on session boot, stored at workspace root: `.session-manifest.json`
   
   "environment": {
     "cwd": "/Users/paulvisciano/.openclaw/workspace",
-    "userId": "+18132963635",
+    "userId": "+XXXXXXXXX",
     "timezone": "Asia/Saigon",
     "hostname": "PaulMacBook",
     "nodeVersion": "v22.22.0",
