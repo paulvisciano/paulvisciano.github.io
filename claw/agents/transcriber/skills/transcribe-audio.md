@@ -15,24 +15,23 @@
 ## Process
 
 ```bash
-# Using whisper.cpp (C version - 10-50x faster than Python)
-whisper-cpp/main \
+# Using whisper-cli (Homebrew's whisper-cpp - 10-50x faster than Python)
+whisper-cli \
     -m ~/.openclaw/models/ggml-base.en.bin \
     -f "$AUDIO_FILE" \
-    -l auto \
     --output-txt \
     --no-timestamps
 
 # Extract transcript
-TRANSCRIPT=$(cat "$(basename "$AUDIO_FILE" .ogg).txt")
+TRANSCRIPT=$(cat "$(dirname "$AUDIO_FILE")/$(basename "$AUDIO_FILE" .ogg).txt" | tr '\n' ' ')
 ```
 
-**Alternative paths for whisper-cpp:**
+**Alternative paths:**
 ```bash
-# Homebrew installation
-/opt/homebrew/bin/whisper-cpp -m model.bin -f "$AUDIO_FILE" --output-txt
+# Direct path (Homebrew on Apple Silicon)
+/opt/homebrew/bin/whisper-cli -m model.bin -f "$AUDIO_FILE" --output-txt
 
-# Or build from source
+# Or if you built from source
 ~/whisper.cpp/main -m model.bin -f "$AUDIO_FILE" --output-txt
 ```
 
