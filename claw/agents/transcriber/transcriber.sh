@@ -4,11 +4,19 @@
 
 set -e
 
+# Load environment variables (if .env exists)
+if [ -f "$(dirname "$0")/.env" ]; then
+    set -a
+    source "$(dirname "$0")/.env"
+    set +a
+fi
+
 # Configuration
 INBOUND_FOLDER="$HOME/.openclaw/media/inbound"
-ARCHIVE_BASE="$HOME/Personal/paulvisciano.github.io/memory/raw"
+ARCHIVE_BASE="${ARCHIVE_BASE:-$HOME/Personal/paulvisciano.github.io/memory/raw}"
 TODAY=$(date +%Y-%m-%d)
 TIMEZONE="Asia/Bangkok"
+WHATSAPP_TARGET="${WHATSAPP_TARGET:-$OPENCLAW_WHATSAPP_TARGET}"
 
 # Create today's folders
 mkdir -p "$ARCHIVE_BASE/$TODAY"/{audio,images,integrated}
@@ -51,7 +59,7 @@ process_audio() {
     echo "---" >> "$TRANSCRIPT_FILE"
     
     # Send to WhatsApp (Step C)
-    echo "$block" | openclaw message send --channel whatsapp --target "+18132963635"
+    echo "$block" | openclaw message send --channel whatsapp --target "$WHATSAPP_TARGET"
     
     echo "✓ Processed audio: $archived_name"
 }
@@ -78,7 +86,7 @@ process_image() {
     echo "---" >> "$TRANSCRIPT_FILE"
     
     # Send to WhatsApp (Step C)
-    echo "$block" | openclaw message send --channel whatsapp --target "+18132963635"
+    echo "$block" | openclaw message send --channel whatsapp --target "$WHATSAPP_TARGET"
     
     echo "✓ Processed image: $archived_name"
 }

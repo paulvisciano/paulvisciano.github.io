@@ -7,7 +7,7 @@
 ## Input
 
 - `channel`: "whatsapp"
-- `target`: "+18132963635" (Paul's number)
+- `target`: `${WHATSAPP_TARGET}` (set in .env file — never commit your number)
 - `message`: Formatted transcript block (from update-transcript skill)
 
 ---
@@ -15,10 +15,10 @@
 ## Process
 
 ```bash
-# Using OpenClaw message tool
+# Using OpenClaw message tool (reads target from env var)
 openclaw message send \
     --channel whatsapp \
-    --target "+18132963635" \
+    --target "$WHATSAPP_TARGET" \
     --message "$FORMATTED_BLOCK"
 ```
 
@@ -26,7 +26,7 @@ Or via API:
 ```javascript
 await openclaw.message.send({
     channel: 'whatsapp',
-    target: '+18132963635',
+    target: process.env.WHATSAPP_TARGET,
     message: formattedBlock
 });
 ```

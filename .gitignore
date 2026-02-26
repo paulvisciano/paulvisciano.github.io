@@ -73,3 +73,4 @@ user-*/
 *.tar.gz
 *.zip
 *.rar
+.env

@@ -37,7 +37,7 @@
   "timezone": "Asia/Bangkok",
   "languages": ["en", "es", "bg"],
   "whatsappChannel": "whatsapp",
-  "whatsappTarget": "+18132963635"
+  "whatsappTarget": "${WHATSAPP_TARGET}"
 }
 ```
 
