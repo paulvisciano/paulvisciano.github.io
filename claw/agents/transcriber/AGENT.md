@@ -22,8 +22,8 @@
 |-------|------|-------------|
 | `archive-media` | `skills/archive-media.md` | Copy inbound → dated archive folders |
 | `transcribe-audio` | `skills/transcribe-audio.md` | Whisper CLI transcription |
-| `update-transcript` | `skills/update-transcript.md` | Append to transcript.md |
-| `prepare-response-block` | `skills/send-to-whatsapp.md` | Prepare formatted block for natural response |
+| `update-transcript` | `skills/update-transcript.md` | Append to transcript.md (append-only) |
+| `prepare-response-block` | `skills/prepare-response-block.md` | Output formatted block for main agent's natural response |
 
 ---
 
