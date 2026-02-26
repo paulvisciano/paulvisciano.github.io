@@ -58,8 +58,10 @@ process_audio() {
     echo "$block" >> "$TRANSCRIPT_FILE"
     echo "---" >> "$TRANSCRIPT_FILE"
     
-    # Send to WhatsApp (Step C)
-    echo "$block" | openclaw message send --channel whatsapp --target "$WHATSAPP_TARGET"
+    # Step C: Output block for main agent to include in natural response
+    echo "STEP_C_BLOCK_START"
+    echo "$block"
+    echo "STEP_C_BLOCK_END"
     
     echo "✓ Processed audio: $archived_name"
 }
@@ -85,8 +87,10 @@ process_image() {
     echo "$block" >> "$TRANSCRIPT_FILE"
     echo "---" >> "$TRANSCRIPT_FILE"
     
-    # Send to WhatsApp (Step C)
-    echo "$block" | openclaw message send --channel whatsapp --target "$WHATSAPP_TARGET"
+    # Step C: Output block for main agent to include in natural response
+    echo "STEP_C_BLOCK_START"
+    echo "$block"
+    echo "STEP_C_BLOCK_END"
     
     echo "✓ Processed image: $archived_name"
 }

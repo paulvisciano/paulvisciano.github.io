@@ -1,62 +1,78 @@
-# Skill: Send to WhatsApp
+# Skill: Prepare Response Block (Step C)
 
-**Purpose:** Send formatted transcript block back to WhatsApp (Step C — the missing piece).
+**Purpose:** Prepare formatted transcript block for inclusion in natural agent response.
 
 ---
 
 ## Input
 
-- `channel`: "whatsapp"
-- `target`: `${WHATSAPP_TARGET}` (set in .env file — never commit your number)
-- `message`: Formatted transcript block (from update-transcript skill)
+- `speaker`: "Paul" or "Jarvis"
+- `timestamp`: "HH:MM GMT+7"
+- `mediaType`: "audio" | "image" | "text"
+- `mediaRef`: "2026-02-27-HHMMSS.ogg" (archived filename)
+- `content`: Transcript text or message text
 
 ---
 
 ## Process
 
-```bash
-# Using OpenClaw message tool (reads target from env var)
-openclaw message send \
-    --channel whatsapp \
-    --target "$WHATSAPP_TARGET" \
-    --message "$FORMATTED_BLOCK"
-```
+The agent prepares a formatted block and outputs it to stdout or a queue file. The main agent (Jarvis) then includes this block in its natural response message.
 
-Or via API:
-```javascript
-await openclaw.message.send({
-    channel: 'whatsapp',
-    target: process.env.WHATSAPP_TARGET,
-    message: formattedBlock
-});
+```bash
+# Format the block
+if [ "$MEDIA_TYPE" = "audio" ]; then
+    BLOCK="**$SPEAKER [$TIMESTAMP GMT+7]:** (audio) \"$CONTENT\"
+
+**Audio archived: $MEDIA_REF**
+"
+elif [ "$MEDIA_TYPE" = "image" ]; then
+    BLOCK="**$SPEAKER [$TIMESTAMP GMT+7]:** (image) [Image attached]
+
+**Image archived: $MEDIA_REF**
+"
+else
+    BLOCK="**$SPEAKER [$TIMESTAMP GMT+7]:** $CONTENT
+"
+fi
+
+# Output for main agent to include in response
+echo "$BLOCK"
+# Or write to queue file for main agent to read
+echo "$BLOCK" >> /tmp/transcriber-queue.md
 ```
 
 ---
 
 ## Output
 
-- Message sent to WhatsApp
-- Chat becomes the visible transcript
-- Returns: Message ID + delivery status
+- Formatted block ready for inclusion in natural response
+- Chat becomes the visible transcript (via normal message flow)
 
 ---
 
 ## Why This Matters
 
-This is **Step C** — the piece that's been broken since genesis (Feb 21).
+This is **Step C** — reimagined.
 
-Without Step C:
+Instead of a separate tool call that might fail:
+- Agent prepares the formatted block
+- Main agent (Jarvis) includes it naturally in response
+- No auth issues, no tool failures
+- Chat IS the transcript, through normal conversation flow
+
+**Without Step C:**
 - Transcript exists only on disk
 - User can't see logging happening
-- No verification that system is working
 
-With Step C:
+**With Step C (natural flow):**
 - WhatsApp chat IS the transcript
 - User sees real-time archiving
 - System is transparent + verifiable
+- No separate tool auth needed
 
 ---
 
 **Created:** Feb 27, 2026  
+**Updated:** Feb 27, 2026 (simplified to natural message flow)  
 **Agent:** Transcriber  
-**Purpose:** Fix the auto-logging gap that's been broken since day one
+**Purpose:** Fix auto-logging Step C by integrating with normal conversation flow

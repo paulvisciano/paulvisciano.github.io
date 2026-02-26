@@ -12,7 +12,7 @@
 2. **Archives** media to dated folders (`/memory/raw/YYYY-MM-DD/{audio,images}/`)
 3. **Transcribes** audio notes (Whisper CLI or Ollama)
 4. **Updates** transcript.md (append-only, never overwrite)
-5. **Sends** formatted block to WhatsApp (Step C — the missing piece)
+5. **Prepares** formatted block for inclusion in natural response (Step C)
 
 ---
 
@@ -23,7 +23,7 @@
 | `archive-media` | `skills/archive-media.md` | Copy inbound → dated archive folders |
 | `transcribe-audio` | `skills/transcribe-audio.md` | Whisper CLI transcription |
 | `update-transcript` | `skills/update-transcript.md` | Append to transcript.md |
-| `send-to-whatsapp` | `skills/send-to-whatsapp.md` | Send formatted block via OpenClaw message tool |
+| `prepare-response-block` | `skills/send-to-whatsapp.md` | Prepare formatted block for natural response |
 
 ---
 
@@ -60,8 +60,9 @@ Skill: update-transcript
   - Format: **Paul [HH:MM GMT+7]:** (audio) "transcript"
   - Append to transcript.md
   ↓
-Skill: send-to-whatsapp
-  - Send formatted block to WhatsApp
+Skill: prepare-response-block (Step C)
+  - Output formatted block for main agent
+  - Main agent includes in natural response
   - Chat becomes the visible transcript
 ```
 
