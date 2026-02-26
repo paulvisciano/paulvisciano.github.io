@@ -41,9 +41,15 @@ process_audio() {
     
     # Transcribe with whisper.cpp (C version - 10-50x faster)
     local transcript=""
-    if command -v whisper-cpp &> /dev/null; then
-        # Use whisper.cpp if available
-        transcript=$(whisper-cpp/main -m ~/.openclaw/models/ggml-base.en.bin -f "$audio_file" --output-txt --no-timestamps 2>/dev/null)
+    if command -v whisper-cli &> /dev/null; then
+        # Use whisper-cli (Homebrew's whisper-cpp)
+        # Try tiny model first (included with Homebrew), fall back to base if available
+        MODEL_PATH="/opt/homebrew/Cellar/whisper-cpp/1.8.3/share/whisper-cpp/for-tests-ggml-tiny.bin"
+        if [ ! -f "$MODEL_PATH" ]; then
+            MODEL_PATH="$HOME/.openclaw/models/ggml-base.en.bin"
+        fi
+        
+        transcript=$(whisper-cli -m "$MODEL_PATH" -f "$audio_file" --output-txt --no-timestamps 2>&1)
         transcript=$(cat "$(dirname "$audio_file")/$(basename "$audio_file" .ogg).txt" 2>/dev/null | tr '\n' ' ' || echo "[Transcription failed]")
     elif command -v whisper &> /dev/null; then
         # Fallback to Python whisper (slower)
