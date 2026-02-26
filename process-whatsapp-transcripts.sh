@@ -3,7 +3,7 @@
 
 set -e
 
-CHAT_FILE="/Users/paulvisciano/.openclaw/media/inbound/WhatsApp Chat with +1 (REDACTED.txt"
+CHAT_FILE="${WHATSAPP_CHAT_EXPORT:-$HOME/.openclaw/media/inbound/WhatsApp_Chat_Export.txt}"
 OUTPUT_DIR="/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw"
 
 echo "Processing WhatsApp chat (full transcript, split by day)..."
@@ -18,7 +18,7 @@ import shutil
 from datetime import datetime
 from collections import defaultdict
 
-CHAT_FILE = "/Users/paulvisciano/.openclaw/media/inbound/WhatsApp Chat with +1 (REDACTED.txt"
+CHAT_FILE = os.environ.get('WHATSAPP_CHAT_EXPORT', os.path.expanduser('~/.openclaw/media/inbound/WhatsApp_Chat_Export.txt'))
 OUTPUT_DIR = "/Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw"
 
 # WhatsApp export: "2/23/26, 8:50 PM - Name: message" (message can be empty; continuation lines have no leading date)
