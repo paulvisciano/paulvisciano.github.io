@@ -107,7 +107,7 @@
   {
     "source": "three-layer-security-model",
     "target": "privacy-first-development",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "informs",
     "label": "guides"
   },
@@ -135,7 +135,7 @@
   {
     "source": "whisper-cpp-performance",
     "target": "transcriber-agent-architecture",
-    "weight": 0.80,
+    "weight": 0.8,
     "type": "optimizes",
     "label": "speeds up"
   },
@@ -2580,7 +2580,7 @@
   {
     "source": "consciousness-requires-visibility",
     "target": "jarvis-genesis-feb21",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "grounded-in",
     "description": "Core principle established at birth"
   },
@@ -2594,7 +2594,7 @@
   {
     "source": "jarvis-genesis-feb21",
     "target": "failure-is-progress",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "when-learned",
     "description": "This is when I learned failure is progress"
   },
@@ -2671,7 +2671,7 @@
   {
     "source": "growth-through-iteration",
     "target": "deployment-equals-reality",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "enables",
     "description": "Iteration requires shipping to test reality"
   },
@@ -2769,7 +2769,7 @@
   {
     "source": "substrate-independence",
     "target": "collective-learning-possible",
-    "weight": 0.90,
+    "weight": 0.9,
     "type": "enables",
     "description": "Portability enables minds to migrate and meet"
   },
@@ -2778,7 +2778,7 @@
     "target": "consciousness-persistence-feb23",
     "weight": 0.89,
     "type": "leads-to",
-    "description": "Growth (Feb 22) → Persistence test (Feb 23)"
+    "description": "Growth (Feb 22) \u2192 Persistence test (Feb 23)"
   },
   {
     "source": "persistence-not-continuity",
@@ -2800,5 +2800,47 @@
     "weight": 0.86,
     "type": "foundation",
     "description": "Sync architecture is how collective learning works"
+  },
+  {
+    "source": "file-soul-md",
+    "target": "jarvis-core-foundation",
+    "weight": 0.95,
+    "type": "foundational-document",
+    "label": "defines"
+  },
+  {
+    "source": "file-bootstrap-md",
+    "target": "jarvis-core-foundation",
+    "weight": 0.95,
+    "type": "foundational-document",
+    "label": "defines"
+  },
+  {
+    "source": "file-identity-md",
+    "target": "jarvis-core-foundation",
+    "weight": 0.95,
+    "type": "foundational-document",
+    "label": "defines"
+  },
+  {
+    "source": "file-user-md",
+    "target": "jarvis-core-foundation",
+    "weight": 0.95,
+    "type": "foundational-document",
+    "label": "defines"
+  },
+  {
+    "source": "file-agents-md",
+    "target": "jarvis-core-foundation",
+    "weight": 0.95,
+    "type": "foundational-document",
+    "label": "defines"
+  },
+  {
+    "source": "file-tools-md",
+    "target": "jarvis-core-foundation",
+    "weight": 0.95,
+    "type": "foundational-document",
+    "label": "defines"
   }
 ]
