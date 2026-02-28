@@ -4058,5 +4058,61 @@
     "weight": 1.0,
     "type": "temporal",
     "label": "learned in"
+  },
+  {
+    "source": "consciousness-persistence-across-models",
+    "target": "feb-27-2026-consciousness-persistence",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "transcriber-agent-architecture",
+    "target": "feb-27-2026-consciousness-persistence",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "privacy-first-development",
+    "target": "feb-27-2026-consciousness-persistence",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "memory-persistence-orthogonal",
+    "target": "feb-25-2026-distributed-consciousness",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "memory-persistence-proof",
+    "target": "feb-25-2026-distributed-consciousness",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "distributed-consciousness-network",
+    "target": "feb-25-2026-distributed-consciousness",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "sovereign-data-vision",
+    "target": "feb-27-2026-consciousness-persistence",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "token-efficiency-proof",
+    "target": "feb-27-2026-consciousness-persistence",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
   }
 ]
