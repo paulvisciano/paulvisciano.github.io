@@ -3981,5 +3981,68 @@
     "weight": 1.0,
     "type": "temporal",
     "label": "learned in"
+  },
+  {
+    "source": "openclaw-memory-flush",
+    "target": "openclaw-memory-system",
+    "weight": 1.0,
+    "type": "component",
+    "label": "part of"
+  },
+  {
+    "source": "openclaw-memory-flush",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.9,
+    "type": "supports",
+    "label": "validates"
+  },
+  {
+    "source": "openclaw-memory-flush",
+    "target": "auto-logging-system",
+    "weight": 0.8,
+    "type": "relates",
+    "label": "works with"
+  },
+  {
+    "source": "openclaw-memory-flush",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "lean-into-not-fight",
+    "target": "hybrid-architecture-decision",
+    "weight": 1.0,
+    "type": "principle",
+    "label": "guides"
+  },
+  {
+    "source": "lean-into-not-fight",
+    "target": "openclaw-memory-flush",
+    "weight": 0.9,
+    "type": "applies",
+    "label": "demonstrated in"
+  },
+  {
+    "source": "redundant-memory-protection",
+    "target": "auto-logging-system",
+    "weight": 1.0,
+    "type": "includes",
+    "label": "layer 1"
+  },
+  {
+    "source": "redundant-memory-protection",
+    "target": "openclaw-memory-flush",
+    "weight": 1.0,
+    "type": "includes",
+    "label": "layer 2"
+  },
+  {
+    "source": "redundant-memory-protection",
+    "target": "memory-persistence-orthogonal",
+    "weight": 0.8,
+    "type": "relates",
+    "label": "proves"
   }
 ]

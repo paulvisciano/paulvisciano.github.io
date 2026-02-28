@@ -4491,5 +4491,66 @@
       },
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
+  },
+  {
+    "id": "openclaw-memory-flush",
+    "label": "OpenClaw Memory Flush (Pre-Compaction Ping)",
+    "category": "system",
+    "frequency": 95,
+    "moments": [
+      "feb-28-2026-session-bloat-debugging"
+    ],
+    "attributes": {
+      "role": "feature",
+      "description": "Silent turn triggered ~4k tokens before compaction. Prompts agent to write durable memories. Redirected to Jarvis's memory paths.",
+      "color": "#8b5cf6",
+      "criticality": "high",
+      "created": "2026-03-01",
+      "config": {
+        "enabled": true,
+        "softThresholdTokens": 4000
+      },
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
+    }
+  },
+  {
+    "id": "lean-into-not-fight",
+    "label": "Lean Into OpenClaw (Don't Fight It)",
+    "category": "principle",
+    "frequency": 95,
+    "moments": [
+      "feb-28-2026-session-bloat-debugging"
+    ],
+    "attributes": {
+      "role": "integration-philosophy",
+      "description": "When integrating frameworks, redirect their defaults to work with your architecture instead of disabling and rebuilding. Use existing features, point them at right paths.",
+      "color": "#a78bfa",
+      "criticality": "high",
+      "created": "2026-03-01",
+      "example": "Memory flush redirected to /memory/raw/ instead of disabled",
+      "quote": "This is another one of those fighting open cloud versus leaning into it",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
+    }
+  },
+  {
+    "id": "redundant-memory-protection",
+    "label": "Redundant Memory Protection",
+    "category": "principle",
+    "frequency": 90,
+    "moments": [
+      "feb-28-2026-session-bloat-debugging"
+    ],
+    "attributes": {
+      "role": "architecture-principle",
+      "description": "Auto-logging (every response) + Memory flush (near compaction) = double protection. Redundancy is good for critical systems like memory persistence.",
+      "color": "#10b981",
+      "criticality": "medium",
+      "created": "2026-03-01",
+      "layers": [
+        "auto-logging: proactive",
+        "memory-flush: safety-net"
+      ],
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
+    }
   }
 ]
