@@ -591,12 +591,30 @@
         }
 
         // Filter bar functionality (desktop + drawer stay in sync)
-        let currentFilter = 'all';
+        // URL sync: ?filter=value so full reload lands on same filter
+        const validFilters = () => Array.from(document.querySelectorAll('.filter-btn')).map(b => b.dataset.filter);
+        function getFilterFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const f = params.get('filter');
+            if (!f) return 'all';
+            return validFilters().includes(f) ? f : 'all';
+        }
+        function setFilterInUrl(filter) {
+            const url = new URL(window.location.href);
+            if (filter === 'all') {
+                url.searchParams.delete('filter');
+            } else {
+                url.searchParams.set('filter', filter);
+            }
+            window.history.replaceState(null, '', url.toString());
+        }
+        let currentFilter = getFilterFromUrl();
         function setActiveFilter(filter) {
             currentFilter = filter;
             document.querySelectorAll('.filter-btn').forEach(b => {
                 b.classList.toggle('active', b.dataset.filter === currentFilter);
             });
+            setFilterInUrl(filter);
             if (selected !== null && nodes[selected] && !nodePassesFilter(nodes[selected])) {
                 selected = null;
                 showNodeDetails(null);
@@ -621,12 +639,13 @@
             return ((n.type || '').toLowerCase() === (typeForFilter || '').toLowerCase());
         }
         document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === currentFilter);
             btn.addEventListener('click', () => {
                 setActiveFilter(btn.dataset.filter);
                 console.log('Filter applied:', currentFilter);
             });
         });
-        
+
         // Mobile drawer: open/close via button or drag on handle
         let drawerOpen = false;
         let drawerDragJustEnded = false;
