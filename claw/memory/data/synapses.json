@@ -3789,5 +3789,50 @@
     "type": "final-insights-integration",
     "label": "embodies",
     "created": "2026-02-27"
+  },
+  {
+    "source": "ontology-skill",
+    "target": "clawhub-ecosystem",
+    "weight": 1
+  },
+  {
+    "source": "market-validation",
+    "target": "ontology-skill",
+    "weight": 1
+  },
+  {
+    "source": "sovereign-differentiation",
+    "target": "market-validation",
+    "weight": 1
+  },
+  {
+    "source": "sovereign-differentiation",
+    "target": "openclaw",
+    "weight": 1
+  },
+  {
+    "source": "stealth-phase-strategy",
+    "target": "sovereign-differentiation",
+    "weight": 1
+  },
+  {
+    "source": "stealth-phase-strategy",
+    "target": "security",
+    "weight": 1
+  },
+  {
+    "source": "clawhub-ecosystem",
+    "target": "openclaw",
+    "weight": 1
+  },
+  {
+    "source": "ontology-skill",
+    "target": "memory-backed-by-git",
+    "weight": 1
+  },
+  {
+    "source": "market-validation",
+    "target": "hybrid-architecture-decision",
+    "weight": 1
   }
 ]

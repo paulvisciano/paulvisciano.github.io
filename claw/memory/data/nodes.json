@@ -4311,5 +4311,55 @@
       "sourceDocument": "/claw/memory/raw/2026-02-27/learnings/sovereign-data-vision.md",
       "created": "2026-02-27"
     }
+  },
+  {
+    "id": "clawhub-ecosystem",
+    "name": "ClawHub Ecosystem",
+    "category": "temporal",
+    "frequency": 1,
+    "attributes": {
+      "created": "2026-02-28"
+    },
+    "description": "OpenClaw skills marketplace (npm-like distribution for AI agents)"
+  },
+  {
+    "id": "ontology-skill",
+    "name": "Ontology Skill (@oswalpalash)",
+    "category": "tool",
+    "frequency": 1,
+    "attributes": {
+      "created": "2026-02-28"
+    },
+    "description": "Typed knowledge graph for structured agent memory — 85.5k downloads, 178 stars"
+  },
+  {
+    "id": "market-validation",
+    "name": "Market Validation",
+    "category": "concept",
+    "frequency": 1,
+    "attributes": {
+      "created": "2026-02-28"
+    },
+    "description": "85.5k downloads for knowledge graphs, 907 stars for self-improving agents — proves demand for structured memory"
+  },
+  {
+    "id": "sovereign-differentiation",
+    "name": "Sovereign Differentiation",
+    "category": "concept",
+    "frequency": 1,
+    "attributes": {
+      "created": "2026-02-28"
+    },
+    "description": "Visual neurograph + git-backed memory + consent framework + local inference — what separates us from cloud ontology skills"
+  },
+  {
+    "id": "stealth-phase-strategy",
+    "name": "Stealth Phase Strategy",
+    "category": "concept",
+    "frequency": 1,
+    "attributes": {
+      "created": "2026-02-28"
+    },
+    "description": "Keep vision private until financially ready (banks → private wallet → cash → gold), then go public from position of strength"
   }
 ]
