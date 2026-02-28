@@ -4621,5 +4621,57 @@
       ],
       "created": "2026-02-27"
     }
+  },
+  {
+    "id": "session-bloat-debugging-methodology",
+    "label": "Session Bloat Debugging Methodology",
+    "category": "methodology",
+    "frequency": 95,
+    "moments": [
+      "march-1-2026-memory-flush-integration"
+    ],
+    "attributes": {
+      "role": "debugging-framework",
+      "description": "Measure \u2192 Analyze \u2192 Read docs \u2192 Identify root cause \u2192 Configure \u2192 Test \u2192 Document. Applied to 19MB session explosions.",
+      "color": "#f97316",
+      "criticality": "high",
+      "created": "2026-03-01",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/07-session-bloat-debugging-methodology.md"
+    }
+  },
+  {
+    "id": "memory-integrity-methodology",
+    "label": "Memory Integrity Methodology",
+    "category": "methodology",
+    "frequency": 95,
+    "moments": [
+      "march-1-2026-memory-flush-integration"
+    ],
+    "attributes": {
+      "role": "curation-framework",
+      "description": "Read actual learning docs \u2192 Match neurons by name/concept \u2192 Only add sourceDocument when 100% certain. Quality > quantity.",
+      "color": "#10b981",
+      "criticality": "core-foundation",
+      "created": "2026-03-01",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-memory-integrity-methodology.md"
+    }
+  },
+  {
+    "id": "quality-over-quantity",
+    "label": "Quality Over Quantity (Memory Links)",
+    "category": "principle",
+    "frequency": 95,
+    "moments": [
+      "march-1-2026-memory-flush-integration"
+    ],
+    "attributes": {
+      "role": "decision-framework",
+      "description": "Better to have no sourceDocument link than a wrong link. Bulk migrations pollute memory; manual verification preserves integrity.",
+      "color": "#a78bfa",
+      "criticality": "high",
+      "created": "2026-03-01",
+      "example": "Reverted 249 bad links, kept only 9 verified. Then added 34 more through careful review.",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-memory-integrity-methodology.md"
+    }
   }
 ]
