@@ -528,38 +528,41 @@
                         const pulse = 1 + 0.15 * Math.sin(time * 0.08);
                         glow *= pulse;
                     }
+                    // Tighter glow when dense: smaller radius, lower opacity so nodes stay readable
+                    const glowRadius = Math.min(glow * 0.6, r + 18);
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
-                    // Outer halo
-                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glow*2);
+                    // Outer halo (reduced spread and opacity)
+                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glowRadius);
                     const [r2, g2, b2] = [
                         parseInt(n.color.slice(1,3), 16),
                         parseInt(n.color.slice(3,5), 16),
                         parseInt(n.color.slice(5,7), 16)
                     ];
-                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.6)`);
-                    g1.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.15)`);
+                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.35)`);
+                    g1.addColorStop(0.6, `rgba(${r2}, ${g2}, ${b2}, 0.08)`);
                     g1.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
                     ctx.fillStyle = g1;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, glow*2, 0, 6.28);
+                    ctx.arc(p.x, p.y, glowRadius, 0, 6.28);
                     ctx.fill();
 
-                    // Inner glow
-                    const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.2, p.x, p.y, glow);
-                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 1)`);
-                    g2_grad.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.4)`);
+                    // Inner glow (tighter)
+                    const innerGlow = Math.min(glow * 0.5, r + 8);
+                    const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.2, p.x, p.y, innerGlow);
+                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.95)`);
+                    g2_grad.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.25)`);
                     g2_grad.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
                     ctx.fillStyle = g2_grad;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, glow, 0, 6.28);
+                    ctx.arc(p.x, p.y, innerGlow, 0, 6.28);
                     ctx.fill();
 
-                    // Core neuron
+                    // Core neuron (lighter shadow so overlaps are less bright)
                     ctx.fillStyle = n.color;
                     ctx.shadowColor = n.color;
-                    ctx.shadowBlur = 25;
+                    ctx.shadowBlur = 10;
                     ctx.shadowOffsetX = 0;
                     ctx.shadowOffsetY = 0;
                     ctx.beginPath();
@@ -586,16 +589,13 @@
                         ctx.globalAlpha = 1;
                     }
 
-                    // Label with glow
+                    // Label (no glow — crisp text for readability)
                     ctx.fillStyle = n.color;
                     ctx.font = 'bold 10px monospace';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.shadowColor = n.color;
-                    ctx.shadowBlur = 10;
-                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.9 : 0.85;
+                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.9 : 1;
                     ctx.fillText(n.name, p.x, p.y + r + 18);
-                    ctx.shadowBlur = 0;
                     ctx.globalAlpha = 1;
                 });
 
