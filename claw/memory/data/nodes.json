@@ -182,8 +182,7 @@
     "attributes": {
       "role": "skill",
       "description": "Make every node reachable. Create connections.",
-      "color": "#38bdf8",
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md"
+      "color": "#38bdf8"
     }
   },
   {
