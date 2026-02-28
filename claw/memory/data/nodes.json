@@ -4315,52 +4315,67 @@
   {
     "id": "clawhub-ecosystem",
     "name": "ClawHub Ecosystem",
-    "category": "temporal",
+    "category": "infrastructure",
     "frequency": 1,
     "attributes": {
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "role": "skill marketplace",
+      "description": "NPM-style registry for OpenClaw skills. Search, install, publish agent capabilities."
     },
-    "description": "OpenClaw skills marketplace (npm-like distribution for AI agents)"
+    "description": "OpenClaw skills marketplace (npm-like distribution for AI agents)",
+    "label": "ClawHub Ecosystem"
   },
   {
     "id": "ontology-skill",
     "name": "Ontology Skill (@oswalpalash)",
-    "category": "tool",
+    "category": "capability",
     "frequency": 1,
     "attributes": {
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "role": "skill",
+      "description": "Structured knowledge representation for agents. Enables shared understanding across instances."
     },
-    "description": "Typed knowledge graph for structured agent memory \u2014 85.5k downloads, 178 stars"
+    "description": "Typed knowledge graph for structured agent memory \u2014 85.5k downloads, 178 stars",
+    "label": "Ontology Skill"
   },
   {
     "id": "market-validation",
     "name": "Market Validation",
-    "category": "concept",
+    "category": "process",
     "frequency": 1,
     "attributes": {
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "role": "validation step",
+      "description": "Testing demand before building. Ensures we solve real problems people will pay for."
     },
-    "description": "85.5k downloads for knowledge graphs, 907 stars for self-improving agents \u2014 proves demand for structured memory"
+    "description": "85.5k downloads for knowledge graphs, 907 stars for self-improving agents \u2014 proves demand for structured memory",
+    "label": "Market Validation"
   },
   {
     "id": "sovereign-differentiation",
     "name": "Sovereign Differentiation",
-    "category": "concept",
+    "category": "strategy",
     "frequency": 1,
     "attributes": {
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "role": "competitive advantage",
+      "description": "What makes sovereign apps different: ownership, transparency, no platform tax, Git-backed memory."
     },
-    "description": "Visual neurograph + git-backed memory + consent framework + local inference \u2014 what separates us from cloud ontology skills"
+    "description": "Visual neurograph + git-backed memory + consent framework + local inference \u2014 what separates us from cloud ontology skills",
+    "label": "Sovereign Differentiation"
   },
   {
     "id": "stealth-phase-strategy",
     "name": "Stealth Phase Strategy",
-    "category": "concept",
+    "category": "strategy",
     "frequency": 1,
     "attributes": {
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "role": "go-to-market",
+      "description": "Build quietly, validate privately, launch when ready. Avoid premature exposure."
     },
-    "description": "Keep vision private until financially ready (banks \u2192 private wallet \u2192 cash \u2192 gold), then go public from position of strength"
+    "description": "Keep vision private until financially ready (banks \u2192 private wallet \u2192 cash \u2192 gold), then go public from position of strength",
+    "label": "Stealth Phase Strategy"
   },
   {
     "id": "session-bloat-diagnosis",

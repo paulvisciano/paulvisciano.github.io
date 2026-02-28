@@ -3817,7 +3817,7 @@
   },
   {
     "source": "stealth-phase-strategy",
-    "target": "security",
+    "target": "airgapped-security",
     "weight": 1
   },
   {
