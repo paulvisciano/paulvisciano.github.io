@@ -42,24 +42,6 @@
             </button>
             <div id="filter-list" class="filter-list accordion-body" role="region" aria-label="Node list by category"></div>
         </div>
-        <div class="filter-section">
-            <button type="button" class="collapsible-trigger" id="info-toggle" aria-expanded="false" aria-controls="info-body" data-accordion-body="info-body">
-                <span>Info</span>
-                <span id="info-chevron">▼</span>
-            </button>
-            <div id="info-body" class="collapsible-body accordion-body accordion-body-detail" role="region" aria-label="Node details">
-                <div id="detailPanel" class="is-empty">
-                    <h3>Info</h3>
-                    <div id="nodeDetails" class="detail-inner">
-                        <p id="detailName" style="color: #ffff99; font-weight: bold; margin-bottom: 4px;"></p>
-                        <p id="detailType" style="color: #00ffff;"></p>
-                        <p id="detailDesc" style="color: #aaa; font-style: italic; margin: 6px 0 8px 0;"></p>
-                        <p style="color: #00ffff; font-weight: bold; margin-bottom: 4px;">Connected to</p>
-                        <div id="detailConnections" style="font-size: 9px; color: #888;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
         <div class="filter-section">
             <button type="button" class="collapsible-trigger" id="actions-toggle" aria-expanded="false" aria-controls="actions-body" data-accordion-body="actions-body">
@@ -70,7 +52,6 @@
                 <div class="panel-buttons">
                     <button class="primary" id="share-memory-btn" type="button">⎘ Share</button>
                     <button class="primary" onclick="walk()">⚡ Random Pulse</button>
-                    <button class="primary" id="full-context-btn" type="button" disabled title="View Layer 2 source document (local only)">📄 Full Context</button>
                     <button class="primary" onclick="clearSelection()">✕ Clear</button>
                 </div>
             </div>
@@ -105,32 +86,8 @@
     <canvas id="canvas"></canvas>
     <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
     
-    <!-- Mobile bottom sheet: scrim (tap to close) + sheet -->
-    <div id="drawerScrim" class="drawer-scrim" aria-hidden="true"></div>
-    <div id="bottomDrawer" class="bottom-drawer" role="dialog" aria-label="Node details">
-        <div class="drawer-header">
-            <div class="drawer-handle" aria-hidden="true"></div>
-            <button type="button" id="drawer-toggle" class="drawer-toggle-btn" aria-label="Open details">▲</button>
-        </div>
-        <div id="drawerFilters" class="drawer-filters" aria-hidden="true">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="today">Today</button>
-            <button class="filter-btn" data-filter="people">People</button>
-            <button class="filter-btn" data-filter="locations">Locations</button>
-            <button class="filter-btn" data-filter="activities">Activities</button>
-            <button class="filter-btn" data-filter="temporal">Temporal</button>
-            <button class="filter-btn" data-filter="memorylinks">Memory links</button>
-        </div>
-        <div id="drawerContent" class="drawer-content">
-            <div id="drawerDetails"></div>
-        </div>
-    </div>
-
-    <div style="position: fixed; bottom: 12px; left: 12px; font-size: 10px; color: #94a3b8; z-index: 20;">
-        <div style="font-size: 9px; color: #64748b; font-family: monospace; word-break: break-all; max-width: 120px;">
-            <span style="color: #475569;">hash:</span> <span id="fingerprint-hash">—</span>
-        </div>
-    </div>
+    <div id="neural-graph-drawer-mount"></div>
+    <script src="../shared/neural-graph-drawer.js"></script>
 
     <div id="share-modal-overlay" class="share-modal-overlay" aria-hidden="true">
         <div class="share-modal" role="dialog" aria-labelledby="share-modal-title">
@@ -170,18 +127,58 @@
     </script>
     <script src="../shared/neural-graph.js"></script>
     <script>
-        // Load and display fingerprint hash
+        // Load and display fingerprint + date from this memory's JSON (desktop overlay + mobile drawer)
         (async () => {
             const hashElement = document.getElementById('fingerprint-hash');
-            try {
-                const response = await fetch('./data/fingerprint.json');
-                const fingerprint = await response.json();
-                if (hashElement) {
-                    hashElement.textContent = fingerprint.hash.substring(0, 16) + '…';
-                    hashElement.title = fingerprint.hash;
+            const drawerHashEl = document.getElementById('drawer-fingerprint-hash');
+            const mvEl = document.getElementById('memory-version');
+            const drawerMv = document.getElementById('drawer-memory-version');
+            const setHash = (el, text, full) => { if (el) { el.textContent = text; el.title = full || text; } };
+            const setDate = (text) => {
+                const t = (text || '—').trim();
+                if (mvEl) mvEl.textContent = t;
+                if (drawerMv) drawerMv.textContent = t;
+            };
+            const copyHash = (el) => {
+                if (!el) return;
+                const fullHash = el.title || el.textContent;
+                if (fullHash && fullHash !== '—') {
+                    navigator.clipboard.writeText(fullHash).then(() => {
+                        const t = el.textContent;
+                        el.textContent = 'Copied!';
+                        el.style.color = '#22c55e';
+                        setTimeout(() => { el.textContent = t; el.style.color = ''; }, 1200);
+                    }).catch(() => {});
                 }
+            };
+            const countEl = document.getElementById('drawer-neurons-synapses');
+            const setCount = (n, s) => {
+                if (!countEl) return;
+                if (n != null || s != null) countEl.textContent = (n != null ? n : '—') + ' neurons · ' + (s != null ? s : '—') + ' synapses';
+                else countEl.textContent = '—';
+            };
+            try {
+                let response = await fetch('./fingerprint.json');
+                if (!response.ok) response = await fetch('./data/fingerprint.json');
+                const fingerprint = await response.json();
+                const fullHash = fingerprint.hash || fingerprint.masterHash || '';
+                setHash(hashElement, fullHash || '—', fullHash || undefined);
+                setHash(drawerHashEl, fullHash || '—', fullHash || undefined);
+                if (fingerprint.lastSynced) setDate(fingerprint.lastSynced);
+                else {
+                    try {
+                        const vRes = await fetch('./memory-version.json');
+                        if (vRes.ok) {
+                            const v = await vRes.json();
+                            setDate(v.last_updated || v.timestamp || v.version || '—');
+                        } else setDate('—');
+                    } catch (_) { setDate('—'); }
+                }
+                setCount(fingerprint.neurons, fingerprint.synapses);
             } catch (e) {
                 console.log('Could not load fingerprint:', e.message);
+                setDate('—');
+                setCount(null, null);
             }
             if (hashElement) {
                 hashElement.addEventListener('dblclick', () => {
@@ -209,6 +206,7 @@
                     }
                 });
             }
+            if (drawerHashEl) drawerHashEl.addEventListener('dblclick', () => copyHash(drawerHashEl));
         })();
     </script>
     <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->

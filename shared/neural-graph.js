@@ -26,7 +26,54 @@
         }
 
         resizeCanvas();
-        panelToggle.addEventListener('click', togglePanel);
+        if (panelToggle) panelToggle.addEventListener('click', togglePanel);
+
+        // Inline node popover (replaces side-panel node info)
+        let nodePopoverEl = null;
+        function getNodePopover() {
+            if (nodePopoverEl) return nodePopoverEl;
+            const pop = document.createElement('div');
+            pop.id = 'node-popover';
+            pop.setAttribute('role', 'dialog');
+            pop.setAttribute('aria-labelledby', 'node-popover-title');
+            pop.className = 'node-popover';
+            pop.innerHTML = '<div class="node-popover-inner"><div id="node-popover-content"></div></div>';
+            const style = document.createElement('style');
+            style.textContent = `
+                .node-popover { position: fixed; z-index: 20; display: none; max-width: min(320px, calc(100vw - 24px)); pointer-events: auto; }
+                .node-popover.is-open { display: block; }
+                .node-popover-inner { background: rgba(10, 17, 40, 0.98); border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 12px; padding: 14px 16px; font-size: 11px; font-family: monospace; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 255, 0.15); }
+                .node-popover-inner h3 { margin: 0 0 8px 0; color: #00ffff; font-size: 12px; }
+                .node-popover-inner .node-popover-name { color: #ffff99; font-weight: bold; margin-bottom: 4px; }
+                .node-popover-inner .node-popover-type { color: #00ffff; margin: 4px 0; }
+                .node-popover-inner .node-popover-desc { color: #aaa; font-style: italic; margin: 6px 0 8px 0; line-height: 1.5; }
+                .node-popover-inner .node-popover-connections-heading { color: #00ffff; font-weight: bold; margin: 8px 0 4px 0; }
+                .node-popover-inner .node-popover-connections { font-size: 9px; color: #888; }
+                .node-popover-inner .node-popover-actions { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+                .node-popover-inner .node-popover-actions button { padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; border: none; font-family: inherit; }
+                .node-popover-inner .node-popover-close { background: rgba(255,255,255,0.1); color: #94a3b8; }
+                .node-popover-inner .node-popover-close:hover { background: rgba(255,255,255,0.2); color: #fff; }
+                .node-popover-inner .node-popover-full-context { background: linear-gradient(135deg, #0088ff, #00ffff); color: #000; }
+                .node-popover-inner .node-popover-full-context:hover:not(:disabled) { filter: brightness(1.1); }
+                .node-popover-inner .node-popover-full-context:disabled { opacity: 0.5; cursor: not-allowed; }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(pop);
+            nodePopoverEl = pop;
+            return pop;
+        }
+        function positionPopover(pop, screenX, screenY) {
+            const rect = pop.getBoundingClientRect();
+            const pad = 12;
+            let left = screenX - rect.width / 2;
+            let top = screenY - rect.height - 20;
+            if (left < pad) left = pad;
+            if (left + rect.width > window.innerWidth - pad) left = window.innerWidth - rect.width - pad;
+            if (top < pad) top = screenY + 24;
+            if (top + rect.height > window.innerHeight - pad) top = window.innerHeight - rect.height - pad;
+            pop.style.left = left + 'px';
+            pop.style.top = top + 'px';
+        }
 
         window.addEventListener('resize', function() {
             resizeCanvas();
@@ -553,6 +600,7 @@
             if (selected !== null && nodes[selected] && !nodePassesFilter(nodes[selected])) {
                 selected = null;
                 showNodeDetails(null);
+                showNodeDetailsInDrawer(null);
                 window.location.hash = '';
             }
             if (filter === 'today') {
@@ -579,9 +627,11 @@
             });
         });
         
-        // Mobile drawer: open/close via button only (no swipe)
+        // Mobile drawer: open/close via button or drag on handle
         let drawerOpen = false;
+        let drawerDragJustEnded = false;
         const drawer = document.getElementById('bottomDrawer');
+        const drawerHeader = drawer ? drawer.querySelector('.drawer-header') : null;
         
         function setDrawerOpen(open) {
             drawerOpen = open;
@@ -603,36 +653,69 @@
             }
         }
         
-        document.getElementById('drawer-toggle').addEventListener('click', () => {
+        if (drawerHeader && window.innerWidth <= 768) {
+            const DRAG_THRESHOLD = 48;
+            let dragStartY = 0;
+            let dragStartOpen = false;
+            let isDragging = false;
+            function getY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
+            function onDragStart(e) {
+                if (window.innerWidth > 768) return;
+                dragStartY = getY(e);
+                dragStartOpen = drawerOpen;
+                isDragging = false;
+            }
+            function onDragMove(e) {
+                if (window.innerWidth > 768) return;
+                const dy = getY(e) - dragStartY;
+                if (!isDragging && Math.abs(dy) > 10) isDragging = true;
+                if (isDragging && e.cancelable) e.preventDefault();
+            }
+            function onDragEnd(e) {
+                if (window.innerWidth > 768) return;
+                const endY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+                const dy = endY - dragStartY;
+                if (isDragging) {
+                    drawerDragJustEnded = true;
+                    setTimeout(() => { drawerDragJustEnded = false; }, 300);
+                    if (dy > DRAG_THRESHOLD && dragStartOpen) setDrawerOpen(false);
+                    else if (dy < -DRAG_THRESHOLD && !dragStartOpen) setDrawerOpen(true);
+                }
+                isDragging = false;
+            }
+            drawerHeader.addEventListener('touchstart', onDragStart, { passive: true });
+            drawerHeader.addEventListener('touchmove', onDragMove, { passive: false });
+            drawerHeader.addEventListener('touchend', onDragEnd, { passive: true });
+            drawerHeader.addEventListener('mousedown', onDragStart);
+            document.addEventListener('mousemove', function move(e) {
+                if (!isDragging) return;
+                onDragMove(e);
+            });
+            document.addEventListener('mouseup', function up(e) {
+                if (dragStartY !== 0) { onDragEnd(e); dragStartY = 0; }
+            });
+        }
+        
+        document.getElementById('drawer-toggle')?.addEventListener('click', (e) => {
             if (window.innerWidth > 768) return;
+            if (drawerDragJustEnded) return;
             const willOpen = !drawerOpen;
             setDrawerOpen(willOpen);
-            if (willOpen && selected !== null && nodes[selected]) showNodeDetailsInDrawer(nodes[selected]);
+            if (willOpen) showNodeDetailsInDrawer(selected !== null && nodes[selected] ? nodes[selected] : null);
         });
         document.getElementById('drawerScrim').addEventListener('click', () => {
             if (window.innerWidth > 768) return;
             setDrawerOpen(false);
         });
-        
-        // Filter buttons in drawer (setActiveFilter keeps bar + drawer in sync)
-        document.querySelectorAll('#drawerFilters .filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => setActiveFilter(btn.dataset.filter));
-        });
 
         canvas.addEventListener('click', e => {
             if (didDrag) { didDrag = false; return; }
             if (hitTestNode(e.clientX, e.clientY)) {
-                // Update URL hash for deep linking; on mobile open drawer for non-memory-ref nodes (memory-ref opens sidebar in hitTestNode)
                 if (selected !== null) {
-                    const selectedNode = nodes[selected];
-                    window.location.hash = selectedNode.idKey;
-                    if (window.innerWidth <= 768 && !selectedNode.isMemoryRef) {
-                        setDrawerOpen(true);
-                        showNodeDetailsInDrawer(selectedNode);
-                    }
+                    window.location.hash = nodes[selected].idKey;
+                    // Node details now show in inline popover (desktop and mobile)
                 }
             } else {
-                // Click on empty space — same as Clear button
                 clearSelection();
             }
         });
@@ -706,10 +789,7 @@
                         openMemoryLinkSidebar(node);
                     } else {
                         showNodeDetails(node);
-                        if (window.innerWidth <= 768) {
-                            setDrawerOpen(true);
-                            showNodeDetailsInDrawer(node);
-                        }
+                        if (window.innerWidth <= 768) showNodeDetailsInDrawer(node);
                     }
                 }
             }
@@ -721,15 +801,13 @@
         // On load: hash selects node by id (e.g. #paul), no hash = random node
         loadGraphData().then(() => {
             if (window.location.hash) handleHashNavigation();
-            if (selected === null && nodes.length > 0) {
-                selected = Math.floor(Math.random() * nodes.length);
-                showNodeDetails(nodes[selected]);
-            }
+            // No random node selection on load — popover only appears when user clicks a node
         });
 
         window.clearSelection = () => {
             selected = null;
             showNodeDetails(null);
+            showNodeDetailsInDrawer(null);
             window.location.hash = '';
         };
         
@@ -759,68 +837,66 @@
             }
         }
 
-        function showNodeDetails(node) {
-            const panel = document.getElementById('detailPanel');
-            const detailName = document.getElementById('detailName');
-            const detailType = document.getElementById('detailType');
-            const detailDesc = document.getElementById('detailDesc');
-            const detailConnections = document.getElementById('detailConnections');
-            
-            const fullContextBtn = document.getElementById('full-context-btn');
-            if (fullContextBtn) {
-                fullContextBtn.disabled = !node || !node.sourceDocument;
-                fullContextBtn.setAttribute('aria-label', node && node.sourceDocument ? 'View full context: ' + node.sourceDocument : 'Select a node with a source document');
-            }
-            if (!node) {
-                panel.classList.add('is-empty');
-                detailName.textContent = '';
-                detailType.textContent = '';
-                detailDesc.textContent = '';
-                detailConnections.innerHTML = '';
-                return;
-            }
-            
-            panel.classList.remove('is-empty');
-            
-            // Check if this is a person node with character profile
+        function buildNodeDetailHtml(node) {
+            let nameHtml, typeText, descText, connectionsHtml;
             if (node.type === 'person' && characterProfiles[node.idKey]) {
                 const char = characterProfiles[node.idKey];
-                detailName.innerHTML = `<img src="${char.avatar}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 12px;" alt="${char.name}">
-                                        <span style="color: #fbbf24; font-weight: bold;">${char.name}</span>`;
-                detailType.textContent = `${char.role}`;
-                detailDesc.textContent = char.bio;
-                
-                // Add episode links if available
-                let connectionHTML = '';
+                nameHtml = `<img src="${char.avatar}" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 8px;" alt="${char.name}"><span style="color: #fbbf24; font-weight: bold;">${escapeHtml(char.name)}</span>`;
+                typeText = char.role || '';
+                descText = char.bio || '';
                 if (char.episodes && char.episodes.length > 0) {
-                    connectionHTML += '<p style="color: #00ffff; font-weight: bold; margin-top: 12px;">Episodes:</p>';
-                    connectionHTML += char.episodes.map(ep => 
-                        `<div style="margin: 4px 0; color: #fbbf24; font-size: 10px;">${ep}</div>`
-                    ).join('');
+                    connectionsHtml = char.episodes.map(ep => `<div style="margin: 4px 0; color: #fbbf24; font-size: 10px;">${escapeHtml(ep)}</div>`).join('');
+                } else {
+                    connectionsHtml = '<div style="color: #666; font-size: 10px;">No episodes linked</div>';
                 }
-                detailConnections.innerHTML = connectionHTML || '<div style="color: #666; font-size: 10px;">No episodes linked</div>';
             } else {
-                // Standard node display
-                detailName.textContent = node.name;
-                detailType.textContent = `Type: ${node.type.charAt(0).toUpperCase() + node.type.slice(1)}`;
-                detailDesc.textContent = node.desc;
-                
-                // Find connected nodes
+                nameHtml = escapeHtml(node.name);
+                typeText = `Type: ${(node.type || '').charAt(0).toUpperCase() + (node.type || '').slice(1)}`;
+                descText = node.desc || '';
                 const connected = [];
                 edges.forEach(e => {
                     if (e.from === node.id) {
                         const target = nodes[e.to];
-                        connected.push(`→ ${target.name} (${target.type})`);
+                        if (target) connected.push(`→ ${escapeHtml(target.name)} (${target.type})`);
                     } else if (e.to === node.id) {
                         const source = nodes[e.from];
-                        connected.push(`← ${source.name} (${source.type})`);
+                        if (source) connected.push(`← ${escapeHtml(source.name)} (${source.type})`);
                     }
                 });
-                
-                detailConnections.innerHTML = connected.length > 0 
+                connectionsHtml = connected.length > 0
                     ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
                     : '<div style="color: #666;">No connections</div>';
             }
+            const fullContextDisabled = !node.sourceDocument;
+            const fullContextBtn = `<button type="button" class="node-popover-full-context" ${fullContextDisabled ? 'disabled' : ''} title="${node.sourceDocument ? 'View Layer 2 source document' : 'No source document'}">📄 Full Context</button>`;
+            return `
+                <h3 id="node-popover-title">Info</h3>
+                <div class="node-popover-name">${nameHtml}</div>
+                <p class="node-popover-type">${escapeHtml(typeText)}</p>
+                <p class="node-popover-desc">${escapeHtml(descText)}</p>
+                <p class="node-popover-connections-heading">Connected to</p>
+                <div class="node-popover-connections">${connectionsHtml}</div>
+                <div class="node-popover-actions">
+                    <button type="button" class="node-popover-close" aria-label="Close">✕ Close</button>
+                    ${fullContextBtn}
+                </div>`;
+        }
+
+        function showNodeDetails(node) {
+            const pop = getNodePopover();
+            const content = pop.querySelector('#node-popover-content');
+            if (!node) {
+                pop.classList.remove('is-open');
+                if (content) content.innerHTML = '';
+                return;
+            }
+            if (content) content.innerHTML = buildNodeDetailHtml(node);
+            const rect = canvas.getBoundingClientRect();
+            const p = project(node.x, node.y, node.z);
+            const screenX = rect.left + p.x;
+            const screenY = rect.top + p.y;
+            pop.classList.add('is-open');
+            requestAnimationFrame(() => positionPopover(pop, screenX, screenY));
         }
 
         // Memory-link sidebar: created in JS so it works for both memory/ and claw/memory/
@@ -950,7 +1026,6 @@
                 openMemoryLinkSidebar(node);
             } else {
                 showNodeDetails(node);
-                openDrawer();
             }
             window.location.hash = node.idKey;
         };
@@ -960,7 +1035,8 @@
 
         function populateFilterList() {
             const listEl = document.getElementById('filter-list');
-            if (!listEl || nodes.length === 0) return;
+            const drawerListEl = document.getElementById('drawerNodeList');
+            if ((!listEl && !drawerListEl) || nodes.length === 0) return;
             const byCategory = {};
             filterCategoryOrder.forEach(cat => { byCategory[cat] = []; });
             nodes.forEach((n, idx) => {
@@ -970,26 +1046,52 @@
             if (nodes.some(n => n.isMemoryRef)) {
                 byCategory['memoryreference'] = nodes.map((n, idx) => ({ node: n, idx })).filter(({ node }) => node.isMemoryRef);
             }
-            listEl.innerHTML = '';
-            filterCategoryOrder.forEach(cat => {
-                const items = byCategory[cat];
-                if (!items || items.length === 0) return;
-                const label = filterCategoryLabels[cat] || cat;
-                const color = categoryColors[cat] || '#00ffff';
-                const heading = document.createElement('h4');
-                heading.textContent = label;
-                heading.style.color = color;
-                listEl.appendChild(heading);
-                items.forEach(({ node, idx }) => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = 'filter-node';
-                    btn.textContent = node.name;
-                    btn.style.color = color;
-                    btn.addEventListener('click', () => selectNodeByIndex(idx));
-                    listEl.appendChild(btn);
+            function appendCategoryTo(listElement) {
+                if (!listElement) return;
+                filterCategoryOrder.forEach(cat => {
+                    const items = byCategory[cat];
+                    if (!items || items.length === 0) return;
+                    const label = filterCategoryLabels[cat] || cat;
+                    const color = categoryColors[cat] || '#00ffff';
+                    const heading = document.createElement('h4');
+                    heading.textContent = label;
+                    heading.style.color = color;
+                    listElement.appendChild(heading);
+                    items.forEach(({ node, idx }) => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'filter-node';
+                        btn.textContent = node.name;
+                        btn.style.color = color;
+                        btn.addEventListener('click', () => {
+                            selectNodeByIndex(idx);
+                            if (window.innerWidth <= 768) setDrawerOpen(false);
+                        });
+                        listElement.appendChild(btn);
+                    });
                 });
-            });
+            }
+            if (listEl) {
+                listEl.innerHTML = '';
+                appendCategoryTo(listEl);
+            }
+            if (drawerListEl) {
+                drawerListEl.innerHTML = '';
+                appendCategoryTo(drawerListEl);
+            }
+            // Populate drawer legend from CONFIG if the grid exists and is empty (e.g. claw/memory)
+            const drawerLegend = document.getElementById('drawerLegendGrid');
+            if (drawerLegend && drawerLegend.children.length === 0 && CONFIG.filterCategoryLabels) {
+                const order = CONFIG.filterCategoryOrder || filterCategoryOrder;
+                order.forEach(cat => {
+                    const label = (CONFIG.filterCategoryLabels || filterCategoryLabels)[cat] || cat;
+                    const color = categoryColors[cat] || '#00ffff';
+                    const item = document.createElement('div');
+                    item.className = 'legend-item';
+                    item.innerHTML = `<div class="legend-dot" style="background: ${color}; box-shadow: 0 0 6px ${color};"></div><span style="color: ${color};">${label}</span>`;
+                    drawerLegend.appendChild(item);
+                });
+            }
         }
 
         // Accordion: only one section open at a time
@@ -1053,6 +1155,7 @@
                         openMemoryLinkSidebar(selNode);
                     } else {
                         showNodeDetails(selNode);
+                        if (window.innerWidth <= 768 && !selNode) showNodeDetailsInDrawer(null);
                     }
                     window.location.hash = selected !== null ? nodes[selected].idKey : '';
                     return true;
@@ -1134,13 +1237,8 @@
                 openMemoryLinkSidebar(node);
             } else {
                 showNodeDetails(node);
-                if (window.innerWidth <= 768) {
-                    setDrawerOpen(true);
-                    showNodeDetailsInDrawer(node);
-                }
             }
             window.location.hash = node.idKey;
-            openDrawer();
         };
 
         window.reset = () => {
@@ -1155,7 +1253,9 @@
 
         const liveUrl = CONFIG.liveUrl || 'https://paulvisciano.github.io/memory/';
         let fingerprintData = null;
-        fetch('./fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {});
+        fetch('./fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {
+            fetch('./data/fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {});
+        });
         function isLocalhost() {
             const h = window.location.hostname;
             return h === 'localhost' || h === '127.0.0.1';
@@ -1169,7 +1269,7 @@
             const url = isLocalhost() ? liveUrl : currentUrl;
             const title = CONFIG.shareTitle || "Neural Mind";
             const shortBoot = CONFIG.shareShortBoot || "Interactive neural graph. The memory is alive.";
-            const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
+            const fingerprint = (fingerprintData && (fingerprintData.hash || fingerprintData.masterHash)) ? (fingerprintData.hash || fingerprintData.masterHash) : '…';
             const verifyUrl = (fingerprintData && fingerprintData.verifyUrl) ? fingerprintData.verifyUrl : (CONFIG.shareVerifyUrlDefault || 'paulvisciano.github.io/memory/BOOT.md');
             const shareHeading = CONFIG.shareHeading || 'Neural Mind';
             const loadLabel = CONFIG.shareLoadMemoryLabel || "Load memory at the start of a new session";
@@ -1194,7 +1294,7 @@
             const { title, text, url, lastSync, n, s, shortBoot, verifyUrl } = getSharePayload();
             const overlay = document.getElementById('share-modal-overlay');
             const preview = document.getElementById('share-preview');
-            const fingerprint = (fingerprintData && fingerprintData.masterHash) ? fingerprintData.masterHash : '…';
+            const fingerprint = (fingerprintData && (fingerprintData.hash || fingerprintData.masterHash)) ? (fingerprintData.hash || fingerprintData.masterHash) : '…';
             const verifyUrlVal = verifyUrl || (fingerprintData && fingerprintData.verifyUrl) || CONFIG.shareVerifyUrlDefault || 'paulvisciano.github.io/memory/BOOT.md';
             const verifyHref = verifyUrlVal.startsWith('http') ? verifyUrlVal : 'https://' + verifyUrlVal;
             const shareHeading = CONFIG.shareHeading || 'Neural Mind';
@@ -1248,19 +1348,19 @@
             }
         });
         document.getElementById('share-memory-btn').addEventListener('click', shareMemory);
+        document.getElementById('drawer-share-btn')?.addEventListener('click', shareMemory);
+        document.getElementById('drawer-walk-btn')?.addEventListener('click', () => { walk(); if (window.innerWidth <= 768 && selected !== null && nodes[selected]) showNodeDetailsInDrawer(nodes[selected]); });
+        document.getElementById('drawer-clear-btn')?.addEventListener('click', () => { clearSelection(); showNodeDetailsInDrawer(null); });
 
-        document.getElementById('full-context-btn').addEventListener('click', function openFullContext() {
+        function openFullContext() {
             if (selected === null || !nodes[selected]) return;
             const node = nodes[selected];
-            if (!node.sourceDocument) return;
             const pathOnDisk = node.sourceDocument;
-            
-            // Handle GitHub URLs
+            if (typeof pathOnDisk !== 'string' || !pathOnDisk) return;
             if (pathOnDisk.startsWith('https://')) {
                 fetch(pathOnDisk)
                     .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
                     .then(md => {
-                        // Use same modal popup as local files for consistency
                         const pre = document.createElement('pre');
                         pre.style.cssText = 'white-space: pre-wrap; max-height: 70vh; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0;';
                         pre.textContent = md;
@@ -1278,15 +1378,13 @@
                     .catch(err => alert('Error loading: ' + err.message));
                 return;
             }
-            
-            // Local file behavior
             const msg = 'File on disk (relative to project root):\n\n' + pathOnDisk + '\n\nIn Cursor: Cmd+P (or Ctrl+P) and paste this path to open.';
             if (window.location.protocol === 'file:' || window.location.hostname === 'paulvisciano.github.io') {
                 console.info('Full Context (local only):', pathOnDisk);
                 alert(msg);
                 return;
             }
-            const fetchUrl = (CONFIG.getFullContextFetchUrl && CONFIG.getFullContextFetchUrl(pathOnDisk)) || (pathOnDisk.startsWith('memory/') ? pathOnDisk.slice(7) : pathOnDisk);
+            const fetchUrl = (CONFIG.getFullContextFetchUrl && CONFIG.getFullContextFetchUrl(pathOnDisk)) || (typeof pathOnDisk === 'string' && pathOnDisk.startsWith('memory/') ? pathOnDisk.slice(7) : pathOnDisk);
             fetch(fetchUrl)
                 .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
                 .then(md => {
@@ -1305,6 +1403,11 @@
                     document.body.appendChild(d);
                 })
                 .catch(() => alert(msg));
+        }
+        document.body.addEventListener('click', function(e) {
+            if (e.target.closest('.node-popover-close')) { clearSelection(); return; }
+            const fc = e.target.closest('.node-popover-full-context');
+            if (fc && !fc.disabled) { openFullContext(); return; }
         });
 
         // Start rendering immediately (will display as data loads)
