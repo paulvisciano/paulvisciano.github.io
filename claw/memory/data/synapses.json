@@ -4004,13 +4004,6 @@
     "label": "works with"
   },
   {
-    "source": "openclaw-memory-flush",
-    "target": "feb-28-2026-session-bloat-debugging",
-    "weight": 1.0,
-    "type": "temporal",
-    "label": "learned in"
-  },
-  {
     "source": "lean-into-not-fight",
     "target": "hybrid-architecture-decision",
     "weight": 1.0,
@@ -4044,5 +4037,26 @@
     "weight": 0.8,
     "type": "relates",
     "label": "proves"
+  },
+  {
+    "source": "openclaw-memory-flush",
+    "target": "march-1-2026-memory-flush-integration",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "lean-into-not-fight",
+    "target": "march-1-2026-memory-flush-integration",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "redundant-memory-protection",
+    "target": "march-1-2026-memory-flush-integration",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
   }
 ]

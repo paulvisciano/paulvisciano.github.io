@@ -4552,5 +4552,23 @@
       ],
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
     }
+  },
+  {
+    "id": "march-1-2026-memory-flush-integration",
+    "label": "March 1, 2026 \u2014 Memory Flush Integration",
+    "category": "temporal",
+    "frequency": 100,
+    "moments": [],
+    "attributes": {
+      "role": "temporal-anchor",
+      "description": "Late night session: OpenClaw memory flush redirected to Jarvis paths. Philosophy: Lean into OpenClaw, don't fight it.",
+      "color": "#fbbf24",
+      "date": "2026-03-01",
+      "timeRange": "00:10 - 00:19 AM GMT+7",
+      "keyDecisions": [
+        "Redirect memory flush to Jarvis paths",
+        "Lean into OpenClaw philosophy established"
+      ]
+    }
   }
 ]
