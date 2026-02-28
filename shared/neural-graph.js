@@ -73,6 +73,54 @@
             pop.style.bottom = pad + 'px';
         }
 
+        // Mobile-only: modal for node details (drawer stays for navigation + actions)
+        let nodeDetailsModalEl = null;
+        function getNodeDetailsModal() {
+            if (nodeDetailsModalEl) return nodeDetailsModalEl;
+            const wrap = document.createElement('div');
+            wrap.id = 'node-details-modal';
+            wrap.setAttribute('role', 'dialog');
+            wrap.setAttribute('aria-labelledby', 'node-details-modal-title');
+            wrap.className = 'node-details-modal';
+            wrap.innerHTML = '<div class="node-details-modal-scrim" aria-hidden="true"></div><div class="node-details-modal-content node-popover-inner"><div id="node-details-modal-body"></div></div>';
+            const style = document.createElement('style');
+            style.textContent = `
+                .node-details-modal { position: fixed; inset: 0; z-index: 25; display: none; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; }
+                .node-details-modal.is-open { display: flex; }
+                .node-details-modal-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+                .node-details-modal-content { position: relative; max-width: 100%; max-height: 85vh; overflow-y: auto; width: 100%; background: rgba(10, 17, 40, 0.98); border: 2px solid rgba(0, 255, 255, 0.5); border-radius: 12px; padding: 14px 16px; font-size: 11px; font-family: monospace; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 255, 0.15); }
+                .node-details-modal-content .node-popover-name { color: #ffff99; font-weight: bold; margin-bottom: 4px; }
+                .node-details-modal-content .node-popover-type { color: #00ffff; margin: 4px 0; }
+                .node-details-modal-content .node-popover-desc { color: #aaa; font-style: italic; margin: 6px 0 8px 0; line-height: 1.5; }
+                .node-details-modal-content .node-popover-connections-heading { color: #00ffff; font-weight: bold; margin: 8px 0 4px 0; }
+                .node-details-modal-content .node-popover-connections { font-size: 9px; color: #888; }
+                .node-details-modal-content .node-popover-actions { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+                .node-details-modal-content .node-popover-actions button { padding: 8px 14px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; border: none; font-family: inherit; }
+                .node-details-modal-content .node-popover-close { background: rgba(255,255,255,0.1); color: #94a3b8; }
+                .node-details-modal-content .node-popover-full-context { background: linear-gradient(135deg, #0088ff, #00ffff); color: #000; }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(wrap);
+            wrap.querySelector('.node-details-modal-scrim').addEventListener('click', () => showNodeDetailsModal(null));
+            nodeDetailsModalEl = wrap;
+            return wrap;
+        }
+        function showNodeDetailsModal(node) {
+            const modal = getNodeDetailsModal();
+            const body = modal.querySelector('#node-details-modal-body');
+            if (!node) {
+                modal.classList.remove('is-open');
+                modal.setAttribute('aria-hidden', 'true');
+                if (body) body.innerHTML = '';
+                return;
+            }
+            if (body) body.innerHTML = buildNodeDetailHtml(node);
+            const titleEl = modal.querySelector('#node-popover-title');
+            if (titleEl) titleEl.id = 'node-details-modal-title';
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
         window.addEventListener('resize', function() {
             resizeCanvas();
         });
@@ -768,17 +816,14 @@
             }
         });
         
-        // Helper: build drawer content from node data (no dependency on hidden #detailPanel).
-        // Fixes mobile Android where reading from display:none panel can leave drawer empty.
-        function showNodeDetailsInDrawer(node) {
+        // Set drawer content only (no side effects). Used for mobile so popover is skipped.
+        function setDrawerContent(node) {
             const content = document.getElementById('drawerDetails');
             if (!content) return;
             if (!node) {
                 content.innerHTML = '<p class="drawer-detail-desc" style="color: rgba(255,255,255,0.6);">Select a node on the graph to see details.</p>';
                 return;
             }
-            // Keep desktop panel in sync for URL/hash and full-context button
-            showNodeDetails(node);
             let nameHtml, typeText, descText, connectionsHtml;
             if (node.type === 'person' && characterProfiles[node.idKey]) {
                 const char = characterProfiles[node.idKey];
@@ -817,6 +862,10 @@
                 <p class="drawer-detail-connections-heading">Connected to</p>
                 <div class="drawer-detail-connections">${connectionsHtml}</div>
             `;
+        }
+        function showNodeDetailsInDrawer(node) {
+            showNodeDetails(node);
+            setDrawerContent(node);
         }
         function escapeHtml(s) {
             if (s == null) return '';
@@ -930,12 +979,20 @@
                 </div>`;
         }
 
+        const MOBILE_BREAKPOINT = 768;
         function showNodeDetails(node) {
             const pop = getNodePopover();
             const content = pop.querySelector('#node-popover-content');
             if (!node) {
                 pop.classList.remove('is-open');
                 if (content) content.innerHTML = '';
+                if (window.innerWidth <= MOBILE_BREAKPOINT) showNodeDetailsModal(null);
+                return;
+            }
+            if (window.innerWidth <= MOBILE_BREAKPOINT) {
+                // Mobile: show modal with node details + Full Context; drawer stays for navigation/actions.
+                if (content) content.innerHTML = buildNodeDetailHtml(node);
+                showNodeDetailsModal(node);
                 return;
             }
             if (content) content.innerHTML = buildNodeDetailHtml(node);
@@ -1207,7 +1264,6 @@
                         openMemoryLinkSidebar(selNode);
                     } else {
                         showNodeDetails(selNode);
-                        if (window.innerWidth <= 768 && !selNode) showNodeDetailsInDrawer(null);
                     }
                     window.location.hash = selected !== null ? nodes[selected].idKey : '';
                     return true;
@@ -1298,7 +1354,6 @@
             } else {
                 showNodeDetails(node);
             }
-            if (window.innerWidth <= 768) showNodeDetailsInDrawer(node);
             window.location.hash = node.idKey;
         };
 
@@ -1423,17 +1478,20 @@
                     .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
                     .then(md => {
                         const pre = document.createElement('pre');
-                        pre.style.cssText = 'white-space: pre-wrap; max-height: 70vh; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0;';
+                        pre.style.cssText = 'white-space: pre-wrap; overflow-wrap: break-word; word-break: break-word; max-width: 100%; width: 100%; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0; box-sizing: border-box;';
                         pre.textContent = md;
                         const d = document.createElement('div');
-                        d.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;';
+                        d.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 20px; box-sizing: border-box; overflow: hidden; min-width: 0;';
                         const closeBtn = document.createElement('button');
                         closeBtn.textContent = 'Close';
                         closeBtn.className = 'primary';
-                        closeBtn.style.marginBottom = '12px';
+                        closeBtn.style.marginTop = '12px';
+                        closeBtn.style.flexShrink = '0';
                         closeBtn.onclick = () => d.remove();
-                        d.appendChild(closeBtn);
                         d.appendChild(pre);
+                        d.appendChild(closeBtn);
+                        pre.style.flex = '1';
+                        pre.style.minHeight = '0';
                         document.body.appendChild(d);
                     })
                     .catch(err => alert('Error loading: ' + err.message));
@@ -1450,23 +1508,33 @@
                 .then(r => r.ok ? r.text() : Promise.reject(new Error(r.statusText)))
                 .then(md => {
                     const pre = document.createElement('pre');
-                    pre.style.cssText = 'white-space: pre-wrap; max-height: 70vh; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0;';
+                    pre.style.cssText = 'white-space: pre-wrap; overflow-wrap: break-word; word-break: break-word; max-width: 100%; width: 100%; overflow: auto; font-size: 12px; text-align: left; padding: 12px; margin: 0; box-sizing: border-box;';
                     pre.textContent = 'File: ' + pathOnDisk + '\n\n' + md;
                     const d = document.createElement('div');
-                    d.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;';
+                    d.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99999; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 20px; box-sizing: border-box; overflow: hidden; min-width: 0;';
                     const closeBtn = document.createElement('button');
                     closeBtn.textContent = 'Close';
                     closeBtn.className = 'primary';
-                    closeBtn.style.marginBottom = '12px';
+                    closeBtn.style.marginTop = '12px';
+                    closeBtn.style.flexShrink = '0';
                     closeBtn.onclick = () => d.remove();
-                    d.appendChild(closeBtn);
                     d.appendChild(pre);
+                    d.appendChild(closeBtn);
+                    pre.style.flex = '1';
+                    pre.style.minHeight = '0';
                     document.body.appendChild(d);
                 })
                 .catch(() => alert(msg));
         }
         document.body.addEventListener('click', function(e) {
-            if (e.target.closest('.node-popover-close')) { clearSelection(); return; }
+            if (e.target.closest('.node-popover-close')) {
+                if (e.target.closest('#node-details-modal')) {
+                    showNodeDetailsModal(null);
+                    return;
+                }
+                clearSelection();
+                return;
+            }
             const fc = e.target.closest('.node-popover-full-context');
             if (fc && !fc.disabled) { openFullContext(); return; }
         });
