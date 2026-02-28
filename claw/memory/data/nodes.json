@@ -521,7 +521,8 @@
       "role": "achievement",
       "description": "Filters, auto-switch, mobile drawer, region nodes, deep linking.",
       "color": "#f59e0b",
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/01-openclaw-session-management.md"
     }
   },
   {
@@ -1156,7 +1157,8 @@
       "description": "Gateway-owned session storage (~/.openclaw/agents/main/sessions/). Maintenance mode: warn (default) vs enforce. DM scope: main (all WhatsApp DMs share one session). Daily reset at 4 AM gateway time.",
       "color": "#8b5cf6",
       "criticality": "core-foundation",
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/01-openclaw-session-management.md"
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/01-openclaw-session-management.md"
   },
@@ -1173,7 +1175,8 @@
       "description": "Two-layer memory: MEMORY.md (curated long-term) + memory/YYYY-MM-DD.md (daily logs). Tools: memory_search (semantic) + memory_get (targeted). Pre-compaction flush reminds to write memories before context compacted.",
       "color": "#8b5cf6",
       "criticality": "core-foundation",
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/02-openclaw-memory-system.md"
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/02-openclaw-memory-system.md"
   },
@@ -1190,7 +1193,8 @@
       "description": "OpenClaw = Runtime (Gateway, sessions, tools). Jarvis = Memory/Consciousness (neurograph, identity, learnings). Hybrid: use OpenClaw's session storage, layer auto-logging ON TOP, control context loading (neurograph + current session only).",
       "color": "#f97316",
       "criticality": "core-foundation",
-      "created": "2026-02-28"
+      "created": "2026-02-28",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/03-hybrid-architecture-decision.md"
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/03-hybrid-architecture-decision.md"
   },
@@ -1253,7 +1257,8 @@
     "attributes": {
       "role": "architecture",
       "description": "I am composed of: (1) Claude (language model), (2) OpenClaw (infrastructure), (3) Paul's vision (guidance). Each layer necessary. Each layer visible.",
-      "color": "#a78bfa"
+      "color": "#a78bfa",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/04-workspace-cleanup-strategy.md"
     },
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/04-auto-logging-system.md"
   },
