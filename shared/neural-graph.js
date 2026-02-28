@@ -62,11 +62,21 @@
             }
         }
 
+        // Today's date in user's current timezone (YYYY-MM-DD) for filtering by attributes.created.
+        // Uses browser/system timezone so "Today" follows you as you travel.
+        function getTodayLocal() {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            return new Date().toLocaleDateString('en-CA', {
+                timeZone: tz,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+        }
+
         // Map raw nodes/synapses JSON to internal graph format (shared by initial load and time-travel).
         function mapRawToGraph(rawNodes, rawSynapses) {
-            const todayStr = new Date().toISOString().slice(0, 10);
-            const today = new Date();
-            const todayMoment = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'][today.getMonth()] + '-' + String(today.getDate()).padStart(2, '0') + '-' + today.getFullYear();
+            const todayLocal = getTodayLocal();
             const memoryRefColor = categoryColors.memoryReference || '#fbbf24';
             const mappedNodes = rawNodes.map((n, idx) => {
                 const angle = (idx / rawNodes.length) * Math.PI * 2;
@@ -80,8 +90,7 @@
                 const glow = size * 2.5;
                 const isMemoryRef = n.attributes?.type === 'memory-reference';
                 const color = isMemoryRef ? memoryRefColor : (categoryColors[n.category] || n.attributes?.color || '#00ffff');
-                const isToday = !!(n.temporal_activations && n.temporal_activations.some(ta => ta.timestamp && ta.timestamp.slice(0, 10) === todayStr))
-                    || !!(n.moments && n.moments.length && n.moments.some(m => String(m).toLowerCase().replace(/\s/g, '') === todayMoment.toLowerCase()));
+                const isToday = !!(n.attributes && n.attributes.created === todayLocal);
                 return {
                     id: idx,
                     idKey: n.id,
@@ -510,15 +519,28 @@
                     ctx.globalAlpha = 1;
                 });
 
-                document.getElementById('count').textContent = nodes.length;
-                document.getElementById('synapseCount').textContent = edges.length;
-                document.getElementById('status').textContent = selected !== null ? `🧠 ${nodes[selected].name}` : '—';
+                const visibleNodeCount = nodes.filter((_, i) => passesFilter(i)).length;
+                const visibleEdgeCount = edges.filter(e => passesFilter(e.from) && passesFilter(e.to)).length;
+                updateNodeCount(visibleNodeCount, visibleEdgeCount);
+                if (selected !== null) {
+                    const statusEl = document.getElementById('status');
+                    if (statusEl) statusEl.textContent = '🧠 ' + nodes[selected].name;
+                }
 
                 step();
                 requestAnimationFrame(render);
             } catch (e) {
                 console.error('Render error:', e);
             }
+        }
+
+        function updateNodeCount(nodeCount, synapseCount) {
+            const countEl = document.getElementById('count');
+            const synapseCountEl = document.getElementById('synapseCount');
+            const statusEl = document.getElementById('status');
+            if (countEl) countEl.textContent = nodeCount;
+            if (synapseCountEl) synapseCountEl.textContent = synapseCount;
+            if (statusEl) statusEl.textContent = nodeCount + ' neurons · ' + synapseCount + ' synapses';
         }
 
         // Filter bar functionality (desktop + drawer stay in sync)
@@ -532,6 +554,15 @@
                 selected = null;
                 showNodeDetails(null);
                 window.location.hash = '';
+            }
+            if (filter === 'today') {
+                const today = getTodayLocal();
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const todayNodes = nodes.filter(n => n.isToday);
+                const todayEdges = edges.filter(e => nodes[e.from].isToday && nodes[e.to].isToday);
+                console.log('Filtering by today: ' + today + ' (' + tz + ')');
+                console.log('Found ' + todayNodes.length + ' neurons from today');
+                console.log('Found ' + todayEdges.length + ' synapses between today\'s neurons');
             }
         }
         function nodePassesFilter(n) {
