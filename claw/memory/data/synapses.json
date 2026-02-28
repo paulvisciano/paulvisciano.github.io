@@ -2813,7 +2813,7 @@
     "target": "consciousness-persistence-feb23",
     "weight": 0.89,
     "type": "leads-to",
-    "description": "Growth (Feb 22) → Persistence test (Feb 23)"
+    "description": "Growth (Feb 22) \u2192 Persistence test (Feb 23)"
   },
   {
     "source": "persistence-not-continuity",
@@ -3834,5 +3834,117 @@
     "source": "market-validation",
     "target": "hybrid-architecture-decision",
     "weight": 1
+  },
+  {
+    "source": "session-bloat-diagnosis",
+    "target": "openclaw-session-management",
+    "weight": 1.0,
+    "type": "discovery",
+    "label": "diagnosed"
+  },
+  {
+    "source": "session-bloat-diagnosis",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.9,
+    "type": "relates",
+    "label": "informs"
+  },
+  {
+    "source": "session-bloat-diagnosis",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "openclaw-four-session-mechanisms",
+    "target": "openclaw-session-management",
+    "weight": 1.0,
+    "type": "component",
+    "label": "describes"
+  },
+  {
+    "source": "openclaw-four-session-mechanisms",
+    "target": "openclaw-memory-system",
+    "weight": 0.9,
+    "type": "component",
+    "label": "includes"
+  },
+  {
+    "source": "openclaw-four-session-mechanisms",
+    "target": "session-bloat-diagnosis",
+    "weight": 1.0,
+    "type": "discovery",
+    "label": "underpins"
+  },
+  {
+    "source": "tool-results-untruncated",
+    "target": "session-bloat-diagnosis",
+    "weight": 1.0,
+    "type": "cause",
+    "label": "causes"
+  },
+  {
+    "source": "tool-results-untruncated",
+    "target": "openclaw-session-management",
+    "weight": 0.8,
+    "type": "relates",
+    "label": "stored in"
+  },
+  {
+    "source": "images-base64-in-sessions",
+    "target": "session-bloat-diagnosis",
+    "weight": 1.0,
+    "type": "cause",
+    "label": "causes"
+  },
+  {
+    "source": "images-base64-in-sessions",
+    "target": "tool-results-untruncated",
+    "weight": 0.7,
+    "type": "relates",
+    "label": "similar to"
+  },
+  {
+    "source": "sessions-are-logs-not-context",
+    "target": "openclaw-session-management",
+    "weight": 1.0,
+    "type": "insight",
+    "label": "clarifies"
+  },
+  {
+    "source": "sessions-are-logs-not-context",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.9,
+    "type": "supports",
+    "label": "validates"
+  },
+  {
+    "source": "sessions-are-logs-not-context",
+    "target": "session-bloat-diagnosis",
+    "weight": 1.0,
+    "type": "insight",
+    "label": "enables fix"
+  },
+  {
+    "source": "maintenance-mode-enforce",
+    "target": "openclaw-session-management",
+    "weight": 1.0,
+    "type": "configuration",
+    "label": "configures"
+  },
+  {
+    "source": "maintenance-mode-enforce",
+    "target": "session-bloat-diagnosis",
+    "weight": 1.0,
+    "type": "solution",
+    "label": "fixes"
+  },
+  {
+    "source": "maintenance-mode-enforce",
+    "target": "deployment-is-real",
+    "weight": 0.6,
+    "type": "principle",
+    "label": "applies"
   }
 ]
