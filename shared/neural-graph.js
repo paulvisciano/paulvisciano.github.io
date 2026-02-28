@@ -65,17 +65,12 @@
             nodePopoverEl = pop;
             return pop;
         }
-        function positionPopover(pop, screenX, screenY) {
-            const rect = pop.getBoundingClientRect();
-            const pad = 12;
-            let left = screenX - rect.width / 2;
-            let top = screenY - rect.height - 20;
-            if (left < pad) left = pad;
-            if (left + rect.width > window.innerWidth - pad) left = window.innerWidth - rect.width - pad;
-            if (top < pad) top = screenY + 24;
-            if (top + rect.height > window.innerHeight - pad) top = window.innerHeight - rect.height - pad;
-            pop.style.left = left + 'px';
-            pop.style.top = top + 'px';
+        function positionPopover(pop) {
+            const pad = 16;
+            pop.style.left = '';
+            pop.style.top = '';
+            pop.style.right = pad + 'px';
+            pop.style.bottom = pad + 'px';
         }
 
         window.addEventListener('resize', function() {
@@ -944,12 +939,8 @@
                 return;
             }
             if (content) content.innerHTML = buildNodeDetailHtml(node);
-            const rect = canvas.getBoundingClientRect();
-            const p = project(node.x, node.y, node.z);
-            const screenX = rect.left + p.x;
-            const screenY = rect.top + p.y;
             pop.classList.add('is-open');
-            requestAnimationFrame(() => positionPopover(pop, screenX, screenY));
+            requestAnimationFrame(() => positionPopover(pop));
         }
 
         // Memory-link sidebar: created in JS so it works for both memory/ and claw/memory/
