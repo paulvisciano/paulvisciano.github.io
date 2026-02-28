@@ -3946,5 +3946,40 @@
     "weight": 0.6,
     "type": "principle",
     "label": "applies"
+  },
+  {
+    "source": "openclaw-four-session-mechanisms",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "tool-results-untruncated",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "images-base64-in-sessions",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "sessions-are-logs-not-context",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
+  },
+  {
+    "source": "maintenance-mode-enforce",
+    "target": "feb-28-2026-session-bloat-debugging",
+    "weight": 1.0,
+    "type": "temporal",
+    "label": "learned in"
   }
 ]
