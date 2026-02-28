@@ -14,7 +14,7 @@
         body { 
 </head>
 <body>
-    <div id="info">
+    <div id="info" class="collapsed">
         <div class="panel-top">
         <div class="panel-top-content">
         <div class="panel-header">
@@ -77,6 +77,8 @@
     <div id="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="today">Today</button>
+        <button class="filter-btn" data-filter="yesterday">Yesterday</button>
+        <button class="filter-btn" data-filter="thisweek">This week</button>
         <button class="filter-btn" data-filter="value">Values</button>
         <button class="filter-btn" data-filter="capability">Capabilities</button>
         <button class="filter-btn" data-filter="foundation">Foundation</button>
@@ -84,7 +86,7 @@
         <button class="filter-btn" data-filter="temporal">Temporal</button>
     </div>
     <canvas id="canvas"></canvas>
-    <button type="button" id="panel-toggle" aria-label="Toggle panel">‹</button>
+    <button type="button" id="panel-toggle" aria-label="Expand panel">‹</button>
     
     <div id="neural-graph-drawer-mount"></div>
     <script src="../../shared/neural-graph-drawer.js"></script>

@@ -6,7 +6,7 @@
         const panelToggle = document.getElementById('panel-toggle');
 
         const PANEL_WIDTH = 240;
-        let panelOpen = true;
+        let panelOpen = false;
 
         function getCanvasWidth() {
             if (window.innerWidth <= 768) return window.innerWidth;
@@ -20,7 +20,7 @@
         function togglePanel() {
             panelOpen = !panelOpen;
             infoPanel.classList.toggle('collapsed', !panelOpen);
-            panelToggle.textContent = panelOpen ? '‹' : '›';
+            panelToggle.textContent = panelOpen ? '›' : '‹';
             panelToggle.setAttribute('aria-label', panelOpen ? 'Collapse panel' : 'Expand panel');
             resizeCanvas();
         }
@@ -109,21 +109,41 @@
             }
         }
 
-        // Today's date in user's current timezone (YYYY-MM-DD) for filtering by attributes.created.
-        // Uses browser/system timezone so "Today" follows you as you travel.
-        function getTodayLocal() {
-            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            return new Date().toLocaleDateString('en-CA', {
-                timeZone: tz,
+        // Date helpers in user's timezone (YYYY-MM-DD) for filtering by attributes.created.
+        const tz = () => Intl.DateTimeFormat().resolvedOptions().timeZone;
+        function toLocalYYYYMMDD(d) {
+            return d.toLocaleDateString('en-CA', {
+                timeZone: tz(),
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'
             });
         }
+        function getTodayLocal() {
+            return toLocalYYYYMMDD(new Date());
+        }
+        function getYesterdayLocal() {
+            const d = new Date();
+            d.setDate(d.getDate() - 1);
+            return toLocalYYYYMMDD(d);
+        }
+        // This week: Monday–Sunday in local timezone.
+        function getThisWeekRange() {
+            const d = new Date();
+            const day = d.getDay();
+            const mondayOffset = day === 0 ? -6 : 1 - day;
+            const start = new Date(d);
+            start.setDate(d.getDate() + mondayOffset);
+            const end = new Date(start);
+            end.setDate(start.getDate() + 6);
+            return { start: toLocalYYYYMMDD(start), end: toLocalYYYYMMDD(end) };
+        }
 
         // Map raw nodes/synapses JSON to internal graph format (shared by initial load and time-travel).
         function mapRawToGraph(rawNodes, rawSynapses) {
             const todayLocal = getTodayLocal();
+            const yesterdayLocal = getYesterdayLocal();
+            const weekRange = getThisWeekRange();
             const memoryRefColor = categoryColors.memoryReference || '#fbbf24';
             const mappedNodes = rawNodes.map((n, idx) => {
                 const angle = (idx / rawNodes.length) * Math.PI * 2;
@@ -137,7 +157,10 @@
                 const glow = size * 2.5;
                 const isMemoryRef = n.attributes?.type === 'memory-reference';
                 const color = isMemoryRef ? memoryRefColor : (categoryColors[n.category] || n.attributes?.color || '#00ffff');
-                const isToday = !!(n.attributes && n.attributes.created === todayLocal);
+                const created = n.attributes?.created || '';
+                const isToday = created === todayLocal;
+                const isYesterday = created === yesterdayLocal;
+                const isThisWeek = created >= weekRange.start && created <= weekRange.end;
                 return {
                     id: idx,
                     idKey: n.id,
@@ -151,6 +174,8 @@
                     freq: n.frequency,
                     desc: n.attributes?.description || '',
                     isToday,
+                    isYesterday,
+                    isThisWeek,
                     sourceDocument: n.sourceDocument || null,
                     isMemoryRef: !!isMemoryRef,
                     target_memory: isMemoryRef ? (n.attributes?.target_memory || '') : undefined,
@@ -411,6 +436,8 @@
                     const n = nodes[nodeIndex];
                     if (currentFilter === 'all') return true;
                     if (currentFilter === 'today') return n.isToday === true;
+                    if (currentFilter === 'yesterday') return n.isYesterday === true;
+                    if (currentFilter === 'thisweek') return n.isThisWeek === true;
                     return ((n.type || '').toLowerCase() === (typeForFilter || '').toLowerCase());
                 };
 
@@ -482,9 +509,11 @@
                     
                     // Filter logic: check if node should be visible
                     if (currentFilter === 'today' && !n.isToday) return;
+                    if (currentFilter === 'yesterday' && !n.isYesterday) return;
+                    if (currentFilter === 'thisweek' && !n.isThisWeek) return;
                     if (currentFilter === 'memorylinks') {
                         if (!n.isMemoryRef) return;
-                    } else if (currentFilter !== 'all' && currentFilter !== 'today') {
+                    } else if (currentFilter !== 'all' && currentFilter !== 'today' && currentFilter !== 'yesterday' && currentFilter !== 'thisweek') {
                         const typeForFilterNode = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
                         if ((n.type || '').toLowerCase() !== (typeForFilterNode || '').toLowerCase()) return;
                     }
@@ -593,15 +622,16 @@
         // Filter bar functionality (desktop + drawer stay in sync)
         // URL sync: ?filter=value so full reload lands on same filter
         const validFilters = () => Array.from(document.querySelectorAll('.filter-btn')).map(b => b.dataset.filter);
+        const defaultFilter = 'today';
         function getFilterFromUrl() {
             const params = new URLSearchParams(window.location.search);
             const f = params.get('filter');
-            if (!f) return 'all';
-            return validFilters().includes(f) ? f : 'all';
+            if (!f) return defaultFilter;
+            return validFilters().includes(f) ? f : defaultFilter;
         }
         function setFilterInUrl(filter) {
             const url = new URL(window.location.href);
-            if (filter === 'all') {
+            if (filter === defaultFilter) {
                 url.searchParams.delete('filter');
             } else {
                 url.searchParams.set('filter', filter);
@@ -621,19 +651,19 @@
                 showNodeDetailsInDrawer(null);
                 window.location.hash = '';
             }
-            if (filter === 'today') {
-                const today = getTodayLocal();
-                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                const todayNodes = nodes.filter(n => n.isToday);
-                const todayEdges = edges.filter(e => nodes[e.from].isToday && nodes[e.to].isToday);
-                console.log('Filtering by today: ' + today + ' (' + tz + ')');
-                console.log('Found ' + todayNodes.length + ' neurons from today');
-                console.log('Found ' + todayEdges.length + ' synapses between today\'s neurons');
+            if (filter === 'today' || filter === 'yesterday' || filter === 'thisweek') {
+                const label = filter === 'today' ? 'today' : filter === 'yesterday' ? 'yesterday' : 'this week';
+                const pred = filter === 'today' ? n => n.isToday : filter === 'yesterday' ? n => n.isYesterday : n => n.isThisWeek;
+                const count = nodes.filter(pred).length;
+                const edgeCount = edges.filter(e => pred(nodes[e.from]) && pred(nodes[e.to])).length;
+                console.log('Filtering by ' + label + ': ' + count + ' neurons, ' + edgeCount + ' synapses');
             }
         }
         function nodePassesFilter(n) {
             if (currentFilter === 'all') return true;
             if (currentFilter === 'today') return n.isToday === true;
+            if (currentFilter === 'yesterday') return n.isYesterday === true;
+            if (currentFilter === 'thisweek') return n.isThisWeek === true;
             if (currentFilter === 'memorylinks') return !!n.isMemoryRef;
             const typeForFilter = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
             return ((n.type || '').toLowerCase() === (typeForFilter || '').toLowerCase());
