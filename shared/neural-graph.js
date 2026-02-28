@@ -484,7 +484,7 @@
                     if (currentFilter === 'today' && !n.isToday) return;
                     if (currentFilter === 'memorylinks') {
                         if (!n.isMemoryRef) return;
-                    } else if (currentFilter !== 'all') {
+                    } else if (currentFilter !== 'all' && currentFilter !== 'today') {
                         const typeForFilterNode = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
                         if ((n.type || '').toLowerCase() !== (typeForFilterNode || '').toLowerCase()) return;
                     }
