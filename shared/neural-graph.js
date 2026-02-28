@@ -578,8 +578,6 @@
 
         canvas.addEventListener('click', e => {
             if (hitTestNode(e.clientX, e.clientY)) {
-                // Node was clicked - switch to "All" filter to show all connections
-                if (currentFilter !== 'all') setActiveFilter('all');
                 // Update URL hash for deep linking; on mobile open drawer for non-memory-ref nodes (memory-ref opens sidebar in hitTestNode)
                 if (selected !== null) {
                     const selectedNode = nodes[selected];
@@ -666,7 +664,6 @@
                             showNodeDetailsInDrawer(node);
                         }
                     }
-                    if (currentFilter !== 'all') setActiveFilter('all');
                 }
             }
         }
