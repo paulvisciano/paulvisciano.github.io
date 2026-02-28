@@ -528,6 +528,18 @@
             document.querySelectorAll('.filter-btn').forEach(b => {
                 b.classList.toggle('active', b.dataset.filter === currentFilter);
             });
+            if (selected !== null && nodes[selected] && !nodePassesFilter(nodes[selected])) {
+                selected = null;
+                showNodeDetails(null);
+                window.location.hash = '';
+            }
+        }
+        function nodePassesFilter(n) {
+            if (currentFilter === 'all') return true;
+            if (currentFilter === 'today') return n.isToday === true;
+            if (currentFilter === 'memorylinks') return !!n.isMemoryRef;
+            const typeForFilter = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
+            return ((n.type || '').toLowerCase() === (typeForFilter || '').toLowerCase());
         }
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1000,6 +1012,7 @@
             const mx = clientX - rect.left;
             const my = clientY - rect.top;
             for (let n of nodes) {
+                if (!nodePassesFilter(n)) continue;
                 const p = project(n.x, n.y, n.z);
                 const d = Math.hypot(p.x - mx, p.y - my);
                 if (d < n.size * p.scale + 25) {
