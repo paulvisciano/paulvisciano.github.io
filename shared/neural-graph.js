@@ -577,6 +577,7 @@
         });
 
         canvas.addEventListener('click', e => {
+            if (didDrag) { didDrag = false; return; }
             if (hitTestNode(e.clientX, e.clientY)) {
                 // Update URL hash for deep linking; on mobile open drawer for non-memory-ref nodes (memory-ref opens sidebar in hitTestNode)
                 if (selected !== null) {
@@ -1061,11 +1062,14 @@
         }, { passive: true });
 
         let drag = null;
+        let didDrag = false;
         canvas.addEventListener('mousedown', e => {
             drag = {x: e.clientX, y: e.clientY};
+            didDrag = false;
         });
         document.addEventListener('mousemove', e => {
             if (drag) {
+                didDrag = true;
                 camera.angle += (e.clientX - drag.x) * 0.012;
                 camera.pitch += (e.clientY - drag.y) * 0.008;
                 camera.pitch = Math.max(-1.2, Math.min(1.2, camera.pitch));
