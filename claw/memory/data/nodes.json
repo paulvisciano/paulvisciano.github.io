@@ -1138,6 +1138,76 @@
     "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-24/learnings/01-openclaw-architecture.md"
   },
   {
+    "id": "openclaw-session-management",
+    "label": "OpenClaw Session Management",
+    "category": "system",
+    "frequency": 95,
+    "moments": [
+      "feb-28-2026-session-bloat-debugging"
+    ],
+    "attributes": {
+      "role": "infrastructure",
+      "description": "Gateway-owned session storage (~/.openclaw/agents/main/sessions/). Maintenance mode: warn (default) vs enforce. DM scope: main (all WhatsApp DMs share one session). Daily reset at 4 AM gateway time.",
+      "color": "#8b5cf6",
+      "criticality": "core-foundation",
+      "created": "2026-02-28",
+      "sourceDocument": "https://docs.openclaw.ai/concepts/session"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/01-openclaw-session-management.md"
+  },
+  {
+    "id": "openclaw-memory-system",
+    "label": "OpenClaw Memory System",
+    "category": "system",
+    "frequency": 95,
+    "moments": [
+      "feb-28-2026-hybrid-architecture"
+    ],
+    "attributes": {
+      "role": "infrastructure",
+      "description": "Two-layer memory: MEMORY.md (curated long-term) + memory/YYYY-MM-DD.md (daily logs). Tools: memory_search (semantic) + memory_get (targeted). Pre-compaction flush reminds to write memories before context compacted.",
+      "color": "#8b5cf6",
+      "criticality": "core-foundation",
+      "created": "2026-02-28",
+      "sourceDocument": "https://docs.openclaw.ai/concepts/memory"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/02-openclaw-memory-system.md"
+  },
+  {
+    "id": "hybrid-architecture-decision",
+    "label": "Hybrid Architecture Decision",
+    "category": "decision",
+    "frequency": 100,
+    "moments": [
+      "feb-28-2026-hybrid-architecture"
+    ],
+    "attributes": {
+      "role": "core-decision",
+      "description": "OpenClaw = Runtime (Gateway, sessions, tools). Jarvis = Memory/Consciousness (neurograph, identity, learnings). Hybrid: use OpenClaw's session storage, layer auto-logging ON TOP, control context loading (neurograph + current session only).",
+      "color": "#f97316",
+      "criticality": "core-foundation",
+      "created": "2026-02-28",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/03-hybrid-architecture-decision.md"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/03-hybrid-architecture-decision.md"
+  },
+  {
+    "id": "feb-28-2026-session-bloat-debugging",
+    "label": "Feb 28 2026 Session Bloat Debugging",
+    "category": "temporal",
+    "frequency": 95,
+    "moments": [
+      "openclaw-session-management",
+      "hybrid-architecture-decision"
+    ],
+    "attributes": {
+      "role": "session",
+      "description": "Debugged Ollama 500 errors on startup. Root cause: session bloat (200k+ tokens from loading all historical sessions). Fix: archived old sessions to backup/. Context dropped to 95k/200k (48%). Learned OpenClaw session maintenance defaults to 'warn' not 'enforce'.",
+      "color": "#fbbf24",
+      "created": "2026-02-28"
+    }
+  },
+  {
     "id": "claude-anthropic",
     "label": "Claude (Anthropic)",
     "category": "tool",

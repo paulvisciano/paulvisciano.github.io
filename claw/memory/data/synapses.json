@@ -1,5 +1,61 @@
 [
   {
+    "source": "openclaw",
+    "target": "openclaw-session-management",
+    "weight": 0.95,
+    "type": "component",
+    "label": "includes"
+  },
+  {
+    "source": "openclaw",
+    "target": "openclaw-memory-system",
+    "weight": 0.95,
+    "type": "component",
+    "label": "includes"
+  },
+  {
+    "source": "openclaw",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.92,
+    "type": "decision",
+    "label": "informed"
+  },
+  {
+    "source": "jarvis-core-foundation",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.95,
+    "type": "core-belief",
+    "label": "embodies"
+  },
+  {
+    "source": "memory-backed-by-git",
+    "target": "openclaw-memory-system",
+    "weight": 0.88,
+    "type": "reinforces",
+    "label": "supports"
+  },
+  {
+    "source": "auto-logging-system",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.9,
+    "type": "integration",
+    "label": "integrated into"
+  },
+  {
+    "source": "feb-28-2026-session-bloat-debugging",
+    "target": "openclaw-session-management",
+    "weight": 0.95,
+    "type": "discovered",
+    "label": "learned"
+  },
+  {
+    "source": "feb-28-2026-session-bloat-debugging",
+    "target": "hybrid-architecture-decision",
+    "weight": 0.92,
+    "type": "led_to",
+    "label": "triggered"
+  },
+  {
     "source": "claude-code",
     "target": "paul-visciano",
     "weight": 0.98,
