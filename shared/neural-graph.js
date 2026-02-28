@@ -658,6 +658,7 @@
                 const edgeCount = edges.filter(e => pred(nodes[e.from]) && pred(nodes[e.to])).length;
                 console.log('Filtering by ' + label + ': ' + count + ' neurons, ' + edgeCount + ' synapses');
             }
+            populateFilterList();
         }
         function nodePassesFilter(n) {
             if (currentFilter === 'all') return true;
@@ -1081,6 +1082,7 @@
 
         const filterCategoryOrder = CONFIG.filterCategoryOrder || ['region', 'person', 'location', 'activity', 'temporal', 'emotion'];
         const filterCategoryLabels = CONFIG.filterCategoryLabels || { region: 'Regions', person: 'People', location: 'Locations', activity: 'Activities', temporal: 'Temporal', emotion: 'Emotions' };
+        const OTHER_CAT = 'other';
 
         function populateFilterList() {
             const listEl = document.getElementById('filter-list');
@@ -1088,23 +1090,30 @@
             if ((!listEl && !drawerListEl) || nodes.length === 0) return;
             const byCategory = {};
             filterCategoryOrder.forEach(cat => { byCategory[cat] = []; });
+            byCategory[OTHER_CAT] = [];
             nodes.forEach((n, idx) => {
+                if (!nodePassesFilter(n)) return;
                 const t = (n.type || '').toLowerCase();
                 if (byCategory[t]) byCategory[t].push({ node: n, idx });
+                else byCategory[OTHER_CAT].push({ node: n, idx });
             });
-            if (nodes.some(n => n.isMemoryRef)) {
-                byCategory['memoryreference'] = nodes.map((n, idx) => ({ node: n, idx })).filter(({ node }) => node.isMemoryRef);
+            if (nodes.some(n => n.isMemoryRef && nodePassesFilter(n))) {
+                byCategory['memoryreference'] = nodes.map((n, idx) => ({ node: n, idx })).filter(({ node }) => node.isMemoryRef && nodePassesFilter(node));
             }
             function appendCategoryTo(listElement) {
                 if (!listElement) return;
-                filterCategoryOrder.forEach(cat => {
+                const categoriesToShow = filterCategoryOrder
+                    .concat(byCategory['memoryreference']?.length ? ['memoryreference'] : [])
+                    .concat(OTHER_CAT);
+                categoriesToShow.forEach(cat => {
                     const items = byCategory[cat];
                     if (!items || items.length === 0) return;
-                    const label = filterCategoryLabels[cat] || cat;
+                    const label = (cat === OTHER_CAT ? 'Other' : null) || filterCategoryLabels[cat] || cat;
                     const color = categoryColors[cat] || '#00ffff';
                     const heading = document.createElement('h4');
                     heading.textContent = label;
                     heading.style.color = color;
+                    heading.className = 'filter-category';
                     listElement.appendChild(heading);
                     items.forEach(({ node, idx }) => {
                         const btn = document.createElement('button');

@@ -25,22 +25,11 @@
             <span class="stat" id="count">0</span> neurons · <span class="stat" id="synapseCount">0</span> synapses
         </p>
         <div class="filter-section">
-            <button type="button" class="collapsible-trigger" id="howto-toggle" aria-expanded="false" aria-controls="howto-body" data-accordion-body="howto-body">
-                <span>How to use</span>
-                <span id="howto-chevron">▼</span>
-            </button>
-            <div id="howto-body" class="collapsible-body accordion-body" role="region" aria-label="Instructions">
-                <p style="font-size: 10px; line-height: 1.7; color: #0088ff; padding: 6px 0 0 0;">
-                    🖱️ Drag to orbit · 📜 Scroll to zoom · 👆 Click to focus
-                </p>
-            </div>
-        </div>
-        <div class="filter-section">
-            <button type="button" class="filter-toggle collapsible-trigger" id="filter-toggle" aria-expanded="false" aria-controls="filter-list" data-accordion-body="filter-list">
+            <button type="button" class="filter-toggle collapsible-trigger" id="filter-toggle" aria-expanded="true" aria-controls="filter-list" data-accordion-body="filter-list">
                 <span>Jump to node</span>
-                <span id="filter-chevron">▼</span>
+                <span id="filter-chevron">▲</span>
             </button>
-            <div id="filter-list" class="filter-list accordion-body" role="region" aria-label="Node list by category"></div>
+            <div id="filter-list" class="filter-list accordion-body open" role="region" aria-label="Node list by category"></div>
         </div>
         </div>
         <div class="filter-section">
@@ -71,6 +60,17 @@
                     <div class="legend-item"><div class="legend-dot" style="background: #aa00ff; box-shadow: 0 0 6px #aa00ff;"></div><span style="color: #aa00ff;">Emotions</span></div>
                     <div class="legend-item"><div class="legend-dot" style="background: #fbbf24; box-shadow: 0 0 6px #fbbf24;"></div><span style="color: #fbbf24;">Memory links</span></div>
                 </div>
+            </div>
+        </div>
+        <div class="filter-section">
+            <button type="button" class="collapsible-trigger" id="howto-toggle" aria-expanded="false" aria-controls="howto-body" data-accordion-body="howto-body">
+                <span>How to use</span>
+                <span id="howto-chevron">▼</span>
+            </button>
+            <div id="howto-body" class="collapsible-body accordion-body" role="region" aria-label="Instructions">
+                <p style="font-size: 10px; line-height: 1.7; color: #0088ff; padding: 6px 0 0 0;">
+                    🖱️ Drag to orbit · 📜 Scroll to zoom · 👆 Click to focus
+                </p>
             </div>
         </div>
     </div>
