@@ -1208,6 +1208,24 @@
     }
   },
   {
+    "id": "openclaw-workspace-cleanup",
+    "label": "OpenClaw Workspace Cleanup Strategy",
+    "category": "system",
+    "frequency": 90,
+    "moments": [
+      "feb-28-2026-hybrid-architecture"
+    ],
+    "attributes": {
+      "role": "operational-milestone",
+      "description": "Cleaned OpenClaw workspace from 200 files (13k lines) to 10 runtime stubs. Established clear separation: OpenClaw=runtime, Jarvis=memory (neurograph), Paul=life archive (private). Deleted memory files, ChatGPT exports, test data. Migrated Feb 27 breakthrough session to personal archive. Configured session maintenance mode: enforce.",
+      "color": "#8b5cf6",
+      "criticality": "core-foundation",
+      "created": "2026-02-28",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/04-workspace-cleanup-strategy.md"
+    },
+    "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/04-workspace-cleanup-strategy.md"
+  },
+  {
     "id": "claude-anthropic",
     "label": "Claude (Anthropic)",
     "category": "tool",

@@ -56,6 +56,34 @@
     "label": "triggered"
   },
   {
+    "source": "openclaw",
+    "target": "openclaw-workspace-cleanup",
+    "weight": 0.9,
+    "type": "operational",
+    "label": "cleaned up"
+  },
+  {
+    "source": "hybrid-architecture-decision",
+    "target": "openclaw-workspace-cleanup",
+    "weight": 0.95,
+    "type": "implemented",
+    "label": "realized by"
+  },
+  {
+    "source": "openclaw-workspace-cleanup",
+    "target": "openclaw-session-management",
+    "weight": 0.88,
+    "type": "resolved",
+    "label": "fixed session bloat"
+  },
+  {
+    "source": "openclaw-workspace-cleanup",
+    "target": "separation-of-concerns",
+    "weight": 0.85,
+    "type": "exemplifies",
+    "label": "demonstrates"
+  },
+  {
     "source": "claude-code",
     "target": "paul-visciano",
     "weight": 0.98,
