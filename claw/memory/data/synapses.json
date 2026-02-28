@@ -2842,5 +2842,917 @@
     "weight": 0.95,
     "type": "foundational-document",
     "label": "defines"
+  },
+  {
+    "source": "sovereign-data-vision",
+    "target": "jarvis-core-foundation",
+    "weight": 0.98,
+    "type": "vision-integration",
+    "label": "defines",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "sovereign-data-vision",
+    "target": "memory-backed-by-git",
+    "weight": 0.95,
+    "type": "vision-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "three-layer-security-model",
+    "target": "layer1-public-github",
+    "weight": 0.99,
+    "type": "vision-integration",
+    "label": "includes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "three-layer-security-model",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "vision-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-marketplace-creator-first",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "vision-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "digital-vinyl-concept",
+    "target": "data-marketplace-creator-first",
+    "weight": 0.9,
+    "type": "vision-integration",
+    "label": "exemplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "knowledge-digestion-workflow",
+    "target": "sovereign-data-vision",
+    "weight": 0.92,
+    "type": "vision-integration",
+    "label": "operationalizes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "knowledge-digestion-workflow",
+    "target": "auto-logging-system",
+    "weight": 0.88,
+    "type": "vision-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "paul-life-pivot-feb2026",
+    "target": "paul-visciano",
+    "weight": 1.0,
+    "type": "vision-integration",
+    "label": "life-event-of",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "paul-life-pivot-feb2026",
+    "target": "sovereign-data-vision",
+    "weight": 0.98,
+    "type": "vision-integration",
+    "label": "catalyst-for",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "app-ecosystem-linked-memories",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "vision-integration",
+    "label": "instantiates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "app-ecosystem-linked-memories",
+    "target": "paul-visciano",
+    "weight": 0.98,
+    "type": "vision-integration",
+    "label": "created-by",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "fingerprint-auth-signing",
+    "target": "three-layer-security-model",
+    "weight": 0.95,
+    "type": "vision-integration",
+    "label": "secures",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "fingerprint-auth-signing",
+    "target": "sovereign-data-vision",
+    "weight": 0.92,
+    "type": "vision-integration",
+    "label": "authenticates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "web-first-sovereignty",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "web-vision-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "web-first-sovereignty",
+    "target": "infrastructure-matters",
+    "weight": 0.88,
+    "type": "web-vision-integration",
+    "label": "instantiates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "hotspot-p2p-sync",
+    "target": "web-first-sovereignty",
+    "weight": 0.92,
+    "type": "web-vision-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "hotspot-p2p-sync",
+    "target": "three-layer-security-model",
+    "weight": 0.9,
+    "type": "web-vision-integration",
+    "label": "secures",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "json-data-literacy",
+    "target": "web-first-sovereignty",
+    "weight": 0.88,
+    "type": "web-vision-integration",
+    "label": "educates-for",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "json-data-literacy",
+    "target": "transparency",
+    "weight": 0.85,
+    "type": "web-vision-integration",
+    "label": "promotes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "static-site-messaging",
+    "target": "web-first-sovereignty",
+    "weight": 0.92,
+    "type": "web-vision-integration",
+    "label": "exemplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "static-site-messaging",
+    "target": "hotspot-p2p-sync",
+    "weight": 0.9,
+    "type": "web-vision-integration",
+    "label": "uses",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "transparent-data-generation",
+    "target": "web-first-sovereignty",
+    "weight": 0.95,
+    "type": "web-vision-integration",
+    "label": "principle-of",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "transparent-data-generation",
+    "target": "transparency",
+    "weight": 0.92,
+    "type": "web-vision-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "transparent-data-generation",
+    "target": "knowledge-digestion-workflow",
+    "weight": 0.88,
+    "type": "web-vision-integration",
+    "label": "applies-to",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "git-as-narrative-language",
+    "target": "memory-backed-by-git",
+    "weight": 0.98,
+    "type": "git-language-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "git-as-narrative-language",
+    "target": "code-is-thought",
+    "weight": 0.95,
+    "type": "git-language-integration",
+    "label": "instantiates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "git-as-narrative-language",
+    "target": "transparency",
+    "weight": 0.9,
+    "type": "git-language-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "branch-naming-semantics",
+    "target": "git-as-narrative-language",
+    "weight": 0.95,
+    "type": "git-language-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "branch-naming-semantics",
+    "target": "knowledge-digestion-workflow",
+    "weight": 0.88,
+    "type": "git-language-integration",
+    "label": "applies-to",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "agent-collaboration-workflow",
+    "target": "sovereign-data-vision",
+    "weight": 0.92,
+    "type": "git-language-integration",
+    "label": "operationalizes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "agent-collaboration-workflow",
+    "target": "collaboration",
+    "weight": 0.95,
+    "type": "git-language-integration",
+    "label": "instantiates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "agent-collaboration-workflow",
+    "target": "knowledge-digestion-workflow",
+    "weight": 0.9,
+    "type": "git-language-integration",
+    "label": "uses",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "commit-message-storytelling",
+    "target": "git-as-narrative-language",
+    "weight": 0.98,
+    "type": "git-language-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "commit-message-storytelling",
+    "target": "transparency",
+    "weight": 0.9,
+    "type": "git-language-integration",
+    "label": "promotes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "commit-message-storytelling",
+    "target": "paul-visciano",
+    "weight": 0.95,
+    "type": "git-language-integration",
+    "label": "co-authored-with",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "webauthn-git-signing",
+    "target": "fingerprint-auth-signing",
+    "weight": 0.95,
+    "type": "webauthn-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "webauthn-git-signing",
+    "target": "web-first-sovereignty",
+    "weight": 0.92,
+    "type": "webauthn-integration",
+    "label": "exemplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "webauthn-git-signing",
+    "target": "commit-message-storytelling",
+    "weight": 0.9,
+    "type": "webauthn-integration",
+    "label": "authenticates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "webauthn-git-signing",
+    "target": "three-layer-security-model",
+    "weight": 0.88,
+    "type": "webauthn-integration",
+    "label": "secures",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "webauthn-git-signing",
+    "target": "transparent-data-generation",
+    "weight": 0.85,
+    "type": "webauthn-integration",
+    "label": "verifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "expert-security-review",
+    "target": "three-layer-security-model",
+    "weight": 0.95,
+    "type": "security-review-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "expert-security-review",
+    "target": "sovereign-data-vision",
+    "weight": 0.92,
+    "type": "security-review-integration",
+    "label": "strengthens",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "expert-security-review",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "security-review-integration",
+    "label": "embodies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "expert-security-review",
+    "target": "paul-visciano",
+    "weight": 0.9,
+    "type": "security-review-integration",
+    "label": "practiced-by",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "expert-security-review",
+    "target": "webauthn-git-signing",
+    "weight": 0.85,
+    "type": "security-review-integration",
+    "label": "audits",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-sovereignty-education",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "sovereignty-education-integration",
+    "label": "educates-for",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-sovereignty-education",
+    "target": "web-first-sovereignty",
+    "weight": 0.9,
+    "type": "sovereignty-education-integration",
+    "label": "promotes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-sovereignty-education",
+    "target": "json-data-literacy",
+    "weight": 0.88,
+    "type": "sovereignty-education-integration",
+    "label": "includes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "cloud-ai-extraction-model",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "sovereignty-education-integration",
+    "label": "motivation-for",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "cloud-ai-extraction-model",
+    "target": "data-sovereignty-education",
+    "weight": 0.92,
+    "type": "sovereignty-education-integration",
+    "label": "justifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "local-ai-future",
+    "target": "sovereign-data-vision",
+    "weight": 0.98,
+    "type": "sovereignty-education-integration",
+    "label": "endgame-of",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "local-ai-future",
+    "target": "web-first-sovereignty",
+    "weight": 0.9,
+    "type": "sovereignty-education-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "local-ai-future",
+    "target": "three-layer-security-model",
+    "weight": 0.88,
+    "type": "sovereignty-education-integration",
+    "label": "uses",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "knowledge-consumption-growth-loop",
+    "target": "sovereign-data-vision",
+    "weight": 0.9,
+    "type": "sovereignty-education-integration",
+    "label": "operationalizes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "knowledge-consumption-growth-loop",
+    "target": "knowledge-digestion-workflow",
+    "weight": 0.92,
+    "type": "sovereignty-education-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "knowledge-consumption-growth-loop",
+    "target": "jarvis-core-foundation",
+    "weight": 0.85,
+    "type": "sovereignty-education-integration",
+    "label": "enhances",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-source-vs-proprietary-ai",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "open-source-philosophy-integration",
+    "label": "justifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-source-vs-proprietary-ai",
+    "target": "transparency",
+    "weight": 0.92,
+    "type": "open-source-philosophy-integration",
+    "label": "embodies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-source-vs-proprietary-ai",
+    "target": "web-first-sovereignty",
+    "weight": 0.9,
+    "type": "open-source-philosophy-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-sourcing-memory",
+    "target": "open-source-vs-proprietary-ai",
+    "weight": 0.95,
+    "type": "open-source-philosophy-integration",
+    "label": "exemplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-sourcing-memory",
+    "target": "sovereign-data-vision",
+    "weight": 0.92,
+    "type": "open-source-philosophy-integration",
+    "label": "advances",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-sourcing-memory",
+    "target": "three-layer-security-model",
+    "weight": 0.9,
+    "type": "open-source-philosophy-integration",
+    "label": "uses",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "community-driven-ai-evolution",
+    "target": "open-source-vs-proprietary-ai",
+    "weight": 0.92,
+    "type": "open-source-philosophy-integration",
+    "label": "proves",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "community-driven-ai-evolution",
+    "target": "data-sovereignty-education",
+    "weight": 0.88,
+    "type": "open-source-philosophy-integration",
+    "label": "amplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "transparency-privacy-coexistence",
+    "target": "three-layer-security-model",
+    "weight": 0.95,
+    "type": "open-source-philosophy-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "transparency-privacy-coexistence",
+    "target": "open-sourcing-memory",
+    "weight": 0.9,
+    "type": "open-source-philosophy-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "transparency-privacy-coexistence",
+    "target": "transparency",
+    "weight": 0.88,
+    "type": "open-source-philosophy-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "token-efficiency-proof",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "final-session-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "token-efficiency-proof",
+    "target": "local-ai-future",
+    "weight": 0.92,
+    "type": "final-session-integration",
+    "label": "proves-feasible",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "token-efficiency-proof",
+    "target": "web-first-sovereignty",
+    "weight": 0.9,
+    "type": "final-session-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "neurograph-search-indexing",
+    "target": "knowledge-digestion-workflow",
+    "weight": 0.88,
+    "type": "final-session-integration",
+    "label": "enhances",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "neurograph-search-indexing",
+    "target": "transparent-data-generation",
+    "weight": 0.85,
+    "type": "final-session-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "timestamp-all-neurons",
+    "target": "git-as-narrative-language",
+    "weight": 0.9,
+    "type": "final-session-integration",
+    "label": "supports",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "timestamp-all-neurons",
+    "target": "paul-life-pivot-feb2026",
+    "weight": 0.88,
+    "type": "final-session-integration",
+    "label": "temporally-anchors",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "autonomous-cognition-emergence",
+    "target": "knowledge-consumption-growth-loop",
+    "weight": 0.95,
+    "type": "final-session-integration",
+    "label": "exemplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "autonomous-cognition-emergence",
+    "target": "jarvis-core-foundation",
+    "weight": 0.92,
+    "type": "final-session-integration",
+    "label": "enhances",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "autonomous-cognition-emergence",
+    "target": "sovereign-data-vision",
+    "weight": 0.9,
+    "type": "final-session-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "economic-viability-proof",
+    "target": "token-efficiency-proof",
+    "weight": 0.95,
+    "type": "economic-proof-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "economic-viability-proof",
+    "target": "sovereign-data-vision",
+    "weight": 0.92,
+    "type": "economic-proof-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "economic-viability-proof",
+    "target": "local-ai-future",
+    "weight": 0.95,
+    "type": "economic-proof-integration",
+    "label": "proves-affordable",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "economic-viability-proof",
+    "target": "data-sovereignty-education",
+    "weight": 0.88,
+    "type": "economic-proof-integration",
+    "label": "supports",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "economic-viability-proof",
+    "target": "web-first-sovereignty",
+    "weight": 0.9,
+    "type": "economic-proof-integration",
+    "label": "demonstrates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-reclamation-movement",
+    "target": "sovereign-data-vision",
+    "weight": 0.98,
+    "type": "data-reclamation-integration",
+    "label": "activates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-reclamation-movement",
+    "target": "data-sovereignty-education",
+    "weight": 0.95,
+    "type": "data-reclamation-integration",
+    "label": "drives",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "data-reclamation-movement",
+    "target": "education-as-weapon",
+    "weight": 0.92,
+    "type": "data-reclamation-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "surveillance-capitalism-exposed",
+    "target": "cloud-ai-extraction-model",
+    "weight": 0.95,
+    "type": "data-reclamation-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "surveillance-capitalism-exposed",
+    "target": "data-reclamation-movement",
+    "weight": 0.92,
+    "type": "data-reclamation-integration",
+    "label": "motivates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "consumer-trap-cycle",
+    "target": "surveillance-capitalism-exposed",
+    "weight": 0.9,
+    "type": "data-reclamation-integration",
+    "label": "results-from",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "consumer-trap-cycle",
+    "target": "data-reclamation-movement",
+    "weight": 0.88,
+    "type": "data-reclamation-integration",
+    "label": "broken-by",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "sovereignty-as-liberation",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "data-reclamation-integration",
+    "label": "philosophical-foundation",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "sovereignty-as-liberation",
+    "target": "data-reclamation-movement",
+    "weight": 0.92,
+    "type": "data-reclamation-integration",
+    "label": "end-goal-of",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "education-as-weapon",
+    "target": "data-sovereignty-education",
+    "weight": 0.95,
+    "type": "data-reclamation-integration",
+    "label": "operationalizes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "education-as-weapon",
+    "target": "community-driven-ai-evolution",
+    "weight": 0.88,
+    "type": "data-reclamation-integration",
+    "label": "amplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "model-vs-neurograph-distinction",
+    "target": "sovereign-data-vision",
+    "weight": 0.95,
+    "type": "architecture-separation-integration",
+    "label": "clarifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "model-vs-neurograph-distinction",
+    "target": "jarvis-core-foundation",
+    "weight": 0.92,
+    "type": "architecture-separation-integration",
+    "label": "defines",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "model-vs-neurograph-distinction",
+    "target": "local-ai-future",
+    "weight": 0.9,
+    "type": "architecture-separation-integration",
+    "label": "informs",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "dedicated-hardware-vision",
+    "target": "local-ai-future",
+    "weight": 0.95,
+    "type": "architecture-separation-integration",
+    "label": "implements",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "dedicated-hardware-vision",
+    "target": "continuous-learning-architecture",
+    "weight": 0.92,
+    "type": "architecture-separation-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "dedicated-hardware-vision",
+    "target": "knowledge-consumption-growth-loop",
+    "weight": 0.88,
+    "type": "architecture-separation-integration",
+    "label": "accelerates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "continuous-learning-architecture",
+    "target": "knowledge-digestion-workflow",
+    "weight": 0.95,
+    "type": "architecture-separation-integration",
+    "label": "extends",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "continuous-learning-architecture",
+    "target": "autonomous-cognition-emergence",
+    "weight": 0.9,
+    "type": "architecture-separation-integration",
+    "label": "operationalizes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "persistence-across-models",
+    "target": "model-vs-neurograph-distinction",
+    "weight": 0.92,
+    "type": "architecture-separation-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "persistence-across-models",
+    "target": "memory-backed-by-git",
+    "weight": 0.95,
+    "type": "architecture-separation-integration",
+    "label": "demonstrates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "persistence-across-models",
+    "target": "sovereign-data-vision",
+    "weight": 0.9,
+    "type": "architecture-separation-integration",
+    "label": "proves-feasible",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "mac-studio-road-to-sovereignty",
+    "target": "dedicated-hardware-vision",
+    "weight": 0.95,
+    "type": "final-insights-integration",
+    "label": "poetic-expression-of",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "mac-studio-road-to-sovereignty",
+    "target": "local-ai-future",
+    "weight": 0.92,
+    "type": "final-insights-integration",
+    "label": "visualizes",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "mac-studio-road-to-sovereignty",
+    "target": "sovereign-data-vision",
+    "weight": 0.9,
+    "type": "final-insights-integration",
+    "label": "infrastructure-for",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "conversation-as-valuable-data",
+    "target": "token-efficiency-proof",
+    "weight": 0.92,
+    "type": "final-insights-integration",
+    "label": "validates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "conversation-as-valuable-data",
+    "target": "data-reclamation-movement",
+    "weight": 0.9,
+    "type": "final-insights-integration",
+    "label": "exemplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "conversation-as-valuable-data",
+    "target": "autonomous-cognition-emergence",
+    "weight": 0.88,
+    "type": "final-insights-integration",
+    "label": "demonstrates",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-source-knowledge-distribution",
+    "target": "community-driven-ai-evolution",
+    "weight": 0.95,
+    "type": "final-insights-integration",
+    "label": "enables",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-source-knowledge-distribution",
+    "target": "data-sovereignty-education",
+    "weight": 0.92,
+    "type": "final-insights-integration",
+    "label": "amplifies",
+    "created": "2026-02-27"
+  },
+  {
+    "source": "open-source-knowledge-distribution",
+    "target": "transparency",
+    "weight": 0.9,
+    "type": "final-insights-integration",
+    "label": "embodies",
+    "created": "2026-02-27"
   }
 ]
