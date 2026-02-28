@@ -588,6 +588,9 @@
                         showNodeDetailsInDrawer(selectedNode);
                     }
                 }
+            } else {
+                // Click on empty space — same as Clear button
+                clearSelection();
             }
         });
         
