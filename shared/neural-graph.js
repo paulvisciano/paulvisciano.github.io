@@ -4,6 +4,9 @@
         const ctx = canvas.getContext('2d', {alpha: true});
         const infoPanel = document.getElementById('info');
         const panelToggle = document.getElementById('panel-toggle');
+        const statusEl = document.getElementById('status');
+        const countEl = document.getElementById('count');
+        const synapseCountEl = document.getElementById('synapseCount');
 
         const PANEL_WIDTH = 240;
         let panelOpen = false;
@@ -372,6 +375,7 @@
         const VIEW_ZOOM_MAX = 5;
         let selected = null;
         let time = 0;
+        let lastStatusText = '';
         let particles = [];
 
         function project(x, y, z) {
@@ -598,9 +602,10 @@
                 const visibleNodeCount = nodes.filter((_, i) => passesFilter(i)).length;
                 const visibleEdgeCount = edges.filter(e => passesFilter(e.from) && passesFilter(e.to)).length;
                 updateNodeCount(visibleNodeCount, visibleEdgeCount);
-                if (selected !== null) {
-                    const statusEl = document.getElementById('status');
-                    if (statusEl) statusEl.textContent = '🧠 ' + nodes[selected].name;
+                const statusText = selected !== null ? '🧠 ' + nodes[selected].name : visibleNodeCount + ' neurons · ' + visibleEdgeCount + ' synapses';
+                if (lastStatusText !== statusText) {
+                    lastStatusText = statusText;
+                    if (statusEl) statusEl.textContent = statusText;
                 }
 
                 step();
@@ -610,13 +615,11 @@
             }
         }
 
+        let lastNodeCount = -1;
+        let lastSynapseCount = -1;
         function updateNodeCount(nodeCount, synapseCount) {
-            const countEl = document.getElementById('count');
-            const synapseCountEl = document.getElementById('synapseCount');
-            const statusEl = document.getElementById('status');
-            if (countEl) countEl.textContent = nodeCount;
-            if (synapseCountEl) synapseCountEl.textContent = synapseCount;
-            if (statusEl) statusEl.textContent = nodeCount + ' neurons · ' + synapseCount + ' synapses';
+            if (countEl && lastNodeCount !== nodeCount) { lastNodeCount = nodeCount; countEl.textContent = nodeCount; }
+            if (synapseCountEl && lastSynapseCount !== synapseCount) { lastSynapseCount = synapseCount; synapseCountEl.textContent = synapseCount; }
         }
 
         // Filter bar functionality (desktop + drawer stay in sync)
@@ -1289,13 +1292,22 @@
         });
 
         window.walk = () => {
-            selected = Math.floor(Math.random() * nodes.length);
+            const eligible = nodes.map((n, idx) => idx).filter(idx => nodePassesFilter(nodes[idx]));
+            if (eligible.length === 0) {
+                selected = null;
+                showNodeDetails(null);
+                showNodeDetailsInDrawer(null);
+                window.location.hash = '';
+                return;
+            }
+            selected = eligible[Math.floor(Math.random() * eligible.length)];
             const node = nodes[selected];
             if (node.isMemoryRef) {
                 openMemoryLinkSidebar(node);
             } else {
                 showNodeDetails(node);
             }
+            if (window.innerWidth <= 768) showNodeDetailsInDrawer(node);
             window.location.hash = node.idKey;
         };
 
