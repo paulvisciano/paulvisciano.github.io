@@ -4391,8 +4391,7 @@
       "color": "#f97316",
       "criticality": "high",
       "created": "2026-02-28",
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
   },
   {
@@ -4415,8 +4414,7 @@
         "maintenance": "Archives transcript files",
         "memoryFlush": "Writes to markdown files"
       },
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
   },
   {
@@ -4434,8 +4432,7 @@
       "criticality": "high",
       "created": "2026-02-28",
       "impact": "68% of session bloat",
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
   },
   {
@@ -4453,8 +4450,7 @@
       "criticality": "high",
       "created": "2026-02-28",
       "impact": "28% of session bloat",
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
   },
   {
@@ -4472,8 +4468,7 @@
       "criticality": "core-foundation",
       "created": "2026-02-28",
       "implication": "Frequent rotation safe - context assembled dynamically",
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
   },
   {
@@ -4494,8 +4489,7 @@
         "mode": "enforce",
         "rotateBytes": 3145728
       },
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/05-session-bloat-diagnosis-and-fix.md"
     }
   },
   {
@@ -4516,8 +4510,7 @@
         "enabled": true,
         "softThresholdTokens": 4000
       },
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
     }
   },
   {
@@ -4536,8 +4529,7 @@
       "created": "2026-03-01",
       "example": "Memory flush redirected to /memory/raw/ instead of disabled",
       "quote": "This is another one of those fighting open cloud versus leaning into it",
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
     }
   },
   {
@@ -4558,8 +4550,7 @@
         "auto-logging: proactive",
         "memory-flush: safety-net"
       ],
-      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md",
-      "fullContext": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-02-28/learnings/06-openclaw-memory-flush-integration.md"
     }
   },
   {
