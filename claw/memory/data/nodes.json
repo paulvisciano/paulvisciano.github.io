@@ -409,12 +409,14 @@
       "role": "creation",
       "type": "comic-book",
       "url": "https://paulvisciano.github.io/moments/bangkok/2026-02-28/",
+      "status": "LIVE",
       "r2Bucket": "urban-runner",
       "spreads": 4,
       "pages": 8,
-      "description": "First sovereignty manifesto comic. RawClaw origin story: Feb 28, 2026 — 8-mile Bangkok walk, phone overheated, OpenClaw held through failure, Graph Reducer named. Created via new Creative Director pipeline.",
+      "description": "First sovereignty manifesto comic. RawClaw origin story: Feb 28, 2026 — 8-mile Bangkok walk, phone overheated, OpenClaw held through failure, Graph Reducer named. Created via new Creative Director pipeline. LIVE NOW.",
       "color": "#fbbf24",
       "created": "2026-03-01",
+      "launched": "2026-03-01T09:53:00Z",
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/09-jarvis-urban-runner-assistant.md"
     }
   },

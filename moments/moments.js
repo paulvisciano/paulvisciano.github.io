@@ -1967,7 +1967,8 @@ window.momentsInTime = [
     cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/cover.png",
     pages: [
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-01.jpg",
-      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-02.jpg"
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-02.jpg",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-03.jpg"
     ],
     pageSlugs: ["empire-built", "walk-begins", "cafe-session", "architecture-worship", "wildlife", "death-resurrection", "gym-naming", "day-complete"],
     pageCount: 8,
