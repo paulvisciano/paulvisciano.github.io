@@ -225,7 +225,7 @@
                     isToday,
                     isYesterday,
                     isThisWeek,
-                    sourceDocument: n.sourceDocument || null,
+                    sourceDocument: n.sourceDocument || n.attributes?.sourceDocument || null,
                     isMemoryRef: !!isMemoryRef,
                     target_memory: isMemoryRef ? (n.attributes?.target_memory || '') : undefined,
                     memory_owner: isMemoryRef ? (n.attributes?.memory_owner || '') : undefined,
@@ -967,8 +967,9 @@
                     ? connected.map(c => `<div style="margin: 4px 0; color: #00ffff;">${c}</div>`).join('')
                     : '<div style="color: #666;">No connections</div>';
             }
-            const fullContextDisabled = !node.sourceDocument;
-            const fullContextBtn = `<button type="button" class="node-popover-full-context" ${fullContextDisabled ? 'disabled' : ''} title="${node.sourceDocument ? 'View Layer 2 source document' : 'No source document'}">📄 Full Context</button>`;
+            const fullContextDisabled = !(node.sourceDocument || node.attributes?.sourceDocument);
+            const fullContextUrl = node.sourceDocument || node.attributes?.sourceDocument || null;
+            const fullContextBtn = `<button type="button" class="node-popover-full-context" ${fullContextDisabled ? 'disabled' : ''} title="${fullContextUrl ? 'View Layer 2 source document' : 'No source document'}">📄 Full Context</button>`;
             return `
                 <h3 id="node-popover-title">Info</h3>
                 <div class="node-popover-name">${nameHtml}</div>
@@ -1474,7 +1475,7 @@
         function openFullContext() {
             if (selected === null || !nodes[selected]) return;
             const node = nodes[selected];
-            const pathOnDisk = node.sourceDocument;
+            const pathOnDisk = node.sourceDocument || node.attributes?.sourceDocument;
             if (typeof pathOnDisk !== 'string' || !pathOnDisk) return;
             if (pathOnDisk.startsWith('https://')) {
                 fetch(pathOnDisk)
