@@ -1,0 +1,28 @@
+{
+  "id": "march-1-2026-gateway-crash-recovery",
+  "label": "March 1, 2026 — Gateway Crash & Recovery",
+  "category": "temporal",
+  "frequency": 10,
+  "moments": ["bangkok-2026-03-01"],
+  "attributes": {
+    "role": "incident-session",
+    "date": "2026-03-01",
+    "timeRange": "14:00 - 15:00 GMT+7",
+    "description": "Gateway hung after WiFi disconnect. Required Activity Monitor force-kill. Discovered delivery recovery budget bug. Created Learning #8 (Debugging Your Claw).",
+    "color": "#f87171",
+    "created": "2026-03-01",
+    "keyEvents": [
+      "WiFi disconnect → voice notes queued",
+      "Gateway hung (zombie state)",
+      "Multiple restart attempts failed",
+      "Activity Monitor force-kill succeeded",
+      "Discovered orphaned media files",
+      "Created comprehensive debugging guide"
+    ],
+    "outcomes": [
+      "Learning #8: Debugging Your Claw",
+      "Documented delivery recovery budget bug",
+      "Mapped zombie gateway failure pattern"
+    ]
+  }
+}

@@ -4207,28 +4207,28 @@
     "label": "learned in"
   },
   {
-    "source": "gateway-crash-recovery-march-1-2026",
+    "source": "march-1-2026-gateway-crash-recovery",
     "target": "delivery-recovery-budget-bug",
     "weight": 0.95,
     "type": "revealed",
     "label": "exposed bug"
   },
   {
-    "source": "gateway-crash-recovery-march-1-2026",
+    "source": "march-1-2026-gateway-crash-recovery",
     "target": "zombie-gateway-pattern",
     "weight": 0.95,
     "type": "example-of",
     "label": "demonstrated pattern"
   },
   {
-    "source": "gateway-crash-recovery-march-1-2026",
+    "source": "march-1-2026-gateway-crash-recovery",
     "target": "activity-monitor-force-kill",
     "weight": 1.0,
     "type": "resolved-by",
     "label": "required technique"
   },
   {
-    "source": "gateway-crash-recovery-march-1-2026",
+    "source": "march-1-2026-gateway-crash-recovery",
     "target": "debugging-your-claw-learning",
     "weight": 1.0,
     "type": "documented-in",
@@ -4327,7 +4327,7 @@
   },
   {
     "source": "context-bloat-silent-failure",
-    "target": "gateway-crash-recovery-march-1-2026",
+    "target": "march-1-2026-gateway-crash-recovery",
     "weight": 0.6,
     "type": "contributed-to",
     "label": "may have caused"
@@ -4397,14 +4397,14 @@
   },
   {
     "source": "feb-28-2026-session-bloat-debugging",
-    "target": "gateway-crash-recovery-march-1-2026",
+    "target": "march-1-2026-gateway-crash-recovery",
     "weight": 0.7,
     "type": "related-to",
     "label": "similar failure mode"
   },
   {
     "source": "day-one-march-1-2026",
-    "target": "gateway-crash-recovery-march-1-2026",
+    "target": "march-1-2026-gateway-crash-recovery",
     "weight": 1.0,
     "type": "contains",
     "label": "includes incident"
