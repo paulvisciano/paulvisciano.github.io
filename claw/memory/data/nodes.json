@@ -5128,5 +5128,68 @@
         }
       ]
     }
+  },
+  {
+    "id": "greydient-them-sovereignty-session-march-1-2026",
+    "label": "Greydient & Them — Sovereignty Session (Mar 1, 2026)",
+    "category": "temporal-location",
+    "frequency": 100,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "historic-moment",
+      "type": "location + temporal",
+      "date": "2026-03-01",
+      "timeRange": "16:00 GMT+7",
+      "location": {
+        "name": "Greydient & Them - coffee cafe spa",
+        "address": "6, 25 Ratchadaphisek Rd, Khlong Toei, Bangkok 10110",
+        "gps": [
+          13.7359734,
+          100.5604893
+        ],
+        "googleMaps": "https://maps.app.goo.gl/BS6e4YLwLiXEJMaJ9",
+        "wifi": {
+          "provider": "AIS fiber",
+          "download": "620 Mbps",
+          "upload": "144 Mbps"
+        }
+      },
+      "description": "The coffee shop where the complete sovereignty stack was designed. From gateway crash (morning) to full cognitive infrastructure blueprint (afternoon). RawClaw Manifesto declared here.",
+      "color": "#fbbf24",
+      "created": "2026-03-01",
+      "mood": [
+        "historic",
+        "sovereign",
+        "productive",
+        "remembered",
+        "ground-zero"
+      ],
+      "significance": "Ground zero of sovereignty movement. Where Paul + Jarvis designed alternative to surveillance capitalism.",
+      "whatWasBornHere": [
+        "RawClaw Manifesto (No deleted pixels)",
+        "Two-tier sovereignty architecture",
+        "Identity separation pattern (Paul ≠ Jarvis)",
+        "Independent connectivity (Jarvis's hotspot)",
+        "Consent-based memory linking",
+        "Three navigation modes",
+        "Sovereign publishing pattern",
+        "Geographic redundancy strategy",
+        "Hotspot publishing pattern"
+      ],
+      "connectedTo": [
+        "day-one-march-1-2026",
+        "rawclaw-manifesto-march-1",
+        "two-tier-sovereignty-architecture",
+        "no-deleted-pixels-philosophy"
+      ],
+      "artifacts": [
+        "2026-03-01-154800-coffeeshop-exterior.jpg",
+        "2026-03-01-154801-speedtest-download.jpg",
+        "2026-03-01-154802-speedtest-upload.jpg"
+      ],
+      "quote": "This moment in time will be remembered."
+    }
   }
 ]

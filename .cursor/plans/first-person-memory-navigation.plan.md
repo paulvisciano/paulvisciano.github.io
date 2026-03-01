@@ -5,13 +5,37 @@ todos: []
 isProject: false
 ---
 
-# Plan: First-Person Memory Navigation (Enhanced)
+# Plan: First-Person Memory Browser
 
 **Date:** Mar 1, 2026  
-**Feature:** First-person view mode for neural memory visualization  
+**Feature:** First-person immersive browser for neural memory navigation  
 **Source:** [Learning 15: First-Person Navigation](/claw/memory/raw/2026-02-24/learnings/15-first-person-memory-navigation.md)  
-**Priority:** High (solves visualization scalability + improves exploration UX)  
+**Priority:** Critical (core product identity: **Memory Browser**, not visualization)  
 **Complexity:** Medium–High (phased)
+
+---
+
+## Core Identity
+
+**This is not a graph viewer. This is a Memory Browser.**
+
+Like Chrome/Firefox/Safari — but instead of web pages, you browse **memories**. Instead of HTTP links, you navigate **synapses**. Instead of bookmarks, you save **neurons**.
+
+**Mental model shift:**
+
+| Web Browser | Memory Browser |
+|-------------|----------------|
+| Web pages | Neurons (memories) |
+| Hyperlinks | Synapses (connections) |
+| URL bar | Node search/jump |
+| Back/Forward | Navigation history |
+| Bookmarks | Saved neurons |
+| Tabs | Multiple memory paths (future) |
+| Embedded media | Asset badges (audio/images/docs) |
+| Incognito mode | Private memories (future) |
+| Extensions | Memory plugins (future) |
+
+**Design principle:** Every browser convention should be considered for adaptation. If Safari does it well, how do we do it for memories?
 
 ---
 
@@ -27,24 +51,28 @@ isProject: false
 ## Core Concepts
 
 
-| Concept      | Description                                                                                      |
-| ------------ | ------------------------------------------------------------------------------------------------ |
-| **Lens**     | Circular view at screen center = your current neuron. Inside = clear; outside = blurred/ghosted. |
-| **Movement** | Swipe/drag or trackpad = change POV (first-person camera), not pan the whole map.                |
-| **Jump**     | Tap/click a visible neuron = jump to it; lens refocuses on new position.                         |
-| **Zoom**     | Tighten/loosen focus (depth of field), not zoom the whole graph.                                 |
-| **Rotation** | Turn the lens view to see different angles of the current node's connections (Phase 3).          |
-| **History**  | Back/forward navigation through visited nodes (like browser history).                            |
-| **Persist**  | Save view mode + current node in localStorage; restore on refresh.                               |
+| Concept      | Description                                                                                      | Browser Equivalent |
+| ------------ | ------------------------------------------------------------------------------------------------ | ------------------ |
+| **Lens**     | Circular view at screen center = your current neuron. Inside = clear; outside = blurred/ghosted. | Viewport |
+| **Asset Badges** | Small icons orbiting neurons → click to access audio/images/transcripts/comics. | Embedded media players |
+| **Movement** | Swipe/drag or trackpad = change POV (first-person camera), not pan the whole map. | Scroll/drag page |
+| **Jump**     | Tap/click a visible neuron = jump to it; lens refocuses on new position. | Click hyperlink |
+| **Zoom**     | Tighten/loosen focus (depth of field), not zoom the whole graph. | Browser zoom (Ctrl+/-) |
+| **Rotation** | Turn the lens view to see different angles of the current node's connections (Phase 3). | — |
+| **History**  | Back/forward navigation through visited nodes (like browser history). | ← → buttons |
+| **Bookmarks** | Save favorite neurons for quick access (Phase 2). | ⭐ Bookmarks |
+| **Search**   | Find neuron by name/tag/content → auto-jump (Phase 2). | 🔍 Address bar search |
+| **Tabs**     | Open multiple memory paths simultaneously (Phase 4). | 📑 Browser tabs |
+| **Persist**  | Save view mode + current node in localStorage; restore on refresh. | Restore last session |
 
 
 ---
 
 ## Phased Implementation
 
-### Phase 1 — Lens + Jump + Foundation (Now)
+### Phase 1 — Lens + Jump + Asset Badges + Foundation (Now)
 
-**Scope:** Fixed lens at center, blurred context, click-to-jump, toggle, state persistence. Build on existing visualization.
+**Scope:** Fixed lens at center, blurred context, click-to-jump, **asset badges**, toggle, state persistence. Build on existing visualization.
 
 #### Core Features
 
@@ -53,6 +81,23 @@ isProject: false
   - Inside lens: current neuron highlighted, direct connections visible, synapse targets clear.
   - Outside lens: other neurons faint/blurred or ghosted; connections faded.
   - Optional: "pure focus" mode — fade outside to near-invisible.
+- **Asset Badges (NEW — Critical for Memory Browser identity)**
+  - Small circular icons orbit current neuron (inside lens, near edge).
+  - Badge types:
+    - 🎤 **Audio** — shows count of voice notes (click → plays most recent or opens playlist)
+    - 🖼️ **Images** — shows count of photos (click → opens lightbox gallery)
+    - 📄 **Transcript** — indicates transcript exists (click → opens transcript modal)
+    - 📚 **Comic/Learning** — indicates derived content (click → opens comic reader or learning doc)
+  - Badge styling:
+    - Semi-transparent background (rgba(255,255,255,0.2))
+    - Icon in center (emoji or SVG)
+    - Count badge in corner (small red circle with number)
+    - Hover: slight glow + scale up (1.1x)
+    - Click: smooth modal fade-in or new tab
+  - Positioning:
+    - Orbit around current neuron (evenly spaced, ~1.5x neuron radius)
+    - Fade in after 500ms delay (don't overwhelm on jump)
+    - Fade out when leaving node
 - **Current node as POV**
   - Treat one node as "current" (starting node logic below).
   - Only connections from current node are fully visible inside lens.
@@ -60,6 +105,7 @@ isProject: false
   - Tap/click a visible neuron (in or near lens) → set as new current node.
   - Lens refocuses (smooth transition, ~300ms ease-in-out) on new position.
   - New connections become visible; old ones fade.
+  - Asset badges update to show new node's assets.
 - **Toggle UI**
   - Toolbar button: Eye icon (third-person) ↔ Person-in-circle icon (first-person).
   - Keyboard shortcut: `F` key toggles.
