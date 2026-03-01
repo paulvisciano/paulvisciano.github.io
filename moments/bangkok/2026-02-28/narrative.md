@@ -3,7 +3,7 @@
 **A RawClaw Origin Story**  
 **Date:** February 28, 2026  
 **Location:** Bangkok, Thailand  
-**Pages:** 8 panels
+**Spreads:** 5 (10 pages total)
 
 ---
 

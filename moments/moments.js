@@ -1969,9 +1969,10 @@ window.momentsInTime = [
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-01.jpg",
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-02.jpg",
       "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-03.jpg",
-      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-04.jpg"
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-04.jpg",
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-05.jpg"
     ],
-    pageCount: 8,
+    pageCount: 10,
     pageSlugs: ["empire-built", "walk-begins", "cafe-session", "architecture-worship", "wildlife", "death-resurrection", "gym-naming", "day-complete"],
     pageCount: 8,
     imageAlt: "Day One: The Architect Wakes — Paul in red shirt holding phone with neurograph, Bangkok skyline with BTS train, RawClaw logo",
