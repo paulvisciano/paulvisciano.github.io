@@ -4738,6 +4738,7 @@
       "color": "#f87171",
       "severity": "critical",
       "resolution": "Manual force-kill + fresh start + manual file archival",
+      "created": "2026-03-01",
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-debugging-your-claw.md"
     }
   },
@@ -4753,7 +4754,8 @@
       "color": "#fbbf24",
       "symptom": "Voice notes sent but not transcribed, files stuck in inbound folder",
       "workaround": "Manually copy inbound files to archive folder",
-      "fixNeeded": "Increase or make recovery budget configurable"
+      "fixNeeded": "Increase or make recovery budget configurable",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4768,7 +4770,8 @@
       "color": "#ef4444",
       "cause": "Likely waiting on Ollama timeout or network socket that never resolves",
       "detection": "openclaw gateway status shows 'running' but no responses",
-      "resolution": "Activity Monitor → Force Kill → openclaw gateway start"
+      "resolution": "Activity Monitor → Force Kill → openclaw gateway start",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4782,7 +4785,8 @@
       "description": "~/.openclaw/agents/main/sessions/*.jsonl — This is where conversation history lives. Backup before deleting.",
       "color": "#22c55e",
       "criticality": "foundational",
-      "relatedCommand": "du -h ~/.openclaw/agents/main/sessions/*.jsonl"
+      "relatedCommand": "du -h ~/.openclaw/agents/main/sessions/*.jsonl",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4796,7 +4800,8 @@
       "description": "When gateway won't die gracefully: Activity Monitor → search 'openclaw' or 'node' → Force Quit. Always works.",
       "color": "#22c55e",
       "whenToUse": "Gateway hung, won't respond to stop/restart commands",
-      "followUp": "Verify port free with 'lsof -i :18789', then start fresh"
+      "followUp": "Verify port free with 'lsof -i :18789', then start fresh",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4810,7 +4815,8 @@
       "description": "~/.openclaw/media/inbound/ — Unprocessed media lands here. Files accumulating = processing pipeline broken.",
       "color": "#22c55e",
       "normalFlow": "Arrive → Process → Archive → Delete from inbound",
-      "recoveryCommand": "cp ~/.openclaw/media/inbound/*.ogg ~/Personal/paulvisciano.github.io/memory/raw/YYYY-MM-DD/audio/"
+      "recoveryCommand": "cp ~/.openclaw/media/inbound/*.ogg ~/Personal/paulvisciano.github.io/memory/raw/YYYY-MM-DD/audio/",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4829,7 +4835,8 @@
         "Port 18789 already in use"
       ],
       "diagnosis": "Check logs: grep 'handshake timeout' ~/Library/Logs/openclaw/gateway.log",
-      "fix": "Restart gateway, or force-kill if hung"
+      "fix": "Restart gateway, or force-kill if hung",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4844,7 +4851,8 @@
       "color": "#f59e0b",
       "meaning": "Network connectivity issue",
       "behavior": "Messages queue in WhatsApp, deliver when back online",
-      "fix": "Check WiFi, wait for reconnection"
+      "fix": "Check WiFi, wait for reconnection",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4859,7 +4867,8 @@
       "color": "#ef4444",
       "prevention": "Rotate sessions at 2MB, monitor with 'du -h'",
       "detection": "No responses despite messages delivered, check session size first",
-      "relatedNode": "session-bloat-debugging-methodology"
+      "relatedNode": "session-bloat-debugging-methodology",
+      "created": "2026-03-01"
     }
   },
   {
@@ -4875,7 +4884,8 @@
       "description": "Complete ops guide: where things live, how to backup/reset, common errors, diagnostic checklist, recovery playbook.",
       "color": "#3b82f6",
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-debugging-your-claw.md",
-      "bornFrom": "Paul's suffering through gateway crash without documentation"
+      "bornFrom": "Paul's suffering through gateway crash without documentation",
+      "created": "2026-03-01"
     }
   }
 ]
