@@ -1213,6 +1213,20 @@
     }
   },
   {
+    "id": "march-1-2026-comic-pipeline",
+    "label": "March 1, 2026 — RawClaw Comic Pipeline Live",
+    "category": "temporal",
+    "frequency": 1,
+    "attributes": {
+      "type": "milestone",
+      "significance": "First live comic generation session. Creative Director pipeline proven. 'Day One: The Architect Wakes' sovereignty manifesto published.",
+      "color": "#fbbf24",
+      "date": "2026-03-01",
+      "timeRange": "09:00 - 11:00 AM GMT+7",
+      "sourceDocument": "file:///Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-03-01/learnings/00-march-1-2026-comic-pipeline.md"
+    }
+  },
+  {
     "id": "bulgaria-era",
     "label": "Bulgaria Era (1988–2004)",
     "category": "temporal",
