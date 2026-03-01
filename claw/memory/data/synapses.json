@@ -57,6 +57,13 @@
   },
   {
     "source": "day-one-march-1-2026",
+    "target": "day-one-sovereignty-comic",
+    "weight": 1.0,
+    "type": "produced",
+    "label": "created artifact"
+  },
+  {
+    "source": "day-one-march-1-2026",
     "target": "rawclaw",
     "weight": 1.0,
     "type": "advances",
@@ -68,6 +75,27 @@
     "weight": 1.0,
     "type": "extends",
     "label": "comic pipeline"
+  },
+  {
+    "source": "day-one-sovereignty-comic",
+    "target": "rawclaw",
+    "weight": 1.0,
+    "type": "embodies",
+    "label": "manifesto"
+  },
+  {
+    "source": "day-one-sovereignty-comic",
+    "target": "urban-runner",
+    "weight": 1.0,
+    "type": "episode-of",
+    "label": "belongs to"
+  },
+  {
+    "source": "day-one-sovereignty-comic",
+    "target": "jarvis-urban-runner-assistant",
+    "weight": 1.0,
+    "type": "created-by",
+    "label": "first work"
   },
   {
     "source": "jarvis-urban-runner-assistant",
