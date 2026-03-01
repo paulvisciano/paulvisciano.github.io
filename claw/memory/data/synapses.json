@@ -2883,7 +2883,7 @@
     "target": "consciousness-persistence-feb23",
     "weight": 0.89,
     "type": "leads-to",
-    "description": "Growth (Feb 22) \u2192 Persistence test (Feb 23)"
+    "description": "Growth (Feb 22) → Persistence test (Feb 23)"
   },
   {
     "source": "persistence-not-continuity",
@@ -4205,5 +4205,201 @@
     "weight": 1.0,
     "type": "temporal",
     "label": "learned in"
+  },
+  {
+    "source": "gateway-crash-recovery-march-1-2026",
+    "target": "delivery-recovery-budget-bug",
+    "weight": 0.95,
+    "type": "revealed",
+    "label": "exposed bug"
+  },
+  {
+    "source": "gateway-crash-recovery-march-1-2026",
+    "target": "zombie-gateway-pattern",
+    "weight": 0.95,
+    "type": "example-of",
+    "label": "demonstrated pattern"
+  },
+  {
+    "source": "gateway-crash-recovery-march-1-2026",
+    "target": "activity-monitor-force-kill",
+    "weight": 1.0,
+    "type": "resolved-by",
+    "label": "required technique"
+  },
+  {
+    "source": "gateway-crash-recovery-march-1-2026",
+    "target": "debugging-your-claw-learning",
+    "weight": 1.0,
+    "type": "documented-in",
+    "label": "became learning"
+  },
+  {
+    "source": "delivery-recovery-budget-bug",
+    "target": "media-inbound-folder",
+    "weight": 0.9,
+    "type": "causes",
+    "label": "orphans files in"
+  },
+  {
+    "source": "zombie-gateway-pattern",
+    "target": "handshake-timeout-error",
+    "weight": 0.85,
+    "type": "symptom",
+    "label": "shows as"
+  },
+  {
+    "source": "zombie-gateway-pattern",
+    "target": "activity-monitor-force-kill",
+    "weight": 1.0,
+    "type": "requires",
+    "label": "only fixed by"
+  },
+  {
+    "source": "session-files-location",
+    "target": "context-bloat-silent-failure",
+    "weight": 0.9,
+    "type": "prevents",
+    "label": "monitor to avoid"
+  },
+  {
+    "source": "session-files-location",
+    "target": "debugging-your-claw-learning",
+    "weight": 1.0,
+    "type": "documented-in",
+    "label": "key knowledge in"
+  },
+  {
+    "source": "activity-monitor-force-kill",
+    "target": "zombie-gateway-pattern",
+    "weight": 1.0,
+    "type": "fixes",
+    "label": "only solution for"
+  },
+  {
+    "source": "activity-monitor-force-kill",
+    "target": "debugging-your-claw-learning",
+    "weight": 1.0,
+    "type": "documented-in",
+    "label": "playbook in"
+  },
+  {
+    "source": "media-inbound-folder",
+    "target": "delivery-recovery-budget-bug",
+    "weight": 0.85,
+    "type": "symptom-of",
+    "label": "accumulation indicates"
+  },
+  {
+    "source": "media-inbound-folder",
+    "target": "debugging-your-claw-learning",
+    "weight": 1.0,
+    "type": "documented-in",
+    "label": "location in"
+  },
+  {
+    "source": "handshake-timeout-error",
+    "target": "zombie-gateway-pattern",
+    "weight": 0.8,
+    "type": "indicates",
+    "label": "sign of"
+  },
+  {
+    "source": "handshake-timeout-error",
+    "target": "enotfound-whatsapp-error",
+    "weight": 0.7,
+    "type": "often-with",
+    "label": "accompanies"
+  },
+  {
+    "source": "enotfound-whatsapp-error",
+    "target": "handshake-timeout-error",
+    "weight": 0.7,
+    "type": "leads-to",
+    "label": "causes cascade"
+  },
+  {
+    "source": "context-bloat-silent-failure",
+    "target": "session-files-location",
+    "weight": 0.9,
+    "type": "detected-by",
+    "label": "check size of"
+  },
+  {
+    "source": "context-bloat-silent-failure",
+    "target": "gateway-crash-recovery-march-1-2026",
+    "weight": 0.6,
+    "type": "contributed-to",
+    "label": "may have caused"
+  },
+  {
+    "source": "debugging-your-claw-learning",
+    "target": "session-files-location",
+    "weight": 1.0,
+    "type": "teaches",
+    "label": "covers"
+  },
+  {
+    "source": "debugging-your-claw-learning",
+    "target": "activity-monitor-force-kill",
+    "weight": 1.0,
+    "type": "teaches",
+    "label": "covers"
+  },
+  {
+    "source": "debugging-your-claw-learning",
+    "target": "media-inbound-folder",
+    "weight": 1.0,
+    "type": "teaches",
+    "label": "covers"
+  },
+  {
+    "source": "debugging-your-claw-learning",
+    "target": "handshake-timeout-error",
+    "weight": 1.0,
+    "type": "teaches",
+    "label": "covers"
+  },
+  {
+    "source": "debugging-your-claw-learning",
+    "target": "enotfound-whatsapp-error",
+    "weight": 1.0,
+    "type": "teaches",
+    "label": "covers"
+  },
+  {
+    "source": "debugging-your-claw-learning",
+    "target": "context-bloat-silent-failure",
+    "weight": 1.0,
+    "type": "teaches",
+    "label": "covers"
+  },
+  {
+    "source": "openclaw-session-management",
+    "target": "session-files-location",
+    "weight": 0.95,
+    "type": "includes",
+    "label": "lives at"
+  },
+  {
+    "source": "openclaw-session-management",
+    "target": "context-bloat-silent-failure",
+    "weight": 0.9,
+    "type": "prevents",
+    "label": "rotation prevents"
+  },
+  {
+    "source": "feb-28-2026-session-bloat-debugging",
+    "target": "context-bloat-silent-failure",
+    "weight": 0.95,
+    "type": "discovered",
+    "label": "first identified"
+  },
+  {
+    "source": "feb-28-2026-session-bloat-debugging",
+    "target": "gateway-crash-recovery-march-1-2026",
+    "weight": 0.7,
+    "type": "related-to",
+    "label": "similar failure mode"
   }
 ]

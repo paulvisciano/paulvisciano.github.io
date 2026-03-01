@@ -4723,5 +4723,159 @@
       "example": "Reverted 249 bad links, kept only 9 verified. Then added 34 more through careful review.",
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-memory-integrity-methodology.md"
     }
+  },
+  {
+    "id": "gateway-crash-recovery-march-1-2026",
+    "label": "Gateway Crash & Recovery (Mar 1, 2026)",
+    "category": "event",
+    "frequency": 10,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "incident",
+      "description": "Gateway hung after network disconnect. Required Activity Monitor force-kill. Recovery budget exceeded, orphaned messages.",
+      "color": "#f87171",
+      "severity": "critical",
+      "resolution": "Manual force-kill + fresh start + manual file archival",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-debugging-your-claw.md"
+    }
+  },
+  {
+    "id": "delivery-recovery-budget-bug",
+    "label": "Delivery Recovery Budget Bug",
+    "category": "bug",
+    "frequency": 8,
+    "moments": [],
+    "attributes": {
+      "role": "known-issue",
+      "description": "When gateway restarts after outage, delivery recovery has a time budget. If backlog too large, it skips entries → orphaned messages.",
+      "color": "#fbbf24",
+      "symptom": "Voice notes sent but not transcribed, files stuck in inbound folder",
+      "workaround": "Manually copy inbound files to archive folder",
+      "fixNeeded": "Increase or make recovery budget configurable"
+    }
+  },
+  {
+    "id": "zombie-gateway-pattern",
+    "label": "Zombie Gateway Pattern",
+    "category": "pattern",
+    "frequency": 7,
+    "moments": [],
+    "attributes": {
+      "role": "failure-mode",
+      "description": "Gateway process hangs (not crashed, not running). Won't respond to stop command. Requires Activity Monitor force-kill.",
+      "color": "#ef4444",
+      "cause": "Likely waiting on Ollama timeout or network socket that never resolves",
+      "detection": "openclaw gateway status shows 'running' but no responses",
+      "resolution": "Activity Monitor → Force Kill → openclaw gateway start"
+    }
+  },
+  {
+    "id": "session-files-location",
+    "label": "Session Files Location",
+    "category": "knowledge",
+    "frequency": 95,
+    "moments": [],
+    "attributes": {
+      "role": "level-100-ops",
+      "description": "~/.openclaw/agents/main/sessions/*.jsonl — This is where conversation history lives. Backup before deleting.",
+      "color": "#22c55e",
+      "criticality": "foundational",
+      "relatedCommand": "du -h ~/.openclaw/agents/main/sessions/*.jsonl"
+    }
+  },
+  {
+    "id": "activity-monitor-force-kill",
+    "label": "Activity Monitor Force Kill",
+    "category": "technique",
+    "frequency": 85,
+    "moments": [],
+    "attributes": {
+      "role": "level-100-ops",
+      "description": "When gateway won't die gracefully: Activity Monitor → search 'openclaw' or 'node' → Force Quit. Always works.",
+      "color": "#22c55e",
+      "whenToUse": "Gateway hung, won't respond to stop/restart commands",
+      "followUp": "Verify port free with 'lsof -i :18789', then start fresh"
+    }
+  },
+  {
+    "id": "media-inbound-folder",
+    "label": "Media Inbound Folder",
+    "category": "knowledge",
+    "frequency": 90,
+    "moments": [],
+    "attributes": {
+      "role": "level-100-ops",
+      "description": "~/.openclaw/media/inbound/ — Unprocessed media lands here. Files accumulating = processing pipeline broken.",
+      "color": "#22c55e",
+      "normalFlow": "Arrive → Process → Archive → Delete from inbound",
+      "recoveryCommand": "cp ~/.openclaw/media/inbound/*.ogg ~/Personal/paulvisciano.github.io/memory/raw/YYYY-MM-DD/audio/"
+    }
+  },
+  {
+    "id": "handshake-timeout-error",
+    "label": "Handshake Timeout Error",
+    "category": "error",
+    "frequency": 75,
+    "moments": [],
+    "attributes": {
+      "role": "common-error",
+      "description": "Gateway waiting for connection that never completes. Network down, gateway hung, or port conflict.",
+      "color": "#f59e0b",
+      "causes": [
+        "Network offline",
+        "Gateway frozen",
+        "Port 18789 already in use"
+      ],
+      "diagnosis": "Check logs: grep 'handshake timeout' ~/Library/Logs/openclaw/gateway.log",
+      "fix": "Restart gateway, or force-kill if hung"
+    }
+  },
+  {
+    "id": "enotfound-whatsapp-error",
+    "label": "ENOTFOUND web.whatsapp.com",
+    "category": "error",
+    "frequency": 80,
+    "moments": [],
+    "attributes": {
+      "role": "common-error",
+      "description": "DNS lookup failed. You're offline or WhatsApp servers unreachable.",
+      "color": "#f59e0b",
+      "meaning": "Network connectivity issue",
+      "behavior": "Messages queue in WhatsApp, deliver when back online",
+      "fix": "Check WiFi, wait for reconnection"
+    }
+  },
+  {
+    "id": "context-bloat-silent-failure",
+    "label": "Context Bloat → Silent Failure",
+    "category": "pattern",
+    "frequency": 70,
+    "moments": [],
+    "attributes": {
+      "role": "failure-mode",
+      "description": "Session grows beyond Ollama's safe range (~95k tokens). Inference fails silently. Agent appears alive but can't process.",
+      "color": "#ef4444",
+      "prevention": "Rotate sessions at 2MB, monitor with 'du -h'",
+      "detection": "No responses despite messages delivered, check session size first",
+      "relatedNode": "session-bloat-debugging-methodology"
+    }
+  },
+  {
+    "id": "debugging-your-claw-learning",
+    "label": "Debugging Your Claw (Learning #8)",
+    "category": "learning",
+    "frequency": 100,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "level-100-documentation",
+      "description": "Complete ops guide: where things live, how to backup/reset, common errors, diagnostic checklist, recovery playbook.",
+      "color": "#3b82f6",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/08-debugging-your-claw.md",
+      "bornFrom": "Paul's suffering through gateway crash without documentation"
+    }
   }
 ]
