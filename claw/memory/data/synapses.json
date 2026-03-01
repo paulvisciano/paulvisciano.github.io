@@ -4401,5 +4401,75 @@
     "weight": 0.7,
     "type": "related-to",
     "label": "similar failure mode"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "gateway-crash-recovery-march-1-2026",
+    "weight": 1.0,
+    "type": "contains",
+    "label": "includes incident"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "delivery-recovery-budget-bug",
+    "weight": 0.95,
+    "type": "revealed",
+    "label": "discovered bug"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "zombie-gateway-pattern",
+    "weight": 0.9,
+    "type": "demonstrated",
+    "label": "experienced pattern"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "session-files-location",
+    "weight": 0.85,
+    "type": "learned",
+    "label": "operational knowledge from"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "activity-monitor-force-kill",
+    "weight": 0.9,
+    "type": "required",
+    "label": "technique used in"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "media-inbound-folder",
+    "weight": 0.85,
+    "type": "learned",
+    "label": "operational knowledge from"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "handshake-timeout-error",
+    "weight": 0.85,
+    "type": "encountered",
+    "label": "error seen in"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "enotfound-whatsapp-error",
+    "weight": 0.85,
+    "type": "encountered",
+    "label": "error seen in"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "context-bloat-silent-failure",
+    "weight": 0.75,
+    "type": "related-to",
+    "label": "similar failure mode"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "debugging-your-claw-learning",
+    "weight": 1.0,
+    "type": "produced",
+    "label": "created learning"
   }
 ]
