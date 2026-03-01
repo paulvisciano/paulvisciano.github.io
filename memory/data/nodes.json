@@ -1224,7 +1224,24 @@
       "created": "2026-03-01",
       "date": "2026-03-01",
       "timeRange": "09:00 - 11:00 AM GMT+7",
-      "sourceDocument": "file:///Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-03-01/learnings/00-march-1-2026-comic-pipeline.md"
+      "sourceDocument": "file:///Users/paulvisciano/Personal/paulvisciano.github.io/memory/raw/2026-03-01/transcript.md"
+    }
+  },
+  {
+    "id": "day-one-sovereignty-comic",
+    "label": "Day One: The Architect Wakes (Comic)",
+    "category": "artifact",
+    "frequency": 1,
+    "attributes": {
+      "type": "comic-book",
+      "url": "https://paulvisciano.github.io/moments/bangkok/2026-02-28/",
+      "status": "LIVE",
+      "spreads": 5,
+      "pages": 10,
+      "description": "First sovereignty manifesto comic. RawClaw origin story: Feb 28, 2026 — 8-mile Bangkok walk, phone overheated, OpenClaw held through failure, Graph Reducer named. Created via new Creative Director pipeline.",
+      "color": "#fbbf24",
+      "created": "2026-03-01",
+      "sourceDocument": "https://paulvisciano.github.io/moments/bangkok/2026-02-28/"
     }
   },
   {
