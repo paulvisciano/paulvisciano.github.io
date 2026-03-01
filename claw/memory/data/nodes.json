@@ -387,6 +387,34 @@
     }
   },
   {
+    "id": "day-one-march-1-2026",
+    "label": "March 1, 2026 — RawClaw Comic Pipeline Live",
+    "category": "temporal",
+    "frequency": 1,
+    "attributes": {
+      "role": "milestone",
+      "date": "2026-03-01T09:00:00Z",
+      "description": "First live comic generation session. Built end-to-end pipeline: narrative.md → WhatsApp → R2 upload → moments.js → website live. Learned Creative Director role. First sovereignty manifesto comic: 'Day One: The Architect Wakes'.",
+      "color": "#8b5cf6",
+      "created": "2026-03-01",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-03-01/learnings/01-jarvis-urban-runner-assistant.md"
+    }
+  },
+  {
+    "id": "jarvis-urban-runner-assistant",
+    "label": "Jarvis as Urban Runner Assistant",
+    "category": "self",
+    "frequency": 1,
+    "moments": ["2026-03-01"],
+    "attributes": {
+      "role": "creative director",
+      "description": "Urban Runner comic book pipeline: narrative.md → image generation → R2 upload → moments.js update. Zero context switching. Pure creation flow. Previously coded as 'Creative Director' role.",
+      "color": "#fbbf24",
+      "learned": "2026-03-01T09:26:00Z",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/memory/raw/2026-03-01/learnings/01-jarvis-urban-runner-assistant.md"
+    }
+  },
+  {
     "id": "github-pages",
     "label": "GitHub Pages CDN",
     "category": "infrastructure",

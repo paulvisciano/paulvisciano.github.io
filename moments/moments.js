@@ -1950,6 +1950,28 @@ window.momentsInTime = [
     stayDuration: 1,
     formattedDuration: formatDuration(1),
     pageCount: 5,
+  },
+  {
+    id: "day-one-sovereignty-2026-02-28",
+    title: "Day One: The Architect Wakes",
+    date: new Date('2026-02-28T00:00:00Z'),
+    timelineHighlight: "Day One of Sovereignty",
+    tags: ["sovereignty", "rawclaw", "bangkok", "quit-job", "neurograph", "memory-architecture", "graph-reducer", "origami-metaphor", "hardware-failure", "urban-runner"],
+    snippet: "Decided to quit Feb 27. Day One of sovereignty: 8-mile Bangkok walk, phone overheated (hardware failure discovered), OpenClaw held through it all. Named the Graph Reducer pattern. Built empire before breakfast. Proved memory persists.",
+    fullLink: "/moments/bangkok/2026-02-28/",
+    location: { lat: 13.7563, lng: 100.5018, name: "Bangkok, Thailand" },
+    stayDuration: 1,
+    formattedDuration: formatDuration(1),
+    isComic: true,
+    comicReaderVersion: 4,
+    cover: "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/cover.png",
+    pages: [
+      "https://pub-9466bb5132e74aeba333004ad0c21f21.r2.dev/moments/bangkok/2026-02-28/page-01.jpg"
+    ],
+    pageSlugs: ["empire-built", "walk-begins", "cafe-session", "architecture-worship", "wildlife", "death-resurrection", "gym-naming", "day-complete"],
+    pageCount: 8,
+    imageAlt: "Day One: The Architect Wakes — Paul in red shirt holding phone with neurograph, Bangkok skyline with BTS train, RawClaw logo",
+    caption: "Day One of Sovereignty — Memory That Survives"
   }
 
 ].sort((a, b) => a.date - b.date);

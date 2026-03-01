@@ -49,6 +49,48 @@
     "label": "learned"
   },
   {
+    "source": "day-one-march-1-2026",
+    "target": "jarvis-urban-runner-assistant",
+    "weight": 1.0,
+    "type": "contains",
+    "label": "learned capability"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "rawclaw",
+    "weight": 1.0,
+    "type": "advances",
+    "label": "sovereignty proof"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "urban-runner",
+    "weight": 1.0,
+    "type": "extends",
+    "label": "comic pipeline"
+  },
+  {
+    "source": "jarvis-urban-runner-assistant",
+    "target": "urban-runner",
+    "weight": 1.0,
+    "type": "supports",
+    "label": "maintains"
+  },
+  {
+    "source": "jarvis-urban-runner-assistant",
+    "target": "rawclaw",
+    "weight": 1.0,
+    "type": "embodies",
+    "label": "powers"
+  },
+  {
+    "source": "jarvis-urban-runner-assistant",
+    "target": "graph-reducer-pattern",
+    "weight": 0.95,
+    "type": "applies",
+    "label": "uses for comics"
+  },
+  {
     "source": "feb-28-2026-session-bloat-debugging",
     "target": "hybrid-architecture-decision",
     "weight": 0.92,
