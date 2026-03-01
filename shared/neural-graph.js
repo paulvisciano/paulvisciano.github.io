@@ -26,6 +26,7 @@
             panelToggle.textContent = panelOpen ? '›' : '‹';
             panelToggle.setAttribute('aria-label', panelOpen ? 'Collapse panel' : 'Expand panel');
             resizeCanvas();
+            if (nodePopoverEl && nodePopoverEl.classList.contains('is-open')) positionPopover(nodePopoverEl);
         }
 
         resizeCanvas();
@@ -69,7 +70,9 @@
             const pad = 16;
             pop.style.left = '';
             pop.style.top = '';
-            pop.style.right = pad + 'px';
+            const isDesktop = window.innerWidth > 768;
+            const rightOffset = (isDesktop && panelOpen) ? (PANEL_WIDTH + pad) : pad;
+            pop.style.right = rightOffset + 'px';
             pop.style.bottom = pad + 'px';
         }
 
