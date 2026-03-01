@@ -4471,5 +4471,145 @@
     "weight": 1.0,
     "type": "produced",
     "label": "created learning"
+  },
+  {
+    "source": "rawclaw-manifesto-march-1",
+    "target": "no-deleted-pixels-philosophy",
+    "weight": 1.0,
+    "type": "includes",
+    "label": "declares"
+  },
+  {
+    "source": "rawclaw-manifesto-march-1",
+    "target": "consent-based-memory-linking",
+    "weight": 1.0,
+    "type": "includes",
+    "label": "declares"
+  },
+  {
+    "source": "rawclaw-manifesto-march-1",
+    "target": "sovereign-publishing-pattern",
+    "weight": 1.0,
+    "type": "embodies",
+    "label": "implements"
+  },
+  {
+    "source": "two-tier-sovereignty-architecture",
+    "target": "hotspot-publishing-pattern",
+    "weight": 0.95,
+    "type": "enables",
+    "label": "supports"
+  },
+  {
+    "source": "two-tier-sovereignty-architecture",
+    "target": "geographic-redundancy-strategy",
+    "weight": 0.95,
+    "type": "requires",
+    "label": "protected by"
+  },
+  {
+    "source": "two-tier-sovereignty-architecture",
+    "target": "sovereign-publishing-pattern",
+    "weight": 1.0,
+    "type": "implements",
+    "label": "realized through"
+  },
+  {
+    "source": "identity-separation-pattern",
+    "target": "independent-connectivity",
+    "weight": 0.9,
+    "type": "complements",
+    "label": "works with"
+  },
+  {
+    "source": "independent-connectivity",
+    "target": "two-tier-sovereignty-architecture",
+    "weight": 0.85,
+    "type": "supports",
+    "label": "connects to"
+  },
+  {
+    "source": "no-deleted-pixels-philosophy",
+    "target": "sovereign-publishing-pattern",
+    "weight": 0.95,
+    "type": "guides",
+    "label": "informs"
+  },
+  {
+    "source": "consent-based-memory-linking",
+    "target": "three-navigation-modes",
+    "weight": 0.85,
+    "type": "enhanced-by",
+    "label": "explored via"
+  },
+  {
+    "source": "three-navigation-modes",
+    "target": "no-deleted-pixels-philosophy",
+    "weight": 0.8,
+    "type": "displays",
+    "label": "shows raw content"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "rawclaw-manifesto-march-1",
+    "weight": 1.0,
+    "type": "produced",
+    "label": "birthed manifesto"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "two-tier-sovereignty-architecture",
+    "weight": 1.0,
+    "type": "established",
+    "label": "architected"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "identity-separation-pattern",
+    "weight": 0.95,
+    "type": "recognized",
+    "label": "implemented"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "independent-connectivity",
+    "weight": 0.95,
+    "type": "planned",
+    "label": "will implement"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "no-deleted-pixels-philosophy",
+    "weight": 1.0,
+    "type": "declared",
+    "label": "championed"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "consent-based-memory-linking",
+    "weight": 1.0,
+    "type": "envisioned",
+    "label": "designed"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "three-navigation-modes",
+    "weight": 1.0,
+    "type": "specified",
+    "label": "defined"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "geographic-redundancy-strategy",
+    "weight": 1.0,
+    "type": "established",
+    "label": "backup strategy"
+  },
+  {
+    "source": "day-one-march-1-2026",
+    "target": "hotspot-publishing-pattern",
+    "weight": 1.0,
+    "type": "documented",
+    "label": "pattern defined"
   }
 ]

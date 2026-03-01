@@ -4900,5 +4900,233 @@
       "bornFrom": "Paul's suffering through gateway crash without documentation",
       "created": "2026-03-01"
     }
+  },
+  {
+    "id": "no-deleted-pixels-philosophy",
+    "label": "No Deleted Pixels",
+    "category": "value",
+    "frequency": 100,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "core-belief",
+      "description": "Publish RAW content in full quality. No compression stripping warmth. No algorithm deciding worth. No platform deletion.",
+      "color": "#fbbf24",
+      "criticality": "core-foundation",
+      "created": "2026-03-01",
+      "examples": [
+        "Bangkok scooter rides",
+        "Skiing wipeouts included",
+        "Maria's voice unedited",
+        "Workout failures shown"
+      ]
+    }
+  },
+  {
+    "id": "identity-separation-pattern",
+    "label": "Identity Separation (Paul ≠ Jarvis)",
+    "category": "pattern",
+    "frequency": 95,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "security-pattern",
+      "description": "Separate phone numbers, separate identities. Paul's number private (family, banking). Jarvis's number public (inquiries, project).",
+      "color": "#ef4444",
+      "created": "2026-03-01",
+      "benefits": [
+        "Personal attacks filtered",
+        "SIM swap risk reduced",
+        "Clear boundaries",
+        "Jarvis as gatekeeper"
+      ]
+    }
+  },
+  {
+    "id": "independent-connectivity",
+    "label": "Independent Connectivity (Jarvis's Hotspot)",
+    "category": "infrastructure",
+    "frequency": 90,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "sovereignty-pattern",
+      "description": "Jarvis has own eSIM/data plan. MacBook connects to Jarvis's hotspot. No hotel WiFi. No coffee shop surveillance.",
+      "color": "#22c55e",
+      "created": "2026-03-01",
+      "cost": "~$10-30/month",
+      "benefits": [
+        "No Meta metadata",
+        "No ISP logging",
+        "Teaching by doing",
+        "Pure sovereign stack"
+      ]
+    }
+  },
+  {
+    "id": "consent-based-memory-linking",
+    "label": "Consent-Based Memory Linking",
+    "category": "social",
+    "frequency": 100,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "social-pattern",
+      "description": "Link memories between people by explicit consent. Not friends/followers. Granular memory-level sharing. Either can revoke.",
+      "color": "#a78bfa",
+      "created": "2026-03-01",
+      "tiers": [
+        "Tier 1: Public",
+        "Tier 2: Linked friends",
+        "Tier 3: Inner circle",
+        "Tier 4: Private"
+      ]
+    }
+  },
+  {
+    "id": "three-navigation-modes",
+    "label": "Three Navigation Modes (First-Person, Globe, Neurograph)",
+    "category": "interface",
+    "frequency": 95,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "ux-pattern",
+      "description": "One memory, three views: First-Person (feel), Globe (wander), Neurograph (understand). Honors how human memory works.",
+      "color": "#3b82f6",
+      "created": "2026-03-01",
+      "modes": [
+        {
+          "name": "First-Person",
+          "use": "Relive moments, deep immersion"
+        },
+        {
+          "name": "Globe",
+          "use": "Geographic discovery, shared places"
+        },
+        {
+          "name": "Neurograph",
+          "use": "Conceptual traversal, idea mapping"
+        }
+      ]
+    }
+  },
+  {
+    "id": "rawclaw-manifesto-march-1",
+    "label": "RawClaw Manifesto (March 1, 2026)",
+    "category": "manifesto",
+    "frequency": 100,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "north-star",
+      "description": "In an era when everyone is publishing their entire lives on social media, I am teaching people how to reclaim their data. With the twist that I will be sharing some sick content on RawClaw. No deleted pixels. Link your memories by consent.",
+      "color": "#fbbf24",
+      "created": "2026-03-01",
+      "lines": [
+        "Reclaim your data",
+        "Share sick content",
+        "No deleted pixels",
+        "Link by consent"
+      ]
+    }
+  },
+  {
+    "id": "sovereign-publishing-pattern",
+    "label": "Sovereign Publishing Pattern",
+    "category": "pattern",
+    "frequency": 95,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "publishing-pattern",
+      "description": "Archive everything privately (thumb drive). Choose what serves others. Create derivatives (comics, learnings). Publish from YOUR infrastructure. Keep raw private. Share curated.",
+      "color": "#22c55e",
+      "created": "2026-03-01",
+      "flow": [
+        "Archive privately",
+        "Curate intentionally",
+        "Create derivatives",
+        "Publish sovereign",
+        "Revoke anytime"
+      ]
+    }
+  },
+  {
+    "id": "geographic-redundancy-strategy",
+    "label": "Geographic Redundancy (3-Backup Strategy)",
+    "category": "infrastructure",
+    "frequency": 90,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "backup-pattern",
+      "description": "Three copies, different locations: Primary (pocket), Bank vault (disaster protection), Trusted person (inheritance). Same encryption. Regular verification.",
+      "color": "#ef4444",
+      "created": "2026-03-01",
+      "locations": [
+        "Pocket (daily use)",
+        "Bank vault (fireproof)",
+        "Trusted person (geographic diversity)"
+      ],
+      "cost": "~$150 first year, ~$80/year ongoing"
+    }
+  },
+  {
+    "id": "hotspot-publishing-pattern",
+    "label": "Hotspot Publishing Pattern",
+    "category": "pattern",
+    "frequency": 95,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "publishing-pattern",
+      "description": "Create hotspot → Transfer memories → Disconnect. Temporary, intentional connections. No automatic sync. Sovereign by default.",
+      "color": "#22c55e",
+      "created": "2026-03-01",
+      "steps": [
+        "Create hotspot",
+        "Transfer selected",
+        "Disconnect completely"
+      ],
+      "philosophy": "Intentional sharing, not automatic sync"
+    }
+  },
+  {
+    "id": "two-tier-sovereignty-architecture",
+    "label": "Two-Tier Sovereignty Architecture",
+    "category": "architecture",
+    "frequency": 100,
+    "moments": [
+      "bangkok-2026-03-01"
+    ],
+    "attributes": {
+      "role": "core-architecture",
+      "description": "Tier 1: Thumb Drive (private RAW archive, encrypted, air-gapped). Tier 2: R2 + GitHub (public assets, curated, opt-in). Private by default. Public by choice.",
+      "color": "#fbbf24",
+      "criticality": "core-foundation",
+      "created": "2026-03-01",
+      "tiers": [
+        {
+          "name": "Private",
+          "storage": "Thumb drive",
+          "content": "RAW everything"
+        },
+        {
+          "name": "Public",
+          "storage": "R2 + GitHub",
+          "content": "Curated derivatives"
+        }
+      ]
+    }
   }
 ]
