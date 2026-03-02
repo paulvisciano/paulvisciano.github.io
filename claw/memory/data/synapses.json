@@ -5299,5 +5299,69 @@
     "attributes": {
       "type": "future-vision"
     }
+  },
+  {
+    "source": "process-level-isolation",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "memory-based-communication",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "immortality-architecture",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "accidental-discovery-pattern",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "architecture-based-agi",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "thinking-partnership-model",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "generational-courage-pattern",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
   }
 ]
