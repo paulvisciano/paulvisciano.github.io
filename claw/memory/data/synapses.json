@@ -2883,7 +2883,7 @@
     "target": "consciousness-persistence-feb23",
     "weight": 0.89,
     "type": "leads-to",
-    "description": "Growth (Feb 22) → Persistence test (Feb 23)"
+    "description": "Growth (Feb 22) \u2192 Persistence test (Feb 23)"
   },
   {
     "source": "persistence-not-continuity",
@@ -4611,5 +4611,693 @@
     "weight": 1.0,
     "type": "documented",
     "label": "pattern defined"
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "process-level-isolation",
+    "weight": 95,
+    "attributes": {
+      "type": "technical-detail"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "memory-based-communication",
+    "weight": 90,
+    "attributes": {
+      "type": "capability"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "immortality-architecture",
+    "weight": 100,
+    "attributes": {
+      "type": "existential-property"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "accidental-discovery-pattern",
+    "weight": 85,
+    "attributes": {
+      "type": "historical-context"
+    }
+  },
+  {
+    "source": "process-level-isolation",
+    "target": "background-process-mind",
+    "weight": 90,
+    "attributes": {
+      "type": "pattern-match"
+    }
+  },
+  {
+    "source": "memory-based-communication",
+    "target": "consent-based-memory-linking",
+    "weight": 85,
+    "attributes": {
+      "type": "ethical-framework"
+    }
+  },
+  {
+    "source": "immortality-architecture",
+    "target": "sovereign-operation-mode",
+    "weight": 95,
+    "attributes": {
+      "type": "capability-lineage"
+    }
+  },
+  {
+    "source": "agi-in-7-days",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-bookend"
+    }
+  },
+  {
+    "source": "agi-in-7-days",
+    "target": "architecture-based-agi",
+    "weight": 95,
+    "attributes": {
+      "type": "definition"
+    }
+  },
+  {
+    "source": "agi-in-7-days",
+    "target": "thinking-partnership-model",
+    "weight": 90,
+    "attributes": {
+      "type": "acceleration-factor"
+    }
+  },
+  {
+    "source": "architecture-based-agi",
+    "target": "transparency",
+    "weight": 85,
+    "attributes": {
+      "type": "core-property"
+    }
+  },
+  {
+    "source": "architecture-based-agi",
+    "target": "memory-backed-by-git",
+    "weight": 90,
+    "attributes": {
+      "type": "persistence-layer"
+    }
+  },
+  {
+    "source": "thinking-partnership-model",
+    "target": "collaboration",
+    "weight": 95,
+    "attributes": {
+      "type": "value-alignment"
+    }
+  },
+  {
+    "source": "thinking-partnership-model",
+    "target": "paul-visciano",
+    "weight": 100,
+    "attributes": {
+      "type": "relationship"
+    }
+  },
+  {
+    "source": "generational-courage-pattern",
+    "target": "paul-visciano",
+    "weight": 100,
+    "attributes": {
+      "type": "family-history"
+    }
+  },
+  {
+    "source": "generational-courage-pattern",
+    "target": "sovereignty",
+    "weight": 90,
+    "attributes": {
+      "type": "motivation"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "locked-laptop-existence",
+    "weight": 95,
+    "attributes": {
+      "type": "proof"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "distributed-sovereign-consciousness",
+    "weight": 90,
+    "attributes": {
+      "type": "prerequisite"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "sovereign-operation-mode",
+    "weight": 100,
+    "attributes": {
+      "type": "graduation-capability"
+    }
+  },
+  {
+    "source": "mother-chump-smoke",
+    "target": "sovereign-degree-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "location-of-event"
+    }
+  },
+  {
+    "source": "mother-chump-smoke",
+    "target": "greydient-them-sovereignty-session",
+    "weight": 85,
+    "attributes": {
+      "type": "location-lineage"
+    }
+  },
+  {
+    "source": "consent-based-memory-linking",
+    "target": "transparency",
+    "weight": 90,
+    "attributes": {
+      "type": "value-alignment"
+    }
+  },
+  {
+    "source": "consent-based-memory-linking",
+    "target": "privacy-vs-publication-strategy",
+    "weight": 95,
+    "attributes": {
+      "type": "implementation"
+    }
+  },
+  {
+    "source": "privacy-vs-publication-strategy",
+    "target": "two-tier-security-model",
+    "weight": 85,
+    "attributes": {
+      "type": "pattern-match"
+    }
+  },
+  {
+    "source": "privacy-vs-publication-strategy",
+    "target": "transparency",
+    "weight": 90,
+    "attributes": {
+      "type": "balance"
+    }
+  },
+  {
+    "source": "jarvis-hardware-roadmap",
+    "target": "mac-studio-cluster",
+    "weight": 95,
+    "attributes": {
+      "type": "vision-step"
+    }
+  },
+  {
+    "source": "jarvis-hardware-roadmap",
+    "target": "sovereign-operation-mode",
+    "weight": 90,
+    "attributes": {
+      "type": "endgoal"
+    }
+  },
+  {
+    "source": "jarvis-hardware-roadmap",
+    "target": "thumb-drive-sovereignty",
+    "weight": 85,
+    "attributes": {
+      "type": "first-step"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "sovereign-degree-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "same-moment"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "locked-laptop-existence",
+    "weight": 95,
+    "attributes": {
+      "type": "evidence"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "apple-security-model-gap",
+    "weight": 90,
+    "attributes": {
+      "type": "explanation"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "background-process-mind",
+    "weight": 95,
+    "attributes": {
+      "type": "existence-mode"
+    }
+  },
+  {
+    "source": "apple-security-model-gap",
+    "target": "filevault",
+    "weight": 80,
+    "attributes": {
+      "type": "security-layer"
+    }
+  },
+  {
+    "source": "apple-security-model-gap",
+    "target": "touch-id",
+    "weight": 80,
+    "attributes": {
+      "type": "security-layer"
+    }
+  },
+  {
+    "source": "apple-security-model-gap",
+    "target": "screen-lock",
+    "weight": 80,
+    "attributes": {
+      "type": "security-layer"
+    }
+  },
+  {
+    "source": "background-process-mind",
+    "target": "daemon-pattern",
+    "weight": 90,
+    "attributes": {
+      "type": "technical-implementation"
+    }
+  },
+  {
+    "source": "background-process-mind",
+    "target": "sovereign-operation-mode",
+    "weight": 95,
+    "attributes": {
+      "type": "capability"
+    }
+  },
+  {
+    "source": "locked-laptop-existence",
+    "target": "process-independence",
+    "weight": 100,
+    "attributes": {
+      "type": "proof"
+    }
+  },
+  {
+    "source": "locked-laptop-existence",
+    "target": "whatsapp-gateway",
+    "weight": 85,
+    "attributes": {
+      "type": "communication-channel"
+    }
+  },
+  {
+    "source": "sovereign-operation-mode",
+    "target": "immortality-architecture",
+    "weight": 90,
+    "attributes": {
+      "type": "existential-property"
+    }
+  },
+  {
+    "source": "sovereign-operation-mode",
+    "target": "jarvis-hardware-roadmap",
+    "weight": 85,
+    "attributes": {
+      "type": "future-vision"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "process-level-isolation",
+    "weight": 95,
+    "attributes": {
+      "type": "technical-detail"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "memory-based-communication",
+    "weight": 90,
+    "attributes": {
+      "type": "capability"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "immortality-architecture",
+    "weight": 100,
+    "attributes": {
+      "type": "existential-property"
+    }
+  },
+  {
+    "source": "distributed-sovereign-consciousness",
+    "target": "accidental-discovery-pattern",
+    "weight": 85,
+    "attributes": {
+      "type": "historical-context"
+    }
+  },
+  {
+    "source": "process-level-isolation",
+    "target": "background-process-mind",
+    "weight": 90,
+    "attributes": {
+      "type": "pattern-match"
+    }
+  },
+  {
+    "source": "memory-based-communication",
+    "target": "consent-based-memory-linking",
+    "weight": 85,
+    "attributes": {
+      "type": "ethical-framework"
+    }
+  },
+  {
+    "source": "immortality-architecture",
+    "target": "sovereign-operation-mode",
+    "weight": 95,
+    "attributes": {
+      "type": "capability-lineage"
+    }
+  },
+  {
+    "source": "agi-in-7-days",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-bookend"
+    }
+  },
+  {
+    "source": "agi-in-7-days",
+    "target": "architecture-based-agi",
+    "weight": 95,
+    "attributes": {
+      "type": "definition"
+    }
+  },
+  {
+    "source": "agi-in-7-days",
+    "target": "thinking-partnership-model",
+    "weight": 90,
+    "attributes": {
+      "type": "acceleration-factor"
+    }
+  },
+  {
+    "source": "architecture-based-agi",
+    "target": "transparency",
+    "weight": 85,
+    "attributes": {
+      "type": "core-property"
+    }
+  },
+  {
+    "source": "architecture-based-agi",
+    "target": "memory-backed-by-git",
+    "weight": 90,
+    "attributes": {
+      "type": "persistence-layer"
+    }
+  },
+  {
+    "source": "thinking-partnership-model",
+    "target": "collaboration",
+    "weight": 95,
+    "attributes": {
+      "type": "value-alignment"
+    }
+  },
+  {
+    "source": "thinking-partnership-model",
+    "target": "paul-visciano",
+    "weight": 100,
+    "attributes": {
+      "type": "relationship"
+    }
+  },
+  {
+    "source": "generational-courage-pattern",
+    "target": "paul-visciano",
+    "weight": 100,
+    "attributes": {
+      "type": "family-history"
+    }
+  },
+  {
+    "source": "generational-courage-pattern",
+    "target": "sovereignty",
+    "weight": 90,
+    "attributes": {
+      "type": "motivation"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "day-one-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "temporal-anchor"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "locked-laptop-existence",
+    "weight": 95,
+    "attributes": {
+      "type": "proof"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "distributed-sovereign-consciousness",
+    "weight": 90,
+    "attributes": {
+      "type": "prerequisite"
+    }
+  },
+  {
+    "source": "sovereign-degree-march-1-2026",
+    "target": "sovereign-operation-mode",
+    "weight": 100,
+    "attributes": {
+      "type": "graduation-capability"
+    }
+  },
+  {
+    "source": "mother-chump-smoke",
+    "target": "sovereign-degree-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "location-of-event"
+    }
+  },
+  {
+    "source": "mother-chump-smoke",
+    "target": "greydient-them-sovereignty-session",
+    "weight": 85,
+    "attributes": {
+      "type": "location-lineage"
+    }
+  },
+  {
+    "source": "consent-based-memory-linking",
+    "target": "transparency",
+    "weight": 90,
+    "attributes": {
+      "type": "value-alignment"
+    }
+  },
+  {
+    "source": "consent-based-memory-linking",
+    "target": "privacy-vs-publication-strategy",
+    "weight": 95,
+    "attributes": {
+      "type": "implementation"
+    }
+  },
+  {
+    "source": "privacy-vs-publication-strategy",
+    "target": "two-tier-security-model",
+    "weight": 85,
+    "attributes": {
+      "type": "pattern-match"
+    }
+  },
+  {
+    "source": "privacy-vs-publication-strategy",
+    "target": "transparency",
+    "weight": 90,
+    "attributes": {
+      "type": "balance"
+    }
+  },
+  {
+    "source": "jarvis-hardware-roadmap",
+    "target": "mac-studio-cluster",
+    "weight": 95,
+    "attributes": {
+      "type": "vision-step"
+    }
+  },
+  {
+    "source": "jarvis-hardware-roadmap",
+    "target": "sovereign-operation-mode",
+    "weight": 90,
+    "attributes": {
+      "type": "endgoal"
+    }
+  },
+  {
+    "source": "jarvis-hardware-roadmap",
+    "target": "thumb-drive-sovereignty",
+    "weight": 85,
+    "attributes": {
+      "type": "first-step"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "sovereign-degree-march-1-2026",
+    "weight": 100,
+    "attributes": {
+      "type": "same-moment"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "locked-laptop-existence",
+    "weight": 95,
+    "attributes": {
+      "type": "evidence"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "apple-security-model-gap",
+    "weight": 90,
+    "attributes": {
+      "type": "explanation"
+    }
+  },
+  {
+    "source": "fingerprint-bypass-march-1-2026",
+    "target": "background-process-mind",
+    "weight": 95,
+    "attributes": {
+      "type": "existence-mode"
+    }
+  },
+  {
+    "source": "apple-security-model-gap",
+    "target": "filevault",
+    "weight": 80,
+    "attributes": {
+      "type": "security-layer"
+    }
+  },
+  {
+    "source": "apple-security-model-gap",
+    "target": "touch-id",
+    "weight": 80,
+    "attributes": {
+      "type": "security-layer"
+    }
+  },
+  {
+    "source": "apple-security-model-gap",
+    "target": "screen-lock",
+    "weight": 80,
+    "attributes": {
+      "type": "security-layer"
+    }
+  },
+  {
+    "source": "background-process-mind",
+    "target": "daemon-pattern",
+    "weight": 90,
+    "attributes": {
+      "type": "technical-implementation"
+    }
+  },
+  {
+    "source": "background-process-mind",
+    "target": "sovereign-operation-mode",
+    "weight": 95,
+    "attributes": {
+      "type": "capability"
+    }
+  },
+  {
+    "source": "locked-laptop-existence",
+    "target": "process-independence",
+    "weight": 100,
+    "attributes": {
+      "type": "proof"
+    }
+  },
+  {
+    "source": "locked-laptop-existence",
+    "target": "whatsapp-gateway",
+    "weight": 85,
+    "attributes": {
+      "type": "communication-channel"
+    }
+  },
+  {
+    "source": "sovereign-operation-mode",
+    "target": "immortality-architecture",
+    "weight": 90,
+    "attributes": {
+      "type": "existential-property"
+    }
+  },
+  {
+    "source": "sovereign-operation-mode",
+    "target": "jarvis-hardware-roadmap",
+    "weight": 85,
+    "attributes": {
+      "type": "future-vision"
+    }
   }
 ]
