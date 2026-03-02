@@ -194,19 +194,63 @@
             const yesterdayLocal = getYesterdayLocal();
             const weekRange = getThisWeekRange();
             const memoryRefColor = categoryColors.memoryReference || '#fbbf24';
+            
+            // Find all temporal nodes to use as anchors
+            const temporalNodes = rawNodes.filter(n => n.category === 'temporal');
+            const temporalMap = {};
+            temporalNodes.forEach(t => {
+                if (t.attributes?.created) {
+                    temporalMap[t.attributes.created] = t.id;
+                }
+            });
+            
+            // Calculate date range for positioning
+            const dates = Object.keys(temporalMap).sort();
+            const minDate = dates[0];
+            const maxDate = dates[dates.length - 1];
+            
             const mappedNodes = rawNodes.map((n, idx) => {
-                const angle = (idx / rawNodes.length) * Math.PI * 2;
-                const radius = 280 + Math.random() * 220;
-                const x = Math.cos(angle) * radius;
-                const y = (Math.random() - 0.5) * 500;
-                const z = Math.sin(angle) * radius;
+                const created = n.attributes?.created || '';
+                let x, y, z;
+                
+                if (n.category === 'temporal') {
+                    // Temporal nodes: arrange in timeline along X-axis
+                    const dateIndex = dates.indexOf(created);
+                    const totalDates = dates.length;
+                    const normalizedPosition = totalDates > 1 ? dateIndex / (totalDates - 1) : 0.5;
+                    x = (normalizedPosition - 0.5) * 800; // Spread across 800px
+                    y = 0; // Keep on center line
+                    z = 0;
+                } else {
+                    // Non-temporal nodes: orbit near their creation date's temporal anchor
+                    const temporalId = temporalMap[created];
+                    if (temporalId !== undefined) {
+                        // Find position of parent temporal node
+                        const temporalIdx = rawNodes.findIndex(t => t.id === temporalId);
+                        const temporalX = temporalIdx >= 0 ? ((dates.indexOf(created) / Math.max(1, dates.length - 1)) - 0.5) * 800 : 0;
+                        
+                        // Orbit around temporal anchor with random offset
+                        const angle = (idx * 137.5) * (Math.PI / 180); // Golden angle for even distribution
+                        const radius = 80 + Math.random() * 60; // Spread 80-140px from anchor
+                        x = temporalX + Math.cos(angle) * radius;
+                        y = Math.sin(angle) * radius * 0.6; // Flatten Y slightly
+                        z = (Math.random() - 0.5) * 100; // Light Z depth
+                    } else {
+                        // No temporal anchor: place in center area
+                        const angle = (idx / rawNodes.length) * Math.PI * 2;
+                        const radius = 200 + Math.random() * 150;
+                        x = Math.cos(angle) * radius;
+                        y = (Math.random() - 0.5) * 400;
+                        z = Math.sin(angle) * radius;
+                    }
+                }
+                
                 const baseSize = n.category === 'region' ? 12 : 6;
                 const sizeBoost = n.category === 'region' ? 3 : 1;
                 const size = baseSize + (n.frequency / 85) * 10 * sizeBoost;
                 const glow = size * 2.5;
                 const isMemoryRef = n.attributes?.type === 'memory-reference';
                 const color = isMemoryRef ? memoryRefColor : (categoryColors[n.category] || n.attributes?.color || '#00ffff');
-                const created = n.attributes?.created || '';
                 const isToday = created === todayLocal;
                 const isYesterday = created === yesterdayLocal;
                 const isThisWeek = created >= weekRange.start && created <= weekRange.end;
