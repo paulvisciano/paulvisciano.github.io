@@ -619,44 +619,45 @@
                     });
                 }
                 
-                // Draw labels with dynamic sizing (skip labels in focus mode for cleaner view)
-                const showLabels = activeNodeIds === null; // Hide labels when a node is selected
-                if (showLabels) {
-                    nodes.forEach((n, idx) => {
-                        if (!passesFilter(idx)) return;
-                        
-                        const p = project(n.x, n.y, n.z);
-                        const r = n.size;
-                        const isDimmed = activeNodeIds !== null && !activeNodeIds.has(idx);
-                        const dimAlpha = 0.25;
-                        
-                        const isSelected = (selected === idx);
-                        const isConnectedToSelected = connectedToSelected.has(idx);
-                        const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
-                        
-                        ctx.font = `bold ${fontSize}px monospace`;
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
-                        
-                        const shadowBlur = isSelected ? 12 : 8;
-                        const shadowOpacity = isSelected ? 1.0 : 0.9;
-                        ctx.shadowColor = `rgba(0, 0, 0, ${shadowOpacity})`;
-                        ctx.shadowBlur = shadowBlur;
-                        ctx.shadowOffsetX = 0;
-                        ctx.shadowOffsetY = 0;
-                        ctx.lineWidth = isSelected ? 4 : 3;
-                        ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
-                        
-                        ctx.fillStyle = isSelected ? '#ffffaa' : '#ffffff';
-                        ctx.strokeText(n.name, p.x, p.y + r + 18);
-                        ctx.fillText(n.name, p.x, p.y + r + 18);
-                        
-                        ctx.shadowBlur = 0;
-                        ctx.lineWidth = 1;
-                        ctx.globalAlpha = 1;
-                    });
-                }
+                // Draw labels with dynamic sizing
+                nodes.forEach((n, idx) => {
+                    if (!passesFilter(idx)) return;
+                    
+                    // Focus mode: hide labels for unconnected nodes
+                    const isConnected = activeNodeIds !== null && activeNodeIds.has(n.id);
+                    if (activeNodeIds !== null && !isConnected) return; // Skip label
+                    
+                    const p = project(n.x, n.y, n.z);
+                    const r = n.size;
+                    const isDimmed = activeNodeIds !== null && !activeNodeIds.has(idx);
+                    const dimAlpha = 0.25;
+                    
+                    const isSelected = (selected === idx);
+                    const isConnectedToSelected = connectedToSelected.has(idx);
+                    const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
+                    
+                    ctx.font = `bold ${fontSize}px monospace`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
+                    
+                    const shadowBlur = isSelected ? 12 : 8;
+                    const shadowOpacity = isSelected ? 1.0 : 0.9;
+                    ctx.shadowColor = `rgba(0, 0, 0, ${shadowOpacity})`;
+                    ctx.shadowBlur = shadowBlur;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                    ctx.lineWidth = isSelected ? 4 : 3;
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
+                    
+                    ctx.fillStyle = isSelected ? '#ffffaa' : '#ffffff';
+                    ctx.strokeText(n.name, p.x, p.y + r + 18);
+                    ctx.fillText(n.name, p.x, p.y + r + 18);
+                    
+                    ctx.shadowBlur = 0;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 1;
+                });
                 
                 // Selection highlight ring
                 if (selected !== null) {
