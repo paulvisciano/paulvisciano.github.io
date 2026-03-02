@@ -661,6 +661,7 @@
                     ctx.arc(p.x, p.y, r + 12, 0, 6.28);
                     ctx.stroke();
                     
+                    // Pulsing outer ring
                     const pulse = Math.sin(time * 0.05) * 0.3 + 0.7;
                     ctx.strokeStyle = `rgba(255, 255, 0, ${pulse * 0.6})`;
                     ctx.lineWidth = 2;
@@ -668,54 +669,7 @@
                     ctx.arc(p.x, p.y, r + 20, 0, 6.28);
                     ctx.stroke();
                     ctx.globalAlpha = 1;
-                    if (selected === n.id) {
-                        ctx.strokeStyle = '#ffff00';
-                        ctx.lineWidth = 4;
-                        ctx.globalAlpha = 0.9;
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, r + 12, 0, 6.28);
-                        ctx.stroke();
-                        
-                        // Pulsing ring
-                        const pulse = Math.sin(time * 0.05) * 0.3 + 0.7;
-                        ctx.strokeStyle = `rgba(255, 255, 0, ${pulse * 0.6})`;
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, r + 20, 0, 6.28);
-                        ctx.stroke();
-                        ctx.globalAlpha = 1;
-                    }
-
-                    // Dynamic label sizing: larger when selected or connected to selected
-                    const isSelected = (selected === idx);
-                    const isConnectedToSelected = connectedToSelected.has(idx);
-                    const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
-                    
-                    ctx.font = `bold ${fontSize}px monospace`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
-                    
-                    // Enhanced shadow for selected node labels
-                    const shadowBlur = isSelected ? 12 : 8;
-                    const shadowOpacity = isSelected ? 1.0 : 0.9;
-                    ctx.shadowColor = `rgba(0, 0, 0, ${shadowOpacity})`;
-                    ctx.shadowBlur = shadowBlur;
-                    ctx.shadowOffsetX = 0;
-                    ctx.shadowOffsetY = 0;
-                    ctx.lineWidth = isSelected ? 4 : 3;
-                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
-                    
-                    // Warm yellow-white for selected, pure white for others
-                    ctx.fillStyle = isSelected ? '#ffffaa' : '#ffffff';
-                    ctx.strokeText(n.name, p.x, p.y + r + 18);
-                    ctx.fillText(n.name, p.x, p.y + r + 18);
-                    
-                    // Reset for next frame
-                    ctx.shadowBlur = 0;
-                    ctx.lineWidth = 1;
-                    ctx.globalAlpha = 1;
-                });
+                }
 
                 const visibleNodeCount = nodes.filter((_, i) => passesFilter(i)).length;
                 const visibleEdgeCount = edges.filter(e => passesFilter(e.from) && passesFilter(e.to)).length;
