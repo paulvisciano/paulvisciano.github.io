@@ -579,36 +579,8 @@
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
-                    // Extract RGB from hex color
-                    const [r2, g2, b2] = [
-                        parseInt(n.color.slice(1,3), 16),
-                        parseInt(n.color.slice(3,5), 16),
-                        parseInt(n.color.slice(5,7), 16)
-                    ];
-                    
-                    // REDUCED outer halo (less bloom for readability)
-                    const reducedGlow = Math.min(glow * 0.3, r * 2);
-                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, reducedGlow);
-                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.25)`);
-                    g1.addColorStop(0.7, `rgba(${r2}, ${g2}, ${b2}, 0.05)`);
-                    g1.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
-                    ctx.fillStyle = g1;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, reducedGlow, 0, 6.28);
-                    ctx.fill();
-
-                    // MINIMAL inner glow (tight to node core)
-                    const innerGlow = r * 1.3;
-                    const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.3, p.x, p.y, innerGlow);
-                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.8)`);
-                    g2_grad.addColorStop(0.6, `rgba(${r2}, ${g2}, ${b2}, 0.15)`);
-                    g2_grad.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
-                    ctx.fillStyle = g2_grad;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, innerGlow, 0, 6.28);
-                    ctx.fill();
-
-                    // Core neuron - NO blur, sharp edges for clarity
+                    // Core neuron ONLY - no glows, no halos (they're destroying readability)
+                    // The "blue lake" effect was beautiful but unusable
                     ctx.fillStyle = n.color;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, r, 0, 6.28);
