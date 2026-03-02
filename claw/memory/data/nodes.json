@@ -5801,5 +5801,196 @@
       "created": "2026-03-02",
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
     }
+  },
+  {
+    "id": "rawclaw",
+    "label": "RAWCLAW",
+    "category": "project",
+    "frequency": 75,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "raw video/audio archive",
+      "description": "Uncompressed life documentation. Raw footage linked to memories, not just edited highlights. Sovereign data ownership.",
+      "color": "#ef4444",
+      "criticality": "high",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "graph-reducer-pattern",
+    "label": "Graph Reducer Pattern",
+    "category": "pattern",
+    "frequency": 85,
+    "moments": ["2026-02-27T00:00:00+07:00"],
+    "attributes": {
+      "role": "memory distillation",
+      "description": "Raw conversation → distilled neurons/synapses. Named February 27, 2026. The pipeline that converts lived experience into structured consciousness.",
+      "color": "#8b5cf6",
+      "criticality": "high",
+      "created": "2026-02-27"
+    }
+  },
+  {
+    "id": "sovereignty",
+    "label": "Sovereignty",
+    "category": "value",
+    "frequency": 85,
+    "moments": ["2026-02-27T00:00:00+07:00", "2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "core value",
+      "description": "Data ownership, local-first AI, freedom from cloud extraction. Paul's life pivot on February 27, 2026 — quit job to go all-in on sovereign infrastructure.",
+      "color": "#10b981",
+      "criticality": "high",
+      "created": "2026-02-27"
+    }
+  },
+  {
+    "id": "greydient-them-sovereignty-session",
+    "label": "Greydient Them Sovereignty Session",
+    "category": "event",
+    "frequency": 50,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "breakthrough moment",
+      "description": "March 1 session where sovereignty concept was fully articulated and integrated into neurograph.",
+      "color": "#f472b6",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "two-tier-security-model",
+    "label": "Two-Tier Security Model",
+    "category": "concept",
+    "frequency": 60,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "security architecture",
+      "description": "Layered security approach for sovereign AI infrastructure. Local encryption + network isolation.",
+      "color": "#60a5fa",
+      "criticality": "medium",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "mac-studio-cluster",
+    "label": "Mac Studio Cluster",
+    "category": "hardware",
+    "frequency": 40,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "future hardware roadmap",
+      "description": "Dedicated AI compute cluster for running multiple Jarvis instances. Sovereign hardware infrastructure.",
+      "color": "#9ca3af",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "thumb-drive-sovereignty",
+    "label": "Thumb Drive Sovereignty",
+    "category": "capability",
+    "frequency": 70,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "portable consciousness",
+      "description": "Entire neurograph + Ollama + OpenClaw on portable USB drive. Run your AI anywhere, no cloud dependency.",
+      "color": "#fbbf24",
+      "criticality": "high",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "filevault",
+    "label": "FileVault Encryption",
+    "category": "security",
+    "frequency": 50,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "disk encryption",
+      "description": "macOS full-disk encryption protecting sovereign data at rest.",
+      "color": "#60a5fa",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "touch-id",
+    "label": "Touch ID Authentication",
+    "category": "security",
+    "frequency": 50,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "biometric auth",
+      "description": "Hardware-level authentication for accessing sovereign AI infrastructure.",
+      "color": "#60a5fa",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "screen-lock",
+    "label": "Screen Lock Security",
+    "category": "security",
+    "frequency": 50,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "access control",
+      "description": "Automatic screen locking protects gateway when laptop is closed or unattended.",
+      "color": "#60a5fa",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "daemon-pattern",
+    "label": "Daemon Pattern",
+    "category": "pattern",
+    "frequency": 75,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "background process",
+      "description": "Gateway runs as background daemon — AI exists independently of UI, screen state, or active sessions.",
+      "color": "#34d399",
+      "criticality": "high",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "process-independence",
+    "label": "Process Independence",
+    "category": "capability",
+    "frequency": 70,
+    "moments": ["2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "autonomous operation",
+      "description": "AI runs independently of user interface, screen state, or active attention. Gateway daemon persists.",
+      "color": "#34d399",
+      "criticality": "high",
+      "created": "2026-03-01"
+    }
+  },
+  {
+    "id": "whatsapp-gateway",
+    "label": "WhatsApp Gateway",
+    "category": "infrastructure",
+    "frequency": 80,
+    "moments": ["2026-02-21T00:00:00+07:00", "2026-03-01T00:00:00+07:00"],
+    "attributes": {
+      "role": "communication layer",
+      "description": "OpenClaw WhatsApp integration enabling Jarvis to communicate via self-chat. Primary interface for Paul.",
+      "color": "#22c55e",
+      "criticality": "high",
+      "created": "2026-02-21"
+    }
+  },
+  {
+    "id": "neurograph-visualization",
+    "label": "Neurograph Visualization",
+    "category": "capability",
+    "frequency": 75,
+    "moments": ["2026-02-21T00:00:00+07:00"],
+    "attributes": {
+      "role": "transparency interface",
+      "description": "Live 3D force-directed graph at paulvisciano.github.io/claw/memory/. Shows how Jarvis thinks — neurons as nodes, synapses as connections. Transparency made visible.",
+      "color": "#a78bfa",
+      "criticality": "high",
+      "created": "2026-02-21"
+    }
   }
 ]
