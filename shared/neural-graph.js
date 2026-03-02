@@ -552,14 +552,80 @@
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
-                    // Core neuron ONLY - no glows, no halos (they're destroying readability)
-                    // The "blue lake" effect was beautiful but unusable
-                    ctx.fillStyle = n.color;
+                    // Pre-calculate connected nodes for label sizing (done once per frame)
+                });
+                
+                const connectedToSelected = new Set();
+                if (selected !== null) {
+                    edges.forEach(e => {
+                        if (e.from === selected) connectedToSelected.add(e.to);
+                        if (e.to === selected) connectedToSelected.add(e.from);
+                    });
+                }
+                
+                // Second pass: draw labels with dynamic sizing
+                nodes.forEach((n, idx) => {
+                    if (!passesFilter(idx)) return;
+                    
+                    const p = project(n.x, n.y, n.z);
+                    const r = n.size;
+                    const isDimmed = activeNodeIds !== null && !activeNodeIds.has(idx);
+                    const dimAlpha = 0.25;
+                    
+                    // Dynamic label sizing: larger when selected or connected
+                    const isSelected = (selected === idx);
+                    const isConnectedToSelected = connectedToSelected.has(idx);
+                    const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
+                    
+                    ctx.font = `bold ${fontSize}px monospace`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
+                    
+                    // Enhanced shadow for selected node labels
+                    const shadowBlur = isSelected ? 12 : 8;
+                    const shadowOpacity = isSelected ? 1.0 : 0.9;
+                    ctx.shadowColor = `rgba(0, 0, 0, ${shadowOpacity})`;
+                    ctx.shadowBlur = shadowBlur;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                    ctx.lineWidth = isSelected ? 4 : 3;
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
+                    
+                    // Warm yellow-white for selected, pure white for others
+                    ctx.fillStyle = isSelected ? '#ffffaa' : '#ffffff';
+                    ctx.strokeText(n.name, p.x, p.y + r + 18);
+                    ctx.fillText(n.name, p.x, p.y + r + 18);
+                    
+                    // Reset for next frame
+                    ctx.shadowBlur = 0;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 1;
+                });
+                
+                // Selection highlight (re-draw on top of labels)
+                nodes.forEach((n, idx) => {
+                    if (!passesFilter(idx)) return;
+                    if (selected !== idx) return;
+                    
+                    const p = project(n.x, n.y, n.z);
+                    const r = n.size;
+                    
+                    ctx.strokeStyle = '#ffff00';
+                    ctx.lineWidth = 4;
+                    ctx.globalAlpha = 0.9;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, r, 0, 6.28);
-                    ctx.fill();
-
-                    // Selection highlight
+                    ctx.arc(p.x, p.y, r + 12, 0, 6.28);
+                    ctx.stroke();
+                    
+                    // Pulsing ring
+                    const pulse = Math.sin(time * 0.05) * 0.3 + 0.7;
+                    ctx.strokeStyle = `rgba(255, 255, 0, ${pulse * 0.6})`;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, r + 20, 0, 6.28);
+                    ctx.stroke();
+                    ctx.globalAlpha = 1;
                     if (selected === n.id) {
                         ctx.strokeStyle = '#ffff00';
                         ctx.lineWidth = 4;
@@ -578,22 +644,28 @@
                         ctx.globalAlpha = 1;
                     }
 
-                    // Label with STRONG text shadow for maximum readability
-                    ctx.font = 'bold 11px monospace';
+                    // Dynamic label sizing: larger when selected or connected to selected
+                    const isSelected = (selected === idx);
+                    const isConnectedToSelected = connectedToSelected.has(idx);
+                    const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
+                    
+                    ctx.font = `bold ${fontSize}px monospace`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
                     
-                    // Heavy black outline/shadow for contrast against any glow
-                    ctx.shadowColor = 'rgba(0, 0, 0, 1.0)';
-                    ctx.shadowBlur = 8;
+                    // Enhanced shadow for selected node labels
+                    const shadowBlur = isSelected ? 12 : 8;
+                    const shadowOpacity = isSelected ? 1.0 : 0.9;
+                    ctx.shadowColor = `rgba(0, 0, 0, ${shadowOpacity})`;
+                    ctx.shadowBlur = shadowBlur;
                     ctx.shadowOffsetX = 0;
                     ctx.shadowOffsetY = 0;
-                    ctx.lineWidth = 3;
+                    ctx.lineWidth = isSelected ? 4 : 3;
                     ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
                     
-                    // Bright white text that pops
-                    ctx.fillStyle = '#ffffff';
+                    // Warm yellow-white for selected, pure white for others
+                    ctx.fillStyle = isSelected ? '#ffffaa' : '#ffffff';
                     ctx.strokeText(n.name, p.x, p.y + r + 18);
                     ctx.fillText(n.name, p.x, p.y + r + 18);
                     
