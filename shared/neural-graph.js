@@ -540,6 +540,9 @@
                     // Skip edges if either node is filtered out
                     if (!passesFilter(e.from) || !passesFilter(e.to)) return;
                     
+                    // Focus mode: when a node is selected, hide edges not connected to it
+                    if (activeNodeIds !== null && !activeNodeIds.has(e.from) && !activeNodeIds.has(e.to)) return;
+                    
                     const p1 = project(nodes[e.from].x, nodes[e.from].y, nodes[e.from].z);
                     const p2 = project(nodes[e.to].x, nodes[e.to].y, nodes[e.to].z);
                     const isConnected = selected !== null && (e.from === selected || e.to === selected);
@@ -584,6 +587,10 @@
                         const typeForFilterNode = (CONFIG.filterToType && CONFIG.filterToType[currentFilter]) || currentFilter;
                         if ((n.type || '').toLowerCase() !== (typeForFilterNode || '').toLowerCase()) return;
                     }
+                    
+                    // Focus mode: when a node is selected, hide unconnected nodes entirely
+                    const isConnected = activeNodeIds !== null && activeNodeIds.has(n.id);
+                    if (activeNodeIds !== null && !isConnected) return; // Skip rendering unconnected nodes
                     
                     const r = n.size * p.scale;
                     let glow = n.glow * p.scale;
