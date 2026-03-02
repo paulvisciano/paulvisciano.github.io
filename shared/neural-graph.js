@@ -641,7 +641,6 @@
                     const isSelected = (selected === idx);
                     const isConnectedToSelected = connectedToSelected.has(idx);
                     
-                    if (!showLabelsAtZoom) return;
                     if (!isImportant && !isSelected && !isConnectedToSelected) return; // Skip small, unconnected labels
                     
                     const p = project(n.x, n.y, n.z);
