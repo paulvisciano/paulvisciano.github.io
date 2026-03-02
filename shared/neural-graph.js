@@ -619,8 +619,9 @@
                     });
                 }
                 
-                // Draw labels with dynamic sizing and zoom-based visibility
+                // Draw labels with size-based and zoom-based visibility
                 const showLabelsAtZoom = viewZoom > 0.6; // Hide labels when zoomed out too far
+                const minSizeForLabel = 9; // Only show labels for neurons larger than this (filters out small/low-frequency nodes)
                 nodes.forEach((n, idx) => {
                     if (!passesFilter(idx)) return;
                     
@@ -628,16 +629,20 @@
                     const isConnected = activeNodeIds !== null && activeNodeIds.has(n.id);
                     if (activeNodeIds !== null && !isConnected) return; // Skip label
                     
-                    // Zoom-based visibility: hide labels in far view to reduce clutter
+                    // Size-based visibility: only show labels for important/large neurons
+                    // EXCEPTION: always show if selected or in focus mode chain
+                    const isImportant = n.size >= minSizeForLabel;
+                    const isSelected = (selected === idx);
+                    const isConnectedToSelected = connectedToSelected.has(idx);
+                    
                     if (!showLabelsAtZoom) return;
+                    if (!isImportant && !isSelected && !isConnectedToSelected) return; // Skip small, unconnected labels
                     
                     const p = project(n.x, n.y, n.z);
                     const r = n.size;
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(idx);
                     const dimAlpha = 0.25;
                     
-                    const isSelected = (selected === idx);
-                    const isConnectedToSelected = connectedToSelected.has(idx);
                     const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
                     
                     ctx.font = `bold ${fontSize}px monospace`;
