@@ -38,10 +38,10 @@ BOOT.md:        [unchanged]
 
 **Master Hash:**
 ```
-e7af2723ff2556f6ae2a00c096688a154b2e02845c80a673de14c5d7ed915954
+7eb769dc84d7989a73d54faeb4e0262a4f7c27a3c65a0c1d1bcc28fdbc7ba1f9
 ```
 
-This is the SHA-256 of nodes.json + synapses.json combined.
+This is the SHA-256 of nodes.json + synapses.json + BOOT.md combined.
 
 **Updated:** March 2, 2026 — After March 1 sovereignty discoveries and neuron additions (340 neurons total across both memory systems).
 
