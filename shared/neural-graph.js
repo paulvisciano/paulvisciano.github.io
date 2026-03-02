@@ -491,7 +491,7 @@
                     return ((n.type || '').toLowerCase() === (typeForFilter || '').toLowerCase());
                 };
 
-                // Draw synapses with triple glow
+                // Draw synapses as thin, subtle lines (no glow - creates visual noise at scale)
                 edges.forEach(e => {
                     // Skip edges if either node is filtered out
                     if (!passesFilter(e.from) || !passesFilter(e.to)) return;
@@ -499,50 +499,23 @@
                     const p1 = project(nodes[e.from].x, nodes[e.from].y, nodes[e.from].z);
                     const p2 = project(nodes[e.to].x, nodes[e.to].y, nodes[e.to].z);
                     const isConnected = selected !== null && (e.from === selected || e.to === selected);
-                    const strength = 0.4 + (e.weight / 15) * 0.6;
                     
                     if (isConnected) {
-                        // Highlight: connected to selected node — yellow/white glow on top
+                        // Highlight: connected to selected node — bright white line
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+                        ctx.lineWidth = 2;
                         ctx.lineCap = 'round';
-                        ctx.lineJoin = 'round';
-                        ctx.strokeStyle = 'rgba(255, 255, 200, 0.35)';
-                        ctx.lineWidth = Math.max(8, e.weight / 1.5) + 4;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                        ctx.strokeStyle = 'rgba(255, 255, 150, 0.7)';
-                        ctx.lineWidth = Math.max(3, e.weight / 2.5) + 1;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                        ctx.strokeStyle = '#ffff88';
-                        ctx.lineWidth = Math.max(1.5, e.weight / 4);
                         ctx.beginPath();
                         ctx.moveTo(p1.x, p1.y);
                         ctx.lineTo(p2.x, p2.y);
                         ctx.stroke();
                     } else {
-                        // Not connected to selected — dim like non-selected nodes
-                        const edgeDimAlpha = activeNodeIds !== null ? 0.22 : 1;
+                        // Normal edges: thin, subtle, gray-blue
+                        const edgeDimAlpha = activeNodeIds !== null ? 0.15 : 0.25;
                         ctx.globalAlpha = edgeDimAlpha;
-                        ctx.strokeStyle = `rgba(0, 100, 255, ${strength * 0.2})`;
-                        ctx.lineWidth = Math.max(4, e.weight / 2.5) + 2;
+                        ctx.strokeStyle = 'rgba(100, 150, 200, 0.6)';
+                        ctx.lineWidth = 1;
                         ctx.lineCap = 'round';
-                        ctx.lineJoin = 'round';
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                        ctx.strokeStyle = `rgba(0, 200, 255, ${strength * 0.4})`;
-                        ctx.lineWidth = Math.max(2, e.weight / 3.5) + 1;
-                        ctx.beginPath();
-                        ctx.moveTo(p1.x, p1.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                        ctx.strokeStyle = `rgba(0, 255, 255, ${strength})`;
-                        ctx.lineWidth = Math.max(0.5, e.weight / 5);
                         ctx.beginPath();
                         ctx.moveTo(p1.x, p1.y);
                         ctx.lineTo(p2.x, p2.y);
