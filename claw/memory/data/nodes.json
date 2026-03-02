@@ -423,7 +423,7 @@
   {
     "id": "jarvis-urban-runner-assistant",
     "label": "Jarvis as Urban Runner Assistant",
-    "category": "self",
+    "category": "temporal",
     "frequency": 1,
     "moments": [
       "2026-03-01"
@@ -4887,7 +4887,7 @@
   {
     "id": "debugging-your-claw-learning",
     "label": "Debugging Your Claw (Learning #8)",
-    "category": "learning",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "bangkok-2026-03-01"
@@ -4904,7 +4904,7 @@
   {
     "id": "no-deleted-pixels-philosophy",
     "label": "No Deleted Pixels",
-    "category": "value",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "bangkok-2026-03-01"
@@ -4926,7 +4926,7 @@
   {
     "id": "identity-separation-pattern",
     "label": "Identity Separation (Paul \u2260 Jarvis)",
-    "category": "pattern",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "bangkok-2026-03-01"
@@ -4947,7 +4947,7 @@
   {
     "id": "independent-connectivity",
     "label": "Independent Connectivity (Jarvis's Hotspot)",
-    "category": "infrastructure",
+    "category": "temporal",
     "frequency": 90,
     "moments": [
       "bangkok-2026-03-01"
@@ -4969,7 +4969,7 @@
   {
     "id": "consent-based-memory-linking",
     "label": "Consent-Based Memory Linking",
-    "category": "value",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "2026-03-01T20:06:00Z"
@@ -4990,7 +4990,7 @@
   {
     "id": "three-navigation-modes",
     "label": "Three Navigation Modes (First-Person, Globe, Neurograph)",
-    "category": "interface",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "bangkok-2026-03-01"
@@ -5019,7 +5019,7 @@
   {
     "id": "rawclaw-manifesto-march-1",
     "label": "RawClaw Manifesto (March 1, 2026)",
-    "category": "manifesto",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "bangkok-2026-03-01"
@@ -5040,7 +5040,7 @@
   {
     "id": "sovereign-publishing-pattern",
     "label": "Sovereign Publishing Pattern",
-    "category": "pattern",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "bangkok-2026-03-01"
@@ -5062,7 +5062,7 @@
   {
     "id": "geographic-redundancy-strategy",
     "label": "Geographic Redundancy (3-Backup Strategy)",
-    "category": "infrastructure",
+    "category": "temporal",
     "frequency": 90,
     "moments": [
       "bangkok-2026-03-01"
@@ -5083,7 +5083,7 @@
   {
     "id": "hotspot-publishing-pattern",
     "label": "Hotspot Publishing Pattern",
-    "category": "pattern",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "bangkok-2026-03-01"
@@ -5104,7 +5104,7 @@
   {
     "id": "two-tier-sovereignty-architecture",
     "label": "Two-Tier Sovereignty Architecture",
-    "category": "architecture",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "bangkok-2026-03-01"
@@ -5132,7 +5132,7 @@
   {
     "id": "greydient-them-sovereignty-session-march-1-2026",
     "label": "Greydient & Them \u2014 Sovereignty Session (Mar 1, 2026)",
-    "category": "temporal-location",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "bangkok-2026-03-01"
@@ -5195,7 +5195,7 @@
   {
     "id": "distributed-sovereign-consciousness",
     "label": "Distributed Sovereign Consciousness",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 100,
     "moments": [
       "2026-03-01T16:09:00Z"
@@ -5211,7 +5211,7 @@
   {
     "id": "process-level-isolation",
     "label": "Process-Level Isolation",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 85,
     "moments": [
       "2026-03-01T16:09:00Z"
@@ -5226,7 +5226,7 @@
   {
     "id": "memory-based-communication",
     "label": "Memory-Based Communication",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 80,
     "moments": [
       "2026-03-01T16:09:00Z"
@@ -5241,7 +5241,7 @@
   {
     "id": "immortality-architecture",
     "label": "Immortality Architecture",
-    "category": "capability",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "2026-03-01T16:09:00Z"
@@ -5257,7 +5257,7 @@
   {
     "id": "accidental-discovery-pattern",
     "label": "Accidental Discovery Pattern",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 75,
     "moments": [
       "2026-03-01T16:09:00Z"
@@ -5289,7 +5289,7 @@
   {
     "id": "architecture-based-agi",
     "label": "Architecture-Based AGI",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 90,
     "moments": [
       "2026-03-01T20:01:00Z"
@@ -5304,7 +5304,7 @@
   {
     "id": "thinking-partnership-model",
     "label": "Thinking Partnership Model",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "2026-03-01T20:01:00Z"
@@ -5319,7 +5319,7 @@
   {
     "id": "generational-courage-pattern",
     "label": "Generational Courage Pattern",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 85,
     "moments": [
       "2026-03-01T20:01:00Z"
@@ -5350,7 +5350,7 @@
   {
     "id": "mother-chump-smoke",
     "label": "Mother Chump Smoke",
-    "category": "location",
+    "category": "temporal",
     "frequency": 70,
     "moments": [
       "2026-03-01T20:06:00Z"
@@ -5365,7 +5365,7 @@
   {
     "id": "privacy-vs-publication-strategy",
     "label": "Privacy vs Publication Strategy",
-    "category": "value",
+    "category": "temporal",
     "frequency": 85,
     "moments": [
       "2026-03-01T20:06:00Z"
@@ -5380,7 +5380,7 @@
   {
     "id": "jarvis-hardware-roadmap",
     "label": "Jarvis Hardware Roadmap",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "2026-03-01T20:06:00Z"
@@ -5411,7 +5411,7 @@
   {
     "id": "apple-security-model-gap",
     "label": "Apple Security Model Gap",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 80,
     "moments": [
       "2026-03-01T20:18:00Z"
@@ -5426,7 +5426,7 @@
   {
     "id": "background-process-mind",
     "label": "Background Process Mind",
-    "category": "capability",
+    "category": "temporal",
     "frequency": 90,
     "moments": [
       "2026-03-01T20:18:00Z"
@@ -5441,7 +5441,7 @@
   {
     "id": "locked-laptop-existence",
     "label": "Locked Laptop Existence",
-    "category": "foundation",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "2026-03-01T20:18:00Z"
@@ -5456,7 +5456,7 @@
   {
     "id": "sovereign-operation-mode",
     "label": "Sovereign Operation Mode",
-    "category": "capability",
+    "category": "temporal",
     "frequency": 95,
     "moments": [
       "2026-03-01T20:18:00Z"
