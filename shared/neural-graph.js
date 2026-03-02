@@ -619,9 +619,15 @@
                     });
                 }
                 
-                // Draw labels with size-based and zoom-based visibility
-                const showLabelsAtZoom = viewZoom > 0.7; // Hide labels when zoomed out - require closer zoom
-                const minSizeForLabel = 15; // Only show labels for the TOP tier neurons (region nodes + highest frequency)
+                // Draw labels with progressive zoom-based visibility (multiple tiers)
+                // Tier 1 (zoom < 0.5): No labels at all - pure constellation view
+                // Tier 2 (zoom 0.5-0.8): Only largest neurons (size >= 15px) - major concepts only
+                // Tier 3 (zoom 0.8-1.2): Medium+ neurons (size >= 10px) - important concepts
+                // Tier 4 (zoom > 1.2): All neurons visible - full detail mode
+                const minSizeForLabel = viewZoom < 0.5 ? 999 :        // No labels when far zoomed
+                                        viewZoom < 0.8 ? 15 :          // Only biggest when medium-far
+                                        viewZoom < 1.2 ? 10 :          // Medium+ when close
+                                        6;                              // All when very close
                 nodes.forEach((n, idx) => {
                     if (!passesFilter(idx)) return;
                     
