@@ -136,6 +136,17 @@
             'emotion': '#aa00ff', 'temporal': '#ffaa00', 'region': '#8800ff'
         };
 
+        // Backwards-compat helper: some older code paths may call showLabelsAtZoom
+        // to decide if a node label should be visible for a given zoom + size.
+        // We keep it here so any lingering references won't break rendering.
+        function showLabelsAtZoom(zoom, size) {
+            // These thresholds mirror the minSizeForLabel tiers used in the label renderer.
+            if (zoom < 0.5) return false;          // Far away: no labels
+            if (zoom < 0.8) return size >= 15;     // Medium-far: only largest nodes
+            if (zoom < 1.2) return size >= 10;     // Mid zoom: medium and large nodes
+            return size >= 6;                      // Close: almost all nodes
+        }
+
         let nodes = [];
         let edges = [];
 
@@ -864,19 +875,28 @@
             const clickedNode = hitTestNode(e.clientX, e.clientY);
             
             if (clickedNode !== null) {
-                // In focus mode: only allow clicking on connected nodes
-                if (activeNodeIds !== null && !activeNodeIds.has(clickedNode)) {
-                    // Clicked on an unconnected node - ignore the click
-                    return;
-                }
-                
                 selected = clickedNode;
                 window.location.hash = nodes[selected].idKey;
                 // Node details now show in inline popover (desktop and mobile)
             } else {
-                // Clicked on empty space - only clear if we're not in focus mode
-                // or if we want to allow exiting focus mode by clicking empty space
                 clearSelection();
+            }
+        });
+
+        // Clicking outside the graph (canvas) clears the current selection
+        document.addEventListener('click', e => {
+            if (selected === null) return;
+            if (canvas && canvas.contains(e.target)) return;
+            const pop = nodePopoverEl || (document.getElementById('node-popover'));
+            if (pop && pop.contains(e.target)) return;
+            const modal = document.getElementById('node-details-modal');
+            if (modal && modal.contains(e.target)) return;
+            window.clearSelection();
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && selected !== null) {
+                window.clearSelection();
             }
         });
         
@@ -1318,23 +1338,26 @@
             const rect = canvas.getBoundingClientRect();
             const mx = clientX - rect.left;
             const my = clientY - rect.top;
-            for (let n of nodes) {
+            // Only consider nodes that are actually visible: pass filter and, in focus mode, are connected
+            let activeNodeIds = null;
+            if (selected !== null) {
+                activeNodeIds = new Set([selected]);
+                edges.forEach(e => {
+                    if (e.from === selected) activeNodeIds.add(e.to);
+                    if (e.to === selected) activeNodeIds.add(e.from);
+                });
+            }
+            for (let idx = 0; idx < nodes.length; idx++) {
+                const n = nodes[idx];
                 if (!nodePassesFilter(n)) continue;
+                if (activeNodeIds !== null && !activeNodeIds.has(idx)) continue; // skip invisible (focus-mode-hidden) nodes
                 const p = project(n.x, n.y, n.z);
                 const d = Math.hypot(p.x - mx, p.y - my);
                 if (d < n.size * p.scale + 25) {
-                    selected = selected === n.id ? null : n.id;
-                    const selNode = selected !== null ? nodes[selected] : null;
-                    if (selNode && selNode.isMemoryRef) {
-                        openMemoryLinkSidebar(selNode);
-                    } else {
-                        showNodeDetails(selNode);
-                    }
-                    window.location.hash = selected !== null ? nodes[selected].idKey : '';
-                    return true;
+                    return idx;
                 }
             }
-            return false;
+            return null;
         }
 
         canvas.addEventListener('touchstart', e => {
@@ -1380,7 +1403,19 @@
             if (e.touches.length < 2) pinchDist = null;
             if (e.touches.length === 0 && touchFingerCount === 1 && !touchMoved && e.changedTouches[0]) {
                 const t = e.changedTouches[0];
-                hitTestNode(t.clientX, t.clientY);
+                const idx = hitTestNode(t.clientX, t.clientY);
+                if (idx !== null) {
+                    selected = idx;
+                    const selNode = nodes[selected];
+                    if (selNode && selNode.isMemoryRef) {
+                        openMemoryLinkSidebar(selNode);
+                    } else {
+                        showNodeDetails(selNode);
+                    }
+                    window.location.hash = selNode ? selNode.idKey : '';
+                } else {
+                    window.clearSelection();
+                }
             }
         }, { passive: true });
 
