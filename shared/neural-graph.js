@@ -596,9 +596,14 @@
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
-                    // Pre-calculate connected nodes for label sizing (done once per frame)
+                    // Core neuron ONLY - no glows, no halos
+                    ctx.fillStyle = n.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, r, 0, 6.28);
+                    ctx.fill();
                 });
                 
+                // Pre-calculate connected nodes for label sizing
                 const connectedToSelected = new Set();
                 if (selected !== null) {
                     edges.forEach(e => {
@@ -607,7 +612,7 @@
                     });
                 }
                 
-                // Second pass: draw labels with dynamic sizing
+                // Draw labels with dynamic sizing
                 nodes.forEach((n, idx) => {
                     if (!passesFilter(idx)) return;
                     
@@ -616,7 +621,6 @@
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(idx);
                     const dimAlpha = 0.25;
                     
-                    // Dynamic label sizing: larger when selected or connected
                     const isSelected = (selected === idx);
                     const isConnectedToSelected = connectedToSelected.has(idx);
                     const fontSize = isSelected ? 14 : (isConnectedToSelected ? 12 : 11);
@@ -626,7 +630,6 @@
                     ctx.textBaseline = 'middle';
                     ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
                     
-                    // Enhanced shadow for selected node labels
                     const shadowBlur = isSelected ? 12 : 8;
                     const shadowOpacity = isSelected ? 1.0 : 0.9;
                     ctx.shadowColor = `rgba(0, 0, 0, ${shadowOpacity})`;
@@ -636,22 +639,18 @@
                     ctx.lineWidth = isSelected ? 4 : 3;
                     ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
                     
-                    // Warm yellow-white for selected, pure white for others
                     ctx.fillStyle = isSelected ? '#ffffaa' : '#ffffff';
                     ctx.strokeText(n.name, p.x, p.y + r + 18);
                     ctx.fillText(n.name, p.x, p.y + r + 18);
                     
-                    // Reset for next frame
                     ctx.shadowBlur = 0;
                     ctx.lineWidth = 1;
                     ctx.globalAlpha = 1;
                 });
                 
-                // Selection highlight (re-draw on top of labels)
-                nodes.forEach((n, idx) => {
-                    if (!passesFilter(idx)) return;
-                    if (selected !== idx) return;
-                    
+                // Selection highlight ring
+                if (selected !== null) {
+                    const n = nodes[selected];
                     const p = project(n.x, n.y, n.z);
                     const r = n.size;
                     
@@ -662,7 +661,6 @@
                     ctx.arc(p.x, p.y, r + 12, 0, 6.28);
                     ctx.stroke();
                     
-                    // Pulsing ring
                     const pulse = Math.sin(time * 0.05) * 0.3 + 0.7;
                     ctx.strokeStyle = `rgba(255, 255, 0, ${pulse * 0.6})`;
                     ctx.lineWidth = 2;
