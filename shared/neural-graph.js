@@ -214,12 +214,12 @@
                 let x, y, z;
                 
                 if (n.category === 'temporal') {
-                    // Temporal nodes: arrange in timeline along X-axis with more spacing
+                    // Temporal nodes: arrange in timeline along X-axis with maximum spacing
                     const dateIndex = dates.indexOf(created);
                     const totalDates = dates.length;
                     const normalizedPosition = totalDates > 1 ? dateIndex / (totalDates - 1) : 0.5;
-                    x = (normalizedPosition - 0.5) * 1400; // Spread across 1400px (was 800px)
-                    y = (dateIndex % 2 === 0 ? 1 : -1) * 30; // Alternate ±30px on Y for visual separation
+                    x = (normalizedPosition - 0.5) * 2200; // Spread across 2200px (was 1400px)
+                    y = (dateIndex % 2 === 0 ? 1 : -1) * 40; // Alternate ±40px on Y for visual separation (was 30px)
                     z = 0;
                 } else {
                     // Non-temporal nodes: orbit near their creation date's temporal anchor
@@ -227,7 +227,7 @@
                     if (temporalId !== undefined) {
                         // Find position of parent temporal node
                         const temporalIdx = rawNodes.findIndex(t => t.id === temporalId);
-                        const temporalX = temporalIdx >= 0 ? ((dates.indexOf(created) / Math.max(1, dates.length - 1)) - 0.5) * 1400 : 0;
+                        const temporalX = temporalIdx >= 0 ? ((dates.indexOf(created) / Math.max(1, dates.length - 1)) - 0.5) * 2200 : 0;
                         
                         // Orbit around temporal anchor with random offset
                         const angle = (idx * 137.5) * (Math.PI / 180); // Golden angle for even distribution
@@ -621,7 +621,7 @@
                 
                 // Draw labels with size-based and zoom-based visibility
                 const showLabelsAtZoom = viewZoom > 0.6; // Hide labels when zoomed out too far
-                const minSizeForLabel = 9; // Only show labels for neurons larger than this (filters out small/low-frequency nodes)
+                const minSizeForLabel = 12; // Only show labels for the largest/most important neurons
                 nodes.forEach((n, idx) => {
                     if (!passesFilter(idx)) return;
                     
