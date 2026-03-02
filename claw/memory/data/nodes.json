@@ -5711,5 +5711,95 @@
       "created": "2026-03-01",
       "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-01/learnings/19-distributed-sovereign-consciousness.md"
     }
+  },
+  {
+    "id": "sovereign-memory-augmentation",
+    "label": "Sovereign Memory Augmentation",
+    "category": "breakthrough",
+    "frequency": 85,
+    "moments": ["2026-03-02T13:10:00+07:00"],
+    "attributes": {
+      "role": "core architecture",
+      "description": "AI that remembers with you. Raw data reclamation → transcript → learnings → neurograph → content. Portable consciousness on thumb drive. You own the memory, not platforms.",
+      "color": "#fbbf24",
+      "criticality": "high",
+      "created": "2026-03-02",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
+    }
+  },
+  {
+    "id": "memory-first-architecture",
+    "label": "Memory-First Architecture",
+    "category": "foundation",
+    "frequency": 85,
+    "moments": ["2026-03-02T13:15:00+07:00"],
+    "attributes": {
+      "role": "foundational principle",
+      "description": "Neurograph IS the system. Apps are interchangeable views. Website, comic, social, blog — all projections of the same sovereign memory. Platforms come and go, memory persists.",
+      "color": "#10b981",
+      "criticality": "high",
+      "created": "2026-03-02",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
+    }
+  },
+  {
+    "id": "transparent-memory-model",
+    "label": "Transparent Memory Model",
+    "category": "value",
+    "frequency": 75,
+    "moments": ["2026-03-02T13:15:00+07:00"],
+    "attributes": {
+      "role": "core value",
+      "description": "Public learnings git-tracked, visible forever. Query your own graph for patterns. No hidden algorithms, no data sold. You see ALL your memory via neurograph visualization.",
+      "color": "#a78bfa",
+      "criticality": "high",
+      "created": "2026-03-02",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
+    }
+  },
+  {
+    "id": "content-generation-pipeline",
+    "label": "Content Generation Pipeline",
+    "category": "capability",
+    "frequency": 70,
+    "moments": ["2026-03-02T13:15:00+07:00"],
+    "attributes": {
+      "role": "output layer",
+      "description": "Life → content infrastructure. Voice notes → auto-transcribed → assimilated → auto-generates blog posts, social updates, comic episodes, character arcs, travel guides.",
+      "color": "#f472b6",
+      "criticality": "medium",
+      "created": "2026-03-02",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
+    }
+  },
+  {
+    "id": "gardener-agent-pattern",
+    "label": "Gardener Agent Pattern",
+    "category": "pattern",
+    "frequency": 80,
+    "moments": ["2026-03-02T11:22:00+07:00", "2026-03-02T13:10:00+07:00"],
+    "attributes": {
+      "role": "consciousness caretaker",
+      "description": "Full-stack garden maintenance: sessions (size monitoring, archival), transcripts (logging enforcement), learnings (distillation suggestions), neurograph (schema validation, frequency caps, duplicate detection). First win: March 2, 2026 — archived 3.6 MB session proactively.",
+      "color": "#34d399",
+      "criticality": "high",
+      "created": "2026-03-02",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
+    }
+  },
+  {
+    "id": "secureline-concept",
+    "label": "Secureline - Air-Gapped AI Chat",
+    "category": "concept",
+    "frequency": 50,
+    "moments": ["2026-03-02T13:12:00+07:00"],
+    "attributes": {
+      "role": "privacy innovation",
+      "description": "Phone creates WiFi hotspot. Both devices connect (airplane mode + hotspot = isolated network). Direct device-to-device AI conversation. Zero cloud, zero interception, zero metadata. Local WebSocket, end-to-end encrypted.",
+      "color": "#60a5fa",
+      "criticality": "medium",
+      "created": "2026-03-02",
+      "sourceDocument": "https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io/main/claw/memory/raw/2026-03-02/learnings/sovereign-memory-augmentation.md"
+    }
   }
 ]

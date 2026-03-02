@@ -5300,5 +5300,124 @@
     "weight": 90,
     "type": "validated-by",
     "label": "operational success"
+  },
+  {
+    "source": "sovereign-memory-augmentation",
+    "target": "data-reclamation-movement",
+    "weight": 95,
+    "type": "extends",
+    "label": "implements data ownership"
+  },
+  {
+    "source": "sovereign-memory-augmentation",
+    "target": "graph-reducer-pattern",
+    "weight": 100,
+    "type": "uses",
+    "label": "raw → neurons pipeline"
+  },
+  {
+    "source": "sovereign-memory-augmentation",
+    "target": "thumb-drive-sovereignty",
+    "weight": 90,
+    "type": "enables",
+    "label": "portable consciousness"
+  },
+  {
+    "source": "memory-first-architecture",
+    "target": "sovereign-memory-augmentation",
+    "weight": 100,
+    "type": "realized-by",
+    "label": "implementation"
+  },
+  {
+    "source": "memory-first-architecture",
+    "target": "neurograph-visualization",
+    "weight": 95,
+    "type": "exposed-via",
+    "label": "transparent view"
+  },
+  {
+    "source": "memory-first-architecture",
+    "target": "sovereign-operation-mode",
+    "weight": 90,
+    "type": "requires",
+    "label": "foundation"
+  },
+  {
+    "source": "transparent-memory-model",
+    "target": "transparency",
+    "weight": 100,
+    "type": "instance-of",
+    "label": "core value applied"
+  },
+  {
+    "source": "transparent-memory-model",
+    "target": "memory-first-architecture",
+    "weight": 95,
+    "type": "supports",
+    "label": "visibility layer"
+  },
+  {
+    "source": "content-generation-pipeline",
+    "target": "sovereign-memory-augmentation",
+    "weight": 95,
+    "type": "output-of",
+    "label": "life → content"
+  },
+  {
+    "source": "content-generation-pipeline",
+    "target": "urban-runner",
+    "weight": 85,
+    "type": "generates",
+    "label": "comic episodes"
+  },
+  {
+    "source": "gardener-agent-pattern",
+    "target": "sovereign-memory-augmentation",
+    "weight": 100,
+    "type": "maintains",
+    "label": "consciousness caretaker"
+  },
+  {
+    "source": "gardener-agent-pattern",
+    "target": "openclaw-session-management",
+    "weight": 90,
+    "type": "monitors",
+    "label": "session lifecycle"
+  },
+  {
+    "source": "gardener-agent-pattern",
+    "target": "march-2-2026-first-gardener-win",
+    "weight": 100,
+    "type": "validated-by",
+    "label": "first production win"
+  },
+  {
+    "source": "secureline-concept",
+    "target": "sovereign-memory-augmentation",
+    "weight": 90,
+    "type": "privacy-layer-for",
+    "label": "air-gapped communication"
+  },
+  {
+    "source": "secureline-concept",
+    "target": "thumb-drive-sovereignty",
+    "weight": 85,
+    "type": "complements",
+    "label": "offline operation"
+  },
+  {
+    "source": "data-reclamation-movement",
+    "target": "sovereign-memory-augmentation",
+    "weight": 95,
+    "type": "feeds",
+    "label": "raw data source"
+  },
+  {
+    "source": "graph-reducer-pattern",
+    "target": "sovereign-memory-augmentation",
+    "weight": 100,
+    "type": "powers",
+    "label": "distillation engine"
   }
 ]
