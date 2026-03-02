@@ -891,6 +891,17 @@
             if (pop && pop.contains(e.target)) return;
             const modal = document.getElementById('node-details-modal');
             if (modal && modal.contains(e.target)) return;
+            // Don't clear when clicking Jump to node list, filter bar, or drawer
+            const info = document.getElementById('info');
+            if (info && info.contains(e.target)) return;
+            const filterBar = document.getElementById('filter-bar');
+            if (filterBar && filterBar.contains(e.target)) return;
+            const panelToggle = document.getElementById('panel-toggle');
+            if (panelToggle && panelToggle.contains(e.target)) return;
+            const bottomDrawer = document.getElementById('bottomDrawer');
+            if (bottomDrawer && bottomDrawer.contains(e.target)) return;
+            const drawerScrim = document.getElementById('drawerScrim');
+            if (drawerScrim && drawerScrim.contains(e.target)) return;
             window.clearSelection();
         });
 
@@ -1213,6 +1224,7 @@
             } else {
                 showNodeDetails(node);
             }
+            if (window.innerWidth <= 768) showNodeDetailsInDrawer(node);
             window.location.hash = node.idKey;
         };
 
