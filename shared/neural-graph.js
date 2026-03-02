@@ -579,36 +579,38 @@
                     const isDimmed = activeNodeIds !== null && !activeNodeIds.has(n.id);
                     if (isDimmed) ctx.globalAlpha = dimAlpha;
 
-                    // Outer halo (reduced spread and opacity)
-                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glowRadius);
+                    // Extract RGB from hex color
                     const [r2, g2, b2] = [
                         parseInt(n.color.slice(1,3), 16),
                         parseInt(n.color.slice(3,5), 16),
                         parseInt(n.color.slice(5,7), 16)
                     ];
-                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.35)`);
-                    g1.addColorStop(0.6, `rgba(${r2}, ${g2}, ${b2}, 0.08)`);
+                    
+                    // Enhanced outer halo for deep space background
+                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glowRadius);
+                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.45)`);
+                    g1.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.15)`);
                     g1.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
                     ctx.fillStyle = g1;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, glowRadius, 0, 6.28);
                     ctx.fill();
 
-                    // Inner glow (tighter)
-                    const innerGlow = Math.min(glow * 0.5, r + 8);
+                    // Enhanced inner glow (brighter core for contrast)
+                    const innerGlow = Math.min(glow * 0.6, r + 10);
                     const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.2, p.x, p.y, innerGlow);
-                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.95)`);
-                    g2_grad.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.25)`);
+                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 1.0)`);
+                    g2_grad.addColorStop(0.4, `rgba(${r2}, ${g2}, ${b2}, 0.4)`);
                     g2_grad.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
                     ctx.fillStyle = g2_grad;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, innerGlow, 0, 6.28);
                     ctx.fill();
 
-                    // Core neuron (lighter shadow so overlaps are less bright)
+                    // Core neuron with enhanced glow for deep space
                     ctx.fillStyle = n.color;
                     ctx.shadowColor = n.color;
-                    ctx.shadowBlur = 10;
+                    ctx.shadowBlur = 15;
                     ctx.shadowOffsetX = 0;
                     ctx.shadowOffsetY = 0;
                     ctx.beginPath();
@@ -635,13 +637,24 @@
                         ctx.globalAlpha = 1;
                     }
 
-                    // Label (no glow — crisp text for readability)
-                    ctx.fillStyle = n.color;
+                    // Label with text shadow for readability against bright nodes
                     ctx.font = 'bold 10px monospace';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.globalAlpha = isDimmed ? dimAlpha * 0.9 : 1;
+                    
+                    // Text shadow for contrast (works on both light and dark backgrounds)
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+                    ctx.shadowBlur = 6;
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                    
+                    // Bright text color that pops against dark background
+                    ctx.fillStyle = '#ffffff';
                     ctx.fillText(n.name, p.x, p.y + r + 18);
+                    
+                    // Reset shadow for next frame
+                    ctx.shadowBlur = 0;
                     ctx.globalAlpha = 1;
                 });
 

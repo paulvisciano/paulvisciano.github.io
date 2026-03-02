@@ -9,8 +9,9 @@ canvas {
     display: block; 
     margin-right: 240px;
     margin-top: 50px;
-    background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0f20 50%, #000000 100%);
-    filter: brightness(1.1);
+    /* Deep space cluster background - preserves blue lake while enabling readability */
+    background: radial-gradient(ellipse at center, #0a1a3a 0%, #050a15 50%, #020408 100%);
+    filter: brightness(1.0);
     touch-action: none;
     transition: margin-right 0.25s ease, margin-bottom 0.3s ease;
 }
