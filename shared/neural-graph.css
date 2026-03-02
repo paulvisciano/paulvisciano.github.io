@@ -9,9 +9,9 @@ canvas {
     display: block; 
     margin-right: 240px;
     margin-top: 50px;
-    /* Deep space cluster background - preserves blue lake while enabling readability */
-    background: radial-gradient(ellipse at center, #0a1a3a 0%, #050a15 50%, #020408 100%);
-    filter: brightness(1.0);
+    /* Near-black background for maximum label contrast */
+    background: radial-gradient(ellipse at center, #0a0a1a 0%, #020205 50%, #000000 100%);
+    filter: brightness(0.9);
     touch-action: none;
     transition: margin-right 0.25s ease, margin-bottom 0.3s ease;
 }

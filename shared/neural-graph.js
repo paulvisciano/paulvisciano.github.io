@@ -586,37 +586,33 @@
                         parseInt(n.color.slice(5,7), 16)
                     ];
                     
-                    // Enhanced outer halo for deep space background
-                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, glowRadius);
-                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.45)`);
-                    g1.addColorStop(0.5, `rgba(${r2}, ${g2}, ${b2}, 0.15)`);
+                    // REDUCED outer halo (less bloom for readability)
+                    const reducedGlow = Math.min(glow * 0.3, r * 2);
+                    const g1 = ctx.createRadialGradient(p.x, p.y, r*0.5, p.x, p.y, reducedGlow);
+                    g1.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.25)`);
+                    g1.addColorStop(0.7, `rgba(${r2}, ${g2}, ${b2}, 0.05)`);
                     g1.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
                     ctx.fillStyle = g1;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, glowRadius, 0, 6.28);
+                    ctx.arc(p.x, p.y, reducedGlow, 0, 6.28);
                     ctx.fill();
 
-                    // Enhanced inner glow (brighter core for contrast)
-                    const innerGlow = Math.min(glow * 0.6, r + 10);
-                    const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.2, p.x, p.y, innerGlow);
-                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 1.0)`);
-                    g2_grad.addColorStop(0.4, `rgba(${r2}, ${g2}, ${b2}, 0.4)`);
+                    // MINIMAL inner glow (tight to node core)
+                    const innerGlow = r * 1.3;
+                    const g2_grad = ctx.createRadialGradient(p.x, p.y, r*0.3, p.x, p.y, innerGlow);
+                    g2_grad.addColorStop(0, `rgba(${r2}, ${g2}, ${b2}, 0.8)`);
+                    g2_grad.addColorStop(0.6, `rgba(${r2}, ${g2}, ${b2}, 0.15)`);
                     g2_grad.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
                     ctx.fillStyle = g2_grad;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, innerGlow, 0, 6.28);
                     ctx.fill();
 
-                    // Core neuron with enhanced glow for deep space
+                    // Core neuron - NO blur, sharp edges for clarity
                     ctx.fillStyle = n.color;
-                    ctx.shadowColor = n.color;
-                    ctx.shadowBlur = 15;
-                    ctx.shadowOffsetX = 0;
-                    ctx.shadowOffsetY = 0;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, r, 0, 6.28);
                     ctx.fill();
-                    ctx.shadowBlur = 0;
 
                     // Selection highlight
                     if (selected === n.id) {
@@ -637,24 +633,28 @@
                         ctx.globalAlpha = 1;
                     }
 
-                    // Label with text shadow for readability against bright nodes
-                    ctx.font = 'bold 10px monospace';
+                    // Label with STRONG text shadow for maximum readability
+                    ctx.font = 'bold 11px monospace';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.9 : 1;
+                    ctx.globalAlpha = isDimmed ? dimAlpha * 0.95 : 1;
                     
-                    // Text shadow for contrast (works on both light and dark backgrounds)
-                    ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
-                    ctx.shadowBlur = 6;
+                    // Heavy black outline/shadow for contrast against any glow
+                    ctx.shadowColor = 'rgba(0, 0, 0, 1.0)';
+                    ctx.shadowBlur = 8;
                     ctx.shadowOffsetX = 0;
                     ctx.shadowOffsetY = 0;
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.9)';
                     
-                    // Bright text color that pops against dark background
+                    // Bright white text that pops
                     ctx.fillStyle = '#ffffff';
+                    ctx.strokeText(n.name, p.x, p.y + r + 18);
                     ctx.fillText(n.name, p.x, p.y + r + 18);
                     
-                    // Reset shadow for next frame
+                    // Reset for next frame
                     ctx.shadowBlur = 0;
+                    ctx.lineWidth = 1;
                     ctx.globalAlpha = 1;
                 });
 
