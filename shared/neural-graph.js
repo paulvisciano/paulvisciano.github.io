@@ -861,12 +861,22 @@
 
         canvas.addEventListener('click', e => {
             if (didDrag) { didDrag = false; return; }
-            if (hitTestNode(e.clientX, e.clientY)) {
-                if (selected !== null) {
-                    window.location.hash = nodes[selected].idKey;
-                    // Node details now show in inline popover (desktop and mobile)
+            
+            const clickedNode = hitTestNode(e.clientX, e.clientY);
+            
+            if (clickedNode !== null) {
+                // In focus mode: only allow clicking on connected nodes
+                if (activeNodeIds !== null && !activeNodeIds.has(clickedNode)) {
+                    // Clicked on an unconnected node - ignore the click
+                    return;
                 }
+                
+                selected = clickedNode;
+                window.location.hash = nodes[selected].idKey;
+                // Node details now show in inline popover (desktop and mobile)
             } else {
+                // Clicked on empty space - only clear if we're not in focus mode
+                // or if we want to allow exiting focus mode by clicking empty space
                 clearSelection();
             }
         });
