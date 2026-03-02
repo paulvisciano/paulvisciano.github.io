@@ -620,8 +620,8 @@
                 }
                 
                 // Draw labels with size-based and zoom-based visibility
-                const showLabelsAtZoom = viewZoom > 0.6; // Hide labels when zoomed out too far
-                const minSizeForLabel = 12; // Only show labels for the largest/most important neurons
+                const showLabelsAtZoom = viewZoom > 0.7; // Hide labels when zoomed out - require closer zoom
+                const minSizeForLabel = 15; // Only show labels for the TOP tier neurons (region nodes + highest frequency)
                 nodes.forEach((n, idx) => {
                     if (!passesFilter(idx)) return;
                     
