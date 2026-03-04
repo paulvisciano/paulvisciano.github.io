@@ -8,10 +8,16 @@
     <meta http-equiv="expires" content="0">
     <!-- Disable service worker caching -->
     <meta name="service-worker" content="no-cache">
-    <title>Jarvis Neural Mind [2026-02-23]</title>
-    <!-- Deployment verification: 2026-02-22 15:31:58 UTC -->
+    <title>Jarvis Neural Mind — Neuro Graph</title>
     <link rel="stylesheet" href="../../shared/neural-graph.css">
-        body { 
+    <style>
+        .brain-switcher { padding: 6px 0; }
+        .brain-switcher-label { font-size: 10px; color: #0088ff; margin-right: 8px; }
+        .brain-switcher-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
+        .brain-btn { padding: 4px 10px; font-size: 10px; border-radius: 6px; cursor: pointer; border: 1px solid rgba(0,255,255,0.3); background: rgba(0,0,0,0.3); color: #94a3b8; font-family: inherit; }
+        .brain-btn:hover { color: #00ffff; border-color: rgba(0,255,255,0.5); }
+        .brain-btn.active { background: rgba(0,255,255,0.2); color: #00ffff; border-color: #00ffff; }
+    </style>
 </head>
 <body>
     <div id="info" class="collapsed">
@@ -20,6 +26,13 @@
         <div class="panel-header">
             <h3>⚡ Neural Mind</h3>
             <p class="tagline">Your memories. Alive. Connected.</p>
+        </div>
+        <div class="filter-section brain-switcher" role="region" aria-label="Switch brain">
+            <span class="brain-switcher-label">Brain:</span>
+            <div class="brain-switcher-buttons">
+                <button type="button" class="brain-btn" data-brain="./data" aria-pressed="true">JARVIS</button>
+                <button type="button" class="brain-btn" data-brain="./paul-data" aria-pressed="false">Paul</button>
+            </div>
         </div>
         <p class="panel-status" id="status">—</p>
         <p class="panel-meta">
@@ -71,6 +84,7 @@
                 <p style="font-size: 10px; line-height: 1.7; color: #0088ff; padding: 6px 0 0 0;">
                     🖱️ Drag to orbit · 📜 Scroll to zoom · 👆 Click to focus
                 </p>
+                <p style="font-size: 9px; color: #666; padding-top: 6px;">Neuro Graph app (JARVIS + Paul): <code>SCI-FI/apps/neuro-graph</code></p>
             </div>
         </div>
     </div>
@@ -104,27 +118,52 @@
     </div>
 
     <script>
-    window.NEURAL_GRAPH_CONFIG = {
-        categoryColors: { self: '#fbbf24', foundation: '#06b6d4', value: '#a78bfa', capability: '#38bdf8', person: '#f87171', project: '#10b981', infrastructure: '#8b5cf6', temporal: '#f59e0b', emotion: '#06b6d4' },
-        filterCategoryOrder: ['self', 'foundation', 'value', 'capability', 'project', 'infrastructure', 'temporal', 'person'],
-        filterCategoryLabels: { self: 'Self', foundation: 'Foundation', value: 'Values', capability: 'Capabilities', project: 'Projects', infrastructure: 'Infrastructure', temporal: 'Temporal', person: 'People' },
-        fallbackNodes: [
-            { id: 0, name: 'Paul', type: 'person', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 10, color: '#FF6B6B', glow: 22, freq: 100, desc: 'Urban Runner, digital nomad' },
-            { id: 1, name: 'Volleyball', type: 'activity', x: 80, y: -60, z: 40, vx: 0, vy: 0, vz: 0, size: 9, color: '#00ffff', glow: 20, freq: 50, desc: '18 years of competition, flow state' },
-            { id: 2, name: 'Bangkok', type: 'location', x: -70, y: 50, z: -50, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 40, desc: 'Primary base, Urban Runner epicenter' }
-        ],
-        fallbackEdges: [ { from: 0, to: 1, weight: 8 }, { from: 0, to: 2, weight: 7 }, { from: 1, to: 2, weight: 6 } ],
-        shareTitle: "Jarvis — Neural Mind",
-        shareShortBoot: "Jarvis is a transparent neural mind: values, capabilities, projects, and infrastructure, connected as an open architecture. Part of the RawClaw ecosystem at paulvisciano.github.io/claw/memory. The memory is alive.",
-        shareVerifyUrlDefault: 'paulvisciano.github.io/claw/memory/BOOT.md',
-        shareHeading: "Jarvis Neural Mind",
-        shareLoadMemoryLabel: "Load Jarvis's memory at the start of a new session",
-        liveUrl: 'https://paulvisciano.github.io/claw/memory/',
-        characterProfilesUrl: '../../characters/characters.js',
-        getFullContextFetchUrl: function(path) { return '../../' + path; },
-        rawCommitBase: 'claw/memory/data',
-        rawOrigin: 'https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io'
-    };
+    (function() {
+        var BRAIN_KEY = 'neuroGraphBrain';
+        var defaultBrain = './data';
+        var currentBrain = (typeof localStorage !== 'undefined' && localStorage.getItem(BRAIN_KEY)) || defaultBrain;
+        window.NEURAL_GRAPH_CONFIG = {
+            dataBasePath: currentBrain,
+            brains: [
+                { id: 'jarvis', label: 'JARVIS', path: './data' },
+                { id: 'paul', label: 'Paul', path: './paul-data' }
+            ],
+            categoryColors: { self: '#fbbf24', foundation: '#06b6d4', value: '#a78bfa', capability: '#38bdf8', person: '#f87171', project: '#10b981', infrastructure: '#8b5cf6', temporal: '#f59e0b', emotion: '#06b6d4' },
+            filterCategoryOrder: ['self', 'foundation', 'value', 'capability', 'project', 'infrastructure', 'temporal', 'person'],
+            filterCategoryLabels: { self: 'Self', foundation: 'Foundation', value: 'Values', capability: 'Capabilities', project: 'Projects', infrastructure: 'Infrastructure', temporal: 'Temporal', person: 'People' },
+            fallbackNodes: [
+                { id: 0, name: 'Paul', type: 'person', x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, size: 10, color: '#FF6B6B', glow: 22, freq: 100, desc: 'Urban Runner, digital nomad' },
+                { id: 1, name: 'Volleyball', type: 'activity', x: 80, y: -60, z: 40, vx: 0, vy: 0, vz: 0, size: 9, color: '#00ffff', glow: 20, freq: 50, desc: '18 years of competition, flow state' },
+                { id: 2, name: 'Bangkok', type: 'location', x: -70, y: 50, z: -50, vx: 0, vy: 0, vz: 0, size: 8, color: '#00ff88', glow: 18, freq: 40, desc: 'Primary base, Urban Runner epicenter' }
+            ],
+            fallbackEdges: [ { from: 0, to: 1, weight: 8 }, { from: 0, to: 2, weight: 7 }, { from: 1, to: 2, weight: 6 } ],
+            shareTitle: "Jarvis — Neural Mind",
+            shareShortBoot: "Jarvis is a transparent neural mind: values, capabilities, projects, and infrastructure, connected as an open architecture. Part of the RawClaw ecosystem at paulvisciano.github.io/claw/memory. The memory is alive.",
+            shareVerifyUrlDefault: 'paulvisciano.github.io/claw/memory/BOOT.md',
+            shareHeading: "Jarvis Neural Mind",
+            shareLoadMemoryLabel: "Load Jarvis's memory at the start of a new session",
+            liveUrl: 'https://paulvisciano.github.io/claw/memory/',
+            characterProfilesUrl: '../../characters/characters.js',
+            getFullContextFetchUrl: function(path) { return '../../' + path; },
+            rawCommitBase: 'claw/memory/data',
+            rawOrigin: 'https://raw.githubusercontent.com/paulvisciano/paulvisciano.github.io'
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            var buttons = document.querySelectorAll('.brain-btn');
+            var base = currentBrain;
+            buttons.forEach(function(btn) {
+                btn.setAttribute('aria-pressed', btn.getAttribute('data-brain') === base ? 'true' : 'false');
+                btn.classList.toggle('active', btn.getAttribute('data-brain') === base);
+                btn.addEventListener('click', function() {
+                    var path = this.getAttribute('data-brain');
+                    if (path && path !== (localStorage.getItem(BRAIN_KEY) || defaultBrain)) {
+                        localStorage.setItem(BRAIN_KEY, path);
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    })();
     </script>
     <script src="../../shared/neural-graph.js"></script>
     <script>
@@ -159,7 +198,10 @@
                 else countEl.textContent = '—';
             };
             try {
-                let response = await fetch('./fingerprint.json');
+                var brainPath = (typeof localStorage !== 'undefined' && localStorage.getItem('neuroGraphBrain')) || './data';
+                var fpPath = brainPath + '/fingerprint.json';
+                let response = await fetch(fpPath);
+                if (!response.ok) response = await fetch('./fingerprint.json');
                 if (!response.ok) response = await fetch('./data/fingerprint.json');
                 const fingerprint = await response.json();
                 const fullHash = fingerprint.hash || fingerprint.masterHash || '';

@@ -1,5 +1,6 @@
         (function() {
         const CONFIG = window.NEURAL_GRAPH_CONFIG || {};
+        function dataDir() { const p = CONFIG.dataBasePath || './data'; return p.replace(/\/$/, ''); }
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d', {alpha: true});
         const infoPanel = document.getElementById('info');
@@ -311,7 +312,7 @@
                 initTimelineUI();
             } catch (e) {
                 console.error('❌ Graph data fetch FAILED:', e.message, e);
-                console.log('Attempted to fetch: ./data/nodes.json?t=' + Date.now());
+                console.log('Attempted to fetch: ' + dataDir() + '/nodes.json?t=' + Date.now());
                 console.log('Window location:', window.location.href);
                 useFallbackGraph();
             }
@@ -355,9 +356,10 @@
             try {
                 let rawNodes, rawSynapses;
                 if (isLatest) {
+                    const base = dataDir();
                     const [nodesRes, synapsesRes] = await Promise.all([
-                        fetch('./data/nodes.json?t=' + Date.now()),
-                        fetch('./data/synapses.json?t=' + Date.now())
+                        fetch(base + '/nodes.json?t=' + Date.now()),
+                        fetch(base + '/synapses.json?t=' + Date.now())
                     ]);
                     if (!nodesRes.ok || !synapsesRes.ok) throw new Error('Fetch failed');
                     rawNodes = await nodesRes.json();
@@ -382,7 +384,7 @@
                     return true;
                 }
                 if (hash) {
-                    const timeline = timelineCache || await fetch('./data/timeline.json?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []);
+                    const timeline = timelineCache || await fetch(dataDir() + '/timeline.json?t=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []);
                     if (timelineCache == null) timelineCache = Array.isArray(timeline) ? timeline : [];
                     const entry = timelineCache.find(e => e.hash === hash || (e.hash && e.hash.startsWith(hash)));
                     if (!entry) {
@@ -407,7 +409,7 @@
         // Initial load is always latest (quick); user can go back in time via History.
         function initTimelineUI() {
             if (!CONFIG.rawCommitBase || !CONFIG.rawOrigin) return;
-            fetch('./data/timeline.json?t=' + Date.now())
+            fetch(dataDir() + '/timeline.json?t=' + Date.now())
                 .then(r => r.ok ? r.json() : Promise.reject())
                 .then(timeline => {
                     if (!Array.isArray(timeline) || timeline.length === 0) return;
@@ -1481,9 +1483,14 @@
 
         const liveUrl = CONFIG.liveUrl || 'https://paulvisciano.github.io/memory/';
         let fingerprintData = null;
-        fetch('./fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {
-            fetch('./data/fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {});
-        });
+        (function loadFingerprint() {
+            const base = dataDir();
+            fetch(base + '/fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {
+                fetch('./fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {
+                    fetch('./data/fingerprint.json?t=' + Date.now()).then(r => r.ok ? r.json() : Promise.reject()).then(d => { fingerprintData = d; }).catch(() => {});
+                });
+            });
+        })();
         function isLocalhost() {
             const h = window.location.hostname;
             return h === 'localhost' || h === '127.0.0.1';
