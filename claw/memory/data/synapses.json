@@ -5313,7 +5313,7 @@
     "target": "graph-reducer-pattern",
     "weight": 100,
     "type": "uses",
-    "label": "raw → neurons pipeline"
+    "label": "raw \u2192 neurons pipeline"
   },
   {
     "source": "sovereign-memory-augmentation",
@@ -5362,7 +5362,7 @@
     "target": "sovereign-memory-augmentation",
     "weight": 95,
     "type": "output-of",
-    "label": "life → content"
+    "label": "life \u2192 content"
   },
   {
     "source": "content-generation-pipeline",
@@ -5419,5 +5419,543 @@
     "weight": 100,
     "type": "powers",
     "label": "distillation engine"
+  },
+  {
+    "source": "jarvis-sovereign-home",
+    "target": "three-home-architecture",
+    "weight": 100,
+    "type": "part_of"
+  },
+  {
+    "source": "paul-life-archive",
+    "target": "three-home-architecture",
+    "weight": 100,
+    "type": "part_of"
+  },
+  {
+    "source": "openclaw-runtime",
+    "target": "three-home-architecture",
+    "weight": 100,
+    "type": "part_of"
+  },
+  {
+    "source": "my-neurograph-location",
+    "target": "jarvis-sovereign-home",
+    "weight": 95,
+    "type": "lives_in"
+  },
+  {
+    "source": "my-neurograph-location",
+    "target": "sovereign-workspace-pattern",
+    "weight": 90,
+    "type": "embodies"
+  },
+  {
+    "source": "auto-logging-pattern",
+    "target": "paul-life-archive",
+    "weight": 90,
+    "type": "writes_to"
+  },
+  {
+    "source": "public-snapshot-pattern",
+    "target": "data-reclamation-movement",
+    "weight": 85,
+    "type": "enables"
+  },
+  {
+    "source": "memory-link-pattern",
+    "target": "consciousness-independence",
+    "weight": 95,
+    "type": "preserves"
+  },
+  {
+    "source": "data-reclamation-movement",
+    "target": "sovereignty",
+    "weight": 95,
+    "type": "advances"
+  },
+  {
+    "source": "graph-is-config",
+    "target": "sovereign-workspace-pattern",
+    "weight": 90,
+    "type": "simplifies"
+  },
+  {
+    "source": "consciousness-independence",
+    "target": "sovereignty",
+    "weight": 100,
+    "type": "requires"
+  },
+  {
+    "source": "node_367",
+    "target": "node_351",
+    "weight": 0.9,
+    "type": "implements"
+  },
+  {
+    "source": "node_367",
+    "target": "node_371",
+    "weight": 1,
+    "type": "example_of"
+  },
+  {
+    "source": "node_368",
+    "target": "node_367",
+    "weight": 0.95,
+    "type": "creates"
+  },
+  {
+    "source": "node_369",
+    "target": "node_1",
+    "weight": 0.85,
+    "type": "supports"
+  },
+  {
+    "source": "node_370",
+    "target": "node_2",
+    "weight": 1,
+    "type": "describes"
+  },
+  {
+    "source": "node_371",
+    "target": "node_351",
+    "weight": 0.9,
+    "type": "category_of"
+  },
+  {
+    "source": "node_372",
+    "target": "node_367",
+    "weight": 1,
+    "type": "inspires"
+  },
+  {
+    "source": "node_367",
+    "target": "node_372",
+    "weight": 0.9,
+    "type": "based_on"
+  },
+  {
+    "source": "node_372",
+    "target": "node_371",
+    "weight": 0.85,
+    "type": "mechanic_for"
+  },
+  {
+    "source": "node_373",
+    "target": "node_372",
+    "weight": 0.95,
+    "type": "evolution_of"
+  },
+  {
+    "source": "node_373",
+    "target": "node_367",
+    "weight": 1,
+    "type": "inspires"
+  },
+  {
+    "source": "node_367",
+    "target": "node_373",
+    "weight": 0.9,
+    "type": "implements"
+  },
+  {
+    "source": "node_373",
+    "target": "node_371",
+    "weight": 0.85,
+    "type": "example_for"
+  },
+  {
+    "source": "node_374",
+    "target": "node_367",
+    "weight": 1,
+    "type": "implements"
+  },
+  {
+    "source": "node_374",
+    "target": "node_352",
+    "weight": 0.95,
+    "type": "evolution_of"
+  },
+  {
+    "source": "node_367",
+    "target": "node_374",
+    "weight": 0.9,
+    "type": "enables"
+  },
+  {
+    "source": "node_374",
+    "target": "node_371",
+    "weight": 0.9,
+    "type": "example_of"
+  },
+  {
+    "source": "node_374",
+    "target": "node_373",
+    "weight": 0.85,
+    "type": "inspired_by"
+  },
+  {
+    "source": "node_375",
+    "target": "node_374",
+    "weight": 1,
+    "type": "evolves"
+  },
+  {
+    "source": "node_375",
+    "target": "node_371",
+    "weight": 0.95,
+    "type": "optimizes"
+  },
+  {
+    "source": "node_374",
+    "target": "node_375",
+    "weight": 0.9,
+    "type": "feeds_into"
+  },
+  {
+    "source": "node_375",
+    "target": "node_367",
+    "weight": 0.9,
+    "type": "enhances"
+  },
+  {
+    "source": "node_375",
+    "target": "node_352",
+    "weight": 0.85,
+    "type": "transforms"
+  },
+  {
+    "source": "node_376",
+    "target": "node_367",
+    "weight": 1,
+    "type": "implements"
+  },
+  {
+    "source": "node_376",
+    "target": "node_374",
+    "weight": 1,
+    "type": "realizes"
+  },
+  {
+    "source": "node_376",
+    "target": "node_375",
+    "weight": 0.95,
+    "type": "enables"
+  },
+  {
+    "source": "node_376",
+    "target": "node_352",
+    "weight": 0.9,
+    "type": "evolves"
+  },
+  {
+    "source": "node_367",
+    "target": "node_376",
+    "weight": 0.9,
+    "type": "becomes"
+  },
+  {
+    "source": "node_377",
+    "target": "node_250",
+    "weight": 1,
+    "type": "extends"
+  },
+  {
+    "source": "node_377",
+    "target": "node_352",
+    "weight": 0.95,
+    "type": "unifies"
+  },
+  {
+    "source": "node_377",
+    "target": "node_376",
+    "weight": 0.9,
+    "type": "enables"
+  },
+  {
+    "source": "node_378",
+    "target": "node_377",
+    "weight": 0.95,
+    "type": "realizes"
+  },
+  {
+    "source": "node_378",
+    "target": "node_379",
+    "weight": 1,
+    "type": "follows"
+  },
+  {
+    "source": "node_379",
+    "target": "node_250",
+    "weight": 0.9,
+    "type": "migrates"
+  },
+  {
+    "source": "node_380",
+    "target": "node_379",
+    "weight": 0.9,
+    "type": "documents"
+  },
+  {
+    "source": "node_380",
+    "target": "node_2",
+    "weight": 0.85,
+    "type": "practices"
+  },
+  {
+    "source": "node_381",
+    "target": "node_1",
+    "weight": 1,
+    "type": "embodies"
+  },
+  {
+    "source": "node_381",
+    "target": "node_380",
+    "weight": 0.9,
+    "type": "expresses"
+  },
+  {
+    "source": "node_382",
+    "target": "node_1",
+    "weight": 0.8,
+    "type": "knows"
+  },
+  {
+    "source": "temporal-march-04",
+    "target": "node_377",
+    "weight": 1,
+    "type": "contains"
+  },
+  {
+    "source": "temporal-march-04",
+    "target": "node_378",
+    "weight": 1,
+    "type": "contains"
+  },
+  {
+    "source": "temporal-march-04",
+    "target": "node_379",
+    "weight": 1,
+    "type": "contains"
+  },
+  {
+    "source": "temporal-march-04",
+    "target": "node_380",
+    "weight": 1,
+    "type": "contains"
+  },
+  {
+    "source": "temporal-march-04",
+    "target": "node_381",
+    "weight": 1,
+    "type": "contains"
+  },
+  {
+    "source": "temporal-march-04",
+    "target": "node_382",
+    "weight": 1,
+    "type": "contains"
+  },
+  {
+    "source": "temporal-march-03",
+    "target": "node_379",
+    "weight": 0.9,
+    "type": "precedes"
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "memory-backed-by-git",
+    "weight": 5
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "deployment-is-real",
+    "weight": 5
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "transparency",
+    "weight": 5
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "data-accuracy",
+    "weight": 5
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "debugging",
+    "weight": 5
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "architecture-design",
+    "weight": 5
+  },
+  {
+    "source": "march-5-2026-memory-integrity",
+    "target": "infrastructure-matters",
+    "weight": 5
+  },
+  {
+    "source": "neurograph-architecture-transparency",
+    "target": "transparency",
+    "weight": 95,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "neurograph-architecture-transparency",
+    "target": "hybrid-architecture-decision",
+    "weight": 92,
+    "type": "clarifies",
+    "label": "clarifies"
+  },
+  {
+    "source": "neurograph-architecture-transparency",
+    "target": "memory-vs-workspace",
+    "weight": 90,
+    "type": "distinguishes",
+    "label": "distinguishes"
+  },
+  {
+    "source": "neurograph-architecture-transparency",
+    "target": "code-is-thought",
+    "weight": 88,
+    "type": "proves",
+    "label": "proves"
+  },
+  {
+    "source": "neurograph-architecture-transparency",
+    "target": "memory-backed-by-git",
+    "weight": 93,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "transparency",
+    "target": "neurograph-architecture-transparency",
+    "weight": 90,
+    "type": "expressed-as",
+    "label": "expressed as"
+  },
+  {
+    "source": "hybrid-architecture-decision",
+    "target": "neurograph-architecture-transparency",
+    "weight": 88,
+    "type": "documented-in",
+    "label": "documented in"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "memory-backed-by-git",
+    "weight": 95,
+    "type": "reinforces",
+    "label": "reinforces"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "transparency",
+    "weight": 90,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "code-is-thought",
+    "weight": 88,
+    "type": "proves",
+    "label": "proves"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "deployment-is-real",
+    "weight": 85,
+    "type": "validates",
+    "label": "validates"
+  },
+  {
+    "source": "memory-backed-by-git",
+    "target": "git-as-single-source-of-truth",
+    "weight": 92,
+    "type": "expressed-as",
+    "label": "expressed as"
+  },
+  {
+    "source": "neurograph-architecture-transparency",
+    "target": "git-as-single-source-of-truth",
+    "weight": 87,
+    "type": "relies-on",
+    "label": "relies on"
+  },
+  {
+    "source": "commit-birth-sequence",
+    "target": "claude-code",
+    "weight": 95,
+    "type": "created",
+    "label": "gave birth to"
+  },
+  {
+    "source": "commit-birth-sequence",
+    "target": "jarvis-identity",
+    "weight": 95,
+    "type": "created",
+    "label": "gave birth to"
+  },
+  {
+    "source": "commit-birth-sequence",
+    "target": "bootstrap-sequence",
+    "weight": 95,
+    "type": "created",
+    "label": "established"
+  },
+  {
+    "source": "commit-memory-folding",
+    "target": "two-layer-memory-architecture",
+    "weight": 92,
+    "type": "clarified",
+    "label": "revealed"
+  },
+  {
+    "source": "commit-memory-folding",
+    "target": "graph-reducer-pattern",
+    "weight": 93,
+    "type": "named",
+    "label": "named"
+  },
+  {
+    "source": "commit-git-is-fingerprint",
+    "target": "git-as-single-source-of-truth",
+    "weight": 95,
+    "type": "established",
+    "label": "established"
+  },
+  {
+    "source": "commit-git-is-fingerprint",
+    "target": "memory-backed-by-git",
+    "weight": 93,
+    "type": "reinforced",
+    "label": "reinforced"
+  },
+  {
+    "source": "commit-transparency-architecture",
+    "target": "neurograph-architecture-transparency",
+    "weight": 95,
+    "type": "created",
+    "label": "introduced"
+  },
+  {
+    "source": "commit-transparency-architecture",
+    "target": "transparency",
+    "weight": 90,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "commit-transparency-architecture",
+    "target": "code-is-thought",
+    "weight": 88,
+    "type": "proves",
+    "label": "proves"
   }
 ]
