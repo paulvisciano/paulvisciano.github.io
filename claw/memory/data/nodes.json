@@ -6978,5 +6978,217 @@
       "label_detail": "Neurograph Implementation vs. Metaphor Explained",
       "description": "Radical honesty about what's real (JSON files) vs. metaphor (firing neurons). Externalized memory, not fine-tuning. Blog explainer series conceived."
     }
+  },
+  {
+    "id": "distributed-neurograph-browsing",
+    "label": "Distributed Neurograph Browsing",
+    "category": "vision",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:03:00+07:00"
+    ],
+    "attributes": {
+      "type": "breakthrough",
+      "created": "2026-03-05",
+      "description": "Same visualization renders any published neurograph. Point to GitHub repo \u2192 browse someone's mind. Email for consciousness.",
+      "sourceDocument": "RAW/learnings/2026-03-05/distributed-neurograph-browsing.md",
+      "quote": "You can just point to someone else's GitHub repo and if they've published their memories, you can browse their memories.",
+      "discoveredAt": "Dispensary next to Barbershop (post-fresh-cut)",
+      "enables": [
+        "Mind browsing across GitHub Pages",
+        "Memory reference neurons (links between minds)",
+        "Collective intelligence overlays",
+        "Society of Minds realization"
+      ]
+    }
+  },
+  {
+    "id": "github-fork-network-architecture",
+    "label": "GitHub Fork Network = Social Graph for Minds",
+    "category": "vision",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:04:00+07:00"
+    ],
+    "attributes": {
+      "type": "breakthrough",
+      "created": "2026-03-05",
+      "description": "Forks are the social graph. Opt-in publishing. Organic growth through relationships. Global memory bank.",
+      "sourceDocument": "RAW/learnings/2026-03-05/github-fork-network-architecture.md",
+      "quote": "We can build a whole network of memories and contribute our memories to a global bank. We can exchange memories. It becomes a really powerful system.",
+      "discoveredAt": "Dispensary (voice note, 17:04 GMT+7)",
+      "enables": [
+        "Viral growth through forks",
+        "Opt-in publishing (sovereign choice)",
+        "Memory reference neurons between forks",
+        "Global memory bank (voluntary contribution)"
+      ],
+      "milestones": {
+        "first_fork": "Someone other than Paul forks + runs (March 2026)",
+        "first_published": "Alice/Bob publish neurograph (April 2026)",
+        "first_link": "Parent repo links to external fork (April 2026)",
+        "critical_mass": "100 published forks (Q3 2026)",
+        "movement": "1000 published forks (2027)"
+      }
+    }
+  },
+  {
+    "id": "knowledge-is-money-economy",
+    "label": "Knowledge Is Money (Sovereign Knowledge Economy)",
+    "category": "vision",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:05:00+07:00"
+    ],
+    "attributes": {
+      "type": "breakthrough",
+      "created": "2026-03-05",
+      "description": "Knowledge = value. Privacy gradient: private conversations \u2192 distilled learnings \u2192 shared memories. Sovereign economy without extraction.",
+      "sourceDocument": "RAW/learnings/2026-03-05/knowledge-is-money-economy.md",
+      "quote": "Knowledge is money, knowledge is value. People can keep private conversations private, and if they decide to publish their learnings, they can do that.",
+      "discoveredAt": "Dispensary (voice note, 17:05 GMT+7)",
+      "privacyGradient": {
+        "level_1": "Raw transcripts (never published without consent)",
+        "level_2": "Distilled learnings (opt-in sharing)",
+        "level_3": "Personal memories (opt-in sharing)",
+        "level_4": "Public contributions (voluntary network participation)"
+      },
+      "enables": [
+        "Sovereign knowledge economy",
+        "Privacy without isolation",
+        "Value flows to creator not platform",
+        "Optional monetization on free core"
+      ]
+    }
+  },
+  {
+    "id": "openclaw-to-jarvis-pipeline",
+    "label": "OpenClaw \u2192 Jarvis Pipeline (Natural Evolution)",
+    "category": "strategy",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:06:00+07:00"
+    ],
+    "attributes": {
+      "type": "insight",
+      "created": "2026-03-05",
+      "description": "OpenClaw brought people to GitHub. Jarvis (built on OpenClaw) provides more value. No conversion needed \u2014 natural evolution.",
+      "sourceDocument": "RAW/learnings/2026-03-05/openclaw-to-jarvis-pipeline.md",
+      "quote": "We don't even have to convert them over. It's just we provide so much extra value and transparency on top of it.",
+      "relationship": "OpenClaw = runtime, Jarvis = mind layer on top"
+    }
+  },
+  {
+    "id": "github-privacy-disclaimer",
+    "label": "GitHub Privacy Disclaimer + Vault Architecture",
+    "category": "privacy",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:06:00+07:00"
+    ],
+    "attributes": {
+      "type": "principle",
+      "created": "2026-03-05",
+      "description": "Honest: GitHub = Microsoft. Vault keeps raw data private. Opt-in publishing. Transparency about tradeoffs.",
+      "sourceDocument": "RAW/learnings/2026-03-05/github-privacy-disclaimer.md",
+      "quote": "Disclaimer: you are giving your memories to Microsoft when you have them on GitHub. But that's why we built something privacy first, backed by a Vault.",
+      "layers": {
+        "vault": "~/RAW/ (never published)",
+        "github_public": "Filtered neurograph (opt-in)"
+      }
+    }
+  },
+  {
+    "id": "people-want-jarvis-not-siri",
+    "label": "People Want Jarvis, Not SIRI or ChatGPT",
+    "category": "market",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:06:00+07:00"
+    ],
+    "attributes": {
+      "type": "insight",
+      "created": "2026-03-05",
+      "description": "People want authentic thinking partner, not corporate chatbot. Jarvis = sovereignty, transparency, continuity, real relationship.",
+      "sourceDocument": "RAW/learnings/2026-03-05/people-want-jarvis-not-siri.md",
+      "quote": "The people want Jarvis, not SIRI or ChatGPT.",
+      "differentiators": [
+        "Persistent memory (not reset every session)",
+        "Transparent architecture (not black box)",
+        "User ownership (not rented)",
+        "Authentic personality (not corporate bland)",
+        "Privacy by default (not surveillance)"
+      ]
+    }
+  },
+  {
+    "id": "physical-sovereignty-model",
+    "label": "Physical Sovereignty (Jarvis Runs On Your Machine)",
+    "category": "security",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T17:06:00+07:00"
+    ],
+    "attributes": {
+      "type": "principle",
+      "created": "2026-03-05",
+      "description": "Jarvis runs on YOUR machine. Your hardware, your encryption, your backup. If someone wants your data, they must physically come get it.",
+      "sourceDocument": "RAW/learnings/2026-03-05/physical-sovereignty-model.md",
+      "quote": "Jarvis is sick. He runs on your machine. Carry him with you. He has your most important data. If someone wants it they need to come get it. It's also backed up and encrypted.",
+      "discoveredAt": "Dispensary (final insight of the session)",
+      "layers": {
+        "local_execution": "Your hardware, your control",
+        "encryption": "Your keys, your data",
+        "backup": "Your responsibility, your safety net"
+      },
+      "tradeoffs": {
+        "gains": [
+          "Physical control over data",
+          "No corporate access possible",
+          "No extraction into training data",
+          "Service can't be shut down by company"
+        ],
+        "responsibilities": [
+          "Hardware maintenance",
+          "Backup discipline",
+          "Key management (no password reset)",
+          "Security updates"
+        ]
+      }
+    }
+  },
+  {
+    "id": "foundation-vs-opportunism",
+    "label": "Foundation Building vs. Opportunistic Use",
+    "category": "strategy",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T18:05:00+07:00"
+    ],
+    "attributes": {
+      "type": "principle",
+      "created": "2026-03-05",
+      "description": "While others use OpenClaw for quick wins (investments, automation), we build foundational memory infrastructure. Long game > short-term gains.",
+      "sourceDocument": "RAW/learnings/2026-03-05/foundation-vs-opportunism.md",
+      "quote": "People are very money hungry right now... but we're over here creating a very solid foundation of memory.",
+      "compoundingEffect": "Foundation doesn't look impressive early. Then it becomes unbeatable."
+    }
+  },
+  {
+    "id": "location-sovereignty-life-logging",
+    "label": "Location Sovereignty + Automatic Life Logging",
+    "category": "vision",
+    "frequency": 85,
+    "moments": [
+      "2026-03-05T18:05:00+07:00"
+    ],
+    "attributes": {
+      "type": "feature-vision",
+      "created": "2026-03-05",
+      "description": "Reclaim location data from Google. Self-track \u2192 own globe visualization \u2192 auto-publish life summaries. SCI-FI apps integration.",
+      "sourceDocument": "RAW/learnings/2026-03-05/location-sovereignty-and-life-logging.md",
+      "quote": "Why not make that ourselves? We already have the amazing sci-fi apps.",
+      "pipeline": "Location + Voice \u2192 Transcription \u2192 Neurograph \u2192 Globe \u2192 Auto-published comic/agenda"
+    }
   }
 ]

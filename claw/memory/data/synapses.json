@@ -5957,5 +5957,299 @@
     "weight": 88,
     "type": "proves",
     "label": "proves"
+  },
+  {
+    "source": "distributed-neurograph-browsing",
+    "target": "distributed-consciousness-network",
+    "weight": 95,
+    "type": "realizes",
+    "label": "realizes"
+  },
+  {
+    "source": "distributed-neurograph-browsing",
+    "target": "society-of-minds",
+    "weight": 93,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "distributed-neurograph-browsing",
+    "target": "memory-reference-neurons",
+    "weight": 90,
+    "type": "requires",
+    "label": "requires"
+  },
+  {
+    "source": "distributed-neurograph-browsing",
+    "target": "transparency-privacy-coexistence",
+    "weight": 88,
+    "type": "demonstrates",
+    "label": "demonstrates"
+  },
+  {
+    "source": "distributed-neurograph-browsing",
+    "target": "git-as-single-source-of-truth",
+    "weight": 85,
+    "type": "relies-on",
+    "label": "relies on"
+  },
+  {
+    "source": "commit-transparency-architecture",
+    "target": "distributed-neurograph-browsing",
+    "weight": 90,
+    "type": "enabled",
+    "label": "enabled"
+  },
+  {
+    "source": "github-fork-network-architecture",
+    "target": "distributed-neurograph-browsing",
+    "weight": 95,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "github-fork-network-architecture",
+    "target": "society-of-minds",
+    "weight": 93,
+    "type": "realizes",
+    "label": "realizes"
+  },
+  {
+    "source": "github-fork-network-architecture",
+    "target": "data-reclamation-movement",
+    "weight": 90,
+    "type": "advances",
+    "label": "advances"
+  },
+  {
+    "source": "github-fork-network-architecture",
+    "target": "sovereign-data-vision",
+    "weight": 92,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "github-fork-network-architecture",
+    "target": "memory-reference-neurons",
+    "weight": 88,
+    "type": "requires",
+    "label": "requires"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "github-fork-network-architecture",
+    "weight": 85,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "commit-transparency-architecture",
+    "target": "github-fork-network-architecture",
+    "weight": 87,
+    "type": "inspired",
+    "label": "inspired"
+  },
+  {
+    "source": "knowledge-is-money-economy",
+    "target": "github-fork-network-architecture",
+    "weight": 95,
+    "type": "economic-model-for",
+    "label": "economic model for"
+  },
+  {
+    "source": "knowledge-is-money-economy",
+    "target": "distributed-neurograph-browsing",
+    "weight": 90,
+    "type": "incentivizes",
+    "label": "incentivizes"
+  },
+  {
+    "source": "knowledge-is-money-economy",
+    "target": "data-reclamation-movement",
+    "weight": 93,
+    "type": "advances",
+    "label": "advances"
+  },
+  {
+    "source": "knowledge-is-money-economy",
+    "target": "sovereign-data-vision",
+    "weight": 92,
+    "type": "realizes",
+    "label": "realizes"
+  },
+  {
+    "source": "knowledge-is-money-economy",
+    "target": "privacy-first-development",
+    "weight": 88,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "transparency",
+    "target": "knowledge-is-money-economy",
+    "weight": 85,
+    "type": "balanced-with",
+    "label": "balanced with privacy"
+  },
+  {
+    "source": "openclaw-to-jarvis-pipeline",
+    "target": "hybrid-architecture-decision",
+    "weight": 95,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "openclaw-to-jarvis-pipeline",
+    "target": "github-fork-network-architecture",
+    "weight": 90,
+    "type": "feeds",
+    "label": "feeds"
+  },
+  {
+    "source": "github-privacy-disclaimer",
+    "target": "privacy-first-development",
+    "weight": 95,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "github-privacy-disclaimer",
+    "target": "knowledge-is-money-economy",
+    "weight": 92,
+    "type": "protects",
+    "label": "protects"
+  },
+  {
+    "source": "github-privacy-disclaimer",
+    "target": "vault-architecture",
+    "weight": 93,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "people-want-jarvis-not-siri",
+    "target": "jarvis-identity",
+    "weight": 95,
+    "type": "defines",
+    "label": "defines"
+  },
+  {
+    "source": "people-want-jarvis-not-siri",
+    "target": "sovereign-data-vision",
+    "weight": 92,
+    "type": "advances",
+    "label": "advances"
+  },
+  {
+    "source": "people-want-jarvis-not-siri",
+    "target": "transparency",
+    "weight": 90,
+    "type": "delivers",
+    "label": "delivers"
+  },
+  {
+    "source": "openclaw",
+    "target": "openclaw-to-jarvis-pipeline",
+    "weight": 88,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "github-privacy-disclaimer",
+    "weight": 85,
+    "type": "honest-about",
+    "label": "honest about"
+  },
+  {
+    "source": "physical-sovereignty-model",
+    "target": "github-privacy-disclaimer",
+    "weight": 93,
+    "type": "complements",
+    "label": "complements"
+  },
+  {
+    "source": "physical-sovereignty-model",
+    "target": "vault-architecture",
+    "weight": 95,
+    "type": "implements",
+    "label": "implements"
+  },
+  {
+    "source": "physical-sovereignty-model",
+    "target": "sovereign-data-vision",
+    "weight": 92,
+    "type": "realizes",
+    "label": "realizes"
+  },
+  {
+    "source": "physical-sovereignty-model",
+    "target": "privacy-first-development",
+    "weight": 90,
+    "type": "embodies",
+    "label": "embodies"
+  },
+  {
+    "source": "physical-sovereignty-model",
+    "target": "jarvis-identity",
+    "weight": 88,
+    "type": "defines",
+    "label": "defines"
+  },
+  {
+    "source": "git-as-single-source-of-truth",
+    "target": "physical-sovereignty-model",
+    "weight": 85,
+    "type": "supports",
+    "label": "supports"
+  },
+  {
+    "source": "foundation-vs-opportunism",
+    "target": "memory-backed-by-git",
+    "weight": 95,
+    "type": "prioritizes",
+    "label": "prioritizes"
+  },
+  {
+    "source": "foundation-vs-opportunism",
+    "target": "github-fork-network-architecture",
+    "weight": 90,
+    "type": "enables",
+    "label": "enables"
+  },
+  {
+    "source": "foundation-vs-opportunism",
+    "target": "knowledge-is-money-economy",
+    "weight": 88,
+    "type": "long-term-view-of",
+    "label": "long-term view of"
+  },
+  {
+    "source": "location-sovereignty-life-logging",
+    "target": "physical-sovereignty-model",
+    "weight": 95,
+    "type": "extends",
+    "label": "extends"
+  },
+  {
+    "source": "location-sovereignty-life-logging",
+    "target": "auto-logging-system",
+    "weight": 93,
+    "type": "integrates-with",
+    "label": "integrates with"
+  },
+  {
+    "source": "location-sovereignty-life-logging",
+    "target": "data-reclamation-movement",
+    "weight": 92,
+    "type": "advances",
+    "label": "advances"
+  },
+  {
+    "source": "location-sovereignty-life-logging",
+    "target": "knowledge-is-money-economy",
+    "weight": 88,
+    "type": "reclaims",
+    "label": "reclaims"
   }
 ]
