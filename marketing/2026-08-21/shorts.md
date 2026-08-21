@@ -1,23 +1,22 @@
-# Shorts / TikTok / Reels scripts — 2026-08-21
+# Shorts — 2026-08-21
 
-## Short 1 (≈30 sec)
-**On-screen text:** Surveillance pricing is real
-
-**Spoken:**  
-The FTC just said companies using your browsing history and location to show you a different price may be breaking the law if they hide it. Hotels charging more for funerals. Rides to hospitals getting marked up. That is profile-building with a checkout button. The apps I build keep the data on your machine instead — Knowledge Graph, Where is Paul?, Musical Cubes. Localhost first. paulvisciano.com
-
----
-
-## Short 2 (≈25 sec)
-**On-screen text:** Different price for you
+## Short 1 (≈30s)
+**On-screen text:** “They price the milk higher if they know kids live there.”
 
 **Spoken:**  
-Surveillance pricing: the same data that builds ad profiles also sets the number you see at checkout. The FTC is pushing for disclosure. The structural answer is still local models and local graphs — llama.cpp, LightRAG, no API keys. Data stays on the device. paulvisciano.com
+FTC this week: companies using your personal data to set a different price for you than the next person — without telling you — can be deceptive. Milk more expensive because the system knows children live at the address. Hotel rate higher because the trip looks like a funeral. That is surveillance pricing. Once the data leaves the device the boundary is gone.  
+paulvisciano.com
 
----
-
-## Short 3 (≈35 sec)
-**On-screen text:** Data is currency
+## Short 2 (≈35s)
+**On-screen text:** “Unplug the network. It still works.”
 
 **Spoken:**  
-Crypto people already guard a seed phrase. Personal data deserves the same treatment. Fifteen years shipping enterprise software made the incentives clear — once it leaves the device, someone else spends it. That is why these are websites designed to run private on your machine and open in Vision Pro the same way. paulvisciano.com
+The same data that trains the ad model also trains the price. That is why Knowledge Graph stays offline on a 16GB laptop — Llama.cpp, LightRAG, Whisper, zero API keys. Unplug the network and the canvas still answers. No silent upload. No profile leaving the machine. Crypto people already guard a seed phrase. Personal data deserves the same treatment.  
+paulvisciano.com
+
+## Short 3 (≈25s)
+**On-screen text:** “Just a website. Opens in Vision Pro.”
+
+**Spoken:**  
+These apps are websites. They open in a browser, on a phone, or inside Vision Pro the same way. The published version is a demo. The real product runs on hardware you own. Local-first is the quieter refusal of surveillance pricing.  
+paulvisciano.com

@@ -1,40 +1,36 @@
-# YouTube transcript — 2026-08-21
+# YouTube Transcript — 2026-08-21
 
-**Suggested title:** Surveillance Pricing Is Profile-Building With a Checkout Button
-
-**Description:** The FTC just released a draft policy on personalized (surveillance) pricing — companies using your data to show you a different price. Here's why that matters and how local-first spatial apps keep the raw material offline.
+**Suggested title:** Surveillance Pricing Is Why I Keep the AI Offline  
+**Description:** The FTC just moved on personalized pricing — companies using your data to charge you more than the next person. Here’s why that practice is the quiet version of the same problem, and why the Knowledge Graph stack stays on a 16GB laptop with zero API keys.
 
 ---
 
-[spoken script ~3 min]
+[hook — calm, direct to camera]
 
-Hey — Paul here.
+This week the FTC put out a draft enforcement policy on something privacy people have been calling surveillance pricing. Companies take the data they already collect — browsing history, location, household signals — and use it to set a different price for you than for the person standing next to you.
 
-Yesterday the Federal Trade Commission put out a draft enforcement policy on something they call personalized pricing. Most of us already know it as surveillance pricing.
+[cut to simple graphic or on-screen text: “milk priced higher because kids live there”]
 
-Here's the short version. Companies take the data they already have on you — browsing history, location, the device you're using, past purchases — and they set a price just for you. Not the market price. The price they think you are willing to pay.
+One of the examples they gave: a grocery delivery service charging more for milk because it knows multiple children live at the address. A hotel raising the rate because the data suggests the traveler is going to a funeral. The price is no longer the market price. It is an estimate of what you will tolerate.
 
-The examples in the FTC materials are blunt. A hotel can raise the rate if it decides the trip looks essential, like you're traveling for a funeral. A ride-hailing app can charge more when the destination is a hospital. A grocery delivery service can adjust the price of milk because it knows there are kids in the house.
+[back to camera]
 
-The agency is not trying to ban the practice entirely. It is saying that hiding it is likely deceptive. When you see a listed price, you reasonably expect that everyone else is seeing the same number. When they are not, and no one told you, that is the problem.
+None of that requires exotic new AI. It is the ordinary outcome of treating personal data as free raw material. The same profile that feeds ads also feeds price discrimination. Once the data leaves your device, the boundary is gone.
 
-This is not abstract privacy language. This is the commercial end of the same profile-building system that has been refined for years. Data is collected, stitched into a model of who you are, and then used against you at the exact moment you decide to buy.
+That is the practical reason the Knowledge Graph stack never phones home.
 
-I spent fifteen years shipping enterprise software — Core Mobile at Paylocity, then principal engineer work at OutSystems. At that scale the incentives are obvious. Once the data leaves your device, someone else spends it.
+[show Knowledge Graph canvas scrolling through time layers]
 
-That is the reason the apps I build now are designed to run on localhost first. Knowledge Graph is a private spatial memory system — an infinite canvas of time where photos, voice notes, and conversations live as nodes. Underneath it is LightRAG and models running through llama.cpp. Unplug the network and it keeps working. Where is Paul? turns a life into a 3D globe and timeline. Musical Cubes treats music production as rotating instrument stems. All of them are websites. You can open them in a normal browser or in a Vision Pro. The published versions are demos. The real product is the private copy that stays on your machine.
+It runs on a normal 16GB laptop. Llama.cpp for the model. LightRAG for retrieval. Whisper for voice. Photos, conversations, voice notes stay on disk. There is no API key. Unplug the network and it keeps working. That offline test is the proof.
 
-Crypto people already treat a seed phrase like something that must not leak. Personal data deserves the same discipline. Surveillance pricing is simply the clearest current proof that the collection has a price tag attached — yours.
+Where is Paul? is the public spatial layer — a 3D globe of real moments — but the private archive that feeds it follows the same rule. The published site is a demo. The real product is the copy you run yourself. Both are just websites, so they open in a browser or inside Vision Pro without a special store.
 
-The FTC is starting to force disclosure. The deeper move is still architectural: keep the raw material offline, on hardware you control.
+[show brief globe or headset-compatible view if available]
 
-You can see the apps and the stack at paulvisciano.com.
+Crypto people already understand the seed-phrase mindset. Guard the keys or lose the asset. Personal data deserves the same discipline. Surveillance pricing is simply the bill arriving for years of free extraction.
 
-[end]
+The FTC action is useful because it makes the practice visible. Visibility is not the same as control. Control starts when the data never leaves in the first place.
 
-**On-screen cues:**
-- [show FTC headline / Reuters link briefly]
-- [cut to Knowledge Graph canvas scrolling through time layers]
-- [show Where is Paul? globe]
-- [brief Musical Cubes rotation]
-- [end card: paulvisciano.com]
+[close]
+
+The stack and the apps are at paulvisciano.com. Run your own copy.
